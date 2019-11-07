@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">AkvAndroidApp</string>
-
-    <string name="forgot_password">Forgot Password</string>
     <string name="launcher">Launcher</string>
     <string name="login">Login</string>
 
@@ -70,5 +68,28 @@
     <string name="text_info">Info</string>
     <string name="delete">Delete</string>
 
+
+    <string name="akv">AKV</string>
+    <string name="enter_account">Войдите в \n аккаунт</string>
+    <string name="phone_number_enter">Номер телефона</string>
+    <string name="password">Пароль</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="Sign_in">Войти</string>
+    <string name="sign_in_Google">Войти через Google</string>
+    <string name="dont_have_account">Все еще нет аккаунта?</string>
+    <string name="create_">Создать</string>
+    <string name="Enter_phonenumber">Введите свой номер телефона</string>
+    <string name="account_exist">Уже есть аккаунт?</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="next">Далее</string>
+    <string name="back">Назад</string>
+    <string name="create_password">Придумайте пароль</string>
+    <string name="put_nickname">Придумайте имя\n пользователя</string>
+    <string name="fill_data">Заполните ваши личные данные</string>
+    <string name="privacy_term">Нажимая кнопку Создать, вы соглашаетесь с политикой конфеденциальности и правилами пользования.</string>
+
+
+    <string name="invalid">Заполните поле</string>
+    <string name="invalid_pass">Пароли не совпадают. Попробуйте ещё раз</string>
 
 </resources>

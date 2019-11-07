@@ -11,15 +11,8 @@
             android:id="@+id/launcherFragment"
             android:name="com.example.akvandroidapp.ui.auth.LauncherFragment"
             android:label="fragment_launcher"
-            tools:layout="@layout/fragment_launcher" >
+            tools:layout="@layout/sign_up_nickname" >
 
-        <action
-                android:id="@+id/action_launcherFragment_to_forgotPasswordFragment"
-                app:destination="@id/forgotPasswordFragment"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"/>
 
         <action
                 android:id="@+id/action_launcherFragment_to_loginFragment"
@@ -30,8 +23,57 @@
                 app:exitAnim="@anim/slide_out_left"/>
 
         <action
-                android:id="@+id/action_launcherFragment_to_registerFragment"
-                app:destination="@id/registerFragment"
+                android:id="@+id/action_launcherFragment_to_register_up_Fragment"
+                app:destination="@id/register_up_Fragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.example.akvandroidapp.ui.auth.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/login">
+
+            <action
+                android:id="@+id/action_loginFragment_to_LauncherFragment"
+                app:destination="@id/launcherFragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+
+
+            <action
+                android:id="@+id/action_loginFragment_to_LoginGmailFragment"
+                app:destination="@id/loginGmail"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/register_up_Fragment"
+            android:name="com.example.akvandroidapp.ui.auth.RegisterUpFragment"
+            android:label="fragment_register_up"
+            tools:layout="@layout/sign_up" >
+
+            <action
+                android:id="@+id/action_register_upFragment_to_register_pass_Fragment"
+                app:destination="@id/register_pass_Fragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+
+
+            <action
+                android:id="@+id/action_registerUpFragment_to_loginFragment"
+                app:destination="@id/loginFragment"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:enterAnim="@anim/slide_in_right"
@@ -41,21 +83,169 @@
 
 
     <fragment
-            android:id="@+id/forgotPasswordFragment"
-            android:name="com.example.akvandroidapp.ui.auth.ForgotPasswordFragment"
-            android:label="fragment_forgot_password"
-            tools:layout="@layout/fragment_forgot_password" />
+        android:id="@+id/register_pass_Fragment"
+        android:name="com.example.akvandroidapp.ui.auth.RegisterPassFragment"
+        android:label="fragment_register_pass"
+        tools:layout="@layout/sign_up_pass">
+
+        <action
+            android:id="@+id/action_register_passFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+
+        <action
+            android:id="@+id/action_registerPassFragment_to_registerUpFragment"
+            app:destination="@id/register_up_Fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+
+    </fragment>
+
 
     <fragment
-            android:id="@+id/loginFragment"
-            android:name="com.example.akvandroidapp.ui.auth.LoginFragment"
-            android:label="fragment_login"
-            tools:layout="@layout/fragment_login" />
+        android:id="@+id/registerFragment"
+        android:name="com.example.akvandroidapp.ui.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/sign_up_detail" >
+
+        <action
+            android:id="@+id/action_registerFragment_to_termOfPolicyFragment"
+            app:destination="@id/termOfPolicy"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+
+        <action
+            android:id="@+id/action_registerFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyOfPolicy"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+
+        <action
+            android:id="@+id/action_registerFragment_to_registerPassFragment"
+            app:destination="@id/register_pass_Fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
 
 
     <fragment
-            android:id="@+id/registerFragment"
-            android:name="com.example.akvandroidapp.ui.auth.RegisterFragment"
-            android:label="fragment_register"
-            tools:layout="@layout/fragment_register" />
+        android:id="@+id/termOfPolicy"
+        android:name="com.example.akvandroidapp.ui.auth.TermOfUseFragment"
+        android:label="fragment_termOfUse"
+        tools:layout="@layout/terms_of_use">
+
+
+        <action
+            android:id="@+id/action_termOfPolicyFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/privacyOfPolicy"
+        android:name="com.example.akvandroidapp.ui.auth.PrivacyPolicyFragment"
+        android:label="fragment_privacyPolicy"
+        tools:layout="@layout/privacy_policy">
+
+        <action
+            android:id="@+id/action_privacyPolicyFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/resetCode"
+        android:name="com.example.akvandroidapp.ui.auth.ResetCodeFragment"
+        android:label="fragment_resetCode"
+        tools:layout="@layout/reset_code">
+
+
+        <action
+            android:id="@+id/action_resetCodeFragment_to_NewPassFragment"
+            app:destination="@id/newPassword"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+
+        <action
+            android:id="@+id/action_resetCodeFragment_to_LoginGmailFragment"
+            app:destination="@id/loginGmail"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/newPassword"
+        android:name="com.example.akvandroidapp.ui.auth.NewPasswordFragment"
+        android:label="fragment_newPassword"
+        tools:layout="@layout/new_pass">
+
+        <action
+            android:id="@+id/action_newPasswordFragment_to_resetCodeFragment"
+            app:destination="@id/resetCode"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/loginGmail"
+        android:name="com.example.akvandroidapp.ui.auth.LoginGmailFragment"
+        android:label="fragment_loginGmail"
+        tools:layout="@layout/login_gmail">
+
+        <action
+            android:id="@+id/action_loginGmailFragment_to_ResetCodeFragment"
+            app:destination="@id/resetCode"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+
+        <action
+            android:id="@+id/action_loginGmailFragment_to_LoginFragment"
+            app:destination="@id/loginFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
 </navigation>

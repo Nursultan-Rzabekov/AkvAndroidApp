@@ -16,11 +16,11 @@ open class JobManager(
         jobs[methodName] = job
     }
 
-    fun cancelJob(methodName: String){
+    private fun cancelJob(methodName: String){
         getJob(methodName)?.cancel()
     }
 
-    fun getJob(methodName: String): Job? {
+    private fun getJob(methodName: String): Job? {
         if(jobs.containsKey(methodName)){
             jobs[methodName]?.let {
                 return it

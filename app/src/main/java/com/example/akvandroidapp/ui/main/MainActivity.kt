@@ -33,7 +33,7 @@ class MainActivity : BaseActivity()
     }
 
     override fun expandAppBar() {
-        findViewById<AppBarLayout>(R.id.app_bar).setExpanded(true)
+        app_bar.setExpanded(true)
     }
 
     private fun setupActionBar(){

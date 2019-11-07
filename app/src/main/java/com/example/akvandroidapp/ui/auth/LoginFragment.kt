@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.LoginFields
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.input_email
+import kotlinx.android.synthetic.main.fragment_login.input_password
+import kotlinx.android.synthetic.main.fragment_login.login_button
+import kotlinx.android.synthetic.main.login.*
 
 
 class LoginFragment : BaseAuthFragment() {
@@ -20,18 +24,28 @@ class LoginFragment : BaseAuthFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "LoginFragment: ${viewModel}")
 
-        subscribeObservers()
-
         login_button.setOnClickListener {
             login()
         }
+
+        subscribeObservers()
+
+        create_btn.setOnClickListener {
+            navLauncherFragment()
+        }
+
+        forgot_password_tv.setOnClickListener {
+            navForgetLoginFragment()
+        }
+
+
     }
 
     fun subscribeObservers(){
@@ -44,12 +58,25 @@ class LoginFragment : BaseAuthFragment() {
     }
 
     fun login(){
-        viewModel.setStateEvent(
-            LoginAttemptEvent(
-                input_email.text.toString(),
-                input_password.text.toString()
+
+        if(input_email.text.trim() == "" && input_password.text.trim() == "") {
+            input_email.error = getString(R.string.invalid)
+            input_password.error = getString(R.string.invalid)
+        }
+
+        if(input_email.text.trim() == "") input_email.error = getString(R.string.invalid)
+        else phonenumber_l_et.isErrorEnabled = false
+        if(input_password.text.trim() == "") input_password.error = getString(R.string.invalid)
+        else password_l_et.isErrorEnabled = false
+
+        if(input_email.text.trim() != "" && input_password.text.trim() != "") {
+            viewModel.setStateEvent(
+                LoginAttemptEvent(
+                    input_email.text.toString(),
+                    input_password.text.toString()
+                )
             )
-        )
+        }
     }
 
     override fun onDestroyView() {
@@ -62,6 +89,13 @@ class LoginFragment : BaseAuthFragment() {
         )
     }
 
+    fun navLauncherFragment(){
+        findNavController().navigate(R.id.action_loginFragment_to_LauncherFragment)
+    }
+
+    fun navForgetLoginFragment(){
+        findNavController().navigate(R.id.action_loginFragment_to_LoginGmailFragment)
+    }
 }
 
 

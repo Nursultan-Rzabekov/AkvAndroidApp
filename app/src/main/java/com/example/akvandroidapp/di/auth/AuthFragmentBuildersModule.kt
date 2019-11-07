@@ -1,9 +1,6 @@
 package com.example.akvandroidapp.di.auth
 
-import com.example.akvandroidapp.ui.auth.ForgotPasswordFragment
-import com.example.akvandroidapp.ui.auth.LauncherFragment
-import com.example.akvandroidapp.ui.auth.LoginFragment
-import com.example.akvandroidapp.ui.auth.RegisterFragment
+import com.example.akvandroidapp.ui.auth.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -14,12 +11,33 @@ abstract class AuthFragmentBuildersModule {
     abstract fun contributeLauncherFragment(): LauncherFragment
 
     @ContributesAndroidInjector()
-    abstract fun contributeLoginFragment(): LoginFragment
+    abstract fun contributeRegisterUpFragment(): RegisterUpFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeRegisterPassFragment(): RegisterPassFragment
 
     @ContributesAndroidInjector()
     abstract fun contributeRegisterFragment(): RegisterFragment
 
     @ContributesAndroidInjector()
+    abstract fun contributeLoginFragment(): LoginFragment
+
+    @ContributesAndroidInjector()
     abstract fun contributeForgotPasswordFragment(): ForgotPasswordFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeTermOfUseFragment(): TermOfUseFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributePrivacyPolicyFragment(): PrivacyPolicyFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeResetCodeFragment(): ResetCodeFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeLoginGmailFragment(): LoginGmailFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeNewPasswordFragment(): NewPasswordFragment
 
 }

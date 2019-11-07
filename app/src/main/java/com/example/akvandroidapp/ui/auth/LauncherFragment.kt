@@ -6,10 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
-import kotlinx.android.synthetic.main.fragment_launcher.*
+import kotlinx.android.synthetic.main.sign_up_nickname.*
 
 
 class LauncherFragment : BaseAuthFragment() {
@@ -19,39 +20,36 @@ class LauncherFragment : BaseAuthFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_launcher, container, false)
+        return inflater.inflate(R.layout.sign_up_nickname, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        register.setOnClickListener {
+        nickname_next_btn.setOnClickListener {
             navRegistration()
         }
 
-        login.setOnClickListener {
+        sign_in_tv.setOnClickListener {
             navLogin()
         }
-
-        forgot_password.setOnClickListener {
-            navForgotPassword()
-        }
-
-        focusable_view.requestFocus() // reset focus
 
         Log.d(TAG, "LauncherFragment: ${viewModel}")
     }
 
-    fun navLogin(){
+    private fun navLogin(){
         findNavController().navigate(R.id.action_launcherFragment_to_loginFragment)
     }
 
-    fun navRegistration(){
-        findNavController().navigate(R.id.action_launcherFragment_to_registerFragment)
-    }
+    private fun navRegistration(){
+        val username = sign_nickname_et.text.toString()
 
-    fun navForgotPassword(){
-        findNavController().navigate(R.id.action_launcherFragment_to_forgotPasswordFragment)
+        if(username.trim().equals("")) sign_nickname_l_et.error = getString(R.string.invalid)
+        else{
+            sign_nickname_l_et.isErrorEnabled = false
+            val bundle = bundleOf("user_name" to username)
+            findNavController().navigate(R.id.action_launcherFragment_to_register_up_Fragment,bundle)
+        }
     }
 }
 

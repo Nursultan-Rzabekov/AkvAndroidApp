@@ -30,7 +30,6 @@ class AuthActivity : BaseActivity(), NavController.OnDestinationChangedListener
         viewModel.cancelActiveJobs()
     }
 
-
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
 
