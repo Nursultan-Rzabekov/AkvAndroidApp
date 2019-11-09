@@ -98,6 +98,7 @@ constructor(
                         response.body.token
                     )
                 )
+
                 if(result < 0){
                     return onCompleteJob(DataState.error(
                         Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog())
@@ -267,6 +268,7 @@ constructor(
                                 }
                             }
                         }
+
                         Log.d(TAG, "createCacheRequestAndReturn: AuthToken not found...")
                         onCompleteJob(
                             DataState.data(

@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/label1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="167dp"
         android:layout_marginEnd="66dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/enter_account"
@@ -38,11 +38,12 @@
         app:layout_constraintTop_toBottomOf="@+id/label1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_email"
+            android:id="@+id/phonenumber_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:textFontWeight="500"
+            android:inputType="phone"
             android:hint="@string/phone_number_enter"
             android:textSize="14sp"
             android:typeface="normal" />
@@ -64,11 +65,12 @@
         app:layout_constraintTop_toBottomOf="@+id/phonenumber_l_et">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_password"
+            android:id="@+id/password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:textFontWeight="500"
+            android:inputType="textPassword"
             android:hint="@string/password"
             android:textSize="14sp"
             android:typeface="normal" />
@@ -76,27 +78,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/akv_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="137dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginBottom="19dp"
-        android:alpha="0.5"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/akv"
-        android:textAlignment="center"
-        android:textColor="@color/secondaryZero"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/forgot_password_tv"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/forgot_password"
         android:textAlignment="textEnd"
@@ -106,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/password_l_et" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_button"
+        android:id="@+id/sign_in_btn"
         style="@style/BasicButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -131,7 +115,7 @@
         android:textColor="@android:color/secondary_text_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_in_google_btn"
@@ -141,10 +125,16 @@
         android:layout_marginStart="38dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="37dp"
+        android:includeFontPadding="true"
+        android:paddingEnd="50dp"
         android:text="@string/sign_in_Google"
         android:textAllCaps="false"
         app:backgroundTint="@android:color/transparent"
+        app:icon="@drawable/google_logo"
         app:iconGravity="end"
+        app:iconPadding="-45dp"
+        app:iconSize="26dp"
+        app:iconTintMode="multiply"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -160,7 +150,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sign_in_google_btn" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="391dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
         android:layout_marginTop="21dp"
@@ -189,5 +179,13 @@
             android:textColor="@color/secondaryFirst"
             android:textSize="12sp" />
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/akv_label"
+        style="@style/AKV_Label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

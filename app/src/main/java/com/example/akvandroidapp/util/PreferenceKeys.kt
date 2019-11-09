@@ -9,8 +9,6 @@ class PreferenceKeys {
 
         // Shared Preference Keys
         const val PREVIOUS_AUTH_USER: String = "com.example.akvandroidapp.PREVIOUS_AUTH_USER"
-        const val BLOG_FILTER: String = "com.example.akvandroidapp.BLOG_FILTER"
-        const val BLOG_ORDER: String = "com.example.akvandroidapp.BLOG_ORDER"
 
     }
 }

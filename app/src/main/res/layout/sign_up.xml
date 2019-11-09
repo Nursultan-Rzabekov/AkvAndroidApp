@@ -40,6 +40,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/sign_up_et"
             android:layout_width="match_parent"
+            android:inputType="phone"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat" />
 

@@ -11,9 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.LoginFields
-import kotlinx.android.synthetic.main.fragment_login.input_email
-import kotlinx.android.synthetic.main.fragment_login.input_password
-import kotlinx.android.synthetic.main.fragment_login.login_button
 import kotlinx.android.synthetic.main.login.*
 
 
@@ -31,7 +28,7 @@ class LoginFragment : BaseAuthFragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "LoginFragment: ${viewModel}")
 
-        login_button.setOnClickListener {
+        sign_in_btn.setOnClickListener {
             login()
         }
 
@@ -51,29 +48,29 @@ class LoginFragment : BaseAuthFragment() {
     fun subscribeObservers(){
         viewModel.viewState.observe(viewLifecycleOwner, Observer{
             it.loginFields?.let{
-                it.login_email?.let{input_email.setText(it)}
-                it.login_password?.let{input_password.setText(it)}
+                it.login_email?.let{phonenumber_et.setText(it)}
+                it.login_password?.let{password_et.setText(it)}
             }
         })
     }
 
     fun login(){
 
-        if(input_email.text.trim() == "" && input_password.text.trim() == "") {
-            input_email.error = getString(R.string.invalid)
-            input_password.error = getString(R.string.invalid)
+        if(phonenumber_et.text?.trim() == "" && password_et.text?.trim() == "") {
+            phonenumber_et.error = getString(R.string.invalid)
+            password_et.error = getString(R.string.invalid)
         }
 
-        if(input_email.text.trim() == "") input_email.error = getString(R.string.invalid)
+        if(phonenumber_et.text?.trim() == "") password_et.error = getString(R.string.invalid)
         else phonenumber_l_et.isErrorEnabled = false
-        if(input_password.text.trim() == "") input_password.error = getString(R.string.invalid)
+        if(phonenumber_et.text?.trim() == "") password_et.error = getString(R.string.invalid)
         else password_l_et.isErrorEnabled = false
 
-        if(input_email.text.trim() != "" && input_password.text.trim() != "") {
+        if(phonenumber_et.text?.trim() != "" && password_et.text?.trim() != "") {
             viewModel.setStateEvent(
                 LoginAttemptEvent(
-                    input_email.text.toString(),
-                    input_password.text.toString()
+                    phonenumber_et.text.toString(),
+                    password_et.text.toString()
                 )
             )
         }
@@ -83,8 +80,8 @@ class LoginFragment : BaseAuthFragment() {
         super.onDestroyView()
         viewModel.setLoginFields(
             LoginFields(
-                input_email.text.toString(),
-                input_password.text.toString()
+                phonenumber_et.text.toString(),
+                password_et.text.toString()
             )
         )
     }

@@ -56,6 +56,7 @@ constructor(
                 }
                 Log.d(TAG, "logout: finally")
                 setValue(null)
+
             }
         }
     }
