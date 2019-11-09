@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.auth
 
 
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,8 @@ class RegisterUpFragment : BaseAuthFragment() {
         phone_next_btn.setOnClickListener {
             navNextNavigationPage()
         }
+
+        sign_up_et.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
         sign_in_tv.setOnClickListener {
             navLogin()

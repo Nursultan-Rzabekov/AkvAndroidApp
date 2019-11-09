@@ -41,6 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
+            android:singleLine="true"
+            android:maxLines="1"
             android:hint="Имя пользователя" />
 
     </com.google.android.material.textfield.TextInputLayout>

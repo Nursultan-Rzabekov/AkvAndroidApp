@@ -31,7 +31,6 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/create_password"
         android:textAlignment="center"
-        android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -54,6 +53,9 @@
             android:id="@+id/sign_up_pass_password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:maxLines="1"
             android:hint="@string/password" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,6 +74,9 @@
             android:id="@+id/sign_up_pass_password_re_et"
             android:layout_width="match_parent"
             android:hint="@string/repeat_password"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:inputType="textPassword"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
