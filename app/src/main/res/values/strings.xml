@@ -91,5 +91,35 @@
 
     <string name="invalid">Заполните поле</string>
     <string name="invalid_pass">Пароли не совпадают. Попробуйте ещё раз</string>
+    <string name="enter_email_for_rest">Введите email  для восстановления  пароля</string>
+    <string name="we_will_send_verific">Мы отправим на вашу электронную почту  6-значный код, с помощью которого вы сможете восстановить доступ к вашему аккаунту.</string>
+    <string name="email">Email</string>
+    <string name="send_code">Отправить код</string>
+    <string name="enter_new_password">Введите новый пароль</string>
+    <string name="new_pass">Новый пароль</string>
+    <string name="enter">Войти</string>
+    <string name="confiden_politics">Политика  конфидециальности</string>
+    <string name="thanks_for_choose">Спасибо, что выбрали нас!</string>
+    <string name="dump_text">Quisque eget rutrum nulla, non lacinia ligula. Phasellus sodales elementum auctor. Nullam ullamcorper mattis purus eu mattis. Nam vel cursus tellus, venenatis posuere orci.</string>
+    <string name="your_pricate_data">Ваши личные данные</string>
+    <string name="savings">Сохраненные</string>
+    <string name="any_questions">Есть вопросы? Обратитесь в Службу поддержки</string>
+    <string name="enter_receive_pass">Введите  полученный код</string>
+    <string name="example_n1">Пример: 996748</string>
+    <string name="recover_password">Восстановить пароль</string>
+    <string name="i_dont_have_code">Мне не пришло сообщение с кодом.</string>
+    <string name="send_again">Отправить ещё раз</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="email_">Электронная почта</string>
+    <string name="birth_date">День рождение</string>
+    <string name="dd_mm_yyyy">ДД/ММ/ГГГГ</string>
+    <string name="gender">Ваш пол</string>
+    <string name="F">Ж</string>
+    <string name="M">M</string>
+    <string name="nickname">Имя пользователя</string>
+    <string name="rules_for_using_app">Правила  пользования  приложением AKV.KZ</string>
+    <string name="your_profile">Ваш профиль</string>
+    <string name="services">Услуги</string>
+    <string name="or">или</string>
 
 </resources>

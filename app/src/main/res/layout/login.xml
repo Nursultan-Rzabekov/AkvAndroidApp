@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,14 +9,14 @@
         android:id="@+id/label1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="@dimen/content_margin1"
         android:layout_marginTop="167dp"
-        android:layout_marginEnd="66dp"
+        android:layout_marginEnd="@dimen/content_margin2"
         android:fontFamily="@font/montserrat"
         android:text="@string/enter_account"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="35sp"
+        android:textSize="@dimen/text_header1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,9 +27,7 @@
         style="@style/TextOutlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
         android:layout_marginTop="43dp"
-        android:layout_marginEnd="37dp"
         app:hintEnabled="false"
         app:boxStrokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +45,7 @@
             android:singleLine="true"
             android:maxLines="1"
             android:hint="@string/phone_number_enter"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_input1"
             android:typeface="normal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,11 +55,8 @@
         style="@style/TextOutlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
         android:layout_marginTop="24dp"
         app:hintEnabled="false"
-        android:layout_marginEnd="37dp"
-        app:boxStrokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phonenumber_l_et">
@@ -77,7 +71,7 @@
             android:singleLine="true"
             android:maxLines="1"
             android:hint="@string/password"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_input1"
             android:typeface="normal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -90,7 +84,7 @@
         android:text="@string/forgot_password"
         android:textAlignment="textEnd"
         android:textColor="@color/secondaryFirst"
-        android:textSize="10sp"
+        android:textSize="@dimen/text_content2"
         app:layout_constraintEnd_toEndOf="@+id/password_l_et"
         app:layout_constraintTop_toBottomOf="@+id/password_l_et" />
 
@@ -99,9 +93,7 @@
         style="@style/BasicButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
         android:layout_marginTop="49dp"
-        android:layout_marginEnd="37dp"
         android:text="@string/Sign_in"
         android:textAllCaps="false"
         android:textStyle="bold"
@@ -116,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:fontFamily="@font/montserrat"
-        android:text="или"
+        android:text="@string/or"
         android:textColor="@android:color/secondary_text_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,10 +118,8 @@
         android:id="@+id/sign_in_google_btn"
         style="@style/GoogleLogButton"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="38dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="37dp"
         android:includeFontPadding="true"
         android:paddingStart="0dp"
         android:paddingEnd="50dp"
@@ -173,17 +163,17 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:text="@string/dont_have_account"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_content1" />
 
         <TextView
             android:id="@+id/create_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginEnd="3dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/create_"
             android:textColor="@color/secondaryFirst"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_content1" />
     </LinearLayout>
 
 

@@ -13,7 +13,7 @@
         android:layout_marginTop="29dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/back"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_button1"
         android:drawableStart="@drawable/ic_back"
         android:drawablePadding="-5dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,14 +24,15 @@
         android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="@dimen/content_margin3"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginEnd="@dimen/content_margin3"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/fill_data"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/text_header4"
+        android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,13 +42,13 @@
         android:id="@+id/phonenumber_label1"
         android:layout_width="154dp"
         android:layout_height="18dp"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="@dimen/content_margin3"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Номер телефона"
+        android:text="@string/phone_number"
         android:textAlignment="textStart"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_content5"
         android:typeface="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
@@ -72,7 +73,7 @@
             android:inputType="phone"
             android:digits="0123456789+"
             android:maxLines="1"
-            android:hint="Номер телефона" />
+            android:hint="@string/phone_number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,10 +81,10 @@
         android:id="@+id/email_label1"
         android:layout_width="154dp"
         android:layout_height="18dp"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="@dimen/content_margin3"
         android:layout_marginTop="14dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Электронная почта"
+        android:text="@string/email_"
         android:textAlignment="textStart"
         android:textColor="@android:color/black"
         android:typeface="normal"
@@ -108,7 +109,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:maxLines="1"
-            android:hint="Email" />
+            android:hint="@string/email" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,10 +117,10 @@
         android:id="@+id/birthdate_label1"
         android:layout_width="154dp"
         android:layout_height="18dp"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="@dimen/content_margin3"
         android:layout_marginTop="23dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="День рождение"
+        android:text="@string/birth_date"
         android:textColor="@android:color/black"
         android:typeface="normal"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +146,7 @@
             android:singleLine="true"
             android:maxLines="1"
             android:inputType="date"
-            android:hint="ДД/ММ/ГГГГ" />
+            android:hint="@string/dd_mm_yyyy" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +157,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Создать"
+        android:text="@string/create_"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,9 +167,9 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="@dimen/gl_margin1"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="37dp"
+        android:layout_marginEnd="@dimen/gl_margin2"
         android:background="@drawable/linear_round_corners"
         android:gravity="end"
         android:orientation="horizontal"
@@ -183,7 +184,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/montserrat"
             android:gravity="center"
-            android:text="Ваш пол"
+            android:text="@string/gender"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:typeface="normal" />
@@ -204,7 +205,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/woman_radio_btn"
                 android:button="@android:color/transparent"
-                android:text="Ж"
+                android:text="@string/F"
                 android:textAlignment="center" />
 
             <RadioButton
@@ -214,7 +215,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/man_radio_btn"
                 android:button="@android:color/transparent"
-                android:text="M"
+                android:text="@string/M"
                 android:textAlignment="center" />
         </RadioGroup>
     </LinearLayout>

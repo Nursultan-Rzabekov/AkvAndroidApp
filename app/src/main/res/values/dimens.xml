@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_header1">35sp</dimen>
+    <dimen name="text_header2">28sp</dimen>
+    <dimen name="text_header3">25sp</dimen>
+    <dimen name="text_header4">30sp</dimen>
+    <dimen name="text_input1">14sp</dimen>
+    <dimen name="text_content1">12sp</dimen>
+    <dimen name="text_content2">10sp</dimen>
+    <dimen name="text_button1">16sp</dimen>
+    <dimen name="text_content3">18sp</dimen>
+    <dimen name="text_content4">13sp</dimen>
+    <dimen name="text_content5">14sp</dimen>
+    <dimen name="content_margin1">68dp</dimen>
+    <dimen name="content_margin2">66dp</dimen>
+    <dimen name="content_margin3">33dp</dimen>
+    <dimen name="content_margin4">38dp</dimen>
+    <dimen name="button_margin1">41dp</dimen>
+    <dimen name="button_margin2">59dp</dimen>
+    <dimen name="content_margin5">35dp</dimen>
+    <dimen name="content_margin6">41dp</dimen>
+    <dimen name="content_margin7">39dp</dimen>
+    <dimen name="content_margin8">29dp</dimen>
+    <dimen name="content_margin9">25dp</dimen>
+    <dimen name="content_margin10">45dp</dimen>
+    <dimen name="content_margin11">56dp</dimen>
+    <dimen name="gl_margin1">38dp</dimen>
+    <dimen name="gl_margin2">37dp</dimen>
+    <dimen name="content_margin12">48dp</dimen>
+    <dimen name="cornerRadius1">10dp</dimen>
+    <dimen name="cornerRadius2">30dp</dimen>
+    <dimen name="padding_1">15dp</dimen>
+</resources>
