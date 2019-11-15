@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/nav_create_home"
+        app:startDestination="@id/messagesFragment">
+
+    <fragment android:id="@+id/messagesFragment"
+            android:name="com.example.akvandroidapp.ui.main.messages.MessagesFragment"
+            android:label="@string/fragment_create_blog"
+            tools:layout="@layout/terms_of_use">
+
+    </fragment>
+</navigation>
