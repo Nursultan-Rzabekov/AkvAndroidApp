@@ -122,4 +122,11 @@
     <string name="services">Услуги</string>
     <string name="or">или</string>
 
+
+    <string name="bottom_menu_profile">Profile</string>
+    <string name="bottom_menu_search">Search</string>
+    <string name="bottom_menu_messages">Messages</string>
+    <string name="bottom_menu_home">Home</string>
+    <string name="bottom_menu_favorite">Favorite</string>
+
 </resources>
