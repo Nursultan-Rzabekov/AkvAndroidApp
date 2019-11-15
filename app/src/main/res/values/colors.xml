@@ -21,8 +21,7 @@
 
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="secondaryZero">#2f6969</color>
+    <color name="colorAccent">#D81B60</color>\
     <color name="secondaryFirst">#2F6969</color>
     <color name="primaryZero">#F5CE00</color>
 

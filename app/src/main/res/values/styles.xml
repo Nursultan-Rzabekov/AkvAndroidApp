@@ -21,6 +21,17 @@
         <item name="boxStrokeColor">@android:color/black</item>
     </style>
 
+    <style name="BasicTextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius3</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius3</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/cornerRadius3</item>
+        <item name="boxCornerRadiusTopStart">@dimen/cornerRadius3</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="hintEnabled">false</item>
+        <item name='boxStrokeWidth'>1dp</item>
+        <item name="boxStrokeColor">@android:color/black</item>
+    </style>
+
     <style name="BasicButton" parent="Widget.MaterialComponents.Button">
     <item name="backgroundTint">@color/primaryZero</item>
     <item name="android:fontFamily">@font/montserrat</item>
@@ -58,7 +69,7 @@
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:text">@string/akv</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/secondaryZero</item>
+        <item name="android:textColor">@color/secondaryFirst</item>
         <item name="android:textSize">@dimen/text_content1</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -76,4 +87,25 @@
         <item name="android:textSize">@dimen/text_content1</item>
     </style>
 
+    <style name="BasicImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">?android:selectableItemBackground</item>
+    </style>
+
+    <style name="BasicChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipCornerRadius">7dp</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="chipStrokeColor">@android:color/secondary_text_light</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipIconVisible">true</item>
+        <item name="chipIconTint">@color/secondaryFirst</item>
+        <item name="rippleColor">@color/secondaryFirst</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="BasicCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">50dp</item>
+        <item name="android:minHeight">320dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="cardElevation">2dp</item>
+    </style>
 </resources>
