@@ -24,6 +24,12 @@
     <dimen name="content_margin9">25dp</dimen>
     <dimen name="content_margin10">45dp</dimen>
     <dimen name="content_margin11">56dp</dimen>
+    <dimen name="content_margin_main1">17dp</dimen>
+    <dimen name="content_margin_main2">10dp</dimen>
+    <dimen name="content_margin_main3">20dp</dimen>
+    <dimen name="content_margin_main4">17dp</dimen>
+    <dimen name="content_margin_main5">14dp</dimen>
+    <dimen name="content_margin_main6">27dp</dimen>
     <dimen name="gl_margin1">38dp</dimen>
     <dimen name="gl_margin2">37dp</dimen>
     <dimen name="content_margin12">48dp</dimen>
@@ -31,4 +37,5 @@
     <dimen name="cornerRadius2">30dp</dimen>
     <dimen name="cornerRadius3">5dp</dimen>
     <dimen name="padding_1">15dp</dimen>
+    <dimen name="card_item_height">170dp</dimen>
 </resources>

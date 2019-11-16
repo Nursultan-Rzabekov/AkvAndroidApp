@@ -15,6 +15,7 @@
     <color name="grey3">#a8a8a8</color>
     <color name="grey4">#7d7d7d</color>
     <color name="grey5">#5c5c5c</color>
+    <color name="black_al88">#88000000</color>
 
     <color name="default_background_color">#EEEEEE</color>
 
@@ -22,7 +23,7 @@
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
     <color name="colorAccent">#D81B60</color>\
-    <color name="secondaryFirst">#2F6969</color>
-    <color name="primaryZero">#F5CE00</color>
+    <color name="secondaryFirst">#1E1D4C</color>
+    <color name="primaryZero">#CD3232</color>
 
 </resources>

@@ -128,5 +128,11 @@
     <string name="bottom_menu_messages">Messages</string>
     <string name="bottom_menu_home">Home</string>
     <string name="bottom_menu_favorite">Favorite</string>
+    <string name="backgroundimage">backgroundImage</string>
+    <string name="dates">Даты</string>
+    <string name="guests">Гости</string>
+    <string name="by_map">На карте</string>
+    <string name="search_result">Результаты поиска “Отели”</string>
+    <string name="hotels">Отели</string>
 
 </resources>

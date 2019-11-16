@@ -1,29 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        app:cardUseCompatPadding="true"
-        app:cardPreventCornerOverlap="false"
-        app:cardCornerRadius="30dp"
-        app:cardBackgroundColor="@color/primaryZero"
-        >
+        android:layout_height="@dimen/card_item_height"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        android:layout_marginEnd="@dimen/content_margin_main6"
+        android:layout_marginStart="@dimen/content_margin_main6"
+        app:cardElevation="1dp"
+        app:cardUseCompatPadding="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/test_image_back"
-                android:scaleType="centerCrop"/>
+                <ImageView
+                    android:id="@+id/search_recycler_item_image_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/backgroundimage"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/test_image_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_image_corners"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.cardview.widget.CardView>
-</FrameLayout>
+                <TextView
+                    android:id="@+id/search_recycler_item_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/content_margin_main1"
+                    android:layout_marginTop="@dimen/content_margin_main2"
+                    android:layout_marginEnd="@dimen/content_margin_main1"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Hotel De Luxe"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_content3"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/search_recycler_item_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="7 км, Алматы"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_content2"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawableTint="@color/primaryZero"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/content_margin_main4"
+                    android:layout_marginBottom="@dimen/content_margin_main3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/search_recycler_item_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="20 000kzt"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_content3"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="@dimen/content_margin_main5"
+                    android:layout_marginEnd="@dimen/content_margin_main4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
