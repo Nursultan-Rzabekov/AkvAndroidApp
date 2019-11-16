@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/wrapper_searcher_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/searcher_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/main_search_l_et"
+            style="@style/BasicTextOutlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/main_search_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:hint="@string/hotels"
+                android:maxLines="1"
+                android:paddingStart="40dp"
+                android:paddingEnd="55dp"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <include
+            layout="@layout/back_button_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center_vertical"
+            />
+
+        <ImageButton
+            android:id="@+id/main_search_img_btn"
+            style="@style/BasicImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center_vertical"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/filter"
+            android:scaleType="center"
+            android:visibility="visible"
+            android:src="@drawable/ic_search"
+            android:tint="@color/secondaryFirst" />
+
+        <ImageButton
+            android:id="@+id/main_filter_img_btn"
+            style="@style/BasicImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/filter"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_tune"
+            android:tint="@color/secondaryFirst" />
+
+    </FrameLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/main_chipGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searcher_layout">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/by_date_chip"
+            style="@style/BasicChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dates"
+            app:chipIcon="@drawable/ic_date" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/by_guests_chip"
+            style="@style/BasicChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guests"
+            app:chipIcon="@drawable/ic_group_people" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/by_map_chip"
+            style="@style/BasicChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/by_map"
+            app:chipIcon="@drawable/ic_location"
+            app:closeIcon="@drawable/ic_close"
+            app:closeIconTint="@android:color/white" />
+        <!-- Chips can be declared here, or added dynamically. -->
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/search_result_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/search_result"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="21dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_chipGroup" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
