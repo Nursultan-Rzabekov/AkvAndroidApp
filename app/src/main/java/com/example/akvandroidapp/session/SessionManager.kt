@@ -40,7 +40,8 @@ constructor(
         CoroutineScope(IO).launch{
             var errorMessage: String? = null
             try{
-                _cachedToken.value!!.account_pk?.let { authTokenDao.nullifyToken(it)
+                _cachedToken.value!!.token?.let {
+//                    authTokenDao.nullifyToken(it)
                 } ?: throw CancellationException("Token Error. Logging out user.")
             }catch (e: CancellationException) {
                 Log.e(TAG, "logout: ${e.message}")

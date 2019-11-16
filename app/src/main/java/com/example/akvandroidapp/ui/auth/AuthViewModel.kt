@@ -28,8 +28,11 @@ constructor(val authRepository: AuthRepository): BaseViewModel<AuthStateEvent, A
                 return authRepository.attemptRegistration(
                     stateEvent.email,
                     stateEvent.username,
+                    stateEvent.phone,
                     stateEvent.password,
-                    stateEvent.confirm_password
+                    stateEvent.first_name,
+                    stateEvent.last_name,
+                    stateEvent.birth_day
                 )
             }
 

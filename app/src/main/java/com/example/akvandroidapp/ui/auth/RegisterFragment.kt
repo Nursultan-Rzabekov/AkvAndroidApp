@@ -41,18 +41,14 @@ class RegisterFragment : BaseAuthFragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterFragment: ${viewModel}")
 
-
-
         sign_detail_create_btn.setOnClickListener {
             register()
         }
         subscribeObservers()
 
-
         sign_detail_back_tv.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_registerPassFragment)
         }
-
 
         term_privacy.makeLinks(
             Pair("политикой конфеденциальности", View.OnClickListener {
@@ -67,7 +63,7 @@ class RegisterFragment : BaseAuthFragment() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer{viewState ->
             viewState.registrationFields?.let {
                 it.registration_email?.let{sign_detail_email_et.setText(it)}
-                it.registration_username?.let{sign_detail_phonenumber_et.setText(it)}
+                it.registration_username?.let{sign_detail_last_name_et.setText(it)}
             }
         })
     }
@@ -76,9 +72,12 @@ class RegisterFragment : BaseAuthFragment() {
         viewModel.setStateEvent(
             RegisterAttemptEvent(
                 sign_detail_email_et.text.toString(),
-                sign_detail_phonenumber_et.text.toString(),
+                arg_user_name.toString(),
+                arg_number.toString(),
                 password1.toString(),
-                password2.toString()
+                sign_detail_last_name_et.text.toString(),
+                sign_detail_last_name_et.text.toString(),
+                sign_detail_birth_et.text.toString()
             )
         )
     }
@@ -88,13 +87,12 @@ class RegisterFragment : BaseAuthFragment() {
         viewModel.setRegistrationFields(
             RegistrationFields(
                 sign_detail_email_et.text.toString(),
-                sign_detail_phonenumber_et.text.toString(),
+                sign_detail_last_name_et.text.toString(),
                 password1.toString(),
-                password2.toString()
+                sign_detail_birth_et.text.toString()
             )
         )
     }
-
 
     fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
         val spannableString = SpannableString(this.text)

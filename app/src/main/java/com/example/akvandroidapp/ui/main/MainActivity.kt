@@ -35,7 +35,7 @@ class MainActivity : BaseActivity(),
         BottomNavController(
             this,
             R.id.main_nav_host_fragment,
-            R.id.nav_create_search,
+            R.id.nav_search,
             this,
             this)
     }
@@ -128,7 +128,7 @@ class MainActivity : BaseActivity(),
     fun subscribeObservers(){
         sessionManager.cachedToken.observe(this, Observer{ authToken ->
             Log.d(TAG, "MainActivity, subscribeObservers: ViewState: ${authToken}")
-            if(authToken == null || authToken.account_pk == -1 || authToken.token == null){
+            if(authToken == null ||  authToken.token == null){
                 navAuthActivity()
                 finish()
             }

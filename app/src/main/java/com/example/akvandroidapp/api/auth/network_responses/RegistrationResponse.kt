@@ -5,13 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 class RegistrationResponse(
 
-    @SerializedName("response")
-    @Expose
-    var response: String,
 
-    @SerializedName("error_message")
+    @SerializedName("id")
     @Expose
-    var errorMessage: String,
+    var id: Int,
 
     @SerializedName("email")
     @Expose
@@ -21,16 +18,30 @@ class RegistrationResponse(
     @Expose
     var username: String,
 
-    @SerializedName("pk")
+    @SerializedName("phone")
     @Expose
-    var pk: Int,
+    var phone: String,
 
-    @SerializedName("token")
+    @SerializedName("first_name")
     @Expose
-    var token: String)
+    var first_name: String,
+
+    @SerializedName("last_name")
+    @Expose
+    var last_name: String,
+
+    @SerializedName("birth_day")
+    @Expose
+    var birth_day: String
+
+//    @SerializedName("error_message")
+//    @Expose
+//    var errorMessage: String
+
+    )
 {
 
     override fun toString(): String {
-        return "RegistrationResponse(response='$response', errorMessage='$errorMessage', email='$email', username='$username', token='$token')"
+        return "RegistrationResponse(response='$id', email='$email', username='$username', phone='$phone', first_name='$first_name',last_name='$last_name',birth_day='$birth_day')"
     }
 }

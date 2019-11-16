@@ -10,8 +10,12 @@ sealed class AuthStateEvent{
     data class RegisterAttemptEvent(
         val email: String,
         val username: String,
+        val phone: String,
         val password: String,
-        val confirm_password: String
+        val first_name: String,
+        val last_name: String,
+        val birth_day: String
+
     ): AuthStateEvent()
 
     class CheckPreviousAuthEvent(): AuthStateEvent()

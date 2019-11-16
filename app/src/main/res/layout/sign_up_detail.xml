@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -45,7 +44,7 @@
         android:layout_marginStart="@dimen/content_margin3"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/phone_number"
+        android:text="@string/last_name"
         android:textAlignment="textStart"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_content5"
@@ -55,7 +54,7 @@
         app:lineHeight="17dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/sign_detail_phonenumber_l_et"
+        android:id="@+id/sign_detail_last_name_l_et"
         style="@style/TextOutlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,14 +65,12 @@
         app:layout_constraintTop_toBottomOf="@+id/phonenumber_label1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/sign_detail_phonenumber_et"
+            android:id="@+id/sign_detail_last_name_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:inputType="phone"
-            android:digits="0123456789+"
             android:maxLines="1"
-            android:hint="@string/phone_number" />
+            android:hint="@string/last_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +86,7 @@
         android:textColor="@android:color/black"
         android:typeface="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_detail_phonenumber_l_et"
+        app:layout_constraintTop_toBottomOf="@+id/sign_detail_last_name_l_et"
         app:lineHeight="17dp" />
 
     <com.google.android.material.textfield.TextInputLayout

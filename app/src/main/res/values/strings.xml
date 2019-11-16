@@ -109,7 +109,7 @@
     <string name="recover_password">Восстановить пароль</string>
     <string name="i_dont_have_code">Мне не пришло сообщение с кодом.</string>
     <string name="send_again">Отправить ещё раз</string>
-    <string name="phone_number">Номер телефона</string>
+    <string name="last_name">Last name</string>
     <string name="email_">Электронная почта</string>
     <string name="birth_date">День рождение</string>
     <string name="dd_mm_yyyy">ДД/ММ/ГГГГ</string>
