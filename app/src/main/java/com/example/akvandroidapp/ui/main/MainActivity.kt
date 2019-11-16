@@ -35,7 +35,7 @@ class MainActivity : BaseActivity(),
         BottomNavController(
             this,
             R.id.main_nav_host_fragment,
-            R.id.nav_create_search,
+            R.id.nav_search,
             this,
             this)
     }

@@ -18,11 +18,106 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:id="@+id/tool_bar"
+            android:visibility="gone"
             app:layout_scrollFlags="scroll|enterAlways"
             >
-
         </androidx.appcompat.widget.Toolbar>
+        <FrameLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="20dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                style="@style/BasicTextOutlined"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="55dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/montserrat"
+                    android:singleLine="true"
+                    android:hint="Oteli" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                style="@style/BasicImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start|center_vertical"
+                android:layout_margin="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_back" />
+
+            <ImageButton
+                android:id="@+id/button"
+                style="@style/BasicImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="10dp"
+                android:adjustViewBounds="true"
+                android:tint="@color/secondaryFirst"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_tune" />
+
+        </FrameLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <com.google.android.material.chip.Chip
+                style="@style/BasicChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Даты"
+                app:chipIcon="@drawable/ic_date" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/BasicChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Гости"
+                app:chipIcon="@drawable/ic_group_people" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/BasicChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="На карте"
+                app:chipIcon="@drawable/ic_location"
+                app:closeIcon="@drawable/ic_close"
+                app:closeIconTint="@android:color/white" />
+            <!-- Chips can be declared here, or added dynamically. -->
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:text="Результаты поиска “Отели”"
+            android:textColor="@android:color/black"/>
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -66,5 +161,7 @@
         app:itemIconTint="@color/bottom_nav_selector"
         app:menu="@menu/main_bottom_navigation_menu"
         />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
