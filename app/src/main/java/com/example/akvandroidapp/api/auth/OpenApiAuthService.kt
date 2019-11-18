@@ -19,7 +19,7 @@ interface OpenApiAuthService {
     @FormUrlEncoded
     fun register(
         @Field("email") email: String,
-        @Field("username") username: String,
+        @Field("gender") gender: Int,
         @Field("phone") phone: String,
         @Field("password") password: String,
         @Field("first_name") first_name: String,

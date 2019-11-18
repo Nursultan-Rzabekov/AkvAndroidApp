@@ -32,11 +32,11 @@ class RegistrationResponse(
 
     @SerializedName("birth_day")
     @Expose
-    var birth_day: String
+    var birth_day: String,
 
-//    @SerializedName("error_message")
-//    @Expose
-//    var errorMessage: String
+    @SerializedName("error_message")
+    @Expose
+    var errorMessage: String
 
     )
 {
