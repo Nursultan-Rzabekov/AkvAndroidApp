@@ -23,7 +23,7 @@
             >
         </androidx.appcompat.widget.Toolbar>
         <FrameLayout
-            android:id="@+id/layout"
+            android:id="@+id/searcher_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -161,5 +161,4 @@
         app:itemIconTint="@color/bottom_nav_selector"
         app:menu="@menu/main_bottom_navigation_menu"
         />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
