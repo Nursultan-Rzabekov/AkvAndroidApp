@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName
 
 class LoginResponse(
 
-//    @SerializedName("response")
-//    @Expose
-//    var response: String,
-
-//    @SerializedName("error_message")
-//    @Expose
-//    var errorMessage: String,
-
-    @SerializedName("auth_token")
+    @SerializedName("response")
     @Expose
-    var auth_token: String
+    var response: Boolean,
 
-//    @SerializedName("pk")
-//    @Expose
-//    var pk: Int,
+    @SerializedName("error_message")
+    @Expose
+    var errorMessage: String,
+
+    @SerializedName("token")
+    @Expose
+    var token: String,
+
+    @SerializedName("user")
+    @Expose
+    var user: UserResponse
 
 )
 {
     override fun toString(): String {
-        return "LoginResponse(auth_token='$auth_token')"
+        return "LoginResponse(response='$response', errorMessage='$errorMessage', token='$token', user='$user')"
     }
 }

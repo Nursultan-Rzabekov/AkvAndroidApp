@@ -24,10 +24,13 @@ class RegisterUpFragment : BaseAuthFragment() {
         return inflater.inflate(R.layout.sign_up, container, false)
     }
 
+    private var argument:String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterUpFragment: ${viewModel}")
 
+        argument = arguments?.getString("user_name")
 
         phone_next_btn.setOnClickListener {
             navNextNavigationPage()
@@ -41,8 +44,6 @@ class RegisterUpFragment : BaseAuthFragment() {
     }
 
     private fun navNextNavigationPage(){
-        val argument = arguments?.getString("user_name")
-        Toast.makeText(context,argument, Toast.LENGTH_SHORT).show()
 
         val number = sign_up_et.text.toString()
 

@@ -9,7 +9,7 @@ sealed class AuthStateEvent{
 
     data class RegisterAttemptEvent(
         val email: String,
-        val username: String,
+        val gender: Int,
         val phone: String,
         val password: String,
         val first_name: String,

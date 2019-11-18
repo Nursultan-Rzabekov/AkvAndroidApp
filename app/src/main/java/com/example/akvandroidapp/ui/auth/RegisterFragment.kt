@@ -32,19 +32,28 @@ class RegisterFragment : BaseAuthFragment() {
         return inflater.inflate(R.layout.sign_up_detail, container, false)
     }
 
-    val password1 = arguments?.getString("password1")
-    val password2 = arguments?.getString("password2")
-    val arg_number = arguments?.getString("arg_number")
-    val arg_user_name = arguments?.getString("arg_user_name")
+    private var password1:String?=null
+    private var password2:String?=null
+    private var arg_number:String?=null
+    private var arg_user_name:String?=null
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterFragment: ${viewModel}")
 
+
+        password1 = arguments?.getString("password1")
+        password2 = arguments?.getString("password2")
+        arg_number = arguments?.getString("arg_number")
+        arg_user_name = arguments?.getString("arg_user_name")
+
         sign_detail_create_btn.setOnClickListener {
             register()
         }
         subscribeObservers()
+
 
         sign_detail_back_tv.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_registerPassFragment)
@@ -72,10 +81,10 @@ class RegisterFragment : BaseAuthFragment() {
         viewModel.setStateEvent(
             RegisterAttemptEvent(
                 sign_detail_email_et.text.toString(),
-                arg_user_name.toString(),
+                1,
                 arg_number.toString(),
                 password1.toString(),
-                sign_detail_last_name_et.text.toString(),
+                arg_user_name.toString(),
                 sign_detail_last_name_et.text.toString(),
                 sign_detail_birth_et.text.toString()
             )
@@ -88,7 +97,6 @@ class RegisterFragment : BaseAuthFragment() {
             RegistrationFields(
                 sign_detail_email_et.text.toString(),
                 sign_detail_last_name_et.text.toString(),
-                password1.toString(),
                 sign_detail_birth_et.text.toString()
             )
         )

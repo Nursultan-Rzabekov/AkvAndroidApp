@@ -19,23 +19,21 @@ import com.google.gson.annotations.SerializedName
         ForeignKey(
             entity = AccountProperties::class,
             parentColumns = ["pk"],
-            childColumns = ["token"],
+            childColumns = ["id"],
             onDelete = CASCADE
         )
     ]
 )
 data class AuthToken(
 
-//    @PrimaryKey
-//    @ColumnInfo(name = "account_pk")
-//    var account_pk: Int? = -1,
-
-    @NonNull
     @PrimaryKey
+    @ColumnInfo(name = "id")
+    var id: Int? = -1,
+
     @ColumnInfo(name = "token")
     @SerializedName("token")
     @Expose
-    var token: String
+    var token: String?
 )
 
 

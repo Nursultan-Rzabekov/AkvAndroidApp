@@ -75,25 +75,28 @@ constructor(
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<LoginResponse>) {
                 Log.d(TAG, "handleApiSuccessResponse: ${response}")
 
-//                // Incorrect login credentials counts as a 200 response from server, so need to handle that
-//                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
-//                    return onErrorReturn(response.body.errorMessage, true, false)
-//                }
+                // Incorrect login credentials counts as a 200 response from server, so need to handle that
+                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
+                    return onErrorReturn(response.body.errorMessage, true, false)
+                }
 
-//                // Don't care about result here. Just insert if it doesn't exist b/c of foreign key relationship
-//                // with AuthToken
-//                accountPropertiesDao.insertOrIgnore(
-//                    AccountProperties(
-//                        response.body.pk,
-//                        response.body.email,
-//                        ""
-//                    )
-//                )
+                // Don't care about result here. Just insert if it doesn't exist b/c of foreign key relationship
+                // with AuthToken
+                accountPropertiesDao.insertOrIgnore(
+                    AccountProperties(
+                        response.body.user.id,
+                        response.body.user.email,
+                        response.body.user.first_name,
+                        response.body.user.last_name,
+                        response.body.user.phone
+                    )
+                )
 
                 // will return -1 if failure
                 val result = authTokenDao.insert(
                     AuthToken(
-                        response.body.auth_token
+                        response.body.user.id,
+                        response.body.token
                     )
                 )
 
@@ -109,7 +112,7 @@ constructor(
                 onCompleteJob(
                     DataState.data(
                         data = AuthViewState(
-                            authToken = AuthToken(response.body.auth_token)
+                            authToken = AuthToken(response.body.user.id, response.body.token)
                         )
                     )
                 )
@@ -128,7 +131,7 @@ constructor(
 
     fun attemptRegistration(
         email: String,
-        username: String,
+        gender: Int,
         phone: String,
         password: String,
         first_name: String,
@@ -136,7 +139,7 @@ constructor(
         birth_day: String
     ): LiveData<DataState<AuthViewState>>{
 
-        val registrationFieldErrors = RegistrationFields(email, username, password, birth_day).isValidForRegistration()
+        val registrationFieldErrors = RegistrationFields(email, first_name, birth_day).isValidForRegistration()
         if(!registrationFieldErrors.equals(RegistrationFields.RegistrationError.none())){
             return returnErrorResponse(registrationFieldErrors, ResponseType.Dialog())
         }
@@ -147,7 +150,6 @@ constructor(
             true,
             false
         ){
-
 
             // Ignore
             override fun loadFromCache(): LiveData<AuthViewState> {
@@ -164,67 +166,66 @@ constructor(
 
             }
 
+
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<RegistrationResponse>) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+                Log.d(TAG, "handleApiSuccessResponse: ${response}")
+
+
+                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
+                    return onErrorReturn(response.body.errorMessage, true, false)
+                }
+
+                val result1 = accountPropertiesDao.insertAndReplace(
+                    AccountProperties(
+                        response.body.user.id,
+                        response.body.user.email,
+                        response.body.user.first_name,
+                        response.body.user.last_name,
+                        response.body.user.phone
+                    )
+                )
+
+                // will return -1 if failure
+                if(result1 < 0){
+                    onCompleteJob(DataState.error(
+                        Response(ERROR_SAVE_ACCOUNT_PROPERTIES, ResponseType.Dialog()))
+                    )
+                    return
+                }
+
+                // will return -1 if failure
+                val result2 = authTokenDao.insert(
+                    AuthToken(
+                        response.body.user.id,
+                        response.body.token
+                    )
+                )
+                if(result2 < 0){
+                    onCompleteJob(DataState.error(
+                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog())
+                    ))
+                    return
+                }
+
+                saveAuthenticatedUserToPrefs(email)
+
+                onCompleteJob(
+                    DataState.data(
+                        data = AuthViewState(
+                            authToken = AuthToken(response.body.user.id, response.body.token)
+                        )
+                    )
+                )
             }
 
-//            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<RegistrationResponse>) {
-//
-//                Log.d(TAG, "handleApiSuccessResponse: ${response}")
-//
-////                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
-////                    return onErrorReturn(response.body.errorMessage, true, false)
-////                }
-//
-//                val result1 = accountPropertiesDao.insertAndReplace(
-//                    AccountProperties(
-//                        response.body.pk,
-//                        response.body.email,
-//                        response.body.username
-//                    )
-//                )
-//
-//                // will return -1 if failure
-//                if(result1 < 0){
-//                    onCompleteJob(DataState.error(
-//                        Response(ERROR_SAVE_ACCOUNT_PROPERTIES, ResponseType.Dialog()))
-//                    )
-//                    return
-//                }
-//
-//                // will return -1 if failure
-//                val result2 = authTokenDao.insert(
-//                    AuthToken(
-//                        response.body.pk,
-//                        response.body.token
-//                    )
-//                )
-//                if(result2 < 0){
-//                    onCompleteJob(DataState.error(
-//                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog())
-//                    ))
-//                    return
-//                }
-//
-//                saveAuthenticatedUserToPrefs(email)
-//
-//                onCompleteJob(
-//                    DataState.data(
-//                        data = AuthViewState(
-//                            authToken = AuthToken(response.body.pk, response.body.token)
-//                        )
-//                    )
-//                )
-//            }
-
             override fun createCall(): LiveData<GenericApiResponse<RegistrationResponse>> {
-                return openApiAuthService.register(email, username,phone, password, first_name, last_name, birth_day)
+                return openApiAuthService.register(email, gender, phone, password, first_name, last_name, birth_day)
             }
 
             override fun setJob(job: Job) {
                 addJob("attemptRegistration", job)
             }
-
         }.asLiveData()
     }
 
@@ -259,22 +260,22 @@ constructor(
                     accountPropertiesDao.searchByEmail(previousAuthUserEmail).let { accountProperties ->
                         Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
 
-//                        accountProperties?.let {
-//                            if(accountProperties.pk > -1){
-//                                authTokenDao.searchByPk(accountProperties.pk).let { authToken ->
-//                                    if(authToken != null){
-//                                        if(authToken.token != null){
-//                                            onCompleteJob(
-//                                                DataState.data(
-//                                                    AuthViewState(authToken = authToken)
-//                                                )
-//                                            )
-//                                            return
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
+                        accountProperties?.let {
+                            if(accountProperties.pk > -1){
+                                authTokenDao.searchByPk(accountProperties.pk).let { authToken ->
+                                    if(authToken != null){
+                                        if(authToken.token != null){
+                                            onCompleteJob(
+                                                DataState.data(
+                                                    AuthViewState(authToken = authToken)
+                                                )
+                                            )
+                                            return
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
                         Log.d(TAG, "createCacheRequestAndReturn: AuthToken not found...")
                         onCompleteJob(

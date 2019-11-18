@@ -12,7 +12,6 @@ data class AuthViewState(
 data class RegistrationFields(
     var registration_email: String? = null,
     var registration_username: String? = null,
-    var registration_password: String? = null,
     var registration_birth_day: String? = null
 ){
     class RegistrationError {
@@ -36,7 +35,6 @@ data class RegistrationFields(
     fun isValidForRegistration(): String{
         if(registration_email.isNullOrEmpty()
             || registration_username.isNullOrEmpty()
-            || registration_password.isNullOrEmpty()
             || registration_birth_day.isNullOrEmpty()){
             return RegistrationError.mustFillAllFields()
         }

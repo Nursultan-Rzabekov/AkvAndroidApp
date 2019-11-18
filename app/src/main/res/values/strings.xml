@@ -112,7 +112,7 @@
     <string name="phone_number">Номер телефона</string>
     <string name="email_">Электронная почта</string>
     <string name="birth_date">День рождение</string>
-    <string name="dd_mm_yyyy">ДД/ММ/ГГГГ</string>
+    <string name="dd_mm_yyyy">ДД-ММ-ГГГГ</string>
     <string name="gender">Ваш пол</string>
     <string name="F">Ж</string>
     <string name="M">M</string>
@@ -121,6 +121,9 @@
     <string name="your_profile">Ваш профиль</string>
     <string name="services">Услуги</string>
     <string name="or">или</string>
+
+
+    <string name="last_name">last_name</string>
 
 
     <string name="bottom_menu_profile">Profile</string>
@@ -134,5 +137,6 @@
     <string name="by_map">На карте</string>
     <string name="search_result">Результаты поиска “Отели”</string>
     <string name="hotels">Отели</string>
+
 
 </resources>

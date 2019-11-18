@@ -23,6 +23,9 @@ class RegisterPassFragment : BaseAuthFragment() {
         return inflater.inflate(R.layout.sign_up_pass, container, false)
     }
 
+    private var arg_number:String? = null
+    private var arg_user_name:String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterPassFragment: ${viewModel}")
@@ -31,14 +34,16 @@ class RegisterPassFragment : BaseAuthFragment() {
             navNextNavigationPage()
         }
 
+        arg_number = arguments?.getString("number")
+        arg_user_name = arguments?.getString("arg_user_name")
+
         sign_up_pass_back_tv.setOnClickListener {
             findNavController().navigate(R.id.action_registerPassFragment_to_registerUpFragment)
         }
     }
 
     private fun navNextNavigationPage(){
-        val arg_number = arguments?.getString("number")
-        val arg_user_name = arguments?.getString("arg_user_name")
+
 
         val password1 = sign_up_pass_password_et.text.toString()
         val password2 = sign_up_pass_password_re_et.text.toString()

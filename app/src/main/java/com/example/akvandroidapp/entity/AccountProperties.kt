@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "account_properties")
 data class AccountProperties(
 
-    @SerializedName("pk")
+    @SerializedName("id")
     @Expose
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "pk") var pk: Int,
@@ -18,9 +18,18 @@ data class AccountProperties(
     @Expose
     @ColumnInfo(name = "email") var email: String,
 
-    @SerializedName("username")
+    @SerializedName("first_name")
     @Expose
-    @ColumnInfo(name = "username") var username: String
+    @ColumnInfo(name = "first_name") var first_name: String,
+
+    @SerializedName("last_name")
+    @Expose
+    @ColumnInfo(name = "last_name") var last_name: String,
+
+    @SerializedName("phone")
+    @Expose
+    @ColumnInfo(name = "phone") var phone: String
+
 )
 {
 
@@ -31,9 +40,20 @@ data class AccountProperties(
 
         if (pk != other.pk) return false
         if (email != other.email) return false
-        if (username != other.username) return false
+        if (first_name != other.first_name) return false
+        if (last_name != other.last_name) return false
+        if (phone != other.phone) return false
 
         return true
+    }
+
+    override fun hashCode(): Int {
+        var result = pk
+        result = 31 * result + email.hashCode()
+        result = 31 * result + first_name.hashCode()
+        result = 31 * result + last_name.hashCode()
+        result = 31 * result + phone.hashCode()
+        return result
     }
 
 }

@@ -27,7 +27,7 @@ constructor(val authRepository: AuthRepository): BaseViewModel<AuthStateEvent, A
             is RegisterAttemptEvent -> {
                 return authRepository.attemptRegistration(
                     stateEvent.email,
-                    stateEvent.username,
+                    stateEvent.gender,
                     stateEvent.phone,
                     stateEvent.password,
                     stateEvent.first_name,

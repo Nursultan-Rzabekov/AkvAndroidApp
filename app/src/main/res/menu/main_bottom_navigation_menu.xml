@@ -25,5 +25,4 @@
         android:title="@string/bottom_menu_profile"
         android:icon="@drawable/ic_account_circle_white_24dp"/>
 
-
 </menu>
