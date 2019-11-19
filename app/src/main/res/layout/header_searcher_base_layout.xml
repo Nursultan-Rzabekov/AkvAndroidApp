@@ -48,12 +48,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
-            android:layout_margin="10dp"
             android:contentDescription="@string/filter"
             android:scaleType="center"
             android:clickable="false"
             android:visibility="visible"
-            android:src="@drawable/ic_search"
+            android:src="@drawable/ic_search_real"
             android:tint="@color/secondaryFirst" />
 
         <ImageButton
@@ -62,11 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end|center_vertical"
-            android:layout_margin="10dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/filter"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_tune"
+            android:src="@drawable/ic_filter_real"
+            android:padding="12dp"
             android:tint="@color/secondaryFirst" />
 
     </FrameLayout>
@@ -85,7 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dates"
-            app:chipIcon="@drawable/ic_date" />
+            app:chipIconTint="@color/secondaryFirst"
+            app:chipIcon="@drawable/ic_calendar_real" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/by_guests_chip"
@@ -93,7 +93,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/guests"
-            app:chipIcon="@drawable/ic_group_people" />
+            app:chipIconTint="@color/secondaryFirst"
+            app:chipIcon="@drawable/ic_guests_real" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/by_map_chip"
@@ -101,10 +102,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/by_map"
-            app:chipIcon="@drawable/ic_location"
+            app:chipIconTint="@color/secondaryFirst"
+            app:chipIcon="@drawable/ic_location_real"
             app:closeIcon="@drawable/ic_close"
             app:closeIconTint="@android:color/white" />
-        <!-- Chips can be declared here, or added dynamically. -->
 
     </com.google.android.material.chip.ChipGroup>
 

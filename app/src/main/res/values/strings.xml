@@ -137,6 +137,8 @@
     <string name="by_map">На карте</string>
     <string name="search_result">Результаты поиска “Отели”</string>
     <string name="hotels">Отели</string>
+    <string name="favourite_eng">favourite</string>
+    <string name="export_eng">export</string>
 
 
 </resources>

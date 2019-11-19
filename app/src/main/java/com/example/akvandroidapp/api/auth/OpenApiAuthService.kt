@@ -8,6 +8,7 @@ import retrofit2.http.*
 
 interface OpenApiAuthService {
 
+
     @POST("api/auth/login")
     @FormUrlEncoded
     fun login(
@@ -27,5 +28,4 @@ interface OpenApiAuthService {
         @Field("birth_day") birth_day: String
 
     ): LiveData<GenericApiResponse<RegistrationResponse>>
-
 }

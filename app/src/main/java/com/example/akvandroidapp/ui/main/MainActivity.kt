@@ -3,6 +3,7 @@ package com.example.akvandroidapp.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -123,6 +124,7 @@ class MainActivity : BaseActivity(),
         }
 
         subscribeObservers()
+
     }
 
     fun subscribeObservers(){
@@ -140,7 +142,7 @@ class MainActivity : BaseActivity(),
     }
 
     private fun setupActionBar(){
-        setSupportActionBar(tool_bar)
+        setSupportActionBar(toolbar_zhilye)
     }
 
     private fun navAuthActivity(){
@@ -158,5 +160,8 @@ class MainActivity : BaseActivity(),
         }
     }
 
-
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.header_zhilye_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 }

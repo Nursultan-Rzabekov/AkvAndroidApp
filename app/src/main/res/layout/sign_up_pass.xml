@@ -7,12 +7,11 @@
 
     <TextView
         android:id="@+id/sign_up_pass_back_tv"
-        android:layout_width="56dp"
-        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/button_margin1"
         android:layout_marginTop="@dimen/button_margin2"
-        android:drawableStart="@drawable/ic_back"
-        android:drawablePadding="-5dp"
+        android:drawableStart="@drawable/ic_chevron_left_real"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/back"
         android:textSize="@dimen/text_button1"

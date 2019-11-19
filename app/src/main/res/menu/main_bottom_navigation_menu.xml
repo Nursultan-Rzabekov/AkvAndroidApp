@@ -4,25 +4,25 @@
     <item android:id="@+id/nav_search"
         android:title="@string/bottom_menu_search"
         android:checked="true"
-        android:icon="@drawable/ic_home_white_24dp"/>
+        android:icon="@drawable/ic_search_nav_real"/>
 
     <item android:id="@+id/nav_favorite"
         android:title="@string/bottom_menu_favorite"
-        android:icon="@drawable/ic_add_circle_outline_white_24dp"
+        android:icon="@drawable/ic_favourite_real"
         />
 
     <item android:id="@+id/nav_home"
         android:title="@string/bottom_menu_home"
-        android:icon="@drawable/ic_add_circle_outline_white_24dp"
+        android:icon="@drawable/ic_booking_nav_real"
         />
 
     <item android:id="@+id/nav_messages"
         android:title="@string/bottom_menu_messages"
-        android:icon="@drawable/ic_add_circle_outline_white_24dp"
+        android:icon="@drawable/ic_chat_nav_real"
         />
 
     <item android:id="@+id/nav_profile"
         android:title="@string/bottom_menu_profile"
-        android:icon="@drawable/ic_account_circle_white_24dp"/>
+        android:icon="@drawable/ic_user_nav_real"/>
 
 </menu>
