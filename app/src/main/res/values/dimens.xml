@@ -38,4 +38,5 @@
     <dimen name="cornerRadius3">5dp</dimen>
     <dimen name="padding_1">15dp</dimen>
     <dimen name="card_item_height">170dp</dimen>
+    <dimen name="recycler_loading_view_height">80dp</dimen>
 </resources>

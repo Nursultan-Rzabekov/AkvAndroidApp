@@ -10,5 +10,8 @@ class PreferenceKeys {
         // Shared Preference Keys
         const val PREVIOUS_AUTH_USER: String = "com.example.akvandroidapp.PREVIOUS_AUTH_USER"
 
+        const val Search_FILTER: String = "com.example.akvandroidapp.Search_FILTER"
+        const val Search_ORDER: String = "com.example.akvandroidapp.Search_ORDER"
+
     }
 }
