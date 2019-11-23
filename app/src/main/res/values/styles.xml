@@ -3,10 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="colorPrimary">@color/primaryZero</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/secondaryFirst</item>
+        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
     <style name="TextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -33,18 +33,31 @@
         <item name="boxStrokeColor">@color/secondaryFirst</item>
     </style>
 
-
-    <style name="BasicButton" parent="Widget.MaterialComponents.Button">
+    <style name="AllButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/primaryZero</item>
-        <item name="android:fontFamily">@font/montserrat</item>
         <item name="elevation">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BasicButton" parent="AllButton">
         <item name="android:textSize">@dimen/text_content3</item>
         <item name="android:layout_marginStart">@dimen/gl_margin1</item>
         <item name="android:layout_marginEnd">@dimen/gl_margin2</item>
         <item name="android:paddingBottom">@dimen/padding_1</item>
         <item name="android:paddingTop">@dimen/padding_1</item>
         <item name="cornerRadius">@dimen/cornerRadius2</item>
-        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BasicMiniButton" parent="AllButton">
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">40dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textSize">@dimen/text_content3</item>
+        <item name="cornerRadius">@dimen/cornerRadius2</item>
+    </style>
+    <style name="MinorButton" parent="AllButton">
+        <item name="cornerRadius">@dimen/cornerRadius3</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
     </style>
 
     <style name="GoogleLogButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
@@ -67,7 +80,7 @@
         <item name="android:layout_marginStart">137dp</item>
         <item name="android:layout_marginEnd">137dp</item>
         <item name="android:layout_marginBottom">19dp</item>
-        <item name="android:alpha">0.5</item>
+        <item name="android:alpha">0.9</item>
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:text">@string/akv</item>
         <item name="android:textAlignment">center</item>
@@ -111,6 +124,20 @@
         <item name="cardElevation">2dp</item>
     </style>
 
+    <style name="ButtonCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="cardCornerRadius">@dimen/cornerRadius3</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="CommentCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/cornerRadius1</item>
+        <item name="cardElevation">3dp</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
     <style name="BasicBackButton1" parent="Widget.MaterialComponents.TextView">
         <item name="android:drawableStart">@drawable/ic_chevron_left_real</item>
         <item name="android:layout_marginStart">@dimen/button_margin1</item>
@@ -118,5 +145,37 @@
         <item name="android:fontFamily">@font/montserrat_bold</item>
         <item name="android:textSize">@dimen/text_button1</item>
         <item name="android:text">@string/back</item>
+    </style>
+
+    <style name="MySpinnerDatePickerStyle" parent="android:Theme.Material.Light.Dialog.NoActionBar.MinWidth">
+        <item name="android:datePickerStyle">@style/MySpinnerDatePicker</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Alert.Button.Texting.Positive</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/Alert.Button.Texting.Negative</item>
+    </style>
+
+    <style name="MySpinnerDatePicker" parent="android:Widget.Material.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:negativeButtonText">Отмена</item>
+    </style>
+
+    <style name="Alert.Button.Texting" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="rippleColor">@color/primaryZero</item>
+        <item name="android:textColor">@color/primaryZero</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="Alert.Button.Texting.Positive" parent="Alert.Button.Texting">
+        <item name="android:text">OK</item>
+    </style>
+    <style name="Alert.Button.Texting.Negative" parent="Alert.Button.Texting">
+        <item name="android:text">Отмена</item>
+    </style>
+
+    <style name="BasicEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_style</item>
+        <item name="android:colorControlHighlight">@color/primaryZero</item>
     </style>
 </resources>

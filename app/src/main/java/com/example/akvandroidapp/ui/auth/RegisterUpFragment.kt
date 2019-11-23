@@ -3,6 +3,9 @@ package com.example.akvandroidapp.ui.auth
 
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
+import android.telephony.PhoneNumberUtils
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +14,9 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.util.PhoneNumberUtil
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.sign_up.*
 
 
@@ -36,8 +42,6 @@ class RegisterUpFragment : BaseAuthFragment() {
             navNextNavigationPage()
         }
 
-        sign_up_et.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-
         sign_in_tv.setOnClickListener {
             navLogin()
         }
@@ -58,4 +62,5 @@ class RegisterUpFragment : BaseAuthFragment() {
     private fun navLogin(){
         findNavController().navigate(R.id.action_registerUpFragment_to_loginFragment)
     }
+
 }

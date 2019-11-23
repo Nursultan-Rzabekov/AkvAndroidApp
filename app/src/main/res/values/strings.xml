@@ -71,7 +71,7 @@
 
     <string name="akv">AKV</string>
     <string name="enter_account">Войдите в \n аккаунт</string>
-    <string name="phone_number_enter">Номер телефона</string>
+    <string name="phone_number_email_enter">Email или номер телефона</string>
     <string name="password">Пароль</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="Sign_in">Войти</string>
@@ -92,7 +92,8 @@
     <string name="invalid">Заполните поле</string>
     <string name="invalid_pass">Пароли не совпадают. Попробуйте ещё раз</string>
     <string name="enter_email_for_rest">Введите email  для восстановления  пароля</string>
-    <string name="we_will_send_verific">Мы отправим на вашу электронную почту  6-значный код, с помощью которого вы сможете восстановить доступ к вашему аккаунту.</string>
+    <string name="we_will_send_verific">Мы отправим на вашу электронную почту \n6-значный код, с помощью которого вы сможете \nвосстановить доступ к вашему аккаунту.</string>
+    <string name="we_will_send_verific_phone">Мы отправим на ваш номер телефона \n6-значный код, с помощью которого вы сможете \nвосстановить доступ к вашему аккаунту.</string>
     <string name="email">Email</string>
     <string name="send_code">Отправить код</string>
     <string name="enter_new_password">Введите новый пароль</string>
@@ -112,7 +113,7 @@
     <string name="phone_number">Номер телефона</string>
     <string name="email_">Электронная почта</string>
     <string name="birth_date">День рождение</string>
-    <string name="dd_mm_yyyy">ДД-ММ-ГГГГ</string>
+    <string name="dd_mm_yyyy">ГГГГ-ММ-ДД</string>
     <string name="gender">Ваш пол</string>
     <string name="F">Ж</string>
     <string name="M">M</string>
@@ -123,7 +124,7 @@
     <string name="or">или</string>
 
 
-    <string name="last_name">last_name</string>
+    <string name="last_name">Имя</string>
 
 
     <string name="bottom_menu_profile">Profile</string>
@@ -139,6 +140,27 @@
     <string name="hotels">Отели</string>
     <string name="favourite_eng">favourite</string>
     <string name="export_eng">export</string>
+    <string name="another_one">Другой способ</string>
+    <string name="enter_phone_number">Введите номер  телефона</string>
+    <string name="validate_phonenumber">Подтвердите \nномер телефона</string>
+    <string name="we_send_code_12">Мы отправили на ваш номер \n6-значный код. Введите его для \nподтверждения вашего номера</string>
+    <string name="validate">Подтвердить</string>
+    <string name="code_is_not_right">Код подтверждения неверен. \nВведите ещё раз.</string>
+    <string name="book">Забранировать</string>
+    <string name="rating_defaul">4.6 (375)</string>
+    <string name="price_default">6000kzt/ночь</string>
+    <string name="house_rules">Правила дома</string>
+    <string name="cancel_rules">Правила отмены</string>
+    <string name="available_dates">Свободные даты</string>
+    <string name="recommendations">Рекомендаций</string>
+    <string name="random_address">г. Алматы, пр. Аль-Фараби 67/2</string>
+    <string name="address">Адрес</string>
+    <string name="comments">Отзывы</string>
+    <string name="random_string">В Алмате однако забывать, что начало повседневной работы по формированию позиции представляет собой интересный эксперимент проверки модели развития по формированию позиции представляет собой интересный эксперимент проверки модели развития.</string>
+    <string name="random_location">– Алматы, Казахстан</string>
+    <string name="random_hotel">Hotel Del Luxe</string>
+    <string name="host">Хозяин</string>
+    <string name="random_name">Мукушева Алия</string>
 
 
 </resources>

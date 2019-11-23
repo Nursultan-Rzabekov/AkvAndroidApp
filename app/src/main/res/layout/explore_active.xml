@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.MainActivity"
-    android:background="#fff">
+    android:backgroundTint="@color/default_background_color">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/app_bar"
+        android:backgroundTint="@color/white"
         >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -24,7 +25,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/header_zhilye_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="220dp"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -81,9 +82,7 @@
             android:id="@+id/main_nav_host_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="?attr/actionBarSize"
-            >
-
+            android:layout_marginBottom="?attr/actionBarSize">
 
         </FrameLayout>
 
