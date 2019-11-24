@@ -88,9 +88,9 @@
     <string name="fill_data">Заполните ваши личные данные</string>
     <string name="privacy_term">Нажимая кнопку Создать, вы соглашаетесь с политикой конфеденциальности и правилами пользования.</string>
 
-
+    <string name="invalid_requirments">Не соответствует требованиям</string>
     <string name="invalid">Заполните поле</string>
-    <string name="invalid_pass">Пароли не совпадают. Попробуйте ещё раз</string>
+    <string name="invalid_pass">Пароли не совпадают</string>
     <string name="enter_email_for_rest">Введите email  для восстановления  пароля</string>
     <string name="we_will_send_verific">Мы отправим на вашу электронную почту \n6-значный код, с помощью которого вы сможете \nвосстановить доступ к вашему аккаунту.</string>
     <string name="we_will_send_verific_phone">Мы отправим на ваш номер телефона \n6-значный код, с помощью которого вы сможете \nвосстановить доступ к вашему аккаунту.</string>
