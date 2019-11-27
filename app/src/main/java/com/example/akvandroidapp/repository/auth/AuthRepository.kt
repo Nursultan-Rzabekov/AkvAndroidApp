@@ -86,8 +86,7 @@ constructor(
                     AccountProperties(
                         response.body.user.id,
                         response.body.user.email,
-                        response.body.user.first_name,
-                        response.body.user.last_name,
+                        response.body.user.name,
                         response.body.user.phone
                     )
                 )
@@ -180,8 +179,7 @@ constructor(
                     AccountProperties(
                         response.body.user.id,
                         response.body.user.email,
-                        response.body.user.first_name,
-                        response.body.user.last_name,
+                        response.body.user.name,
                         response.body.user.phone
                     )
                 )

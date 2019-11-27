@@ -18,13 +18,9 @@ data class AccountProperties(
     @Expose
     @ColumnInfo(name = "email") var email: String,
 
-    @SerializedName("first_name")
+    @SerializedName("name")
     @Expose
-    @ColumnInfo(name = "first_name") var first_name: String,
-
-    @SerializedName("last_name")
-    @Expose
-    @ColumnInfo(name = "last_name") var last_name: String,
+    @ColumnInfo(name = "name") var name: String,
 
     @SerializedName("phone")
     @Expose
@@ -40,8 +36,7 @@ data class AccountProperties(
 
         if (pk != other.pk) return false
         if (email != other.email) return false
-        if (first_name != other.first_name) return false
-        if (last_name != other.last_name) return false
+        if (name != other.name) return false
         if (phone != other.phone) return false
 
         return true
@@ -50,8 +45,7 @@ data class AccountProperties(
     override fun hashCode(): Int {
         var result = pk
         result = 31 * result + email.hashCode()
-        result = 31 * result + first_name.hashCode()
-        result = 31 * result + last_name.hashCode()
+        result = 31 * result + name.hashCode()
         result = 31 * result + phone.hashCode()
         return result
     }

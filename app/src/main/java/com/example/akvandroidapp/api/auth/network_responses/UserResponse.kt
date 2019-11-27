@@ -21,20 +21,16 @@ class UserResponse(
     @Expose
     var phone: String,
 
-    @SerializedName("first_name")
+    @SerializedName("name")
     @Expose
-    var first_name: String,
-
-    @SerializedName("last_name")
-    @Expose
-    var last_name: String,
+    var name: String,
 
     @SerializedName("birth_day")
     @Expose
     var birth_day: String
 ) {
     override fun toString(): String {
-        return "RegistrationResponse(id='$id', email='$email', gender='$gender', phone='$phone', first_name='$first_name',last_name='$last_name',birth_day='$birth_day')"
+        return "RegistrationResponse(id='$id', email='$email', gender='$gender', phone='$phone', name='$name',birth_day='$birth_day')"
     }
 
 }

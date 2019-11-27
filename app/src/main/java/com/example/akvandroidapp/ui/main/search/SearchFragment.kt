@@ -1,9 +1,13 @@
 package com.example.akvandroidapp.ui.main.search
 
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -16,6 +20,7 @@ import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setBlogPost
+import com.example.akvandroidapp.ui.main.search.viewmodel.setQuery
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
@@ -49,9 +54,9 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         initRecyclerView()
         subscribeObservers()
 
-        if(savedInstanceState == null){
-            viewModel.loadFirstPage()
-        }
+//        if(savedInstanceState == null){
+//            viewModel.loadFirstPage()
+//        }
     }
 
 
@@ -81,6 +86,59 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
             }
         })
+    }
+
+    private fun initSearchView(menu: Menu){
+        activity?.apply {
+            val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+            searchView = menu.findItem(R.id.action_search).actionView as SearchView
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            searchView.maxWidth = Integer.MAX_VALUE
+            searchView.setIconifiedByDefault(true)
+            searchView.isSubmitButtonEnabled = true
+        }
+
+        // ENTER ON COMPUTER KEYBOARD OR ARROW ON VIRTUAL KEYBOARD
+        val searchPlate = searchView.findViewById(R.id.search_src_text) as EditText
+        searchPlate.setOnEditorActionListener { v, actionId, _ ->
+
+            if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED
+                || actionId == EditorInfo.IME_ACTION_SEARCH ) {
+                val searchQuery = v.text.toString()
+                Log.e(TAG, "SearchView: (keyboard or arrow) executing search...: ${searchQuery}")
+                viewModel.setQuery(searchQuery).let{
+                    onBlogSearchOrFilter()
+                }
+            }
+            true
+        }
+
+        // SEARCH BUTTON CLICKED (in toolbar)
+        val searchButton = searchView.findViewById(R.id.search_go_btn) as View
+        searchButton.setOnClickListener {
+            val searchQuery = searchPlate.text.toString()
+            Log.e(TAG, "SearchView: (button) executing search...: ${searchQuery}")
+            viewModel.setQuery(searchQuery).let {
+                onBlogSearchOrFilter()
+            }
+
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_menu, menu)
+        initSearchView(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.action_filter_settings -> {
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun handlePagination(dataState: DataState<SearchViewState>){
@@ -139,7 +197,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
     override fun onItemSelected(position: Int, item: BlogPost) {
         viewModel.setBlogPost(item)
-        findNavController().navigate(R.id.action_blogFragment_to_viewBlogFragment)
+//        findNavController().navigate(R.id.action_blogFragment_to_viewBlogFragment)
     }
 
     override fun onDestroyView() {

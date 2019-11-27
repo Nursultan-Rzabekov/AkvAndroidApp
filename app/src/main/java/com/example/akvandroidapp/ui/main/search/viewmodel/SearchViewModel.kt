@@ -27,8 +27,6 @@ constructor(
     private val editor: SharedPreferences.Editor
 ): BaseViewModel<SearchStateEvent, SearchViewState>(){
 
-
-
     init {
         setBlogFilter(
             sharedPreferences.getString(
@@ -46,7 +44,65 @@ constructor(
 
 
     override fun handleStateEvent(stateEvent: SearchStateEvent): LiveData<DataState<SearchViewState>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when(stateEvent){
+
+            is SearchStateEvent.BlogSearchEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    searchRepository.searchBlogPosts(
+                        authToken = authToken,
+                        query = getSearchQuery(),
+                        filterAndOrder = getOrder() + getFilter(),
+                        page = getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is SearchStateEvent.CheckAuthorOfBlogPost -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    searchRepository.searchBlogPosts(
+                        authToken = authToken,
+                        query = getSearchQuery(),
+                        filterAndOrder = getOrder() + getFilter(),
+                        page = getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is SearchStateEvent.DeleteBlogPostEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    searchRepository.searchBlogPosts(
+                        authToken = authToken,
+                        query = getSearchQuery(),
+                        filterAndOrder = getOrder() + getFilter(),
+                        page = getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is SearchStateEvent.UpdateBlogPostEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+
+                    searchRepository.searchBlogPosts(
+                        authToken = authToken,
+                        query = getSearchQuery(),
+                        filterAndOrder = getOrder() + getFilter(),
+                        page = getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is SearchStateEvent.None ->{
+                return liveData {
+                    emit(
+                        DataState(
+                            null,
+                            Loading(false),
+                            null
+                        )
+                    )
+                }
+            }
+        }
     }
 
     override fun initNewViewState(): SearchViewState {
