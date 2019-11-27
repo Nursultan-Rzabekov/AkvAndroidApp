@@ -14,8 +14,7 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/back"
         android:textSize="@dimen/text_button1"
-        android:drawableStart="@drawable/ic_back"
-        android:drawablePadding="-5dp"
+        android:drawableStart="@drawable/ic_chevron_left_real"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="20dp" />
@@ -53,8 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:singleLine="true"
-            android:maxLines="1"
+            style="@style/BasicEditText"
             android:hint="@string/new_pass" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,8 +72,7 @@
             android:layout_width="match_parent"
             android:hint="@string/repeat_password"
             android:inputType="textPassword"
-            android:singleLine="true"
-            android:maxLines="1"
+            style="@style/BasicEditText"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>

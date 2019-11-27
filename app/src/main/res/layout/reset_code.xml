@@ -14,14 +14,13 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/back"
         android:textSize="@dimen/text_button1"
-        android:drawableStart="@drawable/ic_back"
-        android:drawablePadding="-5dp"
+        android:drawableStart="@drawable/ic_chevron_left_real"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="20dp" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/reset_code_label2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/content_margin11"
@@ -46,7 +45,7 @@
         android:layout_marginTop="43dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15">
+        app:layout_constraintTop_toBottomOf="@+id/reset_code_label2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/reset_code_et"
@@ -54,8 +53,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:maxLength="6"
-            android:singleLine="true"
-            android:maxLines="1"
+            style="@style/BasicEditText"
             android:hint="@string/example_n1" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -73,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/reset_code_l_et" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/reset_code_label1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/content_margin8"
@@ -89,20 +87,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialButton" />
 
-    <TextView
-        android:id="@+id/repeat_code_send_tv"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/repeat_code_send_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginStart="@dimen/content_margin8"
         android:layout_marginEnd="@dimen/content_margin8"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/send_again"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_content1"
-        android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/reset_code_label1">
+
+        <TextView
+            android:id="@+id/repeat_code_send_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_again"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_content1"
+            android:typeface="normal"
+            android:textColor="@color/primaryZero"/>
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/akv_label"

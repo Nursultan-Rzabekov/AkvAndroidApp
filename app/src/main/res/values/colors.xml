@@ -6,6 +6,7 @@
     <color name="tealLight">#9FDAF7</color>
     <color name="link_blue">#0000EE</color>
     <color name="black">#000</color>
+    <color name="white">#fff</color>
 
     <!-- other -->
     <color name="red">#e22b2b</color>

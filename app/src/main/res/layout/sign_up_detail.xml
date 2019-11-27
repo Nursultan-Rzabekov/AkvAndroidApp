@@ -14,8 +14,7 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/back"
         android:textSize="@dimen/text_button1"
-        android:drawableStart="@drawable/ic_back"
-        android:drawablePadding="-5dp"
+        android:drawableStart="@drawable/ic_chevron_left_real"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="20dp" />
@@ -69,9 +68,9 @@
             android:id="@+id/sign_detail_last_name_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:hint="@string/last_name" />
+            android:fontFamily="@font/montserrat"
+            android:hint="@string/last_name"
+            style="@style/BasicEditText"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,9 +104,9 @@
             android:id="@+id/sign_detail_email_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:hint="@string/email" />
+            android:fontFamily="@font/montserrat"
+            android:hint="@string/email"
+            style="@style/BasicEditText"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,7 +140,10 @@
             android:id="@+id/sign_detail_birth_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            style="@style/BasicEditText"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
             android:hint="@string/dd_mm_yyyy" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -201,7 +203,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/woman_radio_btn"
                 android:button="@android:color/transparent"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="@string/F"
+                android:textColor="@color/white"
                 android:textAlignment="center" />
 
             <RadioButton

@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.util.PasswordChecker
 import kotlinx.android.synthetic.main.sign_up_pass.*
 
 
@@ -43,27 +44,43 @@ class RegisterPassFragment : BaseAuthFragment() {
     }
 
     private fun navNextNavigationPage(){
-
+        var isFirstPassCorrect = false
+        var isSecondPassCorrect = false
+        var isNotMatch = false
 
         val password1 = sign_up_pass_password_et.text.toString()
         val password2 = sign_up_pass_password_re_et.text.toString()
 
-        if(password1.trim() == "" && password2.trim() == "") {
-            sign_up_pass_password_l_et.error = getString(R.string.invalid)
-            sign_up_pass_password_re_l_et.error = getString(R.string.invalid)
+        if(password1.trim() == "") {
+            sign_up_pass_password_l_et.isErrorEnabled = true
+            sign_up_pass_password_l_et.error = getString(R.string.invalid)}
+        else if(!PasswordChecker.checkPassword(password1)) {
+            sign_up_pass_password_l_et.isErrorEnabled = false
+            sign_up_pass_password_et.error = getString(R.string.invalid_requirments)}
+        else {
+            isFirstPassCorrect = true
+            sign_up_pass_password_l_et.isErrorEnabled = false
         }
 
-        if(password1.trim() != password2.trim()) sign_up_pass_password_re_et.error = getString(R.string.invalid_pass)
+        if(password2.trim() == "") {
+            sign_up_pass_password_re_l_et.isErrorEnabled = true
+            sign_up_pass_password_re_l_et.error = getString(R.string.invalid)}
+        else {
+            isSecondPassCorrect = true
+            sign_up_pass_password_re_l_et.isErrorEnabled = false
+        }
 
-        if(password1.trim() == "") sign_up_pass_password_l_et.error = getString(R.string.invalid)
-        else sign_up_pass_password_l_et.isErrorEnabled = false
-        if(password2.trim() == "") sign_up_pass_password_re_l_et.error = getString(R.string.invalid)
-        else sign_up_pass_password_re_l_et.isErrorEnabled = false
+        if(password1.trim() != password2.trim() && isFirstPassCorrect && isSecondPassCorrect) {
+            isNotMatch = true
+            sign_up_pass_password_re_l_et.isErrorEnabled = true
+            sign_up_pass_password_re_l_et.error = getString(R.string.invalid_pass)
+        }
 
-        if(password1.trim() != "" && password2.trim() != "" && password1.trim() == password2.trim()){
+        if(isFirstPassCorrect && isSecondPassCorrect && !isNotMatch){
             val bundle = bundleOf("password1" to password1, "password2" to password2,
                 "arg_number" to arg_number, "arg_user_name" to arg_user_name)
             findNavController().navigate(R.id.action_register_passFragment_to_registerFragment,bundle)
         }
     }
+
 }

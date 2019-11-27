@@ -1,6 +1,10 @@
 package com.example.akvandroidapp.ui.auth
 
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Selection
 import android.text.Spannable
@@ -14,12 +18,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.RegistrationFields
 import kotlinx.android.synthetic.main.sign_up_detail.*
+import java.util.*
 
 
 class RegisterFragment : BaseAuthFragment() {
@@ -59,6 +65,14 @@ class RegisterFragment : BaseAuthFragment() {
             findNavController().navigate(R.id.action_registerFragment_to_registerPassFragment)
         }
 
+        sign_detail_birth_et.setOnClickListener {
+            showDatePicker()
+        }
+
+        sign_detail_gender_group.setOnCheckedChangeListener { radioGroup, i ->
+            onGenderChanged(i)
+        }
+
         term_privacy.makeLinks(
             Pair("политикой конфеденциальности", View.OnClickListener {
                 findNavController().navigate(R.id.action_registerFragment_to_termOfPolicyFragment)
@@ -78,10 +92,11 @@ class RegisterFragment : BaseAuthFragment() {
     }
 
     fun register(){
+
         viewModel.setStateEvent(
             RegisterAttemptEvent(
                 sign_detail_email_et.text.toString(),
-                1,
+                getGender(),
                 arg_number.toString(),
                 password1.toString(),
                 arg_user_name.toString(),
@@ -118,5 +133,33 @@ class RegisterFragment : BaseAuthFragment() {
         }
         this.movementMethod = LinkMovementMethod.getInstance() // without LinkMovementMethod, link can not click
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
+    }
+
+    fun showDatePicker(){
+        val c = Calendar.getInstance()
+        val brYear = c.get(Calendar.YEAR)
+        val brMonth = c.get(Calendar.MONTH)
+        val brDay = c.get(Calendar.DAY_OF_MONTH)
+
+        val dpd = DatePickerDialog(requireContext(), R.style.MySpinnerDatePickerStyle,
+            DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+                sign_detail_birth_et.setText(("$i-$i2-$i3"))
+            }, brYear, brMonth, brDay)
+        dpd.show()
+    }
+
+    fun onGenderChanged(id: Int){
+        if (id == sign_detail_man_btn.id){
+            sign_detail_man_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            sign_detail_woman_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        }else{
+            sign_detail_man_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            sign_detail_woman_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+    }
+
+    fun getGender(): Int{
+        if (sign_detail_gender_group.checkedRadioButtonId == sign_detail_man_btn.id) return 1
+        return 2
     }
 }

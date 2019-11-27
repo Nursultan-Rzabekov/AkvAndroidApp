@@ -36,13 +36,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonenumber_et"
+            style="@style/BasicEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:textFontWeight="500"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:hint="@string/phone_number_enter"
+            android:hint="@string/phone_number_email_enter"
             android:textSize="@dimen/text_input1"
             android:typeface="normal" />
 
@@ -66,8 +64,7 @@
             android:fontFamily="@font/montserrat"
             android:textFontWeight="500"
             android:inputType="textPassword"
-            android:singleLine="true"
-            android:maxLines="1"
+            style="@style/BasicEditText"
             android:hint="@string/password"
             android:textSize="@dimen/text_input1"
             android:typeface="normal" />
@@ -124,11 +121,11 @@
         android:text="@string/sign_in_Google"
         android:textAllCaps="false"
         app:backgroundTint="@android:color/transparent"
-        app:icon="@drawable/google_logo"
+        app:icon="@mipmap/ic_google_logo_foreground"
         app:iconGravity="end"
         app:iconPadding="-45dp"
         app:iconSize="26dp"
-        app:iconTintMode="multiply"
+        app:iconTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -170,7 +167,8 @@
             android:layout_marginEnd="3dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/create_"
-            android:textColor="@color/secondaryFirst"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/primaryZero"
             android:textSize="@dimen/text_content1" />
     </LinearLayout>
 
