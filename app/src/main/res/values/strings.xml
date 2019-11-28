@@ -90,6 +90,7 @@
 
     <string name="invalid_requirments">Не соответствует требованиям</string>
     <string name="invalid">Заполните поле</string>
+    <string name="invalid_number">Неправильный номер телефона</string>
     <string name="invalid_pass">Пароли не совпадают</string>
     <string name="enter_email_for_rest">Введите email  для восстановления  пароля</string>
     <string name="we_will_send_verific">Мы отправим на вашу электронную почту \n6-значный код, с помощью которого вы сможете \nвосстановить доступ к вашему аккаунту.</string>
@@ -161,6 +162,7 @@
     <string name="random_hotel">Hotel Del Luxe</string>
     <string name="host">Хозяин</string>
     <string name="random_name">Мукушева Алия</string>
+    <string name="password_requierments">Пароль должен состоять минимум из 8\n символов и содержать минимум одну большую\n букву и одну маленькую букву</string>
 
 
 </resources>
