@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_type_any_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="25dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/fragment_type_any_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Любой"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_type_any_checked"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/fragment_type_any_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/secondaryFirst"
+                    android:src="@drawable/ic_checked_real"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_type_any_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_type_any_tv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_type_apparts_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="25dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/fragment_type_apparts_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Квартира"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_type_apparts_checked"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/fragment_type_apparts_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:backgroundTint="@color/secondaryFirst"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_type_apparts_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_type_apparts_tv"
+                    app:srcCompat="@drawable/ic_checked_real" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_type_home_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="25dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/fragment_type_home_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Дом"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_type_home_checked"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/fragment_type_home_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:backgroundTint="@color/secondaryFirst"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_type_home_tv"
+                    app:srcCompat="@drawable/ic_checked_real" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

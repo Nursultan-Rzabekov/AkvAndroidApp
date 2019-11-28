@@ -163,6 +163,9 @@
     <string name="host">Хозяин</string>
     <string name="random_name">Мукушева Алия</string>
     <string name="password_requierments">Пароль должен состоять минимум из 8\n символов и содержать минимум одну большую\n букву и одну маленькую букву</string>
+    <string name="cheked_text">Формированию позиции представляет собой\n интересный эксперимент проверки модели развития.</string>
+    <string name="checked_text_main">Проверенное жильё</string>
+    <string name="Any">Любой</string>
 
 
 </resources>

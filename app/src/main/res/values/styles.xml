@@ -22,6 +22,16 @@
         <item name="boxStrokeColor">@color/secondaryFirst</item>
     </style>
 
+    <style name="CityTextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusTopStart">@dimen/cornerRadius1</item>
+        <item name="hintEnabled">false</item>
+        <item name='boxStrokeWidth'>1dp</item>
+        <item name="boxStrokeColor">@color/secondaryFirst</item>
+    </style>
+
     <style name="BasicTextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius3</item>
         <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius3</item>
@@ -58,6 +68,11 @@
         <item name="cornerRadius">@dimen/cornerRadius3</item>
         <item name="android:paddingStart">20dp</item>
         <item name="android:paddingEnd">20dp</item>
+    </style>
+    <style name="FilterButton" parent="AllButton">
+        <item name="cornerRadius">@dimen/cornerRadius1</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
     </style>
 
     <style name="GoogleLogButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
