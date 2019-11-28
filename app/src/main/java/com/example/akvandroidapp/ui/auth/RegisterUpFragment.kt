@@ -52,6 +52,7 @@ class RegisterUpFragment : BaseAuthFragment() {
         val number = sign_up_et.text.toString()
 
         if(number.trim().equals("")) sign_up_l_et.error = getString(R.string.invalid)
+        else if(number.trim().length != 11) sign_up_l_et.error = getString(R.string.invalid_number)
         else{
             sign_up_l_et.isErrorEnabled = false
             val bundle = bundleOf("number" to number,"arg_user_name" to argument)
