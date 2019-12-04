@@ -193,4 +193,5 @@
         <item name="android:textCursorDrawable">@drawable/cursor_style</item>
         <item name="android:colorControlHighlight">@color/primaryZero</item>
     </style>
+
 </resources>
