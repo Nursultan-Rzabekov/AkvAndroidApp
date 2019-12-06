@@ -48,7 +48,6 @@
                         android:text="@string/random_name"
                         android:textColor="@color/secondaryFirst"
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         android:typeface="normal"
                         app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
                         app:layout_constraintEnd_toStartOf="@+id/circleImageView"
@@ -181,6 +180,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
+            <include
+                android:id="@+id/fragment_zhilye_mini_map"
+                layout="@layout/map"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginEnd="38dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16"/>
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_zhilye_house_rules_card"
                 style="@style/ButtonCardView"
@@ -192,7 +203,7 @@
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_mini_map"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp">
 

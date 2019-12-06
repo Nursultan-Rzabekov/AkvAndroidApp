@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/fragment_add_ad_guests_count_back_btn"
+        layout="@layout/back_button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_add_ad_guests_count_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="48dp"
+        android:text="Сколько гостей вы \nпринимаете?"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_back_btn" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_tv1">
+
+        <TextView
+            android:id="@+id/fragment_add_ad_guests_count_guest_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Гости"
+            android:textColor="@color/grey6"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_add_ad_guests_count_guest_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_add_ad_guests_count_guest_tv">
+
+            <ImageButton
+                android:id="@+id/fragment_add_ad_guests_count_guest_minus_btn"
+                style="@style/BasicImageButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_chevron_left_real" />
+
+            <TextView
+                android:id="@+id/fragment_add_ad_guests_count_guest_counter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="0"
+                android:textColor="@color/secondaryFirst"
+                android:textSize="22sp" />
+
+            <ImageButton
+                android:id="@+id/fragment_add_ad_guests_count_guest_plus_btn"
+                style="@style/BasicImageButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_chevron_right_real" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider13"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="46dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+    <TextView
+        android:id="@+id/fragment_add_ad_guests_count_bed_tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="48dp"
+        android:text="Сколько кроватей у \nвас дома?"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider13" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/const1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_bed_tv2">
+
+        <TextView
+            android:id="@+id/fragment_add_ad_guests_count_bed_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Кровати"
+            android:textColor="@color/grey6"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_add_ad_guests_count_bed_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_add_ad_guests_count_bed_tv">
+
+            <ImageButton
+                android:id="@+id/fragment_add_ad_guests_count_bed_minus_btn"
+                style="@style/BasicImageButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_chevron_left_real" />
+
+            <TextView
+                android:id="@+id/fragment_add_ad_guests_count_bed_counter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="0"
+                android:textColor="@color/secondaryFirst"
+                android:textSize="22sp" />
+
+            <ImageButton
+                android:id="@+id/fragment_add_ad_guests_count_bed_plus_btn"
+                style="@style/BasicImageButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_chevron_right_real" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider14"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="46dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/const1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_add_ad_guests_count_next_btn"
+        style="@style/BasicButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="37dp"
+        android:text="Далее"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

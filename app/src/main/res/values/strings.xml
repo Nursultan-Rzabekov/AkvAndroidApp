@@ -161,10 +161,11 @@
     <string name="random_location">– Алматы, Казахстан</string>
     <string name="random_hotel">Hotel Del Luxe</string>
     <string name="host">Хозяин</string>
-    <string name="random_name">Мукушева Алия</string>
+    <string name="random_name">\@mukushevaaliya</string>
     <string name="password_requierments">Пароль должен состоять минимум из 8\n символов и содержать минимум одну большую\n букву и одну маленькую букву</string>
     <string name="cheked_text">Формированию позиции представляет собой\n интересный эксперимент проверки модели развития.</string>
     <string name="checked_text_main">Проверенное жильё</string>
     <string name="Any">Любой</string>
     <string name="muratov_d">\@muratov_d</string>
+    <string name="select">Выбрать</string>
 </resources>

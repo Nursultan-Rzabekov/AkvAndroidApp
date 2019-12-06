@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/fragment_add_ad_gallery_back_btn"
+        layout="@layout/back_button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_add_ad_gallery_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="48dp"
+        android:text="Добавьте фото \nвашего жилья"
+        android:textAlignment="center"
+        android:textColor='@color/black'
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_gallery_back_btn" />
+
+    <GridLayout
+        android:id="@+id/fragment_add_ad_gallery_grid_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="58dp"
+        android:columnCount="3"
+        android:useDefaultMargins="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_gallery_tv">
+
+        <ImageView
+            android:id="@+id/fragment_add_ad_gallery_iv1"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_location_real" />
+
+        <ImageView
+            android:id="@+id/fragment_add_ad_gallery_iv2"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_location_real" />
+
+        <ImageView
+            android:id="@+id/fragment_add_ad_gallery_iv3"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_location_real" />
+
+        <ImageView
+            android:id="@+id/fragment_add_ad_gallery_iv4"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_location_real" />
+
+        <ImageView
+            android:id="@+id/fragment_add_ad_gallery_iv5"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_location_real" />
+
+        <ImageView
+            android:id="@+id/fragment_add_ad_gallery_iv6"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_location_real" />
+
+    </GridLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_add_ad_gallery_next_btn"
+        style="@style/BasicButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:text="Далее"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
