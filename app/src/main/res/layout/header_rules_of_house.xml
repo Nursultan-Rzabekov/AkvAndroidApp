@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/header_rules_of_house_tv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
@@ -18,16 +18,20 @@
         android:textSize="21sp"
         android:textStyle="bold"
         android:typeface="normal"
+        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <include
+        android:id="@+id/header_rules_of_house_back_btn"
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="@id/header_rules_of_house_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/header_rules_of_house_tv"

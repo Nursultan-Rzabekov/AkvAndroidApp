@@ -6,23 +6,26 @@
 
     <TextView
         android:id="@+id/header_reviews_page_tv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="15dp"
         android:text="Отзывы (2)"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="21sp"
         android:textStyle="bold"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center" />
 
     <include
+        android:id="@+id/header_reviews_page_back_btn"
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="10dp"
+        android:layout_gravity="center_vertical|start"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="@id/header_rules_of_cancel_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/header_rules_of_cancel_tv" />

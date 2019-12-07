@@ -9,17 +9,20 @@
         android:layout_height="wrap_content">
 
         <include
-            android:id="@+id/include"
+            android:id="@+id/header_city_back_btn"
             layout="@layout/back_button_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|start"
             android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/header_city_l_et"
             style="@style/CityTextOutlined"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,16 +33,19 @@
             app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/include"
+            app:layout_constraintStart_toEndOf="@+id/header_city_back_btn"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/header_city_et"
                 style="@style/BasicEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:textSize="16sp"
                 android:hint="Найти город"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="16sp"
                 android:typeface="normal" />
 
         </com.google.android.material.textfield.TextInputLayout>

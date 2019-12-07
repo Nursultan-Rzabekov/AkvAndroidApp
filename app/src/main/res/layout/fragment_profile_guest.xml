@@ -228,18 +228,15 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fragment_profile_guest_post_ad_btn"
-        style="@style/AllButton"
+        style="@style/BasicButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="24dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
         android:text="Разместить обьявление"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:cornerRadius="@dimen/cornerRadius2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

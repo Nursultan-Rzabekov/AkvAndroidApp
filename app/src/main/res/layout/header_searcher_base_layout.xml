@@ -20,6 +20,7 @@
             app:boxBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             >
@@ -37,9 +38,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <include
+            android:id="@+id/header_searcher_base_layout_back_btn"
             layout="@layout/back_button_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="start|center_vertical"
             />
 
@@ -47,7 +51,7 @@
             android:id="@+id/main_search_img_btn"
             style="@style/BasicImageButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:contentDescription="@string/filter"
             android:scaleType="center"
@@ -60,7 +64,7 @@
             android:id="@+id/main_filter_img_btn"
             style="@style/BasicImageButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:adjustViewBounds="true"
             android:contentDescription="@string/filter"

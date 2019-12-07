@@ -11,8 +11,6 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/back"
         android:scaleType="centerCrop"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
         android:src="@drawable/ic_chevron_left_real"/>
 
 </LinearLayout>
