@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.auth.OpenApiAuthService
+import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.example.akvandroidapp.api.auth.network_responses.LoginResponse
 import com.example.akvandroidapp.api.auth.network_responses.RegistrationResponse
 import com.example.akvandroidapp.entity.AccountProperties
@@ -16,9 +17,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
-import com.example.akvandroidapp.ui.auth.state.AuthViewState
-import com.example.akvandroidapp.ui.auth.state.LoginFields
-import com.example.akvandroidapp.ui.auth.state.RegistrationFields
+import com.example.akvandroidapp.ui.auth.state.*
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
 import com.example.akvandroidapp.util.ErrorHandling.Companion.ERROR_SAVE_ACCOUNT_PROPERTIES
@@ -223,6 +222,116 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("attemptRegistration", job)
+            }
+        }.asLiveData()
+    }
+
+
+    fun sendCode(phone: String): LiveData<DataState<AuthViewState>>{
+
+//        val sendCodeFieldErrors = SendCodeFields(phone).isValidForSendCode()
+//        if(!sendCodeFieldErrors.equals(SendCodeFields.SendCodeError.none())){
+//            return returnErrorResponse(sendCodeFieldErrors, ResponseType.Dialog())
+//        }
+
+        return object: NetworkBoundResource<CodeResponse, Any, AuthViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            true,
+            false
+        ){
+
+            // Ignore
+            override fun loadFromCache(): LiveData<AuthViewState> {
+                return AbsentLiveData.create()
+            }
+
+            // Ignore
+            override suspend fun updateLocalDb(cacheObject: Any?) {
+
+            }
+
+            // not used in this case
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
+
+                Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
+
+
+                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
+                    return onErrorReturn(response.body.message, true, false)
+                }
+
+//                onCompleteJob(
+//                    DataState.data(
+//                        data = AuthViewState(
+//                            authToken = AuthToken(response.body.response)
+//                        )
+//                    )
+//                )
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
+                return openApiAuthService.sendCode(phone)
+            }
+
+            override fun setJob(job: Job) {
+                addJob("attemptSendCode", job)
+            }
+        }.asLiveData()
+    }
+
+    fun verifyCode(phone: String, code:String): LiveData<DataState<AuthViewState>>{
+
+        val verifyCodeFieldErrors = VerifyCodeFields(phone,code).isValidForSendCode()
+        if(!verifyCodeFieldErrors.equals(VerifyCodeFields.VerifyCodeError.none())){
+            return returnErrorResponse(verifyCodeFieldErrors, ResponseType.Dialog())
+        }
+
+        return object: NetworkBoundResource<CodeResponse, Any, AuthViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            true,
+            false
+        ){
+
+            // Ignore
+            override fun loadFromCache(): LiveData<AuthViewState> {
+                return AbsentLiveData.create()
+            }
+
+            // Ignore
+            override suspend fun updateLocalDb(cacheObject: Any?) {
+
+            }
+
+            // not used in this case
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
+
+                Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
+
+
+                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
+                    return onErrorReturn(response.body.message, true, false)
+                }
+
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
+                return openApiAuthService.verifyCode(phone,code)
+            }
+
+            override fun setJob(job: Job) {
+                addJob("attemptSendCode", job)
             }
         }.asLiveData()
     }

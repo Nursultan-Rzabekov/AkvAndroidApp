@@ -6,6 +6,8 @@ import com.example.akvandroidapp.entity.AuthToken
 data class AuthViewState(
     var registrationFields: RegistrationFields? = RegistrationFields(),
     var loginFields: LoginFields? = LoginFields(),
+    var sendCodeFields: SendCodeFields? = SendCodeFields(),
+    var verifyCodeFields: VerifyCodeFields? = VerifyCodeFields(),
     var authToken: AuthToken? = null
 )
 
@@ -73,6 +75,62 @@ data class LoginFields(
 
     override fun toString(): String {
         return "LoginState(email=$login_email, password=$login_password)"
+    }
+}
+
+
+data class SendCodeFields(
+    var phone:String? = null
+){
+    class SendCodeError {
+        companion object{
+            fun mustFillAllFields(): String{
+                return "You can't send code without phone."
+            }
+
+            fun none():String{
+                return "None"
+            }
+        }
+    }
+
+    fun isValidForSendCode(): String{
+        if(phone.isNullOrEmpty()){
+            return SendCodeError.mustFillAllFields()
+        }
+        return SendCodeError.none()
+    }
+
+    override fun toString(): String {
+        return "SendCodeState(phone=$phone)"
+    }
+}
+
+data class VerifyCodeFields(
+    var phone:String? = null,
+    var code:String? = null
+){
+    class VerifyCodeError {
+        companion object{
+            fun mustFillAllFields(): String{
+                return "You can't send code without sms number."
+            }
+
+            fun none():String{
+                return "None"
+            }
+        }
+    }
+
+    fun isValidForSendCode(): String{
+        if(code.isNullOrEmpty()){
+            return VerifyCodeError.mustFillAllFields()
+        }
+        return VerifyCodeError.none()
+    }
+
+    override fun toString(): String {
+        return "VerifyCodeState(code=$code)"
     }
 }
 

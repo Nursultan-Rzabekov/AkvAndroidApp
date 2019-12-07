@@ -2,7 +2,9 @@ package com.example.akvandroidapp.ui.auth
 
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -16,6 +18,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -24,6 +28,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.RegistrationFields
+import com.example.akvandroidapp.ui.main.MainActivity
+import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.sign_up_detail.*
 import java.util.*
 
@@ -43,7 +49,7 @@ class RegisterFragment : BaseAuthFragment() {
     private var arg_number:String?=null
     private var arg_user_name:String?=null
 
-
+    private lateinit var body:EditText
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,11 +61,12 @@ class RegisterFragment : BaseAuthFragment() {
         arg_number = arguments?.getString("arg_number")
         arg_user_name = arguments?.getString("arg_user_name")
 
+
+        subscribeObservers()
+
         sign_detail_create_btn.setOnClickListener {
             register()
         }
-        subscribeObservers()
-
 
         sign_detail_back_tv.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_registerPassFragment)
@@ -82,17 +89,61 @@ class RegisterFragment : BaseAuthFragment() {
             }))
     }
 
-    fun subscribeObservers(){
+    private fun subscribeObservers(){
         viewModel.viewState.observe(viewLifecycleOwner, Observer{viewState ->
             viewState.registrationFields?.let {
+                sendCode()
+                showDialog()
                 it.registration_email?.let{sign_detail_email_et.setText(it)}
-                it.registration_username?.let{sign_detail_last_name_et.setText(it)}
+                it.registration_username?.let{sign_detail_last_name_et.setText(it)
+
+                }
+            }
+
+            viewState.sendCodeFields?.let {
+                //it.phone?.let { body.setText(it)}
+            }
+
+
+            viewState.verifyCodeFields?.let {
+                it.phone?.let { body.setText(it)}
+                //navMainActivity()
+
             }
         })
     }
 
-    fun register(){
+    fun navMainActivity(){
+        Log.d(TAG, "navMainActivity: called.")
+        val intent = Intent(context, MainActivity::class.java)
+        startActivity(intent)
+    }
 
+
+    private fun showDialog() {
+        val dialog = Dialog(context!!)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_sign_up_valid)
+        body = dialog.findViewById(R.id.dialog_sign_up_valid_code_et) as EditText
+
+        val valid = dialog.findViewById(R.id.dialog_sign_up_valid_btn) as MaterialButton
+
+        val send = dialog.findViewById(R.id.dialog_sign_up_valid_repeat_code_tv) as TextView
+        valid.setOnClickListener {
+            if (body.text != null) {
+                verifyCode()
+            }
+        }
+        send.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+    }
+
+    private fun register(){
         viewModel.setStateEvent(
             RegisterAttemptEvent(
                 sign_detail_email_et.text.toString(),
@@ -106,6 +157,25 @@ class RegisterFragment : BaseAuthFragment() {
         )
     }
 
+
+    private fun sendCode(){
+        viewModel.setStateEvent(
+            SendCodeEvent(
+                arg_number.toString()
+            )
+        )
+    }
+
+    private fun verifyCode(){
+        viewModel.setStateEvent(
+            VerifyCodeEvent(
+                arg_number.toString(),
+                body.text.toString()
+            )
+        )
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.setRegistrationFields(
@@ -117,7 +187,7 @@ class RegisterFragment : BaseAuthFragment() {
         )
     }
 
-    fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+    private fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
         val spannableString = SpannableString(this.text)
         for (link in links) {
             val clickableSpan = object : ClickableSpan() {
@@ -135,7 +205,7 @@ class RegisterFragment : BaseAuthFragment() {
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
-    fun showDatePicker(){
+    private fun showDatePicker(){
         val c = Calendar.getInstance()
         val brYear = c.get(Calendar.YEAR)
         val brMonth = c.get(Calendar.MONTH)
@@ -148,7 +218,7 @@ class RegisterFragment : BaseAuthFragment() {
         dpd.show()
     }
 
-    fun onGenderChanged(id: Int){
+    private fun onGenderChanged(id: Int){
         if (id == sign_detail_man_btn.id){
             sign_detail_man_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             sign_detail_woman_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
@@ -158,7 +228,7 @@ class RegisterFragment : BaseAuthFragment() {
         }
     }
 
-    fun getGender(): Int{
+    private fun getGender(): Int{
         if (sign_detail_gender_group.checkedRadioButtonId == sign_detail_man_btn.id) return 1
         return 2
     }

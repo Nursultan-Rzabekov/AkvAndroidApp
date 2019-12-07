@@ -18,6 +18,16 @@ sealed class AuthStateEvent{
 
     ): AuthStateEvent()
 
+
+    data class SendCodeEvent(
+        val phone: String
+    ): AuthStateEvent()
+
+    data class VerifyCodeEvent(
+        val phone: String,
+        val code:String
+    ):AuthStateEvent()
+
     class CheckPreviousAuthEvent(): AuthStateEvent()
 
     class None: AuthStateEvent()

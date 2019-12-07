@@ -87,7 +87,7 @@ class AuthActivity : BaseActivity(), NavController.OnDestinationChangedListener
             Log.d(TAG, "AuthActivity, subscribeObservers: AuthDataState: ${dataState}")
             dataState.let{ authToken ->
                 if(authToken?.token != null){
-                    navMainActivity()
+                    //navMainActivity()
                 }
             }
         })
