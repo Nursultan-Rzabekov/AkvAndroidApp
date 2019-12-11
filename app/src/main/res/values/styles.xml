@@ -209,4 +209,11 @@
         <item name="boxCornerRadiusTopStart">@dimen/cornerRadius3</item>
     </style>
 
+    <style name="BasicCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:checkboxStyle">@style/Widget.MaterialComponents.CompoundButton.CheckBox</item>
+        <item name="useMaterialThemeColors">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:buttonTint">@color/primaryZero</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
 </resources>

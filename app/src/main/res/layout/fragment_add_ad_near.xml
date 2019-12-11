@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/fragment_add_ad_near_back_btn"
+        layout="@layout/back_button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_add_ad_near_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="54dp"
+        android:text="Что есть рядом с \nвашим жильём"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_add_ad_near_drop_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="52dp"
+        android:text="Сбросить все"
+        android:textColor="@color/primaryZero"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_near_tv1" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_near_drop_all">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="48dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox1"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Больница"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox2"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Парк"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox3"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Автовокзал"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox4"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Аптека"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox5"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Кинотеатр"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox6"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Детский сад"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox7"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="ЦОН"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox8"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Школа"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fragment_add_ad_near_chkbox9"
+                style="@style/BasicCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Акимат"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_add_ad_check_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/fragment_add_ad_check_add_chkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Добавить своё"
+                android:drawablePadding="4dp"
+                android:textColor="@color/primaryZero"
+                android:textSize="16sp"
+                android:drawableStart="@drawable/ic_location_real"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_add_ad_check_add_chkbox_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+                <EditText
+                    android:id="@+id/fragment_add_ad_check_add_chkbox_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@color/primaryZero"
+                    android:inputType="text"
+                    android:lines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fragment_add_ad_check_add_chkbox_btn"
+                    style="@style/AllButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:text="Добавить"
+                    android:textSize="10sp"
+                    app:cornerRadius="@dimen/cornerRadius3"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_ad_check_add_chkbox_et"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fragment_add_ad_check_remove_chkbox_btn"
+                    style="@style/AllButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:backgroundTint="@color/white"
+                    android:elevation="0dp"
+                    android:textColor="@color/primaryZero"
+                    android:text="Отменить"
+                    android:textSize="10sp"
+                    app:cornerRadius="@dimen/cornerRadius3"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_ad_check_add_chkbox_et"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragment_add_ad_check_next_btn"
+                style="@style/BasicButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:layout_marginEnd="38dp"
+                android:layout_marginBottom="37dp"
+                android:text="Далее"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
