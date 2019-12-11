@@ -105,6 +105,12 @@ constructor(
                     )
                 }
 
+
+                sessionManager.login(
+                    AuthToken(response.body.user.id,
+                        response.body.token)
+                )
+
                 saveAuthenticatedUserToPrefs(email)
 
                 onCompleteJob(
@@ -167,7 +173,9 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<RegistrationResponse>) {
 
-                Log.d(TAG, "handleApiSuccessResponse: ${response}")
+                Log.d(TAG, "qweqewqwqw: ${response}")
+
+                Log.d(TAG,"qweqewqwqw ${response.body}")
 
 
                 if(response.body.response.equals(GENERIC_AUTH_ERROR)){

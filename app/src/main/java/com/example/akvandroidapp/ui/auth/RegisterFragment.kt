@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -40,7 +41,6 @@ class RegisterFragment : BaseAuthFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sign_up_detail, container, false)
     }
 
@@ -50,6 +50,7 @@ class RegisterFragment : BaseAuthFragment() {
     private var arg_user_name:String?=null
 
     private lateinit var body:EditText
+    private lateinit var close:ImageButton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,7 +63,7 @@ class RegisterFragment : BaseAuthFragment() {
         arg_user_name = arguments?.getString("arg_user_name")
 
 
-        subscribeObservers()
+
 
         sign_detail_create_btn.setOnClickListener {
             register()
@@ -87,13 +88,17 @@ class RegisterFragment : BaseAuthFragment() {
             Pair("правилами пользования.", View.OnClickListener {
                 findNavController().navigate(R.id.action_registerFragment_to_privacyPolicyFragment)
             }))
+
+
+        subscribeObservers()
+
+
     }
 
     private fun subscribeObservers(){
         viewModel.viewState.observe(viewLifecycleOwner, Observer{viewState ->
             viewState.registrationFields?.let {
                 sendCode()
-                showDialog()
                 it.registration_email?.let{sign_detail_email_et.setText(it)}
                 it.registration_username?.let{sign_detail_last_name_et.setText(it)
 
@@ -113,12 +118,6 @@ class RegisterFragment : BaseAuthFragment() {
         })
     }
 
-    fun navMainActivity(){
-        Log.d(TAG, "navMainActivity: called.")
-        val intent = Intent(context, MainActivity::class.java)
-        startActivity(intent)
-    }
-
 
     private fun showDialog() {
         val dialog = Dialog(context!!)
@@ -126,16 +125,25 @@ class RegisterFragment : BaseAuthFragment() {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.dialog_sign_up_valid)
         body = dialog.findViewById(R.id.dialog_sign_up_valid_code_et) as EditText
+        close = dialog.findViewById(R.id.dialog_sign_up_valid_close_btn) as ImageButton
 
         val valid = dialog.findViewById(R.id.dialog_sign_up_valid_btn) as MaterialButton
 
         val send = dialog.findViewById(R.id.dialog_sign_up_valid_repeat_code_tv) as TextView
+
         valid.setOnClickListener {
             if (body.text != null) {
                 verifyCode()
+                dialog.dismiss()
+
             }
         }
         send.setOnClickListener {
+            verifyCode()
+            dialog.dismiss()
+        }
+
+        close.setOnClickListener {
             dialog.dismiss()
         }
 
@@ -155,6 +163,8 @@ class RegisterFragment : BaseAuthFragment() {
                 sign_detail_birth_et.text.toString()
             )
         )
+
+        showDialog()
     }
 
 
@@ -174,7 +184,6 @@ class RegisterFragment : BaseAuthFragment() {
             )
         )
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
