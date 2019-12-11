@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/header_search_menu_filter"
+        android:icon="@drawable/ic_filter_real"
+        android:title="@string/filter"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/header_search_menu_back"
+        android:icon="@drawable/ic_chevron_left_real"
+        android:title="@string/back"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="com.google.android.material.textfield.TextInputEditText" />
+</menu>
