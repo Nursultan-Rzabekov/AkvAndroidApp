@@ -15,42 +15,11 @@
         android:backgroundTint="@color/white"
         >
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/header_zhilye_collapse"
+        <include
+            android:id="@+id/head_zhilye"
+            layout="@layout/header_zhilye"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:contentScrim="@color/white"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/header_zhilye_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"/>
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:id="@+id/toolbar_zhilye"
-                app:layout_collapseMode="pin"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetStartWithNavigation="0dp"
-                android:paddingEnd="33dp"
-                android:paddingStart="0dp"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
-
-                <include
-                    layout="@layout/back_button_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    />
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            android:layout_height="wrap_content"/>
 
         <include
             android:id="@+id/searcher_base_layout_in"
