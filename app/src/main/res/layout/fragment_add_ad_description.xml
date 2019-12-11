@@ -89,8 +89,10 @@
                 android:id="@+id/fragment_add_ad_description_desc_et"
                 style="@style/BasicEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:fontFamily="@font/montserrat"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
                 android:hint="Опишите ваше жильё"
                 android:maxLines="10" />
 
