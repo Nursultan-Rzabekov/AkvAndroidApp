@@ -21,9 +21,6 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <include
-            android:id="@+id/fragment_reviews_page_base"
-            layout="@layout/fragment_profi"/>
 
     </FrameLayout>
 
