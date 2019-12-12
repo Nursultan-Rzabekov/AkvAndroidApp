@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="27dp"
     >
 
     <include
-        android:id="@+id/header_profile_guest_back_btn"
+        android:id="@+id/header_profile_account_back_btn"
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,60 +16,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/header_profile_guest_cancel_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Отменить"
-        android:textColor="@color/primaryZero"
-        android:textSize="14sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="27dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/header_profile_guest_civ"
+        android:id="@+id/header_profile_account_civ"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="9dp"
+        android:layout_marginBottom="24dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile_default_avavatar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_profile_guest_back_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/header_profile_account_back_btn" />
     <!-- When back buttton gone circle image view margin top 27dp -->
 
     <TextView
-        android:id="@+id/header_profile_guest_save_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_bold"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="17dp"
-        android:text="Сохранить"
-        android:textColor="@color/primaryZero"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/header_profile_guest_tv"
+        android:id="@+id/header_profile_account_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:text="@string/muratov_d"
-        android:textColor="@color/secondaryFirst"
+        android:textColor="@color/primaryZero"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/header_profile_guest_civ"
+        app:layout_constraintBottom_toBottomOf="@+id/header_profile_account_civ"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/header_profile_guest_civ"
-        app:layout_constraintTop_toTopOf="@+id/header_profile_guest_civ" />
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toEndOf="@+id/header_profile_account_civ"
+        app:layout_constraintTop_toTopOf="@+id/header_profile_account_civ" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/header_profile_guest_change_profile_btn"
+        android:id="@+id/header_profile_account_change_profile_btn"
         style="@style/BasicOutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -81,10 +56,10 @@
         android:paddingBottom="0dp"
         android:text="Изменить профиль"
         android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="@+id/header_profile_guest_civ"
-        app:layout_constraintEnd_toEndOf="@+id/header_profile_guest_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/header_profile_account_civ"
+        app:layout_constraintEnd_toEndOf="@+id/header_profile_account_tv"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/header_profile_guest_tv"
-        app:layout_constraintTop_toBottomOf="@+id/header_profile_guest_tv"
+        app:layout_constraintStart_toStartOf="@+id/header_profile_account_tv"
+        app:layout_constraintTop_toBottomOf="@+id/header_profile_account_tv"
         app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

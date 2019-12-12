@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/fragment_profile_guest_nestedsrcoll"
+        android:id="@+id/fragment_profile_owner_nestedsrcoll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -17,13 +17,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/fragment_profile_guest_layout"
+            android:id="@+id/fragment_profile_owner_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_profile_guest_host_mode_layout"
+                android:id="@+id/fragment_profile_owner_host_mode_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="25dp"
@@ -32,35 +32,68 @@
                 android:paddingBottom="15dp">
 
                 <TextView
-                    android:id="@+id/fragment_profile_guest_host_mode_tv"
+                    android:id="@+id/fragment_profile_owner_host_mode_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Режим хозяина"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_profile_guest_host_mode_switch"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_profile_owner_host_mode_switch"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fragment_profile_guest_host_mode_tv_minor"
+                    android:id="@+id/fragment_profile_owner_host_mode_tv_minor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Формированию позиции представляет собой\n интересный эксперимент проверки модели развития."
                     android:textColor="@color/grey5"
                     android:textSize="7sp"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_profile_guest_host_mode_switch"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_profile_owner_host_mode_switch"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_profile_guest_host_mode_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_profile_owner_host_mode_tv" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/fragment_profile_guest_host_mode_switch"
+                    android:id="@+id/fragment_profile_owner_host_mode_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_guest_host_mode_tv_minor"
+                    android:checked="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_owner_host_mode_tv_minor"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_profile_guest_host_mode_tv" />
+                    app:layout_constraintTop_toTopOf="@+id/fragment_profile_owner_host_mode_tv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider22"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_profile_owner_my_ads_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="25dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:id="@+id/fragment_profile_owner_my_ads_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_chevron_right_real"
+                    android:text="Мои обьявления"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -71,7 +104,7 @@
                 android:background="?android:attr/listDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_profile_guest_payment_layout"
+                android:id="@+id/fragment_profile_owner_payment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="25dp"
@@ -80,7 +113,7 @@
                 android:paddingBottom="15dp">
 
                 <TextView
-                    android:id="@+id/fragment_profile_guest_payment_tv"
+                    android:id="@+id/fragment_profile_owner_payment_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_chevron_right_real"
@@ -103,7 +136,7 @@
                 android:background="?android:attr/listDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_profile_guest_settings_layout"
+                android:id="@+id/fragment_profile_owner_settings_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="25dp"
@@ -112,7 +145,7 @@
                 android:paddingBottom="15dp">
 
                 <TextView
-                    android:id="@+id/fragment_profile_guest_settings_tv"
+                    android:id="@+id/fragment_profile_owner_settings_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_chevron_right_real"
@@ -134,7 +167,7 @@
                 android:background="?android:attr/listDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_profile_guest_support_layout"
+                android:id="@+id/fragment_profile_owner_support_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="25dp"
@@ -143,7 +176,7 @@
                 android:paddingBottom="15dp">
 
                 <TextView
-                    android:id="@+id/fragment_profile_guest_support_tv"
+                    android:id="@+id/fragment_profile_owner_support_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_chevron_right_real"
@@ -165,7 +198,7 @@
                 android:background="?android:attr/listDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_profile_guest_about_us_layout"
+                android:id="@+id/fragment_profile_owner_about_us_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="25dp"
@@ -174,7 +207,7 @@
                 android:paddingBottom="15dp">
 
                 <TextView
-                    android:id="@+id/fragment_profile_guest_about_us_tv"
+                    android:id="@+id/fragment_profile_owner_about_us_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_chevron_right_real"
@@ -193,5 +226,20 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_profile_owner_post_ad_btn"
+        style="@style/BasicButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:text="Разместить обьявление"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

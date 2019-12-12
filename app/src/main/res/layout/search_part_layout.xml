@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/fragment_explore_active_layout_id"
+        layout="@layout/fragment_explore_active_layout"/>
+
+    <include
+        android:visibility="visible"
+        android:id="@+id/fragement_explore_layout_id"
+        layout="@layout/fragement_explore_layout"/>
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/fragment_appartments_layout_id"
+        layout="@layout/fragment_appartments_layout"/>
+
+</FrameLayout>

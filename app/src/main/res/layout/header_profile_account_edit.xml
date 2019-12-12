@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="27dp"
+    >
+
+    <TextView
+        android:id="@+id/header_profile_account_edit_cancel_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отменить"
+        android:textColor="@color/primaryZero"
+        android:textSize="14sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="27dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/header_profile_account_edit_civ"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile_default_avavatar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_profile_account_edit_cancel_tv" />
+
+    <TextView
+        android:id="@+id/header_profile_account_edit_save_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="17dp"
+        android:text="Сохранить"
+        android:textColor="@color/primaryZero"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/header_profile_account_edit_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="@string/muratov_d"
+        android:textColor="@color/secondaryFirst"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/header_profile_account_edit_civ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/header_profile_account_edit_civ"
+        app:layout_constraintTop_toTopOf="@+id/header_profile_account_edit_civ" />
+</androidx.constraintlayout.widget.ConstraintLayout>

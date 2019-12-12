@@ -9,6 +9,7 @@
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
+
     <style name="TextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius1</item>
         <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius1</item>
