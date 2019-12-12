@@ -13,10 +13,10 @@ interface BlogPostDao {
 
     @Query("""
         SELECT * FROM blog_post 
-        WHERE title LIKE '%' || :query || '%' 
-        OR body LIKE '%' || :query || '%' 
-        OR username LIKE '%' || :query || '%' 
-        ORDER BY date_updated  ASC LIMIT (:page * :pageSize)""")
+        WHERE name LIKE '%' || :query || '%' 
+        OR description LIKE '%' || :query || '%' 
+        OR address LIKE '%' || :query || '%' 
+        ORDER BY id  ASC LIMIT (:page * :pageSize)""")
     fun searchBlogPostsOrderByDateASC(
         query: String,
         page: Int,

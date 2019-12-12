@@ -6,48 +6,65 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-/**
- * Local data class for modeling: https://open-api.xyz/ blog objects
-see example: https://gist.github.com/mitchtabian/93f287bd1370e7a1ad3c9588b0b22e3d
- * Docs: https://open-api.xyz/api/
- */
 
 @Entity(tableName = "blog_post")
 data class BlogPost(
 
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "pk")
-    var pk: Int,
+    @ColumnInfo(name = "id")
+    var id: Int,
 
-    @ColumnInfo(name = "title")
-    var title: String,
+    @ColumnInfo(name = "name")
+    var name: String? = null,
 
-    @ColumnInfo(name = "slug")
-    var slug: String,
+    @ColumnInfo(name = "description")
+    var description: String? = null,
 
-    @ColumnInfo(name = "body")
-    var body: String,
+    @ColumnInfo(name = "rooms")
+    var rooms: Int,
 
-    @ColumnInfo(name = "image")
-    var image: String,
+    @ColumnInfo(name = "floor")
+    var floor: Int,
 
-    @ColumnInfo(name = "date_updated")
-    var date_updated: Long,
+    @ColumnInfo(name = "address")
+    var address: String? = null,
 
-    @ColumnInfo(name = "username")
-    var username: String
+    @ColumnInfo(name = "longitude")
+    var longitude: Double,
 
+    @ColumnInfo(name = "latitude")
+    var latitude: Double,
 
-) {
+    @ColumnInfo(name = "house_type")
+    var house_type: Int,
+
+    @ColumnInfo(name = "price")
+    var price: Int,
+
+    @ColumnInfo(name = "status")
+    var status: Int,
+
+//    @ColumnInfo(name = "photos")
+//    var photos: String,
+
+    @ColumnInfo(name = "rating")
+    var rating: Double
+
+    ) {
 
     override fun toString(): String {
-        return "BlogPost(pk=$pk, " +
-                "title='$title', " +
-                "slug='$slug', " +
-                "image='$image', " +
-                "date_updated=$date_updated, " +
-                "username='$username')"
+        return "BlogPost(id=$id, " +
+                "name='$name', " +
+                "description='$description', " +
+                "rooms='$rooms', " +
+                "floor='$floor', " +
+                "address='$address', " +
+                "longitude='$longitude', " +
+                "latitude='$latitude', " +
+                "house_type='$house_type', " +
+                "price='$price', " +
+                "status='$status', " +
+                "rating='$rating')"
     }
-
 
 }

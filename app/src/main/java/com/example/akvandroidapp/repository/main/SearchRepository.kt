@@ -33,15 +33,16 @@ constructor(
     val sessionManager: SessionManager
 ): JobManager("SearchRepository")
 {
-
     private val TAG: String = "AppDebug"
 
     fun searchBlogPosts(
         authToken: AuthToken,
         query: String,
-        filterAndOrder: String,
+        floor:Int,
+        rooms: Int,
         page: Int
     ): LiveData<DataState<SearchViewState>> {
+
         return object: NetworkBoundResource<BlogListSearchResponse, List<BlogPost>, SearchViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
@@ -71,28 +72,44 @@ constructor(
                 for(blogPostResponse in response.body.results){
                     blogPostList.add(
                         BlogPost(
-                            pk = blogPostResponse.pk,
-                            title = blogPostResponse.title,
-                            slug = blogPostResponse.slug,
-                            body = blogPostResponse.body,
-                            image = blogPostResponse.image,
-                            date_updated = DateUtils.convertServerStringDateToLong(
-                                blogPostResponse.date_updated
-                            ),
-                            username = blogPostResponse.username
+                            id = blogPostResponse.id,
+                            name = blogPostResponse.name,
+                            description = blogPostResponse.description,
+                            rooms = blogPostResponse.rooms,
+                            floor = blogPostResponse.floor,
+                            address = blogPostResponse.address,
+                            longitude = blogPostResponse.longitude,
+                            latitude = blogPostResponse.latitude,
+                            house_type = blogPostResponse.house_type,
+                            price = blogPostResponse.price,
+                            status = blogPostResponse.status,
+                            rating = blogPostResponse.rating
                         )
                     )
                 }
+
+                Log.d("qwe","salam ${blogPostList}")
                 updateLocalDb(blogPostList)
 
                 createCacheRequestAndReturn()
+
+                onCompleteJob(
+                    DataState.data(
+                        data = SearchViewState(SearchViewState.BlogFields(blogPostList))
+                    )
+                )
             }
 
             override fun createCall(): LiveData<GenericApiResponse<BlogListSearchResponse>> {
+                Log.d("qwe","wwwww ${query}")
+                Log.d("qwe","wwwww ${floor}")
+                Log.d("qwe","wwwww ${rooms}")
+                Log.d("qwe","wwwww ${page}")
+//                                    "Token ${authToken.token!!}",
                 return openApiMainService.searchListBlogPosts(
-                    "Token ${authToken.token!!}",
-                    query = query,
-                    ordering = filterAndOrder,
+                    search = query,
+                    floor = floor,
+                    rooms = rooms,
                     page = page
                 )
             }
@@ -100,7 +117,8 @@ constructor(
             override fun loadFromCache(): LiveData<SearchViewState> {
                 return blogPostDao.returnOrderedBlogQuery(
                     query = query,
-                    filterAndOrder = filterAndOrder,
+                    floor = floor,
+                    rooms = rooms,
                     page = page)
                     .switchMap {
                         object: LiveData<SearchViewState>(){
@@ -129,7 +147,7 @@ constructor(
                                     blogPostDao.insert(blogPost)
                                 }
                             }catch (e: Exception){
-                                Log.e(TAG, "updateLocalDb: error updating cache data on blog post with slug: ${blogPost.slug}. " +
+                                Log.e(TAG, "updateLocalDb: error updating cache data on blog post with slug: ${blogPost.description}. " +
                                         "${e.message}")
                                 // Could send an error report here or something but I don't think you should throw an error to the UI
                                 // Since there could be many blog posts being inserted/updated.

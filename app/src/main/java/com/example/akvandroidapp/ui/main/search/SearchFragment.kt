@@ -8,24 +8,34 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_FILTER_DATE_UPDATED
+import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_FILTER_USERNAME
+import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_DESC
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
-import com.example.akvandroidapp.ui.main.search.viewmodel.setBlogPost
-import com.example.akvandroidapp.ui.main.search.viewmodel.setQuery
-import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
+import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
+import kotlinx.android.synthetic.main.fragment_explore.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
+import kotlinx.android.synthetic.main.fragment_search_explore.*
+import kotlinx.android.synthetic.main.header_searcher_base_layout.*
 import loadFirstPage
 import nextPage
 
@@ -47,6 +57,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
         swipe_refresh.setOnRefreshListener(this)
@@ -57,6 +68,26 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 //        if(savedInstanceState == null){
 //            viewModel.loadFirstPage()
 //        }
+
+        fragment_explore_homes_iv.setOnClickListener {
+            navFilter()
+        }
+
+
+        fragment_explore_apartments_iv.setOnClickListener {
+            navApartments()
+        }
+
+
+    }
+
+
+    private fun navFilter(){
+        findNavController().navigate(R.id.action_searchFragment_to_searchFilterFragment)
+    }
+
+    private fun navApartments(){
+        findNavController().navigate(R.id.action_searchFragment_to_apartmentsFragment)
     }
 
 
@@ -71,8 +102,10 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         })
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
-            Log.d(TAG, "BlogFragment, ViewState: ${viewState}")
             if(viewState != null){
+                Log.d(TAG, "Search Results: ${viewState.blogFields.blogList}")
+                home_page_explore.visibility = View.GONE
+                search_result.visibility = View.VISIBLE
                 recyclerAdapter.apply {
                     preloadGlideImages(
                         requestManager = requestManager,
@@ -135,6 +168,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
         when(item.itemId){
             R.id.action_filter_settings -> {
+                showFilterDialog()
                 return true
             }
         }
@@ -221,6 +255,69 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         blog_post_recyclerview.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
         focusable_view.requestFocus()
+    }
+
+
+    fun showFilterDialog(){
+
+        activity?.let {
+            val dialog = MaterialDialog(it)
+                .noAutoDismiss()
+                .customView(R.layout.layout_blog_filter)
+
+            val view = dialog.getCustomView()
+
+            val filter = viewModel.getFilter()
+            val order = viewModel.getOrder()
+
+            view.findViewById<RadioGroup>(R.id.filter_group).apply {
+                when (filter) {
+                    6 -> check(R.id.filter_date)
+                    3 -> check(R.id.filter_author)
+                }
+            }
+
+            view.findViewById<RadioGroup>(R.id.order_group).apply {
+                when (order) {
+                    3 -> check(R.id.filter_asc)
+                    6 -> check(R.id.filter_desc)
+                }
+            }
+
+            view.findViewById<TextView>(R.id.positive_button).setOnClickListener {
+                Log.d(TAG, "FilterDialog: apply filter.")
+
+                val newFilter =
+                    when (view.findViewById<RadioGroup>(R.id.filter_group).checkedRadioButtonId) {
+                        R.id.filter_author -> 6
+                        R.id.filter_date -> 3
+                        else -> 6
+                    }
+
+                val newOrder =
+                    when (view.findViewById<RadioGroup>(R.id.order_group).checkedRadioButtonId) {
+                        R.id.filter_desc -> 3
+                        else -> 6
+                    }
+
+                viewModel.apply {
+                    saveFilterOptions(newFilter, newOrder)
+                    setBlogFilter(newFilter)
+                    setBlogOrder(newOrder)
+                }
+
+                onBlogSearchOrFilter()
+
+                dialog.dismiss()
+            }
+
+            view.findViewById<TextView>(R.id.negative_button).setOnClickListener {
+                Log.d(TAG, "FilterDialog: cancelling filter.")
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
     }
 
 

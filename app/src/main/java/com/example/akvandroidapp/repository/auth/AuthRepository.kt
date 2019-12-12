@@ -85,8 +85,10 @@ constructor(
                     AccountProperties(
                         response.body.user.id,
                         response.body.user.email,
+                        response.body.user.gender,
                         response.body.user.name,
-                        response.body.user.phone
+                        response.body.user.phone,
+                        response.body.user.birth_day
                     )
                 )
 
@@ -105,13 +107,12 @@ constructor(
                     )
                 }
 
+                saveAuthenticatedUserToPrefs(email)
 
                 sessionManager.login(
                     AuthToken(response.body.user.id,
                         response.body.token)
                 )
-
-                saveAuthenticatedUserToPrefs(email)
 
                 onCompleteJob(
                     DataState.data(
@@ -186,8 +187,10 @@ constructor(
                     AccountProperties(
                         response.body.user.id,
                         response.body.user.email,
+                        response.body.user.gender,
                         response.body.user.name,
-                        response.body.user.phone
+                        response.body.user.phone,
+                        response.body.user.birth_day
                     )
                 )
 
@@ -214,6 +217,7 @@ constructor(
                 }
 
                 saveAuthenticatedUserToPrefs(email)
+
 
                 onCompleteJob(
                     DataState.data(
@@ -376,8 +380,8 @@ constructor(
                         Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
 
                         accountProperties?.let {
-                            if(accountProperties.pk > -1){
-                                authTokenDao.searchByPk(accountProperties.pk).let { authToken ->
+                            if(accountProperties.id > -1){
+                                authTokenDao.searchByPk(accountProperties.id).let { authToken ->
                                     if(authToken != null){
                                         if(authToken.token != null){
                                             onCompleteJob(

@@ -30,7 +30,7 @@ class UserResponse(
     var birth_day: String
 ) {
     override fun toString(): String {
-        return "RegistrationResponse(id='$id', email='$email', gender='$gender', phone='$phone', name='$name',birth_day='$birth_day')"
+        return "UserResponse(id='$id', email='$email', gender='$gender', phone='$phone', name='$name',birth_day='$birth_day')"
     }
 
 }

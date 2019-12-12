@@ -41,19 +41,19 @@ fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
 
 
 // Filter can be "date_updated" or "username"
-fun SearchViewModel.setBlogFilter(filter: String?){
-    filter?.let{
+fun SearchViewModel.setBlogFilter(floor: Int?){
+    floor?.let{
         val update = getCurrentViewStateOrNew()
-        update.blogFields.filter = filter
+        update.blogFields.floor = floor
         setViewState(update)
     }
 }
 
 // Order can be "-" or ""
 // Note: "-" = DESC, "" = ASC
-fun SearchViewModel.setBlogOrder(order: String){
+fun SearchViewModel.setBlogOrder(rooms: Int){
     val update = getCurrentViewStateOrNew()
-    update.blogFields.order = order
+    update.blogFields.rooms = rooms
     setViewState(update)
 }
 
@@ -84,7 +84,7 @@ fun SearchViewModel.updateListItem(newBlogPost: BlogPost){
     val update = getCurrentViewStateOrNew()
     val list = update.blogFields.blogList.toMutableList()
     for(i in 0..(list.size - 1)){
-        if(list[i].pk == newBlogPost.pk){
+        if(list[i].id == newBlogPost.id){
             list[i] = newBlogPost
             break
         }
@@ -97,8 +97,8 @@ fun SearchViewModel.updateListItem(newBlogPost: BlogPost){
 fun SearchViewModel.onBlogPostUpdateSuccess(blogPost: BlogPost){
     setUpdatedBlogFields(
         uri = null,
-        title = blogPost.title,
-        body = blogPost.body
+        title = blogPost.name,
+        body = blogPost.description
     ) // update UpdateBlogFragment (not really necessary since navigating back)
     setBlogPost(blogPost) // update ViewBlogFragment
     updateListItem(blogPost) // update BlogFragment

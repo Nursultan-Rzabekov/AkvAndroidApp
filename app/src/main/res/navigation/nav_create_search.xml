@@ -11,19 +11,28 @@
                 android:label="@string/fragment_create_blog"
                 tools:layout="@layout/fragment_search_explore">
 
-<!--                <action android:id="@+id/action_blogFragment_to_viewBlogFragment"-->
-<!--                    app:destination="@id/viewBlogFragment"-->
-<!--                    app:popEnterAnim="@anim/slide_in_left"-->
-<!--                    app:popExitAnim="@anim/slide_out_right"-->
-<!--                    app:enterAnim="@anim/slide_in_right"-->
-<!--                    app:exitAnim="@anim/slide_out_left"-->
-<!--                    />-->
+                <action android:id="@+id/action_searchFragment_to_searchFilterFragment"
+                    app:destination="@id/searchFilterFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
+
+                <action android:id="@+id/action_searchFragment_to_apartmentsFragment"
+                    app:destination="@id/apartmentsFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
         </fragment>
 
-<!--        <fragment android:id="@+id/viewBlogFragment"-->
-<!--            android:name="com.codingwithmitch.openapi.ui.main.blog.ViewBlogFragment"-->
-<!--            android:label="@string/fragment_view_blog"-->
-<!--            tools:layout="@layout/fragment_view_blog">-->
+        <fragment android:id="@+id/apartmentsFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.ApartmentsFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_appartments">
 
 
 <!--            <action android:id="@+id/action_viewBlogFragment_to_updateBlogFragment"-->
@@ -34,22 +43,14 @@
 <!--                app:exitAnim="@anim/slide_out_left"-->
 <!--                />-->
 
-<!--            <action-->
-<!--                android:id="@+id/action_viewBlogFragment_to_home"-->
-<!--                app:destination="@id/blogFragment"-->
-<!--                app:popEnterAnim="@anim/fade_in"-->
-<!--                app:popExitAnim="@anim/fade_out"-->
-<!--                app:enterAnim="@anim/fade_in"-->
-<!--                app:exitAnim="@anim/fade_out"-->
-<!--                app:popUpTo="@+id/nav_blog"-->
-<!--                app:popUpToInclusive="true" />-->
 
-<!--        </fragment>-->
 
-<!--        <fragment android:id="@+id/updateBlogFragment"-->
-<!--            android:name="com.codingwithmitch.openapi.ui.main.blog.UpdateBlogFragment"-->
-<!--            android:label="@string/fragment_update_blog"-->
-<!--            tools:layout="@layout/fragment_update_blog">-->
+        </fragment>
+
+        <fragment android:id="@+id/searchFilterFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.SearchFilterFragment"
+            android:label="@string/fragment_update_blog"
+            tools:layout="@layout/fragment_filter">
 
 <!--            <action-->
 <!--                android:id="@+id/action_updateBlogFragment_to_home"-->
@@ -61,5 +62,5 @@
 <!--                app:popUpTo="@+id/nav_create_search"-->
 <!--                app:popUpToInclusive="true" />-->
 
-<!--        </fragment>-->
+        </fragment>
 </navigation>

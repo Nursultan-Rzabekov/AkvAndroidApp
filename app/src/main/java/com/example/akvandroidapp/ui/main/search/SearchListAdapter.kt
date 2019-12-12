@@ -26,16 +26,21 @@ class SearchListAdapter(
         NO_MORE_RESULTS,
         "" ,
         "",
-        "",
-        "",
         0,
-        ""
+        0,
+        "",
+        0.0,
+        0.0,
+        0,
+        0,
+        0,
+        0.0
     )
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
 
         override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
-            return oldItem.pk == newItem.pk
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
@@ -120,10 +125,10 @@ class SearchListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(differ.currentList.get(position).pk > -1){
+        if(differ.currentList.get(position).id > -1){
             return BLOG_ITEM
         }
-        return differ.currentList.get(position).pk
+        return differ.currentList.get(position).id
     }
 
     override fun getItemCount(): Int {
@@ -138,7 +143,7 @@ class SearchListAdapter(
     ){
         for(blogPost in list){
             requestManager
-                .load(blogPost.image)
+                .load("")
                 .preload()
         }
     }
@@ -163,12 +168,12 @@ class SearchListAdapter(
             }
 
             requestManager
-                .load(item.image)
+                .load("")
                 .transition(withCrossFade())
                 .into(itemView.search_recycler_item_image_back)
-            itemView.search_recycler_item_header.text = item.title
-            itemView.search_recycler_item_location.text = item.username
-            itemView.search_recycler_item_cost.text = DateUtils.convertLongToStringDate(item.date_updated)
+            itemView.search_recycler_item_header.text = item.name
+            itemView.search_recycler_item_location.text = item.longitude.toString()
+            itemView.search_recycler_item_cost.text = item.price.toString()
         }
     }
 

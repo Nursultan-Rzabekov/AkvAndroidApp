@@ -2,8 +2,8 @@ package com.example.akvandroidapp.ui.main.search.state
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
-import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_ASC
-import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.ORDER_BY_ASC_DATE_UPDATED
+import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_FLOOR
+import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_ROOMS
 
 
 class SearchViewState (
@@ -20,8 +20,8 @@ class SearchViewState (
         var page: Int = 1,
         var isQueryInProgress: Boolean = false,
         var isQueryExhausted: Boolean = false,
-        var filter: String = ORDER_BY_ASC_DATE_UPDATED,
-        var order: String = BLOG_ORDER_ASC
+        var rooms: Int = BLOG_ORDER_ROOMS,
+        var floor: Int = BLOG_ORDER_FLOOR
     )
 
     data class ViewBlogFields(

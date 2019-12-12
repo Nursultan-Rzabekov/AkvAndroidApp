@@ -33,13 +33,7 @@ interface OpenApiMainService {
         @Field("confirm_new_password") confirmNewPassword: String
     ): LiveData<GenericApiResponse<GenericResponse>>
 
-    @GET("blog/list")
-    fun searchListBlogPosts(
-        @Header("Authorization") authorization: String,
-        @Query("search") query: String,
-        @Query("ordering") ordering: String,
-        @Query("page") page: Int
-    ): LiveData<GenericApiResponse<BlogListSearchResponse>>
+
 
 
     @GET("blog/{slug}/is_author")
@@ -74,6 +68,18 @@ interface OpenApiMainService {
         @Part("body") body: RequestBody,
         @Part image: MultipartBody.Part?
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>
+
+
+
+    @GET("houses")
+    fun searchListBlogPosts(
+//        @Header("Authorization") authorization: String,
+        @Query("search") search: String,
+        @Query("floor") floor: Int,
+        @Query("rooms") rooms: Int,
+        @Query("page") page: Int
+
+    ): LiveData<GenericApiResponse<BlogListSearchResponse>>
 }
 
 

@@ -27,21 +27,20 @@ constructor(
     private val editor: SharedPreferences.Editor
 ): BaseViewModel<SearchStateEvent, SearchViewState>(){
 
-    init {
-        setBlogFilter(
-            sharedPreferences.getString(
-                Search_FILTER,
-                BlogQueryUtils.BLOG_FILTER_DATE_UPDATED
-            ).toString()
-        )
-        setBlogOrder(
-            sharedPreferences.getString(
-                Search_ORDER,
-                BlogQueryUtils.BLOG_ORDER_ASC
-            ).toString()
-        )
-    }
-
+//    init {
+//        setBlogFilter(
+//            sharedPreferences.getString(
+//                Search_FILTER,
+//                ""
+//            ).toString()
+//        )
+//        setBlogOrder(
+//            sharedPreferences.getString(
+//                Search_ORDER,
+//                ""
+//            ).toString()
+//        )
+//    }
 
     override fun handleStateEvent(stateEvent: SearchStateEvent): LiveData<DataState<SearchViewState>> {
         when(stateEvent){
@@ -51,7 +50,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         query = getSearchQuery(),
-                        filterAndOrder = getOrder() + getFilter(),
+                        floor = getOrder(),
+                        rooms = getFilter(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -62,7 +62,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         query = getSearchQuery(),
-                        filterAndOrder = getOrder() + getFilter(),
+                        floor = getOrder(),
+                        rooms = getFilter(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -73,7 +74,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         query = getSearchQuery(),
-                        filterAndOrder = getOrder() + getFilter(),
+                        floor = getOrder(),
+                        rooms = getFilter(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -85,7 +87,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         query = getSearchQuery(),
-                        filterAndOrder = getOrder() + getFilter(),
+                        floor = getOrder(),
+                        rooms = getFilter(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -109,11 +112,12 @@ constructor(
         return SearchViewState()
     }
 
-    fun saveFilterOptions(filter: String, order: String){
-        editor.putString(Search_FILTER, filter)
+
+    fun saveFilterOptions(filter: Int, order: Int){
+        editor.putInt(Search_FILTER, filter)
         editor.apply()
 
-        editor.putString(Search_ORDER, order)
+        editor.putInt(Search_ORDER, order)
         editor.apply()
     }
 

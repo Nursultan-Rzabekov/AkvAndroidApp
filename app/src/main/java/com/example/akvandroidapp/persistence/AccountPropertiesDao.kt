@@ -13,8 +13,8 @@ interface AccountPropertiesDao {
     @Query("SELECT * FROM account_properties WHERE email = :email")
     suspend fun searchByEmail(email: String): AccountProperties?
 
-    @Query("SELECT * FROM account_properties WHERE pk = :pk")
-    fun searchByPk(pk: Int): LiveData<AccountProperties>
+    @Query("SELECT * FROM account_properties WHERE id = :id")
+    fun searchByPk(id: Int): LiveData<AccountProperties>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAndReplace(accountProperties: AccountProperties): Long
@@ -22,8 +22,8 @@ interface AccountPropertiesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertOrIgnore(accountProperties: AccountProperties): Long
 
-    @Query("UPDATE account_properties SET email = :email, name = :name WHERE pk = :pk")
-    fun updateAccountProperties(pk: Int, email: String, name: String)
+    @Query("UPDATE account_properties SET email = :email, name = :name WHERE id = :id")
+    fun updateAccountProperties(id: Int, email: String, name: String)
 }
 
 

@@ -12,27 +12,25 @@ class BlogQueryUtils {
         private val TAG: String = "AppDebug"
 
         // values
-        const val BLOG_ORDER_ASC: String = ""
+
+        const val BLOG_ORDER_ROOMS: Int = 6
+        const val BLOG_ORDER_FLOOR: Int = 3
         const val BLOG_ORDER_DESC: String = "-"
         const val BLOG_FILTER_USERNAME = "username"
         const val BLOG_FILTER_DATE_UPDATED = "date_updated"
 
-        val ORDER_BY_ASC_DATE_UPDATED = BLOG_ORDER_ASC + BLOG_FILTER_DATE_UPDATED
+        val ORDER_BY_ASC_DATE_UPDATED = "" + BLOG_FILTER_DATE_UPDATED
     }
 }
 
 fun BlogPostDao.returnOrderedBlogQuery(
     query: String,
-    filterAndOrder: String,
+    floor:Int,
+    rooms: Int,
     page: Int
 ): LiveData<List<BlogPost>> {
 
     when{
-        filterAndOrder.contains(ORDER_BY_ASC_DATE_UPDATED) ->{
-            return searchBlogPostsOrderByDateASC(
-                query = query,
-                page = page)
-        }
 
         else ->
             return searchBlogPostsOrderByDateASC(

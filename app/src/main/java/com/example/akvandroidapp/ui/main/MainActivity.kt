@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
@@ -17,18 +18,19 @@ import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
 import com.example.akvandroidapp.ui.main.messages.BaseMessagesFragment
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
+import com.example.akvandroidapp.ui.main.search.SearchFilterFragment
 import com.example.akvandroidapp.util.BottomNavController
 import com.example.akvandroidapp.util.setUpNavigation
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : BaseActivity(),
     BottomNavController.NavGraphProvider,
     BottomNavController.OnNavigationGraphChanged,
     BottomNavController.OnNavigationReselectedListener
 {
-
 
     private lateinit var bottomNavigationView: BottomNavigationView
 
@@ -64,11 +66,62 @@ class MainActivity : BaseActivity(),
     }
 
 
-
     override fun onGraphChange() {
+        //changeAppbar()
         cancelActiveJobs()
         expandAppBar()
+
     }
+
+//    private fun changeAppbar(){
+//
+////        if(bottomNavController.onNavigationItemSelected()){
+////            head_zhilye.visibility = View.GONE
+////            searcher_base_layout_in.visibility = View.GONE
+////            rules_of_house_in.visibility = View.GONE
+////            header_profile_guest.visibility = View.VISIBLE
+////        }
+//
+//        val fragments = bottomNavController.fragmentManager
+//            .findFragmentById(bottomNavController.containerId)
+//            ?.childFragmentManager
+//            ?.fragments
+//        if(fragments != null){
+//            for(fragment in fragments){
+//                if(fragment is BaseHomeFragment){
+//                    head_zhilye.visibility = View.GONE
+//                    searcher_base_layout_in.visibility = View.VISIBLE
+//                    rules_of_house_in.visibility = View.GONE
+//                    header_profile_guest.visibility = View.GONE
+//                }
+//                if(fragment is BaseFavoriteFragment){
+//                    head_zhilye.visibility = View.GONE
+//                    searcher_base_layout_in.visibility = View.VISIBLE
+//                    rules_of_house_in.visibility = View.GONE
+//                    header_profile_guest.visibility = View.GONE
+//                }
+//                if(fragment is BaseSearchFragment){
+//                    head_zhilye.visibility = View.GONE
+//                    searcher_base_layout_in.visibility = View.VISIBLE
+//                    rules_of_house_in.visibility = View.GONE
+//                    header_profile_guest.visibility = View.GONE
+//                }
+//                if(fragment is BaseMessagesFragment){
+//                    head_zhilye.visibility = View.GONE
+//                    searcher_base_layout_in.visibility = View.GONE
+//                    rules_of_house_in.visibility = View.VISIBLE
+//                    header_profile_guest.visibility = View.GONE
+//                }
+//                if(fragment is BaseProfileFragment){
+//                    head_zhilye.visibility = View.GONE
+//                    searcher_base_layout_in.visibility = View.GONE
+//                    rules_of_house_in.visibility = View.GONE
+//                    header_profile_guest.visibility = View.VISIBLE
+//                }
+//            }
+//        }
+//        displayProgressBar(false)
+//    }
 
     private fun cancelActiveJobs(){
         val fragments = bottomNavController.fragmentManager
@@ -98,8 +151,18 @@ class MainActivity : BaseActivity(),
     }
 
 
-    override fun onReselectNavItem(navController: NavController, fragment: Fragment) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onReselectNavItem(
+        navController: NavController,
+        fragment: Fragment
+    ) = when(fragment){
+
+        is SearchFilterFragment -> {
+            navController.navigate(R.id.action_searchFragment_to_searchFilterFragment)
+        }
+
+        else -> {
+
+        }
     }
 
     override fun onBackPressed() = bottomNavController.onBackPressed()
@@ -123,14 +186,22 @@ class MainActivity : BaseActivity(),
             bottomNavController.onNavigationItemSelected()
         }
 
+
+        sessionManager.login(AuthToken(1,"qweqweqweqe"))
+
+//        main_filter_img_btn.setOnClickListener {
+//
+//        }
+
         subscribeObservers()
 
     }
 
+
     fun subscribeObservers(){
         sessionManager.cachedToken.observe(this, Observer{ authToken ->
             Log.d(TAG, "MainActivity, subscribeObservers: ViewState: ${authToken}")
-            if(authToken == null ||  authToken.token == null){
+            if(authToken.token == null){
                 navAuthActivity()
                 finish()
             }

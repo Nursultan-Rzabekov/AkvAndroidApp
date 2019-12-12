@@ -4,7 +4,7 @@ class Constants {
 
     companion object{
 
-        const val BASE_URL = "http://akv-technopark.herokuapp.com/"
+        const val BASE_URL = "http://akv-technopark.herokuapp.com/api/"
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
 
         const val NETWORK_TIMEOUT = 6000L

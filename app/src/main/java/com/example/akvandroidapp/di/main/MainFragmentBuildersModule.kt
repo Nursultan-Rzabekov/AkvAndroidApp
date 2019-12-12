@@ -4,6 +4,8 @@ import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
 import com.example.akvandroidapp.ui.main.home.HomeFragment
 import com.example.akvandroidapp.ui.main.messages.MessagesFragment
 import com.example.akvandroidapp.ui.main.profile.ProfileFragment
+import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
+import com.example.akvandroidapp.ui.main.search.SearchFilterFragment
 import com.example.akvandroidapp.ui.main.search.SearchFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -25,4 +27,10 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeProfileFragment(): ProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeSearchFilterFragmentFragment(): SearchFilterFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeSearchApartmentsFragment(): ApartmentsFragment
 }
