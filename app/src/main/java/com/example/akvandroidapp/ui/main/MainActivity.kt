@@ -18,12 +18,12 @@ import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
 import com.example.akvandroidapp.ui.main.messages.BaseMessagesFragment
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
-import com.example.akvandroidapp.ui.main.search.SearchFilterFragment
+import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.util.BottomNavController
 import com.example.akvandroidapp.util.setUpNavigation
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.explore_active.*
 
 
 class MainActivity : BaseActivity(),
@@ -67,61 +67,10 @@ class MainActivity : BaseActivity(),
 
 
     override fun onGraphChange() {
-        //changeAppbar()
         cancelActiveJobs()
         expandAppBar()
 
     }
-
-//    private fun changeAppbar(){
-//
-////        if(bottomNavController.onNavigationItemSelected()){
-////            head_zhilye.visibility = View.GONE
-////            searcher_base_layout_in.visibility = View.GONE
-////            rules_of_house_in.visibility = View.GONE
-////            header_profile_guest.visibility = View.VISIBLE
-////        }
-//
-//        val fragments = bottomNavController.fragmentManager
-//            .findFragmentById(bottomNavController.containerId)
-//            ?.childFragmentManager
-//            ?.fragments
-//        if(fragments != null){
-//            for(fragment in fragments){
-//                if(fragment is BaseHomeFragment){
-//                    head_zhilye.visibility = View.GONE
-//                    searcher_base_layout_in.visibility = View.VISIBLE
-//                    rules_of_house_in.visibility = View.GONE
-//                    header_profile_guest.visibility = View.GONE
-//                }
-//                if(fragment is BaseFavoriteFragment){
-//                    head_zhilye.visibility = View.GONE
-//                    searcher_base_layout_in.visibility = View.VISIBLE
-//                    rules_of_house_in.visibility = View.GONE
-//                    header_profile_guest.visibility = View.GONE
-//                }
-//                if(fragment is BaseSearchFragment){
-//                    head_zhilye.visibility = View.GONE
-//                    searcher_base_layout_in.visibility = View.VISIBLE
-//                    rules_of_house_in.visibility = View.GONE
-//                    header_profile_guest.visibility = View.GONE
-//                }
-//                if(fragment is BaseMessagesFragment){
-//                    head_zhilye.visibility = View.GONE
-//                    searcher_base_layout_in.visibility = View.GONE
-//                    rules_of_house_in.visibility = View.VISIBLE
-//                    header_profile_guest.visibility = View.GONE
-//                }
-//                if(fragment is BaseProfileFragment){
-//                    head_zhilye.visibility = View.GONE
-//                    searcher_base_layout_in.visibility = View.GONE
-//                    rules_of_house_in.visibility = View.GONE
-//                    header_profile_guest.visibility = View.VISIBLE
-//                }
-//            }
-//        }
-//        displayProgressBar(false)
-//    }
 
     private fun cancelActiveJobs(){
         val fragments = bottomNavController.fragmentManager
@@ -177,9 +126,8 @@ class MainActivity : BaseActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.explore_active)
 
-        setupActionBar()
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.setUpNavigation(bottomNavController, this)
         if (savedInstanceState == null) {
@@ -189,9 +137,6 @@ class MainActivity : BaseActivity(),
 
         sessionManager.login(AuthToken(1,"qweqweqweqe"))
 
-//        main_filter_img_btn.setOnClickListener {
-//
-//        }
 
         subscribeObservers()
 
@@ -212,9 +157,6 @@ class MainActivity : BaseActivity(),
         findViewById<AppBarLayout>(R.id.app_bar).setExpanded(true)
     }
 
-    private fun setupActionBar(){
-        setSupportActionBar(toolbar_zhilye)
-    }
 
     private fun navAuthActivity(){
         val intent = Intent(this, AuthActivity::class.java)

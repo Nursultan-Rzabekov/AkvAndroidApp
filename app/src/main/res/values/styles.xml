@@ -9,6 +9,7 @@
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
+
     <style name="TextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius1</item>
         <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius1</item>
@@ -36,6 +37,17 @@
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius3</item>
         <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius3</item>
         <item name="boxCornerRadiusTopEnd">@dimen/cornerRadius3</item>
+        <item name="boxCornerRadiusTopStart">@dimen/cornerRadius3</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="hintEnabled">false</item>
+        <item name='boxStrokeWidth'>1dp</item>
+        <item name="boxStrokeColor">@color/secondaryFirst</item>
+    </style>
+
+    <style name="AdPriceTextOulined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">0dp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius3</item>
+        <item name="boxCornerRadiusTopEnd">0dp</item>
         <item name="boxCornerRadiusTopStart">@dimen/cornerRadius3</item>
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="hintEnabled">false</item>

@@ -8,63 +8,6 @@
     tools:context=".ui.main.MainActivity"
     android:backgroundTint="@color/default_background_color">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/app_bar"
-        android:backgroundTint="@color/white"
-        >
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:id="@+id/toolbar_zhilye"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetStartWithNavigation="0dp"
-                app:contentInsetEnd="33dp"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
-
-            </androidx.appcompat.widget.Toolbar>
-
-            <include
-                android:id="@+id/head_zhilye"
-                layout="@layout/header_zhilye"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <include
-                android:id="@+id/searcher_base_layout_in"
-                android:visibility="visible"
-                layout="@layout/header_searcher_base_layout"
-                android:layout_marginStart="@dimen/content_margin_main3"
-                android:layout_marginEnd="@dimen/content_margin_main3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <include
-                android:id="@+id/rules_of_house_in"
-                android:visibility="gone"
-                layout="@layout/header_rules_of_house"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <include
-                android:id="@+id/header_profile_guest"
-                android:visibility="gone"
-                layout="@layout/header_profile_guest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

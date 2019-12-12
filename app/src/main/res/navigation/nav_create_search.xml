@@ -9,7 +9,7 @@
         <fragment android:id="@+id/searchFragment"
                 android:name="com.example.akvandroidapp.ui.main.search.SearchFragment"
                 android:label="@string/fragment_create_blog"
-                tools:layout="@layout/fragment_search_explore">
+                tools:layout="@layout/search_part_layout">
 
                 <action android:id="@+id/action_searchFragment_to_searchFilterFragment"
                     app:destination="@id/searchFilterFragment"
@@ -27,30 +27,48 @@
                     app:enterAnim="@anim/slide_in_right"
                     app:exitAnim="@anim/slide_out_left"
                     />
+
+                <action android:id="@+id/action_searchFragment_to_mapActivity"
+                    app:destination="@id/mapActivity"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
+                <action android:id="@+id/action_searchFragment_to_zhilyeFragment"
+                    app:destination="@id/zhilyeFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
         </fragment>
 
         <fragment android:id="@+id/apartmentsFragment"
             android:name="com.example.akvandroidapp.ui.main.search.ApartmentsFragment"
             android:label="@string/fragment_view_blog"
-            tools:layout="@layout/fragment_appartments">
-
-
-<!--            <action android:id="@+id/action_viewBlogFragment_to_updateBlogFragment"-->
-<!--                app:destination="@id/updateBlogFragment"-->
-<!--                app:popEnterAnim="@anim/slide_in_left"-->
-<!--                app:popExitAnim="@anim/slide_out_right"-->
-<!--                app:enterAnim="@anim/slide_in_right"-->
-<!--                app:exitAnim="@anim/slide_out_left"-->
-<!--                />-->
-
+            tools:layout="@layout/fragment_appartments_layout">
 
 
         </fragment>
 
+        <activity
+            android:id="@+id/mapActivity"
+            android:name="com.example.akvandroidapp.ui.main.search.MapActivity"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/explore_map">
+
+
+        </activity>
+
+
+
         <fragment android:id="@+id/searchFilterFragment"
-            android:name="com.example.akvandroidapp.ui.main.search.SearchFilterFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment"
             android:label="@string/fragment_update_blog"
-            tools:layout="@layout/fragment_filter">
+            tools:layout="@layout/fragment_filter_layout">
 
 <!--            <action-->
 <!--                android:id="@+id/action_updateBlogFragment_to_home"-->
@@ -62,5 +80,105 @@
 <!--                app:popUpTo="@+id/nav_create_search"-->
 <!--                app:popUpToInclusive="true" />-->
 
+
+                <action android:id="@+id/action_searchFilterFragment_to_filterTypeFragment"
+                    app:destination="@id/filterTypeFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
+
+                <action android:id="@+id/action_searchFilterFragment_to_filterCityFragment"
+                    app:destination="@id/filterCityFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
+                <action android:id="@+id/action_searchFilterFragment_to_filterUdopstvaFragment"
+                    app:destination="@id/filterUdopstvaFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
         </fragment>
+
+
+        <fragment android:id="@+id/filterTypeFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_type_layout">
+
+
+        </fragment>
+
+
+        <fragment android:id="@+id/filterCityFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_city_layout">
+
+
+        </fragment>
+
+
+        <fragment android:id="@+id/filterUdopstvaFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_udopstva_layout">
+
+
+        </fragment>
+
+
+        <fragment android:id="@+id/zhilyeFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_zhilye_layout">
+
+                <action android:id="@+id/action_szhilyeFragment_to_zhilyeRulesOfHouseFragment"
+                    app:destination="@id/zhilyeRulesOfHouseFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
+
+                <action android:id="@+id/action_szhilyeFragment_to_ZhilyeReviewFragment"
+                    app:destination="@id/zhilyeReviewFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
+
+
+        </fragment>
+
+
+        <fragment android:id="@+id/zhilyeRulesOfHouseFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_rules_of_house_layout">
+
+
+        </fragment>
+
+        <fragment android:id="@+id/zhilyeReviewFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_review_page_layout">
+
+
+        </fragment>
+
+
+
+
 </navigation>

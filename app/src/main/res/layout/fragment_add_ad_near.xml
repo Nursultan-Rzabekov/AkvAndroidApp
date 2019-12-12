@@ -139,12 +139,12 @@
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_add_ad_check_recycler_view"
+                android:id="@+id/fragment_add_ad_near_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/fragment_add_ad_check_add_chkbox"
+                android:id="@+id/fragment_add_ad_near_add_chkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Добавить своё"
@@ -154,14 +154,14 @@
                 android:drawableStart="@drawable/ic_location_real"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_add_ad_check_add_chkbox_layout"
+                android:id="@+id/fragment_add_ad_near_add_chkbox_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp">
 
                 <EditText
-                    android:id="@+id/fragment_add_ad_check_add_chkbox_et"
+                    android:id="@+id/fragment_add_ad_near_add_chkbox_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHighlight="@color/primaryZero"
@@ -172,7 +172,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fragment_add_ad_check_add_chkbox_btn"
+                    android:id="@+id/fragment_add_ad_near_add_chkbox_btn"
                     style="@style/AllButton"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
@@ -181,11 +181,11 @@
                     android:text="Добавить"
                     android:textSize="10sp"
                     app:cornerRadius="@dimen/cornerRadius3"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_ad_check_add_chkbox_et"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_ad_near_add_chkbox_et"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_near_add_chkbox_et" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fragment_add_ad_check_remove_chkbox_btn"
+                    android:id="@+id/fragment_add_ad_near_remove_chkbox_btn"
                     style="@style/AllButton"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
@@ -197,18 +197,18 @@
                     android:text="Отменить"
                     android:textSize="10sp"
                     app:cornerRadius="@dimen/cornerRadius3"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_add_ad_check_add_chkbox_et"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_ad_near_add_chkbox_et"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_near_add_chkbox_et" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/fragment_add_ad_check_next_btn"
+                android:id="@+id/fragment_add_ad_near_next_btn"
                 style="@style/BasicButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="38dp"
-                android:layout_marginEnd="38dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
                 android:layout_marginBottom="37dp"
                 android:text="Далее"
                 app:layout_constraintBottom_toBottomOf="parent"

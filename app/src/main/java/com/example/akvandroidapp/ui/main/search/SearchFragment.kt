@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +22,6 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
-import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_FILTER_DATE_UPDATED
-import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_FILTER_USERNAME
-import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_DESC
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
@@ -51,7 +47,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_explore, container, false)
+        return inflater.inflate(R.layout.search_part_layout, container, false)
     }
 
 
@@ -59,7 +55,6 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         super.onViewCreated(view, savedInstanceState)
 
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-        setHasOptionsMenu(true)
         swipe_refresh.setOnRefreshListener(this)
 
         initRecyclerView()
@@ -69,13 +64,16 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 //            viewModel.loadFirstPage()
 //        }
 
-        fragment_explore_homes_iv.setOnClickListener {
+        main_filter_img_btn.setOnClickListener {
             navFilter()
         }
 
-
         fragment_explore_apartments_iv.setOnClickListener {
             navApartments()
+        }
+
+        by_map_chip.setOnClickListener {
+            navMapActivity()
         }
 
 
@@ -88,6 +86,11 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
     private fun navApartments(){
         findNavController().navigate(R.id.action_searchFragment_to_apartmentsFragment)
+    }
+
+
+    private fun navMapActivity(){
+        findNavController().navigate(R.id.action_searchFragment_to_mapActivity)
     }
 
 
@@ -122,6 +125,8 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
     }
 
     private fun initSearchView(menu: Menu){
+
+
         activity?.apply {
             val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
             searchView = menu.findItem(R.id.action_search).actionView as SearchView
@@ -158,22 +163,6 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.search_menu, menu)
-        initSearchView(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when(item.itemId){
-            R.id.action_filter_settings -> {
-                showFilterDialog()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     private fun handlePagination(dataState: DataState<SearchViewState>){
 
@@ -231,7 +220,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
     override fun onItemSelected(position: Int, item: BlogPost) {
         viewModel.setBlogPost(item)
-//        findNavController().navigate(R.id.action_blogFragment_to_viewBlogFragment)
+        findNavController().navigate(R.id.action_searchFragment_to_zhilyeFragment)
     }
 
     override fun onDestroyView() {

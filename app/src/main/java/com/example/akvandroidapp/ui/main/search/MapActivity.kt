@@ -1,6 +1,5 @@
 package com.example.akvandroidapp.ui.main.search
 
-import android.app.Activity
 import android.os.Bundle
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
@@ -39,7 +38,7 @@ class MapActivity : BaseActivity() {
          */
         MapKitFactory.initialize(this)
         // Now MapView can be created.
-        setContentView(R.layout.map)
+        setContentView(R.layout.explore_map)
         super.onCreate(savedInstanceState)
         mapView = findViewById(R.id.mapview)
         // And to show what can be done with it, we move the camera to the center of Saint Petersburg.

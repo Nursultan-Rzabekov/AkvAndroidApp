@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.search
+package com.example.akvandroidapp.ui.main.search.zhilye
 
 
 import android.os.Bundle
@@ -7,30 +7,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.util.PasswordChecker
-import kotlinx.android.synthetic.main.sign_up_pass.*
+import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 
 
-class ApartmentsFragment : BaseSearchFragment() {
+class ZhilyeRulesOfHouseFragment : BaseSearchFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_appartments_layout, container, false)
+        return inflater.inflate(R.layout.fragment_rules_of_house_layout, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+
         setHasOptionsMenu(true)
         Log.d(TAG, "SearchFragment: ${viewModel}")
+
 
     }
 
