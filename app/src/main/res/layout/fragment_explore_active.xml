@@ -6,21 +6,13 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/default_background_color">
 
-    <View android:layout_width="0.5dp"
-        android:layout_height="0.5dp"
-        android:focusableInTouchMode="true"
-        android:id="@+id/focusable_view"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </View>
-
     <TextView
         android:id="@+id/fragment_explore_search_result_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="@dimen/dim_24dp"
+        android:layout_marginStart="@dimen/dim_16dp"
+        android:layout_marginEnd="@dimen/dim_16dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/search_result"
         android:textColor="@android:color/black"
@@ -28,6 +20,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View android:layout_width="0.5dp"
+        android:layout_height="0.5dp"
+        android:focusableInTouchMode="true"
+        android:id="@+id/focusable_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </View>
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -46,10 +47,18 @@
         >
 
         <androidx.recyclerview.widget.RecyclerView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:id="@+id/blog_post_recyclerview"
-            />
+            android:layout_marginTop="@dimen/dim_16dp"
+            android:layout_marginStart="@dimen/dim_28dp"
+            android:layout_marginEnd="@dimen/dim_28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_explore_search_result_tv"
+            app:layout_constraintVertical_bias="0.04" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

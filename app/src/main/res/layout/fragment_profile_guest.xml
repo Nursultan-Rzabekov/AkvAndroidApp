@@ -26,16 +26,16 @@
                 android:id="@+id/fragment_profile_guest_host_mode_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_profile_guest_host_mode_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Режим хозяина"
+                    android:text="@string/host_mode"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -47,9 +47,9 @@
                     android:id="@+id/fragment_profile_guest_host_mode_tv_minor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Формированию позиции представляет собой\n интересный эксперимент проверки модели развития."
+                    android:text="@string/random_text3"
                     android:textColor="@color/grey5"
-                    android:textSize="7sp"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_profile_guest_host_mode_switch"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_profile_guest_host_mode_tv" />
@@ -74,17 +74,17 @@
                 android:id="@+id/fragment_profile_guest_payment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_profile_guest_payment_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
-                    android:text="Платежи и выплаты"
+                    android:drawableEnd="@drawable/ic_forward"
+                    android:text="@string/payments"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -106,17 +106,17 @@
                 android:id="@+id/fragment_profile_guest_settings_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_profile_guest_settings_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
-                    android:text="Настройки"
+                    android:drawableEnd="@drawable/ic_forward"
+                    android:text="@string/settings"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -137,17 +137,17 @@
                 android:id="@+id/fragment_profile_guest_support_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_profile_guest_support_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
-                    android:text="Поддержка"
+                    android:drawableEnd="@drawable/ic_forward"
+                    android:text="@string/support"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -168,17 +168,17 @@
                 android:id="@+id/fragment_profile_guest_about_us_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_profile_guest_about_us_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
-                    android:text="О нас"
+                    android:drawableEnd="@drawable/ic_forward"
+                    android:text="@string/about_us"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"

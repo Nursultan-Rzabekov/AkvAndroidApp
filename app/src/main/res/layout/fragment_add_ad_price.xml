@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,8 +10,8 @@
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,16 +19,16 @@
         android:id="@+id/fragment_add_ad_price_tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="54dp"
-        android:text="Что есть рядом с \nвашим жильём"
+        android:layout_marginStart="@dimen/dim_60dp"
+        android:layout_marginTop="@dimen/dim_16dp"
+        android:layout_marginEnd="@dimen/dim_60dp"
+        android:text="@string/give_price"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_price_back_btn" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fragment_add_ad_price_l_et"
@@ -37,8 +36,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="@dimen/dim_48dp"
+        android:layout_marginTop="@dimen/dim_48dp"
         app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/textView27"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,9 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:hint="Цена"
+            android:hint="@string/price"
             android:textStyle="bold"
-            android:text="20"
+            android:text="@string/_20"
             android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,12 +60,12 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="@dimen/dim_48dp"
         android:background="@drawable/price_text_view"
         android:gravity="center"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:text="KZT"
+        android:paddingStart="@dimen/dim_32dp"
+        android:paddingEnd="@dimen/dim_32dp"
+        android:text="@string/kzt"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="22sp"
@@ -79,9 +78,9 @@
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
+        android:paddingTop="@dimen/dim_16dp"
+        android:layout_marginStart="@dimen/dim_48dp"
+        android:layout_marginEnd="@dimen/dim_48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_price_l_et">
@@ -90,7 +89,7 @@
             android:id="@+id/fragment_add_ad_price_chip_group_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ваши скидки:"
+            android:text="@string/your_discounts"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +99,7 @@
             android:id="@+id/fragment_add_ad_price_chip_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/dim_16dp"
             app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_price_chip_group_tv1">
 
             <com.google.android.material.chip.Chip
@@ -111,10 +110,10 @@
                 app:chipCornerRadius="@dimen/cornerRadius4"
                 app:chipStrokeColor="@color/primaryZero"
                 android:textColor="@color/primaryZero"
-                android:text="Скидка 5% на 7 дней"
-                app:closeIcon="@drawable/ic_close_real"
+                android:text="@string/_5_discount_7days"
+                app:closeIcon="@drawable/ic_cancel_skidka_7days"
                 app:closeIconEnabled="true"
-                app:closeIconEndPadding="8dp"
+                app:closeIconEndPadding="@dimen/dim_8dp"
                 android:gravity="center_vertical"
                 app:closeIconTint="@color/primaryZero"
                 />
@@ -127,11 +126,11 @@
                 app:chipCornerRadius="@dimen/cornerRadius4"
                 app:chipStrokeColor="@color/secondarySecond"
                 android:textColor="@color/secondarySecond"
-                android:text="Скидка 5% на 30 дней"
+                android:text="@string/_5_disocunt_30days"
                 android:gravity="center_vertical"
-                app:closeIcon="@drawable/ic_close_real"
+                app:closeIcon="@drawable/ic_cancel_skidka_30days"
                 app:closeIconEnabled="true"
-                app:closeIconEndPadding="8dp"
+                app:closeIconEndPadding="@dimen/dim_8dp"
                 app:closeIconTint="@color/secondarySecond"
                 />
 
@@ -143,12 +142,12 @@
         style="@style/BasicOutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:text="Назначить скидку"
+        android:layout_marginStart="@dimen/dim_48dp"
+        android:layout_marginEnd="@dimen/dim_48dp"
+        android:text="@string/set_dsicount"
         android:textSize="14sp"
         android:visibility="visible"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,9 +158,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/dim_48dp"
+        android:layout_marginEnd="@dimen/dim_48dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_price_discounts_layout">
@@ -170,7 +169,7 @@
             android:id="@+id/fragment_add_ad_price_discounts_add_choose_days_shrink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/dim_8dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +185,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Кол-во дней: 30 дней"
+                android:text="@string/num_30days"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/black"/>
@@ -197,7 +196,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/dim_8dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -213,8 +212,8 @@
                 android:id="@+id/fragment_add_ad_price_discounts_add_choose_days_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Выберите кол-во дней"
-                android:layout_marginTop="16dp"
+                android:text="@string/set_days"
+                android:layout_marginTop="@dimen/dim_16dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -223,8 +222,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp">
+                android:paddingTop="@dimen/dim_8dp"
+                android:paddingBottom="@dimen/dim_8dp">
 
                 <RadioButton
                     android:id="@+id/fragment_add_ad_price_discounts_add_7_days_rbtn"
@@ -233,9 +232,9 @@
                     android:buttonTint="@color/primaryZero"
                     android:checked="true"
                     android:fontFamily="@font/montserrat"
-                    android:minWidth="36dp"
-                    android:minHeight="32dp"
-                    android:text="7 дней"
+                    android:minWidth="@dimen/dim_36dp"
+                    android:minHeight="@dimen/dim_32dp"
+                    android:text="@string/_7days"
                     app:useMaterialThemeColors="false" />
 
                 <RadioButton
@@ -244,9 +243,9 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/primaryZero"
                     android:fontFamily="@font/montserrat"
-                    android:minWidth="36dp"
-                    android:minHeight="32dp"
-                    android:text="30 дней"
+                    android:minWidth="@dimen/dim_36dp"
+                    android:minHeight="@dimen/dim_32dp"
+                    android:text="@string/_30days"
                     app:useMaterialThemeColors="false" />
 
             </RadioGroup>
@@ -257,7 +256,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/dim_16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_price_discounts_add_choose_days">
@@ -271,13 +270,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_add_ad_price_discounts_slider_lb"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Определите процент \nскидки"
+                    android:text="@string/set_discounts_percent"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_add_ad_price_discounts_slider_tv"
@@ -288,7 +287,7 @@
                     android:id="@+id/fragment_add_ad_price_discounts_slider_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-5%"
+                    android:text="@string/_minus5"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -301,7 +300,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dim_16dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -310,37 +309,37 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="start"
-                    android:text="0%" />
+                    android:text="@string/_0percent" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="50%" />
+                    android:text="@string/_50percent" />
             </LinearLayout>
 
             <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/dim_8dp"
                 android:max="50"
                 android:progress="5"
                 android:progressTint="@color/primaryZero"
-                android:scrollbarSize="4dp"
+                android:scrollbarSize="@dimen/dim_4dp"
                 android:thumbTint="@color/primaryZero" />
 
             <View
                 android:id="@+id/divider16"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dim_16dp"
                 android:background="?android:attr/listDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dim_16dp"
                 >
 
                 <com.google.android.material.button.MaterialButton
@@ -350,7 +349,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
                     android:padding="0dp"
-                    android:text="Добавить"
+                    android:text="@string/add"
                     android:textSize="12sp"
                     app:cornerRadius="@dimen/cornerRadius3"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -365,7 +364,7 @@
                     android:backgroundTint="@color/white"
                     android:elevation="0dp"
                     android:padding="0dp"
-                    android:text="Отменить"
+                    android:text="@string/cancel"
                     android:textColor="@color/primaryZero"
                     android:textSize="12sp"
                     app:cornerRadius="@dimen/cornerRadius3"
@@ -386,10 +385,10 @@
         style="@style/BasicButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="37dp"
-        android:text="Далее"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
+        android:layout_marginBottom="@dimen/dim_36dp"
+        android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

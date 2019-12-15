@@ -10,8 +10,8 @@
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,10 +19,10 @@
         android:id="@+id/fragment_add_ad_description_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="54dp"
-        android:text="Добавте название \nи описание \nвашего жилья"
+        android:layout_marginStart="@dimen/dim_60dp"
+        android:layout_marginTop="@dimen/dim_16dp"
+        android:layout_marginEnd="@dimen/dim_60dp"
+        android:text="@string/add_description"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -33,9 +33,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginStart="@dimen/dim_60dp"
+        android:layout_marginTop="@dimen/dim_48dp"
+        android:layout_marginEnd="@dimen/dim_60dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
             style="@style/BasicTextOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/dim_12dp"
             app:counterEnabled="true"
             app:counterMaxLength="200">
 
@@ -81,7 +81,7 @@
             style="@style/BasicTextOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/dim_12dp"
             app:counterEnabled="true"
             app:counterMaxLength="500">
 
@@ -93,8 +93,7 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
-                android:hint="Опишите ваше жильё"
-                android:maxLines="10" />
+                android:hint="Опишите ваше жильё" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,10 +104,10 @@
         style="@style/BasicButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="37dp"
-        android:text="Далее"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
+        android:layout_marginBottom="@dimen/dim_36dp"
+        android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

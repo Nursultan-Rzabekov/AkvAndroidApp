@@ -52,7 +52,7 @@ class ZhilyeFragment : BaseSearchFragment() {
             navHouseRules()
         }
 
-        textView23.setOnClickListener {
+        fragment_zhilye_reviews_lb.setOnClickListener {
             navReviews()
         }
 
@@ -77,7 +77,4 @@ class ZhilyeFragment : BaseSearchFragment() {
         MapKitFactory.getInstance().onStart()
         maPView.onStart()
     }
-
-
-
 }

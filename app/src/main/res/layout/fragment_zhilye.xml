@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_zhilye_frame_book_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,25 +22,25 @@
             android:layout_height="match_parent">
 
             <FrameLayout
-                android:id="@+id/bottom_container"
+                android:id="@+id/fragment_zhilye_host_frame_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff"
-                android:elevation="4dp"
+                android:elevation="@dimen/elevation_5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="24dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="24dp"
-                    android:paddingBottom="10dp">
+                    android:paddingStart="@dimen/dim_24dp"
+                    android:paddingTop="@dimen/dim_12dp"
+                    android:paddingEnd="@dimen/dim_24dp"
+                    android:paddingBottom="@dimen/dim_12dp">
 
 
                     <TextView
-                        android:id="@+id/textView17"
+                        android:id="@+id/fragment_zhilye_host_nickname_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
@@ -48,27 +48,27 @@
                         android:textColor="@color/secondaryFirst"
                         android:textSize="18sp"
                         android:typeface="normal"
-                        app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-                        app:layout_constraintEnd_toStartOf="@+id/circleImageView"
+                        app:layout_constraintBottom_toBottomOf="@+id/fragment_zhilye_host_image_civ"
+                        app:layout_constraintEnd_toStartOf="@+id/fragment_zhilye_host_image_civ"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView19"
+                        app:layout_constraintTop_toTopOf="@+id/fragment_zhilye_host_nickname_lb"
                         app:layout_constraintVertical_bias="0.69" />
 
                     <TextView
-                        android:id="@+id/textView19"
+                        android:id="@+id/fragment_zhilye_host_nickname_lb"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/dim_12dp"
                         android:text="@string/host"
                         android:textColor="@color/black"
                         android:textSize="10sp"
                         android:typeface="normal"
-                        app:layout_constraintEnd_toStartOf="@+id/circleImageView"
+                        app:layout_constraintEnd_toStartOf="@+id/fragment_zhilye_host_image_civ"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/circleImageView"
+                        android:id="@+id/fragment_zhilye_host_image_civ"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
@@ -82,12 +82,12 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/fragment_zhilye_hotel_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="34dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_36dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/random_hotel"
                 android:textColor="@color/black"
@@ -95,42 +95,42 @@
                 android:typeface="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bottom_container" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_host_frame_layout" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/fragment_zhilye_hotel_location_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="26dp"
+                android:layout_marginStart="@dimen/dim_24dp"
+                android:layout_marginTop="@dimen/dim_8dp"
+                android:layout_marginEnd="@dimen/dim_24dp"
                 android:text="@string/random_location"
                 android:textSize="12sp"
                 android:typeface="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_hotel_name_tv" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/fragment_zhilye_hotel_description_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="26dp"
+                android:layout_marginStart="@dimen/dim_24dp"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginEnd="@dimen/dim_24dp"
                 android:text="@string/random_string"
                 android:textColor="@color/black"
                 android:typeface="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_hotel_location_tv" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/fragment_zhilye_reviews_lb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="29dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/comments"
                 android:textColor="@color/secondaryFirst"
@@ -140,24 +140,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_hotel_description_tv" />
 
             <LinearLayout
                 android:id="@+id/fragment_zhilye_comments_list_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_16dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView23">
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_reviews_lb">
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/fragment_zhilye_addres_lb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="39dp"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_16dp"
                 android:text="@string/address"
                 android:textColor="@color/black"
                 android:typeface="normal"
@@ -165,11 +169,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_comments_list_layout" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/fragment_zhilye_address_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="39dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_8dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/random_address"
                 android:textColor="@color/secondaryFirst"
@@ -177,29 +181,31 @@
                 android:textStyle="bold"
                 android:typeface="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_addres_lb" />
 
             <include
                 android:id="@+id/fragment_zhilye_mini_map"
                 layout="@layout/map"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginEnd="38dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginEnd="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16"/>
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_address_tv"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_zhilye_house_rules_card"
                 style="@style/ButtonCardView"
+                app:cardElevation="@dimen/elevation_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_36dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
                 app:cardBackgroundColor="@color/white"
+                android:backgroundTint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_mini_map"
@@ -209,10 +215,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
+                    android:layout_margin="@dimen/dim_16dp"
+                    android:drawableEnd="@drawable/ic_forward"
                     android:fontFamily="@font/montserrat_bold"
-                    android:paddingStart="33dp"
+                    android:paddingStart="@dimen/dim_32dp"
                     android:paddingEnd="0dp"
                     android:text="@string/house_rules"
                     android:textColor="@color/black"
@@ -224,11 +230,12 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_zhilye_cancel_rules_card"
                 style="@style/ButtonCardView"
+                app:cardElevation="@dimen/elevation_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -239,10 +246,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
+                    android:layout_margin="@dimen/dim_16dp"
+                    android:drawableEnd="@drawable/ic_forward"
                     android:fontFamily="@font/montserrat_bold"
-                    android:paddingStart="33dp"
+                    android:paddingStart="@dimen/dim_32dp"
                     android:paddingEnd="0dp"
                     android:text="@string/cancel_rules"
                     android:textColor="@color/black"
@@ -254,11 +261,12 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_zhilye_available_dates_card"
                 style="@style/ButtonCardView"
+                app:cardElevation="@dimen/elevation_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -269,10 +277,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
+                    android:layout_margin="@dimen/dim_16dp"
+                    android:drawableEnd="@drawable/ic_forward"
                     android:fontFamily="@font/montserrat_bold"
-                    android:paddingStart="33dp"
+                    android:paddingStart="@dimen/dim_32dp"
                     android:paddingEnd="0dp"
                     android:text="@string/available_dates"
                     android:textColor="@color/black"
@@ -282,12 +290,80 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/fragment_zhile_udopstva_lb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="33dp"
-                android:layout_marginTop="66dp"
-                android:layout_marginEnd="33dp"
+                android:text="@string/comfort"
+                android:textColor="@color/secondaryFirst"
+                android:textStyle="bold"
+                android:textSize="23sp"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginEnd="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_zhilye_available_dates_card"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_zhilye_udopstva_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_24dp"
+                app:layout_constraintTop_toBottomOf="@id/fragment_zhile_udopstva_lb"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <View
+                android:id="@+id/divider28"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dim_24dp"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_zhilye_udopstva_recycler_view"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/fragment_zhile_near_lb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/near_by"
+                android:textColor="@color/secondaryFirst"
+                android:textStyle="bold"
+                android:textSize="23sp"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginEnd="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider28"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_zhilye_near_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_32dp"
+                android:layout_marginEnd="@dimen/dim_32dp"
+                android:layout_marginTop="@dimen/dim_24dp"
+                app:layout_constraintTop_toBottomOf="@id/fragment_zhile_near_lb"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+
+            <TextView
+                android:id="@+id/fragment_zhilye_recommendations_lb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginEnd="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_36dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/recommendations"
                 android:textColor="@color/secondaryFirst"
@@ -296,23 +372,27 @@
                 android:typeface="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_available_dates_card" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_near_recycler_view" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_zhilye_recommendations_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="37dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="37dp"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginEnd="@dimen/dim_36dp"
+                android:layout_marginBottom="@dimen/dim_36dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_recommendations_lb"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/fragment_zhilye_frame_book_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
@@ -325,8 +405,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:padding="10dp"
-            android:paddingStart="23dp"
-            android:paddingEnd="23dp">
+            android:paddingStart="@dimen/dim_24dp"
+            android:paddingEnd="@dimen/dim_24dp">
 
             <TextView
                 android:id="@+id/fragment_zhile_price_tv"
@@ -336,7 +416,7 @@
                 android:text="@string/price_default"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/dim_4dp"
                 android:maxLines="1"
                 app:layout_constraintEnd_toStartOf="@+id/materialButton2"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -344,12 +424,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:contentDescription="@string/star"
+                android:id="@+id/fragment_zhile_price_star_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_star_real"
+                android:src="@drawable/ic_star_red"
                 android:tint="@color/primaryZero"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_zhile_rating_tv"
                 app:layout_constraintStart_toStartOf="parent"
@@ -362,7 +443,7 @@
                 android:text="@string/rating_defaul"
                 android:textColor="@color/primaryZero"
                 android:textSize="11sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/fragment_zhile_price_star_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhile_price_tv" />
 
             <com.google.android.material.button.MaterialButton

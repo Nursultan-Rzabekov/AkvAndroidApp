@@ -8,7 +8,7 @@
         android:id="@+id/fragment_appartments_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/dim_16dp"
         android:backgroundTint="@color/white"
         >
 

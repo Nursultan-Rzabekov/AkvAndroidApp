@@ -10,8 +10,8 @@
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,10 +19,10 @@
         android:id="@+id/fragment_add_ad_address_tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="54dp"
-        android:text="Адрес вашего \nжилья"
+        android:layout_marginStart="@dimen/dim_60dp"
+        android:layout_marginTop="@dimen/dim_8dp"
+        android:layout_marginEnd="@dimen/dim_60dp"
+        android:text="@string/appartment_address"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -35,14 +35,14 @@
         style="@style/BasicOutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="38dp"
-        android:paddingLeft="12dp"
+        android:layout_marginTop="@dimen/dim_8dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
+        android:paddingLeft="@dimen/dim_16dp"
         android:paddingTop="0dp"
-        android:paddingRight="12dp"
+        android:paddingRight="@dimen/dim_16dp"
         android:paddingBottom="0dp"
-        android:text="Указать на карте"
-        app:icon="@drawable/ic_location_real"
+        android:text="@string/show_by_map"
+        app:icon="@drawable/ic_location"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_address_tv1" />
@@ -51,7 +51,7 @@
         android:id="@+id/fragment_add_ad_address_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/dim_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,8 +60,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:layout_marginEnd="44dp"
+            android:layout_marginStart="@dimen/dim_48dp"
+            android:layout_marginEnd="@dimen/dim_48dp"
             android:orientation="vertical">
 
             <TextView
@@ -78,7 +78,7 @@
                 style="@style/BasicTextOutlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/dim_16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_add_ad_address_country_et"
@@ -94,7 +94,7 @@
                 android:id="@+id/fragment_add_ad_address_region_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:text="Область"
                 android:textAlignment="textStart"
                 android:textColor='@color/black'
@@ -105,7 +105,7 @@
                 style="@style/BasicTextOutlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/dim_16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_add_ad_address_region_et"
@@ -121,7 +121,7 @@
                 android:id="@+id/fragment_add_ad_address_city_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:text="Город *"
                 android:textAlignment="textStart"
                 android:textColor='@color/black'
@@ -132,7 +132,7 @@
                 style="@style/BasicTextOutlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/dim_16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_add_ad_address_city_et"
@@ -148,7 +148,7 @@
                 android:id="@+id/fragment_add_ad_address_address_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:text="Адрес *"
                 android:textAlignment="textStart"
                 android:textColor='@color/black'
@@ -159,7 +159,7 @@
                 style="@style/BasicTextOutlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/dim_16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_add_ad_address_address_et"
@@ -175,7 +175,7 @@
                 android:id="@+id/fragment_add_ad_address_post_index_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:text="Почтовый индекс"
                 android:textAlignment="textStart"
                 android:textColor='@color/black'
@@ -186,7 +186,7 @@
                 style="@style/BasicTextOutlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/dim_16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_add_ad_address_post_index_et"
@@ -204,10 +204,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="@dimen/dim_48dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="37dp"
-                android:text="Далее"
+                android:layout_marginBottom="@dimen/dim_36dp"
+                android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

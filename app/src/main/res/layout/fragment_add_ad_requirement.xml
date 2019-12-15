@@ -11,8 +11,8 @@
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,23 +20,23 @@
         android:id="@+id/fragment_add_ad_requirement_tv1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/content_margin6"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="@dimen/content_margin7"
+        android:layout_marginStart="@dimen/dim_48dp"
+        android:layout_marginTop="@dimen/dim_16dp"
+        android:layout_marginEnd="@dimen/dim_32dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Требования \nAKV.KZ"
+        android:text="@string/rules_akv_kz"
         android:textAlignment="textEnd"
         android:textColor="@android:color/black"
         android:textSize="34sp"
         android:textStyle="bold"
-        android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_requirement_back_btn" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_add_ad_requirement_next_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_requirement_tv1">
@@ -44,82 +44,77 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="@dimen/dim_28dp"
+            android:paddingEnd="@dimen/dim_28dp">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="21dp"
-                android:layout_marginStart="@dimen/content_margin8"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/thanks_for_choose"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_content3"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_margin8"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="@dimen/content_margin9"
+                android:layout_marginTop="@dimen/dim_12dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/dump_text"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/text_content4"/>
+                android:textSize="@dimen/text_content4" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_margin8"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/dim_48dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/your_profile"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_content3"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_margin8"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="@dimen/content_margin9"
+                android:layout_marginTop="@dimen/dim_12dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/dump_text"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/text_content4"/>
+                android:textSize="@dimen/text_content4" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_margin8"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="@dimen/dim_48dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/services"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_content3"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_margin8"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="@dimen/content_margin9"
+                android:layout_marginTop="@dimen/dim_12dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/dump_text"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/text_content4"/>
+                android:textSize="@dimen/text_content4" />
+
+
         </LinearLayout>
     </ScrollView>
 
@@ -128,10 +123,10 @@
         style="@style/BasicButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="37dp"
-        android:text="Далее"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
+        android:layout_marginBottom="@dimen/dim_36dp"
+        android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

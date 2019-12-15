@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/dim_24dp"
+    android:layout_marginEnd="@dimen/dim_24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingBottom="@dimen/dim_16dp"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_birth_lb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="День рождения:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_birth_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="14 Ноября 1999"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/primaryZero"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingBottom="@dimen/dim_16dp"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_gender_lb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Пол:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"/>
+
+        <RadioGroup
+            android:id="@+id/fragment_profile_account_edit_gender_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checkedButton="@+id/fragment_profile_account_edit_woman_btn"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/fragment_profile_account_edit_woman_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dim_24dp"
+                android:layout_weight="1"
+                android:background="@drawable/mini_woman_radio_btn"
+                android:button="@android:color/transparent"
+                android:minWidth="@dimen/dim_36dp"
+                android:minHeight="@dimen/dim_24dp"
+                android:text="Женский"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/fragment_profile_account_edit_man_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dim_24dp"
+                android:layout_weight="1"
+                android:background="@drawable/mini_man_radio_btn"
+                android:button="@android:color/transparent"
+                android:minWidth="@dimen/dim_36dp"
+                android:minHeight="@dimen/dim_24dp"
+                android:text="Мужской"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingBottom="@dimen/dim_16dp"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_phonenumber_lb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Номер телефона:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_phonenumber_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+7 (708) 675 7823"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/primaryZero"
+            android:drawableEnd="@drawable/ic_forward_12dp"
+            android:drawablePadding="@dimen/dim_4dp"
+            android:drawableTint="@color/primaryZero"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingBottom="@dimen/dim_16dp"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_email_lb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_email_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="muratov.d@gmail.com"
+            android:textSize="14sp"
+            android:textColor="@color/primaryZero"
+            android:textStyle="bold"
+            android:textAlignment="viewEnd"
+            android:drawableEnd="@drawable/ic_forward_12dp"
+            android:drawablePadding="@dimen/dim_4dp"
+            android:drawableTint="@color/primaryZero"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

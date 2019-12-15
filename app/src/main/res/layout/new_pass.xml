@@ -11,9 +11,9 @@
         android:id="@+id/new_pass_label2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="38dp"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginTop="@dimen/dim_12dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
         android:text="@string/password_requierments"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -27,23 +27,17 @@
         android:id="@+id/new_pass_back_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/button_margin1"
-        android:layout_marginTop="@dimen/button_margin2"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/back"
-        android:textSize="@dimen/text_button1"
-        android:drawableStart="@drawable/ic_chevron_left_real"
+        style="@style/BackTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lineHeight="20dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/content_margin5"
-        android:layout_marginTop="168dp"
-        android:layout_marginEnd="@dimen/content_margin5"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginTop="@dimen/dim_60dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/enter_new_password"
         android:textAlignment="center"
@@ -53,14 +47,14 @@
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/new_pass_back_tv" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/new_pass_password_l_et"
         style="@style/TextOutlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/dim_12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_pass_label2">
@@ -80,7 +74,7 @@
         style="@style/TextOutlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_pass_password_l_et">
@@ -100,7 +94,7 @@
         style="@style/BasicButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="@dimen/dim_48dp"
         android:text="@string/enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
