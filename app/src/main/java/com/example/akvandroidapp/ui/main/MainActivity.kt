@@ -21,7 +21,6 @@ import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.util.BottomNavController
 import com.example.akvandroidapp.util.setUpNavigation
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.explore_active.*
 
@@ -134,10 +133,7 @@ class MainActivity : BaseActivity(),
             bottomNavController.onNavigationItemSelected()
         }
 
-
         sessionManager.login(AuthToken(1,"qweqweqweqe"))
-
-
         subscribeObservers()
 
     }
@@ -154,7 +150,7 @@ class MainActivity : BaseActivity(),
     }
 
     override fun expandAppBar() {
-        findViewById<AppBarLayout>(R.id.app_bar).setExpanded(true)
+        //findViewById<AppBarLayout>(R.id.app_bar).setExpanded(true)
     }
 
 

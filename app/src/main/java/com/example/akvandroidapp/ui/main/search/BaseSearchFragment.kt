@@ -36,7 +36,6 @@ abstract class BaseSearchFragment : DaggerFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupActionBarWithNavController(R.id.searchFragment, activity as AppCompatActivity)
 
         viewModel = activity?.run {
             ViewModelProvider(this, providerFactory).get(SearchViewModel::class.java)
@@ -49,17 +48,6 @@ abstract class BaseSearchFragment : DaggerFragment(){
         viewModel.cancelActiveJobs()
     }
 
-    /*
-          @fragmentId is id of fragment from graph to be EXCLUDED from action back bar nav
-        */
-    fun setupActionBarWithNavController(fragmentId: Int, activity: AppCompatActivity){
-        val appBarConfiguration = AppBarConfiguration(setOf(fragmentId))
-        NavigationUI.setupActionBarWithNavController(
-            activity,
-            findNavController(),
-            appBarConfiguration
-        )
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

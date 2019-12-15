@@ -64,7 +64,6 @@
         </activity>
 
 
-
         <fragment android:id="@+id/searchFilterFragment"
             android:name="com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment"
             android:label="@string/fragment_update_blog"

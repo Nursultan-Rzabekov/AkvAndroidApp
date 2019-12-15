@@ -16,5 +16,9 @@ class Constants {
         const val GALLERY_REQUEST_CODE = 201
         const val PERMISSIONS_REQUEST_READ_STORAGE: Int = 301
         const val CROP_IMAGE_INTENT_CODE: Int = 401
+
+
+        const val MAPKIT_API_KEY = "921f9910-6b90-4ad6-afc1-c4fd6898e3c0"
+
     }
 }

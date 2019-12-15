@@ -1,17 +1,12 @@
 package com.example.akvandroidapp.ui.main.search
 
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,17 +25,15 @@ import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.fragment_explore.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
-import kotlinx.android.synthetic.main.fragment_search_explore.*
 import kotlinx.android.synthetic.main.header_searcher_base_layout.*
+import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import nextPage
 
 
 class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , SwipeRefreshLayout.OnRefreshListener{
 
-    private lateinit var searchView: SearchView
     private lateinit var recyclerAdapter: SearchListAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,28 +47,33 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         swipe_refresh.setOnRefreshListener(this)
 
+        initSearchView()
         initRecyclerView()
         subscribeObservers()
+
 
 //        if(savedInstanceState == null){
 //            viewModel.loadFirstPage()
 //        }
 
         main_filter_img_btn.setOnClickListener {
-            navFilter()
+            showFilterDialog()
+            //navFilter()
         }
 
         fragment_explore_apartments_iv.setOnClickListener {
             navApartments()
         }
 
+        fragment_explore_homes_iv.setOnClickListener {
+            navFilter()
+        }
+
         by_map_chip.setOnClickListener {
             navMapActivity()
         }
-
 
     }
 
@@ -107,8 +105,8 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
             if(viewState != null){
                 Log.d(TAG, "Search Results: ${viewState.blogFields.blogList}")
-                home_page_explore.visibility = View.GONE
-                search_result.visibility = View.VISIBLE
+                fragement_explore_layout_id.visibility = View.GONE
+                fragment_explore_active_layout_id.visibility = View.VISIBLE
                 recyclerAdapter.apply {
                     preloadGlideImages(
                         requestManager = requestManager,
@@ -124,22 +122,18 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         })
     }
 
-    private fun initSearchView(menu: Menu){
+    private fun initSearchView(){
 
+//        activity?.apply {
+//            val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//            searchView = menu.findItem(R.id.action_search).actionView as SearchView
+//            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+//            searchView.maxWidth = Integer.MAX_VALUE
+//            searchView.setIconifiedByDefault(true)
+//            searchView.isSubmitButtonEnabled = true
+//        }
 
-        activity?.apply {
-            val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-            searchView = menu.findItem(R.id.action_search).actionView as SearchView
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            searchView.maxWidth = Integer.MAX_VALUE
-            searchView.setIconifiedByDefault(true)
-            searchView.isSubmitButtonEnabled = true
-        }
-
-        // ENTER ON COMPUTER KEYBOARD OR ARROW ON VIRTUAL KEYBOARD
-        val searchPlate = searchView.findViewById(R.id.search_src_text) as EditText
-        searchPlate.setOnEditorActionListener { v, actionId, _ ->
-
+        main_search_et.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED
                 || actionId == EditorInfo.IME_ACTION_SEARCH ) {
                 val searchQuery = v.text.toString()
@@ -151,10 +145,8 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
             true
         }
 
-        // SEARCH BUTTON CLICKED (in toolbar)
-        val searchButton = searchView.findViewById(R.id.search_go_btn) as View
-        searchButton.setOnClickListener {
-            val searchQuery = searchPlate.text.toString()
+        main_search_img_btn.setOnClickListener {
+            val searchQuery = main_search_et.text.toString()
             Log.e(TAG, "SearchView: (button) executing search...: ${searchQuery}")
             viewModel.setQuery(searchQuery).let {
                 onBlogSearchOrFilter()
@@ -162,7 +154,6 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
         }
     }
-
 
     private fun handlePagination(dataState: DataState<SearchViewState>){
 
@@ -308,7 +299,6 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
             dialog.show()
         }
     }
-
 
 }
 

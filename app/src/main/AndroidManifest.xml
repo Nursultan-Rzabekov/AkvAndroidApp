@@ -21,6 +21,8 @@
             android:name=".ui.auth.AuthActivity"
             android:windowSoftInputMode="adjustPan">
 
+
+
         </activity>
 
 
