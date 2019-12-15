@@ -5,13 +5,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp">
+    android:layout_marginTop="@dimen/dim_16dp">
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/fragment_appartments_recycler_item_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardUseCompatPadding="true"
-        android:elevation="5dp"
+        android:elevation="@dimen/elevation_5"
         app:cardCornerRadius="@dimen/cornerRadius1"
         app:cardBackgroundColor="@android:color/white"
         >
@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:padding="@dimen/dim_12dp"
             android:gravity="center_vertical">
 
             <ImageView
@@ -38,10 +38,10 @@
                 android:id="@+id/fragment_appartments_recycler_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="@dimen/dim_16dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:gravity="center_vertical"
-                android:text="Hotel De Luxe"
+                android:text="@string/hotel_del_luxe"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -59,7 +59,7 @@
                 android:fontFamily="@font/montserrat"
                 android:text="Смотреть"
                 android:textColor="@color/secondaryFirst"
-                android:textSize="9sp"
+                android:textSize="12sp"
                 android:typeface="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

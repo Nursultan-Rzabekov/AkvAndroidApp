@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,10 +24,10 @@
                 android:id="@+id/fragment_filter_checked_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_filter_checked_tv1"
@@ -73,17 +72,17 @@
                 android:id="@+id/fragment_filter_appart_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_filter_appart_type_tv1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="Тип жилья"
+                    android:text="@string/type_of_house"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -97,11 +96,12 @@
                     android:id="@+id/fragment_filter_appart_type_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
+                    android:drawableTint="@color/grey4"
+                    android:drawableEnd="@drawable/ic_forward_12dp"
+                    android:drawablePadding="@dimen/dim_8dp"
                     android:fontFamily="@font/montserrat"
                     android:gravity="center"
                     android:text="@string/Any"
-                    android:textCursorDrawable="@drawable/ic_chevron_right_real"
                     android:typeface="normal"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_filter_appart_type_tv1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -118,17 +118,17 @@
                 android:id="@+id/fragment_filter_city_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_filter_city_tv1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="Город"
+                    android:text="@string/city"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -142,9 +142,11 @@
                     android:id="@+id/fragment_filter_city_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
+                    android:drawableTint="@color/grey4"
+                    android:drawableEnd="@drawable/ic_forward_12dp"
+                    android:drawablePadding="@dimen/dim_8dp"
                     android:gravity="center"
-                    android:text="Нет"
+                    android:text="@string/no"
                     android:typeface="normal"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_filter_city_tv1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -161,17 +163,17 @@
                 android:id="@+id/fragment_filter_sort_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
                 <TextView
                     android:id="@+id/fragment_filter_sort_type_tv1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="Сортировка"
+                    android:text="@string/sort"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -198,7 +200,7 @@
                         android:background="@drawable/no_radio_btn"
                         android:button="@android:color/transparent"
                         android:gravity="center"
-                        android:text="нет"
+                        android:text="@string/no"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
 
@@ -211,7 +213,7 @@
                         android:gravity="center"
                         android:paddingStart="9dp"
                         android:paddingEnd="9dp"
-                        android:text="по рейтингу"
+                        android:text="@string/by_rating"
                         android:textSize="10sp" />
 
                     <RadioButton
@@ -220,7 +222,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/by_price_radio_btn"
                         android:button="@android:color/transparent"
-                        android:text="по цене"
+                        android:text="@string/by_price"
                         android:textAlignment="center"
                         android:textSize="10sp" />
 
@@ -237,36 +239,69 @@
                 android:id="@+id/fragment_filter_price_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
-                <TextView
-                    android:id="@+id/fragment_filter_price_tv1"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/fragment_filter_price_l"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="Цена"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:typeface="normal"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_filter_price_tv"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fragment_filter_price_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:gravity="center"
-                    android:text="0-30 000kzt"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_filter_price_tv1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_filter_price_tv1" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/fragment_filter_price_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/price"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/fragment_filter_price_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/_0_30_000kzt"
+                        android:textAlignment="viewEnd"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <com.appyvet.materialrangebar.RangeBar
+                    android:id="@+id/fragment_filter_price_rangeBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrb_pinColor="@color/primaryZero"
+                    app:mrb_tickHeight="0dp"
+                    app:mrb_pinMinFont="8sp"
+                    app:mrb_pinMaxFont="14sp"
+                    app:mrb_tickStart="1"
+                    app:mrb_tickEnd="30000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_filter_price_l"
+                    app:mrb_barWeight="2dp"
+                    app:mrb_connectingLineColor="@color/primaryZero"
+                    app:mrb_connectingLineWeight="@dimen/dim_4dp"
+                    app:mrb_selectorBoundaryColor="@color/secondaryFirst"
+                    app:mrb_selectorBoundarySize="1dp"
+                    app:mrb_selectorColor="@color/white"
+                    app:mrb_selectorSize="@dimen/dim_12dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -279,37 +314,67 @@
                 android:id="@+id/fragment_filter_room_count_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
-                <TextView
-                    android:id="@+id/fragment_filter_room_count_tv1"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/fragment_filter_room_count_l"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="Количество комнат"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:typeface="normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_filter_room_count_tv"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fragment_filter_room_count_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
-                    android:gravity="center"
-                    android:text="Любой"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_filter_room_count_tv1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_filter_room_count_tv1" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/fragment_filter_room_count_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/num_of_rooms"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/fragment_filter_room_count_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/_0_15"
+                        android:textAlignment="viewEnd"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <com.appyvet.materialrangebar.RangeBar
+                    android:id="@+id/fragment_filter_room_count_rangeBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrb_pinColor="@color/primaryZero"
+                    app:mrb_tickHeight="0dp"
+                    app:mrb_pinMinFont="8sp"
+                    app:mrb_pinMaxFont="14sp"
+                    app:mrb_tickStart="1"
+                    app:mrb_tickEnd="15"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_filter_room_count_l"
+                    app:mrb_barWeight="2dp"
+                    app:mrb_connectingLineColor="@color/primaryZero"
+                    app:mrb_connectingLineWeight="@dimen/dim_4dp"
+                    app:mrb_selectorBoundaryColor="@color/secondaryFirst"
+                    app:mrb_selectorBoundarySize="1dp"
+                    app:mrb_selectorColor="@color/white"
+                    app:mrb_selectorSize="@dimen/dim_12dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -322,36 +387,65 @@
                 android:id="@+id/fragment_filter_bed_count_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="25dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="25dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
-                <TextView
-                    android:id="@+id/fragment_filter_bed_count_tv1"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/fragment_filter_bed_count_l"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="Количество кроватей"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_filter_bed_count_tv"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fragment_filter_bed_count_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:drawableEnd="@drawable/ic_chevron_right_real"
-                    android:gravity="center"
-                    android:text="Любой"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_filter_bed_count_tv1"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_filter_bed_count_tv1" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/fragment_filter_bed_count_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/num_of_beds"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/fragment_filter_bed_count_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/_0_30"
+                        android:textAlignment="viewEnd"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <com.appyvet.materialrangebar.RangeBar
+                    android:id="@+id/fragment_filter_bed_count_rangeBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrb_pinColor="@color/primaryZero"
+                    app:mrb_tickHeight="0dp"
+                    app:mrb_pinMinFont="8sp"
+                    app:mrb_pinMaxFont="14sp"
+                    app:mrb_tickStart="1"
+                    app:mrb_tickEnd="30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_filter_bed_count_l"
+                    app:mrb_barWeight="2dp"
+                    app:mrb_connectingLineColor="@color/primaryZero"
+                    app:mrb_connectingLineWeight="@dimen/dim_4dp"
+                    app:mrb_selectorBoundaryColor="@color/secondaryFirst"
+                    app:mrb_selectorBoundarySize="1dp"
+                    app:mrb_selectorColor="@color/white"
+                    app:mrb_selectorSize="@dimen/dim_12dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -359,6 +453,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_filter_udopstva_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp">
+
+                <TextView
+                    android:id="@+id/fragment_filter_udopstva_tv1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/type_of_appart"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_filter_udopstva_layout_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fragment_filter_udopstva_layout_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:drawableEnd="@drawable/ic_forward_12dp"
+                    android:drawablePadding="@dimen/dim_8dp"
+                    android:drawableTint="@color/grey4"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center"
+                    android:text="@string/Any"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_filter_udopstva_tv1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_filter_udopstva_tv1" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
@@ -378,11 +512,11 @@
             style="@style/FilterButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="Показать 300+ результатов" />
+            android:layout_marginStart="@dimen/dim_24dp"
+            android:layout_marginTop="@dimen/dim_12dp"
+            android:layout_marginEnd="@dimen/dim_24dp"
+            android:layout_marginBottom="@dimen/dim_12dp"
+            android:text="@string/show_300_results" />
 
     </FrameLayout>
 

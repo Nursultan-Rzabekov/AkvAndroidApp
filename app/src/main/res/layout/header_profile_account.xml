@@ -11,8 +11,8 @@
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,15 +20,14 @@
         android:id="@+id/header_profile_account_civ"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginTop="@dimen/dim_8dp"
+        android:layout_marginBottom="@dimen/dim_24dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile_default_avavatar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_profile_account_back_btn" />
-    <!-- When back buttton gone circle image view margin top 27dp -->
 
     <TextView
         android:id="@+id/header_profile_account_tv"
@@ -48,13 +47,13 @@
         android:id="@+id/header_profile_account_change_profile_btn"
         style="@style/BasicOutlinedButton"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="@dimen/dim_32dp"
         android:includeFontPadding="false"
-        android:paddingLeft="12dp"
+        android:paddingLeft="@dimen/dim_12dp"
         android:paddingTop="0dp"
-        android:paddingRight="12dp"
+        android:paddingRight="@dimen/dim_12dp"
         android:paddingBottom="0dp"
-        android:text="Изменить профиль"
+        android:text="@string/change_profile"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="@+id/header_profile_account_civ"
         app:layout_constraintEnd_toEndOf="@+id/header_profile_account_tv"

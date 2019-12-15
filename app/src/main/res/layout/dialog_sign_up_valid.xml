@@ -22,15 +22,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="16dp"
+            android:padding="@dimen/dim_16dp"
             android:orientation="vertical">
 
             <ImageButton
+                android:contentDescription="@string/text_cancel"
                 android:id="@+id/dialog_sign_up_valid_close_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_close_real"
-                android:tint="@color/grey2"
+                android:src="@drawable/ic_cancel_date_quests"
+                android:tint="@color/secondaryFirst"
                 style="@style/BasicImageButton"
                 android:layout_gravity="start|top"/>
 
@@ -64,7 +65,7 @@
                 android:inputType="numberDecimal"
                 android:minWidth="128dp"
                 android:letterSpacing="0.1"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/dim_12dp"
                 style="@style/BasicEditText"
                 android:textAlignment="center"
                 android:textSize="24sp" />
@@ -83,7 +84,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_sign_up_valid_btn"
                 style="@style/BasicMiniButton"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/dim_12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/validate"/>
@@ -92,7 +93,7 @@
                 android:id="@+id/dialog_sign_up_valid_label3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/dim_8dp"
                 android:text="@string/i_dont_have_code"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"

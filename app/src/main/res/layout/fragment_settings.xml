@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_settings_push_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dim_24dp"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingEnd="@dimen/dim_24dp"
+        android:paddingBottom="@dimen/dim_16dp">
+
+        <TextView
+            android:id="@+id/fragment_settings_push_tv1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/push_ads"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_settings_push_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_settings_push_tv2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cheked_text"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_settings_push_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_push_tv1" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/fragment_settings_push_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_settings_push_tv2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_settings_push_tv1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider32"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_settings_email_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dim_24dp"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingEnd="@dimen/dim_24dp"
+        android:paddingBottom="@dimen/dim_16dp">
+
+        <TextView
+            android:id="@+id/fragment_settings_email_tv1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/email_ads"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_settings_email_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_settings_email_tv2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cheked_text"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_settings_email_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_email_tv1" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/fragment_settings_email_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_settings_email_tv2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_settings_email_tv1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider33"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_settings_region_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dim_24dp"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingEnd="@dimen/dim_24dp"
+        android:paddingBottom="@dimen/dim_16dp">
+
+        <TextView
+            android:id="@+id/fragment_settings_region_tv1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/region"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_settings_region_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_settings_region_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:drawableTint="@color/grey4"
+            android:drawableEnd="@drawable/ic_forward_12dp"
+            android:drawablePadding="@dimen/dim_8dp"
+            android:gravity="center"
+            android:text="@string/kazakhstan"
+            android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_settings_region_tv1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_settings_region_tv1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider34"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_settings_geolocation_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dim_24dp"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingEnd="@dimen/dim_24dp"
+        android:paddingBottom="@dimen/dim_16dp">
+
+        <TextView
+            android:id="@+id/fragment_settings_geolocation_tv1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/geolocation"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_settings_geolocation_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_settings_geolocation_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:drawableTint="@color/grey4"
+            android:drawableEnd="@drawable/ic_forward_12dp"
+            android:drawablePadding="@dimen/dim_8dp"
+            android:gravity="center"
+            android:text="@string/never"
+            android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_settings_geolocation_tv1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_settings_geolocation_tv1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider35"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_settings_quit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dim_24dp"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingEnd="@dimen/dim_24dp"
+        android:paddingBottom="@dimen/dim_16dp">
+
+        <TextView
+            android:id="@+id/fragment_settings_quit_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quit"
+            android:textColor="@color/primaryZero"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

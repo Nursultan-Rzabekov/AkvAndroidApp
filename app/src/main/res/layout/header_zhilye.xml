@@ -21,7 +21,7 @@
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
-        android:paddingEnd="33dp"
+        android:paddingEnd="@dimen/dim_32dp"
         android:paddingStart="0dp"
         app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
@@ -29,9 +29,9 @@
             layout="@layout/back_button_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="@dimen/dim_28dp"
+            android:layout_marginTop="@dimen/dim_20dp"
+            android:layout_marginBottom="@dimen/dim_20dp"
             />
 
     </androidx.appcompat.widget.Toolbar>

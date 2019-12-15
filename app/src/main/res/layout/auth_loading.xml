@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="@dimen/cornerRadius4"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,10 +20,10 @@
             android:progressTint="@color/primaryZero"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="25dp" />
+            android:layout_marginStart="@dimen/dim_32dp"
+            android:layout_marginTop="@dimen/dim_24dp"
+            android:layout_marginEnd="@dimen/dim_32dp"
+            android:layout_marginBottom="@dimen/dim_24dp" />
 
     </androidx.cardview.widget.CardView>
 

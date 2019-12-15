@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/fragment_about_us_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/BackTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView1515"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginTop="@dimen/dim_36dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/about_us"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_header3"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_about_us_tv"/>
+
+    <View
+        android:id="@+id/divider45"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_28dp"
+        android:layout_marginEnd="@dimen/dim_28dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1515" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider45">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dim_28dp"
+            android:paddingEnd="@dimen/dim_28dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView1516"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_20dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/thanks_for_choose"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_content3"
+                android:textStyle="bold"
+                android:typeface="normal"/>
+
+            <TextView
+                android:id="@+id/textView1517"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/dump_text"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_content4"
+                android:typeface="normal"/>
+
+            <TextView
+                android:id="@+id/textView1518"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/your_pricate_data"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_content3"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/textView1519"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/dump_text"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_content4"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/textView1520"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/savings"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_content3"
+                android:textStyle="bold"
+                android:typeface="normal"/>
+
+            <TextView
+                android:id="@+id/textView1521"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/dump_text"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_content4"
+                android:typeface="normal"/>
+
+            <TextView
+                android:id="@+id/fragment_about_us_questions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginBottom="@dimen/dim_48dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/any_questions"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_content4"
+                android:textStyle="bold"
+                android:typeface="normal"/>
+
+            <TextView
+                android:id="@+id/akv_label"
+                style="@style/AKV_Label"
+                android:layout_marginBottom="@dimen/dim_16dp"
+                android:layout_gravity="center_horizontal|bottom"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

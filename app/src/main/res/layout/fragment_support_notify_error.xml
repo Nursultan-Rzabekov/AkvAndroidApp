@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/dim_28dp"
+    android:paddingEnd="@dimen/dim_28dp"
+    android:paddingTop="@dimen/dim_20dp"
+    android:paddingBottom="@dimen/dim_20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/notify_error"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nullam"
+        android:textSize="12sp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_support_notify_error_l_et"
+        style="@style/BasicTextOutlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dim_12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_support_notify_error_et"
+            style="@style/BasicEditText"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="top|start"
+            android:inputType="textMultiLine" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_support_notify_error_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MinorButton"
+        android:layout_marginTop="@dimen/dim_16dp"
+        android:paddingTop="@dimen/dim_8dp"
+        android:paddingBottom="@dimen/dim_8dp"
+        android:text="@string/notify"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

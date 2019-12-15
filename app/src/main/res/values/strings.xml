@@ -2,7 +2,6 @@
     <string name="app_name">AkvAndroidApp</string>
     <string name="launcher">Launcher</string>
     <string name="login">Login</string>
-
     <string name="auth_token">auth_token</string>
     <string name="password_reset_info">We\'ve emailed you instructions for setting your password. If an account exists
         with the email you entered.
@@ -28,9 +27,6 @@
     <string name="my_blogs">My Blogs</string>
     <string name="home">Home</string>
     <string name="create">Create</string>
-
-
-
     <string name="fragment_create_blog">Create</string>
     <string name="fragment_update_blog">Update</string>
     <string name="fragment_view_blog">View</string>
@@ -67,8 +63,6 @@
     <string name="are_you_sure_delete">Are you sure you want to delete this? This can\'t be un-done.</string>
     <string name="text_info">Info</string>
     <string name="delete">Delete</string>
-
-
     <string name="akv">AKV</string>
     <string name="enter_account">Войдите в \n аккаунт</string>
     <string name="phone_number_email_enter">Email или номер телефона</string>
@@ -87,7 +81,6 @@
     <string name="put_nickname">Придумайте имя\n пользователя</string>
     <string name="fill_data">Заполните ваши личные данные</string>
     <string name="privacy_term">Нажимая кнопку Создать, вы соглашаетесь с политикой конфеденциальности и правилами пользования.</string>
-
     <string name="invalid_requirments">Не соответствует требованиям</string>
     <string name="invalid">Заполните поле</string>
     <string name="invalid_number">Неправильный номер телефона</string>
@@ -123,11 +116,7 @@
     <string name="your_profile">Ваш профиль</string>
     <string name="services">Услуги</string>
     <string name="or">или</string>
-
-
     <string name="last_name">Имя</string>
-
-
     <string name="bottom_menu_profile">Profile</string>
     <string name="bottom_menu_search">Search</string>
     <string name="bottom_menu_messages">Messages</string>
@@ -142,7 +131,7 @@
     <string name="favourite_eng">favourite</string>
     <string name="export_eng">export</string>
     <string name="another_one">Другой способ</string>
-    <string name="enter_phone_number">Введите номер  телефона</string>
+    <string name="enter_phone_number">Введите свой \nномер телефона</string>
     <string name="validate_phonenumber">Подтвердите \nномер телефона</string>
     <string name="we_send_code_12">Мы отправили на ваш номер \n6-значный код. Введите его для \nподтверждения вашего номера</string>
     <string name="validate">Подтвердить</string>
@@ -168,4 +157,123 @@
     <string name="Any">Любой</string>
     <string name="muratov_d">\@muratov_d</string>
     <string name="select">Выбрать</string>
+    <string name="hotel_del_luxe">Hotel Del Luxe</string>
+    <string name="arrival">Прибытие</string>
+    <string name="random_date">25 Дек</string>
+    <string name="departure">Отбытие</string>
+    <string name="random_date2">1 Янв</string>
+    <string name="_5">5</string>
+    <string name="random_calculations1">2000kzt x 4 ночей</string>
+    <string name="random_price1">8000kzt</string>
+    <string name="tax">Налоги</string>
+    <string name="random_price2">468kzt</string>
+    <string name="cleanup">Уборка</string>
+    <string name="radom_price4">1000kzt</string>
+    <string name="random_price3">9468kzt</string>
+    <string name="total">Итого</string>
+    <string name="adults">Взрослые</string>
+    <string name="children">Дети</string>
+    <string name="clear_all">Очистить всё</string>
+    <string name="save">Сохранить</string>
+    <string name="comfort">Удобства</string>
+    <string name="near_by">Рядом есть</string>
+    <string name="star">star</string>
+    <string name="red_circle">Red circle</string>
+    <string name="random_word1">Wifi</string>
+    <string name="how_many_guests">Сколько гостей вы  принимаете?</string>
+    <string name="minus">minus</string>
+    <string name="_0">0</string>
+    <string name="plus">plus</string>
+    <string name="how_many_beds">Сколько кроватей у  вас дома?</string>
+    <string name="beds">Кровати</string>
+    <string name="random_name1">Алиса</string>
+    <string name="random_date1">Сентябрь 2019</string>
+    <string name="random_score1">4.6</string>
+    <string name="random_text1">Алмата однако забывать, что начало повседневной работы по формированию.</string>
+    <string name="appartment_address">Адрес вашего  жилья</string>
+    <string name="show_by_map">Указать на карте</string>
+    <string name="add_description">Добавте название  и описание  вашего жилья</string>
+    <string name="kind_of_udopstva">Какие удобства вы  предлагаете?</string>
+    <string name="drop_all">Сбросить все</string>
+    <string name="give_price">Назначте цену за  ваше жильё</string>
+    <string name="your_discounts">Ваши скидки:</string>
+    <string name="_5_discount_7days">Скидка 5% на 7 дней</string>
+    <string name="_5_disocunt_30days">Скидка 5% на 30 дней</string>
+    <string name="kzt">KZT</string>
+    <string name="price">Цена</string>
+    <string name="_20">20</string>
+    <string name="set_dsicount">Назначить скидку</string>
+    <string name="num_30days">Кол-во дней: 30 дней</string>
+    <string name="set_days">Выберите кол-во дней</string>
+    <string name="_7days">7 дней</string>
+    <string name="_30days">30 дней</string>
+    <string name="set_discounts_percent">Определите процент  скидки</string>
+    <string name="_minus5">-5%</string>
+    <string name="_0percent">0%</string>
+    <string name="_50percent">50%</string>
+    <string name="add">Добавить</string>
+    <string name="cancel">Отменить</string>
+    <string name="rules_akv_kz">Требования  AKV.KZ</string>
+    <string name="add_mine">Добавить своё</string>
+    <string name="choose_appart_type">Выберите тип  жилья</string>
+    <string name="appartments_in">Квартиры в Алматы</string>
+    <string name="random_house">Random house</string>
+    <string name="random_text2">В Алмате однако забывать, что начало повседневной работы по формированию позиции представляет собой интересный эксперимент проверки модели развития. Товарищи! рамки и место обучения кадров обеспечивает широкому.</string>
+    <string name="houses">Дома</string>
+    <string name="appartments">Квартиры</string>
+    <string name="how_can_i_help_you">Чем мы можем  помочь вам?</string>
+    <string name="type_of_appart">Тип жилья</string>
+    <string name="_0_30">0-30</string>
+    <string name="num_of_beds">Кол-во кроватей</string>
+    <string name="_0_15">0-15</string>
+    <string name="num_of_rooms">Кол-во комнат</string>
+    <string name="_0_30_000kzt">0-30 000kzt</string>
+    <string name="by_price">по цене</string>
+    <string name="by_rating">по рейтингу</string>
+    <string name="no">нет</string>
+    <string name="sort">Сортировка</string>
+    <string name="city">Город</string>
+    <string name="type_of_house">Тип жилья</string>
+    <string name="show_300_results">Показать 300+ результатов</string>
+    <string name="host_mode">Режим хозяина</string>
+    <string name="random_text3">Формированию позиции представляет собой  интересный эксперимент проверки модели развития.</string>
+    <string name="payments">Платежи и выплаты</string>
+    <string name="settings">Настройки</string>
+    <string name="support">Поддержка</string>
+    <string name="about_us">О нас</string>
+    <string name="my_ads">Мои обьявления</string>
+    <string name="post_ad">Разместить обьявление</string>
+    <string name="random_text4">1. Quisque eget rutrum nulla, non lacinia lila.  2. Quisque eget rutrum nulla, non lacinia ligula.</string>
+    <string name="any">Любой</string>
+    <string name="appartment">Квартира</string>
+    <string name="house">Дом</string>
+    <string name="find_city">Найти город</string>
+    <string name="filter_">Фильтры</string>
+    <string name="change_profile">Изменить профиль</string>
+    <string name="reviews">Отзывы (2)</string>
+    <string name="udopstva">Удобства</string>
+    <string name="koktem">Koktem</string>
+    <string name="random_text5">Алмата однако забывать, что начало  повседневной работы по формированию.</string>
+    <string name="random_location1">7 км, Алматы</string>
+    <string name="random_price4">20 000kzt</string>
+    <string name="logo">logo</string>
+    <string name="max_15_photo">максимум 15 фото</string>
+    <string name="add_appartment_photo">Добавьте фото  вашего жилья</string>
+    <string name="liked_">liked</string>
+    <string name="liked_description">Сохраняйте понравившиеся вам жилья в одном месте, нажав на сердечку на любом жилье.</string>
+    <string name="find_appartment">Найти жильё</string>
+    <string name="for_guest">Гостю</string>
+    <string name="for_host">Хозяйну</string>
+    <string name="connec_us">Обратная связь:</string>
+    <string name="nullam">Nullam ullamcorper mattis purus eu mattis. Nam vel cursus tellus, venenatis posuere orci.</string>
+    <string name="notify_error">Сообщить об ошибке</string>
+    <string name="notify">Сообщить</string>
+    <string name="push_ads">Push-уведомления</string>
+    <string name="email_ads">Email-уведомления</string>
+    <string name="region">Регион</string>
+    <string name="kazakhstan">Казахстан</string>
+    <string name="geolocation">Служба геолокации</string>
+    <string name="never">Никогда</string>
+    <string name="quit">Выйти</string>
+    <string name="geolocation_support">Служба геолокации</string>
 </resources>

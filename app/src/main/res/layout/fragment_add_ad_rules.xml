@@ -11,8 +11,8 @@
         layout="@layout/back_button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,24 +20,24 @@
         android:id="@+id/fragment_add_ad_rules_tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="54dp"
-        android:text="Какие удобства вы \nпредлагаете?"
+        android:layout_marginStart="@dimen/dim_60dp"
+        android:layout_marginTop="@dimen/dim_16dp"
+        android:layout_marginEnd="@dimen/dim_60dp"
+        android:text="@string/house_rules"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_rules_back_btn" />
 
     <TextView
         android:id="@+id/fragment_add_ad_rules_drop_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="52dp"
-        android:text="Сбросить все"
+        android:layout_marginTop="@dimen/dim_12dp"
+        android:layout_marginEnd="@dimen/dim_60dp"
+        android:text="@string/drop_all"
         android:textColor="@color/primaryZero"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,9 +54,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="@dimen/dim_48dp"
+            android:layout_marginTop="@dimen/dim_16dp"
+            android:layout_marginEnd="@dimen/dim_48dp"
             android:orientation="vertical">
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -122,18 +122,18 @@
                 android:id="@+id/fragment_add_ad_rules_add_chkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Добавить своё"
-                android:drawablePadding="4dp"
+                android:text="@string/add_mine"
+                android:drawablePadding="@dimen/dim_4dp"
                 android:textColor="@color/primaryZero"
                 android:textSize="16sp"
-                android:drawableStart="@drawable/ic_location_real"/>
+                android:drawableStart="@drawable/ic_plus_red"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_add_ad_rules_add_chkbox_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
+                android:layout_marginStart="@dimen/dim_16dp"
+                android:layout_marginEnd="@dimen/dim_16dp">
 
                 <EditText
                     android:id="@+id/fragment_add_ad_rules_add_chkbox_et"
@@ -150,10 +150,10 @@
                     android:id="@+id/fragment_add_ad_rules_add_chkbox_btn"
                     style="@style/AllButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="@dimen/dim_36dp"
                     android:layout_margin="0dp"
                     android:padding="0dp"
-                    android:text="Добавить"
+                    android:text="@string/add"
                     android:textSize="10sp"
                     app:cornerRadius="@dimen/cornerRadius3"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_ad_rules_add_chkbox_et"
@@ -163,13 +163,13 @@
                     android:id="@+id/fragment_add_ad_rules_remove_chkbox_btn"
                     style="@style/AllButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="@dimen/dim_36dp"
                     android:layout_margin="0dp"
                     android:padding="0dp"
                     android:backgroundTint="@color/white"
                     android:elevation="0dp"
                     android:textColor="@color/primaryZero"
-                    android:text="Отменить"
+                    android:text="@string/cancel"
                     android:textSize="10sp"
                     app:cornerRadius="@dimen/cornerRadius3"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_ad_rules_add_chkbox_et"
@@ -184,8 +184,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="37dp"
-                android:text="Далее"
+                android:layout_marginBottom="@dimen/dim_36dp"
+                android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

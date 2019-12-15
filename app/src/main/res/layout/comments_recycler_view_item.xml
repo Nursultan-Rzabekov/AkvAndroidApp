@@ -19,13 +19,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="18dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="18dp"
-                android:paddingBottom="8dp">
+                android:paddingStart="@dimen/dim_16dp"
+                android:paddingTop="@dimen/dim_8dp"
+                android:paddingEnd="@dimen/dim_16dp"
+                android:paddingBottom="@dimen/dim_8dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/circleImageView2"
+                    android:id="@+id/comments_recycler_view_item_civ"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:scaleType="centerCrop"
@@ -35,42 +35,44 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/comments_recycler_view_item_name_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginStart="@dimen/dim_32dp"
+                    android:layout_marginTop="@dimen/dim_4dp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="Алиса"
+                    android:text="@string/random_name1"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:typeface="normal"
                     app:layout_constraintEnd_toStartOf="@+id/comments_recycler_view_item_rating"
                     app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toEndOf="@+id/circleImageView2"
+                    app:layout_constraintStart_toEndOf="@+id/comments_recycler_view_item_civ"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/comments_recycler_view_item_date_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:text="Сентябрь 2019"
+                    android:layout_marginStart="@dimen/dim_32dp"
+                    android:text="@string/random_date1"
                     android:textColor="@color/black"
                     android:textSize="11sp"
                     android:typeface="normal"
                     app:layout_constraintEnd_toStartOf="@+id/comments_recycler_view_item_rating"
                     app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toEndOf="@+id/circleImageView2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                    app:layout_constraintStart_toEndOf="@+id/comments_recycler_view_item_civ"
+                    app:layout_constraintTop_toBottomOf="@+id/comments_recycler_view_item_name_tv" />
 
                 <TextView
                     android:id="@+id/comments_recycler_view_item_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_star_real"
+                    android:drawableStart="@drawable/ic_star_red"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="4.6"
+                    android:text="@string/random_score1"
+                    android:drawablePadding="@dimen/dim_4dp"
                     android:textColor="@color/primaryZero"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -88,14 +90,14 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/comments_recycler_view_item_comment_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="22dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="22dp"
-                android:paddingBottom="16dp"
-                android:text="Алмата однако забывать, что начало повседневной работы по формированию."
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_16dp"
+                android:text="@string/random_text1"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 

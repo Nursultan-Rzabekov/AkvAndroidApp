@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_checked="true"
+        android:state_pressed="true">
+        <shape
+            android:shape="rectangle">
+            <corners
+                android:topLeftRadius="@dimen/cornerRadius3"
+                android:bottomLeftRadius="@dimen/cornerRadius3"/>
+            <solid
+                android:color="@color/primaryZero" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/primaryZero" />
+        </shape>
+    </item>
+    <item
+        android:state_pressed="true">
+        <shape
+            android:shape="rectangle">
+            <corners
+                android:topLeftRadius="@dimen/cornerRadius3"
+                android:bottomLeftRadius="@dimen/cornerRadius3"/>
+            <solid
+                android:color="@color/primaryZero" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/primaryZero" />
+        </shape>
+    </item>
+    <item
+        android:state_checked="true">
+        <shape
+            android:shape="rectangle">
+            <corners
+                android:topLeftRadius="@dimen/cornerRadius3"
+                android:bottomLeftRadius="@dimen/cornerRadius3"/>
+            <solid
+                android:color="@color/primaryZero" />
+        </shape>
+    </item>
+    <item>
+        <shape
+            android:shape="rectangle">
+            <corners
+                android:topLeftRadius="@dimen/cornerRadius3"
+                android:bottomLeftRadius="@dimen/cornerRadius3"/>
+            <solid
+                android:color="#fff" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/primaryZero" />
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:contentDescription="@string/red_circle"
+        android:layout_width="@dimen/dim_8dp"
+        android:layout_height="@dimen/dim_8dp"
+        android:src="@drawable/ic_circle_red"
+        android:tint="@color/primaryZero"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:layout_marginStart="@dimen/dim_8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_word1"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+
+</LinearLayout>
