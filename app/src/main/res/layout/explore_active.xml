@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/app_bar"
-        android:backgroundTint="@color/white"
-        >
+        android:backgroundTint="@color/white">
 
         <include
             android:id="@+id/head_zhilye"
