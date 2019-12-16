@@ -30,8 +30,6 @@ import technolifestyle.com.imageslider.pagetransformers.ZoomOutPageTransformer
 
 class ZhilyeFragment : BaseSearchFragment() {
 
-    private lateinit var flipperLayout: FlipperLayout
-
     private lateinit var maPView: MapView
     private val TARGET_LOCATION = Point(59.945933, 30.320045)
 
@@ -43,6 +41,8 @@ class ZhilyeFragment : BaseSearchFragment() {
         MapKitFactory.initialize(context)
         return inflater.inflate(R.layout.fragment_zhilye_layout, container, false)
     }
+
+    lateinit var flipperLayout : FlipperLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +56,13 @@ class ZhilyeFragment : BaseSearchFragment() {
             null
         )
 
+        flipperLayout = view.findViewById(R.id.header_zhilye_flipper_layout)
+        flipperLayout.removeAutoCycle()
+        flipperLayout.showInnerPagerIndicator()
+        flipperLayout.setIndicatorBackgroundColor(Color.TRANSPARENT)
+
+        setLayout()
+
         fragment_zhilye_house_rules_card.setOnClickListener {
             navHouseRules()
         }
@@ -67,14 +74,6 @@ class ZhilyeFragment : BaseSearchFragment() {
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
         }
-
-        flipperLayout = view.findViewById(R.id.flipper_layout)
-        flipperLayout.addPageTransformer(false, ZoomOutPageTransformer())
-
-        // Uncomment to add your custom scroll time (default is 3 seconds)
-        // flipperLayout.setScrollTimeInSec(5);
-
-        setLayout()
 
     }
 
@@ -106,29 +105,15 @@ class ZhilyeFragment : BaseSearchFragment() {
 
         val flipperViewList: ArrayList<FlipperView> = ArrayList()
         for (i in url.indices) {
-            val view = FlipperView(context!!)
-            view.setDescription("Cool" + (i + 1))
-                .setDescriptionBackgroundColor(Color.TRANSPARENT)
-                .resetDescriptionTextView()
-                .setImage(url[i]) { flipperImageView, image ->
-                    Glide.with(this@ZhilyeFragment).load(image as String).into(flipperImageView)
-                }
-            view.setOnFlipperClickListener(object : FlipperView.OnFlipperClickListener {
-                override fun onFlipperClick(flipperView: FlipperView) {
-                }
-            })
+            val view = FlipperView(requireContext())
+            view.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+            view.setDescriptionBackgroundColor(Color.TRANSPARENT)
+            view.setImage(url[i]) { flipperImageView, image ->
+                    Glide.with(this@ZhilyeFragment).load(image).centerCrop().into(flipperImageView)
+            }
             flipperViewList.add(view)
         }
 
         flipperLayout.addFlipperViewList(flipperViewList)
-        flipperLayout.removeCircleIndicator()
-        flipperLayout.showCircleIndicator()
-        val view = FlipperView(context!!)
-        view.setDescription("This is Black Panther II from new Marvel Movies")
-        view.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-        view.setImage(R.drawable.error) { imageView, image ->
-            imageView.setImageDrawable(image as Drawable)
-        }
-        flipperLayout.addFlipperView(view)
     }
 }

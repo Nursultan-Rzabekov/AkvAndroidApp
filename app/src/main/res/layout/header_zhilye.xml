@@ -8,13 +8,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <technolifestyle.com.imageslider.FlipperLayout
-        android:id="@+id/flipper_layout"
+        android:id="@+id/header_zhilye_flipper_layout"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-         />
-
+        android:layout_height="220dp"/>
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

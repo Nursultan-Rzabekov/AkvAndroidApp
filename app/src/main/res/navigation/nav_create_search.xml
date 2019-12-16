@@ -59,6 +59,15 @@
                     app:exitAnim="@anim/slide_out_left"
                     />
 
+                <action
+                    android:id="@+id/action_apartmentsFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
 
         </fragment>
 
@@ -69,6 +78,7 @@
             tools:layout="@layout/explore_map">
 
 
+
         </activity>
 
 
@@ -77,15 +87,16 @@
             android:label="@string/fragment_update_blog"
             tools:layout="@layout/fragment_filter_layout">
 
-<!--            <action-->
-<!--                android:id="@+id/action_updateBlogFragment_to_home"-->
-<!--                app:destination="@id/searchFragment"-->
-<!--                app:popEnterAnim="@anim/fade_in"-->
-<!--                app:popExitAnim="@anim/fade_out"-->
-<!--                app:enterAnim="@anim/fade_in"-->
-<!--                app:exitAnim="@anim/fade_out"-->
-<!--                app:popUpTo="@+id/nav_create_search"-->
-<!--                app:popUpToInclusive="true" />-->
+
+                <action
+                    android:id="@+id/action_searchFilterFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
 
 
                 <action android:id="@+id/action_searchFilterFragment_to_filterTypeFragment"
@@ -122,6 +133,17 @@
             tools:layout="@layout/fragment_type_layout">
 
 
+                <action
+                    android:id="@+id/action_filterTypeFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
+
+
         </fragment>
 
 
@@ -130,6 +152,15 @@
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/fragment_city_layout">
 
+                <action
+                    android:id="@+id/action_filterCityFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
 
         </fragment>
 
@@ -138,6 +169,16 @@
             android:name="com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment"
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/fragment_udopstva_layout">
+
+                <action
+                    android:id="@+id/action_filterUdopstvaFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
 
 
         </fragment>
@@ -157,6 +198,19 @@
                     />
 
 
+                <action
+                    android:id="@+id/action_zhilyeFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
+
+
+
+
                 <action android:id="@+id/action_szhilyeFragment_to_ZhilyeReviewFragment"
                     app:destination="@id/zhilyeReviewFragment"
                     app:popEnterAnim="@anim/slide_in_left"
@@ -164,7 +218,6 @@
                     app:enterAnim="@anim/slide_in_right"
                     app:exitAnim="@anim/slide_out_left"
                     />
-
 
         </fragment>
 
@@ -174,6 +227,16 @@
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/fragment_rules_of_house_layout">
 
+                <action
+                    android:id="@+id/action_zhilyeRulesOfHouseFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
+
 
         </fragment>
 
@@ -181,6 +244,16 @@
             android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewFragment"
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/fragment_review_page_layout">
+
+                <action
+                    android:id="@+id/action_zhilyeReviewFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
 
 
         </fragment>

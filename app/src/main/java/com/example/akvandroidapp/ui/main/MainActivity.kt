@@ -17,8 +17,16 @@ import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
 import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
 import com.example.akvandroidapp.ui.main.messages.BaseMessagesFragment
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.add_ad.*
+import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
+import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
+import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
+import com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment
 import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeFragment
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewFragment
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseFragment
 import com.example.akvandroidapp.util.BottomNavController
 import com.example.akvandroidapp.util.setUpNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -65,6 +73,89 @@ class MainActivity : BaseActivity(),
     }
 
 
+    override fun onReselectNavItem(
+        navController: NavController,
+        fragment: Fragment
+    ) = when(fragment){
+
+        is ProfileAddAddressFragment -> {
+            navController.navigate(R.id.action_profileAddAddressFragment_to_home)
+        }
+
+        is ProfileAddCheckFragment -> {
+            navController.navigate(R.id.action_profileAddCheckFragment_to_home)
+        }
+
+        is ProfileAddDescriptionFragment -> {
+            navController.navigate(R.id.action_profileAddDescriptionFragment_to_home)
+        }
+
+        is ProfileAddGalleryFragment -> {
+            navController.navigate(R.id.action_profileAddGalleryFragment_to_home)
+        }
+
+        is ProfileAddNearFragment -> {
+            navController.navigate(R.id.action_profileAddNearFragment_to_home)
+        }
+
+        is ProfileAddPriceFragment -> {
+            navController.navigate(R.id.action_profileAddPriceFragment_to_home)
+        }
+
+        is ProfileAddQuestsFragment -> {
+            navController.navigate(R.id.action_profileAddQuestsFragment_to_home)
+        }
+
+        is ProfileAddRequirementFragment -> {
+            navController.navigate(R.id.action_profileAddRequirementFragment_to_home)
+        }
+
+        is ProfileAddRulesFragment -> {
+            navController.navigate(R.id.action_profileAddRulesFragment_to_home)
+        }
+
+        is ProfileAddTypeFragment -> {
+            navController.navigate(R.id.action_profileAddTypeFragment_to_home)
+        }
+
+        is ZhilyeFragment -> {
+            navController.navigate(R.id.action_zhilyeFragment_to_home)
+        }
+
+        is ZhilyeReviewFragment -> {
+            navController.navigate(R.id.action_zhilyeReviewFragment_to_home)
+        }
+
+        is ZhilyeRulesOfHouseFragment -> {
+            navController.navigate(R.id.action_zhilyeRulesOfHouseFragment_to_home)
+        }
+
+        is FilterCityFragment -> {
+            navController.navigate(R.id.action_filterCityFragment_to_home)
+        }
+
+        is FilterTypeFragment -> {
+            navController.navigate(R.id.action_filterTypeFragment_to_home)
+        }
+
+        is FilterUdopstvaFragment -> {
+            navController.navigate(R.id.action_filterUdopstvaFragment_to_home)
+        }
+
+        is SearchFilterFragment -> {
+            navController.navigate(R.id.action_searchFilterFragment_to_home)
+        }
+
+        is ApartmentsFragment -> {
+            navController.navigate(R.id.action_apartmentsFragment_to_home)
+        }
+
+        else -> {
+            // do nothing
+        }
+    }
+
+
     override fun onGraphChange() {
         cancelActiveJobs()
         expandAppBar()
@@ -98,20 +189,6 @@ class MainActivity : BaseActivity(),
         displayProgressBar(false)
     }
 
-
-    override fun onReselectNavItem(
-        navController: NavController,
-        fragment: Fragment
-    ) = when(fragment){
-
-        is SearchFilterFragment -> {
-            navController.navigate(R.id.action_searchFragment_to_searchFilterFragment)
-        }
-
-        else -> {
-
-        }
-    }
 
     override fun onBackPressed() = bottomNavController.onBackPressed()
 

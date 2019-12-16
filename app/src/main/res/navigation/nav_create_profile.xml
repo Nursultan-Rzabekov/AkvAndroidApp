@@ -36,6 +36,17 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+
+        <action
+            android:id="@+id/action_profileAddTypeFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -52,6 +63,16 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             />
+
+        <action
+            android:id="@+id/action_profileAddQuestsFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -70,6 +91,17 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+
+        <action
+            android:id="@+id/action_profileAddAddressFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -86,6 +118,17 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             />
+
+
+        <action
+            android:id="@+id/action_profileAddGalleryFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -104,6 +147,16 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+        <action
+            android:id="@+id/action_profileAddDescriptionFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -120,6 +173,17 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             />
+
+
+        <action
+            android:id="@+id/action_profileAddCheckFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -138,6 +202,17 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+
+        <action
+            android:id="@+id/action_profileAddNearFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -154,6 +229,16 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             />
+
+        <action
+            android:id="@+id/action_profileAddRequirementFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -172,6 +257,17 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+
+        <action
+            android:id="@+id/action_profileAddRulesFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
     <fragment android:id="@+id/profileAddPriceFragment"
@@ -179,7 +275,15 @@
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_price">
 
-
+        <action
+            android:id="@+id/action_profileAddPriceFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
