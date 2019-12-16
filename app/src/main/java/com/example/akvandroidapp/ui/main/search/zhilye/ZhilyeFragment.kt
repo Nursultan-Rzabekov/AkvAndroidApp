@@ -18,6 +18,7 @@ import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 import kotlinx.android.synthetic.main.fragment_zhilye.*
+import kotlinx.android.synthetic.main.header_zhilye.*
 import kotlinx.android.synthetic.main.map.*
 
 
@@ -25,6 +26,8 @@ class ZhilyeFragment : BaseSearchFragment() {
 
     private lateinit var maPView: MapView
     private val TARGET_LOCATION = Point(59.945933, 30.320045)
+
+    private val imageUrls = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,7 @@ class ZhilyeFragment : BaseSearchFragment() {
             Animation(Animation.Type.SMOOTH, 4F),
             null
         )
+
 
         fragment_zhilye_house_rules_card.setOnClickListener {
             navHouseRules()
@@ -76,5 +80,12 @@ class ZhilyeFragment : BaseSearchFragment() {
         super.onStart()
         MapKitFactory.getInstance().onStart()
         maPView.onStart()
+    }
+
+    fun addImages(){
+        imageUrls.add("https://i.pinimg.com/236x/f7/ba/af/f7baaf0bae237b7602dd2849fdf30e9d--contemporary-houses-modern-houses.jpg")
+        imageUrls.add("https://i.pinimg.com/236x/f7/ba/af/f7baaf0bae237b7602dd2849fdf30e9d--contemporary-houses-modern-houses.jpg")
+        imageUrls.add("https://i.pinimg.com/236x/f7/ba/af/f7baaf0bae237b7602dd2849fdf30e9d--contemporary-houses-modern-houses.jpg")
+        imageUrls.add("https://i.pinimg.com/236x/f7/ba/af/f7baaf0bae237b7602dd2849fdf30e9d--contemporary-houses-modern-houses.jpg")
     }
 }

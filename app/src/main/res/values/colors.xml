@@ -7,9 +7,12 @@
     <color name="link_blue">#0000EE</color>
     <color name="black">#000</color>
     <color name="white">#fff</color>
+    <color name="green">#237721</color>
 
     <!-- other -->
     <color name="red">#e22b2b</color>
+    <color name="redDark">#8E0101</color>
+    <color name="redDarker">#B60000</color>
     <color name="red2">#fc8b8d</color>
     <color name="grey1">#f2f2f2</color>
     <color name="grey2">#c4c4c4</color>

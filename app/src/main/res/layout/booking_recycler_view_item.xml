@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dim_8dp"
+    android:paddingBottom="@dimen/dim_8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        app:cardElevation="@dimen/elevation_3"
+        app:cardBackgroundColor="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dim_16dp">
+
+            <ImageView
+                android:id="@+id/booking_recycler_view_item_iv"
+                android:contentDescription="@string/test_image"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/image_all_corner_back1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test_image_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="top|start"
+                android:layout_marginStart="@dimen/dim_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/booking_recycler_view_item_cancel_layout"
+                app:layout_constraintStart_toEndOf="@+id/booking_recycler_view_item_iv"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/booking_accepted_recycler_view_item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hotel_del_luxe"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+
+                <View
+                    android:id="@+id/divider36"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/booking_recycler_view_item_tv_accepted"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_4dp"
+                    android:text="@string/you_accepted"
+                    android:textColor="@color/green"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/booking_recycler_view_item_tv_canceled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_4dp"
+                    android:text="@string/you_denied"
+                    android:textColor="@color/redDarker"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/booking_recycler_view_item_tv_waiting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_4dp"
+                    android:text="@string/wait_for_responec"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/booking_recycler_view_item_tv_accepted_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_4dp"
+                    android:text="@string/chat_host"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/booking_recycler_view_item_tv_canceled_desc_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/booking_recycler_view_item_tv_canceled_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dim_4dp"
+                        android:text="@string/message_from_host"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/booking_recycler_view_item_tv_canceled_desc_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sorry_not_today"
+                        android:textSize="9sp"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/booking_recycler_view_item_cancel_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <ImageButton
+                    android:contentDescription="@string/cancel"
+                    android:id="@+id/booking_recycler_view_item_cancel_btn"
+                    style="@style/BasicImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_cancel_date_quests_12dp"
+                    android:tint="@color/secondaryFirst" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
