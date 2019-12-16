@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
+import android.widget.ImageButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,14 +56,22 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         subscribeObservers()
 
 
+
+
+
+        val filterImgButton = view.findViewById<ImageButton>(R.id.main_filter_img_btn)
+
+        filterImgButton.setOnClickListener {
+            showFilterDialog()
+        }
+
 //        if(savedInstanceState == null){
 //            viewModel.loadFirstPage()
 //        }
 
-        main_filter_img_btn.setOnClickListener {
-            showFilterDialog()
-            //navFilter()
-        }
+//        main_filter_img_btn.setOnClickListener {
+//            //navFilter()
+//        }
 
         fragment_explore_apartments_iv.setOnClickListener {
             navApartments()
@@ -76,7 +86,6 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         }
 
     }
-
 
     private fun navFilter(){
         findNavController().navigate(R.id.action_searchFragment_to_searchFilterFragment)
@@ -240,6 +249,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
     fun showFilterDialog(){
 
+        Toast.makeText(context,"clicked",Toast.LENGTH_SHORT).show()
         activity?.let {
             val dialog = MaterialDialog(it)
                 .noAutoDismiss()
@@ -301,6 +311,8 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
     }
 
 }
+
+
 
 
 

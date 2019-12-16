@@ -16,7 +16,7 @@ data class AccountProperties(
 
     @SerializedName("email")
     @Expose
-    @ColumnInfo(name = "email") var email: String,
+    @ColumnInfo(name = "email") var email: String? = null,
 
     @SerializedName("gender")
     @Expose
@@ -24,11 +24,11 @@ data class AccountProperties(
 
     @SerializedName("phone")
     @Expose
-    @ColumnInfo(name = "phone") var phone: String,
+    @ColumnInfo(name = "phone") var phone: String? = null,
 
     @SerializedName("name")
     @Expose
-    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "name") var name: String? = null,
 
     @SerializedName("birth_day")
     @Expose
@@ -36,7 +36,6 @@ data class AccountProperties(
 
 )
 {
-
     override fun equals(other: Any?): Boolean {
         if (javaClass != other?.javaClass) return false
 

@@ -79,8 +79,6 @@ constructor(
                     return onErrorReturn(response.body.errorMessage, true, false)
                 }
 
-                // Don't care about result here. Just insert if it doesn't exist b/c of foreign key relationship
-                // with AuthToken
                 accountPropertiesDao.insertOrIgnore(
                     AccountProperties(
                         response.body.user.id,
@@ -92,7 +90,6 @@ constructor(
                     )
                 )
 
-                // will return -1 if failure
                 val result = authTokenDao.insert(
                     AuthToken(
                         response.body.user.id,
@@ -107,6 +104,8 @@ constructor(
                     )
                 }
 
+
+                Log.d(TAG,"phone or email ${email}")
                 saveAuthenticatedUserToPrefs(email)
 
                 sessionManager.login(
@@ -174,11 +173,6 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<RegistrationResponse>) {
 
-                Log.d(TAG, "qweqewqwqw: ${response}")
-
-                Log.d(TAG,"qweqewqwqw ${response.body}")
-
-
                 if(response.body.response.equals(GENERIC_AUTH_ERROR)){
                     return onErrorReturn(response.body.errorMessage, true, false)
                 }
@@ -216,8 +210,7 @@ constructor(
                     return
                 }
 
-                saveAuthenticatedUserToPrefs(email)
-
+                //saveAuthenticatedUserToPrefs(email)
 
                 onCompleteJob(
                     DataState.data(
@@ -353,10 +346,11 @@ constructor(
 
         val previousAuthUserEmail: String? = sharedPreferences.getString(PreferenceKeys.PREVIOUS_AUTH_USER, null)
 
-        if(previousAuthUserEmail.isNullOrBlank()){
+        if(previousAuthUserEmail.isNullOrBlank()) {
             Log.d(TAG, "checkPreviousAuthUser: No previously authenticated user found.")
             return returnNoTokenFound()
         }
+
         else{
             return object: NetworkBoundResource<Void, Any, AuthViewState>(
                 sessionManager.isConnectedToTheInternet(),
@@ -376,36 +370,74 @@ constructor(
                 }
 
                 override suspend fun createCacheRequestAndReturn() {
-                    accountPropertiesDao.searchByEmail(previousAuthUserEmail).let { accountProperties ->
-                        Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
 
-                        accountProperties?.let {
-                            if(accountProperties.id > -1){
-                                authTokenDao.searchByPk(accountProperties.id).let { authToken ->
-                                    if(authToken != null){
-                                        if(authToken.token != null){
-                                            onCompleteJob(
-                                                DataState.data(
-                                                    AuthViewState(authToken = authToken)
+                    Log.d(TAG,"phone")
+                    if(previousAuthUserEmail.startsWith("8")){
+                        accountPropertiesDao.searchByPhone(previousAuthUserEmail).let { accountProperties ->
+                            Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
+
+                            accountProperties?.let {
+                                if(accountProperties.id > -1){
+                                    authTokenDao.searchByPk(accountProperties.id).let { authToken ->
+                                        if(authToken != null){
+                                            if(authToken.token != null){
+                                                onCompleteJob(
+                                                    DataState.data(
+                                                        AuthViewState(authToken = authToken)
+                                                    )
                                                 )
-                                            )
-                                            return
+                                                return
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        Log.d(TAG, "createCacheRequestAndReturn: AuthToken not found...")
-                        onCompleteJob(
-                            DataState.data(
-                                null,
-                                Response(
-                                    RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE,
-                                    ResponseType.None()
+                            Log.d(TAG, "createCacheRequestAndReturn: AuthToken not found...")
+                            onCompleteJob(
+                                DataState.data(
+                                    null,
+                                    Response(
+                                        RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE,
+                                        ResponseType.None()
+                                    )
                                 )
                             )
-                        )
+                        }
+                    }
+                    else{
+                        Log.d(TAG,"phone ${previousAuthUserEmail}")
+                        accountPropertiesDao.searchByEmail(previousAuthUserEmail).let { accountProperties ->
+                            Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
+
+                            accountProperties?.let {
+                                if(accountProperties.id > -1){
+                                    authTokenDao.searchByPk(accountProperties.id).let { authToken ->
+                                        if(authToken != null){
+                                            if(authToken.token != null){
+                                                onCompleteJob(
+                                                    DataState.data(
+                                                        AuthViewState(authToken = authToken)
+                                                    )
+                                                )
+                                                return
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            Log.d(TAG, "createCacheRequestAndReturn: AuthToken not found...")
+                            onCompleteJob(
+                                DataState.data(
+                                    null,
+                                    Response(
+                                        RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE,
+                                        ResponseType.None()
+                                    )
+                                )
+                            )
+                        }
                     }
                 }
 
@@ -456,7 +488,6 @@ constructor(
             }
         }
     }
-
 }
 
 
