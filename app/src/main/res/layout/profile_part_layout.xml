@@ -4,11 +4,6 @@
 
     <include
         android:visibility="visible"
-        layout="@layout/fragment_profile_guest_layout"
-        android:id="@+id/fragment_profile_guest_layout_id"/>
-
-    <include
-        android:visibility="gone"
         layout="@layout/fragment_profile_owner_layout"
         android:id="@+id/fragment_profile_owner_layout_id"/>
 

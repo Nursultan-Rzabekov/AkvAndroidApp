@@ -2,10 +2,10 @@ package com.example.akvandroidapp.ui.main.profile
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
-import kotlinx.android.synthetic.main.fragment_profile_guest.*
 import kotlinx.android.synthetic.main.fragment_profile_owner.*
 import kotlinx.android.synthetic.main.profile_part_layout.*
 
@@ -23,14 +23,14 @@ class ProfileFragment : BaseProfileFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fragment_profile_guest_host_mode_switch.setOnCheckedChangeListener { _, b ->
+        fragment_profile_owner_host_mode_switch.setOnCheckedChangeListener { _, b ->
             if(b){
-                fragment_profile_guest_layout_id.visibility = View.GONE
-                fragment_profile_owner_layout_id.visibility  = View.VISIBLE
+                fragment_profile_owner_host_mode_ads.visibility = View.VISIBLE
+                fragment_profile_owner_post_ad_btn.visibility = View.VISIBLE
             }
             else{
-                fragment_profile_guest_layout_id.visibility = View.VISIBLE
-                fragment_profile_owner_layout_id.visibility  = View.GONE
+                fragment_profile_owner_host_mode_ads.visibility = View.GONE
+                fragment_profile_owner_post_ad_btn.visibility = View.GONE
             }
         }
 
