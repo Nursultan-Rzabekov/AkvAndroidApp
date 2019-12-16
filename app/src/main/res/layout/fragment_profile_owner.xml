@@ -58,7 +58,7 @@
                     android:id="@+id/fragment_profile_owner_host_mode_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_owner_host_mode_tv_minor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/fragment_profile_owner_host_mode_tv" />
@@ -71,37 +71,46 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_profile_owner_my_ads_layout"
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/fragment_profile_owner_host_mode_ads"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/dim_24dp"
-                android:paddingTop="@dimen/dim_16dp"
-                android:paddingEnd="@dimen/dim_24dp"
-                android:paddingBottom="@dimen/dim_16dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/fragment_profile_owner_my_ads_tv"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fragment_profile_owner_my_ads_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_forward"
-                    android:text="@string/my_ads"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:paddingStart="@dimen/dim_24dp"
+                    android:paddingTop="@dimen/dim_16dp"
+                    android:paddingEnd="@dimen/dim_24dp"
+                    android:paddingBottom="@dimen/dim_16dp">
+
+                    <TextView
+                        android:id="@+id/fragment_profile_owner_my_ads_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_forward"
+                        android:text="@string/my_ads"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:id="@+id/divider23"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
+                <View
+                    android:id="@+id/divider23"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_profile_owner_payment_layout"
@@ -222,6 +231,12 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:id="@+id/divider28"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
 
         </LinearLayout>
 
@@ -229,12 +244,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fragment_profile_owner_post_ad_btn"
+        android:visibility="gone"
         style="@style/BasicButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dim_16dp"
         android:layout_marginEnd="@dimen/dim_16dp"
-        android:layout_marginBottom="@dimen/dim_24dp"
+        android:layout_marginBottom="@dimen/dim_16dp"
         app:icon="@drawable/ic_plus_white"
         app:iconGravity="textStart"
         app:iconPadding="@dimen/dim_8dp"

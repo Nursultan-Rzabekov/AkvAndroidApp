@@ -7,8 +7,6 @@
         android:id="@+id/fragment_saved_pages_filled_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_28dp"
-        android:layout_marginEnd="@dimen/dim_28dp"
         />
 
 </LinearLayout>
