@@ -14,11 +14,8 @@ class HomeFragment : BaseHomeFragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        MapKitFactory.setApiKey(Constants.MAPKIT_API_KEY)
-        MapKitFactory.initialize(context)
 
-        return inflater.inflate(R.layout.fragment_zhilye_layout, container, false)
+        return inflater.inflate(R.layout.just, container, false)
     }
 
 

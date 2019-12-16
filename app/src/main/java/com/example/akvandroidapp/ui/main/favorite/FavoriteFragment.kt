@@ -13,7 +13,7 @@ class FavoriteFragment : BaseFavoriteFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.reset_code, container, false)
+        return inflater.inflate(R.layout.just, container, false)
     }
 }
 

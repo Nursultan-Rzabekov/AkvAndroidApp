@@ -41,7 +41,11 @@ class BlogSearchResponse(
 
     @SerializedName("house_type")
     @Expose
-    var house_type: Int,
+    var house_type: String,
+
+    @SerializedName("city")
+    @Expose
+    var city: String,
 
     @SerializedName("price")
     @Expose
@@ -88,6 +92,7 @@ class BlogSearchResponse(
                 "status='$status', " +
                 "photos='$photos', " +
                 "houseaccoms='$houseaccoms', " +
+                "city='$city', " +
                 "user='$user', " +
                 "rating='$rating')"
     }

@@ -36,7 +36,10 @@ data class BlogPost(
     var latitude: Double,
 
     @ColumnInfo(name = "house_type")
-    var house_type: Int,
+    var house_type: String? = null,
+
+    @ColumnInfo(name = "city")
+    var city: String? = null,
 
     @ColumnInfo(name = "price")
     var price: Int,
@@ -62,6 +65,7 @@ data class BlogPost(
                 "longitude='$longitude', " +
                 "latitude='$latitude', " +
                 "house_type='$house_type', " +
+                "city='$city', " +
                 "price='$price', " +
                 "status='$status', " +
                 "rating='$rating')"

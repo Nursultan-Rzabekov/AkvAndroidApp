@@ -53,7 +53,7 @@ fun SearchViewModel.getBlogPost(): BlogPost {
 }
 
 fun SearchViewModel.getDummyBlogPost(): BlogPost {
-    return BlogPost(-1, "" , "", 1, 1,"", 1.0, 1.0,1,1,1,1.0)
+    return BlogPost(-1, "" , "", 1, 1,"", 1.0, 1.0,"","",1,1,1.0)
 }
 
 fun SearchViewModel.getUpdatedBlogUri(): Uri? {

@@ -1,14 +1,13 @@
 package com.example.akvandroidapp.ui.main.search
 
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
-import android.widget.ImageButton
-import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -101,7 +100,6 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
         viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
             if(dataState != null) {
-                // call before onDataStateChange to consume error if there is one
                 handlePagination(dataState)
                 stateChangeListener.onDataStateChange(dataState)
             }
@@ -109,20 +107,21 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
             if(viewState != null){
-                Log.d(TAG, "Search Results: ${viewState.blogFields.blogList}")
-                fragement_explore_layout_id.visibility = View.GONE
-                fragment_explore_active_layout_id.visibility = View.VISIBLE
-                recyclerAdapter.apply {
-                    preloadGlideImages(
-                        requestManager = requestManager,
-                        list = viewState.blogFields.blogList
-                    )
-                    submitList(
-                        blogList = viewState.blogFields.blogList,
-                        isQueryExhausted = viewState.blogFields.isQueryExhausted
-                    )
+                if(viewState.blogFields.blogList.isNotEmpty()){
+                    recyclerAdapter.apply {
+                        Log.d(TAG, "Search results responses: ${viewState.blogFields.blogList}")
+                        fragement_explore_layout_id.visibility = View.GONE
+                        fragment_explore_active_layout_id.visibility = View.VISIBLE
+                        preloadGlideImages(
+                            requestManager = requestManager,
+                            list = viewState.blogFields.blogList
+                        )
+                        submitList(
+                            blogList = viewState.blogFields.blogList,
+                            isQueryExhausted = viewState.blogFields.isQueryExhausted
+                        )
+                    }
                 }
-
             }
         })
     }
@@ -131,28 +130,29 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
 //        activity?.apply {
 //            val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//            searchView = menu.findItem(R.id.action_search).actionView as SearchView
+//            searchView = findViewById<ImageButton>(R.id.main_search_et).actionView as SearchView
 //            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
 //            searchView.maxWidth = Integer.MAX_VALUE
 //            searchView.setIconifiedByDefault(true)
 //            searchView.isSubmitButtonEnabled = true
 //        }
 
-        main_search_et.setOnEditorActionListener { v, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED
-                || actionId == EditorInfo.IME_ACTION_SEARCH ) {
-                val searchQuery = v.text.toString()
-                Log.e(TAG, "SearchView: (keyboard or arrow) executing search...: ${searchQuery}")
-                viewModel.setQuery(searchQuery).let{
-                    onBlogSearchOrFilter()
-                }
-            }
-            true
-        }
+//        main_search_et.setOnEditorActionListener { v, actionId, _ ->
+//            if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED
+//                || actionId == EditorInfo.IME_ACTION_SEARCH ) {
+//                val searchQuery = v.text.toString()
+//                Log.e(TAG, "SearchView: (keyboard or arrow) executing search...: ${searchQuery}")
+//                viewModel.setQuery(searchQuery).let{
+//                    onBlogSearchOrFilter()
+//                }
+//            }
+//            true
+//        }
 
         main_search_img_btn.setOnClickListener {
             val searchQuery = main_search_et.text.toString()
             Log.e(TAG, "SearchView: (button) executing search...: ${searchQuery}")
+
             viewModel.setQuery(searchQuery).let {
                 onBlogSearchOrFilter()
             }

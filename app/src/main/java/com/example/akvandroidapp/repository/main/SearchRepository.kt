@@ -81,6 +81,7 @@ constructor(
                             longitude = blogPostResponse.longitude,
                             latitude = blogPostResponse.latitude,
                             house_type = blogPostResponse.house_type,
+                            city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
                             rating = blogPostResponse.rating
@@ -88,7 +89,6 @@ constructor(
                     )
                 }
 
-                Log.d("qwe","salam ${blogPostList}")
                 updateLocalDb(blogPostList)
 
                 createCacheRequestAndReturn()
@@ -101,6 +101,7 @@ constructor(
             }
 
             override fun createCall(): LiveData<GenericApiResponse<BlogListSearchResponse>> {
+
                 Log.d("qwe","wwwww ${query}")
                 Log.d("qwe","wwwww ${floor}")
                 Log.d("qwe","wwwww ${rooms}")

@@ -31,7 +31,8 @@ class SearchListAdapter(
         "",
         0.0,
         0.0,
-        0,
+        "",
+        "",
         0,
         0,
         0.0
@@ -172,7 +173,7 @@ class SearchListAdapter(
                 .transition(withCrossFade())
                 .into(itemView.search_recycler_item_image_back)
             itemView.search_recycler_item_header.text = item.name
-            itemView.search_recycler_item_location.text = item.longitude.toString()
+            itemView.search_recycler_item_location.text = item.city.toString()
             itemView.search_recycler_item_cost.text = item.price.toString()
         }
     }

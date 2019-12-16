@@ -9,7 +9,7 @@
     <fragment android:id="@+id/favoriteFragment"
             android:name="com.example.akvandroidapp.ui.main.favorite.FavoriteFragment"
             android:label="@string/fragment_create_blog"
-            tools:layout="@layout/reset_code">
+            tools:layout="@layout/just">
 
     </fragment>
 </navigation>

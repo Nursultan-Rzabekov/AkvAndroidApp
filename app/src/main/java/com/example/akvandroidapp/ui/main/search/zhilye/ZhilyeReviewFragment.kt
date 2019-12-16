@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
+import kotlinx.android.synthetic.main.back_button_layout.*
 
 
 class ZhilyeReviewFragment : BaseSearchFragment() {
@@ -30,9 +32,9 @@ class ZhilyeReviewFragment : BaseSearchFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
-
+        main_back_img_btn.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
-
-
 
 }

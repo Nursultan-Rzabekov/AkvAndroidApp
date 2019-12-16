@@ -6,9 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
@@ -17,6 +15,7 @@ import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
+import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_zhilye.*
 import kotlinx.android.synthetic.main.map.*
 
@@ -54,6 +53,10 @@ class ZhilyeFragment : BaseSearchFragment() {
 
         fragment_zhilye_reviews_lb.setOnClickListener {
             navReviews()
+        }
+
+        main_back_img_btn.setOnClickListener {
+            findNavController().navigateUp()
         }
 
     }
