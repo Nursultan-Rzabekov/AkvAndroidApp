@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/fragment_saved_pages_lb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/saved"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginEnd="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_48dp"
+        android:layout_marginBottom="@dimen/dim_24dp"/>
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/fragment_saved_pages_empty_id"
+        layout="@layout/fragment_saved_pages_empty"/>
+
+    <include
+        android:id="@+id/fragment_saved_pages_filled_id"
+        layout="@layout/fragment_saved_pages_filled"/>
+</LinearLayout>
