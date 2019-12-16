@@ -8,9 +8,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/header_zhilye_viewpager"
-        android:background="@drawable/test_image_back"
+    <technolifestyle.com.imageslider.FlipperLayout
+        android:id="@+id/header_zhilye_flipper_layout"
         android:layout_width="match_parent"
         android:layout_height="220dp"/>
 

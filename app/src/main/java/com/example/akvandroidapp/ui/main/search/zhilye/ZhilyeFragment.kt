@@ -1,12 +1,17 @@
 package com.example.akvandroidapp.ui.main.search.zhilye
 
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
@@ -18,6 +23,9 @@ import com.yandex.mapkit.mapview.MapView
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_zhilye.*
 import kotlinx.android.synthetic.main.map.*
+import technolifestyle.com.imageslider.FlipperLayout
+import technolifestyle.com.imageslider.FlipperView
+import technolifestyle.com.imageslider.pagetransformers.ZoomOutPageTransformer
 
 
 class ZhilyeFragment : BaseSearchFragment() {
@@ -34,6 +42,7 @@ class ZhilyeFragment : BaseSearchFragment() {
         return inflater.inflate(R.layout.fragment_zhilye_layout, container, false)
     }
 
+    lateinit var flipperLayout : FlipperLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,6 +55,13 @@ class ZhilyeFragment : BaseSearchFragment() {
             Animation(Animation.Type.SMOOTH, 4F),
             null
         )
+
+        flipperLayout = view.findViewById(R.id.header_zhilye_flipper_layout)
+        flipperLayout.removeAutoCycle()
+        flipperLayout.showInnerPagerIndicator()
+        flipperLayout.setIndicatorBackgroundColor(Color.TRANSPARENT)
+
+        setLayout()
 
         fragment_zhilye_house_rules_card.setOnClickListener {
             navHouseRules()
@@ -79,5 +95,25 @@ class ZhilyeFragment : BaseSearchFragment() {
         super.onStart()
         MapKitFactory.getInstance().onStart()
         maPView.onStart()
+    }
+
+    private fun setLayout() {
+        val url =
+            arrayOf("https://blog.eap.ucop.edu/wp-content/uploads/2016/01/Julie-Huang-27.jpg",
+                "https://picsum.photos/300",
+                "https://i.pinimg.com/originals/18/40/72/184072abb72399c23ab635faaa0a94ad.jpg")
+
+        val flipperViewList: ArrayList<FlipperView> = ArrayList()
+        for (i in url.indices) {
+            val view = FlipperView(requireContext())
+            view.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+            view.setDescriptionBackgroundColor(Color.TRANSPARENT)
+            view.setImage(url[i]) { flipperImageView, image ->
+                    Glide.with(this@ZhilyeFragment).load(image).centerCrop().into(flipperImageView)
+            }
+            flipperViewList.add(view)
+        }
+
+        flipperLayout.addFlipperViewList(flipperViewList)
     }
 }
