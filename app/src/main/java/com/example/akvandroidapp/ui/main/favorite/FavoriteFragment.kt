@@ -27,7 +27,6 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteListAdapter.Interaction
     @Inject
     lateinit var sessionManager: SessionManager
 
-
     var favoritePostList: MutableList<BlogPost> = ArrayList()
 
     override fun onCreateView(
@@ -37,7 +36,6 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteListAdapter.Interaction
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_saved_pages, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,10 +49,8 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteListAdapter.Interaction
             fragment_saved_pages_filled_id.visibility = View.VISIBLE
 
             subscribeObservers()
-
         }
     }
-
 
     private fun subscribeObservers(){
         sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
@@ -109,10 +105,9 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteListAdapter.Interaction
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
         Log.d("qwe","size list ${favoritePostList.size}")
         sessionManager.favorite(item,boolean)
-        favoritePostList.removeAt(position)
+        //favoritePostList.removeAt(position)
         recyclerAdapter.notifyItemRemoved(position)
         recyclerAdapter.notifyItemRangeChanged(position,favoritePostList.size)
-
     }
 }
 
