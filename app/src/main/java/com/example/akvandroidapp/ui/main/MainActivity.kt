@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
@@ -17,18 +18,18 @@ import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
 import com.example.akvandroidapp.ui.main.messages.BaseMessagesFragment
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
+import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.util.BottomNavController
 import com.example.akvandroidapp.util.setUpNavigation
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.explore_active.*
+
 
 class MainActivity : BaseActivity(),
     BottomNavController.NavGraphProvider,
     BottomNavController.OnNavigationGraphChanged,
     BottomNavController.OnNavigationReselectedListener
 {
-
 
     private lateinit var bottomNavigationView: BottomNavigationView
 
@@ -64,10 +65,10 @@ class MainActivity : BaseActivity(),
     }
 
 
-
     override fun onGraphChange() {
         cancelActiveJobs()
         expandAppBar()
+
     }
 
     private fun cancelActiveJobs(){
@@ -98,8 +99,18 @@ class MainActivity : BaseActivity(),
     }
 
 
-    override fun onReselectNavItem(navController: NavController, fragment: Fragment) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onReselectNavItem(
+        navController: NavController,
+        fragment: Fragment
+    ) = when(fragment){
+
+        is SearchFilterFragment -> {
+            navController.navigate(R.id.action_searchFragment_to_searchFilterFragment)
+        }
+
+        else -> {
+
+        }
     }
 
     override fun onBackPressed() = bottomNavController.onBackPressed()
@@ -114,23 +125,24 @@ class MainActivity : BaseActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.explore_active)
 
-        setupActionBar()
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.setUpNavigation(bottomNavController, this)
         if (savedInstanceState == null) {
             bottomNavController.onNavigationItemSelected()
         }
 
+        sessionManager.login(AuthToken(1,"qweqweqweqe"))
         subscribeObservers()
 
     }
 
+
     fun subscribeObservers(){
         sessionManager.cachedToken.observe(this, Observer{ authToken ->
             Log.d(TAG, "MainActivity, subscribeObservers: ViewState: ${authToken}")
-            if(authToken == null ||  authToken.token == null){
+            if(authToken.token == null){
                 navAuthActivity()
                 finish()
             }
@@ -138,12 +150,9 @@ class MainActivity : BaseActivity(),
     }
 
     override fun expandAppBar() {
-        findViewById<AppBarLayout>(R.id.app_bar).setExpanded(true)
+        //findViewById<AppBarLayout>(R.id.app_bar).setExpanded(true)
     }
 
-    private fun setupActionBar(){
-        setSupportActionBar(toolbar_zhilye)
-    }
 
     private fun navAuthActivity(){
         val intent = Intent(this, AuthActivity::class.java)

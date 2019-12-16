@@ -61,7 +61,7 @@
                         android:layout_marginTop="@dimen/dim_12dp"
                         android:text="@string/host"
                         android:textColor="@color/black"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:typeface="normal"
                         app:layout_constraintEnd_toStartOf="@+id/fragment_zhilye_host_image_civ"
                         app:layout_constraintStart_toStartOf="parent"
@@ -418,7 +418,7 @@
                 android:textSize="15sp"
                 android:layout_marginTop="@dimen/dim_4dp"
                 android:maxLines="1"
-                app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_zhile_book_btn"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -442,20 +442,36 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rating_defaul"
                 android:textColor="@color/primaryZero"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/fragment_zhile_price_star_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhile_price_tv" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton2"
+                android:id="@+id/fragment_zhile_book_btn"
                 style="@style/MinorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/book"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <!--<com.google.android.material.button.MaterialButton
+                android:id="@+id/fragment_zhile_cancel_book_btn"
+                style="@style/MinorButton"
+                android:visibility="gone"
+                app:backgroundTint="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:paddingStart="@dimen/dim_36dp"
+                android:paddingEnd="@dimen/dim_36dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <include
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/fragment_filter_layout_id"
         layout="@layout/fragment_filter_layout"/>
 

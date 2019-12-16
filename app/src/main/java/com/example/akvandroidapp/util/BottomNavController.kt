@@ -169,7 +169,7 @@ fun BottomNavigationView.setUpNavigation(
         bottomNavController
             .fragmentManager
             .findFragmentById(bottomNavController.containerId)!!
-            .childFragmentManager
+            .childFragmentManager!!
             .fragments[0]?.let { fragment ->
 
             onReselectListener.onReselectNavItem(

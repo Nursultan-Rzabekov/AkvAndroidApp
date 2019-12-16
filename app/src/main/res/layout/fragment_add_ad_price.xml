@@ -381,7 +381,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_add_ad_near_next_btn"
+        android:id="@+id/fragment_add_ad_price_next_btn"
         style="@style/BasicButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

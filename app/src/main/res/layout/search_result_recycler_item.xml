@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_item_height"
         app:cardCornerRadius="@dimen/cornerRadius1"
-        android:layout_marginEnd="@dimen/dim_28dp"
-        android:layout_marginStart="@dimen/dim_28dp"
         app:cardElevation="1dp"
         app:cardUseCompatPadding="true">
 

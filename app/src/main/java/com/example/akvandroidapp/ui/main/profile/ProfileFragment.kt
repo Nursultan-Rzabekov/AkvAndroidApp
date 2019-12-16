@@ -3,7 +3,11 @@ package com.example.akvandroidapp.ui.main.profile
 
 import android.os.Bundle
 import android.view.*
+import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import kotlinx.android.synthetic.main.fragment_profile_guest.*
+import kotlinx.android.synthetic.main.fragment_profile_owner.*
+import kotlinx.android.synthetic.main.profile_part_layout.*
 
 
 class ProfileFragment : BaseProfileFragment(){
@@ -13,10 +17,32 @@ class ProfileFragment : BaseProfileFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.privacy_policy, container, false)
+        return inflater.inflate(R.layout.profile_part_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fragment_profile_guest_host_mode_switch.setOnCheckedChangeListener { _, b ->
+            if(b){
+                fragment_profile_guest_layout_id.visibility = View.GONE
+                fragment_profile_owner_layout_id.visibility  = View.VISIBLE
+            }
+            else{
+                fragment_profile_guest_layout_id.visibility = View.VISIBLE
+                fragment_profile_owner_layout_id.visibility  = View.GONE
+            }
+        }
+
+        fragment_profile_owner_post_ad_btn.setOnClickListener {
+            navNextFragment()
+        }
+    }
+
+    private fun navNextFragment(){
+        findNavController().navigate(R.id.action_profileFragment_to_profileAddTypeFragment)
     }
 }
-
 
 
 

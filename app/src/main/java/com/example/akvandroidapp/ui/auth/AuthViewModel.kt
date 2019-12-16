@@ -36,6 +36,19 @@ constructor(val authRepository: AuthRepository): BaseViewModel<AuthStateEvent, A
                 )
             }
 
+            is SendCodeEvent -> {
+               return authRepository.sendCode(
+                   stateEvent.phone)
+
+            }
+
+            is VerifyCodeEvent -> {
+                return authRepository.verifyCode(
+                    stateEvent.phone,
+                    stateEvent.code
+                )
+            }
+
             is CheckPreviousAuthEvent -> {
                 return authRepository.checkPreviousAuthUser()
             }

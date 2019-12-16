@@ -1,42 +1,94 @@
 package com.example.akvandroidapp.api.main.responses
 
+import com.example.akvandroidapp.api.auth.network_responses.UserResponse
+import com.example.akvandroidapp.entity.AccountProperties
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class BlogSearchResponse(
 
-    @SerializedName("pk")
+    @SerializedName("id")
     @Expose
-    var pk: Int,
+    var id: Int,
 
-    @SerializedName("title")
+    @SerializedName("name")
     @Expose
-    var title: String,
+    var name: String,
 
-    @SerializedName("slug")
+    @SerializedName("description")
     @Expose
-    var slug: String,
+    var description: String,
 
-    @SerializedName("body")
+    @SerializedName("rooms")
     @Expose
-    var body: String,
+    var rooms: Int,
 
-    @SerializedName("image")
+    @SerializedName("floor")
     @Expose
-    var image: String,
+    var floor: Int,
 
-    @SerializedName("date_updated")
+    @SerializedName("address")
     @Expose
-    var date_updated: String,
+    var address: String,
 
-    @SerializedName("username")
+    @SerializedName("longitude")
     @Expose
-    var username: String
+    var longitude: Double,
 
+    @SerializedName("latitude")
+    @Expose
+    var latitude: Double,
+
+    @SerializedName("house_type")
+    @Expose
+    var house_type: Int,
+
+    @SerializedName("price")
+    @Expose
+    var price: Int,
+
+    @SerializedName("status")
+    @Expose
+    var status: Int,
+
+    @SerializedName("photos")
+    @Expose
+    var photos: List<String>,
+
+    @SerializedName("houseaccoms")
+    @Expose
+    var houseaccoms: List<Int>,
+
+//    @SerializedName("houserules")
+//    @Expose
+//    var houserules: List<Int>,
+
+    @SerializedName("user")
+    @Expose
+    var user: UserResponse,
+
+
+    @SerializedName("rating")
+    @Expose
+    var rating: Double
 
 
 ) {
     override fun toString(): String {
-        return "BlogSearchResponse(pk=$pk, title='$title', slug='$slug',  image='$image', date_updated='$date_updated', username='$username')"
+        return "BlogSearchResponse(id=$id, " +
+                "name='$name', " +
+                "description='$description', " +
+                "rooms='$rooms'," +
+                "floor='$floor'," +
+                "address='$address', " +
+                "longitude='$longitude', " +
+                "latitude='$latitude', " +
+                "house_type='$house_type', " +
+                "price='$price', " +
+                "status='$status', " +
+                "photos='$photos', " +
+                "houseaccoms='$houseaccoms', " +
+                "user='$user', " +
+                "rating='$rating')"
     }
 }

@@ -46,9 +46,12 @@ class LoginFragment : BaseAuthFragment() {
     }
 
     fun subscribeObservers(){
+
         viewModel.viewState.observe(viewLifecycleOwner, Observer{
             it.loginFields?.let{
-                it.login_email?.let{phonenumber_et.setText(it)}
+
+                it.login_email?.let{phonenumber_et.setText(it)
+                    Log.d("Check","Okkkkkkkkkkkkkkkkk")}
                 it.login_password?.let{password_et.setText(it)}
             }
         })

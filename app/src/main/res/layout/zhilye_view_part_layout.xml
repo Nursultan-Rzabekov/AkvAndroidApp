@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <include
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/fragment_zhilye_layout_id"
         layout="@layout/fragment_zhilye_layout"/>
 
@@ -14,7 +14,7 @@
         layout="@layout/fragment_rules_of_house_layout"/>
 
     <include
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/fragment_review_page_layout_id"
         layout="@layout/fragment_review_page_layout"/>
 

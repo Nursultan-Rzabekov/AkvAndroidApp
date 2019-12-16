@@ -12,23 +12,27 @@ data class AccountProperties(
     @SerializedName("id")
     @Expose
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "pk") var pk: Int,
+    @ColumnInfo(name = "id") var id: Int,
 
     @SerializedName("email")
     @Expose
     @ColumnInfo(name = "email") var email: String,
 
-    @SerializedName("first_name")
+    @SerializedName("gender")
     @Expose
-    @ColumnInfo(name = "first_name") var first_name: String,
-
-    @SerializedName("last_name")
-    @Expose
-    @ColumnInfo(name = "last_name") var last_name: String,
+    @ColumnInfo(name = "gender") var gender: Int,
 
     @SerializedName("phone")
     @Expose
-    @ColumnInfo(name = "phone") var phone: String
+    @ColumnInfo(name = "phone") var phone: String,
+
+    @SerializedName("name")
+    @Expose
+    @ColumnInfo(name = "name") var name: String,
+
+    @SerializedName("birth_day")
+    @Expose
+    @ColumnInfo(name = "birth_day") var birth_day: String
 
 )
 {
@@ -38,24 +42,25 @@ data class AccountProperties(
 
         other as AccountProperties
 
-        if (pk != other.pk) return false
+        if (id != other.id) return false
         if (email != other.email) return false
-        if (first_name != other.first_name) return false
-        if (last_name != other.last_name) return false
+        if (gender != other.gender) return false
         if (phone != other.phone) return false
+        if (name != other.name) return false
+        if (birth_day != other.birth_day) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = pk
+        var result = id
         result = 31 * result + email.hashCode()
-        result = 31 * result + first_name.hashCode()
-        result = 31 * result + last_name.hashCode()
+        result = 31 * result + gender
         result = 31 * result + phone.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + birth_day.hashCode()
         return result
     }
-
 }
 
 

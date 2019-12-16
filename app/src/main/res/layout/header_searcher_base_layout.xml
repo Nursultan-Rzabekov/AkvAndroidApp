@@ -42,6 +42,7 @@
         <include
             android:id="@+id/header_searcher_base_layout_back_btn"
             layout="@layout/back_button_layout"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dim_20dp"
@@ -70,6 +71,8 @@
             android:layout_gravity="end|center_vertical"
             android:adjustViewBounds="true"
             android:contentDescription="@string/filter"
+            android:clickable="true"
+            android:focusable="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_filter_dark"
             android:padding="@dimen/dim_12dp"
