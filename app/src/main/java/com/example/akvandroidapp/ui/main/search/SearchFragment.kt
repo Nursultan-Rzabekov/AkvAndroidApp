@@ -56,22 +56,14 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
         subscribeObservers()
 
 
-
-
-
-        val filterImgButton = view.findViewById<ImageButton>(R.id.main_filter_img_btn)
-
-        filterImgButton.setOnClickListener {
-            showFilterDialog()
-        }
-
 //        if(savedInstanceState == null){
 //            viewModel.loadFirstPage()
 //        }
 
-//        main_filter_img_btn.setOnClickListener {
-//            //navFilter()
-//        }
+        main_filter_img_btn.setOnClickListener {
+            showFilterDialog()
+            //navFilter()
+        }
 
         fragment_explore_apartments_iv.setOnClickListener {
             navApartments()
@@ -83,6 +75,10 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
 
         by_map_chip.setOnClickListener {
             navMapActivity()
+        }
+
+        by_date_chip.setOnClickListener {
+            showDateDialog()
         }
 
     }
@@ -302,6 +298,25 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
             }
 
             view.findViewById<TextView>(R.id.negative_button).setOnClickListener {
+                Log.d(TAG, "FilterDialog: cancelling filter.")
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+    }
+
+
+    private fun showDateDialog(){
+
+        activity?.let {
+            val dialog = MaterialDialog(it)
+                .noAutoDismiss()
+                .customView(R.layout.dialog_guests)
+
+            val view = dialog.getCustomView()
+
+            view.findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {
                 Log.d(TAG, "FilterDialog: cancelling filter.")
                 dialog.dismiss()
             }

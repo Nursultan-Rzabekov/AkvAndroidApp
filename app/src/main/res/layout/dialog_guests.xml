@@ -29,6 +29,7 @@
 
                 <ImageButton
                     style="@style/BasicImageButton"
+                    android:id="@+id/dialog_date_cancel"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:layout_gravity="center_vertical"
