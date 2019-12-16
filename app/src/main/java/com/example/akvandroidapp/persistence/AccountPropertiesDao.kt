@@ -13,6 +13,9 @@ interface AccountPropertiesDao {
     @Query("SELECT * FROM account_properties WHERE email = :email")
     suspend fun searchByEmail(email: String): AccountProperties?
 
+    @Query("SELECT * FROM account_properties WHERE phone = :phone")
+    suspend fun searchByPhone(phone: String): AccountProperties?
+
     @Query("SELECT * FROM account_properties WHERE id = :id")
     fun searchByPk(id: Int): LiveData<AccountProperties>
 
