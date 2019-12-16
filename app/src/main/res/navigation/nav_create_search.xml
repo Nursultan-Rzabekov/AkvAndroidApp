@@ -49,7 +49,15 @@
         <fragment android:id="@+id/apartmentsFragment"
             android:name="com.example.akvandroidapp.ui.main.search.ApartmentsFragment"
             android:label="@string/fragment_view_blog"
-            tools:layout="@layout/fragment_appartments_layout">
+            tools:layout="@layout/search_part_layout">
+
+                <action android:id="@+id/action_apartmentsFragment_to_mapActivity"
+                    app:destination="@id/mapActivity"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
 
 
         </fragment>
