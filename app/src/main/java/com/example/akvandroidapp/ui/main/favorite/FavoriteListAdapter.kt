@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.search
+package com.example.akvandroidapp.ui.main.favorite
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,16 +9,16 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
-import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
-class SearchListAdapter(
+
+class FavoriteListAdapter(
     private val requestManager: RequestManager,
     private val interaction: Interaction? = null,
     private val interactionCheck: InteractionCheck? = null
     ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
@@ -100,7 +100,7 @@ class SearchListAdapter(
     }
 
     internal inner class BlogRecyclerChangeCallback(
-        private val adapter: SearchListAdapter
+        private val adapter: FavoriteListAdapter
     ) : ListUpdateCallback {
 
         override fun onChanged(position: Int, count: Int, payload: Any?) {
@@ -126,6 +126,7 @@ class SearchListAdapter(
                 holder.bind(differ.currentList.get(position))
             }
         }
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -152,14 +153,18 @@ class SearchListAdapter(
         }
     }
 
+    fun removeAt(position: Int) {
+        differ.currentList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, differ.currentList.size)
+    }
+
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
         differ.submitList(newList)
     }
-
-
 
     class BlogViewHolder
     constructor(
@@ -170,10 +175,11 @@ class SearchListAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: BlogPost) = with(itemView) {
-
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
+
+            itemView.search_recycler_item_favourite_btn.isChecked = true
 
             itemView.search_recycler_item_favourite_btn.setOnClickListener {
                 if(itemView.search_recycler_item_favourite_btn.isChecked){
@@ -202,4 +208,7 @@ class SearchListAdapter(
         fun onItemSelected(position: Int, item: BlogPost,boolean: Boolean)
     }
 
+    override fun onClick(p0: View?) {
+
+    }
 }

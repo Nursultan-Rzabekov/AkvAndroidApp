@@ -1,12 +1,10 @@
 package com.example.akvandroidapp.ui.main.search
 
 
-import android.app.SearchManager
-import android.content.Context
+
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -18,6 +16,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
@@ -30,11 +29,15 @@ import kotlinx.android.synthetic.main.header_searcher_base_layout.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import nextPage
+import javax.inject.Inject
 
 
-class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , SwipeRefreshLayout.OnRefreshListener{
+class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,SearchListAdapter.InteractionCheck, SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var recyclerAdapter: SearchListAdapter
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -197,7 +200,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
-            recyclerAdapter = SearchListAdapter(requestManager,  this@SearchFragment)
+            recyclerAdapter = SearchListAdapter(requestManager,  this@SearchFragment,this@SearchFragment)
             addOnScrollListener(object: RecyclerView.OnScrollListener(){
 
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -217,6 +220,13 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
     override fun onItemSelected(position: Int, item: BlogPost) {
         viewModel.setBlogPost(item)
         findNavController().navigate(R.id.action_searchFragment_to_zhilyeFragment)
+    }
+
+    override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
+
+        Log.d("favorite", "favorite search ${item} and ${boolean}")
+
+        sessionManager.favorite(item,boolean)
     }
 
     override fun onDestroyView() {
@@ -324,7 +334,6 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction , Swi
             dialog.show()
         }
     }
-
 }
 
 

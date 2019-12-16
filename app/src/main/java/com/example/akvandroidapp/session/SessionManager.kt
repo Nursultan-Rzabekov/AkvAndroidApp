@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.akvandroidapp.entity.AuthToken
+import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.AuthTokenDao
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -26,11 +27,41 @@ constructor(
 
     private val _cachedToken = MutableLiveData<AuthToken>()
 
+    private val favoritePostList = MutableLiveData<MutableList<BlogPost>>()
+
+    init {
+        favoritePostList.value = mutableListOf()
+    }
+
     val cachedToken: LiveData<AuthToken>
         get() = _cachedToken
 
+    val favoritePostListItem: LiveData<MutableList<BlogPost>>
+        get() = favoritePostList
+
+
     fun login(newValue: AuthToken){
         setValue(newValue)
+    }
+
+    fun favorite(blogPost: BlogPost, checked: Boolean){
+        setFavoriteValue(blogPost, checked)
+    }
+
+    fun setFavoriteValue(blogPost: BlogPost, checked: Boolean) {
+        Log.d(TAG, "favorite ee ${favoritePostList.value}")
+
+        GlobalScope.launch(Main) {
+            if(checked){
+                favoritePostList.value?.add(blogPost)
+                Log.d(TAG, "favorite ${favoritePostList.value}")
+            }
+            else{
+                favoritePostList.value?.remove(blogPost)
+            }
+
+            Log.d(TAG, "favorite ${favoritePostList.value}")
+        }
     }
 
     fun logout(){
@@ -79,6 +110,4 @@ constructor(
         }
         return false
     }
-
-
 }
