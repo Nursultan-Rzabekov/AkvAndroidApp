@@ -40,20 +40,38 @@ fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
 }
 
 
-// Filter can be "date_updated" or "username"
-fun SearchViewModel.setBlogFilter(floor: Int?){
-    floor?.let{
-        val update = getCurrentViewStateOrNew()
-        update.blogFields.floor = floor
-        setViewState(update)
+fun SearchViewModel.setBlogFilterPrice(price_left: Int?, price_right: Int?){
+    val update = getCurrentViewStateOrNew()
+    price_left?.let{
+        update.blogFields.price_left = price_left
     }
+    price_right?.let{
+        update.blogFields.price_right = price_right
+    }
+    setViewState(update)
 }
 
-// Order can be "-" or ""
-// Note: "-" = DESC, "" = ASC
-fun SearchViewModel.setBlogOrder(rooms: Int){
+
+fun SearchViewModel.setBlogFilterRooms(rooms_left: Int?, rooms_right: Int?){
     val update = getCurrentViewStateOrNew()
-    update.blogFields.rooms = rooms
+    rooms_left?.let {
+        update.blogFields.rooms_left = rooms_left
+    }
+    rooms_right?.let {
+        update.blogFields.rooms_right = rooms_right
+    }
+    setViewState(update)
+}
+
+
+fun SearchViewModel.setBlogFilterBeds(beds_left: Int?, beds_right: Int?){
+    val update = getCurrentViewStateOrNew()
+    beds_left?.let {
+        update.blogFields.beds_left = beds_left
+    }
+    beds_right?.let {
+        update.blogFields.beds_right = beds_right
+    }
     setViewState(update)
 }
 

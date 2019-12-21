@@ -4,15 +4,39 @@ import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
 
 
-fun SearchViewModel.getFilter(): Int {
+fun SearchViewModel.getFilterPriceLeft(): Int {
     getCurrentViewStateOrNew().let {
-        return it.blogFields.floor
+        return it.blogFields.price_left
     }
 }
 
-fun SearchViewModel.getOrder(): Int {
+fun SearchViewModel.getFilterPriceRight(): Int {
     getCurrentViewStateOrNew().let {
-        return it.blogFields.rooms
+        return it.blogFields.price_right
+    }
+}
+
+fun SearchViewModel.getFilterRoomsLeft(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.rooms_left
+    }
+}
+
+fun SearchViewModel.getFilterRoomsRight(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.rooms_right
+    }
+}
+
+fun SearchViewModel.getFilterBedsLeft(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.beds_left
+    }
+}
+
+fun SearchViewModel.getFilterBedsRight(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.beds_right
     }
 }
 
@@ -53,7 +77,7 @@ fun SearchViewModel.getBlogPost(): BlogPost {
 }
 
 fun SearchViewModel.getDummyBlogPost(): BlogPost {
-    return BlogPost(-1, "" , "", 1, 1,"", 1.0, 1.0,"","",1,1,1.0)
+    return BlogPost(-1, "" , "", 0, 0,"", 0.0, 0.0,"","",0,0,"",0.0)
 }
 
 fun SearchViewModel.getUpdatedBlogUri(): Uri? {

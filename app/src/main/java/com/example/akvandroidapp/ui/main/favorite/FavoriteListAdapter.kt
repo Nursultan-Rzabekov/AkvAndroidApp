@@ -36,6 +36,7 @@ class FavoriteListAdapter(
         "",
         0,
         0,
+        "",
         0.0
     )
 

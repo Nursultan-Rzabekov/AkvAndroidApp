@@ -37,9 +37,13 @@ constructor(
 
     fun searchBlogPosts(
         authToken: AuthToken,
-        query: String,
-        floor:Int,
-        rooms: Int,
+        city__name: String,
+        price__gte:Int,
+        price__lte: Int,
+        room__gte:Int,
+        room__lte: Int,
+        beds_gte:Int,
+        beds_lte: Int,
         page: Int
     ): LiveData<DataState<SearchViewState>> {
 
@@ -84,6 +88,7 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
+                            image = "http://akv-technopark.herokuapp.com/media/images/_DSC0428.jpg",
                             rating = blogPostResponse.rating
                         )
                     )
@@ -102,24 +107,26 @@ constructor(
 
             override fun createCall(): LiveData<GenericApiResponse<BlogListSearchResponse>> {
 
-                Log.d("qwe","wwwww ${query}")
-                Log.d("qwe","wwwww ${floor}")
-                Log.d("qwe","wwwww ${rooms}")
-                Log.d("qwe","wwwww ${page}")
+                Log.d("qwe","result price left ${price__gte}")
+                Log.d("qwe","result room left ${room__gte}")
+                Log.d("qwe","result price right ${price__lte}")
+                Log.d("qwe","result page ${page}")
 //                                    "Token ${authToken.token!!}",
                 return openApiMainService.searchListBlogPosts(
-                    search = query,
-                    floor = floor,
-                    rooms = rooms,
+                    city__name = "Алматы",
+                    price__gte = price__gte,
+                    price__lte = price__lte,
+                    room__gte = room__gte,
+                    room__lte = room__lte,
+                    beds_gte = beds_gte,
+                    beds_lte = beds_lte,
                     page = page
                 )
             }
 
             override fun loadFromCache(): LiveData<SearchViewState> {
                 return blogPostDao.returnOrderedBlogQuery(
-                    query = query,
-                    floor = floor,
-                    rooms = rooms,
+                    query = city__name,
                     page = page)
                     .switchMap {
                         object: LiveData<SearchViewState>(){

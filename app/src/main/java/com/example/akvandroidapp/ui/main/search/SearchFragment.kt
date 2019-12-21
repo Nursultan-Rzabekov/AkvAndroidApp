@@ -63,8 +63,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
 //        }
 
         main_filter_img_btn.setOnClickListener {
-            showFilterDialog()
-            //navFilter()
+            navFilter()
         }
 
         fragment_explore_apartments_iv.setOnClickListener {
@@ -72,7 +71,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
         }
 
         fragment_explore_homes_iv.setOnClickListener {
-            navFilter()
+            //navFilter()
         }
 
         by_map_chip.setOnClickListener {
@@ -253,68 +252,68 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
     }
 
 
-    fun showFilterDialog(){
-
-        Toast.makeText(context,"clicked",Toast.LENGTH_SHORT).show()
-        activity?.let {
-            val dialog = MaterialDialog(it)
-                .noAutoDismiss()
-                .customView(R.layout.layout_blog_filter)
-
-            val view = dialog.getCustomView()
-
-            val filter = viewModel.getFilter()
-            val order = viewModel.getOrder()
-
-            view.findViewById<RadioGroup>(R.id.filter_group).apply {
-                when (filter) {
-                    6 -> check(R.id.filter_date)
-                    3 -> check(R.id.filter_author)
-                }
-            }
-
-            view.findViewById<RadioGroup>(R.id.order_group).apply {
-                when (order) {
-                    3 -> check(R.id.filter_asc)
-                    6 -> check(R.id.filter_desc)
-                }
-            }
-
-            view.findViewById<TextView>(R.id.positive_button).setOnClickListener {
-                Log.d(TAG, "FilterDialog: apply filter.")
-
-                val newFilter =
-                    when (view.findViewById<RadioGroup>(R.id.filter_group).checkedRadioButtonId) {
-                        R.id.filter_author -> 6
-                        R.id.filter_date -> 3
-                        else -> 6
-                    }
-
-                val newOrder =
-                    when (view.findViewById<RadioGroup>(R.id.order_group).checkedRadioButtonId) {
-                        R.id.filter_desc -> 3
-                        else -> 6
-                    }
-
-                viewModel.apply {
-                    saveFilterOptions(newFilter, newOrder)
-                    setBlogFilter(newFilter)
-                    setBlogOrder(newOrder)
-                }
-
-                onBlogSearchOrFilter()
-
-                dialog.dismiss()
-            }
-
-            view.findViewById<TextView>(R.id.negative_button).setOnClickListener {
-                Log.d(TAG, "FilterDialog: cancelling filter.")
-                dialog.dismiss()
-            }
-
-            dialog.show()
-        }
-    }
+//    fun showFilterDialog(){
+//
+//        Toast.makeText(context,"clicked",Toast.LENGTH_SHORT).show()
+//        activity?.let {
+//            val dialog = MaterialDialog(it)
+//                .noAutoDismiss()
+//                .customView(R.layout.layout_blog_filter)
+//
+//            val view = dialog.getCustomView()
+//
+//            val filter = viewModel.getFilter()
+//            val order = viewModel.getOrder()
+//
+//            view.findViewById<RadioGroup>(R.id.filter_group).apply {
+//                when (filter) {
+//                    6 -> check(R.id.filter_date)
+//                    3 -> check(R.id.filter_author)
+//                }
+//            }
+//
+//            view.findViewById<RadioGroup>(R.id.order_group).apply {
+//                when (order) {
+//                    3 -> check(R.id.filter_asc)
+//                    6 -> check(R.id.filter_desc)
+//                }
+//            }
+//
+//            view.findViewById<TextView>(R.id.positive_button).setOnClickListener {
+//                Log.d(TAG, "FilterDialog: apply filter.")
+//
+//                val newFilter =
+//                    when (view.findViewById<RadioGroup>(R.id.filter_group).checkedRadioButtonId) {
+//                        R.id.filter_author -> 6
+//                        R.id.filter_date -> 3
+//                        else -> 6
+//                    }
+//
+//                val newOrder =
+//                    when (view.findViewById<RadioGroup>(R.id.order_group).checkedRadioButtonId) {
+//                        R.id.filter_desc -> 3
+//                        else -> 6
+//                    }
+//
+//                viewModel.apply {
+//                    saveFilterOptions(newFilter, newOrder)
+//                    setBlogFilter(newFilter)
+//                    setBlogOrder(newOrder)
+//                }
+//
+//                onBlogSearchOrFilter()
+//
+//                dialog.dismiss()
+//            }
+//
+//            view.findViewById<TextView>(R.id.negative_button).setOnClickListener {
+//                Log.d(TAG, "FilterDialog: cancelling filter.")
+//                dialog.dismiss()
+//            }
+//
+//            dialog.show()
+//        }
+//    }
 
 
     private fun showDateDialog(){

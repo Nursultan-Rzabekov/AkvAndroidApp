@@ -36,6 +36,7 @@ class SearchListAdapter(
         "",
         0,
         0,
+        "",
         0.0
     )
 

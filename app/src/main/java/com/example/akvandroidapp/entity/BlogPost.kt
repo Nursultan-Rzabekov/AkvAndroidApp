@@ -47,8 +47,8 @@ data class BlogPost(
     @ColumnInfo(name = "status")
     var status: Int,
 
-//    @ColumnInfo(name = "photos")
-//    var photos: String,
+    @ColumnInfo(name = "image")
+    var image: String? = null,
 
     @ColumnInfo(name = "rating")
     var rating: Double
@@ -68,6 +68,7 @@ data class BlogPost(
                 "city='$city', " +
                 "price='$price', " +
                 "status='$status', " +
+                "image='$image', " +
                 "rating='$rating')"
     }
 

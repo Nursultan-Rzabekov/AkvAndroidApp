@@ -14,7 +14,8 @@ class BlogQueryUtils {
         // values
 
         const val BLOG_ORDER_ROOMS: Int = 6
-        const val BLOG_ORDER_FLOOR: Int = 3
+        const val BLOG_ORDER_PRICE_LEFT: Int = 3
+        const val BLOG_ORDER_PRICE_RIGHT: Int = 300000000
         const val BLOG_ORDER_DESC: String = "-"
         const val BLOG_FILTER_USERNAME = "username"
         const val BLOG_FILTER_DATE_UPDATED = "date_updated"
@@ -25,13 +26,10 @@ class BlogQueryUtils {
 
 fun BlogPostDao.returnOrderedBlogQuery(
     query: String,
-    floor:Int,
-    rooms: Int,
     page: Int
 ): LiveData<List<BlogPost>> {
 
     when{
-
         else ->
             return searchBlogPostsOrderByDateASC(
                 query = query,
