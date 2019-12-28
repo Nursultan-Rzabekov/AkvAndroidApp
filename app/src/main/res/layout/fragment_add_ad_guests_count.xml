@@ -15,205 +15,301 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/fragment_add_ad_guests_count_tv1"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_48dp"
-        android:layout_marginTop="@dimen/dim_60dp"
-        android:layout_marginEnd="@dimen/dim_48dp"
-        android:text="@string/how_many_guests"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:textStyle="bold"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_back_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_back_btn">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_60dp"
-        android:layout_marginTop="@dimen/dim_48dp"
-        android:layout_marginEnd="@dimen/dim_60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_tv1">
-
-        <TextView
-            android:id="@+id/fragment_add_ad_guests_count_guest_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="@string/guests"
-            android:textColor="@color/grey6"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_add_ad_guests_count_guest_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragment_add_ad_guests_count_guest_tv">
-
-            <ImageButton
-                android:contentDescription="@string/minus"
-                android:id="@+id/fragment_add_ad_guests_count_guest_minus_btn"
-                style="@style/BasicImageButton"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_minus_button" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/fragment_add_ad_guests_count_guest_counter_tv"
-                android:layout_width="wrap_content"
+                android:id="@+id/fragment_add_ad_guests_count_tv1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dim_8dp"
-                android:layout_marginEnd="@dimen/dim_8dp"
-                android:text="@string/_0"
-                android:textColor="@color/secondaryFirst"
-                android:textSize="22sp" />
+                android:layout_marginStart="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_60dp"
+                android:layout_marginEnd="@dimen/dim_48dp"
+                android:text="@string/how_many_guests"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:contentDescription="@string/plus"
-                android:id="@+id/fragment_add_ad_guests_count_guest_plus_btn"
-                style="@style/BasicImageButton"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_plus_button" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_60dp"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginEnd="@dimen/dim_60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_tv1">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/fragment_add_ad_guests_count_guest_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="@string/guests"
+                    android:textColor="@color/grey6"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_ad_guests_count_guest_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_ad_guests_count_guest_tv">
 
-    <View
-        android:id="@+id/divider13"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="@dimen/dim_48dp"
-        android:layout_marginTop="@dimen/dim_48dp"
-        android:layout_marginEnd="@dimen/dim_48dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                    <ImageButton
+                        android:id="@+id/fragment_add_ad_guests_count_guest_minus_btn"
+                        style="@style/BasicImageButton"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:contentDescription="@string/minus"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_minus_button" />
 
-    <TextView
-        android:id="@+id/fragment_add_ad_guests_count_bed_tv2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_48dp"
-        android:layout_marginTop="@dimen/dim_24dp"
-        android:layout_marginEnd="@dimen/dim_48dp"
-        android:text="@string/how_many_beds"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider13" />
+                    <TextView
+                        android:id="@+id/fragment_add_ad_guests_count_guest_counter_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dim_8dp"
+                        android:layout_marginEnd="@dimen/dim_8dp"
+                        android:text="@string/_0"
+                        android:textColor="@color/secondaryFirst"
+                        android:textSize="22sp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/const1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_60dp"
-        android:layout_marginTop="@dimen/dim_48dp"
-        android:layout_marginEnd="@dimen/dim_60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_bed_tv2">
+                    <ImageButton
+                        android:id="@+id/fragment_add_ad_guests_count_guest_plus_btn"
+                        style="@style/BasicImageButton"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:contentDescription="@string/plus"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_plus_button" />
 
-        <TextView
-            android:id="@+id/fragment_add_ad_guests_count_bed_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="@string/beds"
-            android:textColor="@color/grey6"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_add_ad_guests_count_bed_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragment_add_ad_guests_count_bed_tv">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageButton
-                android:contentDescription="@string/minus"
-                android:id="@+id/fragment_add_ad_guests_count_bed_minus_btn"
-                style="@style/BasicImageButton"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_minus_button" />
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginEnd="@dimen/dim_48dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
             <TextView
-                android:id="@+id/fragment_add_ad_guests_count_bed_counter_tv"
-                android:layout_width="wrap_content"
+                android:id="@+id/fragment_add_ad_guests_count_rooms_tv2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dim_8dp"
-                android:layout_marginEnd="@dimen/dim_8dp"
-                android:text="@string/_0"
-                android:textColor="@color/secondaryFirst"
-                android:textSize="22sp" />
+                android:layout_marginStart="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_24dp"
+                android:layout_marginEnd="@dimen/dim_48dp"
+                android:text="@string/how_many_rooms"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider13" />
 
-            <ImageButton
-                android:contentDescription="@string/plus"
-                android:id="@+id/fragment_add_ad_guests_count_bed_plus_btn"
-                style="@style/BasicImageButton"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_plus_button" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_60dp"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginEnd="@dimen/dim_60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_rooms_tv2">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/fragment_add_ad_guests_count_rooms_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="@string/rooms"
+                    android:textColor="@color/grey6"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_ad_guests_count_rooms_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_ad_guests_count_rooms_tv">
 
-    <View
-        android:id="@+id/divider14"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="@dimen/dim_48dp"
-        android:layout_marginTop="@dimen/dim_48dp"
-        android:layout_marginEnd="@dimen/dim_48dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/const1" />
+                    <ImageButton
+                        android:id="@+id/fragment_add_ad_guests_count_rooms_minus_btn"
+                        style="@style/BasicImageButton"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:contentDescription="@string/minus"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_minus_button" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_add_ad_guests_count_next_btn"
-        style="@style/BasicButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_36dp"
-        android:layout_marginEnd="@dimen/dim_36dp"
-        android:layout_marginBottom="@dimen/dim_36dp"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                    <TextView
+                        android:id="@+id/fragment_add_ad_guests_count_rooms_counter_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dim_8dp"
+                        android:layout_marginEnd="@dimen/dim_8dp"
+                        android:text="@string/_0"
+                        android:textColor="@color/secondaryFirst"
+                        android:textSize="22sp" />
+
+                    <ImageButton
+                        android:id="@+id/fragment_add_ad_guests_count_rooms_plus_btn"
+                        style="@style/BasicImageButton"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:contentDescription="@string/plus"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_plus_button" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider14"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginEnd="@dimen/dim_48dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+            <TextView
+                android:id="@+id/fragment_add_ad_guests_count_bed_tv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_24dp"
+                android:layout_marginEnd="@dimen/dim_48dp"
+                android:text="@string/how_many_beds"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider14" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_60dp"
+                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginEnd="@dimen/dim_60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_bed_tv2">
+
+                <TextView
+                    android:id="@+id/fragment_add_ad_guests_count_bed_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="@string/beds"
+                    android:textColor="@color/grey6"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_ad_guests_count_bed_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_ad_guests_count_bed_tv">
+
+                    <ImageButton
+                        android:id="@+id/fragment_add_ad_guests_count_bed_minus_btn"
+                        style="@style/BasicImageButton"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:contentDescription="@string/minus"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_minus_button" />
+
+                    <TextView
+                        android:id="@+id/fragment_add_ad_guests_count_bed_counter_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dim_8dp"
+                        android:layout_marginEnd="@dimen/dim_8dp"
+                        android:text="@string/_0"
+                        android:textColor="@color/secondaryFirst"
+                        android:textSize="22sp" />
+
+                    <ImageButton
+                        android:id="@+id/fragment_add_ad_guests_count_bed_plus_btn"
+                        style="@style/BasicImageButton"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:contentDescription="@string/plus"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_plus_button" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragment_add_ad_guests_count_next_btn"
+                style="@style/BasicButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_36dp"
+                android:layout_marginEnd="@dimen/dim_36dp"
+                android:layout_marginBottom="@dimen/dim_36dp"
+                android:text="@string/next"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

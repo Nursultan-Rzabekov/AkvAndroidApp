@@ -277,4 +277,20 @@
     <string name="quit">Выйти</string>
     <string name="geolocation_support">Служба геолокации</string>
     <string name="saved">Сохранённые</string>
+    <string name="my_booking">Мои \nбронирования</string>
+    <string name="random_trips">2 поездки</string>
+    <string name="random_guests5">5 гостей</string>
+    <string name="dot">•</string>
+    <string name="booking_check_stantard_text">Бронируйте места в жильё и проводите свои лучшие время с нами.</string>
+    <string name="book_appartment">Забранировать жильё</string>
+    <string name="request_under_procesing">Ваша заявка отправлена хозяйну. \nВ течении 24 часов вам придет ответ.</string>
+    <string name="request_accepted">Ваша заявка принета</string>
+    <string name="request_accepted_lb">Можете связаться с хозяйном через чат. Перейти на чат</string>
+    <string name="request_canceled">Ваша заявка откланена</string>
+    <string name="request_canceled_lb1">Сообщение от хозяйна:</string>
+    <string name="random_text6">“Простите, но мы запланировали ремонт”</string>
+    <string name="how_many_rooms">Сколько комнат у вас дома?</string>
+    <string name="rooms">Комнаты</string>
+    <string name="my_adds">Мои обьявления</string>
+    <string name="add_more_adds">Добавить ещё обьявление</string>
 </resources>

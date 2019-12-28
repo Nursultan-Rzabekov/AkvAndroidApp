@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/elevation_3"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dim_16dp">
+
+            <ImageView
+                android:contentDescription="@string/random_location"
+                android:id="@+id/book_requests_recycler_view_item_iv"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:background="@drawable/image_all_corner_back1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test_image_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16dp"
+                android:layout_marginEnd="@dimen/dim_16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                app:layout_constraintStart_toEndOf="@+id/book_requests_recycler_view_item_iv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <TextView
+                    android:id="@+id/book_requests_recycler_view_item_title_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hotel_del_luxe"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/divider36"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="@dimen/dim_48dp"
+                    android:background="?android:attr/listDivider" />
+
+                <LinearLayout
+                    android:id="@+id/book_requests_recycler_view_item_processing_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/book_requests_recycler_view_item_processing_lb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/request_under_procesing"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/book_requests_recycler_view_item_accepted_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/book_requests_recycler_view_item_accepted_lb1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dim_4dp"
+                        android:layout_marginBottom="@dimen/dim_4dp"
+                        android:text="@string/request_accepted"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/green"/>
+
+                    <TextView
+                        android:id="@+id/book_requests_recycler_view_item_accepted_lb2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/request_accepted_lb"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/book_requests_recycler_view_item_canceled_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/book_requests_recycler_view_item_canceled_lb1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dim_4dp"
+                        android:layout_marginBottom="@dimen/dim_4dp"
+                        android:text="@string/request_canceled"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/red3"/>
+
+                    <TextView
+                        android:id="@+id/book_requests_recycler_view_item_canceled_lb2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/request_canceled_lb1"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="11sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/book_requests_recycler_view_item_canceled_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/random_text6"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:contentDescription="@string/cancel"
+                android:id="@+id/imageButton"
+                style="@style/BasicImageButton"
+                android:layout_width="@dimen/dim_12dp"
+                android:layout_height="@dimen/dim_12dp"
+                android:tint="@color/secondaryFirst"
+                android:src="@drawable/ic_cancel_filter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
