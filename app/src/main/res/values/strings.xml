@@ -293,4 +293,6 @@
     <string name="rooms">Комнаты</string>
     <string name="my_adds">Мои обьявления</string>
     <string name="add_more_adds">Добавить ещё обьявление</string>
+    <string name="book_rules">Правила бронирования</string>
+    <string name="submit_ad">Разместить</string>
 </resources>
