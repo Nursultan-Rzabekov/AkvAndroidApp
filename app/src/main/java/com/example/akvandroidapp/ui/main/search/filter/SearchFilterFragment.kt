@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.appyvet.materialrangebar.RangeBar
 import com.appyvet.materialrangebar.RangeBar.OnRangeBarChangeListener
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.persistence.BlogQueryUtils
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_filter.*
@@ -27,14 +28,14 @@ class SearchFilterFragment : BaseSearchFragment() {
         return inflater.inflate(R.layout.fragment_filter_layout, container, false)
     }
 
-    private var price_left:Int? = null
-    private var price_right:Int? = null
+    private var price_left:Int = 0
+    private var price_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
 
-    private var room_left:Int? = null
-    private var room_right:Int? = null
+    private var room_left:Int = 0
+    private var room_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
 
-    private var beds_left:Int? = null
-    private var beds_right:Int? = null
+    private var beds_left:Int = 0
+    private var beds_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,15 +58,12 @@ class SearchFilterFragment : BaseSearchFragment() {
 
         getRangebarStatus()
 
-
         fragment_filter_show_results_btn.setOnClickListener {
             viewModel.apply {
-                saveFilterOptions(price_left!!, price_right!!,room_left!!,room_right!!,beds_left!!,beds_right!!)
                 setBlogFilterPrice(price_left,price_right)
                 setBlogFilterRooms(room_left,room_right)
                 setBlogFilterBeds(beds_left,beds_right)
             }
-
             onBlogSearchOrFilter()
         }
     }
@@ -132,16 +130,13 @@ class SearchFilterFragment : BaseSearchFragment() {
 
             override fun onTouchEnded(rangeBar: RangeBar) {
                 Log.d("RangeBar", "Touch ended")
-
             }
-
             override fun onTouchStarted(rangeBar: RangeBar) {
                 Log.d("RangeBar", "Touch started")
             }
         })
 
     }
-
 
     private fun navFilterCityFragment(){
         findNavController().navigate(R.id.action_searchFilterFragment_to_filterCityFragment)

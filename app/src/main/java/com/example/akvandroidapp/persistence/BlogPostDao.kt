@@ -13,12 +13,14 @@ interface BlogPostDao {
 
     @Query("""
         SELECT * FROM blog_post 
-        WHERE name LIKE '%' || :query || '%' 
-        OR description LIKE '%' || :query || '%' 
-        OR address LIKE '%' || :query || '%' 
+        WHERE name LIKE '%' || :query || '%'
+        OR price <= :price__gte || '%' 
+        OR price >= :price__lte || '%'
         ORDER BY id  ASC LIMIT (:page * :pageSize)""")
     fun searchBlogPostsOrderByDateASC(
         query: String,
+        price__gte:Int,
+        price__lte: Int,
         page: Int,
         pageSize: Int = PAGINATION_PAGE_SIZE
     ): LiveData<List<BlogPost>>

@@ -29,20 +29,6 @@ constructor(
     private val editor: SharedPreferences.Editor
 ): BaseViewModel<SearchStateEvent, SearchViewState>(){
 
-//    init {
-//        setBlogFilter(
-//            sharedPreferences.getString(
-//                Search_FILTER,
-//                ""
-//            ).toString()
-//        )
-//        setBlogOrder(
-//            sharedPreferences.getString(
-//                Search_ORDER,
-//                ""
-//            ).toString()
-//        )
-//    }
 
     override fun handleStateEvent(stateEvent: SearchStateEvent): LiveData<DataState<SearchViewState>> {
         when(stateEvent){
@@ -59,7 +45,7 @@ constructor(
                         room__gte = getFilterRoomsLeft(),
                         room__lte = getFilterRoomsRight(),
                         beds_gte = getFilterBedsLeft(),
-                        beds_lte = getFilterBedsLeft(),
+                        beds_lte = getFilterBedsRight(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -75,7 +61,7 @@ constructor(
                         room__gte = getFilterRoomsLeft(),
                         room__lte = getFilterRoomsRight(),
                         beds_gte = getFilterBedsLeft(),
-                        beds_lte = getFilterBedsLeft(),
+                        beds_lte = getFilterBedsRight(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -91,7 +77,7 @@ constructor(
                         room__gte = getFilterRoomsLeft(),
                         room__lte = getFilterRoomsRight(),
                         beds_gte = getFilterBedsLeft(),
-                        beds_lte = getFilterBedsLeft(),
+                        beds_lte = getFilterBedsRight(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -107,7 +93,7 @@ constructor(
                         room__gte = getFilterRoomsLeft(),
                         room__lte = getFilterRoomsRight(),
                         beds_gte = getFilterBedsLeft(),
-                        beds_lte = getFilterBedsLeft(),
+                        beds_lte = getFilterBedsRight(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
@@ -129,32 +115,6 @@ constructor(
 
     override fun initNewViewState(): SearchViewState {
         return SearchViewState()
-    }
-
-
-    fun saveFilterOptions(filter_price_left: Int,
-                          filter_price_right: Int,
-                          filter_rooms_left: Int,
-                          filter_rooms_right: Int,
-                          filter_beds_left: Int,
-                          filter_beds_right: Int){
-        editor.putInt(Search_FILTER_PRICE_LEFT, filter_price_left)
-        editor.apply()
-
-        editor.putInt(Search_FILTER_PRICE_RIGHT, filter_price_right)
-        editor.apply()
-
-        editor.putInt(Search_FILTER_ROOMS_LEFT, filter_rooms_left)
-        editor.apply()
-
-        editor.putInt(Search_FILTER_ROOMS_RIGHT, filter_rooms_right)
-        editor.apply()
-
-        editor.putInt(Search_FILTER_BEDS_LEFT, filter_beds_left)
-        editor.apply()
-
-        editor.putInt(Search_FILTER_BEDS_RIGHT, filter_beds_right)
-        editor.apply()
     }
 
     fun cancelActiveJobs(){

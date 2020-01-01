@@ -40,38 +40,26 @@ fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
 }
 
 
-fun SearchViewModel.setBlogFilterPrice(price_left: Int?, price_right: Int?){
+fun SearchViewModel.setBlogFilterPrice(price_left: Int, price_right: Int){
     val update = getCurrentViewStateOrNew()
-    price_left?.let{
-        update.blogFields.price_left = price_left
-    }
-    price_right?.let{
-        update.blogFields.price_right = price_right
-    }
+    update.blogFields.price_left = price_left
+    update.blogFields.price_right = price_right
     setViewState(update)
 }
 
 
-fun SearchViewModel.setBlogFilterRooms(rooms_left: Int?, rooms_right: Int?){
+fun SearchViewModel.setBlogFilterRooms(rooms_left: Int, rooms_right: Int){
     val update = getCurrentViewStateOrNew()
-    rooms_left?.let {
-        update.blogFields.rooms_left = rooms_left
-    }
-    rooms_right?.let {
-        update.blogFields.rooms_right = rooms_right
-    }
+    update.blogFields.rooms_left = rooms_left
+    update.blogFields.rooms_right = rooms_right
     setViewState(update)
 }
 
 
-fun SearchViewModel.setBlogFilterBeds(beds_left: Int?, beds_right: Int?){
+fun SearchViewModel.setBlogFilterBeds(beds_left: Int, beds_right: Int){
     val update = getCurrentViewStateOrNew()
-    beds_left?.let {
-        update.blogFields.beds_left = beds_left
-    }
-    beds_right?.let {
-        update.blogFields.beds_right = beds_right
-    }
+    update.blogFields.beds_left = beds_left
+    update.blogFields.beds_right = beds_right
     setViewState(update)
 }
 

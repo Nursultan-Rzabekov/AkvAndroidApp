@@ -104,7 +104,6 @@ constructor(
                     )
                 }
 
-
                 Log.d(TAG,"phone or email ${email}")
                 saveAuthenticatedUserToPrefs(email)
 
@@ -112,6 +111,8 @@ constructor(
                     AuthToken(response.body.user.id,
                         response.body.token)
                 )
+
+
 
                 onCompleteJob(
                     DataState.data(

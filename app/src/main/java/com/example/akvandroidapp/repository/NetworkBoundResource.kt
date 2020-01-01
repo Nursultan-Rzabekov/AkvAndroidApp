@@ -103,7 +103,6 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject, ViewStateType>
     }
 
     suspend fun handleNetworkCall(response: GenericApiResponse<ResponseObject>){
-
         when(response){
             is ApiSuccessResponse ->{
                 handleApiSuccessResponse(response)

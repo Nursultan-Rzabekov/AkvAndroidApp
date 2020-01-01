@@ -74,13 +74,7 @@ interface OpenApiMainService {
     @GET("houses")
     fun searchListBlogPosts(
 //        @Header("Authorization") authorization: String,
-        @Query("city__name") city__name: String,
-        @Query("price__gte") price__gte: Int,
-        @Query("price__lte") price__lte: Int,
-        @Query("room__gte") room__gte: Int,
-        @Query("room__lte") room__lte: Int,
-        @Query("beds_gte") beds_gte: Int,
-        @Query("beds_lte") beds_lte: Int,
+        @QueryMap  options : Map<String, String>,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<BlogListSearchResponse>>
 }
