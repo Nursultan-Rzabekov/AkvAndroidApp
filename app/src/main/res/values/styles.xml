@@ -33,6 +33,16 @@
         <item name="boxStrokeColor">@color/secondaryFirst</item>
     </style>
 
+    <style name="CityTextOutlined.Dense" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusTopStart">@dimen/cornerRadius1</item>
+        <item name="hintEnabled">false</item>
+        <item name='boxStrokeWidth'>1dp</item>
+        <item name="boxStrokeColor">@color/secondaryFirst</item>
+    </style>
+
     <style name="BasicTextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius3</item>
         <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius3</item>

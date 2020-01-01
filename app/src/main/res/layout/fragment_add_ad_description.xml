@@ -45,7 +45,7 @@
             android:id="@+id/fragment_add_ad_description_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Название *"
+            android:text="@string/title_must"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:hint="Дайте название жилью" />
+                android:hint="@string/name_your_apartment" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,7 +72,7 @@
             android:id="@+id/fragment_add_ad_description_desc_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Описание *"
+            android:text="@string/description_must"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -83,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_12dp"
             app:counterEnabled="true"
+            app:errorIconTint="@android:color/transparent"
             app:counterMaxLength="500">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -93,7 +94,7 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
-                android:hint="Опишите ваше жильё" />
+                android:hint="@string/describe_apartment" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

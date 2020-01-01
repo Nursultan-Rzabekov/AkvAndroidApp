@@ -40,7 +40,7 @@
         android:layout_marginStart="@dimen/dim_60dp"
         android:layout_marginTop="@dimen/dim_36dp"
         android:layout_marginEnd="@dimen/dim_60dp"
-        android:hint="@string/select"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_type_of_appartment_tv">
@@ -48,7 +48,9 @@
         <AutoCompleteTextView
             android:id="@+id/fragment_add_ad_type_of_appartment_drop_down_auto_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:hint="@string/select" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

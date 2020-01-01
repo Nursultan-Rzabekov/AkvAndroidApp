@@ -20,7 +20,8 @@
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_back_btn">
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_guests_count_back_btn"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim_60dp"
-                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_32dp"
                 android:layout_marginEnd="@dimen/dim_60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="@dimen/dim_48dp"
-                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_32dp"
                 android:layout_marginEnd="@dimen/dim_48dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim_60dp"
-                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_32dp"
                 android:layout_marginEnd="@dimen/dim_60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -206,7 +207,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="@dimen/dim_48dp"
-                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_32dp"
                 android:layout_marginEnd="@dimen/dim_48dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -233,7 +234,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim_60dp"
-                android:layout_marginTop="@dimen/dim_48dp"
+                android:layout_marginTop="@dimen/dim_32dp"
                 android:layout_marginEnd="@dimen/dim_60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -306,7 +307,8 @@
                 android:text="@string/next"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/constraintLayout1" />
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout1"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

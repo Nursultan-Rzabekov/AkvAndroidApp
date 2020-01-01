@@ -2,7 +2,9 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
@@ -11,6 +13,11 @@ import kotlinx.android.synthetic.main.fragment_add_ad_guests_count.*
 
 
 class ProfileAddQuestsFragment : BaseProfileFragment(){
+
+    private var type: String? = null
+    private var guestsCount: Int = 0
+    private var roomsCount: Int = 0
+    private var bedsCount: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +30,10 @@ class ProfileAddQuestsFragment : BaseProfileFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        type = arguments?.getString("typeOfApartment")
+
+        clearAll()
+
         fragment_add_ad_guests_count_next_btn.setOnClickListener {
             navNextFragment()
         }
@@ -30,10 +41,48 @@ class ProfileAddQuestsFragment : BaseProfileFragment(){
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        fragment_add_ad_guests_count_guest_minus_btn.setOnClickListener {
+            if (guestsCount > 0)
+                guestsCount--
+            fragment_add_ad_guests_count_guest_counter_tv.text = guestsCount.toString()
+        }
+
+        fragment_add_ad_guests_count_guest_plus_btn.setOnClickListener {
+            fragment_add_ad_guests_count_guest_counter_tv.text = (++guestsCount).toString()
+        }
+
+        fragment_add_ad_guests_count_rooms_minus_btn.setOnClickListener {
+            if (roomsCount > 0)
+                roomsCount--
+            fragment_add_ad_guests_count_rooms_counter_tv.text = roomsCount.toString()
+        }
+
+        fragment_add_ad_guests_count_rooms_plus_btn.setOnClickListener {
+            fragment_add_ad_guests_count_rooms_counter_tv.text = (++roomsCount).toString()
+        }
+
+        fragment_add_ad_guests_count_bed_minus_btn.setOnClickListener {
+            if (bedsCount > 0)
+                bedsCount--
+            fragment_add_ad_guests_count_bed_counter_tv.text = bedsCount.toString()
+        }
+
+        fragment_add_ad_guests_count_bed_plus_btn.setOnClickListener {
+            fragment_add_ad_guests_count_bed_counter_tv.text = (++bedsCount).toString()
+        }
     }
 
     private fun navNextFragment(){
-        findNavController().navigate(R.id.action_profileAddQuestsFragment_to_profileAddAddressFragment)
+        val bundle = bundleOf("typeOfApartment" to type, "bedsCount" to bedsCount,
+                                "roomsCount" to roomsCount, "guestsCount" to guestsCount)
+        findNavController().navigate(R.id.action_profileAddQuestsFragment_to_profileAddAddressFragment, bundle)
+    }
+
+    private fun clearAll(){
+        fragment_add_ad_guests_count_guest_counter_tv.text = guestsCount.toString()
+        fragment_add_ad_guests_count_rooms_counter_tv.text = roomsCount.toString()
+        fragment_add_ad_guests_count_bed_counter_tv.text = bedsCount.toString()
     }
 }
 

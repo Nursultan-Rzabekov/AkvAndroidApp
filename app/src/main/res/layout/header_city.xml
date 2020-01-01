@@ -23,7 +23,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/header_city_l_et"
-            style="@style/CityTextOutlined"
+            style="@style/CityTextOutlined.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dim_28dp"

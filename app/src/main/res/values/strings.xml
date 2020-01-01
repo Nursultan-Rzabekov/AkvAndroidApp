@@ -190,7 +190,7 @@
     <string name="random_date1">Сентябрь 2019</string>
     <string name="random_score1">4.6</string>
     <string name="random_text1">Алмата однако забывать, что начало повседневной работы по формированию.</string>
-    <string name="appartment_address">Адрес вашего  жилья</string>
+    <string name="appartment_address">Адрес вашего \nжилья</string>
     <string name="show_by_map">Указать на карте</string>
     <string name="add_description">Добавте название  и описание  вашего жилья</string>
     <string name="kind_of_udopstva">Какие удобства вы  предлагаете?</string>
@@ -295,4 +295,14 @@
     <string name="add_more_adds">Добавить ещё обьявление</string>
     <string name="book_rules">Правила бронирования</string>
     <string name="submit_ad">Разместить</string>
+    <string name="Country">Страна *</string>
+    <string name="city_must">Город *</string>
+    <string name="address_must">Адрес *</string>
+    <string name="country">Страна</string>
+    <string name="region_">Область</string>
+    <string name="post_index">Почтовый индекс</string>
+    <string name="describe_apartment">Опишите ваше жильё</string>
+    <string name="description_must">Описание *</string>
+    <string name="name_your_apartment">Дайте название жилью</string>
+    <string name="title_must">Название *</string>
 </resources>
