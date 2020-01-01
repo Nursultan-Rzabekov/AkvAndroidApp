@@ -11,6 +11,9 @@ import com.example.akvandroidapp.ui.auth.state.*
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import javax.inject.Inject
 
+
+
+///qweeqw
 class AuthViewModel
 @Inject
 constructor(val authRepository: AuthRepository): BaseViewModel<AuthStateEvent, AuthViewState>()
