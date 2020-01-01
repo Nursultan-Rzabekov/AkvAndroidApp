@@ -215,6 +215,20 @@
         <item name="strokeColor">@color/primaryZero</item>
     </style>
 
+    <style name="BasicOutlinedButton.BottomButton" parent="BasicOutlinedButton">
+        <item name="cornerRadius">@dimen/cornerRadius1</item>
+        <item name="elevation">@dimen/elevation_3</item>
+        <item name="android:paddingTop">@dimen/dim_12dp</item>
+        <item name="android:paddingBottom">@dimen/dim_12dp</item>
+    </style>
+
+    <style name="BasicOutlinedButton.SlideButton" parent="BasicOutlinedButton">
+        <item name="cornerRadius">@dimen/cornerRadius3</item>
+        <item name="elevation">@dimen/elevation_3</item>
+        <item name="android:paddingTop">@dimen/dim_12dp</item>
+        <item name="android:paddingBottom">@dimen/dim_12dp</item>
+    </style>
+
     <style name="BasicDropDown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="boxStrokeColor">@color/grey5</item>
         <item name='boxStrokeWidth'>1dp</item>
