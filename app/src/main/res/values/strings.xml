@@ -152,7 +152,7 @@
     <string name="host">Хозяин</string>
     <string name="random_name">\@mukushevaaliya</string>
     <string name="password_requierments">Пароль должен состоять минимум из 8\n символов и содержать минимум одну большую\n букву и одну маленькую букву</string>
-    <string name="cheked_text">Формированию позиции представляет собой\n интересный эксперимент проверки модели развития.</string>
+    <string name="cheked_text">Формированию позиции представляет собой \nинтересный эксперимент проверки модели развития.</string>
     <string name="checked_text_main">Проверенное жильё</string>
     <string name="Any">Любой</string>
     <string name="muratov_d">\@muratov_d</string>
@@ -305,4 +305,5 @@
     <string name="description_must">Описание *</string>
     <string name="name_your_apartment">Дайте название жилью</string>
     <string name="title_must">Название *</string>
+    <string name="my_location">Моё местоположение</string>
 </resources>
