@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
+import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_type.*
 import javax.inject.Inject
@@ -52,7 +53,7 @@ class FilterTypeFragment : BaseSearchFragment() {
     private fun setType(){
         Log.e("GroupRai", sessionManager.typeOfApartment.value.toString())
         when(sessionManager.typeOfApartment.value){
-            fragment_type_any_tv.text.toString()->{
+            Constants.mapTypes.getValue(fragment_type_any_tv.text.toString())->{
                 fragment_type_any_checked_rbtn.isChecked = true
                 fragment_type_apparts_checked_rbtn.isChecked = false
                 fragment_type_home_checked_rbtn.isChecked = false
@@ -62,7 +63,7 @@ class FilterTypeFragment : BaseSearchFragment() {
                 fragment_type_home_tv.setTextColor(Color.BLACK)
             }
 
-            fragment_type_apparts_tv.text.toString()->{
+            Constants.mapTypes.getValue(fragment_type_apparts_tv.text.toString())->{
                 fragment_type_any_checked_rbtn.isChecked = false
                 fragment_type_apparts_checked_rbtn.isChecked = true
                 fragment_type_home_checked_rbtn.isChecked = false
@@ -72,7 +73,7 @@ class FilterTypeFragment : BaseSearchFragment() {
                 fragment_type_home_tv.setTextColor(Color.BLACK)
             }
 
-            fragment_type_home_tv.text.toString()->{
+            Constants.mapTypes.getValue(fragment_type_home_tv.text.toString())->{
                 fragment_type_any_checked_rbtn.isChecked = false
                 fragment_type_apparts_checked_rbtn.isChecked = false
                 fragment_type_home_checked_rbtn.isChecked = true
@@ -92,7 +93,7 @@ class FilterTypeFragment : BaseSearchFragment() {
             fragment_type_apparts_tv.setTextColor(Color.BLACK)
             fragment_type_home_tv.setTextColor(Color.parseColor("#CD3232"))
 
-            sessionManager.filterTypeOfApartment("Дом")
+            sessionManager.filterTypeOfApartment(Constants.mapTypes.getValue("Дом"))
             findNavController().navigateUp()
         }
 
@@ -105,7 +106,7 @@ class FilterTypeFragment : BaseSearchFragment() {
             fragment_type_apparts_tv.setTextColor(Color.parseColor("#CD3232"))
             fragment_type_home_tv.setTextColor(Color.BLACK)
 
-            sessionManager.filterTypeOfApartment("Квартира")
+            sessionManager.filterTypeOfApartment(Constants.mapTypes.getValue("Квартира"))
             findNavController().navigateUp()
         }
 
@@ -118,7 +119,7 @@ class FilterTypeFragment : BaseSearchFragment() {
             fragment_type_apparts_tv.setTextColor(Color.BLACK)
             fragment_type_home_tv.setTextColor(Color.BLACK)
 
-            sessionManager.filterTypeOfApartment("Любой")
+            sessionManager.filterTypeOfApartment(Constants.mapTypes.getValue("Любой"))
             findNavController().navigateUp()
         }
     }

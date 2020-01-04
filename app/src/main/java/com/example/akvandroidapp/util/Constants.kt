@@ -19,5 +19,19 @@ class Constants {
 
         const val MAPKIT_API_KEY = "921f9910-6b90-4ad6-afc1-c4fd6898e3c0"
 
+        val mapFacilities = mapOf(
+            "Отопление" to 1,
+            "Wifi" to 2,
+            "Кондиционер" to 3,
+            "Аптечка" to 4,
+            "Чайник" to 5,
+            "Фен" to 6
+        )
+
+        val mapTypes = mapOf(
+            "Любой" to 0,
+            "Квартира" to 1,
+            "Дом" to 2
+        )
     }
 }

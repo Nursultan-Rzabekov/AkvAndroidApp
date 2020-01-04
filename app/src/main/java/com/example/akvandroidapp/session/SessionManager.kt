@@ -25,6 +25,7 @@ constructor(
 ) {
 
     private val TAG: String = "AppDebug"
+    private val DEFAULT_TYPE = 0
 
     private val _cachedToken = MutableLiveData<AuthToken>()
 
@@ -32,14 +33,14 @@ constructor(
 
     private val _chekedFilterCity = MutableLiveData<FilterCity>()
 
-    private val _typeOfApartment = MutableLiveData<String>()
+    private val _typeOfApartment = MutableLiveData<Int>()
 
-    private val _facilitiesList = MutableLiveData<MutableList<String>>()
+    private val _facilitiesList = MutableLiveData<MutableList<Int>>()
 
     init {
         favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("Almaty, Kazakhstan", false, true)
-        _typeOfApartment.value = "Любой"
+        _typeOfApartment.value = DEFAULT_TYPE
         _facilitiesList.value = mutableListOf()
     }
 
@@ -52,10 +53,10 @@ constructor(
     val checkedFilterCity: LiveData<FilterCity>
         get() = _chekedFilterCity
 
-    val typeOfApartment: LiveData<String>
+    val typeOfApartment: LiveData<Int>
         get() = _typeOfApartment
 
-    val facilitiesList: LiveData<MutableList<String>>
+    val facilitiesList: LiveData<MutableList<Int>>
         get() = _facilitiesList
 
     fun login(newValue: AuthToken){
@@ -70,21 +71,22 @@ constructor(
         setFilterCity(filterCity)
     }
 
-    fun filterTypeOfApartment(type: String){
+    fun filterTypeOfApartment(type: Int){
         setFilterTypeOfApartment(type)
     }
 
-    fun filterFacilitiesList(facility: String, checked: Boolean){
+    fun filterFacilitiesList(facility: Int, checked: Boolean){
         setFacilityValue(facility, checked)
     }
 
-    fun setFilterTypeOfApartment(type: String){
+    fun setFilterTypeOfApartment(type: Int){
         GlobalScope.launch(Main) {
             _typeOfApartment.value = type
         }
+        Log.e("SESSION_TYPE", "${_typeOfApartment.value}")
     }
 
-    fun setFacilityValue(facility: String, checked: Boolean){
+    fun setFacilityValue(facility: Int, checked: Boolean){
         GlobalScope.launch(Main) {
             if(checked){
                 _facilitiesList.value?.add(facility)
@@ -92,6 +94,7 @@ constructor(
             else{
                 _facilitiesList.value?.remove(facility)
             }
+
         }
     }
 
