@@ -55,9 +55,9 @@ class BlogSearchResponse(
     @Expose
     var status: Int,
 
-//    @SerializedName("photos")
-//    @Expose
-//    var photos: List<BlogImageResponse>,
+    @SerializedName("photos")
+    @Expose
+    var photos: List<BlogImageResponse>,
 
     @SerializedName("houseaccoms")
     @Expose
@@ -70,7 +70,6 @@ class BlogSearchResponse(
     @SerializedName("user")
     @Expose
     var user: UserResponse,
-
 
     @SerializedName("rating")
     @Expose

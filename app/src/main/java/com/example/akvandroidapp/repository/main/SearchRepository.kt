@@ -76,10 +76,13 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "http://akv-technopark.herokuapp.com/media/images/_DSC0432_SaeLYkR.jpg",
+                            image = "http://akv-technopark.herokuapp.com" + blogPostResponse.photos[0].toString()
+                                .substring(24),
                             rating = blogPostResponse.rating
                         )
                     )
+
+                    Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24)}")
                 }
 
                 withContext(Dispatchers.Main){

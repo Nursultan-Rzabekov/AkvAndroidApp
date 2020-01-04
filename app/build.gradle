@@ -128,10 +128,6 @@ dependencies {
 
     //Mapkit
     implementation 'com.yandex.android:mapkit:3.4.0'
-    implementation 'com.yandex.android:search:3.4.0'
-    implementation 'com.yandex.android:directions:3.4.0'
-    implementation 'com.yandex.android:transport:3.4.0'
-    implementation 'com.yandex.android:places:3.4.0'
 
     implementation 'com.github.technolifestyle:AutoImageFlipper:1.6.0'
 
