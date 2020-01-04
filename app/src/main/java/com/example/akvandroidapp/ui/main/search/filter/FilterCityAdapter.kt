@@ -5,65 +5,57 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.akvandroidapp.R
 import kotlinx.android.synthetic.main.city_choose_recycler_view_item.view.*
-import java.util.logging.Filter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FilterCityAdapter(
-    private val interaction: CityInteraction? = null,
-    private val interactionCheck: CityInteractionCheck? = null
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val interaction: CityInteraction? = null
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    private var cities: List<FilterCity> = ArrayList()
-    private var chekedPositon = -1
+    private var cities: MutableList<FilterCity> = ArrayList()
+    private var citiesFiltered: MutableList<FilterCity> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FilterCityViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.city_choose_recycler_view_item, parent, false),
-            interaction = interaction,
-            interactionCheck = interactionCheck
+            interaction = interaction
         )
-    }
-
-    fun changePosition(position: Int){
-        this.chekedPositon = position
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is FilterCityViewHolder -> {
-                holder.bind(cities.get(position))
-                holder.city_layout.setOnClickListener {
-                    changePosition(position)
-                    notifyDataSetChanged()
-                }
+                holder.bind(citiesFiltered[position])
             }
         }
     }
 
-    override fun getItemCount(): Int = cities.size
+    override fun getItemCount(): Int = citiesFiltered.size
 
-    fun submitList(cityList: List<FilterCity>){
+    fun submitList(cityList: MutableList<FilterCity>){
         cities = cityList
+        citiesFiltered = ArrayList(cityList)
         notifyDataSetChanged()
     }
 
 
     class FilterCityViewHolder constructor(
-        cityView: View,
-        private val interaction: CityInteraction?,
-        private val interactionCheck: CityInteractionCheck?
-    ): RecyclerView.ViewHolder(cityView){
+        itemView: View,
+        private val interaction: CityInteraction?
+    ): RecyclerView.ViewHolder(itemView){
 
-        val city_location = cityView.city_choose_recycler_view_item_location
-        val city_selected = cityView.city_choose_recycler_view_item_selected_iv
-        val city_my_location = cityView.city_choose_recycler_view_item_my_location
-        val city_layout = cityView.city_choose_recycler_view_item_layout
+        private val city_location = itemView.city_choose_recycler_view_item_location
+        private val city_selected = itemView.city_choose_recycler_view_item_selected_iv
+        private val city_my_location = itemView.city_choose_recycler_view_item_my_location
+        private val city_layout = itemView.city_choose_recycler_view_item_layout
 
-        fun bind(filterCity: FilterCity) = with(itemView){
-            itemView.setOnClickListener {
+        fun bind(filterCity: FilterCity) {
+            city_layout.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, filterCity)
             }
 
@@ -85,8 +77,39 @@ class FilterCityAdapter(
         fun onItemSelected(position: Int, item: FilterCity)
     }
 
-    interface CityInteractionCheck{
-        fun onItemSelected(position: Int, item: FilterCity,boolean: Boolean)
+    override fun getFilter(): Filter {
+        return cityFilter
+    }
+
+    private val cityFilter = object: Filter(){
+        override fun performFiltering(p0: CharSequence?): FilterResults {
+            val filteredList = ArrayList<FilterCity>()
+
+            if (p0 == null || p0.isEmpty()) {
+                filteredList.addAll(cities)
+            } else{
+                val filterPattern = p0.toString().toLowerCase(Locale.getDefault()).trim()
+
+                for (city in cities) {
+                    if (city.location.toLowerCase(Locale.getDefault()).startsWith(filterPattern)) {
+                        filteredList.add(city)
+                    }
+                }
+            }
+
+            val results = FilterResults()
+            results.values = filteredList
+
+            return results
+
+        }
+
+        override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+            citiesFiltered.clear()
+            citiesFiltered.addAll(p1?.values as MutableList<FilterCity>)
+            notifyDataSetChanged()
+        }
+
     }
 
 }

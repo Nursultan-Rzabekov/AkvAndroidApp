@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.AuthTokenDao
+import com.example.akvandroidapp.ui.main.search.filter.FilterCity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -29,8 +30,11 @@ constructor(
 
     private val favoritePostList = MutableLiveData<MutableList<BlogPost>>()
 
+    private val _chekedFilterCity = MutableLiveData<FilterCity>()
+
     init {
         favoritePostList.value = mutableListOf()
+        _chekedFilterCity.value = FilterCity("Almaty, Kazakhstan", false, true)
     }
 
     val cachedToken: LiveData<AuthToken>
@@ -39,6 +43,8 @@ constructor(
     val favoritePostListItem: LiveData<MutableList<BlogPost>>
         get() = favoritePostList
 
+    val checkedFilterCity: LiveData<FilterCity>
+        get() = _chekedFilterCity
 
     fun login(newValue: AuthToken){
         setValue(newValue)
@@ -46,6 +52,10 @@ constructor(
 
     fun favorite(blogPost: BlogPost, checked: Boolean){
         setFavoriteValue(blogPost, checked)
+    }
+
+    fun filterCity(filterCity: FilterCity){
+        setFilterCity(filterCity)
     }
 
     fun setFavoriteValue(blogPost: BlogPost, checked: Boolean) {
@@ -61,6 +71,17 @@ constructor(
             }
 
             Log.d(TAG, "favorite ${favoritePostList.value}")
+        }
+    }
+
+    fun setFilterCity(filterCity: FilterCity){
+        Log.d(TAG, "filter city ee ${_chekedFilterCity.value}")
+
+        GlobalScope.launch(Main) {
+
+            _chekedFilterCity.value = filterCity
+
+            Log.d(TAG, "favorite ${_chekedFilterCity.value}")
         }
     }
 

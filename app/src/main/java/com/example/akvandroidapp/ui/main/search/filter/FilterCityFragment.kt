@@ -2,6 +2,8 @@ package com.example.akvandroidapp.ui.main.search.filter
 
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +14,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_city.*
+import kotlinx.android.synthetic.main.header_city.*
+import javax.inject.Inject
 
 
-class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteraction, FilterCityAdapter.CityInteractionCheck {
+class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteraction {
 
     private lateinit var cityAdapter: FilterCityAdapter
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,30 +52,48 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
             findNavController().navigateUp()
         }
 
+        header_city_et.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                fragment_city_recycler_view.invalidate()
+                cityAdapter.filter.filter(p0)
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+        })
+
     }
 
     private fun addCityDataset(){
-        val data = listOf(FilterCity("Almaty, Kazakhstan", true, true),
+        val data = mutableListOf(FilterCity("Almaty, Kazakhstan", false, true),
                             FilterCity("Astana, Kazakhstan", false, false),
                             FilterCity("Uralsk, Kazakhstan", false, false),
                             FilterCity("asd, Kazakhstan", false, false))
+        for (city in data) {
+            if (sessionManager.checkedFilterCity.value?.location == city.location){
+                city.isSelected = true
+            }
+        }
         cityAdapter.submitList(data)
     }
 
     private fun initRecyclerView(){
         fragment_city_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@FilterCityFragment.context)
-            cityAdapter = FilterCityAdapter()
+            cityAdapter = FilterCityAdapter(this@FilterCityFragment)
             adapter = cityAdapter
         }
     }
 
     override fun onItemSelected(position: Int, item: FilterCity) {
+        sessionManager.filterCity(item)
         findNavController().navigateUp()
-    }
-
-    override fun onItemSelected(position: Int, item: FilterCity, boolean: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
