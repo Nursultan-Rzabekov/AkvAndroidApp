@@ -76,7 +76,7 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "http://akv-technopark.herokuapp.com/media/images/_DSC0428.jpg",
+                            image = "http://akv-technopark.herokuapp.com/media/images/_DSC0432_SaeLYkR.jpg",
                             rating = blogPostResponse.rating
                         )
                     )
@@ -112,10 +112,10 @@ constructor(
                 data["city__name"] = city__name
                 data["price__gte"] = price__gte.toString()
                 data["price__lte"] = price__lte.toString()
-                data["room__gte"] = room__gte.toString()
-                data["room__lte"] = room__lte.toString()
-                data["beds_gte"] = beds_gte.toString()
-                data["beds_lte"] = beds_lte.toString()
+                data["rooms__gte"] = room__gte.toString()
+                data["rooms__lte"] = room__lte.toString()
+                data["beds__gte"] = beds_gte.toString()
+                data["beds__lte"] = beds_lte.toString()
 
                 return openApiMainService.searchListBlogPosts(
                     options = data,

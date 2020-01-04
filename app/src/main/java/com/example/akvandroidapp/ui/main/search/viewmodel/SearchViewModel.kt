@@ -39,7 +39,7 @@ constructor(
                     Log.d("RangeBar", "Touch  + ${getPage()}")
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
-                        city__name = getSearchQuery(),
+                        city__name = getCityQuery(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),
@@ -55,7 +55,7 @@ constructor(
                 return sessionManager.cachedToken.value?.let { authToken ->
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
-                        city__name = getSearchQuery(),
+                        city__name = getCityQuery(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),
@@ -71,7 +71,7 @@ constructor(
                 return sessionManager.cachedToken.value?.let { authToken ->
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
-                        city__name = getSearchQuery(),
+                        city__name = getCityQuery(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),
@@ -87,7 +87,7 @@ constructor(
                 return sessionManager.cachedToken.value?.let { authToken ->
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
-                        city__name = getSearchQuery(),
+                        city__name = getCityQuery(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),

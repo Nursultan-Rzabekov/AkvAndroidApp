@@ -40,6 +40,13 @@ fun SearchViewModel.getFilterBedsRight(): Int {
     }
 }
 
+
+fun SearchViewModel.getCityQuery(): String {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.city_name
+    }
+}
+
 fun SearchViewModel.getSearchQuery(): String {
     getCurrentViewStateOrNew().let {
         return it.blogFields.searchQuery

@@ -28,6 +28,7 @@ class SearchFilterFragment : BaseSearchFragment() {
         return inflater.inflate(R.layout.fragment_filter_layout, container, false)
     }
 
+
     private var price_left:Int = 0
     private var price_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
 
@@ -38,7 +39,6 @@ class SearchFilterFragment : BaseSearchFragment() {
     private var beds_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
 
     private var city_name:String? = null
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +51,6 @@ class SearchFilterFragment : BaseSearchFragment() {
 
 
         city_name = arguments?.getString("city")
-
         fragment_filter_city_tv.text = city_name
 
         fragment_filter_appart_type_layout.setOnClickListener {
@@ -64,8 +63,17 @@ class SearchFilterFragment : BaseSearchFragment() {
 
         getRangebarStatus()
 
+        val city:String
+        if(city_name==null){
+            city = "Шымкент"
+        }
+        else{
+            city = city_name.toString()
+        }
+
         fragment_filter_show_results_btn.setOnClickListener {
             viewModel.apply {
+                setCityQuery(city)
                 setBlogFilterPrice(price_left,price_right)
                 setBlogFilterRooms(room_left,room_right)
                 setBlogFilterBeds(beds_left,beds_right)
@@ -141,7 +149,6 @@ class SearchFilterFragment : BaseSearchFragment() {
                 Log.d("RangeBar", "Touch started")
             }
         })
-
     }
 
     private fun navFilterCityFragment(){

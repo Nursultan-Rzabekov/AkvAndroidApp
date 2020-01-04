@@ -40,6 +40,13 @@ fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
 }
 
 
+fun SearchViewModel.setCityQuery(query: String){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.city_name = query
+    setViewState(update)
+}
+
+
 fun SearchViewModel.setBlogFilterPrice(price_left: Int, price_right: Int){
     val update = getCurrentViewStateOrNew()
     update.blogFields.price_left = price_left

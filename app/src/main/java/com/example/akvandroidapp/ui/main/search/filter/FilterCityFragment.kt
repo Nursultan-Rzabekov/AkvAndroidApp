@@ -72,10 +72,10 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
     }
 
     private fun addCityDataset(){
-        val data = mutableListOf(FilterCity("Almaty, Kazakhstan", false, true),
-                            FilterCity("Astana, Kazakhstan", false, false),
-                            FilterCity("Uralsk, Kazakhstan", false, false),
-                            FilterCity("asd, Kazakhstan", false, false))
+        val data = mutableListOf(FilterCity("Алматы", false, true),
+                            FilterCity("Шымкент", false, false),
+                            FilterCity("Астана", false, false),
+                            FilterCity("Каскелен", false, false))
         for (city in data) {
             if (sessionManager.checkedFilterCity.value?.location == city.location){
                 city.isSelected = true

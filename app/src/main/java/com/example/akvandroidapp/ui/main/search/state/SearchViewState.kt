@@ -19,6 +19,8 @@ class SearchViewState (
         var page: Int = 1,
         var isQueryInProgress: Boolean = false,
         var isQueryExhausted: Boolean = false,
+
+        var city_name: String = "Шымкент",
         var rooms_left: Int = BLOG_ORDER_PRICE_LEFT,
         var rooms_right:Int = BLOG_ORDER_PRICE_RIGHT,
 

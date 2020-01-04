@@ -148,7 +148,7 @@ class SearchListAdapter(
     ){
         for(blogPost in list){
             requestManager
-                .load(R.drawable.test_image_back)
+                .load(blogPost.image)
                 .preload()
         }
     }
@@ -186,7 +186,7 @@ class SearchListAdapter(
             }
 
             requestManager
-                .load(R.drawable.test_image_back)
+                .load(item.image)
                 .transition(withCrossFade())
                 .into(itemView.search_recycler_item_image_back)
             itemView.search_recycler_item_header.text = item.name
