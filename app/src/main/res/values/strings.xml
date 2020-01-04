@@ -306,4 +306,10 @@
     <string name="name_your_apartment">Дайте название жилью</string>
     <string name="title_must">Название *</string>
     <string name="my_location">Моё местоположение</string>
+    <string name="heat">Отопление</string>
+    <string name="wifi">Wifi</string>
+    <string name="conditioner">Кондиционер</string>
+    <string name="medical">Аптечка</string>
+    <string name="tea">Чайник</string>
+    <string name="air_fen">Фен</string>
 </resources>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_udopstva_heat_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_12dp">
+
+                <TextView
+                    android:id="@+id/fragment_udopstva_heat_layout_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/heat"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_udopstva_heat_layout_ckb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/fragment_udopstva_heat_layout_ckb"
+                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_height="@dimen/dim_24dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/checking_rbtn"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_udopstva_heat_layout_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_udopstva_heat_layout_tv"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider38"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_udopstva_wifi_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_12dp">
+
+                <TextView
+                    android:id="@+id/fragment_udopstva_wifi_layout_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/wifi"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_udopstva_wifi_layout_ckb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/fragment_udopstva_wifi_layout_ckb"
+                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_height="@dimen/dim_24dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/checking_rbtn"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_udopstva_wifi_layout_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_udopstva_wifi_layout_tv"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider39"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_udopstva_con_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_12dp">
+
+                <TextView
+                    android:id="@+id/fragment_udopstva_con_layout_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/conditioner"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_udopstva_con_layout_ckb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/fragment_udopstva_con_layout_ckb"
+                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_height="@dimen/dim_24dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/checking_rbtn"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_udopstva_con_layout_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_udopstva_con_layout_tv"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider40"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_udopstva_med_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_12dp">
+
+                <TextView
+                    android:id="@+id/fragment_udopstva_med_layout_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/medical"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_udopstva_med_layout_ckb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/fragment_udopstva_med_layout_ckb"
+                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_height="@dimen/dim_24dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/checking_rbtn"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_udopstva_med_layout_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_udopstva_med_layout_tv"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider41"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_udopstva_tea_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_12dp">
+
+                <TextView
+                    android:id="@+id/fragment_udopstva_tea_layout_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/tea"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_udopstva_tea_layout_ckb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/fragment_udopstva_tea_layout_ckb"
+                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_height="@dimen/dim_24dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/checking_rbtn"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_udopstva_tea_layout_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_udopstva_tea_layout_tv"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider42"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_udopstva_fen_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/dim_24dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_24dp"
+                android:paddingBottom="@dimen/dim_12dp">
+
+                <TextView
+                    android:id="@+id/fragment_udopstva_fen_layout_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/air_fen"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_udopstva_fen_layout_ckb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/fragment_udopstva_fen_layout_ckb"
+                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_height="@dimen/dim_24dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/checking_rbtn"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_udopstva_fen_layout_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_udopstva_fen_layout_tv"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider43"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
