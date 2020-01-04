@@ -15,6 +15,7 @@ import com.example.akvandroidapp.persistence.BlogQueryUtils
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
+import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlinx.android.synthetic.main.header_filter.*
 import loadFirstPage
@@ -46,6 +47,9 @@ class SearchFilterFragment : BaseSearchFragment() {
 
     private var acc_name:String? = null
 
+    private var sortMethod:String = Constants.FILTER_TYPE1
+    private var accomdationListString:String = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,18 +73,23 @@ class SearchFilterFragment : BaseSearchFragment() {
             findNavController().navigateUp()
         }
 
+        header_filter_drop_tv.setOnClickListener {
+            clearAll()
+        }
+
         getRangebarStatus()
+        tuneRadioGroup()
 
         fragment_filter_show_results_btn.setOnClickListener {
             viewModel.apply {
                 setCityQuery(fragment_filter_city_tv.text.toString())
-                setBlogFilterTypeHouse(fragment_filter_appart_type_tv.text.toString().toInt())
-                //setBlogFilterAccomadations("2,1")
+                setBlogFilterTypeHouse(Constants.mapTypes.getValue(fragment_filter_appart_type_tv.text.toString()))
+                //setBlogFilterAccomadations(accomdationListString)
                 setBlogFilterPrice(price_left,price_right)
                 setBlogFilterRooms(room_left,room_right)
                 setBlogFilterBeds(beds_left,beds_right)
-                setBlogOrdering("price")
-                setBlogVerified("false")
+                setBlogOrdering(sortMethod)
+                setBlogVerified(fragment_filter_passed_switch.isChecked.toString())
             }
             onBlogSearchOrFilter()
         }
@@ -94,12 +103,17 @@ class SearchFilterFragment : BaseSearchFragment() {
 
         sessionManager.typeOfApartment.observe(this, Observer{ dataState ->
             Log.d(TAG, "favorite: ${dataState}")
-            fragment_filter_appart_type_tv.text = dataState.toString()
+            fragment_filter_appart_type_tv.text = Constants.mapTypesReversed.getValue(dataState)
         })
 
         sessionManager.facilitiesList.observe(this, Observer{ dataState ->
-            Log.d(TAG, "favorite: ${dataState}")
-            fragment_filter_udopstva_layout_tv.text = "Да"
+
+            accomdationListString = dataState.joinToString(separator = ",")
+            Log.d(TAG, "favorite: $accomdationListString")
+            if (dataState.size > 0)
+                fragment_filter_udopstva_layout_tv.text = getString(R.string.yes)
+            else
+                fragment_filter_udopstva_layout_tv.text = getString(R.string.no )
         })
     }
 
@@ -107,6 +121,36 @@ class SearchFilterFragment : BaseSearchFragment() {
         viewModel.loadFirstPage().let {
             findNavController().popBackStack()
         }
+    }
+
+    private fun tuneRadioGroup(){
+        fragment_filter_sort_radio_group.setOnCheckedChangeListener{radioGroup, i ->
+            when(i) {
+                fragment_filter_no_radio_btn.id -> {
+                    sortMethod = Constants.FILTER_TYPE1
+                }
+                fragment_filter_by_rating_radio_btn.id -> {
+                    sortMethod = Constants.FILTER_TYPE2
+                }
+                fragment_filter_by_price_radio_btn.id -> {
+                    sortMethod = Constants.FILTER_TYPE3
+                }
+            }
+        }
+    }
+
+    private fun clearAll(){
+        fragment_filter_passed_switch.isChecked = false
+        fragment_filter_appart_type_tv.text = getString(R.string.any)
+        sessionManager.clearTypeOfApartment()
+        sessionManager.clearFilterCity()
+        sessionManager.clearFilterFacilities()
+        fragment_filter_sort_radio_group.check(fragment_filter_no_radio_btn.id)
+        fragment_filter_price_rangeBar.setRangePinsByValue(1.toFloat(), 30000.toFloat())
+        fragment_filter_room_count_rangeBar.setRangePinsByValue(1.toFloat(), 15.toFloat())
+        fragment_filter_bed_count_rangeBar.setRangePinsByValue(1.toFloat(), 30.toFloat())
+        fragment_filter_city_tv.text = getString(R.string.no)
+        fragment_filter_udopstva_layout_tv.text = getString(R.string.no)
     }
 
     private fun getRangebarStatus(){
@@ -189,5 +233,6 @@ class SearchFilterFragment : BaseSearchFragment() {
     private fun navFilterUdopstvaFragment(){
         findNavController().navigate(R.id.action_searchFilterFragment_to_filterUdopstvaFragment)
     }
+
 
 }

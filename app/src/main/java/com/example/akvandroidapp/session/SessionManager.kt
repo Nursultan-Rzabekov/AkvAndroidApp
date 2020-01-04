@@ -28,13 +28,9 @@ constructor(
     private val DEFAULT_TYPE = 0
 
     private val _cachedToken = MutableLiveData<AuthToken>()
-
     private val favoritePostList = MutableLiveData<MutableList<BlogPost>>()
-
     private val _chekedFilterCity = MutableLiveData<FilterCity>()
-
     private val _typeOfApartment = MutableLiveData<Int>()
-
     private val _facilitiesList = MutableLiveData<MutableList<Int>>()
 
     init {
@@ -170,5 +166,23 @@ constructor(
             Log.e(TAG, "isConnectedToTheInternet: ${e.message}")
         }
         return false
+    }
+
+    fun clearTypeOfApartment(){
+        GlobalScope.launch(Main) {
+            _typeOfApartment.value = DEFAULT_TYPE
+        }
+    }
+
+    fun clearFilterCity(){
+        GlobalScope.launch(Main) {
+            _chekedFilterCity.value = FilterCity("нет", false, true)
+        }
+    }
+
+    fun clearFilterFacilities(){
+        GlobalScope.launch(Main) {
+            _facilitiesList.value = mutableListOf()
+        }
     }
 }

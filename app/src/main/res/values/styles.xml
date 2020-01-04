@@ -267,4 +267,10 @@
         <item name="android:layout_marginStart">@dimen/dim_36dp</item>
     </style>
 
+    <style name="BasicRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textColor">@drawable/cheked_color_selector</item>
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

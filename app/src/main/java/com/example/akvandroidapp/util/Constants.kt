@@ -19,6 +19,10 @@ class Constants {
 
         const val MAPKIT_API_KEY = "921f9910-6b90-4ad6-afc1-c4fd6898e3c0"
 
+        const val FILTER_TYPE1 = "Нет"
+        const val FILTER_TYPE2 = "rating"
+        const val FILTER_TYPE3 = "price"
+
         val mapFacilities = mapOf(
             "Отопление" to 1,
             "Wifi" to 2,
@@ -27,11 +31,14 @@ class Constants {
             "Чайник" to 5,
             "Фен" to 6
         )
+        val mapFacilitiesReversed = mapFacilities.entries.associateBy({ it.value }) { it.key }
 
         val mapTypes = mapOf(
             "Любой" to 0,
             "Квартира" to 1,
             "Дом" to 2
         )
+
+        val mapTypesReversed = mapTypes.entries.associateBy({ it.value }) { it.key }
     }
 }
