@@ -53,6 +53,18 @@ fun SearchViewModel.getAccomadations(): String {
     }
 }
 
+fun SearchViewModel.getOrdering(): String {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.ordering
+    }
+}
+
+fun SearchViewModel.getVerified(): String {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.verified
+    }
+}
+
 fun SearchViewModel.getTypeHouse(): Int {
     getCurrentViewStateOrNew().let {
         return it.blogFields.type_house

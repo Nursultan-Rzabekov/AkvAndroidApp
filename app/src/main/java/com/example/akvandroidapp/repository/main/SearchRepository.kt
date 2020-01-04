@@ -36,6 +36,8 @@ constructor(
         authToken: AuthToken,
         city__name: String,
         accomadations:String,
+        verified:String,
+        ordering:String,
         type_house:Int,
         price__gte:Int,
         price__lte: Int,
@@ -87,6 +89,7 @@ constructor(
                     Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24,blogPostResponse.photos[0].toString().length - 1)}")
                 }
 
+
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
@@ -115,7 +118,7 @@ constructor(
 
                 val data: MutableMap<String, String> = HashMap()
 
-                if(city__name != ""){
+                if(city__name != "нет"){
                     data["city__name"] = city__name
                 }
 
@@ -147,6 +150,12 @@ constructor(
                 if(beds_lte != 0){
                     data["beds__lte"] = beds_lte.toString()
                 }
+
+                if(ordering != "нет"){
+                    data["ordering"] = ordering.toString()
+                }
+
+                data["verified"] = verified.toString()
 
                 return openApiMainService.searchListBlogPosts(
                     options = data,

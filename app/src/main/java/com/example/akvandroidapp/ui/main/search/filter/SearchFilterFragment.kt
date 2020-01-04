@@ -74,16 +74,17 @@ class SearchFilterFragment : BaseSearchFragment() {
         fragment_filter_show_results_btn.setOnClickListener {
             viewModel.apply {
                 setCityQuery(fragment_filter_city_tv.text.toString())
-                setBlogFilterTypeHouse(1)
-                setBlogFilterAccomadations("3,9")
+                setBlogFilterTypeHouse(fragment_filter_appart_type_tv.text.toString().toInt())
+                //setBlogFilterAccomadations("2,1")
                 setBlogFilterPrice(price_left,price_right)
                 setBlogFilterRooms(room_left,room_right)
                 setBlogFilterBeds(beds_left,beds_right)
+                setBlogOrdering("price")
+                setBlogVerified("false")
             }
             onBlogSearchOrFilter()
         }
     }
-
 
     private fun subscribeObservers(){
         sessionManager.checkedFilterCity.observe(this, Observer{ dataState ->
@@ -93,7 +94,7 @@ class SearchFilterFragment : BaseSearchFragment() {
 
         sessionManager.typeOfApartment.observe(this, Observer{ dataState ->
             Log.d(TAG, "favorite: ${dataState}")
-            fragment_filter_appart_type_tv.text = dataState
+            fragment_filter_appart_type_tv.text = dataState.toString()
         })
 
         sessionManager.facilitiesList.observe(this, Observer{ dataState ->

@@ -39,7 +39,7 @@ constructor(
 
     init {
         favoritePostList.value = mutableListOf()
-        _chekedFilterCity.value = FilterCity("Almaty, Kazakhstan", false, true)
+        _chekedFilterCity.value = FilterCity("нет", false, true)
         _typeOfApartment.value = DEFAULT_TYPE
         _facilitiesList.value = mutableListOf()
     }

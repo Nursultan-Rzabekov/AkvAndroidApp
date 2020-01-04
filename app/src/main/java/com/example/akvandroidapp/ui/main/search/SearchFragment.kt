@@ -108,7 +108,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
             if(viewState != null){
-                if(viewState.blogFields.blogList.isNotEmpty()){
+//                if(viewState.blogFields.blogList.isNotEmpty()){
                     recyclerAdapter.apply {
                         //Log.d(TAG, "Search results responses: ${viewState.blogFields.blogList}")
                         fragement_explore_layout_id.visibility = View.GONE
@@ -122,7 +122,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
                             isQueryExhausted = viewState.blogFields.isQueryExhausted
                         )
                     }
-                }
+//                }
             }
         })
     }

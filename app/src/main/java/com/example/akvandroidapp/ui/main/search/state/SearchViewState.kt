@@ -20,7 +20,7 @@ class SearchViewState (
         var isQueryInProgress: Boolean = false,
         var isQueryExhausted: Boolean = false,
 
-        var city_name: String = "",
+        var city_name: String = "нет",
         var type_house: Int = 0,
         var accomadations:String = "",
         var rooms_left: Int = 0,
@@ -30,7 +30,10 @@ class SearchViewState (
         var price_right: Int = 0,
 
         var beds_left: Int = 0,
-        var beds_right: Int = 0
+        var beds_right: Int = 0,
+
+        var verified: String = "false",
+        var ordering: String = "нет"
 
     )
 

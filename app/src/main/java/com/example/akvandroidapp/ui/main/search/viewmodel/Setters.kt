@@ -58,6 +58,18 @@ fun SearchViewModel.setBlogFilterAccomadations(type: String){
     setViewState(update)
 }
 
+fun SearchViewModel.setBlogVerified(type: String){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.verified = type
+    setViewState(update)
+}
+
+fun SearchViewModel.setBlogOrdering(type: String){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.ordering = type
+    setViewState(update)
+}
+
 fun SearchViewModel.setBlogFilterPrice(price_left: Int, price_right: Int){
     val update = getCurrentViewStateOrNew()
     update.blogFields.price_left = price_left
