@@ -149,6 +149,7 @@ class SearchListAdapter(
         for(blogPost in list){
             requestManager
                 .load(blogPost.image)
+                .error(R.drawable.fragment_appartments_image_default)
                 .preload()
         }
     }
@@ -187,6 +188,7 @@ class SearchListAdapter(
 
             requestManager
                 .load(item.image)
+                .error(R.drawable.fragment_appartments_image_default)
                 .transition(withCrossFade())
                 .into(itemView.search_recycler_item_image_back)
             itemView.search_recycler_item_header.text = item.name

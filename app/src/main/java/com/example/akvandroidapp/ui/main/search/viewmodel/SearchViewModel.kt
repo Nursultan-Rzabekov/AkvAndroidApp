@@ -40,6 +40,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         city__name = getCityQuery(),
+                        accomadations = getAccomadations(),
+                        type_house = getTypeHouse(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),
@@ -56,6 +58,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         city__name = getCityQuery(),
+                        accomadations = getAccomadations(),
+                        type_house = getTypeHouse(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),
@@ -72,6 +76,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         city__name = getCityQuery(),
+                        accomadations = getAccomadations(),
+                        type_house = getTypeHouse(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),
@@ -88,6 +94,8 @@ constructor(
                     searchRepository.searchBlogPosts(
                         authToken = authToken,
                         city__name = getCityQuery(),
+                        accomadations = getAccomadations(),
+                        type_house = getTypeHouse(),
                         price__gte = getFilterPriceLeft(),
                         price__lte = getFilterPriceRight(),
                         room__gte = getFilterRoomsLeft(),

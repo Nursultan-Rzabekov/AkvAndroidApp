@@ -20,16 +20,17 @@ class SearchViewState (
         var isQueryInProgress: Boolean = false,
         var isQueryExhausted: Boolean = false,
 
-        var city_name: String = "Шымкент",
-        var rooms_left: Int = BLOG_ORDER_PRICE_LEFT,
-        var rooms_right:Int = BLOG_ORDER_PRICE_RIGHT,
+        var city_name: String = "",
+        var type_house: Int = 0,
+        var accomadations:String = "",
+        var rooms_left: Int = 0,
+        var rooms_right:Int = 0,
 
-        var price_left: Int = BLOG_ORDER_PRICE_LEFT,
-        var price_right: Int = BLOG_ORDER_PRICE_RIGHT,
+        var price_left: Int = 0,
+        var price_right: Int = 0,
 
-        var beds_left: Int = BLOG_ORDER_PRICE_LEFT,
-        var beds_right: Int = BLOG_ORDER_PRICE_RIGHT
-
+        var beds_left: Int = 0,
+        var beds_right: Int = 0
 
     )
 

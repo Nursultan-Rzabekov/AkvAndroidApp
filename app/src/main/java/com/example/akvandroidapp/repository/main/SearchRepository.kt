@@ -35,6 +35,8 @@ constructor(
     fun searchBlogPosts(
         authToken: AuthToken,
         city__name: String,
+        accomadations:String,
+        type_house:Int,
         price__gte:Int,
         price__lte: Int,
         room__gte:Int,
@@ -76,13 +78,13 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "http://akv-technopark.herokuapp.com" + blogPostResponse.photos[0].toString()
-                                .substring(24),
+                            image = "https://akv-technopark.herokuapp.com" + blogPostResponse.photos[0].toString()
+                                .substring(24,blogPostResponse.photos[0].toString().length - 1),
                             rating = blogPostResponse.rating
                         )
                     )
 
-                    Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24)}")
+                    Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24,blogPostResponse.photos[0].toString().length - 1)}")
                 }
 
                 withContext(Dispatchers.Main){
@@ -112,13 +114,39 @@ constructor(
 //                                    "Token ${authToken.token!!}",
 
                 val data: MutableMap<String, String> = HashMap()
-                data["city__name"] = city__name
-                data["price__gte"] = price__gte.toString()
-                data["price__lte"] = price__lte.toString()
-                data["rooms__gte"] = room__gte.toString()
-                data["rooms__lte"] = room__lte.toString()
-                data["beds__gte"] = beds_gte.toString()
-                data["beds__lte"] = beds_lte.toString()
+
+                if(city__name != ""){
+                    data["city__name"] = city__name
+                }
+
+                if(type_house != 0){
+                    data["house_type__id"] = type_house.toString()
+                }
+                if(accomadations != ""){
+                    data["accommodations"] = accomadations
+                }
+
+                if(price__gte != 0){
+                    data["price__gte"] = price__gte.toString()
+                }
+                if(price__lte != 0){
+                    data["price__lte"] = price__lte.toString()
+                }
+
+                if(room__gte != 0){
+                    data["rooms__gte"] = room__gte.toString()
+                }
+                if(room__lte != 0){
+                    Log.d("asasdsasasdasdsdaasdad",room__lte.toString())
+                    data["rooms__lte"] = room__lte.toString()
+                }
+
+                if(beds_gte != 0){
+                    data["beds__gte"] = beds_gte.toString()
+                }
+                if(beds_lte != 0){
+                    data["beds__lte"] = beds_lte.toString()
+                }
 
                 return openApiMainService.searchListBlogPosts(
                     options = data,

@@ -47,6 +47,18 @@ fun SearchViewModel.getCityQuery(): String {
     }
 }
 
+fun SearchViewModel.getAccomadations(): String {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.accomadations
+    }
+}
+
+fun SearchViewModel.getTypeHouse(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.type_house
+    }
+}
+
 fun SearchViewModel.getSearchQuery(): String {
     getCurrentViewStateOrNew().let {
         return it.blogFields.searchQuery

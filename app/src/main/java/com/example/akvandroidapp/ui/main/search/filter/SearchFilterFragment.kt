@@ -6,19 +6,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.appyvet.materialrangebar.RangeBar
 import com.appyvet.materialrangebar.RangeBar.OnRangeBarChangeListener
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.persistence.BlogQueryUtils
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlinx.android.synthetic.main.header_filter.*
 import loadFirstPage
+import javax.inject.Inject
 
 
 class SearchFilterFragment : BaseSearchFragment() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +44,7 @@ class SearchFilterFragment : BaseSearchFragment() {
     private var beds_left:Int = 0
     private var beds_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
 
-    private var city_name:String? = null
+    private var acc_name:String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,8 +55,7 @@ class SearchFilterFragment : BaseSearchFragment() {
             navFilterCityFragment()
         }
 
-        city_name = arguments?.getString("city")
-        fragment_filter_city_tv.text = city_name
+        subscribeObservers()
 
         fragment_filter_appart_type_layout.setOnClickListener {
             navFilterTypeFragment()
@@ -66,23 +71,35 @@ class SearchFilterFragment : BaseSearchFragment() {
 
         getRangebarStatus()
 
-        val city:String
-        if(city_name==null){
-            city = "Шымкент"
-        }
-        else{
-            city = city_name.toString()
-        }
-
         fragment_filter_show_results_btn.setOnClickListener {
             viewModel.apply {
-                setCityQuery(city)
+                setCityQuery(fragment_filter_city_tv.text.toString())
+                setBlogFilterTypeHouse(1)
+                setBlogFilterAccomadations("3,9")
                 setBlogFilterPrice(price_left,price_right)
                 setBlogFilterRooms(room_left,room_right)
                 setBlogFilterBeds(beds_left,beds_right)
             }
             onBlogSearchOrFilter()
         }
+    }
+
+
+    private fun subscribeObservers(){
+        sessionManager.checkedFilterCity.observe(this, Observer{ dataState ->
+            Log.d(TAG, "favorite: ${dataState.location}")
+            fragment_filter_city_tv.text = dataState.location
+        })
+
+        sessionManager.typeOfApartment.observe(this, Observer{ dataState ->
+            Log.d(TAG, "favorite: ${dataState}")
+            fragment_filter_appart_type_tv.text = dataState
+        })
+
+        sessionManager.facilitiesList.observe(this, Observer{ dataState ->
+            Log.d(TAG, "favorite: ${dataState}")
+            fragment_filter_udopstva_layout_tv.text = "Да"
+        })
     }
 
     private fun onBlogSearchOrFilter(){

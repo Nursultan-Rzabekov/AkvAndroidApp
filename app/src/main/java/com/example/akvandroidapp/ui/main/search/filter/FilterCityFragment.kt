@@ -96,10 +96,10 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
     override fun onItemSelected(position: Int, item: FilterCity) {
         sessionManager.filterCity(item)
         
-        Log.d("just","just + ${item.location} + ${item.isSelected} + ${item.isMyLocation}")
-        val bundle = bundleOf("city" to item.location)
-        findNavController().navigate(R.id.action_filterCityFragment_to_back_filter,bundle)
-//        findNavController().navigateUp()
+//        Log.d("just","just + ${item.location} + ${item.isSelected} + ${item.isMyLocation}")
+//        val bundle = bundleOf("city" to item.location)
+//        findNavController().navigate(R.id.action_filterCityFragment_to_back_filter,bundle)
+        findNavController().navigateUp()
     }
 
 }

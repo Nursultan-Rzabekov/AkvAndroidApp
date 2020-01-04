@@ -46,6 +46,17 @@ fun SearchViewModel.setCityQuery(query: String){
     setViewState(update)
 }
 
+fun SearchViewModel.setBlogFilterTypeHouse(type: Int){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.type_house = type
+    setViewState(update)
+}
+
+fun SearchViewModel.setBlogFilterAccomadations(type: String){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.accomadations = type
+    setViewState(update)
+}
 
 fun SearchViewModel.setBlogFilterPrice(price_left: Int, price_right: Int){
     val update = getCurrentViewStateOrNew()
