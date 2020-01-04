@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
+import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_udopstva.*
 import javax.inject.Inject
@@ -59,18 +60,18 @@ class FilterUdopstvaFragment : BaseSearchFragment() {
 
     private fun setFacilities(facility:String, textView: TextView, constraintLayout: ConstraintLayout, checkBox: CheckBox){
 
-        if (facility in sessionManager.facilitiesList.value!!) {
+        if (Constants.mapFacilities.getValue(facility) in sessionManager.facilitiesList.value!!) {
             checkBox.isChecked = true
             textView.setTextColor(Color.parseColor("#CD3232"))
         }
 
         constraintLayout.setOnClickListener {
-            if (facility in sessionManager.facilitiesList.value!!) {
-                sessionManager.setFacilityValue(facility, false)
+            if (Constants.mapFacilities.getValue(facility) in sessionManager.facilitiesList.value!!) {
+                sessionManager.setFacilityValue(Constants.mapFacilities.getValue(facility), false)
                 checkBox.isChecked = false
                 textView.setTextColor(Color.BLACK)
             }else {
-                sessionManager.setFacilityValue(facility, true)
+                sessionManager.setFacilityValue(Constants.mapFacilities.getValue(facility), true)
                 checkBox.isChecked = true
                 textView.setTextColor(Color.parseColor("#CD3232"))
             }
