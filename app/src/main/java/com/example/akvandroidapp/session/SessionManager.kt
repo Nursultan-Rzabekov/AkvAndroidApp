@@ -32,9 +32,15 @@ constructor(
 
     private val _chekedFilterCity = MutableLiveData<FilterCity>()
 
+    private val _typeOfApartment = MutableLiveData<String>()
+
+    private val _facilitiesList = MutableLiveData<MutableList<String>>()
+
     init {
         favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("Almaty, Kazakhstan", false, true)
+        _typeOfApartment.value = "Любой"
+        _facilitiesList.value = mutableListOf()
     }
 
     val cachedToken: LiveData<AuthToken>
@@ -46,6 +52,12 @@ constructor(
     val checkedFilterCity: LiveData<FilterCity>
         get() = _chekedFilterCity
 
+    val typeOfApartment: LiveData<String>
+        get() = _typeOfApartment
+
+    val facilitiesList: LiveData<MutableList<String>>
+        get() = _facilitiesList
+
     fun login(newValue: AuthToken){
         setValue(newValue)
     }
@@ -56,6 +68,31 @@ constructor(
 
     fun filterCity(filterCity: FilterCity){
         setFilterCity(filterCity)
+    }
+
+    fun filterTypeOfApartment(type: String){
+        setFilterTypeOfApartment(type)
+    }
+
+    fun filterFacilitiesList(facility: String, checked: Boolean){
+        setFacilityValue(facility, checked)
+    }
+
+    fun setFilterTypeOfApartment(type: String){
+        GlobalScope.launch(Main) {
+            _typeOfApartment.value = type
+        }
+    }
+
+    fun setFacilityValue(facility: String, checked: Boolean){
+        GlobalScope.launch(Main) {
+            if(checked){
+                _facilitiesList.value?.add(facility)
+            }
+            else{
+                _facilitiesList.value?.remove(facility)
+            }
+        }
     }
 
     fun setFavoriteValue(blogPost: BlogPost, checked: Boolean) {

@@ -20,7 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
+        <include
+            layout="@layout/fragment_udopstva"
+            android:id="@+id/fragment_udopstva_base"/>
 
     </FrameLayout>
 

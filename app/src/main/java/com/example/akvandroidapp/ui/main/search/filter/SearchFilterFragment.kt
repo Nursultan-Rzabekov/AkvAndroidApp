@@ -57,6 +57,10 @@ class SearchFilterFragment : BaseSearchFragment() {
             navFilterTypeFragment()
         }
 
+        fragment_filter_udopstva_layout.setOnClickListener {
+            navFilterUdopstvaFragment()
+        }
+
         header_filter_close_ibtn.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -157,6 +161,10 @@ class SearchFilterFragment : BaseSearchFragment() {
 
     private fun navFilterTypeFragment(){
         findNavController().navigate(R.id.action_searchFilterFragment_to_filterTypeFragment)
+    }
+
+    private fun navFilterUdopstvaFragment(){
+        findNavController().navigate(R.id.action_searchFilterFragment_to_filterUdopstvaFragment)
     }
 
 }
