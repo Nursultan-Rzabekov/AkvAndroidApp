@@ -35,14 +35,14 @@ class SearchFilterFragment : BaseSearchFragment() {
     }
 
 
-    private var price_left:Int = 0
-    private var price_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
+    private var price_left:Int = 1
+    private var price_right:Int = 30000
 
-    private var room_left:Int = 0
-    private var room_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
+    private var room_left:Int = 1
+    private var room_right:Int = 15
 
-    private var beds_left:Int = 0
-    private var beds_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
+    private var beds_left:Int = 1
+    private var beds_right:Int = 30
 
     private var acc_name:String? = null
 
