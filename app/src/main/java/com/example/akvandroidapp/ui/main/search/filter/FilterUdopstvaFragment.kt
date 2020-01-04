@@ -26,12 +26,6 @@ class FilterUdopstvaFragment : BaseSearchFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
 
-    private val mapFacility: Map<String, List<Any>> = mapOf(
-        "Отопление" to listOf(fragment_udopstva_heat_layout, fragment_udopstva_heat_layout_tv, fragment_udopstva_heat_layout_ckb),
-        "Wifi" to listOf(fragment_udopstva_wifi_layout, fragment_udopstva_wifi_layout_tv, fragment_udopstva_wifi_layout_ckb),
-        "Кондиционер" to listOf(fragment_udopstva_con_layout, fragment_udopstva_con_layout_tv, fragment_udopstva_con_layout_ckb)
-    )
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,8 +40,7 @@ class FilterUdopstvaFragment : BaseSearchFragment() {
 
         setHasOptionsMenu(true)
         Log.d(TAG, "SearchFragment: ${viewModel}")
-
-        setFacilities()
+        setAllFacilities()
 
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
@@ -55,27 +48,31 @@ class FilterUdopstvaFragment : BaseSearchFragment() {
 
     }
 
-    private fun setFacilities(){
-        for ((facility, views) in mapFacility) {
-            if (facility in sessionManager.facilitiesList.value!!) {
-                (views[2] as CheckBox).isChecked = true
-                (views[1] as TextView).setTextColor(Color.parseColor("#CD3232"))
-            }
-            Log.e("ConstraintLay", "${views[1]}")
+    private fun setAllFacilities(){
+        setFacilities("Отопление", fragment_udopstva_heat_layout_tv, fragment_udopstva_heat_layout, fragment_udopstva_heat_layout_ckb)
+        setFacilities("Wifi", fragment_udopstva_wifi_layout_tv, fragment_udopstva_wifi_layout, fragment_udopstva_wifi_layout_ckb)
+        setFacilities("Кондиционер", fragment_udopstva_con_layout_tv, fragment_udopstva_con_layout, fragment_udopstva_con_layout_ckb)
+        setFacilities("Аптечка", fragment_udopstva_med_layout_tv, fragment_udopstva_med_layout, fragment_udopstva_med_layout_ckb)
+        setFacilities("Чайник", fragment_udopstva_tea_layout_tv, fragment_udopstva_tea_layout, fragment_udopstva_tea_layout_ckb)
+        setFacilities("Фен", fragment_udopstva_fen_layout_tv, fragment_udopstva_fen_layout, fragment_udopstva_fen_layout_ckb)
+    }
+
+    private fun setFacilities(facility:String, textView: TextView, constraintLayout: ConstraintLayout, checkBox: CheckBox){
+
+        if (facility in sessionManager.facilitiesList.value!!) {
+            checkBox.isChecked = true
+            textView.setTextColor(Color.parseColor("#CD3232"))
         }
 
-        for ((facility, views) in mapFacility){
-            Log.e("ConstraintLay", "${views[0]}")
-            (views[0] as ConstraintLayout).setOnClickListener {
-                if (facility in sessionManager.facilitiesList.value!!) {
-                    sessionManager.setFacilityValue(facility, false)
-                    (views[2] as CheckBox).isChecked = false
-                    (views[1] as TextView).setTextColor(Color.BLACK)
-                }else {
-                    sessionManager.setFacilityValue(facility, true)
-                    (views[2] as CheckBox).isChecked = true
-                    (views[1] as TextView).setTextColor(Color.parseColor("#CD3232"))
-                }
+        constraintLayout.setOnClickListener {
+            if (facility in sessionManager.facilitiesList.value!!) {
+                sessionManager.setFacilityValue(facility, false)
+                checkBox.isChecked = false
+                textView.setTextColor(Color.BLACK)
+            }else {
+                sessionManager.setFacilityValue(facility, true)
+                checkBox.isChecked = true
+                textView.setTextColor(Color.parseColor("#CD3232"))
             }
         }
     }
