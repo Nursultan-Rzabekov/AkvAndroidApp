@@ -19,7 +19,6 @@ abstract class BaseActivity: DaggerAppCompatActivity(),
     DataStateChangeListener,
     UICommunicationListener
 {
-
     val TAG: String = "AppDebug"
 
     @Inject
@@ -114,6 +113,7 @@ abstract class BaseActivity: DaggerAppCompatActivity(),
             }
         }
     }
+
 
     override fun hideSoftKeyboard() {
         if (currentFocus != null) {

@@ -162,6 +162,16 @@
                     app:popUpTo="@+id/nav_create_search"
                     app:popUpToInclusive="true" />
 
+
+                <action
+                    android:id="@+id/action_filterCityFragment_to_back_filter"
+                    app:destination="@id/searchFilterFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    />
+
         </fragment>
 
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -83,6 +84,7 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
         cityAdapter.submitList(data)
     }
 
+
     private fun initRecyclerView(){
         fragment_city_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@FilterCityFragment.context)
@@ -93,7 +95,11 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
 
     override fun onItemSelected(position: Int, item: FilterCity) {
         sessionManager.filterCity(item)
-        findNavController().navigateUp()
+        
+        Log.d("just","just + ${item.location} + ${item.isSelected} + ${item.isMyLocation}")
+        val bundle = bundleOf("city" to item.location)
+        findNavController().navigate(R.id.action_filterCityFragment_to_back_filter,bundle)
+//        findNavController().navigateUp()
     }
 
 }

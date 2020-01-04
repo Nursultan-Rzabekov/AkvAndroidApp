@@ -37,6 +37,8 @@ class SearchFilterFragment : BaseSearchFragment() {
     private var beds_left:Int = 0
     private var beds_right:Int = BlogQueryUtils.BLOG_ORDER_PRICE_RIGHT
 
+    private var city_name:String? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,6 +49,10 @@ class SearchFilterFragment : BaseSearchFragment() {
             navFilterCityFragment()
         }
 
+
+        city_name = arguments?.getString("city")
+
+        fragment_filter_city_tv.text = city_name
 
         fragment_filter_appart_type_layout.setOnClickListener {
             navFilterTypeFragment()
