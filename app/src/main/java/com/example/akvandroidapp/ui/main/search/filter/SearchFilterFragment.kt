@@ -49,7 +49,6 @@ class SearchFilterFragment : BaseSearchFragment() {
             navFilterCityFragment()
         }
 
-
         city_name = arguments?.getString("city")
         fragment_filter_city_tv.text = city_name
 
@@ -93,6 +92,12 @@ class SearchFilterFragment : BaseSearchFragment() {
     }
 
     private fun getRangebarStatus(){
+        fragment_filter_price_rangeBar.setPinTextFormatter(object: RangeBar.PinTextFormatter{
+            override fun getText(value: String?): String {
+                return value.toString()
+            }
+        })
+
         fragment_filter_price_rangeBar.setOnRangeBarChangeListener(object : OnRangeBarChangeListener {
             override fun onRangeChangeListener(
                 rangeBar: RangeBar, leftPinIndex: Int,
