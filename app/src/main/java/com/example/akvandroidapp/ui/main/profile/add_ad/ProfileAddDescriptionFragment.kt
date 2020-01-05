@@ -9,17 +9,17 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_description.*
+import javax.inject.Inject
 
 
 class ProfileAddDescriptionFragment : BaseProfileFragment(){
 
-    private var type: String? = null
-    private var guestsCount: Int? = null
-    private var roomsCount: Int? = null
-    private var bedsCount: Int? = null
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +45,10 @@ class ProfileAddDescriptionFragment : BaseProfileFragment(){
     }
 
     private fun navNextFragment(){
+        sessionManager.setAddAdtitleAndDescription(
+            fragment_add_ad_description_title_et.text.toString().trim(),
+            fragment_add_ad_description_desc_et.text.toString().trim()
+        )
         findNavController().navigate(R.id.action_profileAddDescriptionFragment_to_profileAddCheckFragment)
     }
 

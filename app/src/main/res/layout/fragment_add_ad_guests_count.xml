@@ -89,8 +89,8 @@
                         android:id="@+id/fragment_add_ad_guests_count_guest_counter_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dim_8dp"
-                        android:layout_marginEnd="@dimen/dim_8dp"
+                        android:layout_marginStart="@dimen/dim_12dp"
+                        android:layout_marginEnd="@dimen/dim_12dp"
                         android:text="@string/_0"
                         android:textColor="@color/secondaryFirst"
                         android:textSize="22sp" />
@@ -183,8 +183,8 @@
                         android:id="@+id/fragment_add_ad_guests_count_rooms_counter_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dim_8dp"
-                        android:layout_marginEnd="@dimen/dim_8dp"
+                        android:layout_marginStart="@dimen/dim_12dp"
+                        android:layout_marginEnd="@dimen/dim_12dp"
                         android:text="@string/_0"
                         android:textColor="@color/secondaryFirst"
                         android:textSize="22sp" />
@@ -276,8 +276,8 @@
                         android:id="@+id/fragment_add_ad_guests_count_bed_counter_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dim_8dp"
-                        android:layout_marginEnd="@dimen/dim_8dp"
+                        android:layout_marginStart="@dimen/dim_12dp"
+                        android:layout_marginEnd="@dimen/dim_12dp"
                         android:text="@string/_0"
                         android:textColor="@color/secondaryFirst"
                         android:textSize="22sp" />

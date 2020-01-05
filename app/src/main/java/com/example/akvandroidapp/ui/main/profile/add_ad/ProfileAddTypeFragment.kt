@@ -8,14 +8,19 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_type_of_appartment.*
+import javax.inject.Inject
 
 
 class ProfileAddTypeFragment : BaseProfileFragment(){
 
     private val typesOfAppartments = listOf("Квартира", "Дом", "Коттедж", "Комната")
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,8 +55,8 @@ class ProfileAddTypeFragment : BaseProfileFragment(){
     }
 
     private fun navNextFragment(type: String){
-        val bundle = bundleOf("typeOfApartment" to type)
-        findNavController().navigate(R.id.action_profileAddTypeFragment_to_profileAddQuestsFragment, bundle)
+        sessionManager.setAddAdType(type)
+        findNavController().navigate(R.id.action_profileAddTypeFragment_to_profileAddQuestsFragment)
     }
 }
 

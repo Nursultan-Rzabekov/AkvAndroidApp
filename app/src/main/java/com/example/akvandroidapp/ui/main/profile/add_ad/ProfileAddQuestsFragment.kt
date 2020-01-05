@@ -7,14 +7,18 @@ import android.view.*
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_guests_count.*
+import javax.inject.Inject
 
 
 class ProfileAddQuestsFragment : BaseProfileFragment(){
 
-    private var type: String? = null
+    @Inject
+    lateinit var sessionManager: SessionManager
+
     private var guestsCount: Int = 0
     private var roomsCount: Int = 0
     private var bedsCount: Int = 0
@@ -29,8 +33,6 @@ class ProfileAddQuestsFragment : BaseProfileFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        type = arguments?.getString("typeOfApartment")
 
         clearAll()
 
@@ -74,9 +76,8 @@ class ProfileAddQuestsFragment : BaseProfileFragment(){
     }
 
     private fun navNextFragment(){
-        val bundle = bundleOf("typeOfApartment" to type, "bedsCount" to bedsCount,
-                                "roomsCount" to roomsCount, "guestsCount" to guestsCount)
-        findNavController().navigate(R.id.action_profileAddQuestsFragment_to_profileAddAddressFragment, bundle)
+        sessionManager.setAddAdCounts(guestsCount, roomsCount, bedsCount)
+        findNavController().navigate(R.id.action_profileAddQuestsFragment_to_profileAddAddressFragment)
     }
 
     private fun clearAll(){

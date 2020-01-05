@@ -50,6 +50,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:hint="@string/price"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionDone"
             android:textStyle="bold"
             android:text="@string/_20"
             android:textSize="18sp" />
@@ -75,7 +77,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_add_ad_price_discounts_layout"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dim_16dp"
@@ -107,6 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/BasicChip"
+                android:visibility="gone"
                 app:chipCornerRadius="@dimen/cornerRadius4"
                 app:chipStrokeColor="@color/primaryZero"
                 android:textColor="@color/primaryZero"
@@ -123,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/BasicChip"
+                android:visibility="gone"
                 app:chipCornerRadius="@dimen/cornerRadius4"
                 app:chipStrokeColor="@color/secondarySecond"
                 android:textColor="@color/secondarySecond"
@@ -139,6 +143,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_add_ad_price_add_discount_btn"
         style="@style/BasicOutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -146,7 +151,7 @@
         android:layout_marginEnd="@dimen/dim_48dp"
         android:text="@string/set_dsicount"
         android:textSize="14sp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -171,6 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_8dp"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -183,6 +189,7 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
+                android:id="@+id/fragment_add_ad_price_one_option_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/num_30days"
@@ -197,7 +204,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/dim_8dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_price_discounts_add_choose_days_shrink">
@@ -287,7 +294,7 @@
                     android:id="@+id/fragment_add_ad_price_discounts_slider_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/_minus5"
+                    android:text="@string/_0percent"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -320,11 +327,12 @@
             </LinearLayout>
 
             <SeekBar
+                android:id="@+id/fragment_add_ad_price_seekbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_8dp"
                 android:max="50"
-                android:progress="5"
+                android:progress="0"
                 android:progressTint="@color/primaryZero"
                 android:scrollbarSize="@dimen/dim_4dp"
                 android:thumbTint="@color/primaryZero" />
@@ -343,7 +351,7 @@
                 >
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fragment_add_ad_rules_add_chkbox_btn"
+                    android:id="@+id/fragment_add_ad_price_add_btn"
                     style="@style/AllButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -356,7 +364,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fragment_add_ad_rules_remove_chkbox_btn"
+                    android:id="@+id/fragment_add_ad_price_remove_btn"
                     style="@style/AllButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

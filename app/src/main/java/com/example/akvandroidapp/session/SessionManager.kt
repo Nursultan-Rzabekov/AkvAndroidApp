@@ -33,11 +33,15 @@ constructor(
     private val _typeOfApartment = MutableLiveData<Int>()
     private val _facilitiesList = MutableLiveData<MutableList<Int>>()
 
+    //Add ad
+    private val _addAdInfo = MutableLiveData<AddAdInfo>()
+
     init {
         favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("нет", false, true)
         _typeOfApartment.value = DEFAULT_TYPE
         _facilitiesList.value = mutableListOf()
+        _addAdInfo.value = AddAdInfo()
     }
 
     val cachedToken: LiveData<AuthToken>
@@ -54,6 +58,9 @@ constructor(
 
     val facilitiesList: LiveData<MutableList<Int>>
         get() = _facilitiesList
+
+    val addAdInfo: LiveData<AddAdInfo>
+        get() = _addAdInfo
 
     fun login(newValue: AuthToken){
         setValue(newValue)
@@ -73,6 +80,50 @@ constructor(
 
     fun filterFacilitiesList(facility: Int, checked: Boolean){
         setFacilityValue(facility, checked)
+    }
+
+    fun setAddAdPriceAndDiscounts(price: Int, days7: Int, days30: Int){
+        GlobalScope.launch(Main){
+            _addAdInfo.value?._addAdPrice = price
+            _addAdInfo.value?._addAd7DaysDiscount = days7
+            _addAdInfo.value?._addAd30DaysDiscount = days30
+        }
+    }
+
+    fun setAddAdtitleAndDescription(title: String, desc: String){
+        GlobalScope.launch(){
+            _addAdInfo.value?._addAdDescription = desc
+            _addAdInfo.value?._addAdTitle = title
+        }
+    }
+
+    fun setAddAdAddressList(country: String, region: String, city: String, address: String, postIndex: String){
+        GlobalScope.launch(Main){
+            _addAdInfo.value?._addAdAddressList?.set(0, country)
+            _addAdInfo.value?._addAdAddressList?.set(1, region)
+            _addAdInfo.value?._addAdAddressList?.set(2, city)
+            _addAdInfo.value?._addAdAddressList?.set(3, address)
+            _addAdInfo.value?._addAdAddressList?.set(4, postIndex)
+        }
+        Log.e("SESSION_ADD_AD_ADDRESS",
+            "${_addAdInfo.value?._addAdAddressList}")
+    }
+
+    fun setAddAdCounts(guests: Int, rooms: Int, beds: Int){
+        GlobalScope.launch(Main){
+            _addAdInfo.value?._addAdGuestsCount = guests
+            _addAdInfo.value?._addAdRoomsCount = rooms
+            _addAdInfo.value?._addAdBedsCount = beds
+        }
+        Log.e("SESSION_ADD_AD_COUNTS",
+            "${_addAdInfo.value?._addAdGuestsCount}, ${_addAdInfo.value?._addAdRoomsCount}, ${_addAdInfo.value?._addAdBedsCount}")
+    }
+
+    fun setAddAdType(type: String){
+        GlobalScope.launch(Main){
+            _addAdInfo.value?._addAdType = type
+        }
+        Log.e("SESSION_ADD_AD_TYPE", "${_addAdInfo.value?._addAdType}")
     }
 
     fun setFilterTypeOfApartment(type: Int){
