@@ -124,7 +124,7 @@ class SearchFilterFragment : BaseSearchFragment() {
     }
 
     private fun tuneRadioGroup(){
-        fragment_filter_sort_radio_group.setOnCheckedChangeListener{radioGroup, i ->
+        fragment_filter_sort_radio_group.setOnCheckedChangeListener{_, i ->
             when(i) {
                 fragment_filter_no_radio_btn.id -> {
                     sortMethod = Constants.FILTER_TYPE1
@@ -165,8 +165,6 @@ class SearchFilterFragment : BaseSearchFragment() {
                 rangeBar: RangeBar, leftPinIndex: Int,
                 rightPinIndex: Int, leftPinValue: String, rightPinValue: String
             ) {
-                Log.d("RangeBar", "Touch Left Value + ${leftPinValue}")
-                Log.d("RangeBar", "Touch Right Value + ${rightPinValue}")
                 price_left = leftPinValue.toInt()
                 price_right = rightPinValue.toInt()
             }
@@ -188,8 +186,6 @@ class SearchFilterFragment : BaseSearchFragment() {
             ) {
                 room_left = leftPinValue.toInt()
                 room_right = rightPinValue.toInt()
-                Log.d("RangeBar", "Touch Left Value + ${room_left}")
-                Log.d("RangeBar", "Touch Right Value + ${room_right}")
             }
 
             override fun onTouchEnded(rangeBar: RangeBar) {
@@ -209,8 +205,6 @@ class SearchFilterFragment : BaseSearchFragment() {
             ) {
                 beds_left = leftPinValue.toInt()
                 beds_right = rightPinValue.toInt()
-                Log.d("RangeBar", "Touch Left Value + ${beds_left}")
-                Log.d("RangeBar", "Touch Right Value + ${beds_right}")
             }
 
             override fun onTouchEnded(rangeBar: RangeBar) {

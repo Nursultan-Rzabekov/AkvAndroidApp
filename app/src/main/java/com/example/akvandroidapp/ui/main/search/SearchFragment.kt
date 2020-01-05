@@ -99,6 +99,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
 
 
     private fun subscribeObservers(){
+
         viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
             if(dataState != null) {
                 handlePagination(dataState)

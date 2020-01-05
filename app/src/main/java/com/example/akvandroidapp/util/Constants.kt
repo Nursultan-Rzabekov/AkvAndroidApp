@@ -1,5 +1,7 @@
 package com.example.akvandroidapp.util
 
+import android.widget.ImageView
+
 class Constants {
 
     companion object{
@@ -13,7 +15,7 @@ class Constants {
 
         const val PAGINATION_PAGE_SIZE = 3
 
-        const val GALLERY_REQUEST_CODE = 201
+        const val GALLERY_REQUEST_CODE = 0
         const val PERMISSIONS_REQUEST_READ_STORAGE: Int = 301
         const val CROP_IMAGE_INTENT_CODE: Int = 401
 
@@ -40,5 +42,22 @@ class Constants {
         )
 
         val mapTypesReversed = mapTypes.entries.associateBy({ it.value }) { it.key }
+
+
+        val mapCity = mapOf(
+            "Астана" to 0,
+            "Алматы" to 1,
+            "Шымкент" to 2
+        )
+
+
+        val mapTypeHouse = mapOf(
+            "Квартира" to 0,
+            "Дом" to 1,
+            "Коттедж" to 2,
+            "Комната" to 3
+        )
+
+
     }
 }

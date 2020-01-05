@@ -5,38 +5,48 @@ import com.google.gson.annotations.SerializedName
 
 class BlogCreateUpdateResponse(
 
-    @SerializedName("response")
+    @SerializedName("id")
     @Expose
-    var response: String,
+    var id: Int,
 
-    @SerializedName("pk")
+    @SerializedName("name")
     @Expose
-    var pk: Int,
+    var name: String,
 
-    @SerializedName("title")
+    @SerializedName("description")
     @Expose
-    var title: String,
+    var description: String,
 
-    @SerializedName("slug")
+    @SerializedName("rooms")
     @Expose
-    var slug: String,
+    var rooms: Int,
 
-    @SerializedName("body")
+    @SerializedName("floor")
     @Expose
-    var body: String,
+    var floor: Int,
 
-    @SerializedName("image")
+    @SerializedName("address")
     @Expose
-    var image: String,
+    var address: String,
 
-    @SerializedName("date_updated")
+    @SerializedName("longitude")
     @Expose
-    var date_updated: String,
+    var longitude: Double,
 
-    @SerializedName("username")
+    @SerializedName("latitude")
     @Expose
-    var username: String
+    var latitude: Double,
 
+    @SerializedName("price")
+    @Expose
+    var price: Int,
 
+    @SerializedName("beds")
+    @Expose
+    var beds: Int,
+
+    @SerializedName("guests")
+    @Expose
+    var guests: Int
 
 )

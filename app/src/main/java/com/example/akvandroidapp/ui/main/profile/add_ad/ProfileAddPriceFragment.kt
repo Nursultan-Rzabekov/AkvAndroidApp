@@ -44,6 +44,11 @@ class ProfileAddPriceFragment : BaseProfileFragment(){
             findNavController().navigateUp()
         }
 
+        fragment_add_ad_price_next_btn.setOnClickListener {
+            savePrice()
+            navNextFragment()
+        }
+
         fragment_add_ad_price_add_discount_btn.setOnClickListener {
             if (fragment_add_ad_price_discounts_add_layout.visibility == View.GONE) {
                 fragment_add_ad_price_discounts_add_layout.visibility = View.VISIBLE
@@ -190,6 +195,11 @@ class ProfileAddPriceFragment : BaseProfileFragment(){
             fragment_add_ad_price_et.text.toString().toInt(),
             discountOn7Days,
             discountOn30Days)
+    }
+
+
+    private fun navNextFragment(){
+        findNavController().navigate(R.id.profileAddPriceFragment_to_profileAddPostFragment)
     }
 }
 

@@ -77,6 +77,7 @@
     <string name="account_exist">Уже есть аккаунт?</string>
     <string name="repeat_password">Повторите пароль</string>
     <string name="next">Далее</string>
+    <string name="post">Разместить</string>
     <string name="back">Назад</string>
     <string name="create_password">Придумайте пароль</string>
     <string name="put_nickname">Придумайте имя\n пользователя</string>
@@ -215,6 +216,7 @@
     <string name="add">Добавить</string>
     <string name="cancel">Отменить</string>
     <string name="rules_akv_kz">Требования  AKV.KZ</string>
+    <string name="post_reserve">Правила \n бронирования</string>
     <string name="add_mine">Добавить своё</string>
     <string name="choose_appart_type">Выберите тип  жилья</string>
     <string name="appartments_in">Квартиры в Алматы</string>
@@ -235,7 +237,7 @@
     <string name="sort">Сортировка</string>
     <string name="city">Город</string>
     <string name="type_of_house">Тип жилья</string>
-    <string name="show_300_results">Показать 300+ результатов</string>
+    <string name="show_300_results">Показать 5+ результатов</string>
     <string name="host_mode">Режим хозяина</string>
     <string name="random_text3">Формированию позиции представляет собой  интересный эксперимент проверки модели развития.</string>
     <string name="payments">Платежи и выплаты</string>

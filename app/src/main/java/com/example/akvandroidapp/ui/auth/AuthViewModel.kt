@@ -1,6 +1,6 @@
 package com.example.akvandroidapp.ui.auth
 
-import android.util.Log
+
 import androidx.lifecycle.*
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.repository.auth.AuthRepository
@@ -12,8 +12,6 @@ import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import javax.inject.Inject
 
 
-
-///qweeqw
 class AuthViewModel
 @Inject
 constructor(val authRepository: AuthRepository): BaseViewModel<AuthStateEvent, AuthViewState>()

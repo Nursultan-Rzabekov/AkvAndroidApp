@@ -210,7 +210,7 @@ class MainActivity : BaseActivity(),
             bottomNavController.onNavigationItemSelected()
         }
 
-        sessionManager.login(AuthToken(1,"qweqweqweqe"))
+        sessionManager.login(AuthToken(1,"a8673d2433213ab45d0f39153ffab0b1f681f738"))
         subscribeObservers()
 
     }

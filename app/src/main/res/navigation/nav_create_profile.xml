@@ -275,6 +275,15 @@
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_price">
 
+
+        <action android:id="@+id/profileAddPriceFragment_to_profileAddPostFragment"
+            app:destination="@id/profileAddPostFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
         <action
             android:id="@+id/action_profileAddPriceFragment_to_home"
             app:destination="@id/profileFragment"
@@ -288,5 +297,21 @@
     </fragment>
 
 
+    <fragment android:id="@+id/profileAddPostFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddPostFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_post">
+
+        <action
+            android:id="@+id/action_profileAddPriceFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
+    </fragment>
 
 </navigation>

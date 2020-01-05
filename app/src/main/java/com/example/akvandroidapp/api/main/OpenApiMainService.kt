@@ -34,8 +34,6 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<GenericResponse>>
 
 
-
-
     @GET("blog/{slug}/is_author")
     fun isAuthorOfBlogPost(
         @Header("Authorization") authorization: String,
@@ -59,17 +57,28 @@ interface OpenApiMainService {
         @Part image: MultipartBody.Part?
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>
 
-
     @Multipart
-    @POST("blog/create")
+    @POST("houses")
     fun createBlog(
         @Header("Authorization") authorization: String,
-        @Part("title") title: RequestBody,
-        @Part("body") body: RequestBody,
-        @Part image: MultipartBody.Part?
+        @Part("name") name: String,
+        @Part("description") description: String,
+        @Part("rooms") rooms: Int,
+        @Part("floor") floor: Int,
+        @Part("address") address: String,
+        @Part("longitude") longitude: Double,
+        @Part("latitude") latitude: Double,
+        @Part("city_id") city_id: Int,
+        @Part("price") price: Int,
+        @Part("beds") beds: Int,
+        @Part("guests") guests: Int,
+        @Part("rules") rules: String,
+        @Part("near_buildings") near_buildings: String,
+        @Part("house_type_id") house_type_id: Int,
+        @Part("blocked_dates") blocked_dates: String,
+        @Part("accommodations") accommodations: String,
+        @Part photos: ArrayList<MultipartBody.Part>?
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>
-
-
 
     @GET("houses")
     fun searchListBlogPosts(

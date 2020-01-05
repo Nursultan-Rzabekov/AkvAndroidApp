@@ -95,5 +95,8 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeProfileAddTypeFragment(): ProfileAddTypeFragment
 
+    @ContributesAndroidInjector()
+    abstract fun contributeProfileAddPostFragment(): ProfileAddPostFragment
+
 
 }

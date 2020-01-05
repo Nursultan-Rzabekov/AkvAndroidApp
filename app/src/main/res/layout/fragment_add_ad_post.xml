@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/fragment_add_ad_post_back_btn"
+        layout="@layout/back_button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim_28dp"
+        android:layout_marginTop="@dimen/dim_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_add_ad_post_tv1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim_48dp"
+        android:layout_marginTop="@dimen/dim_16dp"
+        android:layout_marginEnd="@dimen/dim_32dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/post_reserve"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_post_back_btn" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_add_ad_post_next_btn"
+        style="@style/BasicButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
+        android:layout_marginBottom="@dimen/dim_36dp"
+        android:text="@string/post"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.akvandroidapp.session
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -87,6 +88,29 @@ constructor(
             _addAdInfo.value?._addAdPrice = price
             _addAdInfo.value?._addAd7DaysDiscount = days7
             _addAdInfo.value?._addAd30DaysDiscount = days30
+        }
+    }
+
+    fun setAddAdImage(imageUri1: Uri?, imageUri2: Uri?, imageUri3: Uri?, imageUri4: Uri?, imageUri5: Uri?, imageUri6: Uri?){
+        GlobalScope.launch(Main){
+            imageUri1?.let {
+                _addAdInfo.value?._addAdImage?.add(imageUri1)
+            }
+            imageUri2?.let {
+                _addAdInfo.value?._addAdImage?.add(imageUri2)
+            }
+            imageUri3?.let {
+                _addAdInfo.value?._addAdImage?.add(imageUri3)
+            }
+            imageUri4?.let {
+                _addAdInfo.value?._addAdImage?.add(imageUri4)
+            }
+            imageUri5?.let {
+                _addAdInfo.value?._addAdImage?.add(imageUri5)
+            }
+            imageUri6?.let {
+                _addAdInfo.value?._addAdImage?.add(imageUri6)
+            }
         }
     }
 
