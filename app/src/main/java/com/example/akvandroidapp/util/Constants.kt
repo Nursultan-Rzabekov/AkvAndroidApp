@@ -29,7 +29,10 @@ class Constants {
             "Кондиционер" to 3,
             "Аптечка" to 4,
             "Чайник" to 5,
-            "Фен" to 6
+            "Фен" to 6,
+            "Утюг" to 7,
+            "Полотенца" to 8,
+            "Телевизор" to 9
         )
         val mapFacilitiesReversed = mapFacilities.entries.associateBy({ it.value }) { it.key }
 

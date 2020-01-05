@@ -39,7 +39,7 @@
         android:layout_marginEnd="@dimen/dim_60dp"
         android:text="@string/drop_all"
         android:textColor="@color/primaryZero"
-        android:textSize="11sp"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_check_tv1" />
 
@@ -54,9 +54,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dim_48dp"
+            android:layout_marginStart="@dimen/dim_60dp"
             android:layout_marginTop="@dimen/dim_16dp"
-            android:layout_marginEnd="@dimen/dim_48dp"
+            android:layout_marginEnd="@dimen/dim_60dp"
             android:orientation="vertical">
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Кондиционер"
+                android:text="@string/conditioner"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Фен"
+                android:text="@string/air_fen"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Отопление"
+                android:text="@string/heat"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Утюг"
+                android:text="@string/iron"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Wifi"
+                android:text="@string/wifi"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -110,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Полотенца"
+                android:text="@string/towel"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Телевизор"
+                android:text="@string/tv"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Телефон"
+                android:text="@string/telephone"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -137,68 +137,77 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Аптечка"
+                android:text="@string/medical"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_add_ad_check_recycler_view"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_add_ad_check_add_chkbox"
+                style="@style/AllButton.TextButton"
+                app:icon="@drawable/ic_plus_red_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Добавить своё"
-                android:drawablePadding="@dimen/dim_4dp"
+                android:gravity="center_vertical"
+                android:text="@string/add_your"
+                app:iconPadding="@dimen/dim_8dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:textColor="@color/primaryZero"
-                android:textSize="16sp"
-                android:drawableStart="@drawable/ic_plus_red"/>
+                android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_add_ad_check_add_chkbox_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dim_16dp"
-                android:layout_marginEnd="@dimen/dim_16dp">
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:contentDescription="@string/add"
+                    android:id="@+id/fragment_add_ad_check_fakecheckbox"
+                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_height="@dimen/dim_24dp"
+                    android:padding="3dp"
+                    android:layout_marginStart="@dimen/dim_4dp"
+                    android:layout_marginTop="@dimen/dim_8dp"
+                    android:layout_marginBottom="@dimen/dim_8dp"
+                    android:src="@drawable/fake_checkbox"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/fragment_add_ad_check_add_chkbox_et"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColorHighlight="@color/primaryZero"
                     android:inputType="text"
                     android:lines="1"
+                    android:textColorHighlight="@color/primaryZero"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_add_ad_check_fakecheckbox"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/fragment_add_ad_check_add_chkbox_btn"
-                    style="@style/AllButton"
+                    style="@style/AllButton.Unelevated"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dim_36dp"
-                    android:layout_margin="0dp"
-                    android:padding="0dp"
                     android:text="@string/add"
-                    android:textSize="10sp"
-                    app:cornerRadius="@dimen/cornerRadius3"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_ad_check_add_chkbox_et"
                     app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/fragment_add_ad_check_remove_chkbox_btn"
-                    style="@style/AllButton"
+                    style="@style/AllButton.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dim_36dp"
-                    android:layout_margin="0dp"
-                    android:padding="0dp"
                     android:backgroundTint="@color/white"
-                    android:elevation="0dp"
                     android:textColor="@color/primaryZero"
                     android:text="@string/cancel"
-                    android:textSize="10sp"
-                    app:cornerRadius="@dimen/cornerRadius3"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_ad_check_add_chkbox_et"
                     app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
 
