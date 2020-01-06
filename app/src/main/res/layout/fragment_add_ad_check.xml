@@ -142,7 +142,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_add_ad_check_recycler_view"
-                android:visibility="gone"
+                android:visibility="visible"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -182,7 +183,7 @@
                     android:id="@+id/fragment_add_ad_check_add_chkbox_et"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="textCapSentences"
                     android:lines="1"
                     android:textColorHighlight="@color/primaryZero"
                     app:layout_constraintEnd_toEndOf="parent"

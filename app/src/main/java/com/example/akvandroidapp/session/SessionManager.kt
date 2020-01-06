@@ -83,7 +83,7 @@ constructor(
         setFacilityValue(facility, checked)
     }
 
-    fun setAddAdFacilityListItem(facility: Int, checked: Boolean) {
+    fun setAddAdFacilityListItem(facility: String, checked: Boolean) {
         GlobalScope.launch(Main){
             if (checked)
                 _addAdInfo.value?._addAdFacilityList?.add(facility)

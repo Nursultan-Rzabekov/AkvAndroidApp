@@ -7,6 +7,7 @@ import android.text.style.UnderlineSpan
 import android.view.*
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
@@ -15,10 +16,23 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import kotlinx.android.synthetic.main.fragment_add_ad_check.*
+import java.util.*
 import javax.inject.Inject
 
 
-class ProfileAddCheckFragment : BaseProfileFragment(){
+class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
+
+    private lateinit var checkboxAdapter: AddAdCheckboxAdapter
+    private val staticFacilityList = mutableListOf(
+        "Кондиционер",
+        "Фен",
+        "Отопление",
+        "Утюг",
+        "Wifi",
+        "Полотенца",
+        "Телевизор",
+        "Телефон",
+        "Аптечка")
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -37,12 +51,14 @@ class ProfileAddCheckFragment : BaseProfileFragment(){
         setSpanable()
         setAllStaticChechboxes()
         initialState()
+        initRecyclerView()
 
         fragment_add_ad_check_next_btn.setOnClickListener {
             navNextFragment()
         }
 
         main_back_img_btn.setOnClickListener {
+            sessionManager.addAdInfo.value?._addAdFacilityList?.clear()
             findNavController().navigateUp()
         }
 
@@ -57,6 +73,11 @@ class ProfileAddCheckFragment : BaseProfileFragment(){
 
         fragment_add_ad_check_add_chkbox_btn.setOnClickListener {
             addNewFacility(fragment_add_ad_check_add_chkbox_et.text.toString().trim())
+            initialState()
+        }
+
+        fragment_add_ad_check_drop_all.setOnClickListener {
+            clearAllFacilities()
         }
     }
 
@@ -72,7 +93,7 @@ class ProfileAddCheckFragment : BaseProfileFragment(){
 
     private fun assignCheckbox(checkBox: MaterialCheckBox){
         checkBox.setOnCheckedChangeListener { btn, b ->
-            sessionManager.setAddAdFacilityListItem(Constants.mapFacilities.getValue(checkBox.text.toString().trim()), b)
+            sessionManager.setAddAdFacilityListItem(checkBox.text.toString().trim(), b)
         }
     }
 
@@ -93,8 +114,47 @@ class ProfileAddCheckFragment : BaseProfileFragment(){
         fragment_add_ad_check_add_chkbox.visibility = View.VISIBLE
     }
 
-    private fun addNewFacility(facility: String) {
+    private fun initRecyclerView(){
+        fragment_add_ad_check_recycler_view.apply {
+            layoutManager = LinearLayoutManager(this@ProfileAddCheckFragment.context)
+            checkboxAdapter = AddAdCheckboxAdapter(this@ProfileAddCheckFragment, this@ProfileAddCheckFragment)
+            adapter = checkboxAdapter
+        }
+        checkboxAdapter.submitList(mutableListOf())
+    }
 
+    private fun addNewFacility(facility: String) {
+        if (!staticFacilityList.contains(facility.capitalize()) &&
+            !checkboxAdapter.getList().contains(facility.capitalize()) &&
+            facility != "")
+            checkboxAdapter.addItem(facility)
+        fragment_add_ad_check_add_chkbox_et.setText("")
+    }
+
+    private fun clearAllFacilities() {
+        checkboxAdapter.uncheckAll()
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox1)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox2)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox3)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox4)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox5)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox6)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox7)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox8)
+        uncheckStaticFacilities(fragment_add_ad_check_chkbox9)
+    }
+
+    private fun uncheckStaticFacilities(checkBox: MaterialCheckBox) {
+        checkBox.isChecked = false
+    }
+
+    override fun onItemChecked(position: Int, item: String, checked: Boolean) {
+        sessionManager.setAddAdFacilityListItem(item, checked)
+    }
+
+    override fun onItemClosed(position: Int, item: String) {
+        sessionManager.setAddAdFacilityListItem(item, false)
+        checkboxAdapter.removeItem(position)
     }
 }
 
