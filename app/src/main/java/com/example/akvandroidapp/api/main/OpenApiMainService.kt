@@ -3,6 +3,7 @@ package com.example.akvandroidapp.api.main
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.responses.BlogCreateUpdateResponse
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
+import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.util.GenericApiResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -60,6 +61,7 @@ interface OpenApiMainService {
     @Multipart
     @POST("houses")
     fun createBlog(
+        @Header("accept") type: String,
         @Header("Authorization") authorization: String,
         @Part("name") name: String,
         @Part("description") description: String,
@@ -75,7 +77,7 @@ interface OpenApiMainService {
         @Part("rules") rules: String,
         @Part("near_buildings") near_buildings: String,
         @Part("house_type_id") house_type_id: Int,
-        @Part("blocked_dates") blocked_dates: String,
+        @Part("blocked_dates") blocked_dates: List<BlockedDates>,
         @Part("accommodations") accommodations: String,
         @Part photos: ArrayList<MultipartBody.Part>?
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>

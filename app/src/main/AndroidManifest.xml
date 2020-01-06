@@ -35,6 +35,10 @@
         </activity>
 
         <activity
+            android:name=".ui.main.profile.support.SupportProfileActivity"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
             android:name=".ui.main.search.MapActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan">

@@ -17,5 +17,6 @@ data class AddAdInfo(
     var _addAdPrice: Int = 0,
     var _addAd7DaysDiscount: Int = 0,
     var _addAd30DaysDiscount: Int = 0,
-    var _addAdImage: MutableList<Uri> = mutableListOf()
+    var _addAdImage: MutableList<Uri> = mutableListOf(),
+    var _addAdFacilityList: MutableList<Int> = mutableListOf()
     ) : Parcelable

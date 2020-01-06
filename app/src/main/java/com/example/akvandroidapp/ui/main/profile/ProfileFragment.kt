@@ -37,10 +37,26 @@ class ProfileFragment : BaseProfileFragment(){
         fragment_profile_owner_post_ad_btn.setOnClickListener {
             navNextFragment()
         }
+
+        fragment_profile_owner_about_us_layout.setOnClickListener {
+            navigateAboutFragment()
+        }
+
+        fragment_profile_owner_support_layout.setOnClickListener {
+            navigateSupportFragment()
+        }
     }
 
     private fun navNextFragment(){
         findNavController().navigate(R.id.action_profileFragment_to_profileAddTypeFragment)
+    }
+
+    private fun navigateAboutFragment(){
+        findNavController().navigate(R.id.action_profileFragment_to_profileAddTypeFragment)
+    }
+
+    private fun navigateSupportFragment(){
+        findNavController().navigate(R.id.action_profileFragment_to_supportActivity)
     }
 }
 

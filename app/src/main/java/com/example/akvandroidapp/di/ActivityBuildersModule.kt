@@ -11,6 +11,7 @@ import com.example.akvandroidapp.di.main.MainScope
 import com.example.akvandroidapp.di.main.MainViewModelModule
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.MainActivity
+import com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity
 import com.example.akvandroidapp.ui.main.search.MapActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -34,5 +35,9 @@ abstract class ActivityBuildersModule {
     @MainScope
     @ContributesAndroidInjector
     abstract fun contributeMapActivity(): MapActivity
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeSupportProfileActivity(): SupportProfileActivity
 
 }

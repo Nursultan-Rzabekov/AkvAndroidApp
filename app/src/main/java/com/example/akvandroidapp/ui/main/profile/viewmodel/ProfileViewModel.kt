@@ -17,6 +17,9 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 import javax.inject.Inject
 
+
+data class BlockedDates(private val check_in: String, private val check_out:String)
+
 class ProfileViewModel
 @Inject
 constructor(
@@ -54,6 +57,15 @@ constructor(
 //                    val accommodations = RequestBody.create(MediaType.parse("text/plain"), "Утюг")
 
 
+                    Log.d(TAG,"PostCreateHouse cityId + ${Constants.mapCity.getValue(stateEvent._addAdAddressList[2])}")
+
+                    Log.d(TAG,"PostCreateHouse houseId + ${Constants.mapTypeHouse.getValue(stateEvent._addAdType)}")
+
+
+                    val list:List<BlockedDates> = listOf(BlockedDates("2019-12-20","2019-12-31"))
+
+                    Log.d(TAG,"PostCreateHouse listt + ${list}")
+
                     profileRepository.createNewBlogPost(
                         authToken,
                         stateEvent._addAdTitle,
@@ -68,7 +80,7 @@ constructor(
                         stateEvent._addAdGuestsCount,
                         "Не курить",
                         "Больница",
-                        "[{\"check_in\": \"2019-12-20\", \"check_out\": \"2019-12-31\"}, {\"check_in\": \"2019-12-10\", \"check_out\": \"2012-12-19\"}]",
+                        list,
                         stateEvent.image,
                         Constants.mapTypeHouse.getValue(stateEvent._addAdType),
                         "Утюг"

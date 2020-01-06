@@ -3,8 +3,11 @@ package com.example.akvandroidapp.di.main
 import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
 import com.example.akvandroidapp.ui.main.home.HomeFragment
 import com.example.akvandroidapp.ui.main.messages.MessagesFragment
+import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.ProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.*
+import com.example.akvandroidapp.ui.main.profile.support.GuestProfileFragment
+import com.example.akvandroidapp.ui.main.profile.support.HostProfileFragment
 import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
 import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.ui.main.search.SearchFragment
@@ -97,6 +100,15 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeProfileAddPostFragment(): ProfileAddPostFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeAboutProfileFragment(): AboutProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeHostProfileFragment(): HostProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeGuestProfileFragment(): GuestProfileFragment
 
 
 }

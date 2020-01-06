@@ -83,6 +83,16 @@ constructor(
         setFacilityValue(facility, checked)
     }
 
+    fun setAddAdFacilityListItem(facility: Int, checked: Boolean) {
+        GlobalScope.launch(Main){
+            if (checked)
+                _addAdInfo.value?._addAdFacilityList?.add(facility)
+            else
+                _addAdInfo.value?._addAdFacilityList?.remove(facility)
+        }
+        Log.e("SESSION_ADD_AD_FACILITI", "${_addAdInfo.value?._addAdFacilityList}")
+    }
+
     fun setAddAdPriceAndDiscounts(price: Int, days7: Int, days30: Int){
         GlobalScope.launch(Main){
             _addAdInfo.value?._addAdPrice = price
@@ -115,7 +125,7 @@ constructor(
     }
 
     fun setAddAdtitleAndDescription(title: String, desc: String){
-        GlobalScope.launch(){
+        GlobalScope.launch(Main){
             _addAdInfo.value?._addAdDescription = desc
             _addAdInfo.value?._addAdTitle = title
         }

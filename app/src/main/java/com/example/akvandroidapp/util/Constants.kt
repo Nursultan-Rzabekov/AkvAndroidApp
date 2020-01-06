@@ -1,6 +1,5 @@
 package com.example.akvandroidapp.util
 
-import android.widget.ImageView
 
 class Constants {
 
@@ -31,7 +30,10 @@ class Constants {
             "Кондиционер" to 3,
             "Аптечка" to 4,
             "Чайник" to 5,
-            "Фен" to 6
+            "Фен" to 6,
+            "Утюг" to 7,
+            "Полотенца" to 8,
+            "Телевизор" to 9
         )
         val mapFacilitiesReversed = mapFacilities.entries.associateBy({ it.value }) { it.key }
 
@@ -45,19 +47,20 @@ class Constants {
 
 
         val mapCity = mapOf(
-            "Астана" to 0,
-            "Алматы" to 1,
-            "Шымкент" to 2
+            "Астана" to 1,
+            "Алматы" to 2,
+            "Шымкент" to 3,
+            "Семей" to 4,
+            "Павлодар" to 5,
+            "Тараз" to 6,
+            "Актобе" to 7
         )
-
 
         val mapTypeHouse = mapOf(
-            "Квартира" to 0,
-            "Дом" to 1,
-            "Коттедж" to 2,
-            "Комната" to 3
+            "Квартира" to 1,
+            "Дом" to 2,
+            "Коттедж" to 3,
+            "Комната" to 4
         )
-
-
     }
 }

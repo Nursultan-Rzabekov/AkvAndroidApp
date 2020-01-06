@@ -15,6 +15,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
 import com.example.akvandroidapp.util.DateUtils
@@ -52,7 +53,7 @@ constructor(
         guests:Int,
         rules:String,
         near_buildings:String,
-        blocked_dates:String,
+        blocked_dates:List<BlockedDates>,
         photos: ArrayList<MultipartBody.Part>?,
         house_type_id:Int,
         accommodations:String
@@ -101,6 +102,7 @@ constructor(
             override fun createCall(): LiveData<GenericApiResponse<BlogCreateUpdateResponse>> {
                 Log.d(TAG,"PostCreateHouse 3333333 + ${name}")
                 return openApiMainService.createBlog(
+                    "application/json",
                     "Token ${authToken.token!!}",
                     name,
                     description,

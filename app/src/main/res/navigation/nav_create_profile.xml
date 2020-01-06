@@ -20,6 +20,38 @@
                 app:exitAnim="@anim/slide_out_left"
                 />
 
+            <action android:id="@+id/action_profileFragment_to_profileAboutProfileFragment"
+                app:destination="@id/profileAddTypeFragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                />
+
+            <action android:id="@+id/action_profileFragment_to_supportActivity"
+                app:destination="@id/supportProfileActivity"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                />
+
+    </fragment>
+
+    <activity
+        android:id="@+id/supportProfileActivity"
+        android:name="com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity"
+        android:label="@string/fragment_view_blog"
+        tools:layout="@layout/fragment_support_main">
+
+    </activity>
+
+
+    <fragment android:id="@+id/profileAboutProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.AboutProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_type_of_appartment">
+
     </fragment>
 
     <fragment android:id="@+id/profileAddTypeFragment"

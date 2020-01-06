@@ -315,4 +315,9 @@
     <string name="medical">Аптечка</string>
     <string name="tea">Чайник</string>
     <string name="air_fen">Фен</string>
+    <string name="iron">Утюг</string>
+    <string name="towel">Полотенца</string>
+    <string name="tv">Телевизор</string>
+    <string name="telephone">Телефон</string>
+    <string name="add_your">Добавить своё</string>
 </resources>
