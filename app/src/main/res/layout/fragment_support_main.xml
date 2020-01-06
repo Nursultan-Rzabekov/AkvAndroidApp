@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         style="@style/Widget.MaterialComponents.TabLayout.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
+        android:layout_marginStart="@dimen/dim_36dp"
+        android:layout_marginEnd="@dimen/dim_36dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,6 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
@@ -41,9 +41,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs">
-
-    </androidx.viewpager.widget.ViewPager>
+        app:layout_constraintTop_toBottomOf="@id/tabs"/>
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -93,14 +91,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Телефон: +7 (707) 786 5321"
+                    android:text="@string/_7_707_786_5321"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email: akvkz@gmail.com"
+                    android:text="@string/email_akvkz_gmail_com"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -114,7 +112,7 @@
                 android:layout_weight="2"
                 android:textSize="12sp"
                 android:minHeight="@dimen/dim_36dp"
-                android:text="Сообщить об ошибке" />
+                android:text="@string/report_error" />
 
         </LinearLayout>
     </LinearLayout>
