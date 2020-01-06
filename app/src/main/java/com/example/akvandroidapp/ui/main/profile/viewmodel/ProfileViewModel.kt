@@ -39,7 +39,7 @@ constructor(
                 Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
                 return sessionManager.cachedToken.value?.let { authToken ->
 
-//                    val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdTitle)
+                    val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdTitle)
 //                    val description = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdDescription)
 //                    val rooms = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdRoomsCount.toString())
 //                    val address = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddressList[2])
@@ -68,7 +68,7 @@ constructor(
 
                     profileRepository.createNewBlogPost(
                         authToken,
-                        stateEvent._addAdTitle,
+                        name,
                         stateEvent._addAdDescription,
                         stateEvent._addAdRoomsCount,
                         stateEvent._addAdAddressList[2],

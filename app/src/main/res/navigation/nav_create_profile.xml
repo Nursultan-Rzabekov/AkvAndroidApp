@@ -67,14 +67,6 @@
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_support_main">
 
-        <action android:id="@+id/action_supportProfileActivity_to_profileSupportProfileReviewFragment"
-            app:destination="@id/profileSupportProfileReviewFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            />
-
     </activity>
 
     <fragment android:id="@+id/profileSupportProfileReviewFragment"

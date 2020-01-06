@@ -41,7 +41,7 @@ constructor(
 
     fun createNewBlogPost(
         authToken: AuthToken,
-        name: String,
+        name: RequestBody,
         description: String,
         rooms:Int,
         address:String,
@@ -102,24 +102,24 @@ constructor(
             override fun createCall(): LiveData<GenericApiResponse<BlogCreateUpdateResponse>> {
                 Log.d(TAG,"PostCreateHouse 3333333 + ${name}")
                 return openApiMainService.createBlog(
-                    "application/json",
+//                    "application/json",
                     "Token ${authToken.token!!}",
                     name,
-                    description,
-                    rooms,
-                    4,
-                    address,
-                    longitude,
-                    latitude,
-                    city_id,
-                    price,
-                    beds,
-                    guests,
-                    rules,
-                    near_buildings,
-                    house_type_id,
-                    blocked_dates,
-                    accommodations,
+//                    description,
+//                    rooms,
+//                    4,
+//                    address,
+//                    longitude,
+//                    latitude,
+//                    city_id,
+//                    price,
+//                    beds,
+//                    guests,
+//                    rules,
+//                    near_buildings,
+//                    house_type_id,
+//                    blocked_dates,
+//                    accommodations,
                     photos
                 )
             }

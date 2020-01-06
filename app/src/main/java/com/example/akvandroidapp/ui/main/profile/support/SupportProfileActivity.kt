@@ -23,18 +23,10 @@ class SupportProfileActivity : BaseActivity()
         viewPager.adapter = fragmentAdapter
         tabs.setupWithViewPager(viewPager)
 
-        support_error.setOnClickListener {
-            navigateSettingsFragment()
-        }
 
     }
 
     override fun expandAppBar() {
     }
-
-    private fun navigateSettingsFragment(){
-        findNavController(R.navigation.nav_create_profile).navigate(R.id.action_supportProfileActivity_to_profileSupportProfileReviewFragment)
-    }
-
 
 }
