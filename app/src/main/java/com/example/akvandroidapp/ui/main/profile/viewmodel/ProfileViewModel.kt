@@ -40,21 +40,21 @@ constructor(
                 return sessionManager.cachedToken.value?.let { authToken ->
 
                     val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdTitle)
-//                    val description = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdDescription)
-//                    val rooms = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdRoomsCount.toString())
-//                    val address = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddressList[2])
-//                    val longitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
-//                    val latitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
-//                    val cityId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapCity.getValue(stateEvent._addAdAddressList[2]).toString()))
-//                    val price = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdPrice.toString())
-//                    val beds = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdBedsCount.toString())
-//                    val guests = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdGuestsCount.toString())
-//                    val rules = RequestBody.create(MediaType.parse("text/plain"), "Не курить")
-//                    val nearBuildings = RequestBody.create(MediaType.parse("text/plain"), "Больница")
-//                    val blockedDates = RequestBody.create(MediaType.parse("text/plain"), "[{\"check_in\": \"2019-12-20\", \"check_out\": \"2019-12-31\"}, {\"check_in\": \"2019-12-10\", \"check_out\": \"2012-12-19\"}]")
-//
-//                    val houseTypeId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapTypeHouse.getValue(stateEvent._addAdType).toString()))
-//                    val accommodations = RequestBody.create(MediaType.parse("text/plain"), "Утюг")
+                    val description = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdDescription)
+                    val rooms = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdRoomsCount.toString())
+                    val address = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddressList[2])
+                    val longitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
+                    val latitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
+                    val cityId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapCity.getValue(stateEvent._addAdAddressList[2]).toString()))
+                    val price = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdPrice.toString())
+                    val beds = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdBedsCount.toString())
+                    val guests = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdGuestsCount.toString())
+                    val rules = RequestBody.create(MediaType.parse("text/plain"), "Не курить")
+                    val nearBuildings = RequestBody.create(MediaType.parse("text/plain"), "Больница")
+                    val blockedDates = RequestBody.create(MediaType.parse("text/plain"), "[{\"check_in\": \"2019-12-20\", \"check_out\": \"2019-12-31\"}, {\"check_in\": \"2019-12-10\", \"check_out\": \"2012-12-19\"}]")
+
+                    val houseTypeId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapTypeHouse.getValue(stateEvent._addAdType).toString()))
+                    val accommodations = RequestBody.create(MediaType.parse("text/plain"), "Утюг")
 
 
                     Log.d(TAG,"PostCreateHouse cityId + ${Constants.mapCity.getValue(stateEvent._addAdAddressList[2])}")
@@ -69,21 +69,21 @@ constructor(
                     profileRepository.createNewBlogPost(
                         authToken,
                         name,
-                        stateEvent._addAdDescription,
-                        stateEvent._addAdRoomsCount,
-                        stateEvent._addAdAddressList[2],
-                        55.5,
-                        55.5,
-                        Constants.mapCity.getValue(stateEvent._addAdAddressList[2]),
-                        stateEvent._addAdPrice,
-                        stateEvent._addAdBedsCount,
-                        stateEvent._addAdGuestsCount,
-                        "Не курить",
-                        "Больница",
-                        list,
+                        description,
+                        rooms,
+                        address,
+                        longitude,
+                        latitude,
+                        cityId,
+                        price,
+                        beds,
+                        guests,
+                        rules,
+                        nearBuildings,
+                        blockedDates,
                         stateEvent.image,
-                        Constants.mapTypeHouse.getValue(stateEvent._addAdType),
-                        "Утюг"
+                        houseTypeId,
+                        accommodations
                     )
                 }?: AbsentLiveData.create()
             }

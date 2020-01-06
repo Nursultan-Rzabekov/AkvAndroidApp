@@ -42,21 +42,21 @@ constructor(
     fun createNewBlogPost(
         authToken: AuthToken,
         name: RequestBody,
-        description: String,
-        rooms:Int,
-        address:String,
-        longitude:Double,
-        latitude:Double,
-        city_id:Int,
-        price:Int,
-        beds:Int,
-        guests:Int,
-        rules:String,
-        near_buildings:String,
-        blocked_dates:List<BlockedDates>,
+        description: RequestBody,
+        rooms:RequestBody,
+        address:RequestBody,
+        longitude:RequestBody,
+        latitude:RequestBody,
+        city_id:RequestBody,
+        price:RequestBody,
+        beds:RequestBody,
+        guests:RequestBody,
+        rules:RequestBody,
+        near_buildings:RequestBody,
+        blocked_dates:RequestBody,
         photos: ArrayList<MultipartBody.Part>?,
-        house_type_id:Int,
-        accommodations:String
+        house_type_id:RequestBody,
+        accommodations:RequestBody
     ): LiveData<DataState<ProfileViewState>> {
         return object :
             NetworkBoundResource<BlogCreateUpdateResponse, BlogPost, ProfileViewState>(
@@ -73,7 +73,7 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<BlogCreateUpdateResponse>) {
 
-                Log.d(TAG,"PostCreateHouse 444444 + ${response.body}")
+                Log.d(TAG,"PostCreateHouse 444444 + ${response.body.name}")
 
 //                if (!response.body.response.equals(RESPONSE_MUST_BECOME_CODINGWITHMITCH_MEMBER)) {
 //                    val updatedBlogPost = BlogPost(
@@ -104,22 +104,22 @@ constructor(
                 return openApiMainService.createBlog(
 //                    "application/json",
                     "Token ${authToken.token!!}",
-//                    name,
-//                    description,
-//                    rooms,
-//                    4,
-//                    address,
-//                    longitude,
-//                    latitude,
-//                    city_id,
-//                    price,
-//                    beds,
-//                    guests,
-//                    rules,
-//                    near_buildings,
-//                    house_type_id,
-//                    blocked_dates,
-//                    accommodations,
+                    name,
+                    description,
+                    rooms,
+                    RequestBody.create(MediaType.parse("text/plain"), 4.toString()),
+                    address,
+                    longitude,
+                    latitude,
+                    city_id,
+                    price,
+                    beds,
+                    guests,
+                    rules,
+                    near_buildings,
+                    house_type_id,
+                    blocked_dates,
+                    accommodations,
                     photos
                 )
             }
