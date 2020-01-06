@@ -1,7 +1,6 @@
 package com.example.akvandroidapp.ui.main.profile.add_ad
 
 
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString

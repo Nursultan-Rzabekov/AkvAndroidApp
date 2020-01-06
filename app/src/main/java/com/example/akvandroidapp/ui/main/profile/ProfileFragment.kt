@@ -45,6 +45,10 @@ class ProfileFragment : BaseProfileFragment(){
         fragment_profile_owner_support_layout.setOnClickListener {
             navigateSupportFragment()
         }
+
+        fragment_profile_owner_settings_layout.setOnClickListener {
+            navigateSettingsFragment()
+        }
     }
 
     private fun navNextFragment(){
@@ -52,12 +56,18 @@ class ProfileFragment : BaseProfileFragment(){
     }
 
     private fun navigateAboutFragment(){
-        findNavController().navigate(R.id.action_profileFragment_to_profileAddTypeFragment)
+        findNavController().navigate(R.id.action_profileFragment_to_profileAboutProfileFragment)
     }
 
     private fun navigateSupportFragment(){
         findNavController().navigate(R.id.action_profileFragment_to_supportActivity)
     }
+
+    private fun navigateSettingsFragment(){
+        findNavController().navigate(R.id.action_profileFragment_to_profileSettingsProfileFragment)
+    }
+
+
 }
 
 

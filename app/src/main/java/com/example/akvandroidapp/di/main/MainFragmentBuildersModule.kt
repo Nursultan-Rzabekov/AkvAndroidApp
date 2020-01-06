@@ -6,8 +6,12 @@ import com.example.akvandroidapp.ui.main.messages.MessagesFragment
 import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.ProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.*
+import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
+import com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment
+import com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment
 import com.example.akvandroidapp.ui.main.profile.support.GuestProfileFragment
 import com.example.akvandroidapp.ui.main.profile.support.HostProfileFragment
+import com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment
 import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
 import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.ui.main.search.SearchFragment
@@ -109,6 +113,19 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeGuestProfileFragment(): GuestProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeSupportProfileReviewFragment(): SupportProfileReviewFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeSettingsProfileFragment(): SettingsProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeSettingsGeolocationProfileFragment(): SettingsGeolocationProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeSettingsRegionProfileFragment(): SettingsRegionProfileFragment
+
 
 
 }

@@ -144,7 +144,7 @@
                     android:focusable="false"
                     android:button="@android:color/transparent"
                     android:background="@drawable/checking_rbtn"
-                    app:layout_constraintBottom_toBottomOf="fragment_geolocation_always_layout_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_geolocation_always_layout_tv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/fragment_geolocation_always_layout_tv"
                     />

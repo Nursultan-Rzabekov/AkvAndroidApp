@@ -28,6 +28,14 @@
                 app:exitAnim="@anim/slide_out_left"
                 />
 
+            <action android:id="@+id/action_profileFragment_to_profileSettingsProfileFragment"
+                app:destination="@id/profileSettingsProfileFragmentt"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                />
+
             <action android:id="@+id/action_profileFragment_to_supportActivity"
                 app:destination="@id/supportProfileActivity"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -44,13 +52,67 @@
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_support_main">
 
+        <action android:id="@+id/action_supportProfileActivity_to_profileSupportProfileReviewFragment"
+            app:destination="@id/profileSupportProfileReviewFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
     </activity>
 
+    <fragment android:id="@+id/profileSupportProfileReviewFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_support_notify_error">
+
+    </fragment>
 
     <fragment android:id="@+id/profileAboutProfileFragment"
         android:name="com.example.akvandroidapp.ui.main.profile.AboutProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_type_of_appartment">
+
+    </fragment>
+
+    <fragment android:id="@+id/profileSettingsProfileFragmentt"
+        android:name="com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_settings_layout">
+
+
+        <action android:id="@+id/action_profileSettingsProfileFragmentt_to_profileSettingsRegionProfileFragment"
+            app:destination="@id/profileSettingsRegionProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+        <action android:id="@+id/action_profileSettingsProfileFragmentt_to_profileSettingsGeolocationProfileFragment"
+            app:destination="@id/profileSettingsGeolocationProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileSettingsRegionProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_region_layout">
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileSettingsGeolocationProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_geolocation_layout">
 
     </fragment>
 
