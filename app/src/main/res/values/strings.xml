@@ -318,4 +318,5 @@
     <string name="tv">Телевизор</string>
     <string name="telephone">Телефон</string>
     <string name="add_your">Добавить своё</string>
+    <string name="on_use">При использовании</string>
 </resources>
