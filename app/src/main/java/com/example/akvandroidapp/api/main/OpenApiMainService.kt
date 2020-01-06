@@ -59,11 +59,11 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>
 
     @Multipart
-    @POST("houses")
+    @POST("houses/")
     fun createBlog(
 //        @Header("accept") type: String,
         @Header("Authorization") authorization: String,
-        @Part("name") name: RequestBody,
+//        @Part("name") name: RequestBody,
 //        @Part("description") description: String,
 //        @Part("rooms") rooms: Int,
 //        @Part("floor") floor: Int,

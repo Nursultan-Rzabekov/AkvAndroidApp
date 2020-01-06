@@ -93,7 +93,7 @@ constructor(
                     onCompleteJob(
                         DataState.data(
                             null,
-                            Response(response.body.name, ResponseType.Dialog())
+                            Response(response.body.id.toString(), ResponseType.Dialog())
                         )
                     )
                 }
@@ -104,7 +104,7 @@ constructor(
                 return openApiMainService.createBlog(
 //                    "application/json",
                     "Token ${authToken.token!!}",
-                    name,
+//                    name,
 //                    description,
 //                    rooms,
 //                    4,

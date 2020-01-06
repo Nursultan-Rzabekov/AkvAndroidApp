@@ -87,15 +87,19 @@ class ProfileAddPostFragment : BaseProfileFragment(){
 
                 val requestBody =
                     RequestBody.create(
-                        MediaType.parse("image/*"),
+                        MediaType.parse("multipart/form-data"),
                         imageFile
                     )
 
+                Log.d(TAG, "PostCreateHouse request777: ${requestBody}")
+
                 val multipartBody = MultipartBody.Part.createFormData(
-                    "image",
+                    "photos",
                     imageFile.name,
                     requestBody
                 )
+
+                Log.d(TAG, "PostCreateHouse multipartBody777: ${multipartBody}")
 
                 multipartBodyList.add(multipartBody)
             }

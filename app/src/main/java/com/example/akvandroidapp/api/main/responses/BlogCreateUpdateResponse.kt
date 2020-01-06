@@ -7,11 +7,11 @@ class BlogCreateUpdateResponse(
 
     @SerializedName("id")
     @Expose
-    var id: Int,
+    var id: Int
 
-    @SerializedName("name")
-    @Expose
-    var name: String
+//    @SerializedName("name")
+//    @Expose
+//    var name: String
 
 //    @SerializedName("description")
 //    @Expose
