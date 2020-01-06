@@ -126,7 +126,7 @@
                     android:id="@+id/fragment_geolocation_always_layout_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/house"
+                    android:text="@string/always"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"

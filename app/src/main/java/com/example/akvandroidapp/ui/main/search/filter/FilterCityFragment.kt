@@ -68,7 +68,6 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
             }
 
         })
-
     }
 
     private fun addCityDataset(){

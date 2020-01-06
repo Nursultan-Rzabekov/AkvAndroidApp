@@ -45,7 +45,6 @@ class Constants {
 
         val mapTypesReversed = mapTypes.entries.associateBy({ it.value }) { it.key }
 
-
         val mapCity = mapOf(
             "Астана" to 1,
             "Алматы" to 2,
@@ -62,5 +61,13 @@ class Constants {
             "Коттедж" to 3,
             "Комната" to 4
         )
+
+        val mapGeolocation = mapOf(
+            "Никогда" to 0,
+            "При использовании" to 1,
+            "Всегда" to 2
+        )
+
+        val mapGeolocationReversed = mapGeolocation.entries.associateBy({ it.value }) { it.key }
     }
 }

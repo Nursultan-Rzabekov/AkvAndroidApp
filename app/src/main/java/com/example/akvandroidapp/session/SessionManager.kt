@@ -37,12 +37,16 @@ constructor(
     //Add ad
     private val _addAdInfo = MutableLiveData<AddAdInfo>()
 
+    //Add ad
+    private val _settingsInfo = MutableLiveData<SettingsInfo>()
+
     init {
         favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("нет", false, true)
         _typeOfApartment.value = DEFAULT_TYPE
         _facilitiesList.value = mutableListOf()
         _addAdInfo.value = AddAdInfo()
+        _settingsInfo.value = SettingsInfo()
     }
 
     val cachedToken: LiveData<AuthToken>
@@ -63,6 +67,9 @@ constructor(
     val addAdInfo: LiveData<AddAdInfo>
         get() = _addAdInfo
 
+    val settingsInfo: LiveData<SettingsInfo>
+        get() = _settingsInfo
+
     fun login(newValue: AuthToken){
         setValue(newValue)
     }
@@ -81,6 +88,35 @@ constructor(
 
     fun filterFacilitiesList(facility: Int, checked: Boolean){
         setFacilityValue(facility, checked)
+    }
+
+    fun setSettingsPushNotifications(checked: Boolean) {
+        GlobalScope.launch(Main) {
+            _settingsInfo.value?._pushNotificationsOn = checked
+        }
+        Log.e("SETTINGS_PUSH", "${_settingsInfo.value?._pushNotificationsOn}")
+    }
+
+    fun setSettingsEmailNotifications(checked: Boolean) {
+        GlobalScope.launch(Main) {
+            _settingsInfo.value?._emailNotificationsOn = checked
+        }
+        Log.e("SETTINGS_EMAIL", "${_settingsInfo.value?._emailNotificationsOn}")
+    }
+
+    fun setSettingsGeolocation(type: Int) {
+        GlobalScope.launch(Main) {
+            _settingsInfo.value?._geolocationState = type
+        }
+        Log.e("SETTINGS_GEOLOCATION", "${_settingsInfo.value?._geolocationState}")
+    }
+
+    fun setSettingsRegion(region: FilterCity) {
+        GlobalScope.launch(Main) {
+            _settingsInfo.value?._region = region
+            _settingsInfo.value?._region?.isSelected = true
+        }
+        Log.e("SETTINGS_REGION", "${_settingsInfo.value?._region}")
     }
 
     fun setAddAdFacilityListItem(facility: String, checked: Boolean) {

@@ -8,12 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.search.filter.FilterCity
+import com.example.akvandroidapp.ui.main.search.filter.FilterCityAdapter
 import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_region.*
+import javax.inject.Inject
 
 
-class SettingsRegionProfileFragment : BaseProfileFragment() {
+class SettingsRegionProfileFragment : BaseProfileFragment(), FilterCityAdapter.CityInteraction {
+
+    private lateinit var regionAdapter: FilterCityAdapter
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +41,40 @@ class SettingsRegionProfileFragment : BaseProfileFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "SettingsRegionProfileFragment: ${viewModel}")
 
+        initRecyclerView()
+        addRegionDataset()
+
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun initRecyclerView(){
+        fragment_region_recycler_view.apply {
+            layoutManager = LinearLayoutManager(this@SettingsRegionProfileFragment.context)
+            regionAdapter = FilterCityAdapter(this@SettingsRegionProfileFragment)
+            adapter = regionAdapter
+        }
+    }
+
+    private fun addRegionDataset(){
+        val data = mutableListOf(FilterCity("Алматы", false, true),
+            FilterCity("Шымкент", false, false),
+            FilterCity("Астана", false, false))
+        for (region in data) {
+            if (sessionManager.settingsInfo.value?._region?.location == region.location){
+                region.isSelected = true
+            }
+        }
+        regionAdapter.submitList(data)
+    }
+
+    override fun onItemSelected(position: Int, item: FilterCity) {
+        sessionManager.setSettingsRegion(item)
+
+//        Log.d("just","just + ${item.location} + ${item.isSelected} + ${item.isMyLocation}")
+//        val bundle = bundleOf("city" to item.location)
+//        findNavController().navigate(R.id.action_filterCityFragment_to_back_filter,bundle)
+        findNavController().navigateUp()
     }
 }

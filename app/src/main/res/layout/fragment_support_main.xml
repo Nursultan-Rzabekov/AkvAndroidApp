@@ -18,19 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tabBackground="@color/white"
         app:tabIndicatorColor="@color/primaryZero"
-        app:tabTextColor="@color/primaryZero">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_guest" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_host" />
-
-    </com.google.android.material.tabs.TabLayout>
+        app:tabTextColor="@color/primaryZero"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

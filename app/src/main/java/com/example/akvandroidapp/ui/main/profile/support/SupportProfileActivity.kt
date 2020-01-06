@@ -15,14 +15,13 @@ class SupportProfileActivity : BaseActivity()
     override fun displayProgressBar(bool: Boolean) {
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.fragment_support_main)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.support_main_layout)
 
         val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
         viewPager.adapter = fragmentAdapter
-        tabs.setupWithViewPager(viewPager)
-
+        tabs.setupWithViewPager(viewPager, true)
 
     }
 

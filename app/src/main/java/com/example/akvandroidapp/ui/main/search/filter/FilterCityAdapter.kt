@@ -63,10 +63,15 @@ class FilterCityAdapter(
             if (filterCity.isSelected) {
                 city_location.setTextColor(Color.parseColor("#CD3232"))
                 city_selected.visibility = View.VISIBLE
+            } else {
+                city_location.setTextColor(Color.BLACK)
+                city_selected.visibility = View.INVISIBLE
             }
 
             if (filterCity.isMyLocation) {
                 city_my_location.visibility = View.VISIBLE
+            } else {
+                city_my_location.visibility = View.INVISIBLE
             }
 
         }

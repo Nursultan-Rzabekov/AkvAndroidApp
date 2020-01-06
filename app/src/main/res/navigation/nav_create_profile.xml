@@ -65,7 +65,7 @@
         android:id="@+id/supportProfileActivity"
         android:name="com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity"
         android:label="@string/fragment_view_blog"
-        tools:layout="@layout/fragment_support_main">
+        tools:layout="@layout/support_main_layout">
 
     </activity>
 
