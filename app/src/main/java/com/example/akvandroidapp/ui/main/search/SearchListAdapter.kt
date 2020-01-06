@@ -124,16 +124,16 @@ class SearchListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BlogViewHolder -> {
-                holder.bind(differ.currentList.get(position))
+                holder.bind(differ.currentList[position])
             }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(differ.currentList.get(position).id > -1){
+        if(differ.currentList[position].id > -1){
             return BLOG_ITEM
         }
-        return differ.currentList.get(position).id
+        return differ.currentList[position].id
     }
 
     override fun getItemCount(): Int {
@@ -149,7 +149,7 @@ class SearchListAdapter(
         for(blogPost in list){
             requestManager
                 .load(blogPost.image)
-                .error(R.drawable.fragment_appartments_image_default)
+                .error(R.drawable.test_image_back)
                 .preload()
         }
     }
@@ -188,7 +188,7 @@ class SearchListAdapter(
 
             requestManager
                 .load(item.image)
-                .error(R.drawable.fragment_appartments_image_default)
+                .error(R.drawable.test_image_back)
                 .transition(withCrossFade())
                 .into(itemView.search_recycler_item_image_back)
             itemView.search_recycler_item_header.text = item.name

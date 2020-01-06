@@ -40,28 +40,10 @@ class FavoriteListAdapter(
         0.0
     )
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
-
-        override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
-            return oldItem == newItem
-        }
-
-    }
-    private val differ =
-        AsyncListDiffer(
-            BlogRecyclerChangeCallback(this),
-            AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
-        )
-
+    private var items: MutableList<BlogPost> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
         when(viewType){
-
             NO_MORE_RESULTS ->{
                 Log.e(TAG, "onCreateViewHolder: No more results...")
                 return GenericViewHolder(
@@ -100,45 +82,17 @@ class FavoriteListAdapter(
         }
     }
 
-    internal inner class BlogRecyclerChangeCallback(
-        private val adapter: FavoriteListAdapter
-    ) : ListUpdateCallback {
-
-        override fun onChanged(position: Int, count: Int, payload: Any?) {
-            adapter.notifyItemRangeChanged(position, count, payload)
-        }
-
-        override fun onInserted(position: Int, count: Int) {
-            adapter.notifyItemRangeChanged(position, count)
-        }
-
-        override fun onMoved(fromPosition: Int, toPosition: Int) {
-            adapter.notifyDataSetChanged()
-        }
-
-        override fun onRemoved(position: Int, count: Int) {
-            adapter.notifyDataSetChanged()
-        }
-    }
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BlogViewHolder -> {
-                holder.bind(differ.currentList.get(position))
+                holder.bind(items[position])
             }
         }
 
     }
 
-    override fun getItemViewType(position: Int): Int {
-        if(differ.currentList.get(position).id > -1){
-            return BLOG_ITEM
-        }
-        return differ.currentList.get(position).id
-    }
-
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        return items.size
     }
 
     // Prepare the images that will be displayed in the RecyclerView.
@@ -149,22 +103,22 @@ class FavoriteListAdapter(
     ){
         for(blogPost in list){
             requestManager
-                .load(R.drawable.test_image_back)
+                .load(blogPost.image)
+                .error(R.drawable.test_image_back)
                 .preload()
         }
     }
 
     fun removeAt(position: Int) {
-        differ.currentList.removeAt(position)
+        items.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position, differ.currentList.size)
     }
 
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
-        if (isQueryExhausted)
-            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
-        differ.submitList(newList)
+        newList?.let {
+            items = newList
+        }
     }
 
     class BlogViewHolder
@@ -192,7 +146,8 @@ class FavoriteListAdapter(
             }
 
             requestManager
-                .load(R.drawable.test_image_back)
+                .load(item.image)
+                .error(R.drawable.test_image_back)
                 .transition(withCrossFade())
                 .into(itemView.search_recycler_item_image_back)
             itemView.search_recycler_item_header.text = item.name

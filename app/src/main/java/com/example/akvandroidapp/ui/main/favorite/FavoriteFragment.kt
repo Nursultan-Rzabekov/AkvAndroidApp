@@ -70,7 +70,6 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteListAdapter.Interaction
                     isQueryExhausted = true
                 )
             }
-
         })
     }
 
@@ -105,9 +104,7 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteListAdapter.Interaction
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
         Log.d("qwe","size list ${favoritePostList.size}")
         sessionManager.favorite(item,boolean)
-        //favoritePostList.removeAt(position)
-        recyclerAdapter.notifyItemRemoved(position)
-        recyclerAdapter.notifyItemRangeChanged(position,favoritePostList.size)
+        recyclerAdapter.removeAt(position)
     }
 }
 
