@@ -147,10 +147,19 @@ class SearchListAdapter(
         list: List<BlogPost>
     ){
         for(blogPost in list){
-            requestManager
-                .load(blogPost.image)
-                .error(R.drawable.test_image_back)
-                .preload()
+
+            if(blogPost.image!=null){
+                requestManager
+                    .load(blogPost.image)
+                    .error(R.drawable.test_image_back)
+                    .preload()
+            }
+            else{
+                requestManager
+                    .load(R.drawable.fragment_appartments_image_default)
+                    .preload()
+            }
+
         }
     }
 
@@ -186,11 +195,21 @@ class SearchListAdapter(
                 }
             }
 
-            requestManager
-                .load(item.image)
-                .error(R.drawable.test_image_back)
-                .transition(withCrossFade())
-                .into(itemView.search_recycler_item_image_back)
+
+            if(item.image!=null){
+                requestManager
+                    .load(item.image)
+                    .error(R.drawable.test_image_back)
+                    .transition(withCrossFade())
+                    .into(itemView.search_recycler_item_image_back)
+            }
+            else{
+                requestManager
+                    .load(R.drawable.fragment_appartments_image_default)
+                    .transition(withCrossFade())
+                    .into(itemView.search_recycler_item_image_back)
+            }
+
             itemView.search_recycler_item_header.text = item.name
             itemView.search_recycler_item_location.text = item.city.toString()
             itemView.search_recycler_item_cost.text = item.price.toString()

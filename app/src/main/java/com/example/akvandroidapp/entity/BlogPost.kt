@@ -48,7 +48,7 @@ data class BlogPost(
     var status: Int,
 
     @ColumnInfo(name = "image")
-    var image: String? = null,
+    var image: String,
 
     @ColumnInfo(name = "rating")
     var rating: Double

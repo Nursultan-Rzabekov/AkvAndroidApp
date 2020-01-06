@@ -64,8 +64,10 @@ constructor(
                 Log.d("qwe","result count ${response.body.count}")
                 Log.d("qwe","result response ${response.body.results}")
 
+
                 val blogPostList: ArrayList<BlogPost> = ArrayList()
                 for(blogPostResponse in response.body.results){
+                    val imagePost = blogPostResponse.photos?.get(0) ?: "//////////////////////////////////////////////////////////////////////"
                     blogPostList.add(
                         BlogPost(
                             id = blogPostResponse.id,
@@ -80,13 +82,12 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "https://akv-technopark.herokuapp.com" + blogPostResponse.photos[0].toString()
-                                .substring(24,blogPostResponse.photos[0].toString().length - 1),
+                            image = "https://akv-technopark.herokuapp.com" + imagePost.toString().substring(24,imagePost.toString().length - 1),
                             rating = blogPostResponse.rating
                         )
                     )
 
-                    Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24,blogPostResponse.photos[0].toString().length - 1)}")
+//                    Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24,blogPostResponse.photos[0].toString().length - 1)}")
                 }
 
 

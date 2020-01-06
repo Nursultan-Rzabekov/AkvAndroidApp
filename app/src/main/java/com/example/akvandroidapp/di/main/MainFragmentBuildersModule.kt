@@ -111,12 +111,6 @@ abstract class MainFragmentBuildersModule {
     abstract fun contributeAboutProfileFragment(): AboutProfileFragment
 
     @ContributesAndroidInjector()
-    abstract fun contributeHostProfileFragment(): HostProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeGuestProfileFragment(): GuestProfileFragment
-
-    @ContributesAndroidInjector()
     abstract fun contributeSupportProfileReviewFragment(): SupportProfileReviewFragment
 
     @ContributesAndroidInjector()
