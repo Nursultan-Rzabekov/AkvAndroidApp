@@ -21,7 +21,7 @@
                 />
 
             <action android:id="@+id/action_profileFragment_to_profileAboutProfileFragment"
-                app:destination="@id/profileAddTypeFragment"
+                app:destination="@id/profileAboutProfileFragment"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:enterAnim="@anim/slide_in_right"
@@ -43,6 +43,21 @@
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 />
+
+            <action android:id="@+id/action_profileFragment_to_profileMyHouseAddsProfileFragment"
+                app:destination="@id/profileMyHouseAddsProfileFragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                />
+
+    </fragment>
+
+    <fragment android:id="@+id/profileMyHouseAddsProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.my_house.MyHouseAddsProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_my_adds_layout">
 
     </fragment>
 
@@ -120,7 +135,6 @@
         android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddTypeFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_type_of_appartment">
-
 
         <action android:id="@+id/action_profileAddTypeFragment_to_profileAddQuestsFragment"
             app:destination="@id/profileAddQuestsFragment"

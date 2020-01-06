@@ -49,6 +49,10 @@ class ProfileFragment : BaseProfileFragment(){
         fragment_profile_owner_settings_layout.setOnClickListener {
             navigateSettingsFragment()
         }
+
+        fragment_profile_owner_my_ads_layout.setOnClickListener {
+            navigateMyHouseAddsFragment()
+        }
     }
 
     private fun navNextFragment(){
@@ -67,7 +71,10 @@ class ProfileFragment : BaseProfileFragment(){
         findNavController().navigate(R.id.action_profileFragment_to_profileSettingsProfileFragment)
     }
 
+    private fun navigateMyHouseAddsFragment(){
+        findNavController().navigate(R.id.action_profileSettingsProfileFragmentt_to_profileSettingsGeolocationProfileFragment)
 
+    }
 }
 
 

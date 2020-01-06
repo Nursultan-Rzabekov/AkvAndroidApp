@@ -6,6 +6,9 @@ import com.example.akvandroidapp.ui.main.messages.MessagesFragment
 import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.ProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.*
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseAddsProfileFragment
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseDetailProfileFragment
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMoneyProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment
@@ -53,7 +56,6 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeFilterTypeFragment(): FilterTypeFragment
-
 
     @ContributesAndroidInjector()
     abstract fun contributeFilterUdopstvaFragment(): FilterUdopstvaFragment
@@ -126,6 +128,14 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeSettingsRegionProfileFragment(): SettingsRegionProfileFragment
 
+    @ContributesAndroidInjector()
+    abstract fun contributeMyHouseAddsProfileFragment(): MyHouseAddsProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeMyHouseDetailProfileFragment(): MyHouseDetailProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeMyHouseMoneyProfileFragment(): MyHouseMoneyProfileFragment
 
 
 }
