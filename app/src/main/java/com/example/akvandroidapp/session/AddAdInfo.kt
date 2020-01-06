@@ -11,5 +11,5 @@ data class AddAdInfo(
     var _addAdPrice: Int = 0,
     var _addAd7DaysDiscount: Int = 0,
     var _addAd30DaysDiscount: Int = 0,
-    var _addAdFacilityList: MutableList<Int> = mutableListOf()
+    var _addAdFacilityList: MutableList<String> = mutableListOf()
 )

@@ -13,6 +13,7 @@ class AddAdCheckboxAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: MutableList<String> = ArrayList()
+    private var isUncheckedAll: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CheckBoxViewHolder(
@@ -28,6 +29,9 @@ class AddAdCheckboxAdapter(
        when(holder) {
            is CheckBoxViewHolder -> {
                holder.bind(items[position])
+               if (isUncheckedAll) {
+                   holder.uncheck()
+               }
            }
        }
     }
@@ -35,6 +39,26 @@ class AddAdCheckboxAdapter(
     fun submitList(items: MutableList<String>){
         this.items = items
         notifyDataSetChanged()
+    }
+
+    fun addItem(text: String) {
+        items.add(text)
+        notifyItemChanged(items.size - 1)
+    }
+
+    fun removeItem(position: Int) {
+        items.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun uncheckAll(){
+        isUncheckedAll = true
+        notifyDataSetChanged()
+        isUncheckedAll = false
+    }
+
+    fun getList(): MutableList<String>{
+        return items
     }
 
     class CheckBoxViewHolder constructor(
@@ -49,12 +73,18 @@ class AddAdCheckboxAdapter(
             checkbox.text = text
 
             checkbox.setOnCheckedChangeListener { compoundButton, b ->
-                checkInteraction?.onItemChecked(adapterPosition, text, b)
+                checkInteraction?.onItemChecked(adapterPosition, text.trim(), b)
             }
 
             closeIv.setOnClickListener {
-                closeInteraction?.onItemClosed(adapterPosition, text)
+                closeInteraction?.onItemClosed(adapterPosition, text.trim())
             }
+
+            checkbox.isChecked = false
+        }
+
+        fun uncheck() {
+            checkbox.isChecked = false
         }
     }
 
