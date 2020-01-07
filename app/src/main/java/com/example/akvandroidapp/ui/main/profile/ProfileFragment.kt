@@ -7,6 +7,7 @@ import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import kotlinx.android.synthetic.main.fragment_profile_owner.*
+import kotlinx.android.synthetic.main.header_profile.*
 import kotlinx.android.synthetic.main.profile_part_layout.*
 
 
@@ -53,6 +54,10 @@ class ProfileFragment : BaseProfileFragment(){
         fragment_profile_owner_my_ads_layout.setOnClickListener {
             navigateMyHouseAddsFragment()
         }
+
+        header_profile_civ.setOnClickListener {
+            navigateAccountUserProfileFragment()
+        }
     }
 
     private fun navNextFragment(){
@@ -72,9 +77,14 @@ class ProfileFragment : BaseProfileFragment(){
     }
 
     private fun navigateMyHouseAddsFragment(){
-        findNavController().navigate(R.id.action_profileSettingsProfileFragmentt_to_profileSettingsGeolocationProfileFragment)
-
+        findNavController().navigate(R.id.action_profileFragment_to_profileMyHouseAddsProfileFragment)
     }
+
+    private fun navigateAccountUserProfileFragment(){
+        findNavController().navigate(R.id.action_profileFragment_to_profileAccountUserProfileFragment)
+    }
+
+
 }
 
 

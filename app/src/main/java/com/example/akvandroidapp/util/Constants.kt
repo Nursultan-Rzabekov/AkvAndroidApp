@@ -15,6 +15,8 @@ class Constants {
         const val PAGINATION_PAGE_SIZE = 3
 
         const val GALLERY_REQUEST_CODE = 0
+
+        const val GALLERY_REQUEST_CODE_SAVE = 501
         const val PERMISSIONS_REQUEST_READ_STORAGE: Int = 301
         const val CROP_IMAGE_INTENT_CODE: Int = 401
 

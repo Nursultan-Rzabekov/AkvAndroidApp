@@ -22,7 +22,7 @@ class AboutProfileFragment : BaseProfileFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_ad_type_of_appartment, container, false)
+        return inflater.inflate(R.layout.fragment_about_us, container, false)
     }
 
 

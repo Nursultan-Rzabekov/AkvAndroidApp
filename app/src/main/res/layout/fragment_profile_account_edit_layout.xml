@@ -11,7 +11,7 @@
         android:backgroundTint="@android:color/transparent">
 
         <include
-            layout="@layout/header_profile_account"
+            layout="@layout/header_profile_account_edit"
             android:id="@+id/header_reviews_page_base"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -23,7 +23,7 @@
 
 
         <include
-            layout="@layout/fragment_profile_account"
+            layout="@layout/fragment_profile_account_edit"
             android:id="@+id/fragment_my_adds_base"/>
 
     </FrameLayout>

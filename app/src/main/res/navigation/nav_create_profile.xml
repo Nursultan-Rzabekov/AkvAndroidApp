@@ -52,12 +52,68 @@
                 app:exitAnim="@anim/slide_out_left"
                 />
 
+
+            <action android:id="@+id/action_profileFragment_to_profileAccountUserProfileFragment"
+                app:destination="@id/profileAccountUserProfileFragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                />
+    </fragment>
+
+    <fragment android:id="@+id/profileAccountUserProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_profile_account_layout">
+
+        <action android:id="@+id/action_profileAccountUserProfileFragment_to_profileAccountUserEditProfileFragment"
+            app:destination="@id/profileAccountUserEditProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+    <fragment android:id="@+id/profileAccountUserEditProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_profile_account_edit_layout">
+
+
     </fragment>
 
     <fragment android:id="@+id/profileMyHouseAddsProfileFragment"
         android:name="com.example.akvandroidapp.ui.main.profile.my_house.MyHouseAddsProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_my_adds_layout">
+
+        <action android:id="@+id/action_profileMyHouseAddsProfileFragment_to_profileAddTypeFragment"
+            app:destination="@id/profileAddTypeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+        <action android:id="@+id/action_profileMyHouseAddsProfileFragment_to_profileMyHouseDetailProfileFragment"
+            app:destination="@id/profileMyHouseDetailProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileMyHouseDetailProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.my_house.MyHouseDetailProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_settings_layout">
+
 
     </fragment>
 
@@ -79,7 +135,7 @@
     <fragment android:id="@+id/profileAboutProfileFragment"
         android:name="com.example.akvandroidapp.ui.main.profile.AboutProfileFragment"
         android:label="@string/fragment_create_blog"
-        tools:layout="@layout/fragment_add_ad_type_of_appartment">
+        tools:layout="@layout/fragment_about_us">
 
     </fragment>
 

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_my_adds.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -30,9 +31,22 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "SettingsProfileFragment: ${viewModel}")
 
-
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        fragment_my_adds_add_more_btn.setOnClickListener {
+            navNextFragment()
+        }
+
     }
+
+    private fun navNextFragment(){
+        findNavController().navigate(R.id.action_profileMyHouseAddsProfileFragment_to_profileAddTypeFragment)
+    }
+
+    private fun navNextDetailFragment(){
+        findNavController().navigate(R.id.action_profileMyHouseAddsProfileFragment_to_profileMyHouseDetailProfileFragment)
+    }
+
 }

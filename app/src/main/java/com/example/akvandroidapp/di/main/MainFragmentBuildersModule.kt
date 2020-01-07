@@ -5,6 +5,8 @@ import com.example.akvandroidapp.ui.main.home.HomeFragment
 import com.example.akvandroidapp.ui.main.messages.MessagesFragment
 import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.ProfileFragment
+import com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment
+import com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.*
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseAddsProfileFragment
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseDetailProfileFragment
@@ -130,6 +132,12 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeMyHouseMoneyProfileFragment(): MyHouseMoneyProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeAccountUserEditProfileFragment(): AccountUserEditProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeAccountUserProfileFragment(): AccountUserProfileFragment
 
 
 }

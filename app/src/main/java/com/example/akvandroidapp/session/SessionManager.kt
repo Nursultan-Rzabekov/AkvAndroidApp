@@ -29,7 +29,7 @@ constructor(
     private val DEFAULT_TYPE = 0
 
     private val _cachedToken = MutableLiveData<AuthToken>()
-    private val favoritePostList = MutableLiveData<MutableList<BlogPost>>()
+    private val _favoritePostList = MutableLiveData<MutableList<BlogPost>>()
     private val _chekedFilterCity = MutableLiveData<FilterCity>()
     private val _typeOfApartment = MutableLiveData<Int>()
     private val _facilitiesList = MutableLiveData<MutableList<Int>>()
@@ -41,7 +41,7 @@ constructor(
     private val _settingsInfo = MutableLiveData<SettingsInfo>()
 
     init {
-        favoritePostList.value = mutableListOf()
+        _favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("нет", false, true)
         _typeOfApartment.value = DEFAULT_TYPE
         _facilitiesList.value = mutableListOf()
@@ -53,7 +53,7 @@ constructor(
         get() = _cachedToken
 
     val favoritePostListItem: LiveData<MutableList<BlogPost>>
-        get() = favoritePostList
+        get() = _favoritePostList
 
     val checkedFilterCity: LiveData<FilterCity>
         get() = _chekedFilterCity
@@ -216,18 +216,18 @@ constructor(
     }
 
     fun setFavoriteValue(blogPost: BlogPost, checked: Boolean) {
-        Log.d(TAG, "favorite ee ${favoritePostList.value}")
+        Log.d(TAG, "favorite ee ${_favoritePostList.value}")
 
         GlobalScope.launch(Main) {
             if(checked){
-                favoritePostList.value?.add(blogPost)
-                Log.d(TAG, "favorite ${favoritePostList.value}")
+                _favoritePostList.value?.add(blogPost)
+                Log.d(TAG, "favorite ${_favoritePostList.value}")
             }
             else{
-                favoritePostList.value?.remove(blogPost)
+                _favoritePostList.value?.remove(blogPost)
             }
 
-            Log.d(TAG, "favorite ${favoritePostList.value}")
+            Log.d(TAG, "favorite ${_favoritePostList.value}")
         }
     }
 
