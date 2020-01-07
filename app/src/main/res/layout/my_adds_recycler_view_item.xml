@@ -21,9 +21,42 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dim_28dp"
+                android:paddingEnd="@dimen/dim_28dp"
+                android:paddingTop="@dimen/dim_16dp"
+                android:paddingBottom="@dimen/dim_16dp">
 
+                <ImageView
+                    android:layout_width="76dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/test_image_back"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/image_all_corner_back1"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hotel_del_luxe"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_10k_per"
+                    android:textColor="@color/primaryZero"
+                    android:textSize="13sp"/>
+                
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider44"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:layout_width="match_parent"

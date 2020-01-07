@@ -23,9 +23,9 @@ class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RE
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
-            0 -> "First Tab"
+                0 -> "Гостю"
             else -> {
-                return "Second Tab"
+                return "Хозяйну"
             }
         }
     }
