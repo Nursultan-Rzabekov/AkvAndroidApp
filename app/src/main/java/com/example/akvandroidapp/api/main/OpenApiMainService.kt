@@ -79,6 +79,8 @@ interface OpenApiMainService {
         @Part("house_type_id") house_type_id: RequestBody,
         @Part("blocked_dates") blocked_dates: RequestBody,
         @Part("accommodations") accommodations: RequestBody,
+        @Part("discount7days") discount7days: RequestBody,
+        @Part("discount30days") discount30days: RequestBody,
         @Part photos: ArrayList<MultipartBody.Part>?
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>
 

@@ -2,6 +2,7 @@ package com.example.akvandroidapp.session
 
 import android.app.Application
 import android.content.Context
+import com.yandex.mapkit.geometry.Point
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.util.Log
@@ -28,6 +29,8 @@ constructor(
     private val TAG: String = "AppDebug"
     private val DEFAULT_TYPE = 0
 
+
+    private val _locationList = MutableLiveData<MutableList<Point>>()
     private val _cachedToken = MutableLiveData<AuthToken>()
     private val _favoritePostList = MutableLiveData<MutableList<BlogPost>>()
     private val _chekedFilterCity = MutableLiveData<FilterCity>()
@@ -40,6 +43,8 @@ constructor(
     //Add ad
     private val _settingsInfo = MutableLiveData<SettingsInfo>()
 
+
+
     init {
         _favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("нет", false, true)
@@ -47,7 +52,11 @@ constructor(
         _facilitiesList.value = mutableListOf()
         _addAdInfo.value = AddAdInfo()
         _settingsInfo.value = SettingsInfo()
+        _locationList.value = mutableListOf()
     }
+
+    val locationItem: LiveData<MutableList<Point>>
+        get() = _locationList
 
     val cachedToken: LiveData<AuthToken>
         get() = _cachedToken
@@ -70,8 +79,13 @@ constructor(
     val settingsInfo: LiveData<SettingsInfo>
         get() = _settingsInfo
 
+
     fun login(newValue: AuthToken){
         setValue(newValue)
+    }
+
+    fun locationItemCount(point: ArrayList<Point>){
+        setLocationValue(point)
     }
 
     fun favorite(blogPost: BlogPost, checked: Boolean){
@@ -88,6 +102,15 @@ constructor(
 
     fun filterFacilitiesList(facility: Int, checked: Boolean){
         setFacilityValue(facility, checked)
+    }
+
+    fun setLocationValue(point: ArrayList<Point>) {
+        Log.d(TAG, "location ee ${_locationList.value}")
+
+        GlobalScope.launch(Main) {
+            _locationList.value = point
+            Log.d(TAG, "location ${_locationList.value}")
+        }
     }
 
     fun setSettingsPushNotifications(checked: Boolean) {
@@ -188,6 +211,8 @@ constructor(
         Log.e("SESSION_ADD_AD_COUNTS",
             "${_addAdInfo.value?._addAdGuestsCount}, ${_addAdInfo.value?._addAdRoomsCount}, ${_addAdInfo.value?._addAdBedsCount}")
     }
+
+
 
     fun setAddAdType(type: String){
         GlobalScope.launch(Main){

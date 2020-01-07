@@ -56,7 +56,9 @@ constructor(
         blocked_dates:RequestBody,
         photos: ArrayList<MultipartBody.Part>?,
         house_type_id:RequestBody,
-        accommodations:RequestBody
+        accommodations:RequestBody,
+        discount7days:RequestBody,
+        discount30days:RequestBody
     ): LiveData<DataState<ProfileViewState>> {
         return object :
             NetworkBoundResource<BlogCreateUpdateResponse, BlogPost, ProfileViewState>(
@@ -120,6 +122,8 @@ constructor(
                     house_type_id,
                     blocked_dates,
                     accommodations,
+                    discount7days,
+                    discount30days,
                     photos
                 )
             }
