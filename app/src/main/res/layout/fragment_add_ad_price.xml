@@ -77,7 +77,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_add_ad_price_discounts_layout"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dim_16dp"
@@ -151,7 +151,7 @@
         android:layout_marginEnd="@dimen/dim_48dp"
         android:text="@string/set_dsicount"
         android:textSize="14sp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="@dimen/dim_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -162,7 +162,7 @@
         android:id="@+id/fragment_add_ad_price_discounts_add_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginStart="@dimen/dim_48dp"
         android:layout_marginEnd="@dimen/dim_48dp"
         android:layout_marginTop="@dimen/dim_24dp"
@@ -383,8 +383,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

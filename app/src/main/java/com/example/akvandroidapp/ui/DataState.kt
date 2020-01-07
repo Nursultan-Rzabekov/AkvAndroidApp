@@ -6,7 +6,7 @@ data class DataState<T>(
     var loading: Loading = Loading(false),
     var data: Data<T>? = null
 ) {
-
+    //just do it
     companion object {
 
         fun <T> error(

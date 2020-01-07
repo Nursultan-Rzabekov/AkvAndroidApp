@@ -55,6 +55,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/header_profile_account_edit_civ"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@+id/header_profile_account_edit_civ"
         app:layout_constraintTop_toTopOf="@+id/header_profile_account_edit_civ" />
 </androidx.constraintlayout.widget.ConstraintLayout>

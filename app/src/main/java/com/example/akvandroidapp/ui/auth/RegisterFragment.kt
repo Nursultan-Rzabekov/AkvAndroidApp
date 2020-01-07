@@ -215,6 +215,8 @@ class RegisterFragment : BaseAuthFragment() {
     }
 
     private fun showDatePicker(){
+        Locale.setDefault(Locale("ru"))
+
         val c = Calendar.getInstance()
         val brYear = c.get(Calendar.YEAR)
         val brMonth = c.get(Calendar.MONTH)
@@ -224,7 +226,9 @@ class RegisterFragment : BaseAuthFragment() {
             DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
                 sign_detail_birth_et.setText(("$i-$i2-$i3"))
             }, brYear, brMonth, brDay)
+
         dpd.show()
+        dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)
     }
 
     private fun onGenderChanged(id: Int){

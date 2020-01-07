@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.profile.account
 
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 
@@ -26,9 +28,14 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_gallery.*
+import kotlinx.android.synthetic.main.fragment_profile_account_edit.*
 import kotlinx.android.synthetic.main.header_profile_account.*
 import kotlinx.android.synthetic.main.header_profile_account_edit.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.util.*
 import javax.inject.Inject
 
 
@@ -51,7 +58,10 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
+
         Log.d(TAG, "SearchFragment: ${viewModel}")
+
+        attachUserAccounts()
 
         header_profile_account_edit_cancel_tv.setOnClickListener {
             findNavController().navigateUp()
@@ -67,11 +77,38 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
                 pickFromGallery()
             }
         }
+
+        fragment_profile_account_edit_birth_tv.setOnClickListener {
+            showDatePicker()
+        }
     }
 
     private fun saveUserAccounts(){
-        //sessionManager
-        // image1 деген фото дайын уже осына колдана бер
+        // sessionManager.setProfileInfo(image1)
+    }
+
+    private fun attachUserAccounts(){
+        sessionManager.profileInfo.observe(viewLifecycleOwner, Observer { dataState ->
+            fragment_profile_account_edit_birth_tv.text = dataState.birthdate.toString()
+            when(dataState.gender.toString()) {
+                fragment_profile_account_edit_woman_btn.text.toString() -> {
+                    fragment_profile_account_edit_gender_radio_group.check(fragment_profile_account_edit_woman_btn.id)
+                }
+                fragment_profile_account_edit_man_btn.text.toString() -> {
+                    fragment_profile_account_edit_gender_radio_group.check(fragment_profile_account_edit_man_btn.id)
+                }
+                else -> {
+                    fragment_profile_account_edit_gender_radio_group.check(fragment_profile_account_edit_man_btn.id)
+                }
+            }
+            fragment_profile_account_edit_phonenumber_tv.text = dataState.phonenumber.toString()
+            fragment_profile_account_edit_email_tv.text = dataState.email.toString()
+            header_profile_account_edit_tv.text = dataState.nickname.toString()
+
+            Glide.with(this).load(
+                if (dataState.image != null) dataState.image else R.drawable.default_image)
+                .into(header_profile_account_edit_civ)
+        })
     }
 
     private fun pickFromGallery() {
@@ -139,5 +176,21 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
                 Data(Event.dataEvent(null), null)
             )
         )
+    }
+
+    private fun showDatePicker(){
+        Locale.setDefault(Locale("ru"))
+
+        val c = Calendar.getInstance()
+        val brYear = c.get(Calendar.YEAR)
+        val brMonth = c.get(Calendar.MONTH)
+        val brDay = c.get(Calendar.DAY_OF_MONTH)
+
+        val dpd = DatePickerDialog(requireContext(), R.style.MySpinnerDatePickerStyle,
+            DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+            }, brYear, brMonth, brDay)
+
+        dpd.show()
+        dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)
     }
 }

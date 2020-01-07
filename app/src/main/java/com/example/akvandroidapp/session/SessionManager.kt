@@ -2,6 +2,7 @@ package com.example.akvandroidapp.session
 
 import android.app.Application
 import android.content.Context
+import com.yandex.mapkit.geometry.Point
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.util.Log
@@ -28,6 +29,11 @@ constructor(
     private val TAG: String = "AppDebug"
     private val DEFAULT_TYPE = 0
 
+    //Room
+    private val hostMode = MutableLiveData<Boolean>()
+
+
+    private val _locationList = MutableLiveData<MutableList<Point>>()
     private val _cachedToken = MutableLiveData<AuthToken>()
     private val _favoritePostList = MutableLiveData<MutableList<BlogPost>>()
     private val _chekedFilterCity = MutableLiveData<FilterCity>()
@@ -50,8 +56,13 @@ constructor(
         _facilitiesList.value = mutableListOf()
         _addAdInfo.value = AddAdInfo()
         _settingsInfo.value = SettingsInfo()
+        _locationList.value = mutableListOf()
         _profileInfo.value = ProfileInfo()
+        hostMode.value = false
     }
+
+    val locationItem: LiveData<MutableList<Point>>
+        get() = _locationList
 
     val cachedToken: LiveData<AuthToken>
         get() = _cachedToken
@@ -77,8 +88,16 @@ constructor(
     val profileInfo: LiveData<ProfileInfo>
         get() = _profileInfo
 
+    // Room
+    val isHostMode: LiveData<Boolean>
+        get() = hostMode
+
     fun login(newValue: AuthToken){
         setValue(newValue)
+    }
+
+    fun locationItemCount(point: ArrayList<Point>){
+        setLocationValue(point)
     }
 
     fun favorite(blogPost: BlogPost, checked: Boolean){
@@ -97,11 +116,29 @@ constructor(
         setFacilityValue(facility, checked)
     }
 
-    // Profile
+    fun setLocationValue(point: ArrayList<Point>) {
+        Log.d(TAG, "location ee ${_locationList.value}")
+
+        GlobalScope.launch(Main) {
+            _locationList.value = point
+            Log.d(TAG, "location ${_locationList.value}")
+        }
+    }
+
+    // Main Account
+
+    fun changeHostMode(host: Boolean) {
+        GlobalScope.launch(Main) {
+            hostMode.value = host
+        }
+        Log.e("HOST_MDOE", "${hostMode.value}")
+    }
+
+    //Profile
 
     fun setProfileInfo(image: Uri?, nickname: String,
                        birthdate: String, gender: String,
-                        phonenumber: String, email: String){
+                       phonenumber: String, email: String){
         GlobalScope.launch(Main) {
             _profileInfo.value?.image = image
             _profileInfo.value?.nickname = nickname
@@ -110,10 +147,10 @@ constructor(
             _profileInfo.value?.phonenumber = phonenumber
             _profileInfo.value?.email = email
         }
-        Log.e("PROFILE_INFO", "${_settingsInfo.value?._pushNotificationsOn}")
+        Log.e("PROFILE_INFO", "${_profileInfo.value}")
     }
 
-    // Settings
+    //Settings
 
     fun setSettingsPushNotifications(checked: Boolean) {
         GlobalScope.launch(Main) {
@@ -144,7 +181,7 @@ constructor(
         Log.e("SETTINGS_REGION", "${_settingsInfo.value?._region}")
     }
 
-    //Add Ad
+    // Add Ad
 
     fun setAddAdFacilityListItem(facility: String, checked: Boolean) {
         GlobalScope.launch(Main){
@@ -156,12 +193,54 @@ constructor(
         Log.e("SESSION_ADD_AD_FACILITI", "${_addAdInfo.value?._addAdFacilityList}")
     }
 
+    fun clearAddAdFacilityList(){
+        GlobalScope.launch(Main) {
+            _addAdInfo.value?._addAdFacilityList?.clear()
+        }
+        Log.e("SESSION_CLEAR_FACILITY", "${_addAdInfo.value?._addAdFacilityList}")
+    }
+
+    fun setAddAdNearByListItem(near: String, checked: Boolean) {
+        GlobalScope.launch(Main){
+            if (checked)
+                _addAdInfo.value?._addAdNearByList?.add(near)
+            else
+                _addAdInfo.value?._addAdNearByList?.remove(near)
+        }
+        Log.e("SESSION_ADD_AD_NEAR", "${_addAdInfo.value?._addAdNearByList}")
+    }
+
+    fun clearAddAdNearList() {
+        GlobalScope.launch(Main) {
+            _addAdInfo.value?._addAdNearByList?.clear()
+        }
+        Log.e("SESSION_CLEAR_NEAR", "${_addAdInfo.value?._addAdNearByList}")
+    }
+
+    fun setAddAdRulesListItem(rule: String, checked: Boolean) {
+        GlobalScope.launch(Main){
+            if (checked)
+                _addAdInfo.value?._addAdRulesList?.add(rule)
+            else
+                _addAdInfo.value?._addAdRulesList?.remove(rule)
+        }
+        Log.e("SESSION_ADD_AD_RULES", "${_addAdInfo.value?._addAdRulesList}")
+    }
+
+    fun clearAddAdRulesList(){
+        GlobalScope.launch(Main) {
+            _addAdInfo.value?._addAdRulesList?.clear()
+        }
+        Log.e("SESSION_RULES", "${_addAdInfo.value?._addAdRulesList}")
+    }
+
     fun setAddAdPriceAndDiscounts(price: Int, days7: Int, days30: Int){
         GlobalScope.launch(Main){
             _addAdInfo.value?._addAdPrice = price
             _addAdInfo.value?._addAd7DaysDiscount = days7
             _addAdInfo.value?._addAd30DaysDiscount = days30
         }
+        Log.e("SESSION_ADD_PRICE", "${_addAdInfo.value?._addAdPrice}")
     }
 
     fun setAddAdImage(imageUri1: Uri?, imageUri2: Uri?, imageUri3: Uri?, imageUri4: Uri?, imageUri5: Uri?, imageUri6: Uri?){
@@ -215,6 +294,8 @@ constructor(
         Log.e("SESSION_ADD_AD_COUNTS",
             "${_addAdInfo.value?._addAdGuestsCount}, ${_addAdInfo.value?._addAdRoomsCount}, ${_addAdInfo.value?._addAdBedsCount}")
     }
+
+
 
     fun setAddAdType(type: String){
         GlobalScope.launch(Main){

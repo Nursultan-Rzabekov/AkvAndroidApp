@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.util.PasswordChecker
+import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_about_us.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
 
 
@@ -25,14 +27,14 @@ class AboutProfileFragment : BaseProfileFragment() {
         return inflater.inflate(R.layout.fragment_about_us, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
+        fragment_about_us_tv.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
-
-
 }

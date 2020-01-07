@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.repository.main
 
 
+import com.yandex.mapkit.geometry.Point
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
@@ -21,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 class SearchRepository
 @Inject
@@ -65,8 +67,10 @@ constructor(
                 Log.d("qwe","result response ${response.body.results}")
 
 
+                val location = arrayListOf<Point>()
                 val blogPostList: ArrayList<BlogPost> = ArrayList()
                 for(blogPostResponse in response.body.results){
+                    location.add(Point(blogPostResponse.latitude,blogPostResponse.longitude))
                     val imagePost = blogPostResponse.photos?.get(0) ?: "//////////////////////////////////////////////////////////////////////"
                     blogPostList.add(
                         BlogPost(
@@ -85,11 +89,12 @@ constructor(
                             image = "https://akv-technopark.herokuapp.com" + imagePost.toString().substring(24,imagePost.toString().length - 1),
                             rating = blogPostResponse.rating
                         )
-                    )
 
+                    )
 //                    Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24,blogPostResponse.photos[0].toString().length - 1)}")
                 }
 
+                sessionManager.locationItemCount(location)
 
                 withContext(Dispatchers.Main){
                     onCompleteJob(

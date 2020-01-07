@@ -4,14 +4,20 @@ package com.example.akvandroidapp.ui.main.profile
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import kotlinx.android.synthetic.main.fragment_profile_owner.*
 import kotlinx.android.synthetic.main.header_profile.*
 import kotlinx.android.synthetic.main.profile_part_layout.*
+import javax.inject.Inject
 
 
 class ProfileFragment : BaseProfileFragment(){
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,15 +30,10 @@ class ProfileFragment : BaseProfileFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setObservers()
+
         fragment_profile_owner_host_mode_switch.setOnCheckedChangeListener { _, b ->
-            if(b){
-                fragment_profile_owner_host_mode_ads.visibility = View.VISIBLE
-                fragment_profile_owner_post_ad_btn.visibility = View.VISIBLE
-            }
-            else{
-                fragment_profile_owner_host_mode_ads.visibility = View.GONE
-                fragment_profile_owner_post_ad_btn.visibility = View.GONE
-            }
+            onOwnerMode(b)
         }
 
         fragment_profile_owner_post_ad_btn.setOnClickListener {
@@ -60,6 +61,12 @@ class ProfileFragment : BaseProfileFragment(){
         }
     }
 
+    private fun setObservers() {
+        sessionManager.isHostMode.observe(viewLifecycleOwner, Observer{ dataState ->
+            fragment_profile_owner_host_mode_switch.isChecked = dataState
+        })
+    }
+
     private fun navNextFragment(){
         findNavController().navigate(R.id.action_profileFragment_to_profileAddTypeFragment)
     }
@@ -84,7 +91,17 @@ class ProfileFragment : BaseProfileFragment(){
         findNavController().navigate(R.id.action_profileFragment_to_profileAccountUserProfileFragment)
     }
 
-
+    private fun onOwnerMode(b: Boolean){
+        if(b){
+            fragment_profile_owner_host_mode_ads.visibility = View.VISIBLE
+            fragment_profile_owner_post_ad_btn.visibility = View.VISIBLE
+        }
+        else{
+            fragment_profile_owner_host_mode_ads.visibility = View.GONE
+            fragment_profile_owner_post_ad_btn.visibility = View.GONE
+        }
+        sessionManager.changeHostMode(b)
+    }
 }
 
 

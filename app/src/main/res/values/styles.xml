@@ -203,11 +203,12 @@
         <item name="android:datePickerStyle">@style/MySpinnerDatePicker</item>
         <item name="android:buttonBarPositiveButtonStyle">@style/Alert.Button.Texting.Positive</item>
         <item name="android:buttonBarNegativeButtonStyle">@style/Alert.Button.Texting.Negative</item>
+        <item name="android:negativeButtonText">@string/cancel</item>
+        <item name="android:positiveButtonText">@string/text_ok</item>
     </style>
 
     <style name="MySpinnerDatePicker" parent="android:Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
-        <item name="android:negativeButtonText">Отмена</item>
     </style>
 
     <style name="Alert.Button.Texting" parent="Widget.MaterialComponents.Button.TextButton">
