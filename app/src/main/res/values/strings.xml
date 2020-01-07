@@ -326,4 +326,13 @@
     <string name="report_error">Сообщить об ошибке</string>
     <string name="always">Всегда</string>
     <string name="price_10k_per">Цена: 10 000kzt/ночь</string>
+    <string name="birth_Date">День рождения:</string>
+    <string name="_14_1999">14 Ноября 1999</string>
+    <string name="gender_two_dots">Пол:</string>
+    <string name="man">Мужской</string>
+    <string name="phone_number_tow_dots">Номер телефона:</string>
+    <string name="random_phone_number">+7 (708) 675 7823</string>
+    <string name="email_two_dots">Email:</string>
+    <string name="muratov_d_gmail_com">muratov.d@gmail.com</string>
+    <string name="woman">Женский</string>
 </resources>

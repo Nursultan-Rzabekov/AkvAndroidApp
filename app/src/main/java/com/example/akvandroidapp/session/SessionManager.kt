@@ -37,8 +37,11 @@ constructor(
     //Add ad
     private val _addAdInfo = MutableLiveData<AddAdInfo>()
 
-    //Add ad
+    //Settings
     private val _settingsInfo = MutableLiveData<SettingsInfo>()
+
+    //Profile
+    private val _profileInfo = MutableLiveData<ProfileInfo>()
 
     init {
         _favoritePostList.value = mutableListOf()
@@ -47,6 +50,7 @@ constructor(
         _facilitiesList.value = mutableListOf()
         _addAdInfo.value = AddAdInfo()
         _settingsInfo.value = SettingsInfo()
+        _profileInfo.value = ProfileInfo()
     }
 
     val cachedToken: LiveData<AuthToken>
@@ -70,6 +74,9 @@ constructor(
     val settingsInfo: LiveData<SettingsInfo>
         get() = _settingsInfo
 
+    val profileInfo: LiveData<ProfileInfo>
+        get() = _profileInfo
+
     fun login(newValue: AuthToken){
         setValue(newValue)
     }
@@ -89,6 +96,24 @@ constructor(
     fun filterFacilitiesList(facility: Int, checked: Boolean){
         setFacilityValue(facility, checked)
     }
+
+    // Profile
+
+    fun setProfileInfo(image: Uri?, nickname: String,
+                       birthdate: String, gender: String,
+                        phonenumber: String, email: String){
+        GlobalScope.launch(Main) {
+            _profileInfo.value?.image = image
+            _profileInfo.value?.nickname = nickname
+            _profileInfo.value?.birthdate = birthdate
+            _profileInfo.value?.gender = gender
+            _profileInfo.value?.phonenumber = phonenumber
+            _profileInfo.value?.email = email
+        }
+        Log.e("PROFILE_INFO", "${_settingsInfo.value?._pushNotificationsOn}")
+    }
+
+    // Settings
 
     fun setSettingsPushNotifications(checked: Boolean) {
         GlobalScope.launch(Main) {
@@ -118,6 +143,8 @@ constructor(
         }
         Log.e("SETTINGS_REGION", "${_settingsInfo.value?._region}")
     }
+
+    //Add Ad
 
     fun setAddAdFacilityListItem(facility: String, checked: Boolean) {
         GlobalScope.launch(Main){
