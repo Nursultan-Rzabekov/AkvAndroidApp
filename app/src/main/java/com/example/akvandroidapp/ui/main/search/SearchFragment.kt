@@ -2,6 +2,9 @@ package com.example.akvandroidapp.ui.main.search
 
 
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -254,13 +257,14 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
     private fun showDateDialog(){
 
         activity?.let {
-            val dialog = MaterialDialog(it)
-                .noAutoDismiss()
-                .customView(R.layout.dialog_guests)
+            val dialog = Dialog(it, R.style.CustomBasicDialog)
+            dialog.setCancelable(false)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window?.setDimAmount(0F)
+            dialog.setContentView(R.layout.dialog_guests)
 
-            val view = dialog.getCustomView()
-
-            view.findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {
+            dialog.findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {
                 Log.d(TAG, "FilterDialog: cancelling filter.")
                 dialog.dismiss()
             }

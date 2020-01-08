@@ -21,7 +21,7 @@ class MyHouseMoneyProfileFragment : BaseProfileFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_adds_layout, container, false)
+        return inflater.inflate(R.layout.fragment_my_adds_earnings_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

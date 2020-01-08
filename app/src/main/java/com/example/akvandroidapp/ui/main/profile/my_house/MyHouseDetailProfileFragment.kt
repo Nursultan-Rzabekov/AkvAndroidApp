@@ -21,7 +21,7 @@ class MyHouseDetailProfileFragment : BaseProfileFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings_layout, container, false)
+        return inflater.inflate(R.layout.fragment_my_adds_detailed_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
