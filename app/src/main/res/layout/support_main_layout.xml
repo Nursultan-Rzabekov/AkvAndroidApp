@@ -29,4 +29,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <FrameLayout
+        android:id="@+id/support_main_layout_standardBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="?attr/bottomSheetStyle"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <!-- Bottom Sheet contents -->
+
+    </FrameLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

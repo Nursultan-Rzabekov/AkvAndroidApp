@@ -353,4 +353,6 @@
     <string name="no_garbage">Не сорить</string>
     <string name="the_most_2_person">Небольше 2х гостей</string>
     <string name="no_pets">Никаких животных</string>
+    <string name="call_us">Позвонить нам</string>
+    <string name="text_us">Написать нам</string>
 </resources>
