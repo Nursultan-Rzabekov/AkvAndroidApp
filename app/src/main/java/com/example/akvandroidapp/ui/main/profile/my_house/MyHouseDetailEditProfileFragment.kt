@@ -13,43 +13,30 @@ import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.header_my_adds_change.*
 
 
-class MyHouseDetailProfileFragment : BaseProfileFragment() {
+class MyHouseDetailEditProfileFragment : BaseProfileFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_adds_detailed_layout, container, false)
+        return inflater.inflate(R.layout.fragment_my_adds_change_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
-        Log.d(TAG, "SettingsProfileFragment: ${viewModel}")
+        Log.d(TAG, "MyHouseDetailEditProfileFragment: ${viewModel}")
 
-        main_back_img_btn.setOnClickListener {
+        header_my_adds_change_cancel.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        earning.setOnClickListener {
-            navNextFragment()
-        }
-
-        fragment_my_adds_detailed_change_btn.setOnClickListener {
-            navNextDetailEditFragment()
-        }
     }
 
-    private fun navNextFragment(){
-        findNavController().navigate(R.id.action_profileMyHouseDetailProfileFragment_to_myHouseMoneyProfileFragment)
-    }
-
-    private fun navNextDetailEditFragment(){
-        findNavController().navigate(R.id.action_profileMyHouseDetailProfileFragment_to_myHouseDetailEditProfileFragment)
-    }
 
 }

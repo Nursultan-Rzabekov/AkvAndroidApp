@@ -9,6 +9,7 @@ import com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileF
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.*
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseAddsProfileFragment
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseDetailEditProfileFragment
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseDetailProfileFragment
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMoneyProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
@@ -134,10 +135,15 @@ abstract class MainFragmentBuildersModule {
     abstract fun contributeMyHouseMoneyProfileFragment(): MyHouseMoneyProfileFragment
 
     @ContributesAndroidInjector()
+    abstract fun contributeMyHouseDetailEditProfileFragment(): MyHouseDetailEditProfileFragment
+
+    @ContributesAndroidInjector()
     abstract fun contributeAccountUserEditProfileFragment(): AccountUserEditProfileFragment
 
     @ContributesAndroidInjector()
     abstract fun contributeAccountUserProfileFragment(): AccountUserProfileFragment
+
+
 
 
 }
