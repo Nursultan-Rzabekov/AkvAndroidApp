@@ -364,4 +364,8 @@
     <string name="earning">Заработок</string>
     <string name="total_two_dots">Итого:</string>
     <string name="_20_12_2019">20/12/2019</string>
+    <string name="title">Название</string>
+    <string name="dscription">Описание</string>
+    <string name="photos">Фотографии</string>
+    <string name="zero_from15">0/15</string>
 </resources>

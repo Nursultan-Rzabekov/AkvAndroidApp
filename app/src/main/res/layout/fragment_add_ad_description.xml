@@ -91,9 +91,9 @@
                 style="@style/BasicEditText"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:fontFamily="@font/montserrat"
-                android:gravity="top|start"
-                android:inputType="textMultiLine"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
                 android:hint="@string/describe_apartment" />
 
         </com.google.android.material.textfield.TextInputLayout>

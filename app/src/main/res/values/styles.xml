@@ -66,6 +66,13 @@
         <item name="boxStrokeColor">@color/secondaryFirst</item>
     </style>
 
+    <style name="BasicTextFilled" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="android:topLeftRadius">@dimen/cornerRadius3</item>
+        <item name="android:topRightRadius">@dimen/cornerRadius3</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
+
     <style name="AllButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/primaryZero</item>
         <item name="elevation">0dp</item>
@@ -180,7 +187,7 @@
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="cardCornerRadius">@dimen/cornerRadius3</item>
-        <item name="cardElevation">2dp</item>
+        <item name="cardElevation">@dimen/elevation_3</item>
         <item name="cardUseCompatPadding">true</item>
     </style>
 
@@ -234,7 +241,7 @@
         <item name="android:text">Отмена</item>
     </style>
 
-    <style name="BasicEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="BasicEditText">
         <item name="android:singleLine">true</item>
         <item name="android:maxLines">1</item>
         <item name="android:textCursorDrawable">@drawable/cursor_style</item>
