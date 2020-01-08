@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.PasswordChecker
+import kotlinx.android.synthetic.main.header_support.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
 
 
@@ -23,7 +24,7 @@ class SupportProfileReviewFragment : BaseProfileFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_support_notify_error, container, false)
+        return inflater.inflate(R.layout.support_main_review_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +33,14 @@ class SupportProfileReviewFragment : BaseProfileFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
+
+        header_support_back_btn.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
     }
+
+
 
 
 }

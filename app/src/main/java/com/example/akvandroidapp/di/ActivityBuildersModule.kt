@@ -9,6 +9,10 @@ import com.example.akvandroidapp.di.main.MainFragmentBuildersModule
 import com.example.akvandroidapp.di.main.MainModule
 import com.example.akvandroidapp.di.main.MainScope
 import com.example.akvandroidapp.di.main.MainViewModelModule
+import com.example.akvandroidapp.di.support.SupportFragmentBuildersModule
+import com.example.akvandroidapp.di.support.SupportModule
+import com.example.akvandroidapp.di.support.SupportScope
+import com.example.akvandroidapp.di.support.SupportViewModelModule
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity
@@ -36,8 +40,10 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeMapActivity(): MapActivity
 
-    @MainScope
-    @ContributesAndroidInjector
+    @SupportScope
+    @ContributesAndroidInjector(
+        modules = [SupportModule::class, SupportFragmentBuildersModule::class, SupportViewModelModule::class]
+    )
     abstract fun contributeSupportProfileActivity(): SupportProfileActivity
 
 }
