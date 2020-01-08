@@ -50,78 +50,16 @@ class ProfileAddPriceFragment : BaseProfileFragment(){
         }
 
         fragment_add_ad_price_add_discount_btn.setOnClickListener {
-            if (fragment_add_ad_price_discounts_add_layout.visibility == View.GONE) {
-                fragment_add_ad_price_discounts_add_layout.visibility = View.VISIBLE
-                fragment_add_ad_price_add_discount_btn.visibility = View.GONE
-
-                if (isOneOptionLeft) {
-                    fragment_add_ad_price_discounts_add_choose_days_shrink.visibility = View.VISIBLE
-                    fragment_add_ad_price_discounts_add_choose_days.visibility = View.GONE
-                } else {
-                    fragment_add_ad_price_discounts_add_choose_days_shrink.visibility = View.GONE
-                    fragment_add_ad_price_discounts_add_choose_days.visibility = View.VISIBLE
-                }
-            }
+            onGiveDiscount()
         }
 
         fragment_add_ad_price_remove_btn.setOnClickListener {
-            fragment_add_ad_price_discounts_add_layout.visibility = View.GONE
-            fragment_add_ad_price_seekbar.progress = 0
-            fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
+            onCancelDiscount()
         }
 
         fragment_add_ad_price_add_btn.setOnClickListener {
-            fragment_add_ad_price_discounts_add_layout.visibility = View.GONE
-
-            if (fragment_add_ad_price_seekbar.progress > 0) {
-                if (!isOneOptionLeft) {
-                    when (fragment_add_ad_price_discounts_radio_group.checkedRadioButtonId) {
-                        fragment_add_ad_price_discounts_add_7_days_rbtn.id -> {
-                            is7DaysDiscountSelected = true
-                            fragment_add_ad_price_chip_7_days.visibility = View.VISIBLE
-                            fragment_add_ad_price_chip_7_days.text =
-                                ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 7 дней")
-                            discountOn7Days = fragment_add_ad_price_seekbar.progress
-                        }
-                        fragment_add_ad_price_discounts_add_30_days_rbtn.id -> {
-                            is30DaysDiscountSelected = true
-                            fragment_add_ad_price_chip_30_days.visibility = View.VISIBLE
-                            fragment_add_ad_price_chip_30_days.text =
-                                ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 30 дней")
-                            discountOn30Days = fragment_add_ad_price_seekbar.progress
-                        }
-                    }
-                } else {
-
-                    if (is7DaysDiscountSelected) {
-                        fragment_add_ad_price_chip_30_days.visibility = View.VISIBLE
-                        fragment_add_ad_price_chip_30_days.text =
-                            ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 30 дней")
-                        discountOn30Days = fragment_add_ad_price_seekbar.progress
-                    }
-                    if (is30DaysDiscountSelected) {
-                        fragment_add_ad_price_chip_7_days.visibility = View.VISIBLE
-                        fragment_add_ad_price_chip_7_days.text =
-                            ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 7 дней")
-                        discountOn7Days = fragment_add_ad_price_seekbar.progress
-                    }
-
-                    is30DaysDiscountSelected = true
-                    is7DaysDiscountSelected = true
-                }
-
-                if (!isOneOptionLeft) isOneOptionLeft = true
-            }
-
-            if (is7DaysDiscountSelected || is30DaysDiscountSelected)
-                fragment_add_ad_price_discounts_layout.visibility = View.VISIBLE
-            else
-                fragment_add_ad_price_discounts_layout.visibility = View.GONE
-
-            if (is7DaysDiscountSelected && is30DaysDiscountSelected)
-                fragment_add_ad_price_add_discount_btn.visibility = View.GONE
-            else
-                fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
+            if (fragment_add_ad_price_seekbar.progress > 0)
+                onNewDiscountAdded()
         }
 
         fragment_add_ad_price_seekbar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
@@ -138,24 +76,31 @@ class ProfileAddPriceFragment : BaseProfileFragment(){
 
         fragment_add_ad_price_chip_7_days.setOnCloseIconClickListener {
             fragment_add_ad_price_chip_7_days.visibility = View.GONE
+            discountOn7Days = 0
 
             is7DaysDiscountSelected = false
-            if (!is30DaysDiscountSelected) {
+
+            if (is30DaysDiscountSelected)
+                isOneOptionLeft = true
+            else {
                 isOneOptionLeft = false
                 fragment_add_ad_price_discounts_layout.visibility = View.GONE
-            }else isOneOptionLeft = true
+            }
 
             onChipClose()
         }
 
         fragment_add_ad_price_chip_30_days.setOnCloseIconClickListener {
             fragment_add_ad_price_chip_30_days.visibility = View.GONE
+            discountOn30Days = 0
 
             is30DaysDiscountSelected = false
-            if (!is7DaysDiscountSelected){
+            if (!is7DaysDiscountSelected)
+                isOneOptionLeft = true
+            else {
                 isOneOptionLeft = false
                 fragment_add_ad_price_discounts_layout.visibility = View.GONE
-            }else isOneOptionLeft = true
+            }
 
             onChipClose()
         }
@@ -169,22 +114,34 @@ class ProfileAddPriceFragment : BaseProfileFragment(){
         }
     }
 
+    private fun navNextFragment(){
+        findNavController().navigate(R.id.profileAddPriceFragment_to_profileAddPostFragment)
+    }
+
     private fun initialState(){
         fragment_add_ad_price_discounts_layout.visibility = View.GONE
+        fragment_add_ad_price_chip_7_days.visibility = View.GONE
+        fragment_add_ad_price_chip_30_days.visibility = View.GONE
         fragment_add_ad_price_discounts_add_layout.visibility = View.GONE
+        fragment_add_ad_price_discounts_add_choose_days_shrink.visibility = View.GONE
+        fragment_add_ad_price_discounts_add_choose_days.visibility = View.VISIBLE
         fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
+        fragment_add_ad_price_seekbar.progress = 0
     }
 
     private fun onChipClose(){
-        if (fragment_add_ad_price_discounts_add_layout.visibility == View.GONE){
-            fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
-        } else
-            fragment_add_ad_price_add_discount_btn.visibility = View.GONE
-
         if (isOneOptionLeft){
+            fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
             fragment_add_ad_price_discounts_add_choose_days_shrink.visibility = View.VISIBLE
             fragment_add_ad_price_discounts_add_choose_days.visibility = View.GONE
+
+            if (is7DaysDiscountSelected)
+                fragment_add_ad_price_one_option_tv.text = ("Кол-во дней: 30 дней")
+            else if (is30DaysDiscountSelected)
+                fragment_add_ad_price_one_option_tv.text = ("Кол-во дней: 7 дней")
+
         } else {
+            fragment_add_ad_price_add_discount_btn.visibility = View.GONE
             fragment_add_ad_price_discounts_add_choose_days_shrink.visibility = View.GONE
             fragment_add_ad_price_discounts_add_choose_days.visibility = View.VISIBLE
         }
@@ -197,9 +154,77 @@ class ProfileAddPriceFragment : BaseProfileFragment(){
             discountOn30Days)
     }
 
+    private fun onGiveDiscount() {
+        if (fragment_add_ad_price_discounts_add_layout.visibility == View.GONE) {
+            fragment_add_ad_price_discounts_add_layout.visibility = View.VISIBLE
+            fragment_add_ad_price_add_discount_btn.visibility = View.GONE
 
-    private fun navNextFragment(){
-        findNavController().navigate(R.id.profileAddPriceFragment_to_profileAddPostFragment)
+            if (isOneOptionLeft) {
+                fragment_add_ad_price_discounts_add_choose_days_shrink.visibility = View.VISIBLE
+                fragment_add_ad_price_discounts_add_choose_days.visibility = View.GONE
+            } else {
+                fragment_add_ad_price_discounts_add_choose_days_shrink.visibility = View.GONE
+                fragment_add_ad_price_discounts_add_choose_days.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun onCancelDiscount() {
+        fragment_add_ad_price_discounts_add_layout.visibility = View.GONE
+        fragment_add_ad_price_seekbar.progress = 0
+        fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
+    }
+
+    private fun onNewDiscountAdded() {
+        fragment_add_ad_price_discounts_add_layout.visibility = View.GONE
+
+        if (!isOneOptionLeft) {
+            when (fragment_add_ad_price_discounts_radio_group.checkedRadioButtonId) {
+                fragment_add_ad_price_discounts_add_7_days_rbtn.id -> {
+                    is7DaysDiscountSelected = true
+                    fragment_add_ad_price_chip_7_days.visibility = View.VISIBLE
+                    fragment_add_ad_price_chip_7_days.text =
+                        ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 7 дней")
+                    discountOn7Days = fragment_add_ad_price_seekbar.progress
+                }
+                fragment_add_ad_price_discounts_add_30_days_rbtn.id -> {
+                    is30DaysDiscountSelected = true
+                    fragment_add_ad_price_chip_30_days.visibility = View.VISIBLE
+                    fragment_add_ad_price_chip_30_days.text =
+                        ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 30 дней")
+                    discountOn30Days = fragment_add_ad_price_seekbar.progress
+                }
+            }
+        } else {
+            if (is7DaysDiscountSelected) {
+                fragment_add_ad_price_chip_30_days.visibility = View.VISIBLE
+                fragment_add_ad_price_chip_30_days.text =
+                    ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 30 дней")
+                discountOn30Days = fragment_add_ad_price_seekbar.progress
+            }
+            if (is30DaysDiscountSelected) {
+                fragment_add_ad_price_chip_7_days.visibility = View.VISIBLE
+                fragment_add_ad_price_chip_7_days.text =
+                    ("Скидка ${fragment_add_ad_price_seekbar.progress}% на 7 дней")
+                discountOn7Days = fragment_add_ad_price_seekbar.progress
+            }
+
+            is30DaysDiscountSelected = true
+            is7DaysDiscountSelected = true
+        }
+
+        if (!isOneOptionLeft) isOneOptionLeft = true
+
+
+        if (is7DaysDiscountSelected || is30DaysDiscountSelected)
+            fragment_add_ad_price_discounts_layout.visibility = View.VISIBLE
+        else
+            fragment_add_ad_price_discounts_layout.visibility = View.GONE
+
+        if (is7DaysDiscountSelected && is30DaysDiscountSelected)
+            fragment_add_ad_price_add_discount_btn.visibility = View.GONE
+        else
+            fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
     }
 }
 

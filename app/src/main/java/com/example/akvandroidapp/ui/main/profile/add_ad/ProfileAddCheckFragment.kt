@@ -58,7 +58,7 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         }
 
         main_back_img_btn.setOnClickListener {
-            sessionManager.addAdInfo.value?._addAdFacilityList?.clear()
+            sessionManager.clearAddAdFacilityList()
             findNavController().navigateUp()
         }
 

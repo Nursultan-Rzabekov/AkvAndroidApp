@@ -215,6 +215,7 @@
     <string name="_50percent">50%</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отменить</string>
+    <string name="cancel_">Отмена</string>
     <string name="rules_akv_kz">Требования  AKV.KZ</string>
     <string name="post_reserve">Правила \n бронирования</string>
     <string name="add_mine">Добавить своё</string>
@@ -326,6 +327,30 @@
     <string name="report_error">Сообщить об ошибке</string>
     <string name="always">Всегда</string>
     <string name="price_10k_per">Цена: 10 000kzt/ночь</string>
-
+    <string name="birth_Date">День рождения:</string>
+    <string name="_14_1999">14 Ноября 1999</string>
+    <string name="gender_two_dots">Пол:</string>
+    <string name="man">Мужской</string>
+    <string name="phone_number_tow_dots">Номер телефона:</string>
+    <string name="random_phone_number">+7 (708) 675 7823</string>
+    <string name="email_two_dots">Email:</string>
+    <string name="muratov_d_gmail_com">muratov.d@gmail.com</string>
+    <string name="woman">Женский</string>
     <string name="cluster_tap_message">Tapped cluster with %d items</string>
+    <string name="near_by_lb">Что есть рядом с  вашим жильём</string>
+    <string name="hospital">Больница</string>
+    <string name="park">Парк</string>
+    <string name="autovokzal">Автовокзал</string>
+    <string name="medical_shop">Аптека</string>
+    <string name="cinema">Кинотеатр</string>
+    <string name="kindergarden">Детский сад</string>
+    <string name="ZON">ЦОН</string>
+    <string name="school">Школа</string>
+    <string name="parlament">Акимат</string>
+    <string name="no_smoking">Не курить</string>
+    <string name="no_alchogol">Никакого алкоголя</string>
+    <string name="no_noise">Не шуметь</string>
+    <string name="no_garbage">Не сорить</string>
+    <string name="the_most_2_person">Небольше 2х гостей</string>
+    <string name="no_pets">Никаких животных</string>
 </resources>

@@ -18,7 +18,7 @@
             android:id="@+id/fragment_profile_account_edit_birth_lb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="День рождения:"
+            android:text="@string/birth_Date"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textAlignment="viewStart"
@@ -28,7 +28,7 @@
             android:id="@+id/fragment_profile_account_edit_birth_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="14 Ноября 1999"
+            android:text="@string/_14_1999"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/primaryZero"
@@ -50,7 +50,7 @@
             android:id="@+id/fragment_profile_account_edit_gender_lb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Пол:"
+            android:text="@string/gender_two_dots"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textAlignment="viewStart"
@@ -70,27 +70,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dim_24dp"
                 android:layout_weight="1"
+                style="@style/BasicRadioButton"
                 android:background="@drawable/mini_woman_radio_btn"
-                android:button="@android:color/transparent"
                 android:minWidth="@dimen/dim_36dp"
                 android:minHeight="@dimen/dim_24dp"
-                android:text="Женский"
+                android:text="@string/woman"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/fragment_profile_account_edit_man_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dim_24dp"
                 android:layout_weight="1"
+                style="@style/BasicRadioButton"
                 android:background="@drawable/mini_man_radio_btn"
-                android:button="@android:color/transparent"
                 android:minWidth="@dimen/dim_36dp"
                 android:minHeight="@dimen/dim_24dp"
-                android:text="Мужской"
+                android:text="@string/man"
                 android:textAlignment="center"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
         </RadioGroup>
 
     </LinearLayout>
@@ -108,7 +107,7 @@
             android:id="@+id/fragment_profile_account_edit_phonenumber_lb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Номер телефона:"
+            android:text="@string/phone_number_tow_dots"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textAlignment="viewStart"
@@ -118,7 +117,7 @@
             android:id="@+id/fragment_profile_account_edit_phonenumber_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+7 (708) 675 7823"
+            android:text="@string/random_phone_number"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/primaryZero"
@@ -143,7 +142,7 @@
             android:id="@+id/fragment_profile_account_edit_email_lb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Email:"
+            android:text="@string/email_two_dots"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textAlignment="viewStart"
@@ -153,7 +152,7 @@
             android:id="@+id/fragment_profile_account_edit_email_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="muratov.d@gmail.com"
+            android:text="@string/muratov_d_gmail_com"
             android:textSize="14sp"
             android:textColor="@color/primaryZero"
             android:textStyle="bold"
@@ -164,5 +163,4 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
-
 </LinearLayout>

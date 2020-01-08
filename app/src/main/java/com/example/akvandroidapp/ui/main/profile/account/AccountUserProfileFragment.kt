@@ -8,17 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.PasswordChecker
 import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_profile_account.*
 import kotlinx.android.synthetic.main.header_profile_account.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
+import javax.inject.Inject
 
 
 class AccountUserProfileFragment : BaseProfileFragment() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +43,8 @@ class AccountUserProfileFragment : BaseProfileFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
+        attachProfileInformation()
+
         header_profile_account_change_profile_btn.setOnClickListener {
             navNextFragment()
         }
@@ -46,6 +56,19 @@ class AccountUserProfileFragment : BaseProfileFragment() {
 
     private fun navNextFragment(){
         findNavController().navigate(R.id.action_profileAccountUserProfileFragment_to_profileAccountUserEditProfileFragment)
+    }
+
+    private fun attachProfileInformation(){
+        sessionManager.profileInfo.observe(viewLifecycleOwner, Observer{ dataState ->
+            fragment_profile_account_birthdate_tv.text = dataState.birthdate.toString()
+            fragment_profile_account_gender_tv.text = dataState.gender.toString()
+            fragment_profile_account_phonenumber_tv.text = dataState.phonenumber.toString()
+            fragment_profile_account_email_tv.text = dataState.email.toString()
+            header_profile_account_tv.text = dataState.nickname.toString()
+            Glide.with(this).load(
+                if (dataState.image != null) dataState.image else R.drawable.default_image)
+                .into(header_profile_account_civ)
+        })
     }
 
 }
