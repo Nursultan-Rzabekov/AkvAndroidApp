@@ -2,6 +2,7 @@ package com.example.akvandroidapp.api.main
 
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.responses.BlogCreateUpdateResponse
+import com.example.akvandroidapp.api.main.responses.BlogGetProfileInfoResponse
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
 import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.util.GenericApiResponse
@@ -61,7 +62,6 @@ interface OpenApiMainService {
     @Multipart
     @POST("houses/")
     fun createBlog(
-//        @Header("accept") type: String,
         @Header("Authorization") authorization: String,
         @Part("name") name: RequestBody,
         @Part("description") description: RequestBody,
@@ -90,6 +90,19 @@ interface OpenApiMainService {
         @QueryMap  options : Map<String, String>,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<BlogListSearchResponse>>
+
+
+    @GET("auth/users/me")
+    fun getProfileInfo(
+        @Header("Authorization") authorization: String
+    ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
+
+    @PUT("profile")
+    fun updateProfileInfo(
+        @Header("Authorization") authorization: String,
+        @Part("name") first_name: RequestBody,
+        @Part userpic: MultipartBody.Part?
+    ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
 }
 
 

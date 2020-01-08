@@ -88,6 +88,31 @@ constructor(
                 }?: AbsentLiveData.create()
             }
 
+
+            is ProfileStateEvent.GetProfileInfoEvent ->{
+                Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
+                return sessionManager.cachedToken.value?.let { authToken ->
+
+                    profileRepository.createGetProfileInfo(
+                        authToken
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is ProfileStateEvent.EditProfileInfoEvent ->{
+                Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
+
+                val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent.first_name!!)
+
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    profileRepository.updateProfileInfo(
+                        authToken,
+                        name,
+                        stateEvent.image
+                    )
+                }?: AbsentLiveData.create()
+            }
+
             is ProfileStateEvent.None -> {
                 return liveData {
                     emit(

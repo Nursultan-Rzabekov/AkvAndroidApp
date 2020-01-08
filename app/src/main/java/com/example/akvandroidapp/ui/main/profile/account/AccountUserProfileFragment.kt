@@ -15,7 +15,9 @@ import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.util.PasswordChecker
+import com.example.akvandroidapp.util.SuccessHandling
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_profile_account.*
 import kotlinx.android.synthetic.main.header_profile_account.*
@@ -52,11 +54,14 @@ class AccountUserProfileFragment : BaseProfileFragment() {
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
         }
+
+
     }
 
     private fun navNextFragment(){
         findNavController().navigate(R.id.action_profileAccountUserProfileFragment_to_profileAccountUserEditProfileFragment)
     }
+
 
     private fun attachProfileInformation(){
         sessionManager.profileInfo.observe(viewLifecycleOwner, Observer{ dataState ->

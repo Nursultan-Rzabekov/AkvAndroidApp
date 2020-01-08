@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
+import com.example.akvandroidapp.util.SuccessHandling
 import kotlinx.android.synthetic.main.fragment_profile_owner.*
 import kotlinx.android.synthetic.main.header_profile.*
 import kotlinx.android.synthetic.main.profile_part_layout.*
@@ -31,6 +33,8 @@ class ProfileFragment : BaseProfileFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         setObservers()
+        getInfo()
+        subscribeObservers()
 
         fragment_profile_owner_host_mode_switch.setOnCheckedChangeListener { _, b ->
             onOwnerMode(b)
@@ -101,6 +105,36 @@ class ProfileFragment : BaseProfileFragment(){
             fragment_profile_owner_post_ad_btn.visibility = View.GONE
         }
         sessionManager.changeHostMode(b)
+    }
+
+
+    private fun getInfo(){
+        viewModel.setStateEvent(
+            ProfileStateEvent.GetProfileInfoEvent()
+        )
+    }
+
+    private fun subscribeObservers(){
+        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+            stateChangeListener.onDataStateChange(dataState)
+            dataState.data?.let { data ->
+                data.response?.let { event ->
+                    event.peekContent().let { response ->
+                        response.message?.let { message ->
+                            if (message == SuccessHandling.SUCCESS_BLOG_CREATED) {
+                                viewModel.clearNewBlogFields()
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            viewState.profileInfoFields.let{ newBlogFields ->
+
+            }
+        })
     }
 }
 

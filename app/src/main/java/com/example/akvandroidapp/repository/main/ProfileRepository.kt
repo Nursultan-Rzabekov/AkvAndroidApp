@@ -5,11 +5,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.BlogCreateUpdateResponse
+import com.example.akvandroidapp.api.main.responses.BlogGetProfileInfoResponse
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.repository.JobManager
 import com.example.akvandroidapp.repository.NetworkBoundResource
+import com.example.akvandroidapp.session.ProfileInfo
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Response
@@ -147,6 +149,134 @@ constructor(
     }
 
 
+    fun createGetProfileInfo(
+        authToken: AuthToken
+    ): LiveData<DataState<ProfileViewState>> {
+        return object :
+            NetworkBoundResource<BlogGetProfileInfoResponse, BlogPost, ProfileViewState>(
+                sessionManager.isConnectedToTheInternet(),
+                true,
+                true,
+                false
+            ) {
+
+            // not applicable
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<BlogGetProfileInfoResponse>) {
+
+                Log.d(TAG,"PostCreateHouse 444444 + ${response.body.phone}")
+
+                sessionManager.setProfileInfo(response.body.first_name,
+                    response.body.birth_day,
+                    response.body.gender,
+                    response.body.phone,
+                    response.body.email)
+
+                withContext(Dispatchers.Main) {
+                    // finish with success response
+                    onCompleteJob(
+                        DataState.data(
+                            null,
+                            Response(response.body.id.toString(), ResponseType.Dialog())
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>> {
+                Log.d(TAG,"PostCreateHouse 7070707070 + ${authToken}")
+                return openApiMainService.getProfileInfo(
+                    "Token ${authToken.token!!}"
+                )
+            }
+
+            // not applicable
+            override fun loadFromCache(): LiveData<ProfileViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: BlogPost?) {
+                cacheObject?.let {
+                    //blogPostDao.insert(it)
+                }
+            }
+
+            override fun setJob(job: Job) {
+                addJob("createNewBlogPost", job)
+            }
+
+        }.asLiveData()
+    }
+
+
+    fun updateProfileInfo(
+        authToken: AuthToken,
+        firstName:RequestBody,
+        userPic: MultipartBody.Part?
+    ): LiveData<DataState<ProfileViewState>> {
+        return object :
+            NetworkBoundResource<BlogGetProfileInfoResponse, BlogPost, ProfileViewState>(
+                sessionManager.isConnectedToTheInternet(),
+                true,
+                true,
+                false
+            ) {
+
+            // not applicable
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<BlogGetProfileInfoResponse>) {
+
+                Log.d(TAG,"PostCreateHouse 444444 + ${response.body.phone}")
+
+                sessionManager.setProfileInfo(response.body.first_name,
+                    response.body.birth_day,
+                    response.body.gender,
+                    response.body.phone,
+                    response.body.email)
+
+                withContext(Dispatchers.Main) {
+                    // finish with success response
+                    onCompleteJob(
+                        DataState.data(
+                            null,
+                            Response(response.body.id.toString(), ResponseType.Dialog())
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>> {
+                Log.d(TAG,"PostCreateHouse 7070707070 + ${authToken}")
+                return openApiMainService.updateProfileInfo(
+                    "Token ${authToken.token!!}",
+                    firstName,
+                    userPic
+                )
+            }
+
+            // not applicable
+            override fun loadFromCache(): LiveData<ProfileViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: BlogPost?) {
+                cacheObject?.let {
+                    //blogPostDao.insert(it)
+                }
+            }
+
+            override fun setJob(job: Job) {
+                addJob("createNewBlogPost", job)
+            }
+
+        }.asLiveData()
+    }
 }
 
 

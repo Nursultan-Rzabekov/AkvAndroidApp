@@ -21,9 +21,11 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.PasswordChecker
+import com.example.akvandroidapp.util.SuccessHandling
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.back_button_layout.*
@@ -32,6 +34,10 @@ import kotlinx.android.synthetic.main.fragment_profile_account_edit.*
 import kotlinx.android.synthetic.main.header_profile_account.*
 import kotlinx.android.synthetic.main.header_profile_account_edit.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -85,6 +91,8 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
 
     private fun saveUserAccounts(){
         // sessionManager.setProfileInfo(image1)
+        editInfo()
+        subscribeObservers()
     }
 
     private fun attachUserAccounts(){
@@ -192,5 +200,54 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
 
         dpd.show()
         dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)
+    }
+
+
+    private fun editInfo(){
+        image1?.path?.let {
+            val imageFile = File(it)
+            Log.d(TAG, "CreateBlogFragment, imageFile: file: ${imageFile}")
+
+            val requestBody =
+                RequestBody.create(
+                    MediaType.parse("multipart/form-data"),
+                    imageFile
+                )
+
+            Log.d(TAG, "PostCreateHouse request777: ${requestBody}")
+
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photos",
+                imageFile.name,
+                requestBody
+            )
+
+            viewModel.setStateEvent(
+                ProfileStateEvent.EditProfileInfoEvent(header_profile_account_edit_tv.text.toString(), multipartBody)
+            )
+        }
+    }
+
+    private fun subscribeObservers(){
+        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+            stateChangeListener.onDataStateChange(dataState)
+            dataState.data?.let { data ->
+                data.response?.let { event ->
+                    event.peekContent().let { response ->
+                        response.message?.let { message ->
+                            if (message == SuccessHandling.SUCCESS_BLOG_CREATED) {
+                                viewModel.clearNewBlogFields()
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            viewState.profileInfoFields.let{ newBlogFields ->
+
+            }
+        })
     }
 }

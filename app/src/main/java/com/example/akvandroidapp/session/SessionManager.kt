@@ -112,6 +112,7 @@ constructor(
         setFilterTypeOfApartment(type)
     }
 
+
     fun filterFacilitiesList(facility: Int, checked: Boolean){
         setFacilityValue(facility, checked)
     }
@@ -136,11 +137,9 @@ constructor(
 
     //Profile
 
-    fun setProfileInfo(image: Uri?, nickname: String,
-                       birthdate: String, gender: String,
-                       phonenumber: String, email: String){
+    fun setProfileInfo(nickname: String, birthdate: String, gender: Int, phonenumber: String, email: String){
         GlobalScope.launch(Main) {
-            _profileInfo.value?.image = image
+            _profileInfo.value?.image = null
             _profileInfo.value?.nickname = nickname
             _profileInfo.value?.birthdate = birthdate
             _profileInfo.value?.gender = gender
