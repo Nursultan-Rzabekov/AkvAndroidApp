@@ -2,6 +2,8 @@ package com.example.akvandroidapp.ui.main.search
 
 
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -258,6 +260,8 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
                 .noAutoDismiss()
                 .customView(R.layout.dialog_guests)
 
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window?.setDimAmount(0F)
             val view = dialog.getCustomView()
 
             view.findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {

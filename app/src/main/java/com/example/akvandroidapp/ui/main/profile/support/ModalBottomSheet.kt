@@ -13,18 +13,22 @@ class ModalBottomSheet(
     private val bottomSheetDialogInteraction: BottomSheetDialogInteraction
 ) : BottomSheetDialogFragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.support_bottom_sheet_dialog, container, false)
-
-        return view
+        return inflater.inflate(R.layout.support_bottom_sheet_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         view.support_bottom_sheet_dialog_cancel_btn.setOnClickListener {
             bottomSheetDialogInteraction.onCancelClicked()
         }
