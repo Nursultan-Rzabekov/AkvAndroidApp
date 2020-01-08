@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:contentDescription="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:src="@drawable/ic_cancel_contact"
+        android:layout_gravity="end|top"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_margin="@dimen/dim_8dp"
+        app:cardUseCompatPadding="false"
+        app:cardBackgroundColor="@color/secondaryFirst"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/primaryZero"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:contentDescription="@string/appartment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/test_image_back"
+            android:scaleType="centerCrop"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>
