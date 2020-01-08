@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingTop="@dimen/dim_8dp"
+        android:paddingBottom="@dimen/dim_8dp"
+        android:paddingStart="@dimen/dim_28dp"
+        android:paddingEnd="@dimen/dim_24dp">
+
+        <TextView
+            android:id="@+id/fragment_my_adds_earnings_lb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/total_two_dots"
+            android:textSize="24sp"
+            android:textColor="@color/primaryZero"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/fragment_my_adds_earnings_total_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/_38_000kzt"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/primaryZero"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider50"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primaryZero" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_my_adds_earnings_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </ScrollView>
+
+</LinearLayout>

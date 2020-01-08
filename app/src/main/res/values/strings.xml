@@ -355,4 +355,13 @@
     <string name="no_pets">Никаких животных</string>
     <string name="call_us">Позвонить нам</string>
     <string name="text_us">Написать нам</string>
+    <string name="deactivate">Деактивировать</string>
+    <string name="activate">Активировать</string>
+    <string name="more">Подробнее</string>
+    <string name="earnings">Заробаток:</string>
+    <string name="_38_000kzt">+38 000kzt</string>
+    <string name="change">Изменить</string>
+    <string name="earning">Заработок</string>
+    <string name="total_two_dots">Итого:</string>
+    <string name="_20_12_2019">20/12/2019</string>
 </resources>
