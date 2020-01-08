@@ -27,6 +27,7 @@
                 android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_my_adds_change_title_l_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
@@ -36,6 +37,7 @@
                 style="@style/BasicTextFilled">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_my_adds_change_title_et"
                     style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,6 +56,7 @@
                 android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_my_adds_change_desc_l_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
@@ -63,6 +66,7 @@
                 style="@style/BasicTextFilled">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_my_adds_change_desc_et"
                     style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,6 +87,7 @@
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_my_adds_change_photos_recycler_view"
                 android:layout_marginTop="@dimen/dim_24dp"
                 android:layout_marginStart="@dimen/dim_24dp"
                 android:layout_marginEnd="@dimen/dim_24dp"
@@ -91,6 +96,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/fragment_my_adds_change_photos_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/zero_from15"
@@ -105,6 +111,7 @@
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_my_adds_change_rules"
                 style="@style/ButtonCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,6 +138,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_my_adds_change_facilities"
                 style="@style/ButtonCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,6 +165,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_my_adds_change_near"
                 style="@style/ButtonCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -183,6 +192,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_my_adds_change_available_dates"
                 style="@style/ButtonCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -218,6 +228,7 @@
                 android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_my_adds_change_price_l_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
@@ -227,6 +238,7 @@
                 style="@style/BasicTextFilled">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_my_adds_change_price_et"
                     style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -246,6 +258,7 @@
                 android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_my_adds_change_address_l_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
@@ -255,6 +268,7 @@
                 style="@style/BasicTextFilled">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_my_adds_change_address_et"
                     style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -7,16 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_my_adds_change.*
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.header_my_adds_change.*
+import javax.inject.Inject
 
 
 class MyHouseDetailEditProfileFragment : BaseProfileFragment() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +39,22 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "MyHouseDetailEditProfileFragment: ${viewModel}")
 
+        setObservers()
+
         header_my_adds_change_cancel.setOnClickListener {
             findNavController().navigateUp()
         }
 
     }
 
+    private fun setObservers() {
+        sessionManager.houseUpdateData.observe(viewLifecycleOwner, Observer {
+            fragment_my_adds_change_title_et.setText(it.title.toString())
+            fragment_my_adds_change_desc_et.setText(it.description.toString())
+            fragment_my_adds_change_price_et.setText(it.price.toString())
+            fragment_my_adds_change_address_et.setText(it.address.toString())
+            fragment_my_adds_change_photos_tv.text = ("${it.photosList?.size.toString()}/15")
+        })
+    }
 
 }
