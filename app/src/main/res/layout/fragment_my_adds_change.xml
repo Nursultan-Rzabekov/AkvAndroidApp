@@ -14,8 +14,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="@dimen/dim_28dp"
-            android:paddingStart="@dimen/dim_24dp"
-            android:paddingEnd="@dimen/dim_24dp"
+            android:paddingStart="@dimen/dim_28dp"
+            android:paddingEnd="@dimen/dim_28dp"
             android:paddingBottom="@dimen/dim_24dp">
 
             <TextView
@@ -89,9 +89,6 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_my_adds_change_photos_recycler_view"
                 android:layout_marginTop="@dimen/dim_24dp"
-                android:layout_marginStart="@dimen/dim_24dp"
-                android:layout_marginEnd="@dimen/dim_24dp"
-                android:layout_marginBottom="@dimen/dim_24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

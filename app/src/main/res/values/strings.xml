@@ -368,4 +368,5 @@
     <string name="dscription">Описание</string>
     <string name="photos">Фотографии</string>
     <string name="zero_from15">0/15</string>
+    <string name="choose_dates">Отметьте те дни, которые вы \nсможете принимать гостей</string>
 </resources>
