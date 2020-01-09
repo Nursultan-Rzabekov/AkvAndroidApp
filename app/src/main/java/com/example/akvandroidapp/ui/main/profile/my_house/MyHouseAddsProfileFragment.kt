@@ -73,30 +73,48 @@ class MyHouseAddsProfileFragment :
     }
 
     private fun subscribeObservers(){
-        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
-            if(dataState != null) {
-                handlePagination(dataState)
-                stateChangeListener.onDataStateChange(dataState)
+        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
+            Log.d(TAG, "favorite: ${dataState}")
+
+
+            recyclerAdapter.apply {
+                Log.d(TAG, "favorite: ${dataState}")
+
+                preloadGlideImages(
+                    requestManager = requestManager,
+                    list = dataState
+                )
+                submitList(
+                    blogList = dataState,
+                    isQueryExhausted = true
+                )
             }
         })
 
-        viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
-            if(viewState != null){
-                recyclerAdapter.apply {
-                    //Log.d(TAG, "Search results responses: ${viewState.blogFields.blogList}")
-                    fragement_explore_layout_id.visibility = View.GONE
-                    fragment_explore_active_layout_id.visibility = View.VISIBLE
-                    preloadGlideImages(
-                        requestManager = requestManager,
-                        list = viewState.myHouseFields.blogList
-                    )
-                    submitList(
-                        blogList = viewState.myHouseFields.blogList,
-                        isQueryExhausted = viewState.myHouseFields.isQueryExhausted
-                    )
-                }
-            }
-        })
+//        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
+//            if(dataState != null) {
+//                handlePagination(dataState)
+//                stateChangeListener.onDataStateChange(dataState)
+//            }
+//        })
+//
+//        viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
+//            if(viewState != null){
+//                recyclerAdapter.apply {
+//                    //Log.d(TAG, "Search results responses: ${viewState.blogFields.blogList}")
+//                    fragement_explore_layout_id.visibility = View.GONE
+//                    fragment_explore_active_layout_id.visibility = View.VISIBLE
+//                    preloadGlideImages(
+//                        requestManager = requestManager,
+//                        list = viewState.myHouseFields.blogList
+//                    )
+//                    submitList(
+//                        blogList = viewState.myHouseFields.blogList,
+//                        isQueryExhausted = viewState.myHouseFields.isQueryExhausted
+//                    )
+//                }
+//            }
+//        })
     }
 
     private fun handlePagination(dataState: DataState<ProfileViewState>){
