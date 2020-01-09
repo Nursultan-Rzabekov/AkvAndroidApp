@@ -27,10 +27,9 @@ class SearchListAdapter(
     private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
         NO_MORE_RESULTS,
         "" ,
-        "",
         0,
         0,
-        "",
+        false,
         0.0,
         0.0,
         "",

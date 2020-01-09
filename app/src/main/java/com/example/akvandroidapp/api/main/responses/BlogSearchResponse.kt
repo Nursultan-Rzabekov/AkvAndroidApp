@@ -1,7 +1,5 @@
 package com.example.akvandroidapp.api.main.responses
 
-import com.example.akvandroidapp.api.auth.network_responses.UserResponse
-import com.example.akvandroidapp.entity.AccountProperties
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -15,21 +13,9 @@ class BlogSearchResponse(
     @Expose
     var name: String,
 
-    @SerializedName("description")
+    @SerializedName("city")
     @Expose
-    var description: String,
-
-    @SerializedName("rooms")
-    @Expose
-    var rooms: Int,
-
-    @SerializedName("floor")
-    @Expose
-    var floor: Int,
-
-    @SerializedName("address")
-    @Expose
-    var address: String,
+    var city: String,
 
     @SerializedName("longitude")
     @Expose
@@ -43,10 +29,6 @@ class BlogSearchResponse(
     @Expose
     var house_type: String,
 
-    @SerializedName("city")
-    @Expose
-    var city: String,
-
     @SerializedName("price")
     @Expose
     var price: Int,
@@ -55,44 +37,53 @@ class BlogSearchResponse(
     @Expose
     var status: Int,
 
+    @SerializedName("beds")
+    @Expose
+    var beds: Int,
+
+    @SerializedName("rooms")
+    @Expose
+    var rooms: Int,
+
+    @SerializedName("rating")
+    @Expose
+    var rating: Double,
+
+    @SerializedName("is_favourite")
+    @Expose
+    var is_favourite: Boolean,
+
     @SerializedName("photos")
     @Expose
-    var photos: List<BlogImageResponse>?,
+    var photos: List<BlogImageResponse>?
 
-    @SerializedName("houseaccoms")
-    @Expose
-    var houseaccoms: List<Int>,
+//    @SerializedName("houseaccoms")
+//    @Expose
+//    var houseaccoms: List<Int>,
 
 //    @SerializedName("houserules")
 //    @Expose
 //    var houserules: List<Int>,
 
-    @SerializedName("user")
-    @Expose
-    var user: UserResponse,
-
-    @SerializedName("rating")
-    @Expose
-    var rating: Double
+//    @SerializedName("user")
+//    @Expose
+//    var user: UserResponse
 
 
 ) {
     override fun toString(): String {
         return "BlogSearchResponse(id=$id, " +
                 "name='$name', " +
-                "description='$description', " +
+                "beds='$beds', " +
                 "rooms='$rooms'," +
-                "floor='$floor'," +
-                "address='$address', " +
+                "is_favourite='$is_favourite'," +
                 "longitude='$longitude', " +
                 "latitude='$latitude', " +
                 "house_type='$house_type', " +
                 "price='$price', " +
                 "status='$status', " +
-//                "photos='$photos', " +
-                "houseaccoms='$houseaccoms', " +
+                "photos='$photos', " +
                 "city='$city', " +
-                "user='$user', " +
                 "rating='$rating')"
     }
 }

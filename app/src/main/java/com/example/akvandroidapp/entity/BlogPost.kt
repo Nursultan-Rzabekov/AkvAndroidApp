@@ -1,12 +1,15 @@
 package com.example.akvandroidapp.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 
+@Parcelize
 @Entity(tableName = "blog_post")
 data class BlogPost(
 
@@ -17,17 +20,14 @@ data class BlogPost(
     @ColumnInfo(name = "name")
     var name: String? = null,
 
-    @ColumnInfo(name = "description")
-    var description: String? = null,
+    @ColumnInfo(name = "beds")
+    var beds: Int = 0,
 
     @ColumnInfo(name = "rooms")
     var rooms: Int,
 
-    @ColumnInfo(name = "floor")
-    var floor: Int,
-
-    @ColumnInfo(name = "address")
-    var address: String? = null,
+    @ColumnInfo(name = "is_favourite")
+    var is_favourite: Boolean = false,
 
     @ColumnInfo(name = "longitude")
     var longitude: Double,
@@ -53,15 +53,14 @@ data class BlogPost(
     @ColumnInfo(name = "rating")
     var rating: Double
 
-    ) {
+    ): Parcelable {
 
     override fun toString(): String {
         return "BlogPost(id=$id, " +
                 "name='$name', " +
-                "description='$description', " +
+                "beds='$beds', " +
                 "rooms='$rooms', " +
-                "floor='$floor', " +
-                "address='$address', " +
+                "is_favourite='$is_favourite', " +
                 "longitude='$longitude', " +
                 "latitude='$latitude', " +
                 "house_type='$house_type', " +
@@ -71,5 +70,4 @@ data class BlogPost(
                 "image='$image', " +
                 "rating='$rating')"
     }
-
 }

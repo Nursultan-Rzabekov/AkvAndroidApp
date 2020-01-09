@@ -122,9 +122,7 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

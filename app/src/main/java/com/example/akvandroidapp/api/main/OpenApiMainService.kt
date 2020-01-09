@@ -103,6 +103,13 @@ interface OpenApiMainService {
         @Part("name") first_name: RequestBody,
         @Part userpic: MultipartBody.Part?
     ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
+
+
+    @GET("houses/my/")
+    fun getListMyHouse(
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<BlogListSearchResponse>>
 }
 
 

@@ -1,4 +1,6 @@
 import android.util.Log
+import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.SearchViewModel
@@ -47,6 +49,18 @@ fun SearchViewModel.handleIncomingBlogListData(viewState: SearchViewState){
     setQueryInProgress(viewState.blogFields.isQueryInProgress)
     setQueryExhausted(viewState.blogFields.isQueryExhausted)
     setBlogListData(viewState.blogFields.blogList)
+}
+
+
+fun ProfileViewModel.handleIncomingBlogListData(viewState: ProfileViewState){
+    Log.d(TAG, "BlogViewModel, DataState: ${viewState}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.myHouseFields.isQueryInProgress}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.myHouseFields.isQueryExhausted}")
+    setQueryInProgress(viewState.myHouseFields.isQueryInProgress)
+    setQueryExhausted(viewState.myHouseFields.isQueryExhausted)
+    setBlogListData(viewState.myHouseFields.blogList)
 }
 
 

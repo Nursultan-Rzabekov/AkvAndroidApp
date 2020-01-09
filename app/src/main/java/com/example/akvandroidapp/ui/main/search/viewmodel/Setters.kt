@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 
 fun SearchViewModel.setQuery(query: String){
     val update = getCurrentViewStateOrNew()
@@ -12,6 +13,12 @@ fun SearchViewModel.setQuery(query: String){
 fun SearchViewModel.setBlogListData(blogList: List<BlogPost>){
     val update = getCurrentViewStateOrNew()
     update.blogFields.blogList = blogList
+    setViewState(update)
+}
+
+fun ProfileViewModel.setBlogListData(blogList: List<BlogPost>){
+    val update = getCurrentViewStateOrNew()
+    update.myHouseFields.blogList = blogList
     setViewState(update)
 }
 
@@ -33,9 +40,21 @@ fun SearchViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun ProfileViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.myHouseFields.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun ProfileViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.myHouseFields.isQueryInProgress = isInProgress
     setViewState(update)
 }
 
@@ -134,7 +153,7 @@ fun SearchViewModel.onBlogPostUpdateSuccess(blogPost: BlogPost){
     setUpdatedBlogFields(
         uri = null,
         title = blogPost.name,
-        body = blogPost.description
+        body = blogPost.house_type
     ) // update UpdateBlogFragment (not really necessary since navigating back)
     setBlogPost(blogPost) // update ViewBlogFragment
     updateListItem(blogPost) // update BlogFragment

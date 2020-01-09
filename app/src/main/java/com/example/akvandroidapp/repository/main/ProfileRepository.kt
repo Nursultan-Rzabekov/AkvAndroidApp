@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.BlogCreateUpdateResponse
 import com.example.akvandroidapp.api.main.responses.BlogGetProfileInfoResponse
+import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.BlogPostDao
@@ -18,11 +19,10 @@ import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
-import com.example.akvandroidapp.util.AbsentLiveData
-import com.example.akvandroidapp.util.ApiSuccessResponse
-import com.example.akvandroidapp.util.DateUtils
-import com.example.akvandroidapp.util.GenericApiResponse
+import com.example.akvandroidapp.ui.main.search.state.SearchViewState
+import com.example.akvandroidapp.util.*
 import com.example.akvandroidapp.util.SuccessHandling.Companion.RESPONSE_MUST_BECOME_CODINGWITHMITCH_MEMBER
+import com.yandex.mapkit.geometry.Point
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
@@ -273,6 +273,95 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("createNewBlogPost", job)
+            }
+
+        }.asLiveData()
+    }
+
+
+    fun myHouseList(
+        authToken: AuthToken,
+        page: Int
+    ): LiveData<DataState<ProfileViewState>> {
+
+        return object: NetworkBoundResource<BlogListSearchResponse, List<BlogPost>, ProfileViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            // if network is down, view cache only and return
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<BlogListSearchResponse>
+            ) {
+                Log.d("qwe","result count ${response.body.count}")
+                Log.d("qwe","result response ${response.body.results}")
+
+
+                val location = arrayListOf<Point>()
+                val blogPostList: ArrayList<BlogPost> = ArrayList()
+                for(blogPostResponse in response.body.results){
+                    location.add(Point(blogPostResponse.latitude,blogPostResponse.longitude))
+                    val imagePost = blogPostResponse.photos?.get(0) ?: "//////////////////////////////////////////////////////////////////////"
+                    blogPostList.add(
+                        BlogPost(
+                            id = blogPostResponse.id,
+                            name = blogPostResponse.name,
+                            beds = blogPostResponse.beds,
+                            rooms = blogPostResponse.rooms,
+                            is_favourite = blogPostResponse.is_favourite,
+                            longitude = blogPostResponse.longitude,
+                            latitude = blogPostResponse.latitude,
+                            house_type = blogPostResponse.house_type,
+                            city = blogPostResponse.city,
+                            price = blogPostResponse.price,
+                            status = blogPostResponse.status,
+                            image = "https://akv-technopark.herokuapp.com" + imagePost.toString().substring(24,imagePost.toString().length - 1),
+                            rating = blogPostResponse.rating
+                        )
+                    )
+                }
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ProfileViewState(
+                                ProfileViewState.MyHouseFields(
+                                    blogPostList,
+                                    isQueryInProgress = false,
+                                    isQueryExhausted = booleanQuery(blogPostList)))
+                        )
+                    )
+                }
+            }
+
+            private fun booleanQuery(blogPostList: ArrayList<BlogPost>):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE > blogPostList.size){
+                    return true
+                }
+                return false
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<BlogListSearchResponse>> {
+                return openApiMainService.getListMyHouse(
+                    authToken.token!!,
+                    page
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ProfileViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+                // ignore
+            }
+
+            override fun setJob(job: Job) {
+                addJob("searchBlogPosts", job)
             }
 
         }.asLiveData()

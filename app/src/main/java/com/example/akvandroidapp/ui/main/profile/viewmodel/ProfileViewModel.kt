@@ -11,6 +11,8 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
+import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.Constants
 import okhttp3.MediaType
@@ -35,7 +37,6 @@ constructor(
 
         when(stateEvent){
             is ProfileStateEvent.CreateNewBlogEvent -> {
-
                 Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
                 return sessionManager.cachedToken.value?.let { authToken ->
 
@@ -113,6 +114,17 @@ constructor(
                 }?: AbsentLiveData.create()
             }
 
+            is ProfileStateEvent.MyHouseEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    Log.d("Go", "Go go go go  + ${getPage()}")
+
+                    profileRepository.myHouseList(
+                        authToken = authToken,
+                        page = getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
             is ProfileStateEvent.None -> {
                 return liveData {
                     emit(
@@ -152,7 +164,6 @@ constructor(
         super.onCleared()
         cancelActiveJobs()
     }
-
 }
 
 

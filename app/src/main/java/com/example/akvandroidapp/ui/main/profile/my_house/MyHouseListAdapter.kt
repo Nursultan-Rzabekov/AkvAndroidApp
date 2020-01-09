@@ -28,10 +28,9 @@ class MyHouseListAdapter(
     private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
         NO_MORE_RESULTS,
         "" ,
-        "",
         0,
         0,
-        "",
+        false,
         0.0,
         0.0,
         "",
@@ -42,7 +41,7 @@ class MyHouseListAdapter(
         0.0
     )
 
-    private var items: MutableList<AddAdInfo> = ArrayList()
+    private var items: MutableList<BlogPost> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType){
@@ -90,20 +89,21 @@ class MyHouseListAdapter(
                 holder.bind(items[position])
             }
         }
-
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
 
+
     fun preloadGlideImages(
         requestManager: RequestManager,
-        list: List<AddAdInfo>
+        list: List<BlogPost>
     ){
         for(blogPost in list){
             requestManager
-                .load(R.drawable.test_image_back)
+                .load(blogPost.image)
+                .error(R.drawable.test_image_back)
                 .preload()
         }
     }
@@ -113,7 +113,7 @@ class MyHouseListAdapter(
         notifyItemRemoved(position)
     }
 
-    fun submitList(blogList: List<AddAdInfo>?, isQueryExhausted: Boolean){
+    fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
         newList?.let {
             items = newList
@@ -128,26 +128,27 @@ class MyHouseListAdapter(
         private val interactionCheck: InteractionCheck?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: AddAdInfo) = with(itemView) {
+        fun bind(item: BlogPost) = with(itemView) {
             itemView.my_adds_recycler_view_item_detail_btn.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
             requestManager
-                .load(R.drawable.test_image_back)
+                .load(item.image)
+                .error(R.drawable.test_image_back)
                 .transition(withCrossFade())
                 .into(itemView.my_adds_recycler_view_item_iv)
-            itemView.my_adds_recycler_view_item_title.text = item._addAdTitle
-            itemView.my_adds_recycler_view_item_price.text = item._addAdPrice.toString()
+            itemView.my_adds_recycler_view_item_title.text = item.name
+            itemView.my_adds_recycler_view_item_price.text = item.price.toString()
         }
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: AddAdInfo)
+        fun onItemSelected(position: Int, item: BlogPost)
     }
 
     interface InteractionCheck {
-        fun onItemSelected(position: Int, item: AddAdInfo,boolean: Boolean)
+        fun onItemSelected(position: Int, item: BlogPost,boolean: Boolean)
     }
 
     override fun onClick(p0: View?) {

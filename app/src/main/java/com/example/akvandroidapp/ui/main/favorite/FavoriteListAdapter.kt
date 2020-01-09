@@ -23,22 +23,6 @@ class FavoriteListAdapter(
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
-    private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
-        NO_MORE_RESULTS,
-        "" ,
-        "",
-        0,
-        0,
-        "",
-        0.0,
-        0.0,
-        "",
-        "",
-        0,
-        0,
-        "",
-        0.0
-    )
 
     private var items: MutableList<BlogPost> = ArrayList()
 

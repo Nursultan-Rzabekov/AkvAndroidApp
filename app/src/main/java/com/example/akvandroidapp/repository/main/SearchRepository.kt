@@ -76,10 +76,9 @@ constructor(
                         BlogPost(
                             id = blogPostResponse.id,
                             name = blogPostResponse.name,
-                            description = blogPostResponse.description,
+                            beds = blogPostResponse.beds,
                             rooms = blogPostResponse.rooms,
-                            floor = blogPostResponse.floor,
-                            address = blogPostResponse.address,
+                            is_favourite = blogPostResponse.is_favourite,
                             longitude = blogPostResponse.longitude,
                             latitude = blogPostResponse.latitude,
                             house_type = blogPostResponse.house_type,

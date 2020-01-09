@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 
 
 fun SearchViewModel.getFilterPriceLeft(): Int {
@@ -83,14 +84,6 @@ fun SearchViewModel.getPage(): Int{
     }
 }
 
-fun SearchViewModel.getSlug(): String{
-    getCurrentViewStateOrNew().let {
-        it.viewBlogFields.blogPost?.let {
-            return it.description!!
-        }
-    }
-    return ""
-}
 
 fun SearchViewModel.isAuthorOfBlogPost(): Boolean{
     getCurrentViewStateOrNew().let {
@@ -108,7 +101,7 @@ fun SearchViewModel.getBlogPost(): BlogPost {
 }
 
 fun SearchViewModel.getDummyBlogPost(): BlogPost {
-    return BlogPost(-1, "" , "", 0, 0,"", 0.0, 0.0,"","",0,0,"",0.0)
+    return BlogPost(-1, "" , 0,0, false, 0.0, 0.0, "","",0,0,"",0.0)
 }
 
 fun SearchViewModel.getUpdatedBlogUri(): Uri? {
@@ -118,6 +111,13 @@ fun SearchViewModel.getUpdatedBlogUri(): Uri? {
         }
     }
     return null
+}
+
+
+fun ProfileViewModel.getPage(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.myHouseFields.page
+    }
 }
 
 
