@@ -69,7 +69,7 @@
                 android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"/>
 
-            <com.google.android.material.checkbox.MaterialCheckBox
+            <!--<com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/fragment_add_ad_check_chkbox1"
                 style="@style/BasicCheckBox"
                 android:layout_width="match_parent"
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="@string/medical"
-                android:textSize="20sp" />
+                android:textSize="20sp" /> -->
 
 
             <com.google.android.material.button.MaterialButton

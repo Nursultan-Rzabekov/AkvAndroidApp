@@ -49,9 +49,9 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         super.onViewCreated(view, savedInstanceState)
 
         setSpanable()
+        initRecyclerView()
         setAllStaticChechboxes()
         initialState()
-        initRecyclerView()
 
         fragment_add_ad_check_next_btn.setOnClickListener {
             navNextFragment()
@@ -91,22 +91,8 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         span4.setSpan(UnderlineSpan(), 0, fragment_add_ad_check_drop_all.text.toString().length, 0)
     }
 
-    private fun assignCheckbox(checkBox: MaterialCheckBox){
-        checkBox.setOnCheckedChangeListener { btn, b ->
-            sessionManager.setAddAdFacilityListItem(checkBox.text.toString().trim(), b)
-        }
-    }
-
     private fun setAllStaticChechboxes(){
-        assignCheckbox(fragment_add_ad_check_chkbox1)
-        assignCheckbox(fragment_add_ad_check_chkbox2)
-        assignCheckbox(fragment_add_ad_check_chkbox3)
-        assignCheckbox(fragment_add_ad_check_chkbox4)
-        assignCheckbox(fragment_add_ad_check_chkbox5)
-        assignCheckbox(fragment_add_ad_check_chkbox6)
-        assignCheckbox(fragment_add_ad_check_chkbox7)
-        assignCheckbox(fragment_add_ad_check_chkbox8)
-        assignCheckbox(fragment_add_ad_check_chkbox9)
+        checkboxAdapter.addAllItems(staticFacilityList, isStatic = true)
     }
 
     private fun initialState(){
@@ -124,8 +110,7 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
     }
 
     private fun addNewFacility(facility: String) {
-        if (!staticFacilityList.contains(facility.capitalize()) &&
-            !checkboxAdapter.getList().contains(facility.capitalize()) &&
+        if (!checkboxAdapter.getList().contains(facility.capitalize()) &&
             facility != "")
             checkboxAdapter.addItem(facility)
         fragment_add_ad_check_add_chkbox_et.setText("")
@@ -133,19 +118,7 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
 
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox1)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox2)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox3)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox4)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox5)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox6)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox7)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox8)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox9)
-    }
-
-    private fun uncheckStaticFacilities(checkBox: MaterialCheckBox) {
-        checkBox.isChecked = false
+        sessionManager.clearAddAdFacilityList()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {

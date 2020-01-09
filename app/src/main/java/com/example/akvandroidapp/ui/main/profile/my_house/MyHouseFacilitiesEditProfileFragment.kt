@@ -66,7 +66,7 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         initialState()
         setSpanable()
         setObservers()
-        setAllStaticChechboxes()
+        //setAllStaticChechboxes()
         checkboxAdapter.notifyDataSetChanged()
 
         Log.d(TAG, "SearchFragment: ${viewModel}")
@@ -103,7 +103,7 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
                 for (item in it.facilitiesList?.toMutableList()!!) {
                     Log.e("my_house Faciliti List", item)
                     if (item in staticFacilityList)
-                        checkStaticCheckbox(item)
+                        //checkStaticCheckbox(item)
                     else
                         initialItems.add(CheckboxItem(item, true))
                 }
@@ -143,49 +143,14 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         checkboxAdapter.submitList(mutableListOf())
     }
 
-    private fun checkStaticCheckbox(item: String){
-        when(item) {
-            "Кондиционер" -> fragment_add_ad_check_chkbox1.isChecked = true
-            "Фен" -> fragment_add_ad_check_chkbox2.isChecked = true
-            "Отопление" -> fragment_add_ad_check_chkbox3.isChecked = true
-            "Утюг" -> fragment_add_ad_check_chkbox4.isChecked = true
-            "Wifi" -> fragment_add_ad_check_chkbox5.isChecked = true
-            "Полотенца" -> fragment_add_ad_check_chkbox6.isChecked = true
-            "Телевизор" -> fragment_add_ad_check_chkbox7.isChecked = true
-            "Телефон" -> fragment_add_ad_check_chkbox8.isChecked = true
-            "Аптечка" -> fragment_add_ad_check_chkbox9.isChecked = true
-        }
-    }
-
     private fun assignCheckbox(checkBox: MaterialCheckBox){
         checkBox.setOnCheckedChangeListener { btn, b ->
             addOrRemoveItemToLocalFacilities(btn.text.toString().trim(), b)
         }
     }
 
-    private fun setAllStaticChechboxes(){
-        assignCheckbox(fragment_add_ad_check_chkbox1)
-        assignCheckbox(fragment_add_ad_check_chkbox2)
-        assignCheckbox(fragment_add_ad_check_chkbox3)
-        assignCheckbox(fragment_add_ad_check_chkbox4)
-        assignCheckbox(fragment_add_ad_check_chkbox5)
-        assignCheckbox(fragment_add_ad_check_chkbox6)
-        assignCheckbox(fragment_add_ad_check_chkbox7)
-        assignCheckbox(fragment_add_ad_check_chkbox8)
-        assignCheckbox(fragment_add_ad_check_chkbox9)
-    }
-
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox1)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox2)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox3)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox4)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox5)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox6)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox7)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox8)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox9)
     }
 
     private fun uncheckStaticFacilities(checkBox: MaterialCheckBox) {
