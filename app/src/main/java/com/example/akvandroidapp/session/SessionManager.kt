@@ -49,6 +49,9 @@ constructor(
     //Profile
     private val _profileInfo = MutableLiveData<ProfileInfo>()
 
+    //House Update Data
+    private val _houseUpdateData = MutableLiveData<HouseUpdateData>()
+
     init {
         _favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("нет", false, true)
@@ -59,6 +62,7 @@ constructor(
         _locationList.value = mutableListOf()
         _profileInfo.value = ProfileInfo()
         hostMode.value = false
+        _houseUpdateData.value = HouseUpdateData()
     }
 
     val locationItem: LiveData<MutableList<Point>>
@@ -87,6 +91,9 @@ constructor(
 
     val profileInfo: LiveData<ProfileInfo>
         get() = _profileInfo
+
+    val houseUpdateData: LiveData<HouseUpdateData>
+        get() = _houseUpdateData
 
     // Room
     val isHostMode: LiveData<Boolean>
@@ -124,6 +131,15 @@ constructor(
             _locationList.value = point
             Log.d(TAG, "location ${_locationList.value}")
         }
+    }
+
+    // House Update Data
+
+    fun setHouseUpdateData(houseUpdateData: HouseUpdateData) {
+        GlobalScope.launch(Main) {
+            _houseUpdateData.value = houseUpdateData
+        }
+        Log.e("HOUSE_UPDATE_DATA", "${_houseUpdateData.value}")
     }
 
     // Main Account

@@ -7,16 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_my_adds_change.*
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.header_my_adds_change.*
+import javax.inject.Inject
 
 
-class MyHouseDetailEditProfileFragment : BaseProfileFragment() {
+class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAdapter.PhotoCloseInteraction {
+
+    private lateinit var photosAdapter: GalleryPhotosAdapter
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +40,12 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
+
+        initRecyclerView()
+
         Log.d(TAG, "MyHouseDetailEditProfileFragment: ${viewModel}")
+
+        setObservers()
 
         header_my_adds_change_cancel.setOnClickListener {
             findNavController().navigateUp()
@@ -38,5 +53,31 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment() {
 
     }
 
+    private fun initRecyclerView(){
+        fragment_my_adds_change_photos_recycler_view.apply {
+            layoutManager = LinearLayoutManager(
+                this@MyHouseDetailEditProfileFragment.context,
+                LinearLayoutManager.HORIZONTAL,
+                false)
+            photosAdapter = GalleryPhotosAdapter(requestManager, this@MyHouseDetailEditProfileFragment)
+            adapter = photosAdapter
+        }
+    }
+
+    private fun setObservers() {
+        sessionManager.houseUpdateData.observe(viewLifecycleOwner, Observer {
+            fragment_my_adds_change_title_et.setText(it.title.toString())
+            fragment_my_adds_change_desc_et.setText(it.description.toString())
+            fragment_my_adds_change_price_et.setText(it.price.toString())
+            fragment_my_adds_change_address_et.setText(it.address.toString())
+            fragment_my_adds_change_photos_tv.text = ("${it.photosList.size.toString()}/15")
+            photosAdapter.submitList(it.photosList)
+        })
+    }
+
+    override fun onItemClosed(position: Int, item: String?) {
+        photosAdapter.removeItem(position)
+        fragment_my_adds_change_photos_tv.text = ("${photosAdapter.itemCount}/15")
+    }
 
 }
