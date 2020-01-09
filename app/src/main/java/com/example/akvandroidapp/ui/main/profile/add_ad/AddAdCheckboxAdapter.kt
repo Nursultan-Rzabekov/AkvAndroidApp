@@ -12,8 +12,7 @@ class AddAdCheckboxAdapter(
     private val closeInteraction: CheckboxCloseInteraction? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: MutableList<String> = ArrayList()
-    private var isUncheckedAll: Boolean = false
+    private var items: MutableList<CheckboxItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CheckBoxViewHolder(
@@ -28,21 +27,18 @@ class AddAdCheckboxAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
        when(holder) {
            is CheckBoxViewHolder -> {
-               holder.bind(items[position])
-               if (isUncheckedAll) {
-                   holder.uncheck()
-               }
+               holder.bind(items[holder.adapterPosition])
            }
        }
     }
 
-    fun submitList(items: MutableList<String>){
+    fun submitList(items: MutableList<CheckboxItem>){
         this.items = items
         notifyDataSetChanged()
     }
 
-    fun addItem(text: String) {
-        items.add(text)
+    fun addItem(text: String, isChecked: Boolean = false){
+        items.add(CheckboxItem(text, isChecked))
         notifyItemChanged(items.size - 1)
     }
 
@@ -52,13 +48,15 @@ class AddAdCheckboxAdapter(
     }
 
     fun uncheckAll(){
-        isUncheckedAll = true
+        items.forEach { it.isCheked = false }
         notifyDataSetChanged()
-        isUncheckedAll = false
     }
 
     fun getList(): MutableList<String>{
-        return items
+        val titles = mutableListOf<String>()
+        for(item in items)
+            titles.add(item.title)
+        return titles
     }
 
     class CheckBoxViewHolder constructor(
@@ -69,22 +67,19 @@ class AddAdCheckboxAdapter(
         private val checkbox = itemView.add_ad_checkbox_recycler_view_item_chkbox
         private val closeIv = itemView.add_ad_checkbox_recycler_view_item_close_iv
 
-        fun bind(text: String) {
-            checkbox.text = text
+        fun bind(checkboxItem: CheckboxItem) {
+            checkbox.text = checkboxItem.title
 
             checkbox.setOnCheckedChangeListener { compoundButton, b ->
-                checkInteraction?.onItemChecked(adapterPosition, text.trim(), b)
+                checkInteraction?.onItemChecked(adapterPosition, checkboxItem.title.trim(), b)
+                checkboxItem.isCheked = b
             }
 
             closeIv.setOnClickListener {
-                closeInteraction?.onItemClosed(adapterPosition, text.trim())
+                closeInteraction?.onItemClosed(adapterPosition, checkboxItem.title.trim())
             }
 
-            checkbox.isChecked = false
-        }
-
-        fun uncheck() {
-            checkbox.isChecked = false
+            checkbox.isChecked = checkboxItem.isCheked
         }
     }
 
