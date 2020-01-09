@@ -8,10 +8,7 @@ import com.example.akvandroidapp.ui.main.profile.ProfileFragment
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.*
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseAddsProfileFragment
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseDetailEditProfileFragment
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseDetailProfileFragment
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMoneyProfileFragment
+import com.example.akvandroidapp.ui.main.profile.my_house.*
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment
@@ -114,9 +111,6 @@ abstract class MainFragmentBuildersModule {
     abstract fun contributeAboutProfileFragment(): AboutProfileFragment
 
     @ContributesAndroidInjector()
-    abstract fun contributeSupportProfileReviewFragment(): SupportProfileReviewFragment
-
-    @ContributesAndroidInjector()
     abstract fun contributeSettingsProfileFragment(): SettingsProfileFragment
 
     @ContributesAndroidInjector()
@@ -142,6 +136,18 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeAccountUserProfileFragment(): AccountUserProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeMyHouseAvailableDatesEditProfileFragment(): MyHouseAvailableDatesEditProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeMyHouseFacilitiesEditProfileFragment(): MyHouseFacilitiesEditProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeMyHouseNearEditProfileFragment(): MyHouseNearEditProfileFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributeMyHouseRulesEditProfileFragment(): MyHouseRulesEditProfileFragment
 
 
 

@@ -51,6 +51,25 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAda
             findNavController().navigateUp()
         }
 
+        fragment_my_adds_change_rules.setOnClickListener {
+            findNavController().navigate(R.id.action_myHouseDetailEditProfileFragment_to_myHouseRulesEditProfileFragment)
+        }
+
+
+        fragment_my_adds_change_facilities.setOnClickListener {
+            findNavController().navigate(R.id.action_myHouseDetailEditProfileFragment_to_myHouseFacilitiesEditProfileFragment)
+        }
+
+
+        fragment_my_adds_change_near.setOnClickListener {
+            findNavController().navigate(R.id.action_myHouseDetailEditProfileFragment_to_myHouseNearEditProfileFragment)
+        }
+
+
+        fragment_my_adds_change_available_dates.setOnClickListener {
+            findNavController().navigate(R.id.action_myHouseDetailEditProfileFragment_to_myHouseAvailableDatesEditProfileFragment)
+        }
+
     }
 
     private fun initRecyclerView(){
@@ -79,5 +98,8 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAda
         photosAdapter.removeItem(position)
         fragment_my_adds_change_photos_tv.text = ("${photosAdapter.itemCount}/15")
     }
+
+
+
 
 }

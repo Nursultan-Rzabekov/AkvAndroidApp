@@ -146,6 +146,69 @@
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_my_adds_change_layout">
 
+        <action android:id="@+id/action_myHouseDetailEditProfileFragment_to_myHouseAvailableDatesEditProfileFragment"
+            app:destination="@id/myHouseAvailableDatesEditProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+        <action android:id="@+id/action_myHouseDetailEditProfileFragment_to_myHouseNearEditProfileFragment"
+            app:destination="@id/myHouseNearEditProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+
+        <action android:id="@+id/action_myHouseDetailEditProfileFragment_to_myHouseRulesEditProfileFragment"
+            app:destination="@id/myHouseRulesEditProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+        <action android:id="@+id/action_myHouseDetailEditProfileFragment_to_myHouseFacilitiesEditProfileFragment"
+            app:destination="@id/myHouseFacilitiesEditProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+    <fragment android:id="@+id/myHouseAvailableDatesEditProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.my_house.MyHouseAvailableDatesEditProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_available_dates">
+
+    </fragment>
+
+
+    <fragment android:id="@+id/myHouseNearEditProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.my_house.MyHouseNearEditProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_near">
+
+    </fragment>
+
+
+    <fragment android:id="@+id/myHouseRulesEditProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.my_house.MyHouseRulesEditProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_rules">
+
+    </fragment>
+
+    <fragment android:id="@+id/myHouseFacilitiesEditProfileFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.my_house.MyHouseFacilitiesEditProfileFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_check">
+
     </fragment>
 
     <activity

@@ -24,27 +24,10 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <include
-            layout="@layout/fragment_support_main"
+            layout="@layout/fragment_support_notify_error"
             android:id="@+id/support_main_layout_base"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/support_main_layout_standardBottomSheet"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="?attr/bottomSheetStyle"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-        <!-- Bottom Sheet contents -->
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/navigateToSecond"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
