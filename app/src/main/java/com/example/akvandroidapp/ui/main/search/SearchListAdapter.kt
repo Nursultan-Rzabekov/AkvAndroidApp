@@ -23,6 +23,7 @@ class SearchListAdapter(
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
+
     private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
         NO_MORE_RESULTS,
         "" ,
@@ -61,7 +62,6 @@ class SearchListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         when(viewType){
-
             NO_MORE_RESULTS ->{
                 Log.e(TAG, "onCreateViewHolder: No more results...")
                 return GenericViewHolder(
@@ -163,14 +163,13 @@ class SearchListAdapter(
         }
     }
 
+
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
         differ.submitList(newList)
     }
-
-
 
     class BlogViewHolder
     constructor(
