@@ -7,6 +7,7 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import javax.inject.Inject
@@ -36,6 +38,7 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         initiateContent()
+        initDropDown()
 
         fragment_add_ad_address_next_btn.setOnClickListener {
             if (checkInputs())
@@ -53,7 +56,8 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
             fragment_add_ad_address_region_et.text.toString().trim(),
             fragment_add_ad_address_city_et.text.toString().trim(),
             fragment_add_ad_address_address_et.text.toString().trim(),
-            fragment_add_ad_address_post_index_et.text.toString().trim())
+            "")
+            //fragment_add_ad_address_post_index_et.text.toString().trim())
         findNavController().navigate(R.id.action_pprofileAddAddressFragment_to_profileAddGalleryFragment)
     }
 
@@ -84,8 +88,12 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
     private fun checkInputs(): Boolean{
         if (fragment_add_ad_address_country_et.text.toString().trim() != "" &&
             fragment_add_ad_address_city_et.text.toString().trim() != "" &&
-            fragment_add_ad_address_address_et.text.toString().trim() != "")
+            fragment_add_ad_address_address_et.text.toString().trim() != ""){
+            fragment_add_ad_address_country_l_et.isErrorEnabled = false
+            fragment_add_ad_address_city_l_et.isErrorEnabled = false
+            fragment_add_ad_address_address_l_et.isErrorEnabled = false
             return true
+        }
         if (fragment_add_ad_address_country_et.text.toString().trim() == "") {
             fragment_add_ad_address_country_l_et.isErrorEnabled = true
             fragment_add_ad_address_country_l_et.error = getString(R.string.invalid)
@@ -100,6 +108,28 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
         }
 
         return false
+    }
+
+    private fun initDropDown() {
+        val countriesAdapter: ArrayAdapter<String> = ArrayAdapter(
+            requireContext(),
+            R.layout.support_simple_spinner_dropdown_item,
+            Constants.countryList)
+        fragment_add_ad_address_country_et.setAdapter(countriesAdapter)
+
+        val regionAdapter : ArrayAdapter<String> = ArrayAdapter(
+            requireContext(),
+            R.layout.support_simple_spinner_dropdown_item,
+            Constants.regionList
+        )
+        fragment_add_ad_address_region_et.setAdapter(regionAdapter)
+
+        val cityAdapter : ArrayAdapter<String> = ArrayAdapter(
+            requireContext(),
+            R.layout.support_simple_spinner_dropdown_item,
+            Constants.cityList
+        )
+        fragment_add_ad_address_city_et.setAdapter(regionAdapter)
     }
 }
 

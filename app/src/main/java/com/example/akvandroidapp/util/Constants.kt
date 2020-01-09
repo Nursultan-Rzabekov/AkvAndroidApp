@@ -75,5 +75,11 @@ class Constants {
         )
 
         val mapGeolocationReversed = mapGeolocation.entries.associateBy({ it.value }) { it.key }
+
+        val countryList = listOf("Казахстан", "Китай", "Калифорния", "Япония")
+
+        val regionList = listOf("Казахстан", "Китай", "Калифорния", "Япония")
+
+        val cityList = listOf("Казахстан", "Китай", "Калифорния", "Япония")
     }
 }
