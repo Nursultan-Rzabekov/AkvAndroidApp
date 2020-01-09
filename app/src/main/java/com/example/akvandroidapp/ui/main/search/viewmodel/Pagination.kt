@@ -1,4 +1,5 @@
 import android.util.Log
+import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
@@ -15,6 +16,12 @@ fun SearchViewModel.resetPage(){
     setViewState(update)
 }
 
+fun ProfileViewModel.resetPage(){
+    val update = getCurrentViewStateOrNew()
+    update.myHouseFields.page = 1
+    setViewState(update)
+}
+
 fun SearchViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
@@ -23,10 +30,24 @@ fun SearchViewModel.loadFirstPage() {
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.blogFields.searchQuery}")
 }
 
+fun ProfileViewModel.loadFirstPage() {
+    setQueryInProgress(true)
+    setQueryExhausted(false)
+    resetPage()
+    setStateEvent(ProfileStateEvent.MyHouseEvent())
+}
+
 private fun SearchViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.blogFields.page // get current page
     update.blogFields.page = page + 1
+    setViewState(update)
+}
+
+private fun ProfileViewModel.incrementPageNumber(){
+    val update = getCurrentViewStateOrNew()
+    val page = update.myHouseFields.page // get current page
+    update.myHouseFields.page = page + 1
     setViewState(update)
 }
 
@@ -37,6 +58,16 @@ fun SearchViewModel.nextPage(){
         incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(SearchStateEvent.BlogSearchEvent())
+    }
+}
+
+fun ProfileViewModel.nextPage(){
+    if(!viewState.value!!.myHouseFields.isQueryInProgress
+        && !viewState.value!!.myHouseFields.isQueryExhausted){
+        Log.d(TAG, "BlogViewModel: Attempting to load next page...")
+        incrementPageNumber()
+        setQueryInProgress(true)
+        setStateEvent(ProfileStateEvent.MyHouseEvent())
     }
 }
 

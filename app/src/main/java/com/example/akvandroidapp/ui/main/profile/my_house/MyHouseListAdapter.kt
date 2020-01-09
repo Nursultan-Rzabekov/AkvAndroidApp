@@ -96,18 +96,6 @@ class MyHouseListAdapter(
     }
 
 
-    fun preloadGlideImages(
-        requestManager: RequestManager,
-        list: List<BlogPost>
-    ){
-        for(blogPost in list){
-            requestManager
-                .load(blogPost.image)
-                .error(R.drawable.test_image_back)
-                .preload()
-        }
-    }
-
     fun removeAt(position: Int) {
         items.removeAt(position)
         notifyItemRemoved(position)
@@ -115,8 +103,10 @@ class MyHouseListAdapter(
 
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
+
         newList?.let {
             items = newList
+            Log.d("sea","Search : + ${items}")
         }
     }
 
