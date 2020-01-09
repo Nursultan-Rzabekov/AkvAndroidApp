@@ -65,7 +65,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
         setHasOptionsMenu(true)
         Log.d(TAG, "SettingsProfileFragment: ${viewModel}")
 
-        swipeRefresh.setOnRefreshListener(this)
+        swipe_refresh.setOnRefreshListener(this)
 
         initRecyclerView()
         subscribeObservers()
@@ -198,7 +198,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
 
     override fun onRefresh() {
         onBlogSearchOrFilter()
-        swipeRefresh.isRefreshing = false
+        swipe_refresh.isRefreshing = false
     }
 
     private fun onBlogSearchOrFilter(){
