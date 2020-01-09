@@ -4,6 +4,7 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -23,6 +24,7 @@ import javax.inject.Inject
 
 class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
+    private val facilities = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticFacilityList = mutableListOf(
         "Кондиционер",
@@ -52,9 +54,14 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         setSpanable()
         initRecyclerView()
         setAllStaticChechboxes()
+        setObservers()
         initialState()
 
         fragment_add_ad_check_next_btn.setOnClickListener {
+            sessionManager.clearAddAdFacilityList()
+            saveFacilities()
+            Log.e("Sesssion_test_faci", "$facilities")
+            facilities.clear()
             navNextFragment()
         }
 
@@ -90,10 +97,7 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
             val initialItems = mutableListOf<String>()
             for(item in it._addAdFacilityList) {
-                if (item in checkboxAdapter.getList())
-                    TODO()
-                else
-                    initialItems.add(item)
+                initialItems.add(item)
             }
             checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
         })
@@ -136,12 +140,24 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        sessionManager.setAddAdFacilityListItem(item, checked)
+        addOrRemoveFacility(item, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        sessionManager.setAddAdFacilityListItem(item, false)
+        addOrRemoveFacility(item, false)
         checkboxAdapter.removeItem(position)
+    }
+
+    private fun addOrRemoveFacility(item: String, checked: Boolean) {
+        if (checked)
+            facilities.add(item)
+        else
+            facilities.remove(item)
+    }
+
+    private fun saveFacilities(){
+        for (item in facilities)
+            sessionManager.setAddAdFacilityListItem(item, true)
     }
 }
 

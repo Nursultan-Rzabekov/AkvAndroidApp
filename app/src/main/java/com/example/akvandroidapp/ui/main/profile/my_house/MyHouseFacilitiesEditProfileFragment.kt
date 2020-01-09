@@ -62,18 +62,21 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
 
-        initRecyclerView()
         initialState()
-        setSpanable()
+        initRecyclerView()
+        setAllStaticChechboxes()
         setObservers()
-        //setAllStaticChechboxes()
-        checkboxAdapter.notifyDataSetChanged()
+        setSpanable()
 
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
         fragment_add_ad_check_next_btn.visibility = View.GONE
 
         main_back_img_btn.setOnClickListener {
+            sessionManager.clearHouseUpdateFacilities()
+            saveFacilities()
+            Log.e("house_test_faci", "$facilities")
+            facilities?.clear()
             findNavController().navigateUp()
         }
 
@@ -97,19 +100,12 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
     }
 
     private fun setObservers(){
-        sessionManager.houseUpdateData.observe(viewLifecycleOwner, Observer {
-            if (it.facilitiesList != null) {
-                val initialItems: MutableList<CheckboxItem> = mutableListOf()
-                for (item in it.facilitiesList?.toMutableList()!!) {
-                    Log.e("my_house Faciliti List", item)
-                    if (item in staticFacilityList)
-                        //checkStaticCheckbox(item)
-                    else
-                        initialItems.add(CheckboxItem(item, true))
-                }
-                checkboxAdapter.submitList(initialItems)
-                checkboxAdapter.notifyDataSetChanged()
+        sessionManager.houseUpdateData.observe(viewLifecycleOwner, Observer{
+            val initialItems = mutableListOf<String>()
+            for(item in it.facilitiesList!!) {
+                initialItems.add(item)
             }
+            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
         })
     }
 
@@ -119,14 +115,17 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         span4.setSpan(UnderlineSpan(), 0, fragment_add_ad_check_drop_all.text.toString().length, 0)
     }
 
+    private fun setAllStaticChechboxes(){
+        checkboxAdapter.addAllItems(staticFacilityList, isStatic = true)
+    }
+
     private fun initialState(){
         fragment_add_ad_check_add_chkbox_layout.visibility = View.GONE
         fragment_add_ad_check_add_chkbox.visibility = View.VISIBLE
     }
 
     private fun addNewFacility(facility: String) {
-        if (!staticFacilityList.contains(facility.capitalize()) &&
-            !checkboxAdapter.getList().contains(facility.capitalize()) &&
+        if (!checkboxAdapter.getList().contains(facility.capitalize()) &&
             facility != "")
             checkboxAdapter.addItem(facility)
         fragment_add_ad_check_add_chkbox_et.setText("")
@@ -143,34 +142,29 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         checkboxAdapter.submitList(mutableListOf())
     }
 
-    private fun assignCheckbox(checkBox: MaterialCheckBox){
-        checkBox.setOnCheckedChangeListener { btn, b ->
-            addOrRemoveItemToLocalFacilities(btn.text.toString().trim(), b)
-        }
-    }
-
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
+        sessionManager.clearHouseUpdateFacilities()
     }
 
-    private fun uncheckStaticFacilities(checkBox: MaterialCheckBox) {
-        checkBox.isChecked = false
-    }
-
-    private fun addOrRemoveItemToLocalFacilities(item:String, checked: Boolean){
+    private fun addOrRemoveFacility(item: String, checked: Boolean) {
         if (checked)
             facilities?.add(item)
         else
             facilities?.remove(item)
-        Log.e("MY_HOUSE_EDIT_FAC", "$facilities")
+    }
+
+    private fun saveFacilities(){
+        for (item in facilities!!)
+            sessionManager.setHouseUpdateFacilityItem(item, true)
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        addOrRemoveItemToLocalFacilities(item, checked)
+        addOrRemoveFacility(item, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        addOrRemoveItemToLocalFacilities(item, false)
+        addOrRemoveFacility(item, false)
         checkboxAdapter.removeItem(position)
     }
 }

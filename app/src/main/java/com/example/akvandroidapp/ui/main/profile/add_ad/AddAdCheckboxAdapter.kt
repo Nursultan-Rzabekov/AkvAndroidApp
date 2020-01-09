@@ -47,9 +47,15 @@ class AddAdCheckboxAdapter(
         val listOfTitles = mutableListOf<String>()
         for (item in items) listOfTitles.add(item.title)
         for(item in list) {
-            items.add(CheckboxItem(item, isChecked, isStatic))
+            if (item in listOfTitles){
+                items[listOfTitles.indexOf(item)].isCheked = isChecked
+                items[listOfTitles.indexOf(item)].isStatic = true
+            }
+            else
+                items.add(CheckboxItem(item, isChecked, isStatic))
         }
         notifyItemRangeChanged(start, items.size - 1)
+        notifyDataSetChanged()
     }
 
     fun removeItem(position: Int) {

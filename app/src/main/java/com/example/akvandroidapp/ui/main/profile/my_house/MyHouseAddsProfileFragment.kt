@@ -179,7 +179,7 @@ class MyHouseAddsProfileFragment :
     }
 
     override fun onRefresh() {
-        swipe_refresh.isRefreshing = false
+        swipe_refresh_1.isRefreshing = false
     }
 
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
