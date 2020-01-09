@@ -44,6 +44,8 @@ class AddAdCheckboxAdapter(
 
     fun addAllItems(list: List<String>, isChecked: Boolean = false, isStatic: Boolean = false){
         val start = items.size
+        val listOfTitles = mutableListOf<String>()
+        for (item in items) listOfTitles.add(item.title)
         for(item in list) {
             items.add(CheckboxItem(item, isChecked, isStatic))
         }

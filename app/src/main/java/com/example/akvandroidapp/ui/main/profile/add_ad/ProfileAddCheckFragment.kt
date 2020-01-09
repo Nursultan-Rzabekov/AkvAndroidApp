@@ -6,6 +6,8 @@ import android.text.Spannable
 import android.text.style.UnderlineSpan
 import android.view.*
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
@@ -16,7 +18,6 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import kotlinx.android.synthetic.main.fragment_add_ad_check.*
-import java.util.*
 import javax.inject.Inject
 
 
@@ -83,6 +84,19 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
 
     private fun navNextFragment(){
         findNavController().navigate(R.id.action_profileAddCheckFragment_to_profileAddNearFragment)
+    }
+
+    private fun setObservers(){
+        sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
+            val initialItems = mutableListOf<String>()
+            for(item in it._addAdFacilityList) {
+                if (item in checkboxAdapter.getList())
+                    TODO()
+                else
+                    initialItems.add(item)
+            }
+            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+        })
     }
 
     private fun setSpanable(){
