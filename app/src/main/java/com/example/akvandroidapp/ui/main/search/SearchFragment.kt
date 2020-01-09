@@ -14,9 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
@@ -25,6 +22,7 @@ import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
+import com.google.android.material.button.MaterialButton
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.fragment_explore.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
@@ -81,8 +79,8 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
             navMapActivity()
         }
 
-        by_date_chip.setOnClickListener {
-            showDateDialog()
+        by_guests_chip.setOnClickListener {
+            showGuestDialog()
         }
 
     }
@@ -254,7 +252,7 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
         focusable_view.requestFocus()
     }
 
-    private fun showDateDialog(){
+    private fun showGuestDialog(){
 
         activity?.let {
             val dialog = Dialog(it, R.style.CustomBasicDialog)
@@ -267,6 +265,10 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
             dialog.findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {
                 Log.d(TAG, "FilterDialog: cancelling filter.")
                 dialog.dismiss()
+            }
+
+            dialog.findViewById<MaterialButton>(R.id.dialog_guests_save_btn).setOnClickListener {
+                Log.d(TAG, "FilterDialog: save filter.")
             }
 
             dialog.show()

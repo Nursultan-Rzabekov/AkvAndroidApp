@@ -197,9 +197,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialog_guests_clear_all_btn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="36dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    style="@style/AllButton.TextButton"
                     android:layout_gravity="start|center_vertical"
                     android:text="@string/clear_all"
                     android:textStyle="bold"
@@ -207,7 +211,8 @@
                     android:textSize="12sp" />
 
                 <com.google.android.material.button.MaterialButton
-                    style="@style/MinorButton"
+                    android:id="@+id/dialog_guests_save_btn"
+                    style="@style/AllButton.Unelevated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"

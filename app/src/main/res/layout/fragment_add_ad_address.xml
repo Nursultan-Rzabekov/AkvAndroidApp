@@ -75,14 +75,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_add_ad_address_country_l_et"
-                style="@style/BasicTextOutlined"
+                style="@style/BasicDropDown"
+                app:hintEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/fragment_add_ad_address_country_et"
-                    style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
@@ -102,14 +102,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_add_ad_address_region_l_et"
-                style="@style/BasicTextOutlined"
+                style="@style/BasicDropDown"
+                app:hintEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/fragment_add_ad_address_region_et"
-                    style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
@@ -129,14 +129,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_add_ad_address_city_l_et"
-                style="@style/BasicTextOutlined"
+                style="@style/BasicDropDown"
+                app:hintEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/fragment_add_ad_address_city_et"
-                    style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
@@ -171,7 +171,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/fragment_add_ad_address_post_index_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                     android:fontFamily="@font/montserrat"
                     android:hint="@string/post_index" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>-->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_add_ad_address_next_btn"

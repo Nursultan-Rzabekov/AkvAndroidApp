@@ -119,7 +119,6 @@ constructor(
         setFilterTypeOfApartment(type)
     }
 
-
     fun filterFacilitiesList(facility: Int, checked: Boolean){
         setFacilityValue(facility, checked)
     }

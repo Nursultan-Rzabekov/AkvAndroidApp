@@ -165,7 +165,7 @@
         <item name="android:background">?android:selectableItemBackground</item>
     </style>
 
-    <style name="BasicChip" parent="Widget.MaterialComponents.Chip.Filter">
+    <style name="BasicChip" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipCornerRadius">7dp</item>
         <item name="chipBackgroundColor">@android:color/transparent</item>
         <item name="chipStrokeColor">@android:color/secondary_text_light</item>
@@ -219,8 +219,8 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowMinWidthMajor">90%</item>
-        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:windowMinWidthMajor">95%</item>
+        <item name="android:windowMinWidthMinor">95%</item>
     </style>
 
     <style name="MySpinnerDatePicker" parent="android:Widget.Material.DatePicker">

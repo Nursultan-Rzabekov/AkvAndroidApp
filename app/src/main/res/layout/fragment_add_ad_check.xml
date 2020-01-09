@@ -46,6 +46,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +58,7 @@
             android:layout_marginStart="@dimen/dim_60dp"
             android:layout_marginTop="@dimen/dim_16dp"
             android:layout_marginEnd="@dimen/dim_60dp"
+            android:paddingBottom="@dimen/dim_48dp"
             android:orientation="vertical">
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -145,6 +147,7 @@
                 android:visibility="visible"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.button.MaterialButton
@@ -197,6 +200,7 @@
                     android:layout_height="@dimen/dim_36dp"
                     android:text="@string/add"
                     android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_ad_check_add_chkbox_et"
                     app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
 
@@ -209,6 +213,7 @@
                     android:textColor="@color/primaryZero"
                     android:text="@string/cancel"
                     android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_ad_check_add_chkbox_et"
                     app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_check_add_chkbox_et" />
 
@@ -221,7 +226,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="@dimen/dim_36dp"
                 android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

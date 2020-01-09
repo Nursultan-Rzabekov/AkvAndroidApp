@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MapActivity : BaseActivity(), ClusterListener, ClusterTapListener
 {
     private lateinit var mapView: MapView
-    private val cluster = arrayListOf<Point>()
+    private val cluster = arrayListOf<Point>(Point(60.0,15.0))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.setApiKey(MAPKIT_API_KEY)
