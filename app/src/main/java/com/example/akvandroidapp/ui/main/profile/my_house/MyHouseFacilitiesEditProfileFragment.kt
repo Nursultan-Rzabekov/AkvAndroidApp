@@ -108,6 +108,7 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
                         initialItems.add(CheckboxItem(item, true))
                 }
                 checkboxAdapter.submitList(initialItems)
+                checkboxAdapter.notifyDataSetChanged()
             }
         })
     }

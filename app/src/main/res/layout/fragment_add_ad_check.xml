@@ -61,6 +61,14 @@
             android:paddingBottom="@dimen/dim_48dp"
             android:orientation="vertical">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_add_ad_check_recycler_view"
+                android:visibility="visible"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"/>
+
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/fragment_add_ad_check_chkbox1"
                 style="@style/BasicCheckBox"
@@ -142,13 +150,6 @@
                 android:text="@string/medical"
                 android:textSize="20sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_add_ad_check_recycler_view"
-                android:visibility="visible"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_width="match_parent"
-                android:nestedScrollingEnabled="false"
-                android:layout_height="wrap_content"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_add_ad_check_add_chkbox"

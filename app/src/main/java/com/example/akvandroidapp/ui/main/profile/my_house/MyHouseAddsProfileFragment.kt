@@ -76,7 +76,6 @@ class MyHouseAddsProfileFragment :
         sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
             Log.d(TAG, "favorite: ${dataState}")
 
-
             recyclerAdapter.apply {
                 Log.d(TAG, "favorite: ${dataState}")
 
