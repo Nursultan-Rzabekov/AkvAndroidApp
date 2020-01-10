@@ -44,6 +44,16 @@
         <item name="boxStrokeColor">@color/secondaryFirst</item>
     </style>
 
+    <style name="MessageTextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius5</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius5</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/cornerRadius5</item>
+        <item name="boxCornerRadiusTopStart">@dimen/cornerRadius5</item>
+        <item name="hintEnabled">false</item>
+        <item name='boxStrokeWidth'>2dp</item>
+        <item name="boxStrokeColor">@color/secondaryFirst</item>
+    </style>
+
     <style name="BasicTextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius3</item>
         <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius3</item>

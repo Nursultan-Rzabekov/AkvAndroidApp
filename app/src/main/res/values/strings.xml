@@ -374,4 +374,6 @@
     <string name="random_message1">А у вас есть такие вещи как полотоенце, рак</string>
     <string name="random_time1">21:23</string>
     <string name="random_guest1">/@muratov_d хочет быть вашем гостем.</string>
+    <string name="online">в сети</string>
+    <string name="send_eng">send</string>
 </resources>
