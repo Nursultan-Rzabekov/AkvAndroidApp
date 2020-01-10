@@ -376,5 +376,14 @@
     <string name="random_guest1">/@muratov_d хочет быть вашем гостем.</string>
     <string name="online">в сети</string>
     <string name="send_eng">send</string>
-    <string name="enter_message">Напишите сообщение...</string>
+    <string name="enter_message">Напишите сообщение…</string>
+    <string name="camera">Камера</string>
+    <string name="photo_and_video">Фото/видео</string>
+    <string name="document">Документ</string>
+    <string name="deny_and_delete">Откланить и удалить</string>
+    <string name="accept">Принять</string>
+    <string name="request_cancel_label">Напишите пожалуйста \nпочему вы откланяете заявку</string>
+    <string name="message_two_dots">Сообщение:</string>
+    <string name="send">Отправить</string>
+    <string name="skip">Пропустить</string>
 </resources>

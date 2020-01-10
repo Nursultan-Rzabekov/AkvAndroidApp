@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.support_bottom_sheet_dialog.view.*
 import kotlinx.android.synthetic.main.support_bottom_sheet_dialog.view.support_bottom_sheet_dialog_text_us_btn
 
 
-class ModalBottomSheetСhat(
-    private val bottomSheetDialogInteraction: BottomSheetDialogInteraction
+class ModalBottomSheetChat(
+    private val bottomSheetDialogInteraction: BottomSheetDialogChatInteraction
 ) : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +40,10 @@ class ModalBottomSheetСhat(
         const val TAG = "ModalBottomSheet"
     }
 
-    interface BottomSheetDialogInteraction{
-        fun onTextUsClicked()
-        fun onCallUsClicked()
+    interface BottomSheetDialogChatInteraction{
+        fun onCameraClicked()
+        fun onPhotoClicked()
+        fun onDocumentClicked()
         fun onCancelClicked()
     }
 }

@@ -10,11 +10,11 @@ import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_support_main.*
 
 
-class MessagesDetailActivity : BaseActivity(), ModalBottomSheetСhat.BottomSheetDialogInteraction,
+class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetDialogChatInteraction,
     SwipeRefreshLayout.OnRefreshListener
 {
 
-    private val modalBottomSheet: ModalBottomSheetСhat = ModalBottomSheetСhat(this)
+    private val modalBottomSheet: ModalBottomSheetChat = ModalBottomSheetChat(this)
 
     override fun displayProgressBar(bool: Boolean) {
     }
@@ -38,14 +38,19 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetСhat.BottomSheet
     }
 
     private fun showDialog(){
-        modalBottomSheet.show(supportFragmentManager, ModalBottomSheetСhat.TAG)
+        modalBottomSheet.show(supportFragmentManager, ModalBottomSheetChat.TAG)
     }
 
-    override fun onTextUsClicked() {
+    override fun onCameraClicked() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun onPhotoClicked() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-    override fun onCallUsClicked() {
+    override fun onDocumentClicked() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onCancelClicked() {

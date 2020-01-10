@@ -171,33 +171,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--<TextView
-                android:id="@+id/fragment_add_ad_address_post_index_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_16dp"
-                android:text="@string/post_index"
-                android:textAlignment="textStart"
-                android:textColor='@color/black'
-                android:textSize="16sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_add_ad_address_post_index_l_et"
-                style="@style/BasicTextOutlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_12dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fragment_add_ad_address_post_index_et"
-                    style="@style/BasicEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:hint="@string/post_index" />
-
-            </com.google.android.material.textfield.TextInputLayout>-->
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_add_ad_address_next_btn"
                 style="@style/BasicButton"
