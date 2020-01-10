@@ -136,7 +136,7 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
 
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
-        sessionManager.clearAddAdFacilityList()
+        facilities.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {

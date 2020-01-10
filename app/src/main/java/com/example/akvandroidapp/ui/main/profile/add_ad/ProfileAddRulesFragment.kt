@@ -129,7 +129,7 @@ class ProfileAddRulesFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
 
     private fun clearAllRules() {
         checkboxAdapter.uncheckAll()
-        sessionManager.clearAddAdRulesList()
+        rules.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {

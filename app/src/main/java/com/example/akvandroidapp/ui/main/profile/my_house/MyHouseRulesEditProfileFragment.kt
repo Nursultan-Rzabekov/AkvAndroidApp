@@ -136,6 +136,7 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
     private fun clearAllRules() {
         checkboxAdapter.uncheckAll()
         sessionManager.clearHouseUpdateRules()
+        rules.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {

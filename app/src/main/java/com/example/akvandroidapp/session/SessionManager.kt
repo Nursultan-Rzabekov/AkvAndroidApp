@@ -141,6 +141,13 @@ constructor(
         Log.e("HOUSE_UPDATE_DATA", "${_houseUpdateData.value}")
     }
 
+    fun clearHouseUpdateData(){
+        GlobalScope.launch(Main) {
+            _houseUpdateData.value = HouseUpdateData()
+        }
+        Log.e("HOUSE_CLEAR_DATA", "${_houseUpdateData.value}")
+    }
+
     fun setHouseUpdateFacilityItem(facility: String, checked: Boolean){
         GlobalScope.launch(Main){
             if (checked)
