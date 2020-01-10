@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.home
+package com.example.akvandroidapp.ui.main.messages
 
 
 import android.os.Bundle
@@ -9,28 +9,37 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
-import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.ui.main.messages.adapter.RequestListAdapter
+import com.example.akvandroidapp.ui.main.profile.support.MyPagerAdapter
+import com.example.akvandroidapp.util.Constants.Companion.MAPKIT_API_KEY
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
+import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
-import kotlinx.android.synthetic.main.fragment_chats.*
+import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.mapview.MapView
+import kotlinx.android.synthetic.main.fragment_chat_main.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
-import kotlinx.android.synthetic.main.fragment_saved_booking.*
+import kotlinx.android.synthetic.main.fragment_requests.*
+import kotlinx.android.synthetic.main.fragment_support_main.*
+import kotlinx.android.synthetic.main.map.*
 import javax.inject.Inject
 
 
-class HomeFragment : BaseHomeFragment(),
-    HomeListAdapter.Interaction, SwipeRefreshLayout.OnRefreshListener{
+class RequestFragment : BaseMessagesFragment(),
+    RequestListAdapter.Interaction, SwipeRefreshLayout.OnRefreshListener{
 
-    private lateinit var recyclerAdapter: HomeListAdapter
+    private lateinit var recyclerAdapter: RequestListAdapter
 
     @Inject
     lateinit var sessionManager: SessionManager
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_saved_booking, container, false)
+        return inflater.inflate(R.layout.fragment_requests, container, false)
 
     }
 
@@ -49,13 +58,13 @@ class HomeFragment : BaseHomeFragment(),
 
 
     private fun initRecyclerView(){
-        fragment_saved_booking_recycler_view.apply {
-            layoutManager = LinearLayoutManager(this@HomeFragment.context)
+        fragment_requests_recycler_view.apply {
+            layoutManager = LinearLayoutManager(this@RequestFragment.context)
             val topSpacingDecorator = TopSpacingItemDecoration(30)
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
-            recyclerAdapter = HomeListAdapter(requestManager,  this@HomeFragment)
+            recyclerAdapter = RequestListAdapter(requestManager,  this@RequestFragment)
 //            addOnScrollListener(object: RecyclerView.OnScrollListener(){
 //
 //                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -80,7 +89,7 @@ class HomeFragment : BaseHomeFragment(),
     override fun onDestroyView() {
         super.onDestroyView()
         // clear references (can leak memory)
-        fragment_saved_booking_recycler_view.adapter = null
+        blog_post_recyclerview.adapter = null
     }
 
     override fun onRefresh() {
@@ -95,9 +104,26 @@ class HomeFragment : BaseHomeFragment(),
     }
 
     private  fun resetUI(){
-        fragment_saved_booking_recycler_view.smoothScrollToPosition(0)
+        blog_post_recyclerview.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
         focusable_view.requestFocus()
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

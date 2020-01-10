@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.profile.my_house
+package com.example.akvandroidapp.ui.main.messages.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,22 +9,20 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
-import com.example.akvandroidapp.session.AddAdInfo
+import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
-import kotlinx.android.synthetic.main.my_adds_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
-
-class MyHouseListAdapter(
+class ChatListAdapter(
     private val requestManager: RequestManager,
-    private val interaction: Interaction? = null,
-    private val interactionCheck: InteractionCheck? = null
-    ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+    private val interaction: Interaction? = null
+) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
+
     private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
         NO_MORE_RESULTS,
         "" ,
@@ -41,9 +39,26 @@ class MyHouseListAdapter(
         0.0
     )
 
-    private var items: MutableList<BlogPost> = ArrayList()
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
+
+        override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    private val differ =
+        AsyncListDiffer(
+            BlogRecyclerChangeCallback(this),
+            AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
+        )
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
         when(viewType){
             NO_MORE_RESULTS ->{
                 Log.e(TAG, "onCreateViewHolder: No more results...")
@@ -57,79 +72,94 @@ class MyHouseListAdapter(
             }
 
             BLOG_ITEM ->{
-                return MyHouseViewHolder(
+                return BlogViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                            R.layout.my_adds_recycler_view_item,
+                            R.layout.chats_recycler_view_item,
                         parent,
                         false
                     ),
                     interaction = interaction,
-                    interactionCheck = interactionCheck,
                     requestManager = requestManager
                 )
             }
             else -> {
-                return MyHouseViewHolder(
+                return BlogViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.my_adds_recycler_view_item,
+                        R.layout.chats_recycler_view_item,
                         parent,
                         false
                     ),
                     interaction = interaction,
-                    interactionCheck = interactionCheck,
                     requestManager = requestManager
                 )
             }
+        }
+    }
+
+    internal inner class BlogRecyclerChangeCallback(
+        private val adapter: ChatListAdapter
+    ) : ListUpdateCallback {
+
+        override fun onChanged(position: Int, count: Int, payload: Any?) {
+            adapter.notifyItemRangeChanged(position, count, payload)
+        }
+
+        override fun onInserted(position: Int, count: Int) {
+            adapter.notifyItemRangeChanged(position, count)
+        }
+
+        override fun onMoved(fromPosition: Int, toPosition: Int) {
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun onRemoved(position: Int, count: Int) {
+            adapter.notifyDataSetChanged()
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is MyHouseViewHolder -> {
-                holder.bind(items[position])
+            is BlogViewHolder -> {
+                holder.bind(differ.currentList[position])
             }
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if(differ.currentList[position].id > -1){
+            return BLOG_ITEM
+        }
+        return differ.currentList[position].id
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return differ.currentList.size
     }
 
-
-    fun removeAt(position: Int) {
-        items.removeAt(position)
-        notifyItemRemoved(position)
+    // Prepare the images that will be displayed in the RecyclerView.
+    // This also ensures if the network connection is lost, they will be in the cache
+    fun preloadGlideImages(
+        requestManager: RequestManager,
+        list: List<BlogPost>
+    ){
     }
+
 
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
-
-        newList?.let {
-            items = newList
-            Log.d("sea","Search : + ${items}")
-        }
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+        differ.submitList(newList)
     }
 
-    class MyHouseViewHolder
+    class BlogViewHolder
     constructor(
         itemView: View,
         val requestManager: RequestManager,
-        private val interaction: Interaction?,
-        private val interactionCheck: InteractionCheck?
+        private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: BlogPost) = with(itemView) {
-            itemView.my_adds_recycler_view_item_detail_btn.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
-            }
-
-            requestManager
-                .load(item.image)
-                .error(R.drawable.test_image_back)
-                .transition(withCrossFade())
-                .into(itemView.my_adds_recycler_view_item_iv)
-            itemView.my_adds_recycler_view_item_title.text = item.name
-            itemView.my_adds_recycler_view_item_price.text = item.price.toString()
         }
     }
 
@@ -137,11 +167,5 @@ class MyHouseListAdapter(
         fun onItemSelected(position: Int, item: BlogPost)
     }
 
-    interface InteractionCheck {
-        fun onItemSelected(position: Int, item: BlogPost,boolean: Boolean)
-    }
 
-    override fun onClick(p0: View?) {
-
-    }
 }

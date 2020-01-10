@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
@@ -20,21 +21,25 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.favorite.FavoriteListAdapter
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.search.SearchListAdapter
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.fragment_my_adds.*
 import kotlinx.android.synthetic.main.fragment_saved_pages_filled.*
+import kotlinx.android.synthetic.main.fragment_saved_pages_filled.swipe_refresh
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.search_part_layout.*
+import loadFirstPage
+import nextPage
 import javax.inject.Inject
 
 
-class MyHouseAddsProfileFragment :
-    BaseProfileFragment() ,
+class MyHouseAddsProfileFragment : BaseProfileFragment() ,
     MyHouseListAdapter.Interaction ,
     MyHouseListAdapter.InteractionCheck,
     SwipeRefreshLayout.OnRefreshListener{
@@ -60,8 +65,14 @@ class MyHouseAddsProfileFragment :
         setHasOptionsMenu(true)
         Log.d(TAG, "SettingsProfileFragment: ${viewModel}")
 
-        subscribeObservers()
+        swipe_refresh_1.setOnRefreshListener(this)
+
         initRecyclerView()
+        subscribeObservers()
+
+        if(savedInstanceState == null){
+            viewModel.loadFirstPage()
+        }
 
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
@@ -73,47 +84,27 @@ class MyHouseAddsProfileFragment :
     }
 
     private fun subscribeObservers(){
-        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
-            Log.d(TAG, "favorite: ${dataState}")
-
-            recyclerAdapter.apply {
-                Log.d(TAG, "favorite: ${dataState}")
-
-                preloadGlideImages(
-                    requestManager = requestManager,
-                    list = dataState
-                )
-                submitList(
-                    blogList = dataState,
-                    isQueryExhausted = true
-                )
+        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
+            if(dataState != null) {
+                handlePagination(dataState)
+                stateChangeListener.onDataStateChange(dataState)
             }
         })
 
-//        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
-//            if(dataState != null) {
-//                handlePagination(dataState)
-//                stateChangeListener.onDataStateChange(dataState)
-//            }
-//        })
-//
-//        viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
-//            if(viewState != null){
-//                recyclerAdapter.apply {
-//                    //Log.d(TAG, "Search results responses: ${viewState.blogFields.blogList}")
-//                    fragement_explore_layout_id.visibility = View.GONE
-//                    fragment_explore_active_layout_id.visibility = View.VISIBLE
-//                    preloadGlideImages(
-//                        requestManager = requestManager,
-//                        list = viewState.myHouseFields.blogList
-//                    )
-//                    submitList(
-//                        blogList = viewState.myHouseFields.blogList,
-//                        isQueryExhausted = viewState.myHouseFields.isQueryExhausted
-//                    )
-//                }
-//            }
-//        })
+        viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
+            if(viewState != null){
+                if(viewState.myHouseFields.blogList.isNotEmpty()){
+                    recyclerAdapter.apply {
+                        Log.d(TAG, "Search results responses: ${viewState.myHouseFields.blogList}")
+
+                        submitList(
+                            blogList = viewState.myHouseFields.blogList,
+                            isQueryExhausted = viewState.myHouseFields.isQueryExhausted
+                        )
+                    }
+                }
+            }
+        })
     }
 
     private fun handlePagination(dataState: DataState<ProfileViewState>){
@@ -161,15 +152,25 @@ class MyHouseAddsProfileFragment :
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
-            recyclerAdapter = MyHouseListAdapter(requestManager,  this@MyHouseAddsProfileFragment,this@MyHouseAddsProfileFragment)
+            recyclerAdapter = MyHouseListAdapter(requestManager,  this@MyHouseAddsProfileFragment)
+            addOnScrollListener(object: RecyclerView.OnScrollListener(){
 
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val lastPosition = layoutManager.findLastVisibleItemPosition()
+                    if (lastPosition == recyclerAdapter.itemCount.minus(1)) {
+                        Log.d(TAG, "BlogFragment: attempting to load next page...")
+                        viewModel.nextPage()
+                    }
+                }
+            })
             adapter = recyclerAdapter
         }
     }
 
     override fun onItemSelected(position: Int, item: BlogPost) {
         //viewModel.setBlogPost(item)
-
         navNextDetailFragment(item)
     }
 
@@ -179,7 +180,20 @@ class MyHouseAddsProfileFragment :
     }
 
     override fun onRefresh() {
+        onBlogSearchOrFilter()
         swipe_refresh_1.isRefreshing = false
+    }
+
+    private fun onBlogSearchOrFilter(){
+        viewModel.loadFirstPage().let {
+            resetUI()
+        }
+    }
+
+    private  fun resetUI(){
+        fragment_my_adds_recycler_view.smoothScrollToPosition(0)
+        stateChangeListener.hideSoftKeyboard()
+        focusable_view_adds.requestFocus()
     }
 
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {

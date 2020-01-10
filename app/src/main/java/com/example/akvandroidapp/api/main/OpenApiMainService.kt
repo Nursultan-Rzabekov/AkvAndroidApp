@@ -105,7 +105,7 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
 
 
-    @GET("houses/my/")
+    @GET("my_houses/")
     fun getListMyHouse(
         @Header("Authorization") authorization: String,
         @Query("page") page: Int

@@ -9,7 +9,7 @@
     <fragment android:id="@+id/messagesFragment"
             android:name="com.example.akvandroidapp.ui.main.messages.MessagesFragment"
             android:label="@string/fragment_create_blog"
-            tools:layout="@layout/just">
+            tools:layout="@layout/fragment_chat_main_layout">
 
     </fragment>
 </navigation>
