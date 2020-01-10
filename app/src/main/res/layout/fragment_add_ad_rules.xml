@@ -59,60 +59,6 @@
             android:layout_marginEnd="@dimen/dim_60dp"
             android:orientation="vertical">
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/fragment_add_ad_rules_chkbox1"
-                style="@style/BasicCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/no_smoking"
-                android:textSize="20sp" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/fragment_add_ad_rules_chkbox2"
-                style="@style/BasicCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/no_alchogol"
-                android:textSize="20sp" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/fragment_add_ad_rules_chkbox3"
-                style="@style/BasicCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/no_noise"
-                android:textSize="20sp" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/fragment_add_ad_rules_chkbox4"
-                style="@style/BasicCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/no_garbage"
-                android:textSize="20sp" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/fragment_add_ad_rules_chkbox5"
-                style="@style/BasicCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/the_most_2_person"
-                android:textSize="20sp" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/fragment_add_ad_rules_chkbox6"
-                style="@style/BasicCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/no_pets"
-                android:textSize="20sp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_add_ad_rules_recycler_view"
                 android:layout_width="match_parent"

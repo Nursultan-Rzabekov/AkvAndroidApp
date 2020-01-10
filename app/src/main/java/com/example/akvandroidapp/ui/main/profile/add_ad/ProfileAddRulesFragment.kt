@@ -4,8 +4,10 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
@@ -19,6 +21,7 @@ import javax.inject.Inject
 
 class ProfileAddRulesFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCheckInteraction, AddAdCheckboxAdapter.CheckboxCloseInteraction{
 
+    private val rules = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticRulesList = mutableListOf(
         "Не курить",
@@ -43,11 +46,16 @@ class ProfileAddRulesFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setSpanable()
-        setAllStaticChechboxes()
-        initialState()
         initRecyclerView()
+        setAllStaticChechboxes()
+        setObservers()
+        initialState()
 
         fragment_add_ad_rules_next_btn.setOnClickListener {
+            sessionManager.clearAddAdRulesList()
+            saveRules()
+            Log.e("Sesssion_test_rule", "$rules")
+            rules.clear()
             navNextFragment()
         }
 
@@ -84,19 +92,18 @@ class ProfileAddRulesFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         span4.setSpan(UnderlineSpan(), 0, fragment_add_ad_rules_drop_all.text.toString().length, 0)
     }
 
-    private fun assignCheckbox(checkBox: MaterialCheckBox){
-        checkBox.setOnCheckedChangeListener { btn, b ->
-            sessionManager.setAddAdRulesListItem(checkBox.text.toString().trim(), b)
-        }
+    private fun setObservers(){
+        sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
+            val initialItems = mutableListOf<String>()
+            for(item in it._addAdRulesList) {
+                initialItems.add(item)
+            }
+            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+        })
     }
 
     private fun setAllStaticChechboxes(){
-        assignCheckbox(fragment_add_ad_rules_chkbox1)
-        assignCheckbox(fragment_add_ad_rules_chkbox2)
-        assignCheckbox(fragment_add_ad_rules_chkbox3)
-        assignCheckbox(fragment_add_ad_rules_chkbox4)
-        assignCheckbox(fragment_add_ad_rules_chkbox5)
-        assignCheckbox(fragment_add_ad_rules_chkbox6)
+        checkboxAdapter.addAllItems(staticRulesList, isStatic = true)
     }
 
     private fun initialState(){
@@ -114,8 +121,7 @@ class ProfileAddRulesFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
     }
 
     private fun addNewRule(rule: String) {
-        if (!staticRulesList.contains(rule.capitalize()) &&
-            !checkboxAdapter.getList().contains(rule.capitalize()) &&
+        if (!checkboxAdapter.getList().contains(rule.capitalize()) &&
             rule != "")
             checkboxAdapter.addItem(rule)
         fragment_add_ad_rules_add_chkbox_et.setText("")
@@ -123,25 +129,28 @@ class ProfileAddRulesFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
 
     private fun clearAllRules() {
         checkboxAdapter.uncheckAll()
-        uncheckStaticFacilities(fragment_add_ad_rules_chkbox1)
-        uncheckStaticFacilities(fragment_add_ad_rules_chkbox2)
-        uncheckStaticFacilities(fragment_add_ad_rules_chkbox3)
-        uncheckStaticFacilities(fragment_add_ad_rules_chkbox4)
-        uncheckStaticFacilities(fragment_add_ad_rules_chkbox5)
-        uncheckStaticFacilities(fragment_add_ad_rules_chkbox6)
-    }
-
-    private fun uncheckStaticFacilities(checkBox: MaterialCheckBox) {
-        checkBox.isChecked = false
+        sessionManager.clearAddAdRulesList()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        sessionManager.setAddAdRulesListItem(item, checked)
+        addOrRemoveRule(item, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        sessionManager.setAddAdRulesListItem(item, false)
+        addOrRemoveRule(item, false)
         checkboxAdapter.removeItem(position)
+    }
+
+    private fun addOrRemoveRule(item: String, checked: Boolean) {
+        if (checked)
+            rules.add(item)
+        else
+            rules.remove(item)
+    }
+
+    private fun saveRules(){
+        for (item in rules)
+            sessionManager.setAddAdRulesListItem(item, true)
     }
 }
 

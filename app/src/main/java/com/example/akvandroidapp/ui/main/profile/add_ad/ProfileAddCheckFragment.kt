@@ -4,8 +4,11 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
@@ -16,12 +19,12 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import kotlinx.android.synthetic.main.fragment_add_ad_check.*
-import java.util.*
 import javax.inject.Inject
 
 
 class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
+    private val facilities = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticFacilityList = mutableListOf(
         "Кондиционер",
@@ -49,11 +52,16 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         super.onViewCreated(view, savedInstanceState)
 
         setSpanable()
-        setAllStaticChechboxes()
-        initialState()
         initRecyclerView()
+        setAllStaticChechboxes()
+        setObservers()
+        initialState()
 
         fragment_add_ad_check_next_btn.setOnClickListener {
+            sessionManager.clearAddAdFacilityList()
+            saveFacilities()
+            Log.e("Sesssion_test_faci", "$facilities")
+            facilities.clear()
             navNextFragment()
         }
 
@@ -85,28 +93,24 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
         findNavController().navigate(R.id.action_profileAddCheckFragment_to_profileAddNearFragment)
     }
 
+    private fun setObservers(){
+        sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
+            val initialItems = mutableListOf<String>()
+            for(item in it._addAdFacilityList) {
+                initialItems.add(item)
+            }
+            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+        })
+    }
+
     private fun setSpanable(){
         fragment_add_ad_check_drop_all.setText(fragment_add_ad_check_drop_all.text.toString(), TextView.BufferType.SPANNABLE)
         val span4 = fragment_add_ad_check_drop_all.text as Spannable
         span4.setSpan(UnderlineSpan(), 0, fragment_add_ad_check_drop_all.text.toString().length, 0)
     }
 
-    private fun assignCheckbox(checkBox: MaterialCheckBox){
-        checkBox.setOnCheckedChangeListener { btn, b ->
-            sessionManager.setAddAdFacilityListItem(checkBox.text.toString().trim(), b)
-        }
-    }
-
     private fun setAllStaticChechboxes(){
-        assignCheckbox(fragment_add_ad_check_chkbox1)
-        assignCheckbox(fragment_add_ad_check_chkbox2)
-        assignCheckbox(fragment_add_ad_check_chkbox3)
-        assignCheckbox(fragment_add_ad_check_chkbox4)
-        assignCheckbox(fragment_add_ad_check_chkbox5)
-        assignCheckbox(fragment_add_ad_check_chkbox6)
-        assignCheckbox(fragment_add_ad_check_chkbox7)
-        assignCheckbox(fragment_add_ad_check_chkbox8)
-        assignCheckbox(fragment_add_ad_check_chkbox9)
+        checkboxAdapter.addAllItems(staticFacilityList, isStatic = true)
     }
 
     private fun initialState(){
@@ -124,8 +128,7 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
     }
 
     private fun addNewFacility(facility: String) {
-        if (!staticFacilityList.contains(facility.capitalize()) &&
-            !checkboxAdapter.getList().contains(facility.capitalize()) &&
+        if (!checkboxAdapter.getList().contains(facility.capitalize()) &&
             facility != "")
             checkboxAdapter.addItem(facility)
         fragment_add_ad_check_add_chkbox_et.setText("")
@@ -133,28 +136,28 @@ class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Chec
 
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox1)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox2)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox3)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox4)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox5)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox6)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox7)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox8)
-        uncheckStaticFacilities(fragment_add_ad_check_chkbox9)
-    }
-
-    private fun uncheckStaticFacilities(checkBox: MaterialCheckBox) {
-        checkBox.isChecked = false
+        sessionManager.clearAddAdFacilityList()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        sessionManager.setAddAdFacilityListItem(item, checked)
+        addOrRemoveFacility(item, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        sessionManager.setAddAdFacilityListItem(item, false)
+        addOrRemoveFacility(item, false)
         checkboxAdapter.removeItem(position)
+    }
+
+    private fun addOrRemoveFacility(item: String, checked: Boolean) {
+        if (checked)
+            facilities.add(item)
+        else
+            facilities.remove(item)
+    }
+
+    private fun saveFacilities(){
+        for (item in facilities)
+            sessionManager.setAddAdFacilityListItem(item, true)
     }
 }
 

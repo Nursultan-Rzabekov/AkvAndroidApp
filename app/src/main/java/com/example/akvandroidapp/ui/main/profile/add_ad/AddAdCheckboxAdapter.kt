@@ -42,6 +42,22 @@ class AddAdCheckboxAdapter(
         notifyItemChanged(items.size - 1)
     }
 
+    fun addAllItems(list: List<String>, isChecked: Boolean = false, isStatic: Boolean = false){
+        val start = items.size
+        val listOfTitles = mutableListOf<String>()
+        for (item in items) listOfTitles.add(item.title)
+        for(item in list) {
+            if (item in listOfTitles){
+                items[listOfTitles.indexOf(item)].isCheked = isChecked
+                items[listOfTitles.indexOf(item)].isStatic = true
+            }
+            else
+                items.add(CheckboxItem(item, isChecked, isStatic))
+        }
+        notifyItemRangeChanged(start, items.size - 1)
+        notifyDataSetChanged()
+    }
+
     fun removeItem(position: Int) {
         items.removeAt(position)
         notifyItemRemoved(position)
@@ -70,9 +86,11 @@ class AddAdCheckboxAdapter(
         fun bind(checkboxItem: CheckboxItem) {
             checkbox.text = checkboxItem.title
 
+            closeIv.visibility =
+                if (checkboxItem.isStatic) View.GONE else View.VISIBLE
+
             checkbox.setOnCheckedChangeListener { compoundButton, b ->
                 checkInteraction?.onItemChecked(adapterPosition, checkboxItem.title.trim(), b)
-                checkboxItem.isCheked = b
             }
 
             closeIv.setOnClickListener {

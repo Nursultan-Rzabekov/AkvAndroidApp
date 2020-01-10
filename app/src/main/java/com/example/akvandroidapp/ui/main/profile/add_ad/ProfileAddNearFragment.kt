@@ -4,8 +4,10 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
@@ -19,6 +21,7 @@ import javax.inject.Inject
 
 class ProfileAddNearFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
+    private val nears = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticNearList = mutableListOf(
         "Больница",
@@ -46,11 +49,16 @@ class ProfileAddNearFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Check
         super.onViewCreated(view, savedInstanceState)
 
         setSpanable()
-        setAllStaticChechboxes()
-        initialState()
         initRecyclerView()
+        setAllStaticChechboxes()
+        setObservers()
+        initialState()
 
         fragment_add_ad_near_next_btn.setOnClickListener {
+            sessionManager.clearAddAdNearList()
+            saveNears()
+            Log.e("Sesssion_test_near", "$nears")
+            nears.clear()
             navNextFragment()
         }
 
@@ -84,22 +92,18 @@ class ProfileAddNearFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Check
         span4.setSpan(UnderlineSpan(), 0, fragment_add_ad_near_drop_all.text.toString().length, 0)
     }
 
-    private fun assignCheckbox(checkBox: MaterialCheckBox){
-        checkBox.setOnCheckedChangeListener { btn, b ->
-            sessionManager.setAddAdNearByListItem(checkBox.text.toString().trim(), b)
-        }
+    private fun setObservers(){
+        sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
+            val initialItems = mutableListOf<String>()
+            for(item in it._addAdNearByList) {
+                initialItems.add(item)
+            }
+            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+        })
     }
 
     private fun setAllStaticChechboxes(){
-        assignCheckbox(fragment_add_ad_near_chkbox1)
-        assignCheckbox(fragment_add_ad_near_chkbox2)
-        assignCheckbox(fragment_add_ad_near_chkbox3)
-        assignCheckbox(fragment_add_ad_near_chkbox4)
-        assignCheckbox(fragment_add_ad_near_chkbox5)
-        assignCheckbox(fragment_add_ad_near_chkbox6)
-        assignCheckbox(fragment_add_ad_near_chkbox7)
-        assignCheckbox(fragment_add_ad_near_chkbox8)
-        assignCheckbox(fragment_add_ad_near_chkbox9)
+        checkboxAdapter.addAllItems(staticNearList, isStatic = true)
     }
 
     private fun navNextFragment(){
@@ -121,8 +125,7 @@ class ProfileAddNearFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Check
     }
 
     private fun addNewNear(near: String) {
-        if (!staticNearList.contains(near.capitalize()) &&
-            !checkboxAdapter.getList().contains(near.capitalize()) &&
+        if (!checkboxAdapter.getList().contains(near.capitalize()) &&
             near != "")
             checkboxAdapter.addItem(near)
         fragment_add_ad_near_add_chkbox_et.setText("")
@@ -130,28 +133,28 @@ class ProfileAddNearFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Check
 
     private fun clearAllNear() {
         checkboxAdapter.uncheckAll()
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox1)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox2)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox3)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox4)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox5)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox6)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox7)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox8)
-        uncheckStaticFacilities(fragment_add_ad_near_chkbox9)
-    }
-
-    private fun uncheckStaticFacilities(checkBox: MaterialCheckBox) {
-        checkBox.isChecked = false
+        sessionManager.clearAddAdNearList()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        sessionManager.setAddAdNearByListItem(item, checked)
+        addOrRemoveNear(item, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        sessionManager.setAddAdNearByListItem(item, false)
+        addOrRemoveNear(item, false)
         checkboxAdapter.removeItem(position)
+    }
+
+    private fun addOrRemoveNear(item: String, checked: Boolean) {
+        if (checked)
+            nears.add(item)
+        else
+            nears.remove(item)
+    }
+
+    private fun saveNears(){
+        for (item in nears)
+            sessionManager.setAddAdNearByListItem(item, true)
     }
 }
 

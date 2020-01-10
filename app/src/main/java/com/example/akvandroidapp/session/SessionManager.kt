@@ -141,6 +141,54 @@ constructor(
         Log.e("HOUSE_UPDATE_DATA", "${_houseUpdateData.value}")
     }
 
+    fun setHouseUpdateFacilityItem(facility: String, checked: Boolean){
+        GlobalScope.launch(Main){
+            if (checked)
+                _houseUpdateData.value?.facilitiesList?.add(facility)
+            else
+                _houseUpdateData.value?.facilitiesList?.remove(facility)
+        }
+        Log.e("HOUSE_UPDATE_FACILITI", "${_houseUpdateData.value?.facilitiesList}")
+    }
+
+    fun setHouseUpdateNearItem(near: String, checked: Boolean){
+        GlobalScope.launch(Main){
+            if (checked)
+                _houseUpdateData.value?.nearByList?.add(near)
+            else
+                _houseUpdateData.value?.nearByList?.remove(near)
+        }
+        Log.e("HOUSE_UPDATE_NEAR", "${_houseUpdateData.value?.nearByList}")
+    }
+
+    fun setHouseUpdateRulesItem(rule: String, checked: Boolean){
+        GlobalScope.launch(Main){
+            if (checked)
+                _houseUpdateData.value?.houseRulesList?.add(rule)
+            else
+                _houseUpdateData.value?.houseRulesList?.remove(rule)
+        }
+        Log.e("HOUSE_UPDATE_RULES", "${_houseUpdateData.value?.houseRulesList}")
+    }
+
+    fun clearHouseUpdateFacilities(){
+        GlobalScope.launch(Main) {
+            _houseUpdateData.value?.facilitiesList?.clear()
+        }
+    }
+
+    fun clearHouseUpdateNears(){
+        GlobalScope.launch(Main) {
+            _houseUpdateData.value?.nearByList?.clear()
+        }
+    }
+
+    fun clearHouseUpdateRules(){
+        GlobalScope.launch(Main) {
+            _houseUpdateData.value?.houseRulesList?.clear()
+        }
+    }
+
     // Main Account
 
     fun changeHostMode(host: Boolean) {

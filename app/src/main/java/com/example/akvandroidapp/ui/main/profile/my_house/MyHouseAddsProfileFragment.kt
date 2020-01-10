@@ -65,7 +65,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
         setHasOptionsMenu(true)
         Log.d(TAG, "SettingsProfileFragment: ${viewModel}")
 
-        swipe_refresh.setOnRefreshListener(this)
+        swipe_refresh_1.setOnRefreshListener(this)
 
         initRecyclerView()
         subscribeObservers()
@@ -84,23 +84,6 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
     }
 
     private fun subscribeObservers(){
-//        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
-//            Log.d(TAG, "favorite: ${dataState}")
-//
-//            recyclerAdapter.apply {
-//                Log.d(TAG, "favorite: ${dataState}")
-//
-//                preloadGlideImages(
-//                    requestManager = requestManager,
-//                    list = dataState
-//                )
-//                submitList(
-//                    blogList = dataState,
-//                    isQueryExhausted = true
-//                )
-//            }
-//        })
-
         viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
             if(dataState != null) {
                 handlePagination(dataState)
@@ -198,7 +181,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
 
     override fun onRefresh() {
         onBlogSearchOrFilter()
-        swipe_refresh.isRefreshing = false
+        swipe_refresh_1.isRefreshing = false
     }
 
     private fun onBlogSearchOrFilter(){

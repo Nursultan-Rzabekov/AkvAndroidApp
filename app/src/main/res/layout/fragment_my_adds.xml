@@ -16,20 +16,19 @@
     </View>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+        android:id="@+id/swipe_refresh_1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dim_12dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_my_adds_add_more_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/fragment_my_adds_recycler_view"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -40,6 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dim_16dp"
         android:layout_marginEnd="@dimen/dim_16dp"
+        android:layout_marginTop="@dimen/dim_36dp"
+        android:layout_marginBottom="@dimen/dim_16dp"
         style="@style/BasicOutlinedButton.SlideButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
