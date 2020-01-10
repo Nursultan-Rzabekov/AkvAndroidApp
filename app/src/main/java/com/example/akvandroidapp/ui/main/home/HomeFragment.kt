@@ -23,6 +23,8 @@ class HomeFragment : BaseHomeFragment(),
 
     private lateinit var recyclerAdapter: HomeListAdapter
 
+    //
+
     @Inject
     lateinit var sessionManager: SessionManager
 
