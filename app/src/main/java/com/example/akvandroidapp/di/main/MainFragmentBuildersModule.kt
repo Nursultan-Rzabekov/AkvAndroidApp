@@ -3,6 +3,7 @@ package com.example.akvandroidapp.di.main
 import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
 import com.example.akvandroidapp.ui.main.home.HomeFragment
 import com.example.akvandroidapp.ui.main.messages.ChatMesFragment
+import com.example.akvandroidapp.ui.main.messages.MessagesDetailFragment
 import com.example.akvandroidapp.ui.main.messages.MessagesFragment
 import com.example.akvandroidapp.ui.main.messages.RequestFragment
 import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
@@ -157,5 +158,7 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeRequestFragment(): RequestFragment
 
+    @ContributesAndroidInjector()
+    abstract fun contributeMessagesDetailFragment(): MessagesDetailFragment
 
 }

@@ -1,13 +1,23 @@
 package com.example.akvandroidapp.ui.main.messages.viewmodel
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.akvandroidapp.repository.main.MessagesRepository
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.Loading
 import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
+import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
+import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
+import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
+import com.example.akvandroidapp.util.AbsentLiveData
+import com.example.akvandroidapp.util.Constants
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class MessagesViewModel
@@ -19,11 +29,30 @@ constructor(
     private val editor: SharedPreferences.Editor
 ): BaseViewModel<MessagesStateEvent, MessagesViewState>(){
 
-
     override fun handleStateEvent(stateEvent: MessagesStateEvent): LiveData<DataState<MessagesViewState>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        when(stateEvent){
+            is MessagesStateEvent.ChatInfoEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    messagesRepository.myHouseList(
+                        authToken = authToken,
+                        uri = ""
+                    )
+                }?: AbsentLiveData.create()
+            }
 
+            is MessagesStateEvent.None -> {
+                return liveData {
+                    emit(
+                        DataState(
+                            null,
+                            Loading(false),
+                            null
+                        )
+                    )
+                }
+            }
+        }
+    }
 
     override fun initNewViewState(): MessagesViewState {
         return MessagesViewState()

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.responses.BlogCreateUpdateResponse
 import com.example.akvandroidapp.api.main.responses.BlogGetProfileInfoResponse
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
+import com.example.akvandroidapp.api.main.responses.ChatHistoryResponse
 import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.util.GenericApiResponse
 import okhttp3.MultipartBody
@@ -110,10 +111,13 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<BlogListSearchResponse>>
+
+    @GET("chats/{id}/messages/")
+    fun getChatHistory(
+        @Header("Authorization") authorization: String,
+        @Path("id") postId:String
+    ): LiveData<GenericApiResponse<ChatHistoryResponse>>
 }
-
-
-
 
 
 
