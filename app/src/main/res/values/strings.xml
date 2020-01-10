@@ -369,4 +369,9 @@
     <string name="photos">Фотографии</string>
     <string name="zero_from15">0/15</string>
     <string name="choose_dates">Отметьте те дни, которые вы \nсможете принимать гостей</string>
+    <string name="chats">Чаты</string>
+    <string name="_30_11">30/11</string>
+    <string name="random_message1">А у вас есть такие вещи как полотоенце, рак</string>
+    <string name="random_time1">21:23</string>
+    <string name="random_guest1">/@muratov_d хочет быть вашем гостем.</string>
 </resources>

@@ -16,5 +16,5 @@ data class HouseUpdateData(
     var nearByList: MutableList<String>? = mutableListOf(),
     var availableDates: MutableList<Date>? = mutableListOf(),
     var price: Int? = null,
-    var address: Int? = null
+    var address: String? = null
 )

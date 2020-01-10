@@ -136,6 +136,10 @@ constructor(
 
     fun setHouseUpdateData(houseUpdateData: HouseUpdateData) {
         GlobalScope.launch(Main) {
+            houseUpdateData.facilitiesList = _houseUpdateData.value?.facilitiesList
+            houseUpdateData.nearByList = _houseUpdateData.value?.nearByList
+            houseUpdateData.houseRulesList = _houseUpdateData.value?.houseRulesList
+            houseUpdateData.availableDates = _houseUpdateData.value?.availableDates
             _houseUpdateData.value = houseUpdateData
         }
         Log.e("HOUSE_UPDATE_DATA", "${_houseUpdateData.value}")

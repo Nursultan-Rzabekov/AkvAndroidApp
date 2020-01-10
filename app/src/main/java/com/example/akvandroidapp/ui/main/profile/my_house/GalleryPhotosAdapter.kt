@@ -45,6 +45,10 @@ class GalleryPhotosAdapter(
         notifyItemRemoved(position)
     }
 
+    fun getPhotos(): MutableList<String> {
+        return ArrayList(photos)
+    }
+
     class PhotoViewHolder constructor(
         val requestManager: RequestManager,
         photoView: View,
