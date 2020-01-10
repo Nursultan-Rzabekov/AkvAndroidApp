@@ -46,7 +46,7 @@ class RequestFragment : BaseMessagesFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipe_refresh.setOnRefreshListener(this)
+        swipe_request.setOnRefreshListener(this)
 
         initRecyclerView()
         subscribeObservers()
@@ -89,12 +89,12 @@ class RequestFragment : BaseMessagesFragment(),
     override fun onDestroyView() {
         super.onDestroyView()
         // clear references (can leak memory)
-        blog_post_recyclerview.adapter = null
+        fragment_requests_recycler_view.adapter = null
     }
 
     override fun onRefresh() {
         onBlogSearchOrFilter()
-        swipe_refresh.isRefreshing = false
+        swipe_request.isRefreshing = false
     }
 
     private fun onBlogSearchOrFilter(){
@@ -104,9 +104,9 @@ class RequestFragment : BaseMessagesFragment(),
     }
 
     private  fun resetUI(){
-        blog_post_recyclerview.smoothScrollToPosition(0)
+        fragment_requests_recycler_view.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
-        focusable_view.requestFocus()
+        focusable_view_request.requestFocus()
     }
 
 }

@@ -37,7 +37,7 @@ class HomeFragment : BaseHomeFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipe_refresh.setOnRefreshListener(this)
+        swipe_home.setOnRefreshListener(this)
 
         initRecyclerView()
         subscribeObservers()
@@ -85,7 +85,7 @@ class HomeFragment : BaseHomeFragment(),
 
     override fun onRefresh() {
         onBlogSearchOrFilter()
-        swipe_refresh.isRefreshing = false
+        swipe_home.isRefreshing = false
     }
 
     private fun onBlogSearchOrFilter(){
@@ -97,7 +97,7 @@ class HomeFragment : BaseHomeFragment(),
     private  fun resetUI(){
         fragment_saved_booking_recycler_view.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
-        focusable_view.requestFocus()
+        focusable_view_home.requestFocus()
     }
 
 }
