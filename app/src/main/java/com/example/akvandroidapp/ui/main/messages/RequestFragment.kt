@@ -2,7 +2,11 @@ package com.example.akvandroidapp.ui.main.messages
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
@@ -54,6 +58,22 @@ class RequestFragment : BaseMessagesFragment(),
     }
 
     private fun subscribeObservers(){
+        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
+            Log.d(TAG, "chat: ${dataState}")
+
+            recyclerAdapter.apply {
+                Log.d(TAG, "chat: ${dataState}")
+
+                preloadGlideImages(
+                    requestManager = requestManager,
+                    list = dataState
+                )
+                submitList(
+                    blogList = dataState,
+                    isQueryExhausted = true
+                )
+            }
+        })
     }
 
 
@@ -83,7 +103,13 @@ class RequestFragment : BaseMessagesFragment(),
 
     override fun onItemSelected(position: Int, item: BlogPost) {
         //viewModel.setBlogPost(item)
-        //findNavController().navigate(R.id.action_searchFragment_to_zhilyeFragment)
+
+        val fragment: Fragment = MessagesDetailFragment()
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.replace(R.id.сontainer_messages, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+//        findNavController().navigate(R.id.action_RequestFragment_to_MessagesDetailFragmentt)
     }
 
     override fun onDestroyView() {

@@ -47,7 +47,6 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteListAdapter.Interaction
         fragment_saved_pages_empty_find_btn.setOnClickListener {
             fragment_saved_pages_empty_id.visibility = View.GONE
             fragment_saved_pages_filled_id.visibility = View.VISIBLE
-
             subscribeObservers()
         }
     }

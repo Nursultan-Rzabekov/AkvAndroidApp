@@ -4,6 +4,8 @@ package com.example.akvandroidapp.ui.main.messages
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
 import com.example.akvandroidapp.ui.main.profile.support.MyPagerAdapter
+import com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment
 import com.example.akvandroidapp.ui.main.search.SearchListAdapter
 import com.example.akvandroidapp.ui.main.search.viewmodel.setBlogPost
 import com.example.akvandroidapp.util.Constants.Companion.MAPKIT_API_KEY
@@ -59,6 +62,22 @@ class ChatMesFragment : BaseMessagesFragment(),
     }
 
     private fun subscribeObservers(){
+        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
+            Log.d(TAG, "chat: ${dataState}")
+
+            recyclerAdapter.apply {
+                Log.d(TAG, "chat: ${dataState}")
+
+                preloadGlideImages(
+                    requestManager = requestManager,
+                    list = dataState
+                )
+                submitList(
+                    blogList = dataState,
+                    isQueryExhausted = true
+                )
+            }
+        })
     }
 
 
@@ -88,7 +107,14 @@ class ChatMesFragment : BaseMessagesFragment(),
 
     override fun onItemSelected(position: Int, item: BlogPost) {
         //viewModel.setBlogPost(item)
-        //findNavController().navigate(R.id.action_searchFragment_to_zhilyeFragment)
+
+        val fragment: Fragment = MessagesDetailFragment()
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.replace(R.id.сontainer_messages, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+//        findNavController().navigate(R.id.action_ChatMesFragment_to_MessagesDetailFragmentt)
     }
 
     override fun onDestroyView() {

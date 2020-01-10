@@ -11,5 +11,53 @@
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/fragment_chat_main_layout">
 
+
+
     </fragment>
+
+
+<!--    <fragment android:id="@+id/ChatMesFragment"-->
+<!--        android:name="com.example.akvandroidapp.ui.main.messages.ChatMesFragment"-->
+<!--        android:label="@string/fragment_create_blog"-->
+<!--        tools:layout="@layout/fragment_chats">-->
+
+
+<!--        <action android:id="@+id/action_ChatMesFragment_to_MessagesDetailFragmentt"-->
+<!--            app:destination="@id/MessagesDetailFragment"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            />-->
+
+<!--    </fragment>-->
+<!--    -->
+
+<!--    <fragment android:id="@+id/RequestFragment"-->
+<!--        android:name="com.example.akvandroidapp.ui.main.messages.RequestFragment"-->
+<!--        android:label="@string/fragment_create_blog"-->
+<!--        tools:layout="@layout/fragment_requests">-->
+
+
+<!--        <action android:id="@+id/action_RequestFragment_to_MessagesDetailFragmentt"-->
+<!--            app:destination="@id/MessagesDetailFragment"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            />-->
+
+
+<!--    </fragment>-->
+
+<!--    <fragment android:id="@+id/MessagesDetailFragment"-->
+<!--        android:name="com.example.akvandroidapp.ui.main.messages.MessagesDetailFragment"-->
+<!--        android:label="@string/fragment_create_blog"-->
+<!--        tools:layout="@layout/activity_dialog_layout">-->
+<!--        -->
+<!--    </fragment>-->
+
+
+
+
 </navigation>
