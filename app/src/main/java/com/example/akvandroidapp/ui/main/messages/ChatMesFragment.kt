@@ -51,7 +51,7 @@ class ChatMesFragment : BaseMessagesFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipe_refresh.setOnRefreshListener(this)
+        swipe_chat.setOnRefreshListener(this)
 
         initRecyclerView()
         subscribeObservers()
@@ -94,12 +94,12 @@ class ChatMesFragment : BaseMessagesFragment(),
     override fun onDestroyView() {
         super.onDestroyView()
         // clear references (can leak memory)
-        blog_post_recyclerview.adapter = null
+        fragment_chats_recycler_view.adapter = null
     }
 
     override fun onRefresh() {
         onBlogSearchOrFilter()
-        swipe_refresh.isRefreshing = false
+        swipe_chat.isRefreshing = false
     }
 
     private fun onBlogSearchOrFilter(){
@@ -109,9 +109,9 @@ class ChatMesFragment : BaseMessagesFragment(),
     }
 
     private  fun resetUI(){
-        blog_post_recyclerview.smoothScrollToPosition(0)
+        fragment_chats_recycler_view.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
-        focusable_view.requestFocus()
+        focusable_view_chat.requestFocus()
     }
 
 }

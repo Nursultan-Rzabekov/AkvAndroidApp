@@ -6,6 +6,14 @@
     android:padding="@dimen/dim_32dp"
     android:layout_height="match_parent">
 
+    <View android:layout_width="0.5dp"
+        android:layout_height="0.5dp"
+        android:focusableInTouchMode="true"
+        android:id="@+id/focusable_view_home"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </View>
+
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
@@ -70,12 +78,17 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_saved_booking_recycler_view"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dim_24dp"
-            />
+            android:id="@+id/swipe_home"
+            android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_saved_booking_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_24dp"
+                    />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
