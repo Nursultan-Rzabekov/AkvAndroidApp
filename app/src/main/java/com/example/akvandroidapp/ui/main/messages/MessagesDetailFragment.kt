@@ -25,8 +25,6 @@ class MessagesDetailFragment : BaseMessagesFragment(){
     }
 
 
-
-
 }
 
 
