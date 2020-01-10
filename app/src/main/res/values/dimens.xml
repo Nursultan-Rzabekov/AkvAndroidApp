@@ -37,6 +37,7 @@
     <dimen name="cornerRadius2">30dp</dimen>
     <dimen name="cornerRadius3">5dp</dimen>
     <dimen name="cornerRadius4">16dp</dimen>
+    <dimen name="cornerRadius5">20dp</dimen>
     <dimen name="radius_20">20dp</dimen>
     <dimen name="padding_1">15dp</dimen>
     <dimen name="elevation_5">5dp</dimen>
@@ -52,6 +53,7 @@
     <dimen name="dim_4dp">4dp</dimen>
     <dimen name="dim_8dp">8dp</dimen>
     <dimen name="dim_36dp">36dp</dimen>
+    <dimen name="dim_40dp">40dp</dimen>
     <dimen name="card_item_height">170dp</dimen>
     <dimen name="recycler_loading_view_height">80dp</dimen>
 </resources>
