@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
@@ -50,6 +51,18 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAda
         header_my_adds_change_cancel.setOnClickListener {
             sessionManager.clearHouseUpdateData()
             findNavController().navigateUp()
+        }
+
+        header_my_adds_change_save.setOnClickListener {
+            sessionManager.setHouseUpdateData(
+                HouseUpdateData(
+                    -1,
+                    fragment_my_adds_change_title_et.text.toString().trim(),
+                    fragment_my_adds_change_desc_et.text.toString().trim(),
+                    photosAdapter.getPhotos(),
+                    price = fragment_my_adds_change_price_et.text.toString().toIntOrNull(),
+                    address = fragment_my_adds_change_address_et.text.toString().trim())
+            )
         }
 
         fragment_my_adds_change_rules.setOnClickListener {
