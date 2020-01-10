@@ -2,7 +2,9 @@ package com.example.akvandroidapp.di.main
 
 import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
 import com.example.akvandroidapp.ui.main.home.HomeFragment
+import com.example.akvandroidapp.ui.main.messages.ChatMesFragment
 import com.example.akvandroidapp.ui.main.messages.MessagesFragment
+import com.example.akvandroidapp.ui.main.messages.RequestFragment
 import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.ProfileFragment
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment
@@ -149,7 +151,11 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeMyHouseRulesEditProfileFragment(): MyHouseRulesEditProfileFragment
 
+    @ContributesAndroidInjector()
+    abstract fun contributeChatMesFragment(): ChatMesFragment
 
+    @ContributesAndroidInjector()
+    abstract fun contributeRequestFragment(): RequestFragment
 
 
 }
