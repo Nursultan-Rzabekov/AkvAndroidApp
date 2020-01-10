@@ -39,6 +39,10 @@
             android:windowSoftInputMode="adjustPan"/>
 
         <activity
+            android:name=".ui.main.messages.MessagesDetailActivity"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
             android:name=".ui.main.search.MapActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan">

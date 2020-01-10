@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.messages
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -108,11 +109,8 @@ class ChatMesFragment : BaseMessagesFragment(),
     override fun onItemSelected(position: Int, item: BlogPost) {
         //viewModel.setBlogPost(item)
 
-        val fragment: Fragment = MessagesDetailFragment()
-        val transaction = childFragmentManager.beginTransaction()
-        transaction.replace(R.id.сontainer_messages, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        val intent = Intent(context,MessagesDetailActivity::class.java)
+        startActivity(intent)
 
 //        findNavController().navigate(R.id.action_ChatMesFragment_to_MessagesDetailFragmentt)
     }

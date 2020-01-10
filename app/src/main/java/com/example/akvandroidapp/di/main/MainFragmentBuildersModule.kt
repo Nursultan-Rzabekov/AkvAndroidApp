@@ -3,7 +3,6 @@ package com.example.akvandroidapp.di.main
 import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
 import com.example.akvandroidapp.ui.main.home.HomeFragment
 import com.example.akvandroidapp.ui.main.messages.ChatMesFragment
-import com.example.akvandroidapp.ui.main.messages.MessagesDetailFragment
 import com.example.akvandroidapp.ui.main.messages.MessagesFragment
 import com.example.akvandroidapp.ui.main.messages.RequestFragment
 import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
@@ -15,9 +14,6 @@ import com.example.akvandroidapp.ui.main.profile.my_house.*
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment
-import com.example.akvandroidapp.ui.main.profile.support.GuestProfileFragment
-import com.example.akvandroidapp.ui.main.profile.support.HostProfileFragment
-import com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment
 import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
 import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.ui.main.search.SearchFragment
@@ -158,7 +154,5 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeRequestFragment(): RequestFragment
 
-    @ContributesAndroidInjector()
-    abstract fun contributeMessagesDetailFragment(): MessagesDetailFragment
 
 }
