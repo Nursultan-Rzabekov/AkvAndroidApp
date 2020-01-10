@@ -376,4 +376,5 @@
     <string name="random_guest1">/@muratov_d хочет быть вашем гостем.</string>
     <string name="online">в сети</string>
     <string name="send_eng">send</string>
+    <string name="enter_message">Напишите сообщение...</string>
 </resources>
