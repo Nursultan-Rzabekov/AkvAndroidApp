@@ -139,6 +139,7 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
     private fun clearAllNear() {
         checkboxAdapter.uncheckAll()
         sessionManager.clearHouseUpdateNears()
+        nears.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {

@@ -48,6 +48,7 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAda
         setObservers()
 
         header_my_adds_change_cancel.setOnClickListener {
+            sessionManager.clearHouseUpdateData()
             findNavController().navigateUp()
         }
 

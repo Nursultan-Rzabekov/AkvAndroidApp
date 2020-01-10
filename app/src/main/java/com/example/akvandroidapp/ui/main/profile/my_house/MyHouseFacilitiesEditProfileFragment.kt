@@ -145,6 +145,7 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
         sessionManager.clearHouseUpdateFacilities()
+        facilities?.clear()
     }
 
     private fun addOrRemoveFacility(item: String, checked: Boolean) {

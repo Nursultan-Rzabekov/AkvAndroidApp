@@ -133,7 +133,7 @@ class ProfileAddNearFragment : BaseProfileFragment(), AddAdCheckboxAdapter.Check
 
     private fun clearAllNear() {
         checkboxAdapter.uncheckAll()
-        sessionManager.clearAddAdNearList()
+        nears.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
