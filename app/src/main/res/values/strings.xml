@@ -388,4 +388,5 @@
     <string name="skip">Пропустить</string>
     <string name="profile_other">profile_other</string>
     <string name="profile_me">profile_me</string>
+    <string name="_continue_">Продолжить</string>
 </resources>

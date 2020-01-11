@@ -71,15 +71,22 @@
                 android:layout_marginEnd="@dimen/dim_28dp"
                 android:layout_marginBottom="@dimen/dim_20dp">
 
-                <ImageView
-                    android:id="@+id/fragment_my_adds_detailed_iv"
-                    android:layout_width="76dp"
-                    android:layout_height="68dp"
-                    android:background="@drawable/image_all_corner_back1"
-                    android:contentDescription="@string/appartment"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/test_image_back"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="2dp">
 
+                    <ImageView
+                        android:id="@+id/fragment_my_adds_detailed_iv"
+                        android:layout_width="76dp"
+                        android:layout_height="68dp"
+                        android:background="@drawable/image_all_corner_back1"
+                        android:contentDescription="@string/appartment"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/test_image_back"/>
+
+                </com.google.android.material.card.MaterialCardView>
                 <TextView
                     android:id="@+id/fragment_my_adds_detailed_title_tv"
                     android:layout_width="wrap_content"

@@ -74,6 +74,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             )
         }
         activity_dialog_message_et.setText("")
+        activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
     }
 
     private fun showDialog(){

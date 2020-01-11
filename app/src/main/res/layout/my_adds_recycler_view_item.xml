@@ -27,27 +27,36 @@
                 android:paddingTop="@dimen/dim_16dp"
                 android:paddingBottom="@dimen/dim_16dp">
 
-                <ImageView
-                    android:id="@+id/my_adds_recycler_view_item_iv"
-                    android:layout_width="76dp"
-                    android:layout_height="68dp"
-                    android:background="@drawable/image_all_corner_back1"
-                    android:contentDescription="@string/appartment"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/test_image_back"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/my_adds_recycler_view_item_iv_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:cardUseCompatPadding="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/my_adds_recycler_view_item_iv"
+                        android:layout_width="76dp"
+                        android:layout_height="68dp"
+                        android:background="@drawable/image_all_corner_back1"
+                        android:contentDescription="@string/appartment"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/test_image_back" />
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginStart="@dimen/dim_16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/my_adds_recycler_view_item_iv"
+                    app:layout_constraintBottom_toBottomOf="@+id/my_adds_recycler_view_item_iv_card"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/my_adds_recycler_view_item_iv"
-                    app:layout_constraintTop_toTopOf="@+id/my_adds_recycler_view_item_iv">
+                    app:layout_constraintStart_toEndOf="@+id/my_adds_recycler_view_item_iv_card"
+                    app:layout_constraintTop_toTopOf="@+id/my_adds_recycler_view_item_iv_card">
 
                     <TextView
                         android:id="@+id/my_adds_recycler_view_item_title"
