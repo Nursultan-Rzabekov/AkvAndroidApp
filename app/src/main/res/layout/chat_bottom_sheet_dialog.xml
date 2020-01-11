@@ -28,17 +28,19 @@
                 app:icon="@drawable/ic_camera"
                 app:iconGravity="start"
                 app:iconPadding="@dimen/dim_12dp"
+                app:iconTint="@color/primaryZero"
                 android:paddingTop="@dimen/dim_8dp"
                 android:paddingBottom="@dimen/dim_8dp"
                 android:paddingStart="@dimen/dim_24dp"
                 android:paddingEnd="@dimen/dim_8dp"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
             <View
                 android:id="@+id/divider78"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:foregroundTint="@color/grey8"
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.button.MaterialButton
@@ -51,17 +53,19 @@
                 app:icon="@drawable/ic_gallery"
                 app:iconGravity="start"
                 app:iconPadding="@dimen/dim_12dp"
+                app:iconTint="@color/primaryZero"
                 android:paddingTop="@dimen/dim_8dp"
                 android:paddingBottom="@dimen/dim_8dp"
                 android:paddingStart="@dimen/dim_24dp"
                 android:paddingEnd="@dimen/dim_8dp"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
             <View
                 android:id="@+id/divider46"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:foregroundTint="@color/grey8"
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.button.MaterialButton
@@ -72,6 +76,7 @@
                 android:text="@string/document"
                 android:textAlignment="textStart"
                 app:icon="@drawable/ic_document"
+                app:iconTint="@color/primaryZero"
                 app:iconGravity="start"
                 app:iconPadding="@dimen/dim_12dp"
                 android:paddingTop="@dimen/dim_8dp"
@@ -79,7 +84,7 @@
                 android:paddingStart="@dimen/dim_24dp"
                 android:paddingEnd="@dimen/dim_8dp"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
         </LinearLayout>
 

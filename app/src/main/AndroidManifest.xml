@@ -40,7 +40,7 @@
 
         <activity
             android:name=".ui.main.messages.MessagesDetailActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".ui.main.search.MapActivity"

@@ -17,6 +17,8 @@
             android:id="@+id/activity_dialog_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:transcriptMode="alwaysScroll"
+            app:stackFromEnd="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/activity_dialog_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -95,14 +98,15 @@
 
         <ImageButton
             android:contentDescription="@string/add"
-            android:layout_width="@dimen/dim_24dp"
-            android:layout_height="@dimen/dim_24dp"
+            android:layout_width="@dimen/dim_28dp"
+            android:layout_height="@dimen/dim_28dp"
             style="@style/BasicImageButton"
-            android:id="@+id/add_chat"
+            android:id="@+id/activity_dialog_attach_btn"
             android:src="@drawable/ic_plus_red_center"
             android:scaleType="fitXY"/>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_dialog_message_l_et"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -112,6 +116,7 @@
             android:layout_marginEnd="@dimen/dim_8dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_dialog_message_et"
                 style="@style/BasicEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,9 +130,10 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageButton
+            android:id="@+id/activity_dialog_send_btn"
             android:contentDescription="@string/send_eng"
-            android:layout_width="@dimen/dim_24dp"
-            android:layout_height="@dimen/dim_24dp"
+            android:layout_width="@dimen/dim_36dp"
+            android:layout_height="@dimen/dim_36dp"
             style="@style/BasicImageButton"
             android:src="@drawable/ic_send"
             android:scaleType="fitXY"/>

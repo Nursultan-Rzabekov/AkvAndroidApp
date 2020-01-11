@@ -113,17 +113,20 @@
             android:textAlignment="viewStart"
             android:layout_weight="1"/>
 
-        <TextView
+        <EditText
             android:id="@+id/fragment_profile_account_edit_phonenumber_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/random_phone_number"
+            style="@style/BasicEditText"
+            android:imeOptions="actionDone"
+            android:background="@android:color/transparent"
+            android:hint="@string/phone_number"
+            android:inputType="numberDecimal"
+            android:ellipsize="end"
+            android:maxLength="11"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/primaryZero"
-            android:drawableEnd="@drawable/ic_forward_12dp"
-            android:drawablePadding="@dimen/dim_4dp"
-            android:drawableTint="@color/primaryZero"
             android:textAlignment="viewEnd"
             android:layout_weight="1"/>
 
@@ -140,26 +143,28 @@
 
         <TextView
             android:id="@+id/fragment_profile_account_edit_email_lb"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/email_two_dots"
+            android:lines="1"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textAlignment="viewStart"
             android:layout_weight="1"/>
 
-        <TextView
+        <EditText
             android:id="@+id/fragment_profile_account_edit_email_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/muratov_d_gmail_com"
+            style="@style/BasicEditText"
+            android:imeOptions="actionDone"
+            android:background="@android:color/transparent"
+            android:hint="@string/email"
+            android:ellipsize="end"
             android:textSize="14sp"
             android:textColor="@color/primaryZero"
             android:textStyle="bold"
             android:textAlignment="viewEnd"
-            android:drawableEnd="@drawable/ic_forward_12dp"
-            android:drawablePadding="@dimen/dim_4dp"
-            android:drawableTint="@color/primaryZero"
             android:layout_weight="1"/>
 
     </LinearLayout>

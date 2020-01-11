@@ -53,12 +53,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <CheckBox
+                <androidx.appcompat.widget.AppCompatToggleButton
                     android:id="@+id/search_recycler_item_favourite_btn"
-                    android:layout_width="@dimen/dim_24dp"
+                    android:layout_width="26dp"
                     android:layout_height="@dimen/dim_24dp"
                     android:background="@drawable/favourite_heart_btn"
-                    android:button="@null"
+                    android:textOff=""
+                    android:textOn=""
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

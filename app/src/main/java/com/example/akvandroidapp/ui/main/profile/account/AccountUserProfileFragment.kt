@@ -66,7 +66,12 @@ class AccountUserProfileFragment : BaseProfileFragment() {
     private fun attachProfileInformation(){
         sessionManager.profileInfo.observe(viewLifecycleOwner, Observer{ dataState ->
             fragment_profile_account_birthdate_tv.text = dataState.birthdate.toString()
-            fragment_profile_account_gender_tv.text = dataState.gender.toString()
+            fragment_profile_account_gender_tv.text =
+                when (dataState.gender){
+                    0 -> getString(R.string.woman)
+                    1 -> getString(R.string.man)
+                    else -> getString(R.string.man)
+                }
             fragment_profile_account_phonenumber_tv.text = dataState.phonenumber.toString()
             fragment_profile_account_email_tv.text = dataState.email.toString()
             header_profile_account_tv.text = dataState.nickname.toString()

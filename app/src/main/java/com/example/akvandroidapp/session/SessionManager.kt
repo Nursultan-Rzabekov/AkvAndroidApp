@@ -313,7 +313,16 @@ constructor(
             _addAdInfo.value?._addAd7DaysDiscount = days7
             _addAdInfo.value?._addAd30DaysDiscount = days30
         }
-        Log.e("SESSION_ADD_PRICE", "${_addAdInfo.value?._addAdPrice}")
+        Log.e("SESSION_ADD_PRICE", "${_addAdInfo.value?._addAd7DaysDiscount}")
+    }
+
+    fun clearAddAdPriceAndDiscounts(){
+        GlobalScope.launch(Main){
+            _addAdInfo.value?._addAdPrice = 0
+            _addAdInfo.value?._addAd7DaysDiscount = 0
+            _addAdInfo.value?._addAd30DaysDiscount = 0
+        }
+        Log.e("SESSION_CLEAR_PRICE", "${_addAdInfo.value?._addAd7DaysDiscount}")
     }
 
     fun setAddAdImage(imageUri1: Uri?, imageUri2: Uri?, imageUri3: Uri?, imageUri4: Uri?, imageUri5: Uri?, imageUri6: Uri?){

@@ -38,6 +38,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -85,12 +86,25 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
         }
 
         fragment_profile_account_edit_birth_tv.setOnClickListener {
-            showDatePicker()
+            showDatePicker(fragment_profile_account_edit_birth_tv.text.toString())
         }
     }
 
+    private fun getGender(): Int{
+        when(fragment_profile_account_edit_gender_radio_group.checkedRadioButtonId){
+            fragment_profile_account_edit_woman_btn.id -> return 0
+            fragment_profile_account_edit_man_btn.id -> return 1
+        }
+        return 0
+    }
+
     private fun saveUserAccounts(){
-        // sessionManager.setProfileInfo(image1)
+        sessionManager.setProfileInfo(
+            header_profile_account_edit_tv.text.toString(),
+            fragment_profile_account_edit_birth_tv.text.toString(),
+            getGender(),
+            fragment_profile_account_edit_phonenumber_tv.text.toString(),
+            fragment_profile_account_edit_email_tv.text.toString())
         editInfo()
         subscribeObservers()
     }
@@ -98,19 +112,19 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
     private fun attachUserAccounts(){
         sessionManager.profileInfo.observe(viewLifecycleOwner, Observer { dataState ->
             fragment_profile_account_edit_birth_tv.text = dataState.birthdate.toString()
-            when(dataState.gender.toString()) {
-                fragment_profile_account_edit_woman_btn.text.toString() -> {
+            when(dataState.gender) {
+                0 -> {
                     fragment_profile_account_edit_gender_radio_group.check(fragment_profile_account_edit_woman_btn.id)
                 }
-                fragment_profile_account_edit_man_btn.text.toString() -> {
+                1 -> {
                     fragment_profile_account_edit_gender_radio_group.check(fragment_profile_account_edit_man_btn.id)
                 }
                 else -> {
                     fragment_profile_account_edit_gender_radio_group.check(fragment_profile_account_edit_man_btn.id)
                 }
             }
-            fragment_profile_account_edit_phonenumber_tv.text = dataState.phonenumber.toString()
-            fragment_profile_account_edit_email_tv.text = dataState.email.toString()
+            fragment_profile_account_edit_phonenumber_tv.setText(dataState.phonenumber.toString())
+            fragment_profile_account_edit_email_tv.setText(dataState.email.toString())
             header_profile_account_edit_tv.text = dataState.nickname.toString()
 
             Glide.with(this).load(
@@ -186,17 +200,21 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
         )
     }
 
-    private fun showDatePicker(){
+    private fun showDatePicker(date: String){
         Locale.setDefault(Locale("ru"))
 
-        val c = Calendar.getInstance()
-        val brYear = c.get(Calendar.YEAR)
-        val brMonth = c.get(Calendar.MONTH)
-        val brDay = c.get(Calendar.DAY_OF_MONTH)
+        val dd = date.split('-')[2]
+        val mm = date.split('-')[1]
+        val yy = date.split('-')[0]
+
+//        val c = Calendar.getInstance()
+//        val sdf = SimpleDateFormat("yy-mm-dd", Locale.getDefault())
+//        c.time = sdf.parse(date)!!
 
         val dpd = DatePickerDialog(requireContext(), R.style.MySpinnerDatePickerStyle,
             DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
-            }, brYear, brMonth, brDay)
+                fragment_profile_account_edit_birth_tv.text = ("$i-${i2+1}-$i3")
+            }, yy.toInt(), mm.toInt()-1, dd.toInt())
 
         dpd.show()
         dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)

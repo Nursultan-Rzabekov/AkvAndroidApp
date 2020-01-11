@@ -169,7 +169,8 @@ constructor(
 
                 Log.d(TAG,"PostCreateHouse 444444 + ${response.body.phone}")
 
-                sessionManager.setProfileInfo(response.body.first_name,
+                sessionManager.setProfileInfo(
+                    response.body.first_name,
                     response.body.birth_day,
                     response.body.gender,
                     response.body.phone,

@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:paddingTop="@dimen/dim_20dp"
             android:paddingStart="@dimen/dim_24dp"
             android:paddingBottom="@dimen/dim_20dp"
@@ -49,6 +50,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/hotel_del_luxe"
+                        android:layout_marginEnd="@dimen/dim_8dp"
+                        android:lines="1"
+                        android:ellipsize="end"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 
