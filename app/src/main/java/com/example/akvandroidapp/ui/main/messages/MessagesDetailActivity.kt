@@ -1,16 +1,35 @@
 package com.example.akvandroidapp.ui.main.messages
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.BaseActivity
+import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
 import com.example.akvandroidapp.ui.main.messages.models.Message
+import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.util.Constants.Companion.GALLERY_REQUEST_CODE
+import com.example.akvandroidapp.util.Constants.Companion.PICK_FILE_CODE
+import com.example.akvandroidapp.util.Constants.Companion.REQUEST_IMAGE_CAPTURE
+import com.example.akvandroidapp.util.ErrorHandling
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_dialog.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_support_main.*
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetDialogChatInteraction,
@@ -18,6 +37,10 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 {
 
     private val mUserId: String = "123"
+    private val myDataTransfer = arrayOf<Bundle?>(null)
+    private lateinit var currentPhotoPath: String
+    private lateinit var currentPhotoUri: Uri
+    private lateinit var currentFileUri: Uri
 
     private lateinit var chatAdapter: ChatRecyclerAdapter
     private val modalBottomSheet: ModalBottomSheetChat = ModalBottomSheetChat(this)
@@ -82,22 +105,145 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     }
 
     override fun onCameraClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if(isStoragePermissionGranted())
+            dispatchTakePictureIntent()
+        if (modalBottomSheet.isVisible)
+            modalBottomSheet.dismiss()
     }
 
     override fun onPhotoClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (isStoragePermissionGranted())
+            pickFromGallery()
+        if (modalBottomSheet.isVisible)
+            modalBottomSheet.dismiss()
     }
 
     override fun onDocumentClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (isStoragePermissionGranted())
+            dispatchTakeFileIntent()
+        if (modalBottomSheet.isVisible)
+            modalBottomSheet.dismiss()
     }
 
     override fun onCancelClicked() {
-        modalBottomSheet.dismiss()
+        if (modalBottomSheet.isVisible)
+            modalBottomSheet.dismiss()
     }
 
     override fun onRefresh() {
         swipe_messages.isRefreshing = false
     }
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            .also { takePictureIntent ->
+                takePictureIntent.resolveActivity(packageManager)
+                    ?.also {
+
+                        val photoFile: File? = try{
+                            createImageFile()
+                        } catch (ex: IOException){
+                            null
+                        }
+
+                        photoFile?.also {
+                            val photoUri: Uri = FileProvider.getUriForFile(
+                                this,
+                                "com.example.akvandroidapp.fileprovider",
+                                it
+                            )
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                        }
+                    }
+            }
+    }
+
+    private fun dispatchTakeFileIntent() {
+        Intent(Intent.ACTION_GET_CONTENT)
+            .apply {
+                type = "*/*"
+            }.also {
+                startActivityForResult(
+                    Intent.createChooser(it, "Choose a file"),
+                    PICK_FILE_CODE
+                )
+            }
+    }
+
+    private fun pickFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        val mimeTypes = arrayOf("image/jpeg", "image/png", "image/jpg")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+
+        val myData = Bundle()
+        myData.putString("where", "RED")
+        myDataTransfer[GALLERY_REQUEST_CODE] = myData
+
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        startActivityForResult(Intent.createChooser(intent, "Choose photos"), GALLERY_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK){
+            when(requestCode){
+                REQUEST_IMAGE_CAPTURE -> {
+                    data?.data?.let {
+                        currentPhotoUri = it
+                    }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
+                    Log.e("MESSAGE_CAMERA_PATH", currentPhotoPath.toString())
+                }
+
+                GALLERY_REQUEST_CODE -> {
+                    data?.data?.let { uri ->
+                        currentPhotoUri = uri
+
+                    }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
+                    //temporary variable
+                    val myData = myDataTransfer[requestCode]
+
+                    Log.e("MESSAGE_GALLEY_URI", currentPhotoUri.toString())
+                }
+
+                PICK_FILE_CODE -> {
+                    data?.data?.let {
+                        currentFileUri = it
+                    }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_FILE)
+                    Log.e("MESSAGE_DOCUMENT_URI", currentFileUri.toString())
+                }
+            }
+        }
+        else if (resultCode == Activity.RESULT_CANCELED)
+            Log.e("MESSAGE_INTENT_CANCELED", "cancelled")
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    fun showErrorDialog(errorMessage: String){
+        onDataStateChange(
+            DataState(
+                Event(StateError(Response(errorMessage, ResponseType.Dialog()))),
+                Loading(isLoading = false),
+                Data(Event.dataEvent(null), null)
+            )
+        )
+    }
+
 }

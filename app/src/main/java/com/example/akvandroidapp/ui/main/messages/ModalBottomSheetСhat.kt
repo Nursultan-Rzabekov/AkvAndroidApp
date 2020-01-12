@@ -31,8 +31,20 @@ class ModalBottomSheetChat(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.cancel_sheet.setOnClickListener {
+        view.chat_bottom_sheet_dialog_cancel_btn.setOnClickListener {
             bottomSheetDialogInteraction.onCancelClicked()
+        }
+
+        view.chat_bottom_sheet_dialog_camera_btn.setOnClickListener {
+            bottomSheetDialogInteraction.onCameraClicked()
+        }
+
+        view.chat_bottom_sheet_dialog_photo_btn.setOnClickListener {
+            bottomSheetDialogInteraction.onPhotoClicked()
+        }
+
+        view.chat_bottom_sheet_dialog_document_btn.setOnClickListener {
+            bottomSheetDialogInteraction.onDocumentClicked()
         }
     }
 

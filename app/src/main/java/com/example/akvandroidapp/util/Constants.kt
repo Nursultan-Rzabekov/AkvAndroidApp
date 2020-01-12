@@ -15,6 +15,8 @@ class Constants {
         const val PAGINATION_PAGE_SIZE = 3
 
         const val GALLERY_REQUEST_CODE = 0
+        const val REQUEST_IMAGE_CAPTURE = 15
+        const val PICK_FILE_CODE = 30
 
         const val FONT_SIZE = 15f
         const val MARGIN_SIZE = 3f
