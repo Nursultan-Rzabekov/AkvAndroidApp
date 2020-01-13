@@ -32,6 +32,10 @@ class Constants {
         const val FILTER_TYPE2 = "rating"
         const val FILTER_TYPE3 = "price"
 
+        const val MESSAGE_TYPE_TEXT = 0
+        const val MESSAGE_TYPE_PHOTO = 1
+        const val MESSAGE_TYPE_DOC = 2
+
         val mapFacilities = mapOf(
             "Отопление" to 1,
             "Wifi" to 2,

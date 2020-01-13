@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.RequestManager
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.util.Constants.Companion.PERMISSIONS_REQUEST_READ_STORAGE
 import dagger.android.support.DaggerAppCompatActivity
@@ -23,6 +24,9 @@ abstract class BaseActivity: DaggerAppCompatActivity(),
 
     @Inject
     lateinit var sessionManager: SessionManager
+
+    @Inject
+    lateinit var requestManager: RequestManager
 
     override fun onUIMessageReceived(uiMessage: UIMessage) {
         when(uiMessage.uiMessageType){
