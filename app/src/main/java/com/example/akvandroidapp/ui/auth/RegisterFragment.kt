@@ -74,11 +74,7 @@ class RegisterFragment : BaseAuthFragment() {
         }
 
         sign_detail_birth_et.setOnClickListener {
-            showDatePicker()
-        }
-
-        sign_detail_gender_group.setOnCheckedChangeListener { radioGroup, i ->
-            onGenderChanged(i)
+            showDatePicker(sign_detail_birth_et.text.toString())
         }
 
         term_privacy.makeLinks(
@@ -214,35 +210,29 @@ class RegisterFragment : BaseAuthFragment() {
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
-    private fun showDatePicker(){
+    private fun showDatePicker(date: String){
         Locale.setDefault(Locale("ru"))
 
-        val c = Calendar.getInstance()
-        val brYear = c.get(Calendar.YEAR)
-        val brMonth = c.get(Calendar.MONTH)
-        val brDay = c.get(Calendar.DAY_OF_MONTH)
+        val dd = date.split('-')[2]
+        val mm = date.split('-')[1]
+        val yy = date.split('-')[0]
+
+//        val c = Calendar.getInstance()
+//        val brYear = c.get(Calendar.YEAR)
+//        val brMonth = c.get(Calendar.MONTH)
+//        val brDay = c.get(Calendar.DAY_OF_MONTH)
 
         val dpd = DatePickerDialog(requireContext(), R.style.MySpinnerDatePickerStyle,
             DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
-                sign_detail_birth_et.setText(("$i-$i2-$i3"))
-            }, brYear, brMonth, brDay)
+                sign_detail_birth_et.setText(("$i-${i2+1}-$i3"))
+            }, yy.toInt(), mm.toInt()-1, dd.toInt())
 
         dpd.show()
         dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)
     }
 
-    private fun onGenderChanged(id: Int){
-        if (id == sign_detail_man_btn.id){
-            sign_detail_man_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            sign_detail_woman_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-        }else{
-            sign_detail_man_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            sign_detail_woman_btn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-        }
-    }
-
     private fun getGender(): Int{
-        if (sign_detail_gender_group.checkedRadioButtonId == sign_detail_man_btn.id) return 1
-        return 2
+        if (sign_detail_gender_group.checkedRadioButtonId == sign_detail_man_btn.id) return 0
+        return 1
     }
 }
