@@ -192,10 +192,12 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         if (resultCode == Activity.RESULT_OK){
             when(requestCode){
                 REQUEST_IMAGE_CAPTURE -> {
-                    data?.data?.let {
-                        currentPhotoUri = it
-                    }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
-                    Log.e("MESSAGE_CAMERA_PATH", currentPhotoPath.toString())
+                    try {
+                        currentPhotoUri = Uri.parse(currentPhotoPath)
+                    }catch (ex: Exception){
+                        showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
+                    }
+                    Log.e("MESSAGE_CAMERA_URI", "$currentPhotoUri")
                 }
 
                 GALLERY_REQUEST_CODE -> {
