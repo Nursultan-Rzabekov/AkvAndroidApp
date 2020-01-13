@@ -14,12 +14,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
+import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
+import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.support.MyPagerAdapter
 import com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment
 import com.example.akvandroidapp.ui.main.search.SearchListAdapter
 import com.example.akvandroidapp.ui.main.search.viewmodel.setBlogPost
+import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants.Companion.MAPKIT_API_KEY
+import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
@@ -79,7 +84,48 @@ class ChatMesFragment : BaseMessagesFragment(),
                 )
             }
         })
+
+//        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
+//            if(dataState != null) {
+//                handlePagination(dataState)
+//                stateChangeListener.onDataStateChange(dataState)
+//            }
+//        })
+//
+//        viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
+//            if(viewState != null){
+//                if(viewState.myChatFields.blogList.isNotEmpty()){
+//                    recyclerAdapter.apply {
+//                        Log.d(TAG, "Search results responses: ${viewState.myChatFields.blogList}")
+//
+//                        submitList(
+//                            blogList = viewState.myChatFields.blogList,
+//                            isQueryExhausted = viewState.myChatFields.isQueryExhausted
+//                        )
+//                    }
+//                }
+//            }
+//        })
     }
+
+//    private fun handlePagination(dataState: DataState<MessagesViewState>){
+//        dataState.data?.let {
+//            it.data?.let{
+//                it.getContentIfNotHandled()?.let{
+//                    viewModel.handleIncomingBlogListData(it)
+//                }
+//            }
+//        }
+//
+//        dataState.error?.let{ event ->
+//            event.peekContent().response.message?.let{
+//                if(ErrorHandling.isPaginationDone(it)){
+//                    event.getContentIfNotHandled()
+//                    viewModel.setQueryExhausted(true)
+//                }
+//            }
+//        }
+//    }
 
 
     private fun initRecyclerView(){

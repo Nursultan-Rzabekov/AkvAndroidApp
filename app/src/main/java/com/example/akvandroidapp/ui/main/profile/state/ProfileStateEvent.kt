@@ -17,6 +17,9 @@ sealed class ProfileStateEvent {
         val _addAdPrice: Int,
         val _addAd7DaysDiscount: Int,
         val _addAd30DaysDiscount: Int,
+        val facilitiesList: List<String>,
+        val nearbyList: List<String>,
+        val rulesList: List<String>,
         val image: ArrayList<MultipartBody.Part>? = null
     ): ProfileStateEvent()
 

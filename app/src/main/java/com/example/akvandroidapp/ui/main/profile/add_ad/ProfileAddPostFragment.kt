@@ -119,6 +119,9 @@ class ProfileAddPostFragment : BaseProfileFragment(){
                 addAdInfo._addAdPrice,
                 addAdInfo._addAd7DaysDiscount,
                 addAdInfo._addAd30DaysDiscount,
+                addAdInfo._addAdFacilityList,
+                addAdInfo._addAdNearByList,
+                addAdInfo._addAdRulesList,
                 multipartBodyList
             )
         )

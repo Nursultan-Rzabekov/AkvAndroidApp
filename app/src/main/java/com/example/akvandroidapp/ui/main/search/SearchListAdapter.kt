@@ -193,7 +193,6 @@ class SearchListAdapter(
                 }
             }
 
-
             if(item.image!=null){
                 requestManager
                     .load(item.image)

@@ -7,6 +7,7 @@ import com.example.akvandroidapp.api.auth.OpenApiAuthService
 import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.example.akvandroidapp.api.auth.network_responses.LoginResponse
 import com.example.akvandroidapp.api.auth.network_responses.RegistrationResponse
+import com.example.akvandroidapp.api.auth.network_responses.UserResponse
 import com.example.akvandroidapp.entity.AccountProperties
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.persistence.AccountPropertiesDao
@@ -145,7 +146,7 @@ constructor(
     ): LiveData<DataState<AuthViewState>>{
 
         val registrationFieldErrors = RegistrationFields(email, first_name, birth_day).isValidForRegistration()
-        if(!registrationFieldErrors.equals(RegistrationFields.RegistrationError.none())){
+        if(registrationFieldErrors != RegistrationFields.RegistrationError.none()){
             return returnErrorResponse(registrationFieldErrors, ResponseType.Dialog())
         }
 
@@ -174,7 +175,7 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<RegistrationResponse>) {
 
-                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
+                if(response.body.errorMessage.equals(GENERIC_AUTH_ERROR)){
                     return onErrorReturn(response.body.errorMessage, true, false)
                 }
 
