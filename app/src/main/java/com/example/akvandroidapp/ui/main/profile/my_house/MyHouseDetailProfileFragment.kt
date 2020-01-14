@@ -7,15 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
+import kotlinx.android.synthetic.main.fragment_my_adds_change.*
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.my_adds_recycler_view_item.view.*
+import javax.inject.Inject
 
 
 class MyHouseDetailProfileFragment : BaseProfileFragment() {
@@ -27,6 +32,9 @@ class MyHouseDetailProfileFragment : BaseProfileFragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_adds_detailed_layout, container, false)
     }
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     private var argument:BlogPost? = null
 
@@ -49,7 +57,6 @@ class MyHouseDetailProfileFragment : BaseProfileFragment() {
             .error(R.drawable.test_image_back)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(fragment_my_adds_detailed_iv)
-
 
 
         earning.setOnClickListener {

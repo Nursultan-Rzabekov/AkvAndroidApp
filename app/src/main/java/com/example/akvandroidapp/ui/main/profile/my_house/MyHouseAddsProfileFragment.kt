@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.AddAdInfo
+import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.favorite.FavoriteListAdapter
@@ -97,6 +98,11 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
                     recyclerAdapter.apply {
                         Log.d(TAG, "Search results responses: ${viewState.myHouseFields.blogList}")
 
+
+                        preloadGlideImages(
+                            requestManager = requestManager,
+                            list = viewState.myHouseFields.blogList
+                        )
                         submitList(
                             blogList = viewState.myHouseFields.blogList,
                             isQueryExhausted = viewState.myHouseFields.isQueryExhausted
@@ -142,6 +148,16 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
 
     private fun navNextDetailFragment(item: BlogPost){
         val bundle = bundleOf("item" to item)
+        sessionManager.setHouseUpdateData(
+            HouseUpdateData(
+                -1,
+                item.name,
+                item.name,
+                price = item.price,
+                address = item.house_type.toString())
+        )
+        sessionManager.setHouseUpdateFacilityItem("Утюг", true)
+
         findNavController().navigate(R.id.action_profileMyHouseAddsProfileFragment_to_profileMyHouseDetailProfileFragment,bundle)
     }
 
@@ -170,7 +186,6 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
     }
 
     override fun onItemSelected(position: Int, item: BlogPost) {
-        //viewModel.setBlogPost(item)
         navNextDetailFragment(item)
     }
 
@@ -197,6 +212,6 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
     }
 
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
-        recyclerAdapter.removeAt(position)
+
     }
 }

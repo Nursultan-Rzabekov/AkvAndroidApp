@@ -41,7 +41,6 @@
                     style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/title"
                     android:textSize="20sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +71,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="top|start"
                     android:maxLines="10"
-                    android:hint="@string/dscription"
                     android:inputType="textMultiLine"
                     android:textSize="13sp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -240,7 +238,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top|start"
-                    android:hint="@string/price"
                     android:inputType="numberDecimal"
                     android:textSize="20sp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -269,7 +266,6 @@
                     style="@style/BasicEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/address"
                     android:gravity="top|start"
                     android:textSize="18sp"/>
             </com.google.android.material.textfield.TextInputLayout>

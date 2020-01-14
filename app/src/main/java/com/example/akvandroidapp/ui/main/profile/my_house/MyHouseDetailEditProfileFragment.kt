@@ -6,11 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
@@ -36,6 +39,7 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAda
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_adds_change_layout, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -103,7 +107,7 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAda
             fragment_my_adds_change_desc_et.setText(it.description.toString())
             fragment_my_adds_change_price_et.setText(it.price.toString())
             fragment_my_adds_change_address_et.setText(it.address.toString())
-            fragment_my_adds_change_photos_tv.text = ("${it.photosList.size.toString()}/15")
+            fragment_my_adds_change_photos_tv.text = ("${it.photosList.size}/15")
             photosAdapter.submitList(it.photosList)
         })
     }

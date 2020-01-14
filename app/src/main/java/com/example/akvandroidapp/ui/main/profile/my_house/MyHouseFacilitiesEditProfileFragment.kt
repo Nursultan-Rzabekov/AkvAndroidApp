@@ -75,7 +75,6 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         main_back_img_btn.setOnClickListener {
             sessionManager.clearHouseUpdateFacilities()
             saveFacilities()
-            Log.e("house_test_faci", "$facilities")
             facilities?.clear()
             findNavController().navigateUp()
         }

@@ -210,6 +210,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     }
 
     override fun onRefresh() {
+        onBlogSearchOrFilter()
         swipe_messages.isRefreshing = false
     }
 

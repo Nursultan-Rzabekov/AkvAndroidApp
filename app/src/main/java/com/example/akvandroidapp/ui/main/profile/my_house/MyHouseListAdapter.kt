@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.AddAdInfo
+import com.example.akvandroidapp.ui.main.search.SearchListAdapter
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.my_adds_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
@@ -41,7 +42,44 @@ class MyHouseListAdapter(
         0.0
     )
 
-    private var items: MutableList<BlogPost> = ArrayList()
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
+
+        override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    private val differ =
+        AsyncListDiffer(
+            MyHouseRecyclerChangeCallback(this),
+            AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
+        )
+
+
+    internal inner class MyHouseRecyclerChangeCallback(
+        private val adapter: MyHouseListAdapter
+    ) : ListUpdateCallback {
+
+        override fun onChanged(position: Int, count: Int, payload: Any?) {
+            adapter.notifyItemRangeChanged(position, count, payload)
+        }
+
+        override fun onInserted(position: Int, count: Int) {
+            adapter.notifyItemRangeChanged(position, count)
+        }
+
+        override fun onMoved(fromPosition: Int, toPosition: Int) {
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun onRemoved(position: Int, count: Int) {
+            adapter.notifyDataSetChanged()
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType){
@@ -86,28 +124,40 @@ class MyHouseListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MyHouseViewHolder -> {
-                holder.bind(items[position])
+                holder.bind(differ.currentList[position])
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    override fun getItemViewType(position: Int): Int {
+        if(differ.currentList[position].id > -1){
+            return BLOG_ITEM
+        }
+        return differ.currentList[position].id
     }
 
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
 
-    fun removeAt(position: Int) {
-        items.removeAt(position)
-        notifyItemRemoved(position)
+    fun preloadGlideImages(
+        requestManager: RequestManager,
+        list: List<BlogPost>
+    ){
+        for(blogPost in list){
+            requestManager
+                .load(blogPost.image)
+                .error(R.drawable.test_image_back)
+                .preload()
+
+        }
     }
 
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
-
-        newList?.let {
-            items = newList
-            Log.d("sea","Search : + ${items}")
-        }
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+        differ.submitList(newList)
     }
 
     class MyHouseViewHolder
@@ -119,7 +169,7 @@ class MyHouseListAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: BlogPost) = with(itemView) {
-            itemView.my_adds_recycler_view_item_detail_btn.setOnClickListener {
+            itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
