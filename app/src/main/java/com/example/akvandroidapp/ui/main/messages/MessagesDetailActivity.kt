@@ -17,7 +17,9 @@ import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
-import com.example.akvandroidapp.ui.main.messages.models.Message
+import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
+import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
+import com.example.akvandroidapp.ui.main.messages.models.MessageText
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Constants.Companion.GALLERY_REQUEST_CODE
 import com.example.akvandroidapp.util.Constants.Companion.PICK_FILE_CODE
@@ -85,23 +87,22 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     }
 
     private fun mookDate(){
-        chatAdapter.addMessage(Message("124", "asdsd"))
-        chatAdapter.addMessage(Message("123", "asdsd"))
-        chatAdapter.addMessage(Message("123", "asdsd"))
-        chatAdapter.addMessage(Message("124", "asdsd"))
-        chatAdapter.addMessage(Message("123", "asdsd"))
+        chatAdapter.addMessage(MessageText("124", "asdsd"))
+        chatAdapter.addMessage(MessageText("123", "asdsd"))
+        chatAdapter.addMessage(MessageText("123", "asdsd"))
+        chatAdapter.addMessage(MessageText("124", "asdsd"))
+        chatAdapter.addMessage(MessageText("123", "asdsd"))
         //chatAdapter.addMessage(Message("123", "", Constants.MESSAGE_TYPE_PHOTO, Uri.parse("content://media/external/images/media/24437")))
     }
 
     private fun sendMessage(){
         val message = activity_dialog_message_et.text.toString()
         if (message.trim() != ""){
-            chatAdapter.addMessage(
-                Message(mUserId, message)
-            )
+            sendMessageWithType(
+                Constants.MESSAGE_TYPE_TEXT,
+                body = message)
         }
         activity_dialog_message_et.setText("")
-        activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
     }
 
     private fun showDialog(){
@@ -199,7 +200,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             when(requestCode){
                 REQUEST_IMAGE_CAPTURE -> {
                     try {
-                        addMessageWithType(
+                        sendMessageWithType(
                             Constants.MESSAGE_TYPE_PHOTO,
                             uriOfFile = currentPhotoUri)
                     }catch (ex: Exception){
@@ -211,7 +212,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 GALLERY_REQUEST_CODE -> {
                     data?.data?.let { uri ->
                         currentPhotoUri = uri
-                        addMessageWithType(
+                        sendMessageWithType(
                             Constants.MESSAGE_TYPE_PHOTO,
                             uriOfFile = uri)
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
@@ -234,7 +235,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                                 cursor.moveToFirst()
                                 fileName = cursor.getString(nameIndex)
                                 fileSize = cursor.getLong(sizeIndex)
-                                addMessageWithType(
+                                sendMessageWithType(
                                     Constants.MESSAGE_TYPE_DOC,
                                     fileName = fileName,
                                     fileSize = fileSize)
@@ -273,26 +274,27 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         )
     }
 
-    fun addMessageWithType(type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
+    fun sendMessageWithType(type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
         when( type ){
             Constants.MESSAGE_TYPE_TEXT -> {
                 chatAdapter.addMessage(
-                    Message(mUserId, body, type)
+                    MessageText(mUserId, body)
                 )
             }
             Constants.MESSAGE_TYPE_PHOTO -> {
                 chatAdapter.addMessage(
-                    Message(mUserId, "", type, uriOfFile)
+                    MessagePhoto(mUserId, uriOfFile)
                 )
             }
             Constants.MESSAGE_TYPE_DOC -> {
                 chatAdapter.addMessage(
-                    Message(mUserId, "", type,
+                    MessageDocument(mUserId,
                         fileName = fileName,
                         fileSize = Converters.humanReadableByteCountSI(fileSize))
                 )
             }
         }
+        activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
     }
 
 }

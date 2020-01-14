@@ -35,6 +35,7 @@ class Constants {
         const val MESSAGE_TYPE_TEXT = 0
         const val MESSAGE_TYPE_PHOTO = 1
         const val MESSAGE_TYPE_DOC = 2
+        const val MESSAGE_TYPE_REQUEST = 3
 
         val mapFacilities = mapOf(
             "Отопление" to 1,
