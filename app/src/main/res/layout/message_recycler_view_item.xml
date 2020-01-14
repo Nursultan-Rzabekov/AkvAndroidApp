@@ -2,14 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
-    <TextView
-        android:textSize="16sp"
-        android:id="@+id/tvBody"
-        android:padding="@dimen/dim_8dp"
-        android:textColor="@color/white"
-        android:background="@color/primaryZero"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/dim_4dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/message_recycler_view_item_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        app:cardBackgroundColor="@color/primaryZero">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dim_4dp"
+            android:paddingBottom="@dimen/dim_4dp"
+            android:paddingStart="@dimen/dim_8dp"
+            android:paddingEnd="@dimen/dim_8dp">
+
+            <TextView
+                android:textSize="16sp"
+                android:id="@+id/tvBody"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
 </LinearLayout>

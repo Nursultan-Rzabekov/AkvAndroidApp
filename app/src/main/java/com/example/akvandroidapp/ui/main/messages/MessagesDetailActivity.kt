@@ -7,19 +7,24 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
-import com.example.akvandroidapp.ui.main.messages.models.Message
+import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
+import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
+import com.example.akvandroidapp.ui.main.messages.models.MessageText
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Constants.Companion.GALLERY_REQUEST_CODE
 import com.example.akvandroidapp.util.Constants.Companion.PICK_FILE_CODE
 import com.example.akvandroidapp.util.Constants.Companion.REQUEST_IMAGE_CAPTURE
+import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.ErrorHandling
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -76,28 +81,28 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     private fun initRecyclerView(){
         activity_dialog_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@MessagesDetailActivity).apply { stackFromEnd = true }
-            chatAdapter = ChatRecyclerAdapter(mUserId)
+            chatAdapter = ChatRecyclerAdapter(requestManager, mUserId)
             adapter = chatAdapter
         }
     }
 
     private fun mookDate(){
-        chatAdapter.addMessage(Message("124", "asdsd"))
-        chatAdapter.addMessage(Message("123", "asdsd"))
-        chatAdapter.addMessage(Message("123", "asdsd"))
-        chatAdapter.addMessage(Message("124", "asdsd"))
-        chatAdapter.addMessage(Message("123", "asdsd"))
+        chatAdapter.addMessage(MessageText("124", "asdsd"))
+        chatAdapter.addMessage(MessageText("123", "asdsd"))
+        chatAdapter.addMessage(MessageText("123", "asdsd"))
+        chatAdapter.addMessage(MessageText("124", "asdsd"))
+        chatAdapter.addMessage(MessageText("123", "asdsd"))
+        //chatAdapter.addMessage(Message("123", "", Constants.MESSAGE_TYPE_PHOTO, Uri.parse("content://media/external/images/media/24437")))
     }
 
     private fun sendMessage(){
         val message = activity_dialog_message_et.text.toString()
         if (message.trim() != ""){
-            chatAdapter.addMessage(
-                Message(mUserId, message)
-            )
+            sendMessageWithType(
+                Constants.MESSAGE_TYPE_TEXT,
+                body = message)
         }
         activity_dialog_message_et.setText("")
-        activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
     }
 
     private fun showDialog(){
@@ -149,10 +154,12 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                         photoFile?.also {
                             val photoUri: Uri = FileProvider.getUriForFile(
                                 this,
-                                "com.example.akvandroidapp.fileprovider",
+                                BuildConfig.APPLICATION_ID + ".fileprovider",
                                 it
                             )
                             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+                            currentPhotoUri = photoUri
+                            Log.e("MESSAGE_CAMERA_BITMAP", "$photoUri")
                             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
                         }
                     }
@@ -193,7 +200,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             when(requestCode){
                 REQUEST_IMAGE_CAPTURE -> {
                     try {
-                        currentPhotoUri = Uri.parse(currentPhotoPath)
+                        sendMessageWithType(
+                            Constants.MESSAGE_TYPE_PHOTO,
+                            uriOfFile = currentPhotoUri)
                     }catch (ex: Exception){
                         showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                     }
@@ -203,7 +212,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 GALLERY_REQUEST_CODE -> {
                     data?.data?.let { uri ->
                         currentPhotoUri = uri
-
+                        sendMessageWithType(
+                            Constants.MESSAGE_TYPE_PHOTO,
+                            uriOfFile = uri)
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                     //temporary variable
                     val myData = myDataTransfer[requestCode]
@@ -212,8 +223,23 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 }
 
                 PICK_FILE_CODE -> {
+                    var fileName: String
+                    var fileSize: Long
                     data?.data?.let {
                         currentFileUri = it
+                        contentResolver
+                            .query(it, null, null, null, null)
+                            ?.use { cursor ->
+                                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                                cursor.moveToFirst()
+                                fileName = cursor.getString(nameIndex)
+                                fileSize = cursor.getLong(sizeIndex)
+                                sendMessageWithType(
+                                    Constants.MESSAGE_TYPE_DOC,
+                                    fileName = fileName,
+                                    fileSize = fileSize)
+                        }
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_FILE)
                     Log.e("MESSAGE_DOCUMENT_URI", currentFileUri.toString())
                 }
@@ -246,6 +272,29 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 Data(Event.dataEvent(null), null)
             )
         )
+    }
+
+    fun sendMessageWithType(type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
+        when( type ){
+            Constants.MESSAGE_TYPE_TEXT -> {
+                chatAdapter.addMessage(
+                    MessageText(mUserId, body)
+                )
+            }
+            Constants.MESSAGE_TYPE_PHOTO -> {
+                chatAdapter.addMessage(
+                    MessagePhoto(mUserId, uriOfFile)
+                )
+            }
+            Constants.MESSAGE_TYPE_DOC -> {
+                chatAdapter.addMessage(
+                    MessageDocument(mUserId,
+                        fileName = fileName,
+                        fileSize = Converters.humanReadableByteCountSI(fileSize))
+                )
+            }
+        }
+        activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
     }
 
 }

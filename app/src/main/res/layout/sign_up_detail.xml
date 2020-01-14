@@ -183,7 +183,7 @@
                 android:button="@android:color/transparent"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/F"
-                android:textColor="@color/white"
+                android:textColor="@drawable/cheked_color_selector"
                 android:textAlignment="center" />
 
             <RadioButton
@@ -191,6 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@drawable/cheked_color_selector"
                 android:background="@drawable/man_radio_btn"
                 android:button="@android:color/transparent"
                 android:text="@string/M"

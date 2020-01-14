@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dim_4dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/message_request_view_item_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        app:strokeColor="@color/primaryZero"
+        app:strokeWidth="1dp"
+        app:cardBackgroundColor="@color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dim_24dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/cornerRadius1">
+
+                <ImageView
+                    android:id="@+id/message_request_view_item_iv"
+                    android:contentDescription="@string/request_under_procesing"
+                    android:layout_width="160dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/test_image_back"
+                    android:scaleType="centerCrop"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/message_request_view_item_title"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/hotel_del_luxe"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/dim_4dp"/>
+
+            <View
+                android:id="@+id/divider58"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/dim_60dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/message_request_view_item_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/request_under_procesing"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/dim_4dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
