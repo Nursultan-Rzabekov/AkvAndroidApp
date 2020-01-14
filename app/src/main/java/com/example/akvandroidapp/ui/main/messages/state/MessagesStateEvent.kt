@@ -5,9 +5,6 @@ import okhttp3.MultipartBody
 
 
 sealed class MessagesStateEvent {
-    data class ChatInfoEvent(
-        var uri: String? = null
-    ): MessagesStateEvent()
-
+    class ChatInfoEvent: MessagesStateEvent()
     class None: MessagesStateEvent()
 }

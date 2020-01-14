@@ -48,7 +48,6 @@ abstract class BaseSearchFragment : DaggerFragment(){
         viewModel.cancelActiveJobs()
     }
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try{

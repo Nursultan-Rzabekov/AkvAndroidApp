@@ -2,6 +2,10 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.UserChatMessages
+import com.example.akvandroidapp.entity.UserConversationMessages
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
+import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 
 fun SearchViewModel.setQuery(query: String){
@@ -10,9 +14,28 @@ fun SearchViewModel.setQuery(query: String){
     setViewState(update)
 }
 
+fun DetailsViewModel.setQuery(query: String){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.target = query
+    setViewState(update)
+}
+
 fun SearchViewModel.setBlogListData(blogList: List<BlogPost>){
     val update = getCurrentViewStateOrNew()
     update.blogFields.blogList = blogList
+    setViewState(update)
+}
+
+
+fun MessagesViewModel.setBlogListData(blogList: List<UserChatMessages>){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.blogList = blogList
+    setViewState(update)
+}
+
+fun DetailsViewModel.setBlogListData(blogList: List<UserConversationMessages>){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.blogList = blogList
     setViewState(update)
 }
 
@@ -46,6 +69,18 @@ fun ProfileViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun MessagesViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
+fun DetailsViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryInProgress = isInProgress
@@ -55,6 +90,18 @@ fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
 fun ProfileViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun MessagesViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun DetailsViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.isQueryInProgress = isInProgress
     setViewState(update)
 }
 

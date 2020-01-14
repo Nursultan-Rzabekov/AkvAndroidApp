@@ -1,4 +1,10 @@
 import android.util.Log
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsStateEvent
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
+import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
+import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
+import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
@@ -22,6 +28,18 @@ fun ProfileViewModel.resetPage(){
     setViewState(update)
 }
 
+fun MessagesViewModel.resetPage(){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.page = 1
+    setViewState(update)
+}
+
+fun DetailsViewModel.resetPage(){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.page = 1
+    setViewState(update)
+}
+
 fun SearchViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
@@ -37,10 +55,33 @@ fun ProfileViewModel.loadFirstPage() {
     setStateEvent(ProfileStateEvent.MyHouseEvent())
 }
 
+fun MessagesViewModel.loadFirstPage() {
+    setQueryInProgress(true)
+    setQueryExhausted(false)
+    resetPage()
+    Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.myChatFields}")
+    setStateEvent(MessagesStateEvent.ChatInfoEvent())
+}
+
+fun DetailsViewModel.loadFirstPage() {
+    setQueryInProgress(true)
+    setQueryExhausted(false)
+    resetPage()
+    Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.myChatFields}")
+    setStateEvent(DetailsStateEvent.ChatDetailEvent())
+}
+
 private fun SearchViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.blogFields.page // get current page
     update.blogFields.page = page + 1
+    setViewState(update)
+}
+
+private fun MessagesViewModel.incrementPageNumber(){
+    val update = getCurrentViewStateOrNew()
+    val page = update.myChatFields.page // get current page
+    update.myChatFields.page = page + 1
     setViewState(update)
 }
 
@@ -58,6 +99,16 @@ fun SearchViewModel.nextPage(){
         incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(SearchStateEvent.BlogSearchEvent())
+    }
+}
+
+fun MessagesViewModel.nextPage(){
+    if(!viewState.value!!.myChatFields.isQueryInProgress
+        && !viewState.value!!.myChatFields.isQueryExhausted){
+        Log.d(TAG, "BlogViewModel: Attempting to load next page...")
+        incrementPageNumber()
+        setQueryInProgress(true)
+        setStateEvent(MessagesStateEvent.ChatInfoEvent())
     }
 }
 
@@ -80,6 +131,29 @@ fun SearchViewModel.handleIncomingBlogListData(viewState: SearchViewState){
     setQueryInProgress(viewState.blogFields.isQueryInProgress)
     setQueryExhausted(viewState.blogFields.isQueryExhausted)
     setBlogListData(viewState.blogFields.blogList)
+}
+
+
+fun MessagesViewModel.handleIncomingBlogListData(viewState: MessagesViewState){
+    Log.d(TAG, "BlogViewModel, DataState: ${viewState}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.myChatFields.isQueryInProgress}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.myChatFields.isQueryExhausted}")
+    setQueryInProgress(viewState.myChatFields.isQueryInProgress)
+    setQueryExhausted(viewState.myChatFields.isQueryExhausted)
+    setBlogListData(viewState.myChatFields.blogList)
+}
+
+fun DetailsViewModel.handleIncomingBlogListData(viewState: DetailsViewState){
+    Log.d(TAG, "BlogViewModel, DataState: ${viewState}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.myChatFields.isQueryInProgress}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.myChatFields.isQueryExhausted}")
+    setQueryInProgress(viewState.myChatFields.isQueryInProgress)
+    setQueryExhausted(viewState.myChatFields.isQueryExhausted)
+    setBlogListData(viewState.myChatFields.blogList)
 }
 
 

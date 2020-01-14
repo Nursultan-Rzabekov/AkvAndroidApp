@@ -9,37 +9,52 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.View
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
 import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
 import com.example.akvandroidapp.ui.main.messages.models.MessageText
+import com.example.akvandroidapp.ui.main.search.viewmodel.setQuery
+import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Constants.Companion.GALLERY_REQUEST_CODE
 import com.example.akvandroidapp.util.Constants.Companion.PICK_FILE_CODE
 import com.example.akvandroidapp.util.Constants.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.ErrorHandling
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
+import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
+import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
 import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.fragment_support_main.*
+import kotlinx.android.synthetic.main.fragment_explore_active.*
+import kotlinx.android.synthetic.main.search_part_layout.*
+import loadFirstPage
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetDialogChatInteraction,
     SwipeRefreshLayout.OnRefreshListener
 {
+
+    lateinit var stateChangeListener: DataStateChangeListener
+    @Inject
+    lateinit var providerFactory: ViewModelProviderFactory
+    lateinit var viewModel: DetailsViewModel
 
     private val mUserId: String = "123"
     private val myDataTransfer = arrayOf<Bundle?>(null)
@@ -57,10 +72,17 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dialog_layout)
 
-        swipe_messages.setOnRefreshListener(this)
+        viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
+        stateChangeListener = this
+
 
         initRecyclerView()
-        mookDate()
+        subscribeObservers()
+
+        swipe_messages.setOnRefreshListener(this)
+
+
+//        mookDate()
 
         activity_dialog_attach_btn.setOnClickListener {
             showDialog()
@@ -73,9 +95,70 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         activity_dialog_send_btn.setOnClickListener {
             sendMessage()
         }
+
+        val target =  intent.getStringExtra("name")
+
+        viewModel.setQuery(target!!).let {
+            onBlogSearchOrFilter()
+        }
+    }
+
+    private fun onBlogSearchOrFilter(){
+        viewModel.loadFirstPage().let {
+            resetUI()
+        }
+    }
+
+    private  fun resetUI(){
+        activity_dialog_recycler_view.smoothScrollToPosition(0)
+        stateChangeListener.hideSoftKeyboard()
     }
 
     override fun expandAppBar() {
+    }
+
+    private fun subscribeObservers(){
+        viewModel.dataState.observe(this, androidx.lifecycle.Observer{ dataState ->
+            if(dataState != null) {
+                handlePagination(dataState)
+                stateChangeListener.onDataStateChange(dataState)
+            }
+        })
+
+        viewModel.viewState.observe(this, androidx.lifecycle.Observer{ viewState ->
+            if(viewState != null){
+                if(viewState.myChatFields.blogList.isNotEmpty()){
+
+                    Log.d("name","name + ${viewState.myChatFields.blogList}")
+                    for(i in viewState.myChatFields.blogList){
+                        chatAdapter.addMessage(MessageText(i.user.toString(),i.body.toString()))
+                    }
+                }
+            }
+        })
+    }
+
+    private fun handlePagination(dataState: DataState<DetailsViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.handleIncomingBlogListData(it)
+                }
+            }
+        }
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+                if(ErrorHandling.isPaginationDone(it)){
+
+                    // handle the error message event so it doesn't display in UI
+                    event.getContentIfNotHandled()
+
+                    // set query exhausted to update RecyclerView with
+                    // "No more results..." list item
+                    viewModel.setQueryExhausted(true)
+                }
+            }
+        }
     }
 
     private fun initRecyclerView(){
@@ -84,15 +167,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             chatAdapter = ChatRecyclerAdapter(requestManager, mUserId)
             adapter = chatAdapter
         }
-    }
-
-    private fun mookDate(){
-        chatAdapter.addMessage(MessageText("124", "asdsd"))
-        chatAdapter.addMessage(MessageText("123", "asdsd"))
-        chatAdapter.addMessage(MessageText("123", "asdsd"))
-        chatAdapter.addMessage(MessageText("124", "asdsd"))
-        chatAdapter.addMessage(MessageText("123", "asdsd"))
-        //chatAdapter.addMessage(Message("123", "", Constants.MESSAGE_TYPE_PHOTO, Uri.parse("content://media/external/images/media/24437")))
     }
 
     private fun sendMessage(){

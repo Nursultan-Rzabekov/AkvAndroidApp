@@ -9,8 +9,10 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
+import kotlinx.android.synthetic.main.chats_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
 class ChatListAdapter(
@@ -23,29 +25,22 @@ class ChatListAdapter(
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
 
-    private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
+    private val NO_MORE_RESULTS_BLOG_MARKER = UserChatMessages(
         NO_MORE_RESULTS,
         "" ,
-        0,
-        0,
-        false,
-        0.0,
-        0.0,
         "",
         "",
-        0,
-        0,
-        "",
-        0.0
+        ""
+
     )
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UserChatMessages>() {
 
-        override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+        override fun areItemsTheSame(oldItem: UserChatMessages, newItem: UserChatMessages): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+        override fun areContentsTheSame(oldItem: UserChatMessages, newItem: UserChatMessages): Boolean {
             return oldItem == newItem
         }
 
@@ -140,12 +135,18 @@ class ChatListAdapter(
     // This also ensures if the network connection is lost, they will be in the cache
     fun preloadGlideImages(
         requestManager: RequestManager,
-        list: List<BlogPost>
+        list: List<UserChatMessages>
     ){
+        for(allChats in list){
+            requestManager
+                .load(allChats.userpic)
+                .error(R.drawable.test_image_back)
+                .preload()
+        }
     }
 
 
-    fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
+    fun submitList(blogList: List<UserChatMessages>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
@@ -159,15 +160,25 @@ class ChatListAdapter(
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: BlogPost) = with(itemView) {
+        fun bind(item: UserChatMessages) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
+
+            requestManager
+                .load(item.userpic)
+                .error(R.drawable.test_image_back)
+                .transition(withCrossFade())
+                .into(itemView.chats_recycler_view_item_civ)
+
+            itemView.chats_recycler_view_item_from_tv.text = item.email
+            itemView.chats_recycler_view_item_last_message_tv.text = item.first_name
+
         }
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: BlogPost)
+        fun onItemSelected(position: Int, item: UserChatMessages)
     }
 
 

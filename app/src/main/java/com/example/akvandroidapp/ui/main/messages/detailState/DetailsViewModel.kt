@@ -1,7 +1,6 @@
-package com.example.akvandroidapp.ui.main.messages.viewmodel
+package com.example.akvandroidapp.ui.main.messages.detailState
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.akvandroidapp.repository.main.MessagesRepository
@@ -9,38 +8,34 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
-import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
-import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
-import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
-import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
+import com.example.akvandroidapp.ui.main.search.viewmodel.getTargetQuery
 import com.example.akvandroidapp.util.AbsentLiveData
-import com.example.akvandroidapp.util.Constants
-import okhttp3.MediaType
-import okhttp3.RequestBody
 import javax.inject.Inject
 
-class MessagesViewModel
+class DetailsViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
     private val messagesRepository: MessagesRepository,
     private val sharedPreferences: SharedPreferences,
     private val editor: SharedPreferences.Editor
-): BaseViewModel<MessagesStateEvent, MessagesViewState>(){
+): BaseViewModel<DetailsStateEvent, DetailsViewState>(){
 
-    override fun handleStateEvent(stateEvent: MessagesStateEvent): LiveData<DataState<MessagesViewState>> {
+
+    override fun handleStateEvent(stateEvent: DetailsStateEvent): LiveData<DataState<DetailsViewState>> {
         when(stateEvent){
-            is MessagesStateEvent.ChatInfoEvent -> {
+            is DetailsStateEvent.ChatDetailEvent -> {
                 return sessionManager.cachedToken.value?.let { authToken ->
-                    messagesRepository.myChatsList(
+                    messagesRepository.myConversationsList(
                         authToken = authToken,
+                        target = getTargetQuery(),
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
             }
 
-            is MessagesStateEvent.None -> {
+            is DetailsStateEvent.None -> {
                 return liveData {
                     emit(
                         DataState(
@@ -54,8 +49,8 @@ constructor(
         }
     }
 
-    override fun initNewViewState(): MessagesViewState {
-        return MessagesViewState()
+    override fun initNewViewState(): DetailsViewState {
+        return DetailsViewState()
     }
 
 //    fun cancelActiveJobs(){
@@ -64,7 +59,7 @@ constructor(
 //    }
 
     fun handlePendingData(){
-        setStateEvent(MessagesStateEvent.None())
+        setStateEvent(DetailsStateEvent.None())
     }
 
     override fun onCleared() {

@@ -6,25 +6,29 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class UserProfileInfoResponse(
+class UserConversationsInfoResponse(
 
     @SerializedName("id")
     @Expose
     var id: Int,
 
-    @SerializedName("first_name")
+    @SerializedName("user")
     @Expose
-    var first_name: String,
+    var user: String,
 
-    @SerializedName("last_name")
+    @SerializedName("recipient")
     @Expose
-    var last_name: String,
+    var recipient: String,
 
-    @SerializedName("email")
+    @SerializedName("body")
     @Expose
-    var email: String,
+    var body: String,
 
-    @SerializedName("userpic")
+    @SerializedName("created_at")
     @Expose
-    var userpic: String
+    var created_at: String,
+
+    @SerializedName("updated_at")
+    @Expose
+    var updated_at: String
 ):Parcelable

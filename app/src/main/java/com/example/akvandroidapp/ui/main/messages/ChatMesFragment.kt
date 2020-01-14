@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
@@ -31,12 +32,15 @@ import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
+import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.fragment_chat_main.*
 import kotlinx.android.synthetic.main.fragment_chats.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.fragment_support_main.*
 import kotlinx.android.synthetic.main.map.*
 import kotlinx.android.synthetic.main.search_part_layout.*
+import loadFirstPage
+import nextPage
 import javax.inject.Inject
 
 
@@ -65,67 +69,74 @@ class ChatMesFragment : BaseMessagesFragment(),
         initRecyclerView()
         subscribeObservers()
 
+
+        viewModel.loadFirstPage()
+
     }
 
     private fun subscribeObservers(){
-        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
-            Log.d(TAG, "chat: ${dataState}")
+//        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
+//            Log.d(TAG, "chat: ${dataState}")
+//
+//            recyclerAdapter.apply {
+//                Log.d(TAG, "chat: ${dataState}")
+//
+//                preloadGlideImages(
+//                    requestManager = requestManager,
+//                    list = dataState
+//                )
+//                submitList(
+//                    blogList = dataState,
+//                    isQueryExhausted = true
+//                )
+//            }
+//        })
 
-            recyclerAdapter.apply {
-                Log.d(TAG, "chat: ${dataState}")
-
-                preloadGlideImages(
-                    requestManager = requestManager,
-                    list = dataState
-                )
-                submitList(
-                    blogList = dataState,
-                    isQueryExhausted = true
-                )
+        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
+            if(dataState != null) {
+                handlePagination(dataState)
+                stateChangeListener.onDataStateChange(dataState)
             }
         })
 
-//        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
-//            if(dataState != null) {
-//                handlePagination(dataState)
-//                stateChangeListener.onDataStateChange(dataState)
-//            }
-//        })
-//
-//        viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
-//            if(viewState != null){
-//                if(viewState.myChatFields.blogList.isNotEmpty()){
-//                    recyclerAdapter.apply {
-//                        Log.d(TAG, "Search results responses: ${viewState.myChatFields.blogList}")
-//
-//                        submitList(
-//                            blogList = viewState.myChatFields.blogList,
-//                            isQueryExhausted = viewState.myChatFields.isQueryExhausted
-//                        )
-//                    }
-//                }
-//            }
-//        })
+        viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
+            if(viewState != null){
+                if(viewState.myChatFields.blogList.isNotEmpty()){
+                    recyclerAdapter.apply {
+                        Log.d(TAG, "Search results responses: ${viewState.myChatFields.blogList}")
+
+                        preloadGlideImages(
+                            requestManager = requestManager,
+                            list = viewState.myChatFields.blogList
+                        )
+                        submitList(
+                            blogList = viewState.myChatFields.blogList,
+                            isQueryExhausted = viewState.myChatFields.isQueryExhausted
+                        )
+                    }
+                }
+            }
+        })
     }
 
-//    private fun handlePagination(dataState: DataState<MessagesViewState>){
-//        dataState.data?.let {
-//            it.data?.let{
-//                it.getContentIfNotHandled()?.let{
-//                    viewModel.handleIncomingBlogListData(it)
-//                }
-//            }
-//        }
-//
-//        dataState.error?.let{ event ->
-//            event.peekContent().response.message?.let{
-//                if(ErrorHandling.isPaginationDone(it)){
-//                    event.getContentIfNotHandled()
-//                    viewModel.setQueryExhausted(true)
-//                }
-//            }
-//        }
-//    }
+    private fun handlePagination(dataState: DataState<MessagesViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.handleIncomingBlogListData(it)
+                }
+            }
+        }
+
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+                if(ErrorHandling.isPaginationDone(it)){
+                    event.getContentIfNotHandled()
+                    viewModel.setQueryExhausted(true)
+                }
+            }
+        }
+    }
 
 
     private fun initRecyclerView(){
@@ -136,26 +147,27 @@ class ChatMesFragment : BaseMessagesFragment(),
             addItemDecoration(topSpacingDecorator)
 
             recyclerAdapter = ChatListAdapter(requestManager,  this@ChatMesFragment)
-//            addOnScrollListener(object: RecyclerView.OnScrollListener(){
-//
-//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                    super.onScrollStateChanged(recyclerView, newState)
-//                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-//                    val lastPosition = layoutManager.findLastVisibleItemPosition()
-//                    if (lastPosition == recyclerAdapter.itemCount.minus(1)) {
-//                        Log.d(TAG, "BlogFragment: attempting to load next page...")
-//                        viewModel.nextPage()
-//                    }
-//                }
-//            })
+            addOnScrollListener(object: RecyclerView.OnScrollListener(){
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val lastPosition = layoutManager.findLastVisibleItemPosition()
+                    if (lastPosition == recyclerAdapter.itemCount.minus(1)) {
+                        Log.d(TAG, "BlogFragment: attempting to load next page...")
+                        viewModel.nextPage()
+                    }
+                }
+            })
             adapter = recyclerAdapter
         }
     }
 
-    override fun onItemSelected(position: Int, item: BlogPost) {
+    override fun onItemSelected(position: Int, item: UserChatMessages) {
         //viewModel.setBlogPost(item)
 
         val intent = Intent(context,MessagesDetailActivity::class.java)
+        intent.putExtra("name",item.email)
         startActivity(intent)
 
 //        findNavController().navigate(R.id.action_ChatMesFragment_to_MessagesDetailFragmentt)
@@ -173,9 +185,9 @@ class ChatMesFragment : BaseMessagesFragment(),
     }
 
     private fun onBlogSearchOrFilter(){
-//        viewModel.loadFirstPage().let {
-//            resetUI()
-//        }
+        viewModel.loadFirstPage().let {
+            resetUI()
+        }
     }
 
     private  fun resetUI(){

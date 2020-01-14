@@ -2,6 +2,8 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
+import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 
 
@@ -81,6 +83,25 @@ fun SearchViewModel.getSearchQuery(): String {
 fun SearchViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.blogFields.page
+    }
+}
+
+
+fun MessagesViewModel.getPage(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.myChatFields.page
+    }
+}
+
+fun DetailsViewModel.getPage(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.myChatFields.page
+    }
+}
+
+fun DetailsViewModel.getTargetQuery(): String {
+    getCurrentViewStateOrNew().let {
+        return it.myChatFields.target
     }
 }
 

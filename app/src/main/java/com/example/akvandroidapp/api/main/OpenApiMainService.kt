@@ -1,11 +1,7 @@
 package com.example.akvandroidapp.api.main
 
 import androidx.lifecycle.LiveData
-import com.example.akvandroidapp.api.main.responses.BlogCreateUpdateResponse
-import com.example.akvandroidapp.api.main.responses.BlogGetProfileInfoResponse
-import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
-import com.example.akvandroidapp.api.main.responses.ChatHistoryResponse
-import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
+import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.util.GenericApiResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -116,10 +112,22 @@ interface OpenApiMainService {
     fun getChatHistory(
         @Header("Authorization") authorization: String,
         @Path("id") postId:String
-    ): LiveData<GenericApiResponse<ChatHistoryResponse>>
+    ): LiveData<GenericApiResponse<AllChatsResponse>>
 
 
+    @GET("chat_sessions/")
+    fun getAllChats(
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<AllChatsResponse>>
 
+
+    @GET("messages/")
+    fun getConversations(
+        @Header("Authorization") authorization: String,
+        @Query("target") target: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<ConverstaionsResponse>>
 }
 
 

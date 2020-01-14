@@ -142,7 +142,7 @@ constructor(
             }
 
             override fun setJob(job: Job) {
-                addJob("createNewBlogPost", job)
+                addJob("createNewBlogPost3", job)
             }
 
         }.asLiveData()
@@ -206,7 +206,7 @@ constructor(
             }
 
             override fun setJob(job: Job) {
-                addJob("createNewBlogPost", job)
+                addJob("createNewBlogPost1", job)
             }
 
         }.asLiveData()
@@ -362,7 +362,7 @@ constructor(
             }
 
             override fun setJob(job: Job) {
-                addJob("searchBlogPosts", job)
+                addJob("myhouseBlogPosts", job)
             }
 
         }.asLiveData()
