@@ -55,8 +55,6 @@ class HomeFragment : BaseHomeFragment(),
         initRecyclerView()
         subscribeObservers()
 
-        listEmptyState()
-
         viewModel.loadFirstPage()
     }
 
@@ -70,22 +68,28 @@ class HomeFragment : BaseHomeFragment(),
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer {viewState ->
             if (viewState != null){
-                if (viewState.homeReservationField.reservationList.isNotEmpty()){
-                    val trips = viewState.homeReservationField.reservationList.size
-                    val guests = viewState.homeReservationField.reservationList.sumBy { it.guests!! }
-                    listFilledState(trips, guests)
-                    recyclerAdapter.apply {
-                        preloadGlideImages(
-                            requestManager = requestManager,
-                            list = viewState.homeReservationField.reservationList
-                        )
-                        submitList(
-                            blogList = viewState.homeReservationField.reservationList,
-                            isQueryExhausted = viewState.homeReservationField.isQueryExhausted
-                        )
+                if (viewState.homeReservationField.count == 0)
+                    recyclerAdapter.submitList(
+                        blogList = viewState.homeReservationField.reservationList,
+                        isQueryExhausted = viewState.homeReservationField.isQueryExhausted
+                    )
+                else {
+                    if (viewState.homeReservationField.reservationList.isNotEmpty()) {
+                        val trips = viewState.homeReservationField.count
+                        val guests =
+                            viewState.homeReservationField.reservationList.sumBy { it.guests!! }
+                        listFilledState(trips, guests)
+                        recyclerAdapter.apply {
+                            preloadGlideImages(
+                                requestManager = requestManager,
+                                list = viewState.homeReservationField.reservationList
+                            )
+                            submitList(
+                                blogList = viewState.homeReservationField.reservationList,
+                                isQueryExhausted = viewState.homeReservationField.isQueryExhausted
+                            )
+                        }
                     }
-                }else{
-                    listEmptyState()
                 }
             }
         })
@@ -162,17 +166,11 @@ class HomeFragment : BaseHomeFragment(),
     }
 
     private fun listEmptyState(){
-        fragment_saved_booking_lb2.visibility = View.VISIBLE
-        fragment_saved_booking_recycler_view.visibility = View.GONE
-
         fragment_saved_booking_trips_tv.text = "0 поездки"
         fragment_saved_booking_guets_tv.text = "0 гостей"
     }
 
     private fun listFilledState(trips: Int, guests: Int){
-        fragment_saved_booking_lb2.visibility = View.GONE
-        fragment_saved_booking_recycler_view.visibility = View.VISIBLE
-
         fragment_saved_booking_trips_tv.text = ("$trips поездки")
         fragment_saved_booking_guets_tv.text = ("$guests гостей")
     }

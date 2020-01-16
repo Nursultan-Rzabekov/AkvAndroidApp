@@ -11,7 +11,8 @@ class HomeViewState (
         var reservationList: List<HomeReservation> = ArrayList(),
         var page: Int = 1,
         var isQueryInProgress: Boolean = false,
-        var isQueryExhausted: Boolean = false
+        var isQueryExhausted: Boolean = false,
+        var count: Int = 0
     )
 }
 

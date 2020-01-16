@@ -76,7 +76,8 @@ constructor(
                                 HomeViewState.HomeReservationField(
                                     reservationList = reservationsList,
                                     isQueryExhausted = false,
-                                    isQueryInProgress = true
+                                    isQueryInProgress = true,
+                                    count = response.body.count
                                 )
                             )
                         )
