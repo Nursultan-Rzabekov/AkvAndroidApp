@@ -2,12 +2,16 @@ package com.example.akvandroidapp.ui.main.home.viewmodel
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.akvandroidapp.repository.main.HomeRepository
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.Loading
 import com.example.akvandroidapp.ui.main.home.state.HomeStateEvent
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
+import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
+import com.example.akvandroidapp.util.AbsentLiveData
 import javax.inject.Inject
 
 class HomeViewModel
@@ -21,7 +25,27 @@ constructor(
 
 
     override fun handleStateEvent(stateEvent: HomeStateEvent): LiveData<DataState<HomeViewState>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when(stateEvent){
+            is HomeStateEvent.HomeInfoEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    homeRepository.getReservations(
+                        authToken = it,
+                        page = getPage()
+                    )
+                }?:AbsentLiveData.create()
+            }
+            is HomeStateEvent.None -> {
+                return liveData {
+                    emit(
+                        DataState(
+                            null,
+                            Loading(false),
+                            null
+                        )
+                    )
+                }
+            }
+        }
     }
 
 

@@ -1,6 +1,8 @@
 package com.example.akvandroidapp.ui.main.home
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
@@ -39,6 +41,21 @@ abstract class BaseHomeFragment : DaggerFragment(){
 
     fun cancelActiveJobs(){
         viewModel.cancelActiveJobs()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            stateChangeListener = context as DataStateChangeListener
+        }catch(e: ClassCastException){
+            Log.e(TAG, "$context must implement DataStateChangeListener" )
+        }
+
+        try{
+            uiCommunicationListener = context as UICommunicationListener
+        }catch(e: ClassCastException){
+            Log.e(TAG, "$context must implement UICommunicationListener" )
+        }
     }
 
 }

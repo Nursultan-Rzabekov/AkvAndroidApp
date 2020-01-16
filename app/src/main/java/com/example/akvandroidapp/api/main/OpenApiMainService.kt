@@ -137,8 +137,9 @@ interface OpenApiMainService {
 
     @GET("reservations/")
     fun getReservations(
-        @Header("Authorization") authorization: String
-    )
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<HomeListResponse>>
 }
 
 

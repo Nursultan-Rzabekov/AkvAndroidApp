@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
@@ -153,6 +154,12 @@ fun SearchViewModel.getUpdatedBlogUri(): Uri? {
 fun ProfileViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.myHouseFields.page
+    }
+}
+
+fun HomeViewModel.getPage(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.homeReservationField.page
     }
 }
 

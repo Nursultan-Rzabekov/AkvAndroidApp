@@ -1,4 +1,7 @@
 import android.util.Log
+import com.example.akvandroidapp.ui.main.home.state.HomeStateEvent
+import com.example.akvandroidapp.ui.main.home.state.HomeViewState
+import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsStateEvent
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
@@ -54,6 +57,12 @@ fun DetailsViewModel.resetPage(){
     setViewState(update)
 }
 
+fun HomeViewModel.resetPage(){
+    val update = getCurrentViewStateOrNew()
+    update.homeReservationField.page = 1
+    setViewState(update)
+}
+
 fun SearchViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
@@ -85,6 +94,14 @@ fun DetailsViewModel.loadFirstPage() {
     setStateEvent(DetailsStateEvent.ChatDetailEvent())
 }
 
+fun HomeViewModel.loadFirstPage(){
+    setQueryInProgress(true)
+    setQueryExhausted(false)
+    resetPage()
+    Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.homeReservationField}")
+    setStateEvent(HomeStateEvent.HomeInfoEvent())
+}
+
 private fun SearchViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.blogFields.page // get current page
@@ -103,6 +120,13 @@ private fun ProfileViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.myHouseFields.page // get current page
     update.myHouseFields.page = page + 1
+    setViewState(update)
+}
+
+private fun HomeViewModel.incrementPageNumber(){
+    val update = getCurrentViewStateOrNew()
+    val page = update.homeReservationField.page // get current page
+    update.homeReservationField.page = page + 1
     setViewState(update)
 }
 
@@ -133,6 +157,16 @@ fun ProfileViewModel.nextPage(){
         incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(ProfileStateEvent.MyHouseEvent())
+    }
+}
+
+fun HomeViewModel.nextPage(){
+    if(!viewState.value!!.homeReservationField.isQueryInProgress
+        && !viewState.value!!.homeReservationField.isQueryExhausted){
+        Log.d(TAG, "HomeViewModel: Attempting to load next page...")
+        incrementPageNumber()
+        setQueryInProgress(true)
+        setStateEvent(HomeStateEvent.HomeInfoEvent())
     }
 }
 
@@ -182,4 +216,14 @@ fun ProfileViewModel.handleIncomingBlogListData(viewState: ProfileViewState){
     setBlogListData(viewState.myHouseFields.blogList)
 }
 
+fun HomeViewModel.handleIncomingReservationListData(viewState: HomeViewState){
+    Log.d(TAG, "BlogViewModel, DataState: ${viewState}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.homeReservationField.isQueryInProgress}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.homeReservationField.isQueryExhausted}")
+    setQueryInProgress(viewState.homeReservationField.isQueryInProgress)
+    setQueryExhausted(viewState.homeReservationField.isQueryExhausted)
+    setBlogListData(viewState.homeReservationField.reservationList)
+}
 

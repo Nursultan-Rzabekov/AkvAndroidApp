@@ -2,8 +2,10 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.entity.UserConversationMessages
+import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
@@ -45,6 +47,12 @@ fun ProfileViewModel.setBlogListData(blogList: List<BlogPost>){
     setViewState(update)
 }
 
+fun HomeViewModel.setBlogListData(blogList: List<HomeReservation>){
+    val update = getCurrentViewStateOrNew()
+    update.homeReservationField.reservationList = blogList
+    setViewState(update)
+}
+
 fun SearchViewModel.setBlogPost(blogPost: BlogPost){
     val update = getCurrentViewStateOrNew()
     update.viewBlogFields.blogPost = blogPost
@@ -81,6 +89,12 @@ fun DetailsViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun HomeViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.homeReservationField.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryInProgress = isInProgress
@@ -102,6 +116,12 @@ fun MessagesViewModel.setQueryInProgress(isInProgress: Boolean){
 fun DetailsViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun HomeViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.homeReservationField.isQueryInProgress = isInProgress
     setViewState(update)
 }
 

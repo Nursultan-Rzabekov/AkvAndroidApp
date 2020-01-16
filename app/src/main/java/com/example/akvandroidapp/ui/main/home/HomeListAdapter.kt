@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
@@ -21,31 +21,30 @@ class HomeListAdapter(
 
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
-    private val BLOG_ITEM = 0
+    private val RESERVATION_ITEM = 0
 
-    private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
+    private val NO_MORE_RESULTS_RESERVATION_MARKER = HomeReservation(
         NO_MORE_RESULTS,
         "" ,
+        "",
         0,
         0,
+        "",
         false,
-        0.0,
-        0.0,
+        -1,
+        -1,
         "",
         "",
-        0,
-        0,
-        "",
-        0.0
+        -1
     )
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HomeReservation>() {
 
-        override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+        override fun areItemsTheSame(oldItem: HomeReservation, newItem: HomeReservation): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+        override fun areContentsTheSame(oldItem: HomeReservation, newItem: HomeReservation): Boolean {
             return oldItem == newItem
         }
 
@@ -71,10 +70,10 @@ class HomeListAdapter(
                 )
             }
 
-            BLOG_ITEM ->{
-                return BlogViewHolder(
+            RESERVATION_ITEM ->{
+                return ReservationViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                            R.layout.chats_recycler_view_item,
+                            R.layout.book_requests_recycler_view_item,
                         parent,
                         false
                     ),
@@ -83,9 +82,9 @@ class HomeListAdapter(
                 )
             }
             else -> {
-                return BlogViewHolder(
+                return ReservationViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.chats_recycler_view_item,
+                        R.layout.book_requests_recycler_view_item,
                         parent,
                         false
                     ),
@@ -119,7 +118,7 @@ class HomeListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is BlogViewHolder -> {
+            is ReservationViewHolder -> {
                 holder.bind(differ.currentList[position])
             }
         }
@@ -127,7 +126,7 @@ class HomeListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         if(differ.currentList[position].id > -1){
-            return BLOG_ITEM
+            return RESERVATION_ITEM
         }
         return differ.currentList[position].id
     }
@@ -140,31 +139,31 @@ class HomeListAdapter(
     // This also ensures if the network connection is lost, they will be in the cache
     fun preloadGlideImages(
         requestManager: RequestManager,
-        list: List<BlogPost>
+        list: List<HomeReservation>
     ){
     }
 
 
-    fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
+    fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
         if (isQueryExhausted)
-            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+            newList?.add(NO_MORE_RESULTS_RESERVATION_MARKER)
         differ.submitList(newList)
     }
 
-    class BlogViewHolder
+    class ReservationViewHolder
     constructor(
         itemView: View,
         val requestManager: RequestManager,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: BlogPost) = with(itemView) {
+        fun bind(item: HomeReservation) = with(itemView) {
         }
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: BlogPost)
+        fun onItemSelected(position: Int, item: HomeReservation)
     }
 
 
