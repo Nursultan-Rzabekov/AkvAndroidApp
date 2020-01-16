@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':addLibs:rangedatepicker'
 rootProject.name='AkvAndroidApp'

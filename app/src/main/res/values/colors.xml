@@ -25,7 +25,6 @@
     <color name="black_al22">#11000000</color>
 
 
-
     <color name="default_background_color">#EEEEEE</color>
 
 
@@ -35,5 +34,10 @@
     <color name="secondaryFirst">#1E1D4C</color>
     <color name="secondarySecond">#9A256B</color>
     <color name="primaryZero">#CD3232</color>
+
+
+    <color name="calendar_selected_day_bg">@color/primaryZero</color>
+    <color name="calendar_selected_range_bg">@color/primaryZero</color>
+    <color name="dateTimeRangePickerStateToday">@color/primaryZero</color>
 
 </resources>

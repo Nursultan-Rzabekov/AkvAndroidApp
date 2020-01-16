@@ -128,6 +128,13 @@ interface OpenApiMainService {
         @Query("target") target: String,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<ConverstaionsResponse>>
+
+    @POST("messages/")
+    fun sendMessageTo(
+        @Header("Authorization") authorization: String,
+        @Query("recipient") recipient: RequestBody,
+        @Query("body") body: RequestBody
+    ):LiveData<GenericApiResponse<UserConversationsInfoResponse>>
 }
 
 

@@ -23,13 +23,16 @@ import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import com.google.android.material.button.MaterialButton
+import com.savvi.rangedatepicker.CalendarPickerView
 import handleIncomingBlogListData
+import kotlinx.android.synthetic.main.dialog_filter_dates.*
 import kotlinx.android.synthetic.main.fragment_explore.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.header_searcher_base_layout.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import nextPage
+import java.util.*
 import javax.inject.Inject
 
 
@@ -83,6 +86,9 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
             showGuestDialog()
         }
 
+        by_date_chip.setOnClickListener {
+            showDatePickerDialog()
+        }
     }
 
     private fun navFilter(){
@@ -272,6 +278,44 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
             }
 
             dialog.show()
+        }
+    }
+
+    private fun showDatePickerDialog(){
+        activity?.let {
+            val dialog = Dialog(it, R.style.CustomBasicDialog).apply {
+                setCancelable(false)
+                requestWindowFeature(Window.FEATURE_NO_TITLE)
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                window?.setDimAmount(0F)
+                setContentView(R.layout.dialog_filter_dates)
+
+                val lastyear = Calendar.getInstance()
+                lastyear.add(Calendar.YEAR, 0)
+                lastyear.add(Calendar.MONTH, 0)
+                lastyear.add(Calendar.DAY_OF_MONTH, 0)
+
+                dialog_filter_dates_picker.deactivateDates(ArrayList())
+
+                val nextyear = Calendar.getInstance()
+                nextyear.set(Calendar.YEAR, nextyear.get(Calendar.YEAR)+1)
+                nextyear.set(Calendar.MONTH, Calendar.DECEMBER)
+                nextyear.set(Calendar.DAY_OF_MONTH, 31)
+
+                dialog_filter_dates_picker.init(lastyear.time, nextyear.time)
+                    .inMode(CalendarPickerView.SelectionMode.RANGE)
+
+                findViewById<ImageButton>(R.id.dialog_filter_dates_picker_cancel).setOnClickListener {
+                    Log.d(TAG, "FilterDialog: cancelling filter.")
+                    dismiss()
+                }
+
+                findViewById<MaterialButton>(R.id.dialog_filter_dates_save_btn).setOnClickListener {
+                    Log.d(TAG, "FilterDialog: save filter.")
+                }
+
+                show()
+            }
         }
     }
 }
