@@ -219,6 +219,13 @@
                     app:popUpToInclusive="true" />
 
 
+                <action android:id="@+id/action_szhilyeFragment_to_zhilyeBookFragment"
+                    app:destination="@id/zhilyeBookFragment"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    />
 
 
                 <action android:id="@+id/action_szhilyeFragment_to_ZhilyeReviewFragment"
@@ -228,6 +235,23 @@
                     app:enterAnim="@anim/slide_in_right"
                     app:exitAnim="@anim/slide_out_left"
                     />
+
+        </fragment>
+
+        <fragment android:id="@+id/zhilyeBookFragment"
+            android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookFragment"
+            android:label="@string/fragment_view_blog"
+            tools:layout="@layout/fragment_rules_of_house_layout">
+
+                <action
+                    android:id="@+id/action_zhilyeBookFragment_to_home"
+                    app:destination="@id/searchFragment"
+                    app:popEnterAnim="@anim/fade_in"
+                    app:popExitAnim="@anim/fade_out"
+                    app:enterAnim="@anim/fade_in"
+                    app:exitAnim="@anim/fade_out"
+                    app:popUpTo="@+id/nav_create_search"
+                    app:popUpToInclusive="true" />
 
         </fragment>
 

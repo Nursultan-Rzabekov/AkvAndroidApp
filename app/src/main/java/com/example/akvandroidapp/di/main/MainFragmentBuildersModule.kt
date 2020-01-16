@@ -20,6 +20,7 @@ import com.example.akvandroidapp.ui.main.search.SearchFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookFragment
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeFragment
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewFragment
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseFragment
@@ -154,5 +155,7 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeRequestFragment(): RequestFragment
 
+    @ContributesAndroidInjector()
+    abstract fun contributeZhilyeBookFragment(): ZhilyeBookFragment
 
 }
