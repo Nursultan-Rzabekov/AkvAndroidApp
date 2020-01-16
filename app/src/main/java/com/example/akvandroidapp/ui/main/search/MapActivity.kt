@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.search
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,7 +19,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MapActivity : BaseActivity(), ClusterListener, ClusterTapListener
 {
     private lateinit var mapView: MapView
-    private val cluster = arrayListOf<Point>(Point(60.0,15.0))
+    private val cluster = arrayListOf(Point(60.0,15.0))
+    private val CLUSTER_CENTERS =
+        listOf(
+            Point(43.2565, 76.9285),
+            Point(47.105045, 51.924622),
+            Point(42.341686, 69.590103),
+            Point(43.693695, 51.260834),
+            Point(51.169392, 71.449074)
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.setApiKey(MAPKIT_API_KEY)
@@ -27,27 +36,32 @@ class MapActivity : BaseActivity(), ClusterListener, ClusterTapListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.map)
 
-        subscribeObservers()
-
         mapView = findViewById(R.id.mapview)
-        mapView.map.move(CameraPosition(cluster[0], 1F, 0F, 0F))
 
-        val imageProvider = ImageProvider.fromResource(this@MapActivity, R.drawable.profile_default_avavatar)
-        val clusterizedCollection = mapView.map.mapObjects.addClusterizedPlacemarkCollection(this)
-
-        val points = cluster
-        clusterizedCollection.addPlacemarks(points, imageProvider, IconStyle())
-        clusterizedCollection.clusterPlacemarks(60.0, 15)
-    }
-
-    private fun subscribeObservers(){
         sessionManager.locationItem.observe(this, androidx.lifecycle.Observer{ dataState ->
             for(i in dataState){
                 Log.d(TAG,"qwerty  = ${dataState}")
                 cluster.add(i)
             }
         })
+
+        Handler().postDelayed({
+            if(!cluster.isNullOrEmpty()){
+                Log.d(TAG,"qwerty cluster  = ${cluster}")
+                mapView.map.move(CameraPosition(cluster.first(), 10F, 0F, 0F))
+                val imageProvider = ImageProvider.fromResource(this@MapActivity, R.drawable.pin)
+                val clusterizedCollection = mapView.map.mapObjects.addClusterizedPlacemarkCollection(this)
+                val points = ArrayList<Point>()
+                for (i in cluster.indices) {
+                    points.add(Point(cluster[i].latitude, cluster[i].longitude))
+                }
+                Log.d("wqe","qwerty point + ${points}")
+                clusterizedCollection.addPlacemarks(points, imageProvider, IconStyle())
+                clusterizedCollection.clusterPlacemarks(60.0, 15)
+            }
+        }, 1000)
     }
+
 
     override fun displayProgressBar(bool: Boolean){
         if(bool){
@@ -89,5 +103,4 @@ class MapActivity : BaseActivity(), ClusterListener, ClusterTapListener
         ).show()
         return true
     }
-
 }

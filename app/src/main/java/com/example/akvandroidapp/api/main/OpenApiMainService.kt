@@ -88,7 +88,6 @@ interface OpenApiMainService {
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<BlogListSearchResponse>>
 
-
     @GET("auth/users/me/")
     fun getProfileInfo(
         @Header("Authorization") authorization: String
@@ -100,7 +99,6 @@ interface OpenApiMainService {
         @Part("name") first_name: RequestBody,
         @Part userpic: MultipartBody.Part?
     ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
-
 
     @GET("my_houses/")
     fun getListMyHouse(
@@ -129,11 +127,12 @@ interface OpenApiMainService {
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<ConverstaionsResponse>>
 
+    @Multipart
     @POST("messages/")
     fun sendMessageTo(
         @Header("Authorization") authorization: String,
-        @Query("recipient") recipient: RequestBody,
-        @Query("body") body: RequestBody
+        @Part("recipient") recipient: RequestBody,
+        @Part("body") body: RequestBody
     ):LiveData<GenericApiResponse<UserConversationsInfoResponse>>
 }
 

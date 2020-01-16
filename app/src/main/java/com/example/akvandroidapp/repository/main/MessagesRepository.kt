@@ -107,7 +107,6 @@ constructor(
         }.asLiveData()
     }
 
-
     fun myConversationsList(
         authToken: AuthToken,
         target: String,
@@ -185,9 +184,9 @@ constructor(
         authToken: AuthToken,
         recipient: RequestBody,
         body: RequestBody
-    ): LiveData<DataState<UserConversationMessages>>{
+    ): LiveData<DataState<DetailsViewState>>{
         return object:
-            NetworkBoundResource<UserConversationsInfoResponse, List<BlogPost>, UserConversationMessages>(
+            NetworkBoundResource<UserConversationsInfoResponse, List<BlogPost>, DetailsViewState>(
                 sessionManager.isConnectedToTheInternet(),
                 true,
                 false,
@@ -210,10 +209,14 @@ constructor(
                     updated_at = response.body.updated_at
                 )
 
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     onCompleteJob(
                         DataState.data(
-                            data = sendMessageInfo
+                            data = DetailsViewState(
+                                sendMessageFields = DetailsViewState.SendMessageFields(
+                                    blogPost = sendMessageInfo
+                                )
+                            )
                         )
                     )
                 }
@@ -228,7 +231,7 @@ constructor(
                 )
             }
 
-            override fun loadFromCache(): LiveData<UserConversationMessages> {
+            override fun loadFromCache(): LiveData<DetailsViewState> {
                 return AbsentLiveData.create()
             }
 

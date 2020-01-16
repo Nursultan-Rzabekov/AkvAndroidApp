@@ -19,6 +19,8 @@ fun SearchViewModel.getFilterPriceRight(): Int {
     }
 }
 
+
+
 fun SearchViewModel.getFilterRoomsLeft(): Int {
     getCurrentViewStateOrNew().let {
         return it.blogFields.rooms_left
@@ -98,6 +100,19 @@ fun DetailsViewModel.getPage(): Int{
         return it.myChatFields.page
     }
 }
+
+fun DetailsViewModel.getMessageBody(): String {
+    getCurrentViewStateOrNew().let {
+        return it.sendMessageFields.messageBody
+    }
+}
+
+fun DetailsViewModel.getEmailName(): String {
+    getCurrentViewStateOrNew().let {
+        return it.sendMessageFields.email
+    }
+}
+
 
 fun DetailsViewModel.getTargetQuery(): String {
     getCurrentViewStateOrNew().let {

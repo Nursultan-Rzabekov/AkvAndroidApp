@@ -41,6 +41,8 @@ import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
+import setEmailName
+import setMessageBody
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -82,8 +84,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
         swipe_messages.setOnRefreshListener(this)
 
-
-//        mookDate()
 
         activity_dialog_attach_btn.setOnClickListener {
             showDialog()
@@ -130,7 +130,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         viewModel.viewState.observe(this, androidx.lifecycle.Observer{ viewState ->
             if(viewState != null){
                 if(viewState.myChatFields.blogList.isNotEmpty()){
-
                     Log.d("name","name + ${viewState.myChatFields.blogList}")
                     for(i in viewState.myChatFields.blogList){
                         sendMessageWithType(
@@ -178,10 +177,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     private fun sendMessage(){
         val message = activity_dialog_message_et.text.toString()
         if (message.trim() != ""){
-            sendMessageTo(
-                "nurs@gmail.com",
-                message
-            )
+            viewModel.setMessageBody(message)
+            viewModel.setEmailName("admin@mail.com")
+            viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
         }
         activity_dialog_message_et.setText("")
     }
@@ -380,13 +378,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             }
         }
         activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
-    }
-
-    private fun sendMessageTo(recipient: String, body: String){
-        viewModel.sendMessage(
-            recipient,
-            body
-        )
     }
 
 }

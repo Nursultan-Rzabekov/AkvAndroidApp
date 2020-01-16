@@ -22,6 +22,20 @@ fun SearchViewModel.resetPage(){
     setViewState(update)
 }
 
+
+fun DetailsViewModel.setMessageBody(messagesBody: String){
+    val update = getCurrentViewStateOrNew()
+    update.sendMessageFields.messageBody = messagesBody
+    setViewState(update)
+}
+
+fun DetailsViewModel.setEmailName(email: String){
+    val update = getCurrentViewStateOrNew()
+    update.sendMessageFields.email = email
+    setViewState(update)
+}
+
+
 fun ProfileViewModel.resetPage(){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.page = 1
