@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.AuthTokenDao
+import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.ui.main.search.filter.FilterCity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -23,6 +24,7 @@ class SessionManager
 @Inject
 constructor(
     val authTokenDao: AuthTokenDao,
+    val blogPostDao: BlogPostDao,
     val application: Application
 ) {
 
@@ -32,12 +34,21 @@ constructor(
     //Room
     private val hostMode = MutableLiveData<Boolean>()
 
-
+    //Map
     private val _locationList = MutableLiveData<MutableList<Point>>()
+
+    //Token
     private val _cachedToken = MutableLiveData<AuthToken>()
+
+    //Favorite
     private val _favoritePostList = MutableLiveData<MutableList<BlogPost>>()
+
+    //Filter
     private val _chekedFilterCity = MutableLiveData<FilterCity>()
+
     private val _typeOfApartment = MutableLiveData<Int>()
+
+    //Accommodations
     private val _facilitiesList = MutableLiveData<MutableList<Int>>()
 
     //Add ad
@@ -72,7 +83,20 @@ constructor(
         get() = _cachedToken
 
     val favoritePostListItem: LiveData<MutableList<BlogPost>>
-        get() = _favoritePostList
+        get() = if(_favoritePostList.value == null){
+            val casheTimeList: ArrayList<BlogPost> = ArrayList()
+            CoroutineScope(IO).launch {
+                blogPostDao.getFavoriteBlogPost().let {
+                    for (i in it) {
+                        casheTimeList.add(i)
+                    }
+                }
+            }
+            _favoritePostList.value = casheTimeList
+            _favoritePostList
+        }else{
+            _favoritePostList
+        }
 
     val checkedFilterCity: LiveData<FilterCity>
         get() = _chekedFilterCity
@@ -411,10 +435,12 @@ constructor(
         GlobalScope.launch(Main) {
             if(checked){
                 _favoritePostList.value?.add(blogPost)
+                blogPostDao.insert(blogPost)
                 Log.d(TAG, "favorite ${_favoritePostList.value}")
             }
             else{
                 _favoritePostList.value?.remove(blogPost)
+                blogPostDao.delete(blogPost)
             }
 
             Log.d(TAG, "favorite ${_favoritePostList.value}")
@@ -434,7 +460,6 @@ constructor(
 
     fun logout(){
         Log.d(TAG, "logout: ")
-
 
         CoroutineScope(IO).launch{
             var errorMessage: String? = null

@@ -12,6 +12,7 @@ import com.example.akvandroidapp.persistence.AccountPropertiesDao
 import com.example.akvandroidapp.persistence.AppDatabase
 import com.example.akvandroidapp.persistence.AppDatabase.Companion.DATABASE_NAME
 import com.example.akvandroidapp.persistence.AuthTokenDao
+import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.LiveDataCallAdapterFactory
 import com.example.akvandroidapp.util.PreferenceKeys
@@ -68,6 +69,12 @@ class AppModule{
     @Provides
     fun provideAuthTokenDao(db: AppDatabase): AuthTokenDao {
         return db.getAuthTokenDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideBlogPostDao(db: AppDatabase): BlogPostDao {
+        return db.getBlogPostDao()
     }
 
     @Singleton

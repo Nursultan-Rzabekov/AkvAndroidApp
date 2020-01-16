@@ -32,12 +32,6 @@ class MainModule {
 
     @MainScope
     @Provides
-    fun provideBlogPostDao(db: AppDatabase): BlogPostDao {
-        return db.getBlogPostDao()
-    }
-
-    @MainScope
-    @Provides
     fun provideSearchRepository(
         openApiMainService: OpenApiMainService,
         blogPostDao: BlogPostDao,

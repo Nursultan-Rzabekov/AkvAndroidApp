@@ -21,11 +21,6 @@ class SupportModule {
             .create(OpenApiMainService::class.java)
     }
 
-    @SupportScope
-    @Provides
-    fun provideBlogPostDao(db: AppDatabase): BlogPostDao {
-        return db.getBlogPostDao()
-    }
 
     @SupportScope
     @Provides
