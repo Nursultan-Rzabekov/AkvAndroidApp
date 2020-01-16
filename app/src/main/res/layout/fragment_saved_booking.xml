@@ -3,7 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:padding="@dimen/dim_32dp"
+    android:paddingStart="@dimen/dim_16dp"
+    android:paddingEnd="@dimen/dim_16dp"
+    android:paddingBottom="@dimen/dim_16dp"
+    android:paddingTop="@dimen/dim_36dp"
     android:layout_height="match_parent">
 
     <View android:layout_width="0.5dp"
@@ -66,17 +69,6 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/fragment_saved_booking_lb2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dim_24dp"
-            android:text="@string/booking_check_stantard_text"
-            android:textColor="@color/grey8"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
