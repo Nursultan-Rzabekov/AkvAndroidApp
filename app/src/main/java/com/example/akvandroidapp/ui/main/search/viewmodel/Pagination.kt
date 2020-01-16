@@ -13,10 +13,7 @@ import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
-import com.example.akvandroidapp.ui.main.search.viewmodel.SearchViewModel
-import com.example.akvandroidapp.ui.main.search.viewmodel.setBlogListData
-import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
-import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryInProgress
+import com.example.akvandroidapp.ui.main.search.viewmodel.*
 
 
 fun SearchViewModel.resetPage(){
@@ -224,6 +221,7 @@ fun HomeViewModel.handleIncomingReservationListData(viewState: HomeViewState){
             "${viewState.homeReservationField.isQueryExhausted}")
     setQueryInProgress(viewState.homeReservationField.isQueryInProgress)
     setQueryExhausted(viewState.homeReservationField.isQueryExhausted)
+    setCount(viewState.homeReservationField.count)
     setBlogListData(viewState.homeReservationField.reservationList)
 }
 

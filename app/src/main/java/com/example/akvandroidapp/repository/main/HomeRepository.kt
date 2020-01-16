@@ -50,6 +50,7 @@ constructor(
                 Log.d("home reservations", "result response ${response.body.results}")
 
                 val reservationsList: ArrayList<HomeReservation> = ArrayList()
+                val count = response.body.count
                 for(reservation in response.body.results){
                     val image: String = reservation.house.photos?.get(0)?.image ?: "////////////////"
                     reservationsList.add(
@@ -69,6 +70,7 @@ constructor(
                         )
                     )
                 }
+                Log.e("home repo reservations", "$reservationsList")
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
@@ -77,7 +79,7 @@ constructor(
                                     reservationList = reservationsList,
                                     isQueryExhausted = false,
                                     isQueryInProgress = true,
-                                    count = response.body.count
+                                    count = count
                                 )
                             )
                         )

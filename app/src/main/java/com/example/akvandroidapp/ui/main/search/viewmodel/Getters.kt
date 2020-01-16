@@ -163,6 +163,12 @@ fun HomeViewModel.getPage(): Int{
     }
 }
 
+fun HomeViewModel.getCount(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.homeReservationField.count
+    }
+}
+
 
 
 

@@ -190,6 +190,7 @@ class HomeListAdapter(
     fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean) {
         if (!blogList.isNullOrEmpty()) {
             val newList = blogList.toMutableList()
+            Log.e("home adapter list", "$newList")
             if (isQueryExhausted)
                 newList.add(NO_MORE_RESULTS_RESERVATION_MARKER)
             differ.submitList(newList)
