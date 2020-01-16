@@ -31,6 +31,7 @@ import com.example.akvandroidapp.util.BottomNavController
 import com.example.akvandroidapp.util.setUpNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.explore_active.*
+import java.util.*
 
 
 class MainActivity : BaseActivity(),
@@ -203,6 +204,8 @@ class MainActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.explore_active)
+
+        Locale.setDefault(Locale.forLanguageTag("ru"))
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.setUpNavigation(bottomNavController, this)

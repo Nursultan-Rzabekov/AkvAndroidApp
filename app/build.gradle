@@ -137,4 +137,7 @@ dependencies {
 
     //Flipper
     implementation 'com.github.technolifestyle:AutoImageFlipper:1.6.0'
+
+    //Custom Calendar Picker
+    implementation project(':addLibs:rangedatepicker')
 }

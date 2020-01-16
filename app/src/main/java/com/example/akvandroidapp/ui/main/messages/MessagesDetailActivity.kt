@@ -20,6 +20,7 @@ import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
+import com.example.akvandroidapp.ui.main.messages.detailState.DetailsStateEvent
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
@@ -56,7 +57,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     lateinit var providerFactory: ViewModelProviderFactory
     lateinit var viewModel: DetailsViewModel
 
-    private val mUserId: String = "123"
+    private var mUserId: String = "nurs@gmail.com"
     private val myDataTransfer = arrayOf<Bundle?>(null)
     private lateinit var currentPhotoPath: String
     private lateinit var currentPhotoUri: Uri
@@ -118,6 +119,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     }
 
     private fun subscribeObservers(){
+
         viewModel.dataState.observe(this, androidx.lifecycle.Observer{ dataState ->
             if(dataState != null) {
                 handlePagination(dataState)
@@ -131,7 +133,11 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
                     Log.d("name","name + ${viewState.myChatFields.blogList}")
                     for(i in viewState.myChatFields.blogList){
-                        chatAdapter.addMessage(MessageText(i.user.toString(),i.body.toString()))
+                        sendMessageWithType(
+                            i.user.toString(),
+                            Constants.MESSAGE_TYPE_TEXT,
+                            body = i.body.toString()
+                        )
                     }
                 }
             }
@@ -172,9 +178,10 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     private fun sendMessage(){
         val message = activity_dialog_message_et.text.toString()
         if (message.trim() != ""){
-            sendMessageWithType(
-                Constants.MESSAGE_TYPE_TEXT,
-                body = message)
+            sendMessageTo(
+                "nurs@gmail.com",
+                message
+            )
         }
         activity_dialog_message_et.setText("")
     }
@@ -276,6 +283,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 REQUEST_IMAGE_CAPTURE -> {
                     try {
                         sendMessageWithType(
+                            mUserId,
                             Constants.MESSAGE_TYPE_PHOTO,
                             uriOfFile = currentPhotoUri)
                     }catch (ex: Exception){
@@ -288,6 +296,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                     data?.data?.let { uri ->
                         currentPhotoUri = uri
                         sendMessageWithType(
+                            mUserId,
                             Constants.MESSAGE_TYPE_PHOTO,
                             uriOfFile = uri)
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
@@ -311,6 +320,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                                 fileName = cursor.getString(nameIndex)
                                 fileSize = cursor.getLong(sizeIndex)
                                 sendMessageWithType(
+                                    mUserId,
                                     Constants.MESSAGE_TYPE_DOC,
                                     fileName = fileName,
                                     fileSize = fileSize)
@@ -349,27 +359,34 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         )
     }
 
-    fun sendMessageWithType(type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
+    fun sendMessageWithType(userId: String, type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
         when( type ){
             Constants.MESSAGE_TYPE_TEXT -> {
                 chatAdapter.addMessage(
-                    MessageText(mUserId, body)
+                    MessageText(userId, body)
                 )
             }
             Constants.MESSAGE_TYPE_PHOTO -> {
                 chatAdapter.addMessage(
-                    MessagePhoto(mUserId, uriOfFile)
+                    MessagePhoto(userId, uriOfFile)
                 )
             }
             Constants.MESSAGE_TYPE_DOC -> {
                 chatAdapter.addMessage(
-                    MessageDocument(mUserId,
+                    MessageDocument(userId,
                         fileName = fileName,
                         fileSize = Converters.humanReadableByteCountSI(fileSize))
                 )
             }
         }
         activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
+    }
+
+    private fun sendMessageTo(recipient: String, body: String){
+        viewModel.sendMessage(
+            recipient,
+            body
+        )
     }
 
 }

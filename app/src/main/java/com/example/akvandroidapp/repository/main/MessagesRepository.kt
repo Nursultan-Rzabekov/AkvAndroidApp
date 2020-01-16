@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.AllChatsResponse
 import com.example.akvandroidapp.api.main.responses.ConverstaionsResponse
+import com.example.akvandroidapp.api.main.responses.UserConversationsInfoResponse
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.UserChatMessages
@@ -15,14 +16,15 @@ import com.example.akvandroidapp.repository.NetworkBoundResource
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
+import com.example.akvandroidapp.ui.main.messages.detailState.MessageSendViewState
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
 import com.example.akvandroidapp.util.GenericApiResponse
-import com.yandex.mapkit.geometry.Point
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class MessagesRepository
@@ -175,6 +177,67 @@ constructor(
             }
             override fun setJob(job: Job) {
                 addJob("messagesBlogPosts", job)
+            }
+        }.asLiveData()
+    }
+
+    fun sendMessage(
+        authToken: AuthToken,
+        recipient: RequestBody,
+        body: RequestBody
+    ): LiveData<DataState<UserConversationMessages>>{
+        return object:
+            NetworkBoundResource<UserConversationsInfoResponse, List<BlogPost>, UserConversationMessages>(
+                sessionManager.isConnectedToTheInternet(),
+                true,
+                false,
+                true
+            ) {
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<UserConversationsInfoResponse>
+            ) {
+                Log.d("send message", "recipient ${response.body.recipient}")
+
+                val sendMessageInfo = UserConversationMessages(
+                    id = response.body.id,
+                    user = response.body.user,
+                    recipient = response.body.recipient,
+                    body = response.body.body,
+                    created_at = response.body.created_at,
+                    updated_at = response.body.updated_at
+                )
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = sendMessageInfo
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<UserConversationsInfoResponse>> {
+                Log.d("send message call", "send message $recipient")
+                return openApiMainService.sendMessageTo(
+                    "Token ${authToken.token!!}",
+                    recipient,
+                    body
+                )
+            }
+
+            override fun loadFromCache(): LiveData<UserConversationMessages> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+
+            }
+
+            override fun setJob(job: Job) {
+                addJob("messagesSend", job)
             }
         }.asLiveData()
     }
