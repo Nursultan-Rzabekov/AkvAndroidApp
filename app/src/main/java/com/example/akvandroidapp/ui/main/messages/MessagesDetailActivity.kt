@@ -26,6 +26,7 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
 import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
 import com.example.akvandroidapp.ui.main.messages.models.MessageText
+import com.example.akvandroidapp.ui.main.search.viewmodel.getTargetQuery
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQuery
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
@@ -131,7 +132,8 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             if(viewState != null){
                 if(viewState.myChatFields.blogList.isNotEmpty()){
                     Log.d("name","name + ${viewState.myChatFields.blogList}")
-                    for(i in viewState.myChatFields.blogList){
+                    clearMessages()
+                    for(i in viewState.myChatFields.blogList.asReversed()){
                         sendMessageWithType(
                             i.user.toString(),
                             Constants.MESSAGE_TYPE_TEXT,
@@ -178,7 +180,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         val message = activity_dialog_message_et.text.toString()
         if (message.trim() != ""){
             viewModel.setMessageBody(message)
-            viewModel.setEmailName("admin@mail.com")
+            viewModel.setEmailName(viewModel.getTargetQuery())
             viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
         }
         activity_dialog_message_et.setText("")
@@ -378,6 +380,10 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             }
         }
         activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
+    }
+
+    fun clearMessages(){
+        chatAdapter.clearMessages()
     }
 
 }

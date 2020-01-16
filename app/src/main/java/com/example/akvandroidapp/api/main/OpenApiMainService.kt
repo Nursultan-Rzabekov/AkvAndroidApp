@@ -134,6 +134,11 @@ interface OpenApiMainService {
         @Part("recipient") recipient: RequestBody,
         @Part("body") body: RequestBody
     ):LiveData<GenericApiResponse<UserConversationsInfoResponse>>
+
+    @GET("reservations/")
+    fun getReservations(
+        @Header("Authorization") authorization: String
+    )
 }
 
 

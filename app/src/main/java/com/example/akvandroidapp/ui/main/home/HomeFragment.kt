@@ -96,6 +96,16 @@ class HomeFragment : BaseHomeFragment(),
 //        }
     }
 
+    private fun listEmptyState(){
+        fragment_saved_booking_lb2.visibility = View.VISIBLE
+        swipe_home.visibility = View.GONE
+    }
+
+    private fun listFilledState(){
+        fragment_saved_booking_lb2.visibility = View.GONE
+        swipe_home.visibility = View.VISIBLE
+    }
+
     private  fun resetUI(){
         fragment_saved_booking_recycler_view.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()

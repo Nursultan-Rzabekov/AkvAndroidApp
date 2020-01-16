@@ -122,6 +122,11 @@ class ChatRecyclerAdapter(
         notifyItemInserted(messageList.size-1)
     }
 
+    fun clearMessages(){
+        messageList.clear()
+        notifyDataSetChanged()
+    }
+
     class MessageTextViewHolder(
         itemView: View
     ): RecyclerView.ViewHolder(itemView){
