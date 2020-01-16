@@ -19,7 +19,25 @@ class ErrorHandling{
         const val ERROR_MUST_SELECT_IMAGE = "You must select an image."
         const val ERROR_SOMETHING_WRONG_WITH_FILE = "Something went wrong with the file."
 
-        const val GENERIC_AUTH_ERROR = "Error"
+        const val GENERIC_AUTH_ERROR = "Невозможно войти с предоставленными учетными данными."
+
+        const val GENERIC_AUTH_ERROR_EMAIL = "user с таким email уже существует."
+        const val GENERIC_AUTH_ERROR_EMAIL_EMPTY = "Это поле не может быть пустым."
+
+
+        const val GENERIC_AUTH_ERROR_PHONE = "Введен некорректный номер телефона."
+        const val GENERIC_AUTH_ERROR_PHONE_EMPTY = "Это поле не может быть пустым."
+
+        const val GENERIC_AUTH_ERROR_PHONE_first_name = "Это поле не может быть пустым."
+        const val GENERIC_AUTH_ERROR_PHONE_last_name = "Это поле не может быть пустым."
+        const val GENERIC_AUTH_ERROR_PHONE_birth_day = "Это поле не может быть пустым."
+        const val GENERIC_AUTH_ERROR_PHONE_password = "Это поле не может быть пустым."
+        const val GENERIC_AUTH_ERROR_PHONE_re_password = "Это поле не может быть пустым."
+        const val GENERIC_AUTH_ERROR_PHONE_gender = "Это поле не может быть пустым."
+
+
+
+
         const val PAGINATION_DONE_ERROR = "Invalid page."
         const val ERROR_CHECK_NETWORK_CONNECTION = "Check network connection."
         const val ERROR_UNKNOWN = "Unknown error"

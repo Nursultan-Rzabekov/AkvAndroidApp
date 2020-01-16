@@ -5,15 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 class LoginResponse(
 
-    @SerializedName("response")
+    @SerializedName("non_field_errors")
     @Expose
-    var response: Boolean,
+    var errorMessage: List<String>? = null,
 
-    @SerializedName("error_message")
-    @Expose
-    var errorMessage: String,
-
-    @SerializedName("token")
+    @SerializedName("auth_token")
     @Expose
     var token: String,
 
@@ -24,6 +20,6 @@ class LoginResponse(
 )
 {
     override fun toString(): String {
-        return "LoginResponse(response='$response', errorMessage='$errorMessage', token='$token', user='$user')"
+        return "LoginResponse(errorMessage='$errorMessage', token='$token', user='$user')"
     }
 }

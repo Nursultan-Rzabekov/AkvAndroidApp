@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface OpenApiAuthService {
 
 
-    @POST("auth/login")
+    @POST("auth/token/login/")
     @FormUrlEncoded
     fun login(
         @Field("email") email: String,

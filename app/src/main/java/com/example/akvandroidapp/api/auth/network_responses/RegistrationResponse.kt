@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 class RegistrationResponse(
 
-    @SerializedName("response")
+    @SerializedName("email")
     @Expose
-    var response: Boolean,
+    var email: List<String>? = null,
 
     @SerializedName("token")
     @Expose
@@ -24,6 +24,6 @@ class RegistrationResponse(
     )
 {
     override fun toString(): String {
-        return "RegistrationResponse(response='$response', errorMessage='$errorMessage', token='$token', user='$user')"
+        return "RegistrationResponse(errorMessage='$errorMessage', token='$token', user='$user')"
     }
 }

@@ -89,7 +89,7 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<BlogListSearchResponse>>
 
 
-    @GET("auth/users/me")
+    @GET("auth/users/me/")
     fun getProfileInfo(
         @Header("Authorization") authorization: String
     ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>

@@ -75,9 +75,8 @@ constructor(
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<LoginResponse>) {
                 Log.d(TAG, "handleApiSuccessResponse: ${response}")
 
-                // Incorrect login credentials counts as a 200 response from server, so need to handle that
-                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
-                    return onErrorReturn(response.body.errorMessage, true, false)
+                if(response.body.errorMessage?.first() == (GENERIC_AUTH_ERROR)){
+                    return onErrorReturn(response.body.errorMessage?.first(), true, false)
                 }
 
                 accountPropertiesDao.insertOrIgnore(
