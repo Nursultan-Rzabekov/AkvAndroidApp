@@ -3,7 +3,7 @@
     android:id="@+id/header_zhilye_collapse"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentScrim="@color/white"
+    app:contentScrim="@color/primaryZero"
     app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -16,23 +16,12 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:id="@+id/toolbar_zhilye"
+        android:id="@+id/toolbar_zhilye_header"
         app:layout_collapseMode="pin"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
+        app:contentInsetLeft="4dp"
+        app:contentInsetStart="4dp"
         app:contentInsetStartWithNavigation="0dp"
-        android:paddingEnd="@dimen/dim_32dp"
-        android:paddingStart="0dp"
         app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
-
-        <include
-            layout="@layout/back_button_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/dim_28dp"
-            android:layout_marginTop="@dimen/dim_20dp"
-            android:layout_marginBottom="@dimen/dim_20dp"
-            />
 
     </androidx.appcompat.widget.Toolbar>
 

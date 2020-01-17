@@ -5,14 +5,15 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
 import com.yandex.mapkit.Animation
@@ -22,6 +23,8 @@ import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_zhilye.*
+import kotlinx.android.synthetic.main.fragment_zhilye_layout.*
+import kotlinx.android.synthetic.main.header_zhilye.*
 import kotlinx.android.synthetic.main.map.*
 import technolifestyle.com.imageslider.FlipperLayout
 import technolifestyle.com.imageslider.FlipperView
@@ -39,6 +42,10 @@ class ZhilyeFragment : BaseSearchFragment() {
     ): View? {
         MapKitFactory.setApiKey(Constants.MAPKIT_API_KEY)
         MapKitFactory.initialize(context)
+
+        (activity as AppCompatActivity).setSupportActionBar(toolbar_zhilye_header)
+        setHasOptionsMenu(true)
+
         return inflater.inflate(R.layout.fragment_zhilye_layout, container, false)
     }
 
@@ -49,19 +56,9 @@ class ZhilyeFragment : BaseSearchFragment() {
 
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
-        maPView = mapview
-        maPView.map.move(
-            CameraPosition(TARGET_LOCATION, 14.0f, 0.0f, 0.0f),
-            Animation(Animation.Type.SMOOTH, 4F),
-            null
-        )
-
-        flipperLayout = view.findViewById(R.id.header_zhilye_flipper_layout)
-        flipperLayout.removeAutoCycle()
-        flipperLayout.showInnerPagerIndicator()
-        flipperLayout.setIndicatorBackgroundColor(Color.TRANSPARENT)
-
-        setLayout()
+        setMapView()
+        setFlipperLayout()
+        setToolbar()
 
         fragment_zhilye_house_rules_card.setOnClickListener {
             navHouseRules()
@@ -71,7 +68,7 @@ class ZhilyeFragment : BaseSearchFragment() {
             navReviews()
         }
 
-        main_back_img_btn.setOnClickListener {
+        toolbar_zhilye_header.setOnClickListener {
             findNavController().navigateUp()
         }
 
@@ -97,7 +94,12 @@ class ZhilyeFragment : BaseSearchFragment() {
         maPView.onStart()
     }
 
-    private fun setLayout() {
+    private fun setFlipperLayout() {
+        flipperLayout = view!!.findViewById(R.id.header_zhilye_flipper_layout)
+        flipperLayout.removeAutoCycle()
+        flipperLayout.showInnerPagerIndicator()
+        flipperLayout.setIndicatorBackgroundColor(Color.TRANSPARENT)
+
         val url =
             arrayOf("https://blog.eap.ucop.edu/wp-content/uploads/2016/01/Julie-Huang-27.jpg",
                 "https://picsum.photos/300",
@@ -116,4 +118,32 @@ class ZhilyeFragment : BaseSearchFragment() {
 
         flipperLayout.addFlipperViewList(flipperViewList)
     }
+
+    private fun setMapView(){
+        maPView = mapview
+        maPView.map.move(
+            CameraPosition(TARGET_LOCATION, 14.0f, 0.0f, 0.0f),
+            Animation(Animation.Type.SMOOTH, 4F),
+            null
+        )
+    }
+
+    private fun setToolbar(){
+        toolbar_zhilye_header.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.header_zhilye_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.share -> {
+                Toast.makeText(context, "ASDASD", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
