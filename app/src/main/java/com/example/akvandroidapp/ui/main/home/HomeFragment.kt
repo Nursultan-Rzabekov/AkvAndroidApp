@@ -15,6 +15,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
+import com.example.akvandroidapp.ui.main.search.viewmodel.getCount
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
@@ -68,14 +69,18 @@ class HomeFragment : BaseHomeFragment(),
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer {viewState ->
             if (viewState != null){
-                if (viewState.homeReservationField.count == 0)
+                Log.e("HOME FRAGMENT COUNT", "${viewState.homeReservationField.count}")
+                Log.e("HOME FRAGMENT size", "${viewState.homeReservationField.reservationList.size}")
+
+                val trips = viewModel.getCount()
+
+                if (trips == 0){
                     recyclerAdapter.submitList(
                         blogList = viewState.homeReservationField.reservationList,
                         isQueryExhausted = viewState.homeReservationField.isQueryExhausted
                     )
-                else {
+                }else {
                     if (viewState.homeReservationField.reservationList.isNotEmpty()) {
-                        val trips = viewState.homeReservationField.count
                         val guests =
                             viewState.homeReservationField.reservationList.sumBy { it.guests!! }
                         listFilledState(trips, guests)

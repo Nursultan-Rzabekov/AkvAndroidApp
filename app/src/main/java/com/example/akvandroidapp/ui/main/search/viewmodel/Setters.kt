@@ -125,6 +125,11 @@ fun HomeViewModel.setQueryInProgress(isInProgress: Boolean){
     setViewState(update)
 }
 
+fun HomeViewModel.setCount(count: Int){
+    val update = getCurrentViewStateOrNew()
+    update.homeReservationField.count = count
+    setViewState(update)
+}
 
 fun SearchViewModel.setCityQuery(query: String){
     val update = getCurrentViewStateOrNew()
