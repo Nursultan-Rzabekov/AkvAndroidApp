@@ -13,6 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"/>
 
+    <ImageView
+        android:contentDescription="@string/appartments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/shadow_box_for_card" />
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
