@@ -170,24 +170,18 @@ class HomeListAdapter(
         list: List<HomeReservation>
     ){
         for(reserv in list){
-
-            if(reserv.house_image!=null){
-                requestManager
-                    .load(reserv.house_image)
-                    .error(R.drawable.test_image_back)
-                    .preload()
-            }
-            else{
-                requestManager
-                    .load(R.drawable.test_image_back)
-                    .preload()
-            }
+            requestManager
+                .load(reserv.house_image)
+                .error(R.drawable.test_image_back)
+                .preload()
 
         }
     }
 
 
     fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean) {
+
+        Log.e("HOME FRAGMENT adapter", "${blogList}")
         if (!blogList.isNullOrEmpty()) {
             val newList = blogList.toMutableList()
             Log.e("home adapter list", "$newList")
@@ -241,15 +235,10 @@ class HomeListAdapter(
                 }
             }
 
-            if (item.house_image != null)
-                requestManager
-                    .load(item.house_image)
-                    .error(R.drawable.test_image_back)
-                    .into(itemView.book_requests_recycler_view_item_iv)
-            else
-                requestManager
-                    .load(R.drawable.test_image_back)
-                    .into(itemView.book_requests_recycler_view_item_iv)
+            requestManager
+                .load(item.house_image)
+                .error(R.drawable.test_image_back)
+                .into(itemView.book_requests_recycler_view_item_iv)
         }
     }
 
