@@ -24,9 +24,8 @@ import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment
 import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeFragment
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewFragment
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseFragment
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity
 import com.example.akvandroidapp.util.BottomNavController
 import com.example.akvandroidapp.util.setUpNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -119,17 +118,6 @@ class MainActivity : BaseActivity(),
             navController.navigate(R.id.action_profileAddTypeFragment_to_home)
         }
 
-        is ZhilyeFragment -> {
-            navController.navigate(R.id.action_zhilyeFragment_to_home)
-        }
-
-        is ZhilyeReviewFragment -> {
-            navController.navigate(R.id.action_zhilyeReviewFragment_to_home)
-        }
-
-        is ZhilyeRulesOfHouseFragment -> {
-            navController.navigate(R.id.action_zhilyeRulesOfHouseFragment_to_home)
-        }
 
         is FilterCityFragment -> {
             navController.navigate(R.id.action_filterCityFragment_to_home)

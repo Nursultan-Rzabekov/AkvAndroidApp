@@ -23,7 +23,7 @@
 
 
     <fragment android:id="@+id/zhilyeFragment"
-        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeFragment"
+        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_zhilye_layout">
 
@@ -49,7 +49,7 @@
 
 
     <fragment android:id="@+id/zhilyeRulesOfHouseFragment"
-        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseFragment"
+        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity"
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_rules_of_house_layout">
 
@@ -57,7 +57,7 @@
     </fragment>
 
     <fragment android:id="@+id/zhilyeReviewFragment"
-        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewFragment"
+        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity"
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_review_page_layout">
 

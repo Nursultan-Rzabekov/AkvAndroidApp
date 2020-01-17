@@ -47,6 +47,32 @@
 
         </activity>
 
+
+        <activity
+            android:name=".ui.main.search.zhilye.ZhilyeActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity
+            android:name=".ui.main.search.zhilye.ZhilyeBookActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+
+        <activity
+            android:name=".ui.main.search.zhilye.ZhilyeRulesOfHouseActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity
+            android:name=".ui.main.search.zhilye.ZhilyeReviewActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
         <activity
             android:name=".ui.main.profile.support.SupportProfileActivity"
             android:windowSoftInputMode="adjustPan"/>

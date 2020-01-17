@@ -6,6 +6,7 @@
     android:backgroundTint="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/fragment_zhilye_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent">

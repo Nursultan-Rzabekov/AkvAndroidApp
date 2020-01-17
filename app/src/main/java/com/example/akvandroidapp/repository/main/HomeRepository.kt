@@ -46,8 +46,8 @@ constructor(
             }
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<HomeListResponse>) {
-                Log.d("home reservations", "result count ${response.body.count}")
-                Log.d("home reservations", "result response ${response.body.results}")
+                Log.e("home reservations", "result count ${response.body.count}")
+                Log.e("home reservations", "result response ${response.body.results}")
 
                 val reservationsList: ArrayList<HomeReservation> = ArrayList()
                 val count = response.body.count

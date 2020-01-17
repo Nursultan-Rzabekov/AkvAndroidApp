@@ -18,6 +18,10 @@ import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity
 import com.example.akvandroidapp.ui.main.search.MapActivity
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookActivity
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -36,10 +40,26 @@ abstract class ActivityBuildersModule {
     )
     abstract fun contributeMainActivity(): MainActivity
 
-
     @MainScope
     @ContributesAndroidInjector
     abstract fun contributeMapActivity(): MapActivity
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeZhilyeFragmentActivity(): ZhilyeActivity
+
+    @MainScope
+    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
+    abstract fun contributeZhilyeBookActivity(): ZhilyeBookActivity
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeZhilyeReviewActivity(): ZhilyeReviewActivity
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeZhilyeRulesOfHouseActivity(): ZhilyeRulesOfHouseActivity
+
 
     @MainScope
     @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
