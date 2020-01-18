@@ -226,8 +226,6 @@ constructor(
                 )
 
 
-
-
                 val blogZhilyePhotosList: ArrayList<ZhilyeDetailPhotos> = ArrayList()
                 response.body.photos?.forEach {
                     val image: String = it.image

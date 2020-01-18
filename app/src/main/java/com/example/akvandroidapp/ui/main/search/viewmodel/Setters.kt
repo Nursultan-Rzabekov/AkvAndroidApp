@@ -10,6 +10,7 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 
 fun SearchViewModel.setQuery(query: String){
     val update = getCurrentViewStateOrNew()
@@ -26,6 +27,18 @@ fun DetailsViewModel.setQuery(query: String){
 fun ZhilyeViewModel.setHouseId(houseId: Int){
     val update = getCurrentViewStateOrNew()
     update.zhilyeFields.houseId = houseId
+    setViewState(update)
+}
+
+fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
+    val update = getCurrentViewStateOrNew()
+    update.zhilyeFields.blogListRecommendations = zhilyeFields.blogListRecommendations
+    update.zhilyeFields.zhilyeDetail = zhilyeFields.zhilyeDetail
+    update.zhilyeFields.zhilyeDetailAccomadations = zhilyeFields.zhilyeDetailAccomadations
+    update.zhilyeFields.zhilyeDetailNearBuildings = zhilyeFields.zhilyeDetailNearBuildings
+    update.zhilyeFields.zhilyeDetailPhotos = zhilyeFields.zhilyeDetailPhotos
+    update.zhilyeFields.zhilyeDetailRules = zhilyeFields.zhilyeDetailRules
+    update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
     setViewState(update)
 }
 

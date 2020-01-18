@@ -14,6 +14,8 @@ import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 
 
 fun SearchViewModel.resetPage(){
@@ -224,5 +226,9 @@ fun HomeViewModel.handleIncomingReservationListData(viewState: HomeViewState){
     setQueryExhausted(viewState.homeReservationField.isQueryExhausted)
     setCount(viewState.homeReservationField.count)
     setBlogListData(viewState.homeReservationField.reservationList)
+}
+
+fun ZhilyeViewModel.handleIncomingZhilyeData(viewState: ZhilyeViewState){
+    setZhilyeData(viewState.zhilyeFields)
 }
 
