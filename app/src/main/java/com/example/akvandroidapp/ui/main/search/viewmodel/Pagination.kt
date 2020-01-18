@@ -83,6 +83,7 @@ fun MessagesViewModel.loadFirstPage() {
     setStateEvent(MessagesStateEvent.ChatInfoEvent())
 }
 
+
 fun DetailsViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)

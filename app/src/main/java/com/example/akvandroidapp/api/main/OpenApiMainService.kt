@@ -106,13 +106,6 @@ interface OpenApiMainService {
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<BlogListSearchResponse>>
 
-    @GET("chats/{id}/messages/")
-    fun getChatHistory(
-        @Header("Authorization") authorization: String,
-        @Path("id") postId:String
-    ): LiveData<GenericApiResponse<AllChatsResponse>>
-
-
     @GET("chat_sessions/")
     fun getAllChats(
         @Header("Authorization") authorization: String,
@@ -140,6 +133,11 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<HomeListResponse>>
+
+    @GET("houses/{house_id}")
+    fun getZhilyeWithHouseId(
+        @Path("house_id") house_id: Int
+    ): LiveData<GenericApiResponse<ZhilyeResponse>>
 }
 
 

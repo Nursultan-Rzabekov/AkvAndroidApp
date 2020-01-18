@@ -6,14 +6,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
-import com.example.akvandroidapp.entity.AuthToken
-import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.api.main.responses.ZhilyeResponse
+import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.repository.JobManager
 import com.example.akvandroidapp.repository.NetworkBoundResource
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
 import com.example.akvandroidapp.util.Constants.Companion.PAGINATION_PAGE_SIZE
@@ -178,6 +179,164 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("searchBlogPosts", job)
+            }
+
+        }.asLiveData()
+    }
+
+
+    fun getZhilyeWithHouseId(
+        houseId: Int
+    ): LiveData<DataState<ZhilyeViewState>> {
+
+        return object: NetworkBoundResource<ZhilyeResponse, List<BlogPost>, ZhilyeViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            // if network is down, view cache only and return
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<ZhilyeResponse>
+            ) {
+
+
+                val zhilyeDetail = ZhilyeDetail(
+                    id = response.body.id,
+                    name = response.body.name,
+                    description = response.body.description,
+                    rooms = response.body.rooms,
+                    floor = response.body.floor,
+                    address = response.body.address,
+                    longitude = response.body.longitude,
+                    latitude = response.body.latitude,
+                    house_type = response.body.house_type,
+                    price = response.body.price,
+                    status = response.body.status,
+                    beds = response.body.beds,
+                    guests = response.body.guests,
+                    rating = response.body.rating,
+                    city = response.body.city,
+                    is_favourite = response.body.is_favourite,
+                    discount7days = response.body.discount7days,
+                    discount30days = response.body.discount30days
+                )
+
+
+
+
+                val blogZhilyePhotosList: ArrayList<ZhilyeDetailPhotos> = ArrayList()
+                response.body.photos?.forEach {
+                    val image: String = it.image
+                    blogZhilyePhotosList.add(
+                        ZhilyeDetailPhotos(
+                            house = it.house,
+                            image = "https://akv-technopark.herokuapp.com$image"
+                        )
+                    )
+                }
+
+                val blogZhilyeAccommodationsList: ArrayList<ZhilyeDetailProperties> = ArrayList()
+                response.body.accommodations?.forEach {
+                    blogZhilyeAccommodationsList.add(
+                        ZhilyeDetailProperties(
+                            id = it.id,
+                            name = it.name
+                        )
+                    )
+                }
+
+
+                val blogZhilyeRulesList: ArrayList<ZhilyeDetailProperties> = ArrayList()
+                response.body.rules?.forEach {
+                    blogZhilyeRulesList.add(
+                        ZhilyeDetailProperties(
+                            id = it.id,
+                            name = it.name
+                        )
+                    )
+                }
+
+                val blogZhilyeNearBuildingsList: ArrayList<ZhilyeDetailProperties> = ArrayList()
+                response.body.near_buildings?.forEach {
+                    blogZhilyeNearBuildingsList.add(
+                        ZhilyeDetailProperties(
+                            id = it.id,
+                            name = it.name
+                        )
+                    )
+                }
+
+                val userChatMessages = UserChatMessages(
+                    id = response.body.user.id,
+                    email = response.body.user.email,
+                    first_name = response.body.user.first_name,
+                    last_name = response.body.user.last_name,
+                    userpic = response.body.user.userpic
+                )
+
+
+                val blogPostList: ArrayList<BlogPost> = ArrayList()
+                for(blogPostResponse in response.body.recommendations){
+                    val imagePost = blogPostResponse.photos?.get(0) ?: "//////////////////////////////////////////////////////////////////////"
+                    blogPostList.add(
+                        BlogPost(
+                            id = blogPostResponse.id,
+                            name = blogPostResponse.name,
+                            beds = blogPostResponse.beds,
+                            rooms = blogPostResponse.rooms,
+                            is_favourite = blogPostResponse.is_favourite,
+                            longitude = blogPostResponse.longitude,
+                            latitude = blogPostResponse.latitude,
+                            house_type = blogPostResponse.house_type,
+                            city = blogPostResponse.city,
+                            price = blogPostResponse.price,
+                            status = blogPostResponse.status,
+                            image = "https://akv-technopark.herokuapp.com" + imagePost.toString().substring(24,imagePost.toString().length - 1),
+                            rating = blogPostResponse.rating
+                        )
+
+                    )
+                }
+
+
+                Log.d("qwe","result count 1  ${blogZhilyeAccommodationsList}")
+                Log.d("qwe","result count 2 ${blogZhilyeNearBuildingsList}")
+                Log.d("qwe","result count 3 ${blogPostList}")
+                Log.d("qwe","result count 4 ${userChatMessages}")
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeViewState(ZhilyeViewState.ZhilyeFields(
+                                zhilyeDetail = zhilyeDetail,
+                                zhilyeDetailAccomadations = blogZhilyeAccommodationsList,
+                                zhilyeDetailNearBuildings = blogZhilyeNearBuildingsList,
+                                zhilyeDetailPhotos = blogZhilyePhotosList,
+                                zhilyeUser = userChatMessages,
+                                blogListRecommendations = blogPostList))
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<ZhilyeResponse>> {
+                return openApiMainService.getZhilyeWithHouseId(house_id = houseId)
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+                // ignore
+            }
+
+            override fun setJob(job: Job) {
+                addJob("searchBlogPosts2", job)
             }
 
         }.asLiveData()

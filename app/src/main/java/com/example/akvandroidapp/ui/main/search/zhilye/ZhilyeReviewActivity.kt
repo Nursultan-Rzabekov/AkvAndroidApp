@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.back_button_layout.*
 class ZhilyeReviewActivity : BaseActivity() {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_review_page_layout)

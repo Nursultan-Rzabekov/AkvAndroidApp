@@ -11,6 +11,7 @@ import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.viewmodel.SearchViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -55,7 +56,12 @@ abstract class MainViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(ZhilyeBookViewModel::class)
-    abstract fun bindMessagesBookViewModel(createBlogViewModel: ZhilyeBookViewModel): ViewModel
+    abstract fun bindZhilyeBookViewModel(createBlogViewModel: ZhilyeBookViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ZhilyeViewModel::class)
+    abstract fun bindZhilyeViewModel(createBlogViewModel: ZhilyeViewModel): ViewModel
 
 }
 

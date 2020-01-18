@@ -57,33 +57,4 @@ class BlogSearchResponse(
     @Expose
     var photos: List<BlogImageResponse>?
 
-//    @SerializedName("houseaccoms")
-//    @Expose
-//    var houseaccoms: List<Int>,
-
-//    @SerializedName("houserules")
-//    @Expose
-//    var houserules: List<Int>,
-
-//    @SerializedName("user")
-//    @Expose
-//    var user: UserResponse
-
-
-) {
-    override fun toString(): String {
-        return "BlogSearchResponse(id=$id, " +
-                "name='$name', " +
-                "beds='$beds', " +
-                "rooms='$rooms'," +
-                "is_favourite='$is_favourite'," +
-                "longitude='$longitude', " +
-                "latitude='$latitude', " +
-                "house_type='$house_type', " +
-                "price='$price', " +
-                "status='$status', " +
-                "photos='$photos', " +
-                "city='$city', " +
-                "rating='$rating')"
-    }
-}
+)

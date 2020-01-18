@@ -7,7 +7,6 @@ import com.example.akvandroidapp.api.auth.OpenApiAuthService
 import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.example.akvandroidapp.api.auth.network_responses.LoginResponse
 import com.example.akvandroidapp.api.auth.network_responses.RegistrationResponse
-import com.example.akvandroidapp.api.auth.network_responses.UserResponse
 import com.example.akvandroidapp.entity.AccountProperties
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.persistence.AccountPropertiesDao

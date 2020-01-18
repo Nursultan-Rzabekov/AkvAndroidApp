@@ -10,23 +10,14 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-@Entity(tableName = "blog_post")
-data class UserChatMessages(
+@Entity(tableName = "blog_zhilye_properties")
+data class ZhilyeDetailProperties(
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
     var id: Int,
 
-    @ColumnInfo(name = "email")
-    var email: String? = null,
+    @ColumnInfo(name = "name")
+    var name: String? = null
 
-    @ColumnInfo(name = "first_name")
-    var first_name: String? = null,
-
-    @ColumnInfo(name = "last_name")
-    var last_name: String? = null,
-
-    @ColumnInfo(name = "userpic")
-    var userpic: String? = null
-
-    ): Parcelable
+): Parcelable

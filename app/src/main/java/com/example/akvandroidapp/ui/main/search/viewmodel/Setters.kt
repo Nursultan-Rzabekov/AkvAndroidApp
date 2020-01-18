@@ -9,6 +9,7 @@ import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 
 fun SearchViewModel.setQuery(query: String){
     val update = getCurrentViewStateOrNew()
@@ -19,6 +20,12 @@ fun SearchViewModel.setQuery(query: String){
 fun DetailsViewModel.setQuery(query: String){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.target = query
+    setViewState(update)
+}
+
+fun ZhilyeViewModel.setHouseId(houseId: Int){
+    val update = getCurrentViewStateOrNew()
+    update.zhilyeFields.houseId = houseId
     setViewState(update)
 }
 

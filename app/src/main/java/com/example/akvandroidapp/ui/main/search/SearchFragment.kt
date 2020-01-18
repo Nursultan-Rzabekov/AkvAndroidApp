@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -224,8 +225,8 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
     }
 
     override fun onItemSelected(position: Int, item: BlogPost) {
-        viewModel.setBlogPost(item)
-        findNavController().navigate(R.id.action_searchFragment_to_zhilyeFragment)
+        val bundle = bundleOf("houseId" to item.id)
+        findNavController().navigate(R.id.action_searchFragment_to_zhilyeFragment,bundle)
     }
 
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {

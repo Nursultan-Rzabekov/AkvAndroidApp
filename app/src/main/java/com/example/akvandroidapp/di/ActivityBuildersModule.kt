@@ -45,7 +45,7 @@ abstract class ActivityBuildersModule {
     abstract fun contributeMapActivity(): MapActivity
 
     @MainScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
     abstract fun contributeZhilyeFragmentActivity(): ZhilyeActivity
 
     @MainScope

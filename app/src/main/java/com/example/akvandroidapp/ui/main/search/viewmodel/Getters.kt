@@ -6,6 +6,7 @@ import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 
 
 fun SearchViewModel.getFilterPriceLeft(): Int {
@@ -50,6 +51,12 @@ fun SearchViewModel.getFilterBedsRight(): Int {
 fun SearchViewModel.getCityQuery(): String {
     getCurrentViewStateOrNew().let {
         return it.blogFields.city_name
+    }
+}
+
+fun ZhilyeViewModel.getHouseId(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.zhilyeFields.houseId
     }
 }
 

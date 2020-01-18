@@ -5,21 +5,31 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
+import com.example.akvandroidapp.ui.DataStateChangeListener
+import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
 import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
+import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_zhilye.*
+import kotlinx.android.synthetic.main.fragment_zhilye_layout.*
 import kotlinx.android.synthetic.main.map.*
 import technolifestyle.com.imageslider.FlipperLayout
 import technolifestyle.com.imageslider.FlipperView
+import javax.inject.Inject
 
 
 class ZhilyeActivity : BaseActivity() {
@@ -29,11 +39,32 @@ class ZhilyeActivity : BaseActivity() {
     lateinit var flipperLayout : FlipperLayout
 
 
+    lateinit var stateChangeListener: DataStateChangeListener
+    @Inject
+    lateinit var providerFactory: ViewModelProviderFactory
+    lateinit var viewModel: ZhilyeViewModel
+
+    private var houseId:Int?=null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MapKitFactory.setApiKey(Constants.MAPKIT_API_KEY)
         MapKitFactory.initialize(this)
         setContentView(R.layout.fragment_zhilye_layout)
+
+        houseId = intent.getIntExtra("houseId",67)
+
+        viewModel = ViewModelProvider(this, providerFactory).get(ZhilyeViewModel::class.java)
+        stateChangeListener = this
+
+        subscribeObservers()
+
+        houseId?.let {
+            viewModel.setHouseId(it).let {
+                viewModel.setStateEvent(ZhilyeStateEvent.BlogZhilyeEvent())
+            }
+        }
 
         maPView = mapview
         maPView.map.move(
@@ -61,10 +92,27 @@ class ZhilyeActivity : BaseActivity() {
         fragment_zhile_book_btn.setOnClickListener {
             navBookReserv()
         }
+    }
 
-//        main_back_img_btn.setOnClickListener {
-//            finish()
-//        }
+    private fun subscribeObservers(){
+        viewModel.dataState.observe(this, Observer{ dataState ->
+            if(dataState != null) {
+                stateChangeListener.onDataStateChange(dataState)
+            }
+        })
+
+        viewModel.viewState.observe(this, Observer{ viewState ->
+            if(viewState != null){
+                Log.d("yes","list house +${viewState.zhilyeFields.houseId}")
+                Log.d("yes","list zhilyeDetail +${viewState.zhilyeFields.zhilyeDetail}")
+                Log.d("yes","list Recommendations +${viewState.zhilyeFields.blogListRecommendations}")
+                Log.d("yes","list Accomadations +${viewState.zhilyeFields.zhilyeDetailAccomadations}")
+                Log.d("yes","list Photos +${viewState.zhilyeFields.zhilyeDetailPhotos}")
+                Log.d("yes","list DetailRules +${viewState.zhilyeFields.zhilyeDetailRules}")
+                Log.d("yes","list User +${viewState.zhilyeFields.zhilyeUser}")
+                Log.d("yes","list DetailNearBuildings +${viewState.zhilyeFields.zhilyeDetailNearBuildings}")
+            }
+        })
     }
 
 
@@ -91,11 +139,16 @@ class ZhilyeActivity : BaseActivity() {
 
 
     override fun displayProgressBar(bool: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if(bool){
+            progress_bar_zhilye.visibility = View.VISIBLE
+        }
+        else{
+            progress_bar_zhilye.visibility = View.GONE
+        }
     }
 
     override fun expandAppBar() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onStart() {
