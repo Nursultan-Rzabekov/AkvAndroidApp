@@ -53,7 +53,7 @@ data class BlogPost(
     @ColumnInfo(name = "rating")
     var rating: Double
 
-    ): Parcelable {
+    ): Parcelable  {
 
     override fun toString(): String {
         return "BlogPost(id=$id, " +

@@ -448,7 +448,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_zhile_book_btn"
-                style="@style/MinorButton"
+                style="@style/AllButton.Unelevated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/book"
