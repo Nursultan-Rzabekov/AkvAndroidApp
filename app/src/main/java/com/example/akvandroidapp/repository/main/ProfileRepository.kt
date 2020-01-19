@@ -79,19 +79,6 @@ constructor(
 
                 Log.d(TAG,"PostCreateHouse 444444 + ${response.body.name}")
 
-//                if (!response.body.response.equals(RESPONSE_MUST_BECOME_CODINGWITHMITCH_MEMBER)) {
-//                    val updatedBlogPost = BlogPost(
-//                        response.body.pk,
-//                        response.body.title,
-//                        response.body.slug,
-//                        response.body.body,
-//                        response.body.image,
-//                        DateUtils.convertServerStringDateToLong(response.body.date_updated),
-//                        response.body.username
-//                    )
-//                    updateLocalDb(updatedBlogPost)
-//                }
-
                 withContext(Dispatchers.Main) {
                     // finish with success response
                     onCompleteJob(
@@ -106,7 +93,6 @@ constructor(
             override fun createCall(): LiveData<GenericApiResponse<BlogCreateUpdateResponse>> {
                 Log.d(TAG,"PostCreateHouse 3333333 + ${name}")
                 return openApiMainService.createBlog(
-//                    "application/json",
                     "Token ${authToken.token!!}",
                     name,
                     description,
@@ -167,14 +153,13 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<BlogGetProfileInfoResponse>) {
 
-                Log.d(TAG,"PostCreateHouse 444444 + ${response.body.phone}")
-
                 sessionManager.setProfileInfo(
-                    response.body.first_name,
-                    response.body.birth_day,
-                    response.body.gender,
-                    response.body.phone,
-                    response.body.email)
+                    nickname = response.body.first_name,
+                    birthdate = response.body.birth_day,
+                    gender = response.body.gender,
+                    phonenumber = response.body.phone,
+                    email = response.body.email,
+                    imageBackend = response.body.userpic)
 
                 withContext(Dispatchers.Main) {
                     // finish with success response
@@ -188,7 +173,6 @@ constructor(
             }
 
             override fun createCall(): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>> {
-                Log.d(TAG,"PostCreateHouse 7070707070 + ${authToken}")
                 return openApiMainService.getProfileInfo(
                     "Token ${authToken.token!!}"
                 )
@@ -215,7 +199,10 @@ constructor(
 
     fun updateProfileInfo(
         authToken: AuthToken,
-        firstName:RequestBody,
+        phone:RequestBody,
+        email:RequestBody,
+        gender:RequestBody,
+        birth_day:RequestBody,
         userPic: MultipartBody.Part?
     ): LiveData<DataState<ProfileViewState>> {
         return object :
@@ -233,16 +220,7 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<BlogGetProfileInfoResponse>) {
 
-                Log.d(TAG,"PostCreateHouse 444444 + ${response.body.phone}")
-
-                sessionManager.setProfileInfo(response.body.first_name,
-                    response.body.birth_day,
-                    response.body.gender,
-                    response.body.phone,
-                    response.body.email)
-
                 withContext(Dispatchers.Main) {
-                    // finish with success response
                     onCompleteJob(
                         DataState.data(
                             null,
@@ -256,20 +234,19 @@ constructor(
                 Log.d(TAG,"PostCreateHouse 7070707070 + ${authToken}")
                 return openApiMainService.updateProfileInfo(
                     "Token ${authToken.token!!}",
-                    firstName,
-                    userPic
+                    phone = phone,
+                    email = email,
+                    birth_day = birth_day,
+                    userpic = userPic,
+                    gender = gender
                 )
             }
 
-            // not applicable
             override fun loadFromCache(): LiveData<ProfileViewState> {
                 return AbsentLiveData.create()
             }
 
             override suspend fun updateLocalDb(cacheObject: BlogPost?) {
-                cacheObject?.let {
-                    //blogPostDao.insert(it)
-                }
             }
 
             override fun setJob(job: Job) {

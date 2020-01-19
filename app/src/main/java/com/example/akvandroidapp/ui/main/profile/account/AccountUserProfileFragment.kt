@@ -54,8 +54,6 @@ class AccountUserProfileFragment : BaseProfileFragment() {
         main_back_img_btn.setOnClickListener {
             findNavController().navigateUp()
         }
-
-
     }
 
     private fun navNextFragment(){
@@ -76,9 +74,8 @@ class AccountUserProfileFragment : BaseProfileFragment() {
             fragment_profile_account_email_tv.text = dataState.email.toString()
             header_profile_account_tv.text = dataState.nickname.toString()
             Glide.with(this).load(
-                if (dataState.image != null) dataState.image else R.drawable.default_image)
+                if (dataState.imageBackend != null) dataState.imageBackend else R.drawable.default_image)
                 .into(header_profile_account_civ)
         })
     }
-
 }

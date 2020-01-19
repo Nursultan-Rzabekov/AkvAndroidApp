@@ -105,8 +105,8 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
             getGender(),
             fragment_profile_account_edit_phonenumber_tv.text.toString(),
             fragment_profile_account_edit_email_tv.text.toString())
-        editInfo()
         subscribeObservers()
+        editInfo()
     }
 
     private fun attachUserAccounts(){
@@ -128,7 +128,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
             header_profile_account_edit_tv.text = dataState.nickname.toString()
 
             Glide.with(this).load(
-                if (dataState.image != null) dataState.image else R.drawable.default_image)
+                if (dataState.imageBackend != null) dataState.imageBackend else R.drawable.default_image)
                 .into(header_profile_account_edit_civ)
         })
     }
@@ -224,15 +224,11 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
     private fun editInfo(){
         image1?.path?.let {
             val imageFile = File(it)
-            Log.d(TAG, "CreateBlogFragment, imageFile: file: ${imageFile}")
-
             val requestBody =
                 RequestBody.create(
                     MediaType.parse("multipart/form-data"),
                     imageFile
                 )
-
-            Log.d(TAG, "PostCreateHouse request777: ${requestBody}")
 
             val multipartBody = MultipartBody.Part.createFormData(
                 "photos",
@@ -241,7 +237,12 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
             )
 
             viewModel.setStateEvent(
-                ProfileStateEvent.EditProfileInfoEvent(header_profile_account_edit_tv.text.toString(), multipartBody)
+                ProfileStateEvent.EditProfileInfoEvent(
+                    phone = fragment_profile_account_edit_phonenumber_tv.text.toString(),
+                    gender = getGender(),
+                    email = fragment_profile_account_edit_email_tv.text.toString(),
+                    birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
+                    image = multipartBody)
             )
         }
     }

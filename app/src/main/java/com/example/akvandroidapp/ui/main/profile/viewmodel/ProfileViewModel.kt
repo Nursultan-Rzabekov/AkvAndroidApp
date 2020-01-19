@@ -106,15 +106,19 @@ constructor(
             }
 
             is ProfileStateEvent.EditProfileInfoEvent ->{
-                Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
-
-                val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent.first_name!!)
+                val email = RequestBody.create(MediaType.parse("text/plain"), stateEvent.email!!)
+                val phone = RequestBody.create(MediaType.parse("text/plain"), stateEvent.phone!!)
+                val birth_day = RequestBody.create(MediaType.parse("text/plain"), stateEvent.birth_day!!)
+                val gender = RequestBody.create(MediaType.parse("text/plain"), stateEvent.gender.toString()!!)
 
                 return sessionManager.cachedToken.value?.let { authToken ->
                     profileRepository.updateProfileInfo(
                         authToken,
-                        name,
-                        stateEvent.image
+                        email = email,
+                        phone = phone,
+                        gender = gender,
+                        birth_day = birth_day,
+                        userPic = stateEvent.image
                     )
                 }?: AbsentLiveData.create()
             }
@@ -129,7 +133,6 @@ constructor(
                     )
                 }?: AbsentLiveData.create()
             }
-
             is ProfileStateEvent.None -> {
                 return liveData {
                     emit(
@@ -143,7 +146,6 @@ constructor(
             }
         }
     }
-
 
     override fun initNewViewState(): ProfileViewState {
         return ProfileViewState()

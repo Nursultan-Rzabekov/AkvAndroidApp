@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
@@ -52,12 +53,11 @@ class MyHouseDetailProfileFragment : BaseProfileFragment() {
 
         fragment_my_adds_detailed_title_tv.text = argument?.name
 
-        requestManager
+        Glide.with(this)
             .load(argument?.image)
             .error(R.drawable.test_image_back)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(fragment_my_adds_detailed_iv)
-
 
         earning.setOnClickListener {
             navNextFragment()

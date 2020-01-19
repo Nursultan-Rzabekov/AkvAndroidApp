@@ -116,8 +116,4 @@ class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAda
         photosAdapter.removeItem(position)
         fragment_my_adds_change_photos_tv.text = ("${photosAdapter.itemCount}/15")
     }
-
-
-
-
 }

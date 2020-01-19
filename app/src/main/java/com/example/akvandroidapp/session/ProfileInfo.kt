@@ -8,5 +8,6 @@ data class ProfileInfo(
     var gender: Int? = null,
     var phonenumber: String? = null,
     var email: String? = null,
-    var image: Uri? = null
+    var image: Uri? = null,
+    var imageBackend: String? = null
 )

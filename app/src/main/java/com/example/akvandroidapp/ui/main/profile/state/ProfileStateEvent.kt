@@ -1,7 +1,6 @@
 package com.example.akvandroidapp.ui.main.profile.state
 
-import android.net.Uri
-import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
+
 import okhttp3.MultipartBody
 
 
@@ -26,17 +25,14 @@ sealed class ProfileStateEvent {
     class GetProfileInfoEvent(): ProfileStateEvent()
 
     data class EditProfileInfoEvent(
-//        var phone: String? = null,
-//        var birth_day: String? = null,
-//        var gender: Int? = null,
-//        var user_type: Int? = null,
-        var first_name: String? = null,
+        var phone: String? = null,
+        var birth_day: String? = null,
+        var gender: Int? = null,
+//        var first_name: String? = null,
 //        var last_name: String? = null,
-//        var id: Int? = null,
-//        var email: String? = null,
+        var email: String? = null,
         val image: MultipartBody.Part? = null
     ): ProfileStateEvent()
-
 
     class MyHouseEvent : ProfileStateEvent()
 

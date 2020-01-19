@@ -21,10 +21,6 @@ class BlogGetProfileInfoResponse(
     @Expose
     var gender: Int,
 
-    @SerializedName("user_type")
-    @Expose
-    var user_type: Int,
-
     @SerializedName("first_name")
     @Expose
     var first_name: String,
@@ -35,6 +31,14 @@ class BlogGetProfileInfoResponse(
 
     @SerializedName("email")
     @Expose
-    var email: String
+    var email: String,
+
+    @SerializedName("userpic")
+    @Expose
+    var userpic: String,
+
+    @SerializedName("is_active")
+    @Expose
+    var is_active: Boolean
 
 )
