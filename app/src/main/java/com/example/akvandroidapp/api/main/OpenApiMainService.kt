@@ -117,7 +117,6 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<MyHouseStateResponse>>
 
     @FormUrlEncoded
-    @Headers("Content-Type: application/json")
     @POST("reservations/")
     fun sendReservationRequest(
         @Header("Authorization") authorization: String,
