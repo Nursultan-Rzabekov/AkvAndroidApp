@@ -1,8 +1,12 @@
 package com.example.akvandroidapp.ui.main.search.zhilye
 
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -10,20 +14,27 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.ZhilyeDetailProperties
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
+import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentReviewsAdapter
+import com.example.akvandroidapp.ui.main.search.zhilye.adapters.RecommendationsAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.util.EndSpacingItemDecoration
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
+import com.google.android.material.appbar.AppBarLayout
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
@@ -49,11 +60,17 @@ class ZhilyeActivity : BaseActivity() {
     private val TARGET_LOCATION = Point(59.945933, 30.320045)
     lateinit var flipperLayout : FlipperLayout
 
+    //bundle
+    private var houseRules: List<ZhilyeDetailProperties> = listOf()
+
     //Adapters
     private lateinit var facilitiesAdapter: ApartmentPropertiesAdapter
     private lateinit var nearsAdapter: ApartmentPropertiesAdapter
+    private lateinit var recommendationsAdapter: RecommendationsAdapter
+    private lateinit var reviewsAdapter: ApartmentReviewsAdapter
 
     private var isFavouriteChecked = false
+    private var isToolbarColapsed = false
 
     lateinit var stateChangeListener: DataStateChangeListener
     @Inject
@@ -84,7 +101,7 @@ class ZhilyeActivity : BaseActivity() {
         subscribeObservers()
         setToolbar()
         setMapView()
-        setFlipperLayout()
+        setFlipperLayout(arrayListOf())
         initRecyclerViews()
 
 
@@ -140,8 +157,22 @@ class ZhilyeActivity : BaseActivity() {
                 fragment_zhile_price_tv.text =
                     ("${viewState.zhilyeFields.zhilyeDetail.price}kzt/ночь")
 
+                moveMapTo(Point(
+                    viewState.zhilyeFields.zhilyeDetail.latitude,
+                    viewState.zhilyeFields.zhilyeDetail.longitude
+                ))
+
                 facilitiesAdapter.submitList(viewState.zhilyeFields.zhilyeDetailAccomadations)
                 nearsAdapter.submitList(viewState.zhilyeFields.zhilyeDetailNearBuildings)
+                recommendationsAdapter.submitList(viewState.zhilyeFields.blogListRecommendations)
+                reviewsAdapter.submitList(listOf())
+
+                val photos: ArrayList<String> = arrayListOf()
+                for(photo in viewState.zhilyeFields.zhilyeDetailPhotos)
+                    photos.add(photo.image!!)
+                setFlipperLayout(photos)
+
+                houseRules = viewState.zhilyeFields.zhilyeDetailRules
             }
         })
     }
@@ -163,7 +194,11 @@ class ZhilyeActivity : BaseActivity() {
 
 
     private fun navHouseRules(){
+        val bundle = bundleOf(
+            "houseRules" to houseRules
+        )
         val intent = Intent(this, ZhilyeRulesOfHouseActivity::class.java)
+        intent.putExtra("houseRules", bundle)
         startActivity(intent)
     }
 
@@ -214,12 +249,60 @@ class ZhilyeActivity : BaseActivity() {
             nearsAdapter = ApartmentPropertiesAdapter()
             adapter = nearsAdapter
         }
+        fragment_zhilye_recommendations_recycler_view.apply {
+            layoutManager = LinearLayoutManager(this@ZhilyeActivity, LinearLayoutManager.HORIZONTAL, false)
+            val endSpacingItemDecoration = EndSpacingItemDecoration(EndSpacingItemDecoration.STANDARD_SPACING)
+            removeItemDecoration(endSpacingItemDecoration) // does nothing if not applied already
+            addItemDecoration(endSpacingItemDecoration)
+
+            recommendationsAdapter = RecommendationsAdapter(
+                requestManager = requestManager
+            )
+            adapter = recommendationsAdapter
+        }
+        fragment_zhilye_reviews_recycler_view.apply {
+            layoutManager = LinearLayoutManager(this@ZhilyeActivity)
+            reviewsAdapter = ApartmentReviewsAdapter(
+                requestManager = requestManager
+            )
+            adapter = reviewsAdapter
+        }
     }
 
     private fun setToolbar(){
         toolbar_zhilye_header.navigationIcon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_back_white)
         setSupportActionBar(toolbar_zhilye_header)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        toolbar_zhilye_header.setNavigationOnClickListener{
+            finish()
+        }
+
+        fragment_zhilye_appbar.addOnOffsetChangedListener(
+            object: AppBarLayout.OnOffsetChangedListener{
+                var scrollRange = -1
+
+                override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+                    if (scrollRange == -1)
+                        scrollRange = fragment_zhilye_appbar.totalScrollRange
+                    if (scrollRange + verticalOffset == 0){
+                        isToolbarColapsed = true
+                        toolbar_zhilye_header.navigationIcon =
+                            ContextCompat.getDrawable(applicationContext, R.drawable.ic_back)
+                    }else{
+                        isToolbarColapsed = false
+                        toolbar_zhilye_header.navigationIcon =
+                            ContextCompat.getDrawable(applicationContext, R.drawable.ic_back_white)
+                    }
+                    changeFavouriteMenuBtnDrawable(
+                        toolbar_zhilye_header.menu?.findItem(R.id.favourite)
+                    )
+                    changeShareMenuBtnDrawable(
+                        toolbar_zhilye_header.menu?.findItem(R.id.share)
+                    )
+                }
+            }
+        )
     }
 
     private fun setMapView(){
@@ -231,24 +314,35 @@ class ZhilyeActivity : BaseActivity() {
         )
     }
 
-    private fun setFlipperLayout() {
+    private fun moveMapTo(point: Point){
+        mapview.map.move(
+            CameraPosition(point, 14.0f, 0.0f, 0.0f),
+            Animation(Animation.Type.SMOOTH, 4F),
+            null
+        )
+    }
+
+    private fun setFlipperLayout(urls: ArrayList<String>) {
         flipperLayout = findViewById(R.id.header_zhilye_flipper_layout)
         flipperLayout.removeAutoCycle()
         flipperLayout.showInnerPagerIndicator()
         flipperLayout.setIndicatorBackgroundColor(Color.TRANSPARENT)
 
-        val url =
-            arrayOf("https://blog.eap.ucop.edu/wp-content/uploads/2016/01/Julie-Huang-27.jpg",
-                "https://picsum.photos/300",
-                "https://i.pinimg.com/originals/18/40/72/184072abb72399c23ab635faaa0a94ad.jpg")
+        var photos: ArrayList<String> = arrayListOf("http://akv-technopark.herokuapp.com/media/userpics/_DSC0430.jpg")
+        if (urls.size > 0)
+            photos = urls
 
         val flipperViewList: ArrayList<FlipperView> = ArrayList()
-        for (i in url.indices) {
+        for (i in photos.indices) {
             val view = FlipperView(this)
             view.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
             view.setDescriptionBackgroundColor(Color.TRANSPARENT)
-            view.setImage(url[i]) { flipperImageView, image ->
-                Glide.with(this@ZhilyeActivity).load(image).centerCrop().into(flipperImageView)
+            view.setImage(photos[i]) { flipperImageView, image ->
+                requestManager
+                    .load(image)
+                    .error(R.drawable.test_image_back)
+                    .centerCrop()
+                    .into(flipperImageView)
             }
             flipperViewList.add(view)
         }
@@ -279,10 +373,19 @@ class ZhilyeActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun changeFavouriteMenuBtnDrawable(item: MenuItem){
+    private fun changeFavouriteMenuBtnDrawable(item: MenuItem?){
         if (isFavouriteChecked)
-            item.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_liked)
+            item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_liked)
+        else if (isToolbarColapsed)
+            item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_like_dark)
         else
-            item.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_like_white)
+            item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_like_white)
+    }
+
+    private fun changeShareMenuBtnDrawable(item: MenuItem?){
+        if (isToolbarColapsed)
+            item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_dark)
+        else
+            item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_white)
     }
 }

@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim_24dp"
-                android:layout_marginTop="@dimen/dim_36dp"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:layout_marginEnd="@dimen/dim_24dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/random_hotel"
@@ -154,6 +154,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_reviews_lb">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_zhilye_reviews_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <TextView
@@ -209,13 +214,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_mini_map"
-                app:strokeColor="@color/black"
-                app:strokeWidth="1dp">
+                app:strokeColor="@color/grey8"
+                app:strokeWidth="1px">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dim_12dp"
+                    android:layout_marginStart="@dimen/dim_12dp"
+                    android:layout_marginEnd="@dimen/dim_12dp"
+                    android:layout_marginTop="@dimen/dim_16dp"
+                    android:layout_marginBottom="@dimen/dim_16dp"
                     android:drawableEnd="@drawable/ic_forward"
                     android:fontFamily="@font/montserrat_bold"
                     android:paddingStart="@dimen/dim_20dp"
@@ -240,13 +248,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_house_rules_card"
-                app:strokeColor="@color/black"
-                app:strokeWidth="1dp">
+                app:strokeColor="@color/grey8"
+                app:strokeWidth="1px">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dim_12dp"
+                    android:layout_marginStart="@dimen/dim_12dp"
+                    android:layout_marginEnd="@dimen/dim_12dp"
+                    android:layout_marginTop="@dimen/dim_16dp"
+                    android:layout_marginBottom="@dimen/dim_16dp"
                     android:drawableEnd="@drawable/ic_forward"
                     android:fontFamily="@font/montserrat_bold"
                     android:paddingStart="@dimen/dim_20dp"
@@ -271,13 +282,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_zhilye_cancel_rules_card"
-                app:strokeColor="@color/black"
-                app:strokeWidth="1dp">
+                app:strokeColor="@color/grey8"
+                app:strokeWidth="1px">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dim_12dp"
+                    android:layout_marginStart="@dimen/dim_12dp"
+                    android:layout_marginEnd="@dimen/dim_12dp"
+                    android:layout_marginTop="@dimen/dim_16dp"
+                    android:layout_marginBottom="@dimen/dim_16dp"
                     android:drawableEnd="@drawable/ic_forward"
                     android:fontFamily="@font/montserrat_bold"
                     android:paddingStart="@dimen/dim_20dp"
@@ -379,7 +393,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim_36dp"
-                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginTop="@dimen/dim_24dp"
                 android:layout_marginEnd="@dimen/dim_36dp"
                 android:layout_marginBottom="@dimen/dim_36dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -396,6 +410,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
+        android:elevation="@dimen/elevation_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

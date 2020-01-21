@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
+import com.example.akvandroidapp.api.main.responses.ReservationRequestResponse
 import com.example.akvandroidapp.api.main.responses.ZhilyeResponse
 import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.persistence.BlogPostDao
@@ -14,6 +15,7 @@ import com.example.akvandroidapp.repository.NetworkBoundResource
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
@@ -22,6 +24,7 @@ import com.example.akvandroidapp.util.GenericApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
+import okhttp3.RequestBody
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -335,6 +338,68 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("searchBlogPosts2", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun sendReservationRequest(
+        authToken: AuthToken,
+        check_in: RequestBody,
+        check_out: RequestBody,
+        guests: RequestBody,
+        house_id: RequestBody
+    ): LiveData<DataState<ZhilyeBookViewState>> {
+        return object : NetworkBoundResource<ReservationRequestResponse, List<BlogPost>, ZhilyeBookViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<ReservationRequestResponse>) {
+                Log.d("response reservation", "response: ${response.body.response}")
+
+                val responseInfo = ReservationRequestInfo(
+                    response = response.body.response
+                )
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeBookViewState(
+                                reservationRequestField = ZhilyeBookViewState.ReservationRequestField(
+                                    response = responseInfo
+                                )
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<ReservationRequestResponse>> {
+                Log.d("Reservation request cal", "send house_id $house_id")
+                return openApiMainService.sendReservationRequest(
+                    "Token ${authToken.token!!}",
+                    check_in = check_in,
+                    chek_out = check_out,
+                    guests = guests,
+                    house_id = house_id
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeBookViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+
+            }
+
+            override fun setJob(job: Job) {
+                addJob("requestReservation", job)
             }
 
         }.asLiveData()

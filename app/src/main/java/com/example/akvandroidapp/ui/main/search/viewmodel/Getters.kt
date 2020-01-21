@@ -6,6 +6,7 @@ import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 
 
@@ -128,6 +129,11 @@ fun DetailsViewModel.getTargetQuery(): String {
     }
 }
 
+fun ZhilyeBookViewModel.getResponse(): Boolean{
+    getCurrentViewStateOrNew().let {
+        return it.reservationRequestField.response.response
+    }
+}
 
 fun SearchViewModel.isAuthorOfBlogPost(): Boolean{
     getCurrentViewStateOrNew().let {

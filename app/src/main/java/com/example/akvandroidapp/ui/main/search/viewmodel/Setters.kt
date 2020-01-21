@@ -10,6 +10,7 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 
@@ -40,6 +41,13 @@ fun ProfileViewModel.setHouseId(houseId: Int){
 fun ProfileViewModel.setState(state: Int){
     val update = getCurrentViewStateOrNew()
     update.myHouseStateFields.state = state
+    setViewState(update)
+}
+
+
+fun ZhilyeBookViewModel.setResponse(response: Boolean) {
+    val update = getCurrentViewStateOrNew()
+    update.reservationRequestField.response
     setViewState(update)
 }
 

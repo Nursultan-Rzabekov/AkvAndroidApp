@@ -8,11 +8,29 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/transparent">
+        android:backgroundTint="@color/white">
 
-        <include
-            layout="@layout/header_rules_of_house"
-            android:id="@+id/header_rules_of_house_base"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/header_rules_of_house_toolbar"
+            app:buttonGravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/header_rules_of_house_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/house_rules"
+                android:fontFamily="@font/montserrat_bold"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginBottom="@dimen/dim_16dp"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

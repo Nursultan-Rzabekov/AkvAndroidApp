@@ -115,6 +115,16 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<MyHouseStateResponse>>
+
+    @Multipart
+    @POST("reservations/")
+    fun sendReservationRequest(
+        @Header("Authorization") authorization: String,
+        @Part("check_in") check_in: RequestBody,
+        @Part("check_out") chek_out: RequestBody,
+        @Part("guests") guests: RequestBody,
+        @Part("house_id") house_id: RequestBody
+    ): LiveData<GenericApiResponse<ReservationRequestResponse>>
 }
 
 
