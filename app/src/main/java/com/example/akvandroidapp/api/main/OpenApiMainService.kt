@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.api.main
 
 import androidx.lifecycle.LiveData
+import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.util.GenericApiResponse
 import okhttp3.MultipartBody
@@ -116,14 +117,10 @@ interface OpenApiMainService {
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<MyHouseStateResponse>>
 
-    @FormUrlEncoded
     @POST("reservations/")
     fun sendReservationRequest(
         @Header("Authorization") authorization: String,
-        @Field("check_in") check_in: String,
-        @Field("check_out") check_out: String,
-        @Field("guests") guests: Int,
-        @Field("house_id") house_id: Int
+        @Body body: CreateReservationBody
     ): LiveData<GenericApiResponse<ReservationRequestResponse>>
 }
 

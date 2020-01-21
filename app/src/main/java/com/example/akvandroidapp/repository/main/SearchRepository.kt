@@ -5,6 +5,7 @@ import com.yandex.mapkit.geometry.Point
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
+import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
 import com.example.akvandroidapp.api.main.responses.ReservationRequestResponse
 import com.example.akvandroidapp.api.main.responses.ZhilyeResponse
@@ -383,10 +384,11 @@ constructor(
                 Log.d("Reservation request cal", "send house_id $house_id")
                 return openApiMainService.sendReservationRequest(
                     "Token ${authToken.token!!}",
-                    check_in = check_in,
-                    check_out = check_out,
-                    guests = guests,
-                    house_id = house_id
+                    CreateReservationBody(
+                        check_in = check_in,
+                        check_out = check_out,
+                        guests = guests,
+                        house_id = house_id)
                 )
             }
 

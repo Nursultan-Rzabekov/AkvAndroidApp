@@ -58,9 +58,9 @@ class SettingsRegionProfileFragment : BaseProfileFragment(), FilterCityAdapter.C
     }
 
     private fun addRegionDataset(){
-        val data = mutableListOf(FilterCity("Алматы", false, true),
-            FilterCity("Шымкент", false, false),
-            FilterCity("Астана", false, false))
+        val data = mutableListOf(FilterCity("Алматы", false, true, -1),
+            FilterCity("Шымкент", false, false, -1),
+            FilterCity("Астана", false, false, -1))
         for (region in data) {
             if (sessionManager.settingsInfo.value?._region?.location == region.location){
                 region.isSelected = true

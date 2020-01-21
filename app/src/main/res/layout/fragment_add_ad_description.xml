@@ -88,12 +88,13 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fragment_add_ad_description_desc_et"
-                style="@style/BasicEditText"
+                android:textCursorDrawable="@drawable/cursor_style"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                    android:fontFamily="@font/montserrat"
-                    android:gravity="top|start"
-                    android:inputType="textMultiLine"
+                android:fontFamily="@font/montserrat"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
                 android:hint="@string/describe_apartment" />
 
         </com.google.android.material.textfield.TextInputLayout>
