@@ -6,6 +6,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.TextView
@@ -15,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.add_ad.adapter.CityAutoCompleteAdapter
+import com.example.akvandroidapp.ui.main.profile.add_ad.adapter.RegionAutoCompleteAdapter
 import com.example.akvandroidapp.util.CityList
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ReqionList
@@ -27,6 +30,9 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
 
     @Inject
     lateinit var sessionManager: SessionManager
+
+    private var region_id = 0
+    private var city_id = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -115,23 +121,43 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
     private fun initDropDown() {
         val countriesAdapter: ArrayAdapter<String> = ArrayAdapter(
             requireContext(),
-            R.layout.support_simple_spinner_dropdown_item,
+            R.layout.support_simple_spinner_dropdown_item_custom,
             Constants.countryList)
         fragment_add_ad_address_country_et.setAdapter(countriesAdapter)
 
-        val regionAdapter : ArrayAdapter<ReqionList> = ArrayAdapter(
+        val regionAdapter : ArrayAdapter<ReqionList> = RegionAutoCompleteAdapter(
             requireContext(),
-            R.layout.support_simple_spinner_dropdown_item,
             Constants.regionList
         )
         fragment_add_ad_address_region_et.setAdapter(regionAdapter)
 
-        val cityAdapter : ArrayAdapter<CityList> = ArrayAdapter(
+        var cityAdapter : ArrayAdapter<CityList> = CityAutoCompleteAdapter(
             requireContext(),
-            R.layout.support_simple_spinner_dropdown_item,
             Constants.cityList
         )
         fragment_add_ad_address_city_et.setAdapter(cityAdapter)
+
+        fragment_add_ad_address_region_et.setOnItemClickListener { adapterView, view, i, l ->
+            val region = (adapterView.adapter.getItem(i) as ReqionList)
+            val citiesFiltered = mutableListOf<CityList>()
+            for (reg in Constants.cityList)
+                if (reg.region_id == region.id)
+                    citiesFiltered.add(reg)
+            cityAdapter = CityAutoCompleteAdapter(
+                requireContext(),
+                citiesFiltered.toList()
+            )
+            fragment_add_ad_address_city_et.setText("")
+            fragment_add_ad_address_city_et.setAdapter(cityAdapter)
+
+            region_id = region.id
+            Log.e("ADD ADDRESS ", "$region")
+        }
+
+        fragment_add_ad_address_city_et.setOnItemClickListener { adapterView, view, i, l ->
+            val city = (adapterView.adapter.getItem(i) as CityList)
+            city_id = city.id
+        }
     }
 }
 

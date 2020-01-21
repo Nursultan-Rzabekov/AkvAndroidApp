@@ -189,5 +189,5 @@ class Constants {
     }
 }
 
-data class CityList(private val id :Int, private val name:String, private val region_id:Int)
-data class ReqionList(private val name:String,private val id :Int)
+data class CityList(val id :Int, val name:String, val region_id:Int)
+data class ReqionList(val name:String, val id :Int)
