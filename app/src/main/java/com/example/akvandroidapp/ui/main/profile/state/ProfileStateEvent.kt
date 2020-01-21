@@ -22,7 +22,7 @@ sealed class ProfileStateEvent {
         val image: ArrayList<MultipartBody.Part>? = null
     ): ProfileStateEvent()
 
-    class GetProfileInfoEvent(): ProfileStateEvent()
+    class GetProfileInfoEvent: ProfileStateEvent()
 
     data class EditProfileInfoEvent(
         var phone: String? = null,
@@ -35,6 +35,8 @@ sealed class ProfileStateEvent {
     ): ProfileStateEvent()
 
     class MyHouseEvent : ProfileStateEvent()
+
+    class MyHouseStateEvent : ProfileStateEvent()
 
     class None: ProfileStateEvent()
 }

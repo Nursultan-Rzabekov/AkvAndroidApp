@@ -22,12 +22,15 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
+import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.PasswordChecker
 import com.example.akvandroidapp.util.SuccessHandling
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import handleIncomingProfileInfo
+import handleIncomingProfileInfoUpdate
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_gallery.*
 import kotlinx.android.synthetic.main.fragment_profile_account_edit.*
@@ -51,6 +54,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
     var image1: Uri? = null
+    private var imageUrl: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +80,6 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
 
         header_profile_account_edit_save_tv.setOnClickListener {
             saveUserAccounts()
-            findNavController().navigateUp()
         }
 
         header_profile_account_edit_civ.setOnClickListener {
@@ -99,12 +102,6 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
     }
 
     private fun saveUserAccounts(){
-        sessionManager.setProfileInfo(
-            header_profile_account_edit_tv.text.toString(),
-            fragment_profile_account_edit_birth_tv.text.toString(),
-            getGender(),
-            fragment_profile_account_edit_phonenumber_tv.text.toString(),
-            fragment_profile_account_edit_email_tv.text.toString())
         subscribeObservers()
         editInfo()
     }
@@ -126,6 +123,8 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
             fragment_profile_account_edit_phonenumber_tv.setText(dataState.phonenumber.toString())
             fragment_profile_account_edit_email_tv.setText(dataState.email.toString())
             header_profile_account_edit_tv.text = dataState.nickname.toString()
+
+            imageUrl = dataState.imageBackend
 
             Glide.with(this).load(
                 if (dataState.imageBackend != null) dataState.imageBackend else R.drawable.default_image)
@@ -222,6 +221,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
 
 
     private fun editInfo(){
+        var multipartBody:MultipartBody.Part? = null
         image1?.path?.let {
             val imageFile = File(it)
             val requestBody =
@@ -230,25 +230,29 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
                     imageFile
                 )
 
-            val multipartBody = MultipartBody.Part.createFormData(
+             multipartBody = MultipartBody.Part.createFormData(
                 "photos",
                 imageFile.name,
                 requestBody
             )
-
-            viewModel.setStateEvent(
-                ProfileStateEvent.EditProfileInfoEvent(
-                    phone = fragment_profile_account_edit_phonenumber_tv.text.toString(),
-                    gender = getGender(),
-                    email = fragment_profile_account_edit_email_tv.text.toString(),
-                    birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
-                    image = multipartBody)
-            )
         }
+
+        Log.d("qwe","qwerty + ${multipartBody}")
+
+
+        viewModel.setStateEvent(
+            ProfileStateEvent.EditProfileInfoEvent(
+                phone = fragment_profile_account_edit_phonenumber_tv.text.toString(),
+                gender = getGender(),
+                email = fragment_profile_account_edit_email_tv.text.toString(),
+                birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
+                image = multipartBody )
+        )
     }
 
     private fun subscribeObservers(){
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+            handleUpdate(dataState)
             stateChangeListener.onDataStateChange(dataState)
             dataState.data?.let { data ->
                 data.response?.let { event ->
@@ -264,9 +268,36 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
         })
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
-            viewState.profileInfoFields.let{ newBlogFields ->
+            viewState.profileInfoUpdateFields.let{ newBlogFields ->
+                Log.d("qwe","qwerty + ${newBlogFields.first_name}")
+                Log.d("qwe","qwerty image + ${newBlogFields.newImageUri}")
 
+                newBlogFields.gender?.let {gender ->
+                        sessionManager.setProfileInfo(
+                            newBlogFields.first_name.toString(),
+                            newBlogFields.birth_day.toString(),
+                            gender,
+                            newBlogFields.phone.toString(),
+                            newBlogFields.email.toString(),
+                            imageBackend = if(newBlogFields.newImageUri == null) {imageUrl} else {newBlogFields.newImageUri})
+                        findNavController().navigateUp()
+                }
             }
         })
+    }
+
+    private fun handleUpdate(dataState: DataState<ProfileViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.handleIncomingProfileInfoUpdate(it)
+                }
+            }
+        }
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+
+            }
+        }
     }
 }

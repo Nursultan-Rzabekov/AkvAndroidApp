@@ -8,6 +8,7 @@ import com.example.akvandroidapp.entity.UserConversationMessages
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
+import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
@@ -30,6 +31,18 @@ fun ZhilyeViewModel.setHouseId(houseId: Int){
     setViewState(update)
 }
 
+fun ProfileViewModel.setHouseId(houseId: Int){
+    val update = getCurrentViewStateOrNew()
+    update.myHouseStateFields.houseId = houseId
+    setViewState(update)
+}
+
+fun ProfileViewModel.setState(state: Int){
+    val update = getCurrentViewStateOrNew()
+    update.myHouseStateFields.state = state
+    setViewState(update)
+}
+
 fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
     val update = getCurrentViewStateOrNew()
     update.zhilyeFields.blogListRecommendations = zhilyeFields.blogListRecommendations
@@ -39,6 +52,28 @@ fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
     update.zhilyeFields.zhilyeDetailPhotos = zhilyeFields.zhilyeDetailPhotos
     update.zhilyeFields.zhilyeDetailRules = zhilyeFields.zhilyeDetailRules
     update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
+    setViewState(update)
+}
+
+fun ProfileViewModel.setProfileInfo(profileInfoFields: ProfileViewState.ProfileInfoFields){
+    val update = getCurrentViewStateOrNew()
+    update.profileInfoFields.email = profileInfoFields.email
+    update.profileInfoFields.first_name = profileInfoFields.first_name
+    update.profileInfoFields.newImageUri = profileInfoFields.newImageUri
+    update.profileInfoFields.gender = profileInfoFields.gender
+    update.profileInfoFields.birth_day = profileInfoFields.birth_day
+    update.profileInfoFields.phone = profileInfoFields.phone
+    setViewState(update)
+}
+
+fun ProfileViewModel.setProfileInfoUpdate(profileInfoUpdateFields: ProfileViewState.ProfileInfoUpdateFields){
+    val update = getCurrentViewStateOrNew()
+    update.profileInfoUpdateFields.email = profileInfoUpdateFields.email
+    update.profileInfoUpdateFields.first_name = profileInfoUpdateFields.first_name
+    update.profileInfoUpdateFields.newImageUri = profileInfoUpdateFields.newImageUri
+    update.profileInfoUpdateFields.gender = profileInfoUpdateFields.gender
+    update.profileInfoUpdateFields.birth_day = profileInfoUpdateFields.birth_day
+    update.profileInfoUpdateFields.phone = profileInfoUpdateFields.phone
     setViewState(update)
 }
 

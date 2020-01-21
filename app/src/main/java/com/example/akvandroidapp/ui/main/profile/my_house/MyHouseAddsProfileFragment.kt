@@ -21,10 +21,13 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.favorite.FavoriteListAdapter
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.search.SearchListAdapter
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
+import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
+import com.example.akvandroidapp.ui.main.search.viewmodel.setState
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
@@ -40,9 +43,8 @@ import nextPage
 import javax.inject.Inject
 
 
-class MyHouseAddsProfileFragment : BaseProfileFragment() ,
-    MyHouseListAdapter.Interaction ,
-    MyHouseListAdapter.InteractionCheck,
+class MyHouseAddsProfileFragment : BaseProfileFragment(),
+    MyHouseListAdapter.Interaction,
     SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var recyclerAdapter: MyHouseListAdapter
@@ -189,6 +191,27 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
         navNextDetailFragment(item)
     }
 
+    override fun onStateSelected(position: Int, item: BlogPost, text: String) {
+        if(text == resources.getString(R.string.activate)){
+            item.id.let {
+                viewModel.setHouseId(it).let {
+                    viewModel.setState(0).let {
+                        viewModel.setStateEvent(ProfileStateEvent.MyHouseStateEvent())
+                    }
+                }
+            }
+        }
+        else{
+            item.id.let {
+                viewModel.setHouseId(it).let {
+                    viewModel.setState(1).let {
+                        viewModel.setStateEvent(ProfileStateEvent.MyHouseStateEvent())
+                    }
+                }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         fragment_my_adds_recycler_view.adapter = null
@@ -209,9 +232,5 @@ class MyHouseAddsProfileFragment : BaseProfileFragment() ,
         fragment_my_adds_recycler_view.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
         focusable_view_adds.requestFocus()
-    }
-
-    override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
-
     }
 }

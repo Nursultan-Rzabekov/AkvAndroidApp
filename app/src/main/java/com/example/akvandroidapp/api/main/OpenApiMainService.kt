@@ -103,6 +103,18 @@ interface OpenApiMainService {
     fun getZhilyeWithHouseId(
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<ZhilyeResponse>>
+
+    @POST("houses/{house_id}/activate/")
+    fun myHouseActivate(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int
+    ): LiveData<GenericApiResponse<MyHouseStateResponse>>
+
+    @POST("houses/{house_id}/deactivate/")
+    fun myHouseDeactivate(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int
+    ): LiveData<GenericApiResponse<MyHouseStateResponse>>
 }
 
 

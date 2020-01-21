@@ -232,3 +232,11 @@ fun ZhilyeViewModel.handleIncomingZhilyeData(viewState: ZhilyeViewState){
     setZhilyeData(viewState.zhilyeFields)
 }
 
+fun ProfileViewModel.handleIncomingProfileInfo(viewState: ProfileViewState){
+    setProfileInfo(viewState.profileInfoFields)
+}
+
+fun ProfileViewModel.handleIncomingProfileInfoUpdate(viewState: ProfileViewState){
+    setProfileInfoUpdate(viewState.profileInfoUpdateFields)
+}
+

@@ -18,8 +18,7 @@ import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
 class MyHouseListAdapter(
     private val requestManager: RequestManager,
-    private val interaction: Interaction? = null,
-    private val interactionCheck: InteractionCheck? = null
+    private val interaction: Interaction? = null
     ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
@@ -102,7 +101,6 @@ class MyHouseListAdapter(
                         false
                     ),
                     interaction = interaction,
-                    interactionCheck = interactionCheck,
                     requestManager = requestManager
                 )
             }
@@ -114,7 +112,6 @@ class MyHouseListAdapter(
                         false
                     ),
                     interaction = interaction,
-                    interactionCheck = interactionCheck,
                     requestManager = requestManager
                 )
             }
@@ -164,13 +161,33 @@ class MyHouseListAdapter(
     constructor(
         itemView: View,
         val requestManager: RequestManager,
-        private val interaction: Interaction?,
-        private val interactionCheck: InteractionCheck?
+        private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: BlogPost) = with(itemView) {
-            itemView.setOnClickListener {
+            itemView.my_adds_recycler_view_item_detail_btn.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
+            }
+
+            if(item.status == 1){
+                itemView.my_adds_recycler_view_item_state_btn.text = resources.getString(R.string.deactivate)
+                itemView.my_adds_recycler_view_item_state_btn.setTextColor(resources.getColor(R.color.red))
+            }
+            else{
+                itemView.my_adds_recycler_view_item_state_btn.text = resources.getString(R.string.activate)
+                itemView.my_adds_recycler_view_item_state_btn.setTextColor(resources.getColor(R.color.green))
+            }
+
+            itemView.my_adds_recycler_view_item_state_btn.setOnClickListener {
+                interaction?.onStateSelected(adapterPosition,item,my_adds_recycler_view_item_state_btn.text.toString())
+                if(my_adds_recycler_view_item_state_btn.text == resources.getString(R.string.activate)){
+                    itemView.my_adds_recycler_view_item_state_btn.text = resources.getString(R.string.deactivate)
+                    itemView.my_adds_recycler_view_item_state_btn.setTextColor(resources.getColor(R.color.red))
+                }
+                else{
+                    itemView.my_adds_recycler_view_item_state_btn.text = resources.getString(R.string.activate)
+                    itemView.my_adds_recycler_view_item_state_btn.setTextColor(resources.getColor(R.color.green))
+                }
             }
 
             requestManager
@@ -185,10 +202,7 @@ class MyHouseListAdapter(
 
     interface Interaction {
         fun onItemSelected(position: Int, item: BlogPost)
-    }
-
-    interface InteractionCheck {
-        fun onItemSelected(position: Int, item: BlogPost,boolean: Boolean)
+        fun onStateSelected(position: Int,item: BlogPost,text:String)
     }
 
     override fun onClick(p0: View?) {

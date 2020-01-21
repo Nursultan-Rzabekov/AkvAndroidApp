@@ -81,7 +81,6 @@ class ZhilyeActivity : BaseActivity() {
             }
         }
 
-
         subscribeObservers()
         setToolbar()
         setMapView()

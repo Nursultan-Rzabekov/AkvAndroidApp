@@ -6,10 +6,15 @@ import android.util.Log
 import android.view.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
+import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.SuccessHandling
+import handleIncomingProfileInfo
 import kotlinx.android.synthetic.main.fragment_profile_owner.*
 import kotlinx.android.synthetic.main.header_profile.*
 import kotlinx.android.synthetic.main.profile_part_layout.*
@@ -109,13 +114,12 @@ class ProfileFragment : BaseProfileFragment(){
 
 
     private fun getInfo(){
-        viewModel.setStateEvent(
-            ProfileStateEvent.GetProfileInfoEvent()
-        )
+        viewModel.setStateEvent(ProfileStateEvent.GetProfileInfoEvent())
     }
 
     private fun subscribeObservers(){
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+            handleUpdate(dataState)
             stateChangeListener.onDataStateChange(dataState)
             dataState.data?.let { data ->
                 data.response?.let { event ->
@@ -132,9 +136,28 @@ class ProfileFragment : BaseProfileFragment(){
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.profileInfoFields.let{ newBlogFields ->
-
+                header_profile_tv.text = newBlogFields.first_name.toString()
+                Glide.with(this).load(
+                    if (newBlogFields.newImageUri != null) newBlogFields.newImageUri else R.drawable.default_image)
+                    .into(header_profile_civ)
             }
         })
+
+    }
+
+    private fun handleUpdate(dataState: DataState<ProfileViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.handleIncomingProfileInfo(it)
+                }
+            }
+        }
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+
+            }
+        }
     }
 }
 

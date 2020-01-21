@@ -164,6 +164,21 @@ fun ProfileViewModel.getPage(): Int{
     }
 }
 
+fun ProfileViewModel.getHouseId(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.myHouseStateFields.houseId
+    }
+}
+
+
+// 0 -> activate
+// 1 -> deactivate
+fun ProfileViewModel.getState(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.myHouseStateFields.state
+    }
+}
+
 fun HomeViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.homeReservationField.page

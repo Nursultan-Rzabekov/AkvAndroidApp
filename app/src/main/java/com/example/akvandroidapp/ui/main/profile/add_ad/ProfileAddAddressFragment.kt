@@ -15,7 +15,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.util.CityList
 import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.util.ReqionList
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import javax.inject.Inject
@@ -117,19 +119,19 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
             Constants.countryList)
         fragment_add_ad_address_country_et.setAdapter(countriesAdapter)
 
-        val regionAdapter : ArrayAdapter<String> = ArrayAdapter(
+        val regionAdapter : ArrayAdapter<ReqionList> = ArrayAdapter(
             requireContext(),
             R.layout.support_simple_spinner_dropdown_item,
             Constants.regionList
         )
         fragment_add_ad_address_region_et.setAdapter(regionAdapter)
 
-        val cityAdapter : ArrayAdapter<String> = ArrayAdapter(
+        val cityAdapter : ArrayAdapter<CityList> = ArrayAdapter(
             requireContext(),
             R.layout.support_simple_spinner_dropdown_item,
             Constants.cityList
         )
-        fragment_add_ad_address_city_et.setAdapter(regionAdapter)
+        fragment_add_ad_address_city_et.setAdapter(cityAdapter)
     }
 }
 

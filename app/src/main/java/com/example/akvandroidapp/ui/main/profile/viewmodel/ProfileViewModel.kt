@@ -46,7 +46,6 @@ constructor(
                     val address = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddressList[2])
                     val longitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
                     val latitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
-                    val cityId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapCity.getValue(stateEvent._addAdAddressList[2]).toString()))
                     val price = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdPrice.toString())
                     val beds = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdBedsCount.toString())
                     val guests = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdGuestsCount.toString())
@@ -58,15 +57,16 @@ constructor(
                     val discount7days = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAd7DaysDiscount.toString())
                     val discount30days = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAd30DaysDiscount.toString())
 
+                    val cityId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapCity.getValue(stateEvent._addAdAddressList[2]).toString()))
+
                     Log.d(TAG,"PostCreateHouse dis30 + ${stateEvent._addAd30DaysDiscount}")
                     Log.d(TAG,"PostCreateHouse dis7 + ${stateEvent._addAd7DaysDiscount}")
-
                     Log.d(TAG,"PostCreateHouse facilitiesList + ${stateEvent.facilitiesList}")
                     Log.d(TAG,"PostCreateHouse nearbyList + ${stateEvent.nearbyList}")
                     Log.d(TAG,"PostCreateHouse rulesList + ${stateEvent.rulesList}")
-
                     Log.d(TAG,"PostCreateHouse cityId + ${Constants.mapCity.getValue(stateEvent._addAdAddressList[2])}")
                     Log.d(TAG,"PostCreateHouse houseId + ${Constants.mapTypeHouse.getValue(stateEvent._addAdType)}")
+
                     val list:List<BlockedDates> = listOf(BlockedDates("2019-12-20","2019-12-31"))
 
                     Log.d(TAG,"PostCreateHouse listt + ${list}")
@@ -96,7 +96,6 @@ constructor(
             }
 
             is ProfileStateEvent.GetProfileInfoEvent ->{
-                Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
                 return sessionManager.cachedToken.value?.let { authToken ->
 
                     profileRepository.createGetProfileInfo(
@@ -106,11 +105,14 @@ constructor(
             }
 
             is ProfileStateEvent.EditProfileInfoEvent ->{
+
+
+                Log.d("qwe","PostCreateHouse 555555 ${stateEvent.birth_day}")
+
                 val email = RequestBody.create(MediaType.parse("text/plain"), stateEvent.email!!)
                 val phone = RequestBody.create(MediaType.parse("text/plain"), stateEvent.phone!!)
                 val birth_day = RequestBody.create(MediaType.parse("text/plain"), stateEvent.birth_day!!)
-                val gender = RequestBody.create(MediaType.parse("text/plain"), stateEvent.gender.toString()!!)
-
+                val gender = RequestBody.create(MediaType.parse("text/plain"), stateEvent.gender.toString())
                 return sessionManager.cachedToken.value?.let { authToken ->
                     profileRepository.updateProfileInfo(
                         authToken,
@@ -125,14 +127,32 @@ constructor(
 
             is ProfileStateEvent.MyHouseEvent -> {
                 return sessionManager.cachedToken.value?.let { authToken ->
-                    Log.d("Go", "Go go go go  + ${getPage()}")
-
                     profileRepository.myHouseList(
                         authToken = authToken,
                         page = getPage()
                     )
                 }?: AbsentLiveData.create()
             }
+
+            is ProfileStateEvent.MyHouseStateEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    Log.d("Go", "Go go go go  + ${getState()}")
+                    Log.d("Go", "Go go go go  + ${getHouseId()}")
+                    if(getState() == 0){
+                        profileRepository.myHouseStateActivate(
+                            authToken = authToken,
+                            houseId = getHouseId()
+                        )
+                    }
+                    else{
+                        profileRepository.myHouseStateDeactivate(
+                            authToken = authToken,
+                            houseId = getHouseId()
+                        )
+                    }
+                }?: AbsentLiveData.create()
+            }
+
             is ProfileStateEvent.None -> {
                 return liveData {
                     emit(

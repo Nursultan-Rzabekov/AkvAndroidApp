@@ -21,6 +21,4 @@ class HomeListResponse (
     @Expose
     var previous: String
 
-){
-
-}
+)

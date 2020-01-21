@@ -7,6 +7,7 @@ import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.BlogCreateUpdateResponse
 import com.example.akvandroidapp.api.main.responses.BlogGetProfileInfoResponse
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
+import com.example.akvandroidapp.api.main.responses.MyHouseStateResponse
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.BlogPostDao
@@ -162,11 +163,17 @@ constructor(
                     imageBackend = response.body.userpic)
 
                 withContext(Dispatchers.Main) {
-                    // finish with success response
                     onCompleteJob(
                         DataState.data(
-                            null,
-                            Response(response.body.id.toString(), ResponseType.Dialog())
+                            data = ProfileViewState(profileInfoFields =
+                            ProfileViewState.ProfileInfoFields(
+                                email = response.body.email,
+                                first_name = response.body.first_name,
+                                newImageUri = response.body.userpic,
+                                gender = response.body.gender,
+                                birth_day = response.body.birth_day,
+                                phone = response.body.phone
+                            ))
                         )
                     )
                 }
@@ -220,18 +227,27 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<BlogGetProfileInfoResponse>) {
 
+                Log.d(TAG,"PostCreateHouse 7070707070 + ${response.body}")
+
                 withContext(Dispatchers.Main) {
                     onCompleteJob(
                         DataState.data(
-                            null,
-                            Response(response.body.id.toString(), ResponseType.Dialog())
+                            data = ProfileViewState(
+                                profileInfoUpdateFields =
+                                ProfileViewState.ProfileInfoUpdateFields(
+                                    email = response.body.email,
+                                    first_name = response.body.first_name,
+                                    newImageUri = response.body.userpic,
+                                    gender = response.body.gender,
+                                    birth_day = response.body.birth_day,
+                                    phone = response.body.phone
+                                )
+                            )
                         )
                     )
                 }
             }
-
             override fun createCall(): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>> {
-                Log.d(TAG,"PostCreateHouse 7070707070 + ${authToken}")
                 return openApiMainService.updateProfileInfo(
                     "Token ${authToken.token!!}",
                     phone = phone,
@@ -341,6 +357,94 @@ constructor(
             override fun setJob(job: Job) {
                 addJob("myhouseBlogPosts", job)
             }
+
+        }.asLiveData()
+    }
+
+
+
+    fun myHouseStateActivate(
+        authToken: AuthToken,
+        houseId: Int
+    ): LiveData<DataState<ProfileViewState>> {
+
+        return object: NetworkBoundResource<MyHouseStateResponse, List<BlogPost>, ProfileViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            // if network is down, view cache only and return
+            override suspend fun createCacheRequestAndReturn() {}
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<MyHouseStateResponse>
+            ) {
+                Log.d("qwe","result details ${response.body.response}")
+                Log.d("qwe","result details ${response.body.message}")
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ProfileViewState( myHouseStateFields =
+                                ProfileViewState.MyHouseStateFields())
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<MyHouseStateResponse>> {
+                return openApiMainService.myHouseActivate(
+                    "Token ${authToken.token!!}", houseId)
+            }
+
+            override fun loadFromCache(): LiveData<ProfileViewState> { return AbsentLiveData.create() }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {}
+
+            override fun setJob(job: Job) { addJob("myhouseBlogPosts", job) }
+
+        }.asLiveData()
+    }
+
+
+    fun myHouseStateDeactivate(
+        authToken: AuthToken,
+        houseId: Int
+    ): LiveData<DataState<ProfileViewState>> {
+
+        return object: NetworkBoundResource<MyHouseStateResponse, List<BlogPost>, ProfileViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            // if network is down, view cache only and return
+            override suspend fun createCacheRequestAndReturn() {}
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<MyHouseStateResponse>
+            ) {
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ProfileViewState( myHouseStateFields =
+                            ProfileViewState.MyHouseStateFields())
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<MyHouseStateResponse>> {
+                return openApiMainService.myHouseDeactivate(
+                    "Token ${authToken.token!!}", houseId)
+            }
+
+            override fun loadFromCache(): LiveData<ProfileViewState> { return AbsentLiveData.create() }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {}
+
+            override fun setJob(job: Job) { addJob("myhouseBlogPosts", job) }
 
         }.asLiveData()
     }
