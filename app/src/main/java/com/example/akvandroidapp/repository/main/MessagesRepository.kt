@@ -6,10 +6,7 @@ import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.AllChatsResponse
 import com.example.akvandroidapp.api.main.responses.ConverstaionsResponse
 import com.example.akvandroidapp.api.main.responses.UserConversationsInfoResponse
-import com.example.akvandroidapp.entity.AuthToken
-import com.example.akvandroidapp.entity.BlogPost
-import com.example.akvandroidapp.entity.UserChatMessages
-import com.example.akvandroidapp.entity.UserConversationMessages
+import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.repository.JobManager
 import com.example.akvandroidapp.repository.NetworkBoundResource
@@ -23,6 +20,7 @@ import com.example.akvandroidapp.util.GenericApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
@@ -130,6 +128,8 @@ constructor(
 
 
                 val blogPostList: ArrayList<UserConversationMessages> = ArrayList()
+                val blogPostListImages: ArrayList<UserConversationImages?> = ArrayList()
+
                 for(blogPostResponse in response.body.results){
                     blogPostList.add(
                         UserConversationMessages(
@@ -141,6 +141,17 @@ constructor(
                             updated_at = blogPostResponse.updated_at
                         )
                     )
+
+
+                    blogPostListImages.add(
+                        blogPostResponse.images?.let {
+                            UserConversationImages(
+                                message = it.first().message,
+                                image = it.first().image
+                            )
+                        }
+
+                    )
                 }
 
                 withContext(Dispatchers.Main) {
@@ -148,7 +159,8 @@ constructor(
                         DataState.data(
                             data = DetailsViewState(
                                 DetailsViewState.MyChatDetailsFields(
-                                    blogPostList,
+                                    blogList = blogPostList,
+                                    blogListImages = blogPostListImages,
                                     isQueryInProgress = false,
                                     isQueryExhausted = true
                                 )
@@ -182,8 +194,9 @@ constructor(
     fun sendMessage(
         authToken: AuthToken,
         recipient: RequestBody,
-        body: RequestBody
-    ): LiveData<DataState<DetailsViewState>>{
+        body: RequestBody,
+        photos: MultipartBody.Part?
+        ): LiveData<DataState<DetailsViewState>>{
         return object:
             NetworkBoundResource<UserConversationsInfoResponse, List<BlogPost>, DetailsViewState>(
                 sessionManager.isConnectedToTheInternet(),
@@ -226,7 +239,8 @@ constructor(
                 return openApiMainService.sendMessageTo(
                     "Token ${authToken.token!!}",
                     recipient,
-                    body
+                    body,
+                    photos
                 )
             }
 

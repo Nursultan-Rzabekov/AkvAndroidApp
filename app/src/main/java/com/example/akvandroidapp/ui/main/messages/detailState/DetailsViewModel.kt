@@ -11,10 +11,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
-import com.example.akvandroidapp.ui.main.search.viewmodel.getEmailName
-import com.example.akvandroidapp.ui.main.search.viewmodel.getMessageBody
-import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
-import com.example.akvandroidapp.ui.main.search.viewmodel.getTargetQuery
+import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.AbsentLiveData
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -50,7 +47,8 @@ constructor(
                     messagesRepository.sendMessage(
                         it,
                         recipient = _recipient,
-                        body = _body
+                        body = _body,
+                        photos = getMessageImages()
                     )
                 }?: AbsentLiveData.create()
             }

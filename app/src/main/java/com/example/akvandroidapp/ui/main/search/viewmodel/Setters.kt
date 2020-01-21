@@ -1,10 +1,7 @@
 package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
-import com.example.akvandroidapp.entity.BlogPost
-import com.example.akvandroidapp.entity.HomeReservation
-import com.example.akvandroidapp.entity.UserChatMessages
-import com.example.akvandroidapp.entity.UserConversationMessages
+import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
@@ -103,6 +100,13 @@ fun DetailsViewModel.setBlogListData(blogList: List<UserConversationMessages>){
     update.myChatFields.blogList = blogList
     setViewState(update)
 }
+
+fun DetailsViewModel.setBlogListDataImages(blogList: List<UserConversationImages?>){
+    val update = getCurrentViewStateOrNew()
+    update.myChatFields.blogListImages = blogList
+    setViewState(update)
+}
+
 
 fun ProfileViewModel.setBlogListData(blogList: List<BlogPost>){
     val update = getCurrentViewStateOrNew()

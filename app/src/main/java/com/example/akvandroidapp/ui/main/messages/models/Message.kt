@@ -16,7 +16,8 @@ data class MessageText(
 
 data class MessagePhoto(
     var userId: String,
-    var photo: Uri?,
+    var photo: Uri? = null,
+    var image: String? = null,
     var type: Int = Constants.MESSAGE_TYPE_PHOTO
 ): mMessage(userId, type)
 

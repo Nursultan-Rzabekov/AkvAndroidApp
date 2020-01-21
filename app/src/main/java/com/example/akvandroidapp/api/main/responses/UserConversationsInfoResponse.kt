@@ -24,6 +24,10 @@ class UserConversationsInfoResponse(
     @Expose
     var body: String,
 
+    @SerializedName("images")
+    @Expose
+    var images: List<UserConversationsImagesResponse>? = null,
+
     @SerializedName("created_at")
     @Expose
     var created_at: String,

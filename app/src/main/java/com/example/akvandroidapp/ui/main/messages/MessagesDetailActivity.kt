@@ -36,13 +36,19 @@ import com.example.akvandroidapp.util.Constants.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import setEmailName
+import setImageMultipart
 import setMessageBody
 import java.io.File
 import java.io.IOException
@@ -141,6 +147,17 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                         )
                     }
                 }
+
+                for(i in viewState.myChatFields.blogListImages.asReversed()){
+                    Log.d("wqeqwe","qwertyu + ${i?.image}")
+                    Log.d("wqeqwe","qwertyu + ${i?.message}")
+
+                    if(i !=null){
+                        chatAdapter.addMessage(
+                            MessagePhoto(i.message.toString(), image = i.image)
+                        )
+                    }
+                }
             }
         })
     }
@@ -178,9 +195,11 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
     private fun sendMessage(){
         val message = activity_dialog_message_et.text.toString()
+
         if (message.trim() != ""){
             viewModel.setMessageBody(message)
             viewModel.setEmailName(viewModel.getTargetQuery())
+            viewModel.setImageMultipart(null)
             viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
         }
         activity_dialog_message_et.setText("")
@@ -294,16 +313,30 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
                 GALLERY_REQUEST_CODE -> {
                     data?.data?.let { uri ->
-                        currentPhotoUri = uri
-                        sendMessageWithType(
-                            mUserId,
-                            Constants.MESSAGE_TYPE_PHOTO,
-                            uriOfFile = uri)
+                        launchImageCrop(uri)
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                     //temporary variable
                     val myData = myDataTransfer[requestCode]
+                }
+
+                CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
+                    Log.d(TAG, "CROP: CROP_IMAGE_ACTIVITY_REQUEST_CODE")
+                    val result = CropImage.getActivityResult(data)
+                    val resultUri = result.uri
+                    Log.d(TAG, "CROP: CROP_IMAGE_ACTIVITY_REQUEST_CODE: uri: ${resultUri}")
+
+                    currentPhotoUri = resultUri
+                    sendMessageWithType(
+                        mUserId,
+                        Constants.MESSAGE_TYPE_PHOTO,
+                        uriOfFile = resultUri)
 
                     Log.e("MESSAGE_GALLEY_URI", currentPhotoUri.toString())
+                }
+
+                CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE -> {
+                    Log.d(TAG, "CROP: ERROR")
+                    showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                 }
 
                 PICK_FILE_CODE -> {
@@ -332,6 +365,12 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         }
         else if (resultCode == Activity.RESULT_CANCELED)
             Log.e("MESSAGE_INTENT_CANCELED", "cancelled")
+    }
+
+    private fun launchImageCrop(uri: Uri){
+        CropImage.activity(uri)
+            .setGuidelines(CropImageView.Guidelines.ON)
+            .start(this)
     }
 
     @Throws(IOException::class)
@@ -370,6 +409,32 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 chatAdapter.addMessage(
                     MessagePhoto(userId, uriOfFile)
                 )
+
+                uriOfFile?.path?.let { filePath->
+                    val imageFile = File(filePath)
+                    Log.d(TAG, "CreateBlogFragment, imageFile: file: ${imageFile}")
+
+                    val requestBody =
+                        RequestBody.create(
+                            MediaType.parse("multipart/form-data"),
+                            imageFile
+                        )
+
+                    Log.d(TAG, "PostCreateHouse request777: ${requestBody}")
+
+                    val multipartBody = MultipartBody.Part.createFormData(
+                        "images",
+                        imageFile.name,
+                        requestBody
+                    )
+
+                    multipartBody.let {
+                        viewModel.setMessageBody("Фотка")
+                        viewModel.setImageMultipart(it)
+                        viewModel.setEmailName(viewModel.getTargetQuery())
+                        viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
+                    }
+                }
             }
             Constants.MESSAGE_TYPE_DOC -> {
                 chatAdapter.addMessage(

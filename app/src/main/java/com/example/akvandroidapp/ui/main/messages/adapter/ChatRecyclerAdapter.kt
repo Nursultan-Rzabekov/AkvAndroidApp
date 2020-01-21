@@ -146,12 +146,24 @@ class ChatRecyclerAdapter(
         val layout = itemView.message_photo_recycler_view_item_layout
 
         fun bind(message: MessagePhoto){
-            Glide.with(photo.context)
-                .load(message.photo)
-                .error(R.drawable.test_image_back)
-                .transition(withCrossFade())
-                .fitCenter()
-                .into(photo)
+
+            if(message.photo != null){
+                Glide.with(photo.context)
+                    .load(message.photo)
+                    .error(R.drawable.test_image_back)
+                    .transition(withCrossFade())
+                    .fitCenter()
+                    .into(photo)
+            }
+
+            if(message.image != null){
+                Glide.with(photo.context)
+                    .load("http://akv-technopark.herokuapp.com${message.image}")
+                    .error(R.drawable.test_image_back)
+                    .transition(withCrossFade())
+                    .fitCenter()
+                    .into(photo)
+            }
         }
     }
 

@@ -8,6 +8,7 @@ import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
+import okhttp3.MultipartBody
 
 
 fun SearchViewModel.getFilterPriceLeft(): Int {
@@ -113,6 +114,13 @@ fun DetailsViewModel.getPage(): Int{
 fun DetailsViewModel.getMessageBody(): String {
     getCurrentViewStateOrNew().let {
         return it.sendMessageFields.messageBody
+    }
+}
+
+
+fun DetailsViewModel.getMessageImages(): MultipartBody.Part? {
+    getCurrentViewStateOrNew().let {
+        return it.sendMessageFields.images
     }
 }
 

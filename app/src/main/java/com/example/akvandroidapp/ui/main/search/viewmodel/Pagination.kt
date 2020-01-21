@@ -18,6 +18,7 @@ import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
+import okhttp3.MultipartBody
 
 
 fun SearchViewModel.resetPage(){
@@ -36,6 +37,12 @@ fun DetailsViewModel.setMessageBody(messagesBody: String){
 fun DetailsViewModel.setEmailName(email: String){
     val update = getCurrentViewStateOrNew()
     update.sendMessageFields.email = email
+    setViewState(update)
+}
+
+fun DetailsViewModel.setImageMultipart(photos:  MultipartBody.Part?) {
+    val update = getCurrentViewStateOrNew()
+    update.sendMessageFields.images = photos
     setViewState(update)
 }
 
@@ -203,6 +210,7 @@ fun DetailsViewModel.handleIncomingBlogListData(viewState: DetailsViewState){
     setQueryInProgress(viewState.myChatFields.isQueryInProgress)
     setQueryExhausted(viewState.myChatFields.isQueryExhausted)
     setBlogListData(viewState.myChatFields.blogList)
+    setBlogListDataImages(viewState.myChatFields.blogListImages)
 }
 
 fun ZhilyeBookViewModel.handleIncomingRequest(viewState: ZhilyeBookViewState){

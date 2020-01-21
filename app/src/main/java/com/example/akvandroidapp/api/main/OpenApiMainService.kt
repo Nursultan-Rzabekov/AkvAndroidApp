@@ -90,7 +90,8 @@ interface OpenApiMainService {
     fun sendMessageTo(
         @Header("Authorization") authorization: String,
         @Part("recipient") recipient: RequestBody,
-        @Part("body") body: RequestBody
+        @Part("body") body: RequestBody,
+        @Part images: MultipartBody.Part?
     ):LiveData<GenericApiResponse<UserConversationsInfoResponse>>
 
     @GET("reservations/")
