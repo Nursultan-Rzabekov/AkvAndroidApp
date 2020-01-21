@@ -89,8 +89,8 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         initRecyclerView()
         subscribeObservers()
 
-        swipe_messages.setOnRefreshListener(this)
 
+        swipe_messages.setOnRefreshListener(this)
 
         activity_dialog_attach_btn.setOnClickListener {
             showDialog()
@@ -137,7 +137,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         viewModel.viewState.observe(this, androidx.lifecycle.Observer{ viewState ->
             if(viewState != null){
                 if(viewState.myChatFields.blogList.isNotEmpty()){
-                    Log.d("name","name + ${viewState.myChatFields.blogList}")
                     clearMessages()
                     for(i in viewState.myChatFields.blogList.asReversed()){
                         sendMessageWithType(
@@ -149,12 +148,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 }
 
                 for(i in viewState.myChatFields.blogListImages.asReversed()){
-                    Log.d("wqeqwe","qwertyu + ${i?.image}")
-                    Log.d("wqeqwe","qwertyu + ${i?.message}")
-
-                    if(i !=null){
+                    if(i!=null){
                         chatAdapter.addMessage(
-                            MessagePhoto(i.message.toString(), image = i.image)
+                            MessagePhoto(mUserId, image = i.image)
                         )
                     }
                 }
@@ -199,7 +195,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         if (message.trim() != ""){
             viewModel.setMessageBody(message)
             viewModel.setEmailName(viewModel.getTargetQuery())
-            viewModel.setImageMultipart(null)
             viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
         }
         activity_dialog_message_et.setText("")
@@ -419,7 +414,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                             MediaType.parse("multipart/form-data"),
                             imageFile
                         )
-
                     Log.d(TAG, "PostCreateHouse request777: ${requestBody}")
 
                     val multipartBody = MultipartBody.Part.createFormData(
