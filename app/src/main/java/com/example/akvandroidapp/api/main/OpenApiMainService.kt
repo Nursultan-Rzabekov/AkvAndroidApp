@@ -117,14 +117,14 @@ interface OpenApiMainService {
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<MyHouseStateResponse>>
 
-    @Multipart
+    @FormUrlEncoded
     @POST("reservations/")
     fun sendReservationRequest(
         @Header("Authorization") authorization: String,
-        @Part("check_in") check_in: RequestBody,
-        @Part("check_out") chek_out: RequestBody,
-        @Part("guests") guests: RequestBody,
-        @Part("house_id") house_id: RequestBody
+        @Field("check_in") check_in: String,
+        @Field("check_out") check_out: String,
+        @Field("guests") guests: Int,
+        @Field("house_id") house_id: Int
     ): LiveData<GenericApiResponse<ReservationRequestResponse>>
 }
 

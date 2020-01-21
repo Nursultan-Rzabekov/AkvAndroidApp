@@ -60,11 +60,10 @@ class ProfileAddAddressFragment : BaseProfileFragment(){
 
     private fun navNextFragment(){
         sessionManager.setAddAdAddressList(
-            fragment_add_ad_address_country_et.text.toString().trim(),
-            fragment_add_ad_address_region_et.text.toString().trim(),
-            fragment_add_ad_address_city_et.text.toString().trim(),
-            fragment_add_ad_address_address_et.text.toString().trim(),
-            "")
+            1,
+            region_id,
+            city_id,
+            fragment_add_ad_address_address_et.text.toString().trim())
             //fragment_add_ad_address_post_index_et.text.toString().trim())
         findNavController().navigate(R.id.action_pprofileAddAddressFragment_to_profileAddGalleryFragment)
     }

@@ -380,16 +380,15 @@ constructor(
         }
     }
 
-    fun setAddAdAddressList(country: String, region: String, city: String, address: String, postIndex: String){
+    fun setAddAdAddressList(country: Int, region: Int, city: Int, address: String){
         GlobalScope.launch(Main){
-            _addAdInfo.value?._addAdAddressList?.set(0, country)
-            _addAdInfo.value?._addAdAddressList?.set(1, region)
-            _addAdInfo.value?._addAdAddressList?.set(2, city)
-            _addAdInfo.value?._addAdAddressList?.set(3, address)
-            _addAdInfo.value?._addAdAddressList?.set(4, postIndex)
+            _addAdInfo.value?._addAdAddress = address
+            _addAdInfo.value?._addAdAddressCityId = city
+            _addAdInfo.value?._addAdAddressRegionId = region
+            _addAdInfo.value?._addAdAddressCountry = country
         }
         Log.e("SESSION_ADD_AD_ADDRESS",
-            "${_addAdInfo.value?._addAdAddressList}")
+            "${_addAdInfo.value?._addAdAddress}")
     }
 
     fun setAddAdCounts(guests: Int, rooms: Int, beds: Int){
