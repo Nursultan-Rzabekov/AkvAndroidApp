@@ -345,10 +345,10 @@ constructor(
 
     fun sendReservationRequest(
         authToken: AuthToken,
-        check_in: RequestBody,
-        check_out: RequestBody,
-        guests: RequestBody,
-        house_id: RequestBody
+        check_in: String,
+        check_out: String,
+        guests: Int,
+        house_id: Int
     ): LiveData<DataState<ZhilyeBookViewState>> {
         return object : NetworkBoundResource<ReservationRequestResponse, List<BlogPost>, ZhilyeBookViewState>(
             sessionManager.isConnectedToTheInternet(),
@@ -384,7 +384,7 @@ constructor(
                 return openApiMainService.sendReservationRequest(
                     "Token ${authToken.token!!}",
                     check_in = check_in,
-                    chek_out = check_out,
+                    check_out = check_out,
                     guests = guests,
                     house_id = house_id
                 )

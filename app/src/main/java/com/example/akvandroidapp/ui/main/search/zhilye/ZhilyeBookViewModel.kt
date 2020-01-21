@@ -38,10 +38,10 @@ constructor(
         when(stateEvent){
             is ZhilyeBookStateEvent.ReservationEvent -> {
                 return sessionManager.cachedToken.value?.let {
-                    val _check_in = RequestBody.create(MediaType.parse("text/plain"), stateEvent.check_in)
-                    val _check_out = RequestBody.create(MediaType.parse("text/plain"), stateEvent.check_out)
-                    val _guests = RequestBody.create(MediaType.parse("text/plain"), stateEvent.guests.toString())
-                    val _house_id = RequestBody.create(MediaType.parse("text/plain"), stateEvent.houseId.toString())
+                    val _check_in = stateEvent.check_in
+                    val _check_out = stateEvent.check_out
+                    val _guests = stateEvent.guests
+                    val _house_id = stateEvent.houseId
 
                     searchRepository.sendReservationRequest(
                         it,
