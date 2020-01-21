@@ -391,4 +391,6 @@
     <string name="_continue_">Продолжить</string>
     <string name="choose_Dates">Выберите даты</string>
     <string name="not_mentioned">Не указано</string>
+    <string name="no_recommendations">Нет рекомендации</string>
+    <string name="no_reviews">Пока ещё никто не оставил отзыв</string>
 </resources>

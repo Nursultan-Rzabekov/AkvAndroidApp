@@ -26,6 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center_vertical"
                     android:paddingStart="24dp"
                     android:paddingEnd="24dp"
                     android:paddingTop="16dp"
@@ -63,6 +64,8 @@
                             android:id="@+id/fragment_zhilye_book_title_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:ellipsize="end"
                             android:text="@string/hotel_del_luxe"
                             android:textSize="25sp"
                             android:textColor="@color/black"
@@ -251,36 +254,6 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="16dp"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:id="@+id/fragment_zhilye_book_clean_lb"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/cleanup"
-                            android:textSize="18sp"
-                            android:layout_gravity="start"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/fragment_zhilye_book_clean_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/radom_price4"
-                            android:textSize="18sp"
-                            android:layout_gravity="end"
-                            android:textAlignment="viewEnd"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"/>
-
-                    </LinearLayout>
-
                 </LinearLayout>
 
                 <View
@@ -332,20 +305,26 @@
             android:id="@+id/fragment_zhilye_book_bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_zhilye_book_nex_btn"
-                style="@style/FilterButton"
+                style="@style/AllButton.Unelevated"
+                app:cornerRadius="@dimen/cornerRadius1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:layout_marginStart="@dimen/dim_24dp"
                 android:layout_marginTop="@dimen/dim_12dp"
                 android:layout_marginEnd="@dimen/dim_24dp"
                 android:layout_marginBottom="@dimen/dim_12dp"
-                android:text="@string/_continue_" />
+                android:text="@string/_continue_"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
         </FrameLayout>
 

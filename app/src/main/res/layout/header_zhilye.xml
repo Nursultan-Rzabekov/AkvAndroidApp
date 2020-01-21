@@ -3,7 +3,7 @@
     android:id="@+id/header_zhilye_collapse"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentScrim="@color/primaryZero"
+    app:contentScrim="@color/white"
     app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">

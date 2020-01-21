@@ -19,6 +19,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.ErrorHandling
@@ -37,7 +38,12 @@ import java.util.*
 import javax.inject.Inject
 
 
-class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,SearchListAdapter.InteractionCheck, SwipeRefreshLayout.OnRefreshListener{
+class SearchFragment :
+    BaseSearchFragment(),
+    SearchListAdapter.Interaction,
+    SearchListAdapter.InteractionCheck,
+    SwipeRefreshLayout.OnRefreshListener,
+    DateRangePickerDialog.DatePickerDialogInteraction{
 
     private lateinit var recyclerAdapter: SearchListAdapter
 
@@ -318,6 +324,30 @@ class SearchFragment : BaseSearchFragment(), SearchListAdapter.Interaction,Searc
                 show()
             }
         }
+    }
+
+    private fun showCustomDateDialog(){
+        val dialog = DateRangePickerDialog(this)
+        val ft = fragmentManager?.beginTransaction()
+        val prev = fragmentManager?.findFragmentByTag("dialog")
+        if (prev != null)
+        {
+            ft?.remove(prev)
+        }
+        ft?.addToBackStack(null)
+        dialog.show(ft!!, "dialog")
+    }
+
+    override fun onCloseBtnListener() {
+
+    }
+
+    override fun onClearBtnListener() {
+
+    }
+
+    override fun onSaveBtnListener() {
+
     }
 }
 

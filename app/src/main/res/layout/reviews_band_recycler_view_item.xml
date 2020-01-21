@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        app:cardBackgroundColor="@color/white"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_12dp"
+                android:paddingTop="@dimen/dim_8dp"
+                android:paddingBottom="@dimen/dim_8dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/reviews_band_civ"
+                    android:layout_width="@dimen/dim_48dp"
+                    android:layout_height="@dimen/dim_48dp"
+                    android:src="@drawable/profile_default_avavatar"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/dim_16dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/reviews_band_username_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/random_name1"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:ellipsize="end"
+                        android:lines="1"/>
+
+                    <TextView
+                        android:id="@+id/reviews_band_date_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/random_date1"
+                        android:textSize="12sp"
+                        android:textColor="@color/secondaryFirst"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:layout_marginTop="@dimen/dim_4dp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/reviews_band_rating_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="@string/random_score1"
+                    android:drawableStart="@drawable/ic_star_red"
+                    android:textColor="@color/primaryZero"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/reviews_band_comment_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/random_text1"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:padding="@dimen/dim_12dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

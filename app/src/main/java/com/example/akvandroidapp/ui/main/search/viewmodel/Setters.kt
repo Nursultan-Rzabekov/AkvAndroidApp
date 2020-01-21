@@ -9,6 +9,7 @@ import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 
@@ -39,6 +40,12 @@ fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
     update.zhilyeFields.zhilyeDetailPhotos = zhilyeFields.zhilyeDetailPhotos
     update.zhilyeFields.zhilyeDetailRules = zhilyeFields.zhilyeDetailRules
     update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
+    setViewState(update)
+}
+
+fun ZhilyeBookViewModel.setResponse(response: Boolean) {
+    val update = getCurrentViewStateOrNew()
+    update.reservationRequestField.response
     setViewState(update)
 }
 

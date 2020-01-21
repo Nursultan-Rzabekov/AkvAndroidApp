@@ -16,7 +16,6 @@ import com.example.akvandroidapp.repository.NetworkBoundResource
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
-import com.example.akvandroidapp.ui.main.messages.detailState.MessageSendViewState
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse

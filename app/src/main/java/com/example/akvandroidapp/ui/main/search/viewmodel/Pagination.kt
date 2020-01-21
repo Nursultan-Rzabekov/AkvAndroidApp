@@ -14,7 +14,9 @@ import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 
 
@@ -36,7 +38,6 @@ fun DetailsViewModel.setEmailName(email: String){
     update.sendMessageFields.email = email
     setViewState(update)
 }
-
 
 fun ProfileViewModel.resetPage(){
     val update = getCurrentViewStateOrNew()
@@ -202,6 +203,11 @@ fun DetailsViewModel.handleIncomingBlogListData(viewState: DetailsViewState){
     setQueryInProgress(viewState.myChatFields.isQueryInProgress)
     setQueryExhausted(viewState.myChatFields.isQueryExhausted)
     setBlogListData(viewState.myChatFields.blogList)
+}
+
+fun ZhilyeBookViewModel.handleIncomingRequest(viewState: ZhilyeBookViewState){
+    Log.d(TAG, "ZhilyeBookViewModel, DataState: ${viewState}")
+    setResponse(viewState.reservationRequestField.response.response)
 }
 
 
