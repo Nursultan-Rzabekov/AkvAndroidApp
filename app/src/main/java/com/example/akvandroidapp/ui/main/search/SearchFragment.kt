@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -70,7 +71,7 @@ class SearchFragment :
 
 
 //        if(savedInstanceState == null){
-//            viewModel.loadFirstPage()
+//            onBlogSearchOrFilter()
 //        }
 
         main_filter_img_btn.setOnClickListener {
@@ -144,26 +145,16 @@ class SearchFragment :
 
     private fun initSearchView(){
 
-//        activity?.apply {
-//            val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//            searchView = findViewById<ImageButton>(R.id.main_search_et).actionView as SearchView
-//            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-//            searchView.maxWidth = Integer.MAX_VALUE
-//            searchView.setIconifiedByDefault(true)
-//            searchView.isSubmitButtonEnabled = true
-//        }
-
-//        main_search_et.setOnEditorActionListener { v, actionId, _ ->
-//            if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED
-//                || actionId == EditorInfo.IME_ACTION_SEARCH ) {
-//                val searchQuery = v.text.toString()
-//                Log.e(TAG, "SearchView: (keyboard or arrow) executing search...: ${searchQuery}")
-//                viewModel.setQuery(searchQuery).let{
-//                    onBlogSearchOrFilter()
-//                }
-//            }
-//            true
-//        }
+        main_search_et.setOnEditorActionListener { v, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val searchQuery = v.text.toString()
+                Log.e(TAG, "SearchView: (keyboard or arrow) executing search...: ${searchQuery}")
+                viewModel.setQuery(searchQuery).let{
+                    onBlogSearchOrFilter()
+                }
+            }
+            true
+        }
 
         main_search_img_btn.setOnClickListener {
             val searchQuery = main_search_et.text.toString()
@@ -172,7 +163,6 @@ class SearchFragment :
             viewModel.setQuery(searchQuery).let {
                 onBlogSearchOrFilter()
             }
-
         }
     }
 
@@ -236,15 +226,12 @@ class SearchFragment :
     }
 
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
-
         Log.d("favorite", "favorite search ${item} and ${boolean}")
-
         sessionManager.favorite(item,boolean)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // clear references (can leak memory)
         blog_post_recyclerview.adapter = null
     }
 

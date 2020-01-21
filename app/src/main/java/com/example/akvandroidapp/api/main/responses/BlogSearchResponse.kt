@@ -56,5 +56,4 @@ class BlogSearchResponse(
     @SerializedName("photos")
     @Expose
     var photos: List<BlogImageResponse>?
-
 )

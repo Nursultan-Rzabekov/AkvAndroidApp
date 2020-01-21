@@ -43,7 +43,7 @@ constructor(
                     val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdTitle)
                     val description = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdDescription)
                     val rooms = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdRoomsCount.toString())
-                    val address = RequestBody.create(MediaType.parse("text/plain"), "")
+                    val address = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddress)
                     val longitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
                     val latitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
                     val price = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdPrice.toString())
@@ -57,15 +57,17 @@ constructor(
                     val discount7days = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAd7DaysDiscount.toString())
                     val discount30days = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAd30DaysDiscount.toString())
 
-                    val cityId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapCity.getValue("").toString()))
+                    val cityId = RequestBody.create(MediaType.parse("text/plain"),(stateEvent._addAdAddressCityId.toString()))
+                    val regionId = RequestBody.create(MediaType.parse("text/plain"),(stateEvent._addAdAddressRegionId.toString()))
+                    val countryId = RequestBody.create(MediaType.parse("text/plain"),(stateEvent._addAdAddressCountry.toString()))
 
                     Log.d(TAG,"PostCreateHouse dis30 + ${stateEvent._addAd30DaysDiscount}")
                     Log.d(TAG,"PostCreateHouse dis7 + ${stateEvent._addAd7DaysDiscount}")
                     Log.d(TAG,"PostCreateHouse facilitiesList + ${stateEvent.facilitiesList}")
                     Log.d(TAG,"PostCreateHouse nearbyList + ${stateEvent.nearbyList}")
                     Log.d(TAG,"PostCreateHouse rulesList + ${stateEvent.rulesList}")
-                    Log.d(TAG,"PostCreateHouse cityId + ${Constants.mapCity.getValue("")}")
-                    Log.d(TAG,"PostCreateHouse houseId + ${Constants.mapTypeHouse.getValue(stateEvent._addAdType)}")
+                    Log.d(TAG,"PostCreateHouse cityId + ${stateEvent._addAdAddressCityId}")
+                    Log.d(TAG,"PostCreateHouse regionId + ${stateEvent._addAdAddressRegionId.toString()}")
 
                     val list:List<BlockedDates> = listOf(BlockedDates("2019-12-20","2019-12-31"))
 
@@ -90,7 +92,9 @@ constructor(
                         houseTypeId,
                         accommodations,
                         discount7days,
-                        discount30days
+                        discount30days,
+                        regionId,
+                        countryId
                     )
                 }?: AbsentLiveData.create()
             }

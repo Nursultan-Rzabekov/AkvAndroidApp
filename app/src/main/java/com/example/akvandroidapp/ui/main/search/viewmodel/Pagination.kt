@@ -1,4 +1,7 @@
 import android.util.Log
+import com.example.akvandroidapp.ui.main.favorite.state.FavoriteStateEvent
+import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
+import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.state.HomeStateEvent
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
@@ -22,6 +25,12 @@ import okhttp3.MultipartBody
 
 
 fun SearchViewModel.resetPage(){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.page = 1
+    setViewState(update)
+}
+
+fun FavoriteViewModel.resetPage(){
     val update = getCurrentViewStateOrNew()
     update.blogFields.page = 1
     setViewState(update)
@@ -76,6 +85,14 @@ fun SearchViewModel.loadFirstPage() {
     resetPage()
     setStateEvent(SearchStateEvent.BlogSearchEvent())
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.blogFields.searchQuery}")
+}
+
+fun FavoriteViewModel.loadFirstPage() {
+    setQueryInProgress(true)
+    setQueryExhausted(false)
+    resetPage()
+    setStateEvent(FavoriteStateEvent.FavoriteMyListEvent())
+    Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.blogFields.blogList}")
 }
 
 fun ProfileViewModel.loadFirstPage() {
@@ -188,6 +205,18 @@ fun SearchViewModel.handleIncomingBlogListData(viewState: SearchViewState){
     setQueryExhausted(viewState.blogFields.isQueryExhausted)
     setBlogListData(viewState.blogFields.blogList)
 }
+
+fun FavoriteViewModel.handleIncomingBlogListData(viewState: FavoriteViewState){
+    Log.d(TAG, "BlogViewModel, DataState: ${viewState}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.blogFields.isQueryInProgress}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.blogFields.isQueryExhausted}")
+    setQueryInProgress(viewState.blogFields.isQueryInProgress)
+    setQueryExhausted(viewState.blogFields.isQueryExhausted)
+    setBlogListData(viewState.blogFields.blogList)
+}
+
 
 
 fun MessagesViewModel.handleIncomingBlogListData(viewState: MessagesViewState){

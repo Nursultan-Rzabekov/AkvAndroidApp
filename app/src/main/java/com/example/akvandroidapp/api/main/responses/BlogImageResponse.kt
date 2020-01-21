@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName
 
 class BlogImageResponse(
 
+    @SerializedName("house")
+    @Expose
+    var house: Int,
+
     @SerializedName("image")
     @Expose
     var image: String

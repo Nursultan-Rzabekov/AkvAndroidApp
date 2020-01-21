@@ -75,23 +75,6 @@ class ChatMesFragment : BaseMessagesFragment(),
     }
 
     private fun subscribeObservers(){
-//        sessionManager.favoritePostListItem.observe(this, Observer{ dataState ->
-//            Log.d(TAG, "chat: ${dataState}")
-//
-//            recyclerAdapter.apply {
-//                Log.d(TAG, "chat: ${dataState}")
-//
-//                preloadGlideImages(
-//                    requestManager = requestManager,
-//                    list = dataState
-//                )
-//                submitList(
-//                    blogList = dataState,
-//                    isQueryExhausted = true
-//                )
-//            }
-//        })
-
         viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
             if(dataState != null) {
                 handlePagination(dataState)

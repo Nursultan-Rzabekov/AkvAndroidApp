@@ -40,6 +40,7 @@ constructor(
 
     fun searchBlogPosts(
         authToken: AuthToken,
+        query_name:String,
         city__name: String,
         accomadations:String,
         verified:String,
@@ -67,15 +68,11 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<BlogListSearchResponse>
             ) {
-                Log.d("qwe","result count ${response.body.count}")
-                Log.d("qwe","result response ${response.body.results}")
-
 
                 val location = arrayListOf<Point>()
                 val blogPostList: ArrayList<BlogPost> = ArrayList()
                 for(blogPostResponse in response.body.results){
                     location.add(Point(blogPostResponse.latitude,blogPostResponse.longitude))
-                    val imagePost = blogPostResponse.photos?.get(0) ?: "//////////////////////////////////////////////////////////////////////"
                     blogPostList.add(
                         BlogPost(
                             id = blogPostResponse.id,
@@ -89,16 +86,13 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "https://akv-technopark.herokuapp.com" + imagePost.toString().substring(24,imagePost.toString().length - 1),
+                            image = "https://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
                             rating = blogPostResponse.rating
                         )
-
                     )
-//                    Log.d("String","String just do + ${blogPostResponse.photos[0].toString().substring(24,blogPostResponse.photos[0].toString().length - 1)}")
                 }
 
                 sessionManager.locationItemCount(location)
-
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
@@ -119,13 +113,13 @@ constructor(
 
             override fun createCall(): LiveData<GenericApiResponse<BlogListSearchResponse>> {
 
-                Log.d("qwe","result price left ${price__gte}")
-                Log.d("qwe","result room left ${room__gte}")
-                Log.d("qwe","result price right ${price__lte}")
-                Log.d("qwe","result page ${page}")
-//                                    "Token ${authToken.token!!}",
+                Log.d("qwe","result search ${query_name}")
 
                 val data: MutableMap<String, String> = HashMap()
+
+                if(query_name.isNotEmpty()){
+                    data["search"] = query_name
+                }
 
                 if(city__name != "нет"){
                     data["city__name"] = city__name
@@ -149,7 +143,6 @@ constructor(
                     data["rooms__gte"] = room__gte.toString()
                 }
                 if(room__lte != 0){
-                    Log.d("asasdsasasdasdsdaasdad",room__lte.toString())
                     data["rooms__lte"] = room__lte.toString()
                 }
 
@@ -161,10 +154,10 @@ constructor(
                 }
 
                 if(ordering != "нет"){
-                    data["ordering"] = ordering.toString()
+                    data["ordering"] = ordering
                 }
 
-                data["verified"] = verified.toString()
+                data["verified"] = verified
 
                 return openApiMainService.searchListBlogPosts(
                     options = data,
@@ -282,7 +275,6 @@ constructor(
 
                 val blogPostList: ArrayList<BlogPost> = ArrayList()
                 for(blogPostResponse in response.body.recommendations){
-                    val imagePost = blogPostResponse.photos?.get(0) ?: "//////////////////////////////////////////////////////////////////////"
                     blogPostList.add(
                         BlogPost(
                             id = blogPostResponse.id,
@@ -296,18 +288,11 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "https://akv-technopark.herokuapp.com" + imagePost.toString().substring(24,imagePost.toString().length - 1),
+                            image = "https://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
                             rating = blogPostResponse.rating
                         )
-
                     )
                 }
-
-
-                Log.d("qwe","result count 1  ${blogZhilyeAccommodationsList}")
-                Log.d("qwe","result count 2 ${blogZhilyeNearBuildingsList}")
-                Log.d("qwe","result count 3 ${blogPostList}")
-                Log.d("qwe","result count 4 ${userChatMessages}")
 
                 withContext(Dispatchers.Main){
                     onCompleteJob(

@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.*
+import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
@@ -26,6 +27,12 @@ fun DetailsViewModel.setQuery(query: String){
 fun ZhilyeViewModel.setHouseId(houseId: Int){
     val update = getCurrentViewStateOrNew()
     update.zhilyeFields.houseId = houseId
+    setViewState(update)
+}
+
+fun FavoriteViewModel.setHouseId(houseId: Int){
+    val update = getCurrentViewStateOrNew()
+    update.deleteblogFields.houseId = houseId
     setViewState(update)
 }
 
@@ -88,6 +95,12 @@ fun SearchViewModel.setBlogListData(blogList: List<BlogPost>){
     setViewState(update)
 }
 
+fun FavoriteViewModel.setBlogListData(blogList: List<BlogPost>){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.blogList = blogList
+    setViewState(update)
+}
+
 
 fun MessagesViewModel.setBlogListData(blogList: List<UserChatMessages>){
     val update = getCurrentViewStateOrNew()
@@ -138,6 +151,12 @@ fun SearchViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun FavoriteViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun ProfileViewModel.setQueryExhausted(isExhausted: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.isQueryExhausted = isExhausted
@@ -163,6 +182,12 @@ fun HomeViewModel.setQueryExhausted(isExhausted: Boolean){
 }
 
 fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun FavoriteViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryInProgress = isInProgress
     setViewState(update)

@@ -61,7 +61,9 @@ constructor(
         house_type_id:RequestBody,
         accommodations:RequestBody,
         discount7days:RequestBody,
-        discount30days:RequestBody
+        discount30days:RequestBody,
+        regionId:RequestBody,
+        countryId:RequestBody
     ): LiveData<DataState<ProfileViewState>> {
         return object :
             NetworkBoundResource<BlogCreateUpdateResponse, BlogPost, ProfileViewState>(
@@ -95,25 +97,27 @@ constructor(
                 Log.d(TAG,"PostCreateHouse 3333333 + ${name}")
                 return openApiMainService.createBlog(
                     "Token ${authToken.token!!}",
-                    name,
-                    description,
-                    rooms,
-                    RequestBody.create(MediaType.parse("text/plain"), 4.toString()),
-                    address,
-                    longitude,
-                    latitude,
-                    city_id,
-                    price,
-                    beds,
-                    guests,
-                    rules,
-                    near_buildings,
-                    house_type_id,
-                    blocked_dates,
-                    accommodations,
-                    discount7days,
-                    discount30days,
-                    photos
+                    name = name,
+                    description = description,
+                    rooms = rooms,
+                    floor = RequestBody.create(MediaType.parse("text/plain"), 4.toString()),
+                    address = address,
+                    longitude = longitude,
+                    latitude = latitude,
+                    city_id = city_id,
+                    price = price,
+                    beds = beds,
+                    guests = guests,
+                    rules = rules,
+                    near_buildings = near_buildings,
+                    house_type_id = house_type_id,
+                    blocked_dates = blocked_dates,
+                    accommodations = accommodations,
+                    discount7days = discount7days,
+                    discount30days = discount30days,
+                    country_id = countryId,
+                    region_id = regionId,
+                    photos = photos
                 )
             }
 

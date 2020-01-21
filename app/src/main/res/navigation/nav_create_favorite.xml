@@ -22,47 +22,13 @@
     </fragment>
 
 
-    <fragment android:id="@+id/zhilyeFragment"
+    <activity android:id="@+id/zhilyeFragment"
         android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_zhilye_layout">
 
-        <action android:id="@+id/action_szhilyeFragment_to_zhilyeRulesOfHouseFragment"
-            app:destination="@id/zhilyeRulesOfHouseFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            />
 
-
-        <action android:id="@+id/action_szhilyeFragment_to_ZhilyeReviewFragment"
-            app:destination="@id/zhilyeReviewFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            />
-
-
-    </fragment>
-
-
-    <fragment android:id="@+id/zhilyeRulesOfHouseFragment"
-        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity"
-        android:label="@string/fragment_view_blog"
-        tools:layout="@layout/fragment_rules_of_house_layout">
-
-
-    </fragment>
-
-    <fragment android:id="@+id/zhilyeReviewFragment"
-        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity"
-        android:label="@string/fragment_view_blog"
-        tools:layout="@layout/fragment_review_page_layout">
-
-
-    </fragment>
+    </activity>
 
 
 </navigation>

@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
@@ -62,6 +63,12 @@ fun ZhilyeViewModel.getHouseId(): Int {
     }
 }
 
+fun FavoriteViewModel.getHouseId(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.deleteblogFields.houseId
+    }
+}
+
 fun SearchViewModel.getAccomadations(): String {
     getCurrentViewStateOrNew().let {
         return it.blogFields.accomadations
@@ -93,6 +100,12 @@ fun SearchViewModel.getSearchQuery(): String {
 }
 
 fun SearchViewModel.getPage(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.page
+    }
+}
+
+fun FavoriteViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.blogFields.page
     }

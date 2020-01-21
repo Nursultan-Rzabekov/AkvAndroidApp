@@ -9,12 +9,6 @@ import retrofit2.http.*
 
 interface OpenApiMainService {
 
-    @DELETE("blog/{slug}/delete")
-    fun deleteBlogPost(
-        @Header("Authorization") authorization: String,
-        @Path("slug") slug: String
-    ): LiveData<GenericApiResponse<GenericResponse>>
-
     @Multipart
     @POST("houses/")
     fun createBlog(
@@ -37,6 +31,8 @@ interface OpenApiMainService {
         @Part("accommodations") accommodations: RequestBody,
         @Part("discount7days") discount7days: RequestBody,
         @Part("discount30days") discount30days: RequestBody,
+        @Part("country_id") country_id: RequestBody,
+        @Part("region_id") region_id: RequestBody,
         @Part photos: ArrayList<MultipartBody.Part>?
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>
 
@@ -46,6 +42,20 @@ interface OpenApiMainService {
         @QueryMap  options : Map<String, String>,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<BlogListSearchResponse>>
+
+
+    @GET("favourites/")
+    fun getMyFavorites(
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<BlogListFavoritesResponse>>
+
+    @DELETE("houses/{house_id}/cancel_favourite/")
+    fun deleteFavoritePost(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int
+    ): LiveData<GenericApiResponse<GenericResponse>>
+
 
     @GET("auth/users/me/")
     fun getProfileInfo(

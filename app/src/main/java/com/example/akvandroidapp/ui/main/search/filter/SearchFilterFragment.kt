@@ -35,18 +35,13 @@ class SearchFilterFragment : BaseSearchFragment() {
         return inflater.inflate(R.layout.fragment_filter_layout, container, false)
     }
 
-
     private var price_left:Int = 1
     private var price_right:Int = 30000
-
     private var room_left:Int = 1
     private var room_right:Int = 15
-
     private var beds_left:Int = 1
     private var beds_right:Int = 30
-
     private var acc_name:String? = null
-
     private var sortMethod:String = Constants.FILTER_TYPE1
     private var accomdationListString:String = ""
 
@@ -107,7 +102,6 @@ class SearchFilterFragment : BaseSearchFragment() {
         })
 
         sessionManager.facilitiesList.observe(this, Observer{ dataState ->
-
             accomdationListString = dataState.joinToString(separator = ",")
             Log.d(TAG, "favorite: $accomdationListString")
             if (dataState.size > 0)
@@ -118,8 +112,8 @@ class SearchFilterFragment : BaseSearchFragment() {
     }
 
     private fun onBlogSearchOrFilter(){
-        viewModel.loadFirstPage().let {
-            findNavController().popBackStack()
+        findNavController().popBackStack().let {
+            viewModel.loadFirstPage()
         }
     }
 

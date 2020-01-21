@@ -6,7 +6,6 @@ import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER
 import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_PRICE_RIGHT
 
 class SearchViewState (
-
     var blogFields: BlogFields = BlogFields(),
     var viewBlogFields: ViewBlogFields = ViewBlogFields(),
     var updatedBlogFields: UpdatedBlogFields = UpdatedBlogFields()
