@@ -65,7 +65,7 @@ constructor(
 
     init {
         _favoritePostList.value = mutableListOf()
-        _chekedFilterCity.value = FilterCity("нет", false, true)
+        _chekedFilterCity.value = FilterCity("нет", false, true, -1)
         _typeOfApartment.value = DEFAULT_TYPE
         _facilitiesList.value = mutableListOf()
         _addAdInfo.value = AddAdInfo()
@@ -512,7 +512,7 @@ constructor(
 
     fun clearFilterCity(){
         GlobalScope.launch(Main) {
-            _chekedFilterCity.value = FilterCity("нет", false, true)
+            _chekedFilterCity.value = FilterCity("нет", false, true, -1)
         }
     }
 

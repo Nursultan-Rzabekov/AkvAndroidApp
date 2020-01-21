@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
+import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_city.*
 import kotlinx.android.synthetic.main.header_city.*
@@ -71,9 +73,9 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
     }
 
     private fun addCityDataset(){
-        val data = mutableListOf(FilterCity("Алматы", false, true),
-                            FilterCity("Шымкент", false, false),
-                            FilterCity("Астана", false, false))
+        val data = mutableListOf<FilterCity>()
+        for(city in Constants.cityList)
+            data.add(FilterCity(city.name, false, false, city.id))
         for (city in data) {
             if (sessionManager.checkedFilterCity.value?.location == city.location){
                 city.isSelected = true

@@ -5,31 +5,20 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/gallery_photo_recycler_view_item_close_iv"
-        android:contentDescription="@string/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:src="@drawable/ic_cancel_contact"
-        android:layout_gravity="end|top"/>
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="74dp"
         android:layout_height="74dp"
         android:layout_margin="@dimen/dim_8dp"
         app:cardUseCompatPadding="false"
-        app:cardBackgroundColor="@color/secondaryFirst"
-        app:cardCornerRadius="@dimen/cornerRadius1"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/primaryZero">
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/cornerRadius1">
 
         <ImageView
-            android:id="@+id/gallery_photo_recycler_view_item_iv"
-            android:contentDescription="@string/appartment"
+            android:id="@+id/gallery_add_photo_item_iv"
+            android:contentDescription="@string/add_appartment_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/test_image_back"
+            android:src="@drawable/ic_add_photo"
             android:scaleType="centerCrop"/>
 
     </com.google.android.material.card.MaterialCardView>
