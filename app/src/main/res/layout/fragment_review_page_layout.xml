@@ -8,11 +8,28 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/transparent">
+        android:backgroundTint="@color/white">
 
-        <include
-            layout="@layout/header_reviews_page"
-            android:id="@+id/header_reviews_page_base"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/header_reviews_page_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonGravity="center_vertical">
+
+            <TextView
+                android:id="@+id/header_reviews_page_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginBottom="@dimen/dim_16dp"
+                android:text="@string/reviews"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:layout_gravity="center" />
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

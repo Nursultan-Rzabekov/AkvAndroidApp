@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
@@ -18,7 +18,28 @@ class GalleryPhotosAdapter(
     private val closeInteraction: PhotoCloseInteraction? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var photos: MutableList<GalleryPhoto> = ArrayList()
+    val DIFF_CALLBACK = object: DiffUtil.ItemCallback<GalleryPhoto>(){
+        override fun areItemsTheSame(oldItem: GalleryPhoto, newItem: GalleryPhoto): Boolean {
+            if (oldItem.url != null && newItem.url != null)
+                if (oldItem.url.equals(newItem.url))
+                    return true
+            else if(oldItem.uri != null && newItem.uri != null)
+                    if (oldItem.uri == newItem.uri)
+                        return true
+            return false
+        }
+
+        override fun areContentsTheSame(oldItem: GalleryPhoto, newItem: GalleryPhoto): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
+    private val differ =
+        AsyncListDiffer(
+            BlogRecyclerChangeCallback(this),
+            AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
+        )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
@@ -46,47 +67,68 @@ class GalleryPhotosAdapter(
         }
     }
 
-    override fun getItemCount(): Int = photos.size
+    internal inner class BlogRecyclerChangeCallback(
+        private val adapter: GalleryPhotosAdapter
+    ) : ListUpdateCallback {
+
+        override fun onChanged(position: Int, count: Int, payload: Any?) {
+            adapter.notifyItemRangeChanged(position, count, payload)
+        }
+
+        override fun onInserted(position: Int, count: Int) {
+            adapter.notifyItemRangeChanged(position, count)
+        }
+
+        override fun onMoved(fromPosition: Int, toPosition: Int) {
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun onRemoved(position: Int, count: Int) {
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
             is PhotoViewHolder -> {
-                holder.bind(photos[position])
+                holder.bind(differ.currentList[position])
             }
             is AddPhotoViewHolder -> {
-                holder.bind(photos[position])
+                holder.bind(differ.currentList[position])
             }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (photos[position].url == null && photos[position].uri == null)
+        if (differ.currentList[position].url == null && differ.currentList[position].uri == null)
             return 1
         return 0
     }
 
     fun submitList(items: MutableList<GalleryPhoto>){
-        this.photos = items
-        photos.add(GalleryPhoto(null, null))
-        notifyDataSetChanged()
-        Log.e("GALLERYADAPTER", "${photos}")
+        val newList = items.toMutableList()
+        newList.add(GalleryPhoto(null, null))
+        differ.submitList(newList)
+        Log.e("GALLERYADAPTER", "${differ.currentList}")
     }
 
     fun addGalleryPhoto(item: GalleryPhoto){
-        photos.add(photos.size-1, item)
-        notifyItemInserted(photos.size-2)
-        notifyItemRangeChanged(photos.size-2, photos.size)
-        notifyDataSetChanged()
-        Log.e("GALLERYADAPTER", "${photos}")
+        val newList = differ.currentList.toMutableList()
+        newList.add(differ.currentList.size-1, item)
+        differ.submitList(newList)
+        Log.e("GALLERYADAPTER", "${differ.currentList}")
     }
 
     fun removeItem(position: Int) {
-        photos.removeAt(position)
-        notifyItemRemoved(position)
+        val newList = differ.currentList.toMutableList()
+        newList.removeAt(position)
+        differ.submitList(newList)
     }
 
     fun getPhotos(): MutableList<GalleryPhoto> {
-        return ArrayList(photos)
+        return ArrayList(differ.currentList)
     }
 
     class PhotoViewHolder constructor(

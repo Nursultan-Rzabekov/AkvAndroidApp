@@ -122,6 +122,11 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Body body: CreateReservationBody
     ): LiveData<GenericApiResponse<ReservationRequestResponse>>
+
+    @GET("houses/{house_id}/reviews")
+    fun getReviewsForHouse(
+        @Path("house_id") house_id: Int
+    ): LiveData<GenericApiResponse<ReviewsListResponse>>
 }
 
 

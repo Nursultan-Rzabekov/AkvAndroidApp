@@ -8,6 +8,7 @@ import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
 import com.example.akvandroidapp.api.main.responses.ReservationRequestResponse
+import com.example.akvandroidapp.api.main.responses.ReviewsListResponse
 import com.example.akvandroidapp.api.main.responses.ZhilyeResponse
 import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.persistence.BlogPostDao
@@ -17,6 +18,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
@@ -402,6 +404,74 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("requestReservation", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun getReviewsForHouse(
+        house_id: Int
+    ): LiveData<DataState<ZhilyeReviewsViewState>>{
+        return object : NetworkBoundResource<ReviewsListResponse, List<BlogPost>, ZhilyeReviewsViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<ReviewsListResponse>) {
+                Log.d("response reviews", "response_count: ${response.body.count}")
+
+                val reviewsList = arrayListOf<Review>()
+                for (review in response.body.results){
+                    reviewsList.add(
+                        Review(
+                            id = review.id,
+                            house = review.house,
+                            body = review.body,
+                            stars = review.stars,
+                            created_at = review.created_at,
+                            user_id = review.user.id,
+                            first_name = review.user.first_name,
+                            last_name = review.user.last_name,
+                            userpic = review.user.userpic,
+                            email = review.user.email
+                        )
+                    )
+                }
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeReviewsViewState(ZhilyeReviewsViewState.ReviewField(
+                                reviewList = reviewsList,
+                                isQueryInProgress = false,
+                                isQueryExhausted = true)
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<ReviewsListResponse>> {
+                Log.d("Reviews request cal", "send house_id $house_id")
+                return openApiMainService.getReviewsForHouse(
+                    house_id = house_id
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeReviewsViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+
+            }
+
+            override fun setJob(job: Job) {
+                addJob("reviewsList", job)
             }
 
         }.asLiveData()

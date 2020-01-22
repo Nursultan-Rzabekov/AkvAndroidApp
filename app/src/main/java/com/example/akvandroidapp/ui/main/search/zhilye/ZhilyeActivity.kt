@@ -25,6 +25,7 @@ import com.example.akvandroidapp.entity.ZhilyeDetailProperties
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
+import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentReviewsAdapter
@@ -110,7 +111,7 @@ class ZhilyeActivity : BaseActivity() {
         }
 
         fragment_zhilye_reviews_lb.setOnClickListener {
-            navReviews()
+            navReviews(viewModel.getHouseId())
         }
 
 
@@ -202,8 +203,12 @@ class ZhilyeActivity : BaseActivity() {
         startActivity(intent)
     }
 
-    private fun navReviews(){
+    private fun navReviews(house_id: Int){
+        val bundle = bundleOf(
+            "house_id" to house_id
+        )
         val intent = Intent(this, ZhilyeReviewActivity::class.java)
+        intent.putExtra("house_id", bundle)
         startActivity(intent)
     }
 
