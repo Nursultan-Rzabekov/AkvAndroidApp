@@ -8,9 +8,10 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeReviewViewModel
 
 fun SearchViewModel.setQuery(query: String){
     val update = getCurrentViewStateOrNew()
@@ -27,6 +28,12 @@ fun DetailsViewModel.setQuery(query: String){
 fun ZhilyeViewModel.setHouseId(houseId: Int){
     val update = getCurrentViewStateOrNew()
     update.zhilyeFields.houseId = houseId
+    setViewState(update)
+}
+
+fun ZhilyeReviewViewModel.setHouseId(houseId: Int){
+    val update = getCurrentViewStateOrNew()
+    update.reviewsField.houseId = houseId
     setViewState(update)
 }
 
@@ -64,6 +71,7 @@ fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
     update.zhilyeFields.zhilyeDetailPhotos = zhilyeFields.zhilyeDetailPhotos
     update.zhilyeFields.zhilyeDetailRules = zhilyeFields.zhilyeDetailRules
     update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
+    update.zhilyeFields.zhilyeReviewsList = zhilyeFields.zhilyeReviewsList
     setViewState(update)
 }
 
@@ -105,6 +113,12 @@ fun FavoriteViewModel.setBlogListData(blogList: List<BlogPost>){
 fun MessagesViewModel.setBlogListData(blogList: List<UserChatMessages>){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.blogList = blogList
+    setViewState(update)
+}
+
+fun ZhilyeReviewViewModel.setBlogListData(reviewList: List<Review>){
+    val update = getCurrentViewStateOrNew()
+    update.reviewsField.reviewList = reviewList
     setViewState(update)
 }
 
@@ -181,6 +195,12 @@ fun HomeViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun ZhilyeReviewViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.reviewsField.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryInProgress = isInProgress
@@ -196,6 +216,12 @@ fun FavoriteViewModel.setQueryInProgress(isInProgress: Boolean){
 fun ProfileViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun ZhilyeReviewViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.reviewsField.isQueryInProgress = isInProgress
     setViewState(update)
 }
 

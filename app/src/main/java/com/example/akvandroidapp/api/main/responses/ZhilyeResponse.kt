@@ -1,7 +1,5 @@
 package com.example.akvandroidapp.api.main.responses
 
-import com.example.akvandroidapp.api.auth.network_responses.UserResponse
-import com.example.akvandroidapp.session.ProfileInfo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -90,6 +88,10 @@ class ZhilyeResponse(
     @SerializedName("near_buildings")
     @Expose
     var near_buildings: List<BlogPropertiesResponse>? = null,
+
+    @SerializedName("reviews")
+    @Expose
+    var reviews: List<ReviewResponse>? = null,
 
     @SerializedName("rules")
     @Expose

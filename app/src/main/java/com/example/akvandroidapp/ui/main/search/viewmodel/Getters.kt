@@ -7,8 +7,9 @@ import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeReviewViewModel
 import okhttp3.MultipartBody
 
 
@@ -63,6 +64,12 @@ fun ZhilyeViewModel.getHouseId(): Int {
     }
 }
 
+fun ZhilyeReviewViewModel.getHouseId(): Int {
+    getCurrentViewStateOrNew().let {
+        return it.reviewsField.houseId
+    }
+}
+
 fun FavoriteViewModel.getHouseId(): Int {
     getCurrentViewStateOrNew().let {
         return it.deleteblogFields.houseId
@@ -102,6 +109,12 @@ fun SearchViewModel.getSearchQuery(): String {
 fun SearchViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.blogFields.page
+    }
+}
+
+fun ZhilyeReviewViewModel.getPage(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.reviewsField.page
     }
 }
 

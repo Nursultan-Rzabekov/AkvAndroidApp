@@ -17,6 +17,7 @@ class ZhilyeViewState (
         var zhilyeDetailNearBuildings: List<ZhilyeDetailProperties> = ArrayList(),
         var zhilyeDetailPhotos: List<ZhilyeDetailPhotos> = ArrayList(),
         var blogListRecommendations: List<BlogPost> = ArrayList(),
+        var zhilyeReviewsList: List<Review> = ArrayList(),
         var houseId: Int = 1
     )
 }

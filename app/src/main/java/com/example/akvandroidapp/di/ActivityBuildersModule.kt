@@ -53,7 +53,7 @@ abstract class ActivityBuildersModule {
     abstract fun contributeZhilyeBookActivity(): ZhilyeBookActivity
 
     @MainScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
     abstract fun contributeZhilyeReviewActivity(): ZhilyeReviewActivity
 
     @MainScope

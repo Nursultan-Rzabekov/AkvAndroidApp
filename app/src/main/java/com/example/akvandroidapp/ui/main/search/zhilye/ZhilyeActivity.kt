@@ -1,12 +1,8 @@
 package com.example.akvandroidapp.ui.main.search.zhilye
 
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -19,16 +15,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.ZhilyeDetailProperties
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
+import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
-import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentReviewsAdapter
+import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentsReviewsPageAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.RecommendationsAdapter
+import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ReviewsPageAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.Constants
@@ -41,8 +38,6 @@ import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 import handleIncomingZhilyeData
-import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_zhilye.*
 import kotlinx.android.synthetic.main.fragment_zhilye_layout.*
 import kotlinx.android.synthetic.main.header_zhilye.*
@@ -67,7 +62,7 @@ class ZhilyeActivity : BaseActivity() {
     private lateinit var facilitiesAdapter: ApartmentPropertiesAdapter
     private lateinit var nearsAdapter: ApartmentPropertiesAdapter
     private lateinit var recommendationsAdapter: RecommendationsAdapter
-    private lateinit var reviewsAdapter: ApartmentReviewsAdapter
+    private lateinit var reviewsAdapter: ApartmentsReviewsPageAdapter
 
     private var isFavouriteChecked = false
     private var isToolbarColapsed = false
@@ -110,7 +105,7 @@ class ZhilyeActivity : BaseActivity() {
         }
 
         fragment_zhilye_reviews_lb.setOnClickListener {
-            navReviews()
+            navReviews(viewModel.getHouseId())
         }
 
 
@@ -165,7 +160,7 @@ class ZhilyeActivity : BaseActivity() {
                 facilitiesAdapter.submitList(viewState.zhilyeFields.zhilyeDetailAccomadations)
                 nearsAdapter.submitList(viewState.zhilyeFields.zhilyeDetailNearBuildings)
                 recommendationsAdapter.submitList(viewState.zhilyeFields.blogListRecommendations)
-                reviewsAdapter.submitList(listOf())
+                reviewsAdapter.submitList(viewState.zhilyeFields.zhilyeReviewsList)
 
                 val photos: ArrayList<String> = arrayListOf()
                 for(photo in viewState.zhilyeFields.zhilyeDetailPhotos)
@@ -202,8 +197,12 @@ class ZhilyeActivity : BaseActivity() {
         startActivity(intent)
     }
 
-    private fun navReviews(){
+    private fun navReviews(house_id: Int){
+        val bundle = bundleOf(
+            "house_id" to house_id
+        )
         val intent = Intent(this, ZhilyeReviewActivity::class.java)
+        intent.putExtra("house_id", bundle)
         startActivity(intent)
     }
 
@@ -262,7 +261,7 @@ class ZhilyeActivity : BaseActivity() {
         }
         fragment_zhilye_reviews_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@ZhilyeActivity)
-            reviewsAdapter = ApartmentReviewsAdapter(
+            reviewsAdapter = ApartmentsReviewsPageAdapter(
                 requestManager = requestManager
             )
             adapter = reviewsAdapter

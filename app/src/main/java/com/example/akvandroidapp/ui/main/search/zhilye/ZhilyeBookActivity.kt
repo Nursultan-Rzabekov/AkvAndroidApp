@@ -2,25 +2,16 @@ package com.example.akvandroidapp.ui.main.search.zhilye
 
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
-import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
-import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
-import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookStateEvent
-import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
-import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
-import handleIncomingRequest
 import kotlinx.android.synthetic.main.fragment_zhilye_book.*
 import kotlinx.android.synthetic.main.fragment_zhilye_book_layout.*
 import javax.inject.Inject

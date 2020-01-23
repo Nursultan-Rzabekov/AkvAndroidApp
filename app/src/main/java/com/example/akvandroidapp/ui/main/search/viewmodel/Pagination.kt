@@ -17,10 +17,13 @@ import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsStateEvent
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeReviewViewModel
 import okhttp3.MultipartBody
 
 
@@ -36,6 +39,12 @@ fun FavoriteViewModel.resetPage(){
     setViewState(update)
 }
 
+
+fun ZhilyeReviewViewModel.resetPage(){
+    val update = getCurrentViewStateOrNew()
+    update.reviewsField.page = 1
+    setViewState(update)
+}
 
 fun DetailsViewModel.setMessageBody(messagesBody: String){
     val update = getCurrentViewStateOrNew()
@@ -95,6 +104,15 @@ fun FavoriteViewModel.loadFirstPage() {
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.blogFields.blogList}")
 }
 
+
+fun ZhilyeReviewViewModel.loadFirstPage() {
+    setQueryInProgress(true)
+    setQueryExhausted(false)
+    resetPage()
+    setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent())
+    Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.reviewsField.reviewList}")
+}
+
 fun ProfileViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
@@ -134,6 +152,13 @@ private fun SearchViewModel.incrementPageNumber(){
     setViewState(update)
 }
 
+private fun ZhilyeReviewViewModel.incrementPageNumber(){
+    val update = getCurrentViewStateOrNew()
+    val page = update.reviewsField.page // get current page
+    update.reviewsField.page = page + 1
+    setViewState(update)
+}
+
 private fun MessagesViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.myChatFields.page // get current page
@@ -162,6 +187,17 @@ fun SearchViewModel.nextPage(){
         incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(SearchStateEvent.BlogSearchEvent())
+    }
+}
+
+
+fun ZhilyeReviewViewModel.nextPage(){
+    if(!viewState.value!!.reviewsField.isQueryInProgress
+        && !viewState.value!!.reviewsField.isQueryExhausted){
+        Log.d(TAG, "BlogViewModel: Attempting to load next page...")
+        incrementPageNumber()
+        setQueryInProgress(true)
+        setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent())
     }
 }
 
@@ -256,6 +292,18 @@ fun ProfileViewModel.handleIncomingBlogListData(viewState: ProfileViewState){
     setQueryInProgress(viewState.myHouseFields.isQueryInProgress)
     setQueryExhausted(viewState.myHouseFields.isQueryExhausted)
     setBlogListData(viewState.myHouseFields.blogList)
+}
+
+
+fun ZhilyeReviewViewModel.handleIncomingBlogListData(viewState: ZhilyeReviewsViewState){
+    Log.d(TAG, "BlogViewModel, DataState: ${viewState}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.reviewsField.isQueryInProgress}")
+    Log.d(TAG, "BlogViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.reviewsField.isQueryExhausted}")
+    setQueryInProgress(viewState.reviewsField.isQueryInProgress)
+    setQueryExhausted(viewState.reviewsField.isQueryExhausted)
+    setBlogListData(viewState.reviewsField.reviewList)
 }
 
 fun HomeViewModel.handleIncomingReservationListData(viewState: HomeViewState){
