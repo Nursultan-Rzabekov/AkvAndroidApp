@@ -25,7 +25,6 @@ import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentsReviewsPageAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.RecommendationsAdapter
-import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ReviewsPageAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.Constants
@@ -47,7 +46,7 @@ import technolifestyle.com.imageslider.FlipperView
 import javax.inject.Inject
 
 
-class ZhilyeActivity : BaseActivity() {
+class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreReviewInteraction {
 
     private val TAGV = "Zhilye Activity"
 
@@ -103,11 +102,6 @@ class ZhilyeActivity : BaseActivity() {
         fragment_zhilye_house_rules_card.setOnClickListener {
             navHouseRules()
         }
-
-        fragment_zhilye_reviews_lb.setOnClickListener {
-            navReviews(viewModel.getHouseId())
-        }
-
 
         fragment_zhile_book_btn.setOnClickListener {
             navBookReserv()
@@ -262,7 +256,8 @@ class ZhilyeActivity : BaseActivity() {
         fragment_zhilye_reviews_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@ZhilyeActivity)
             reviewsAdapter = ApartmentsReviewsPageAdapter(
-                requestManager = requestManager
+                requestManager = requestManager,
+                showMoreReviewInteraction = this@ZhilyeActivity
             )
             adapter = reviewsAdapter
         }
@@ -386,5 +381,9 @@ class ZhilyeActivity : BaseActivity() {
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_dark)
         else
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_white)
+    }
+
+    override fun onShowMorePressed() {
+        navReviews(viewModel.getHouseId())
     }
 }

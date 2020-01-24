@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="@dimen/dim_4dp"
+    android:paddingBottom="@dimen/dim_4dp">
+
+    <TextView
+        android:id="@+id/show_more_reviews_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/show_all"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/secondaryFirst"/>
+
+</LinearLayout>

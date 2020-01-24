@@ -393,4 +393,5 @@
     <string name="not_mentioned">Не указано</string>
     <string name="no_recommendations">Нет рекомендации</string>
     <string name="no_reviews">Пока ещё никто не оставил отзыв</string>
+    <string name="show_all">Смотреть все</string>
 </resources>

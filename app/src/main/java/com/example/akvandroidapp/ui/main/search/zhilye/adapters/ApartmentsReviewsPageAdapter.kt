@@ -1,9 +1,12 @@
 package com.example.akvandroidapp.ui.main.search.zhilye.adapters
 
+import android.text.Spannable
+import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
@@ -12,17 +15,23 @@ import com.example.akvandroidapp.entity.Review
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.reviews_band_recycler_view_item.view.*
+import kotlinx.android.synthetic.main.show_more_reviews_item.view.*
 
 class ApartmentsReviewsPageAdapter(
-    private val requestManager: RequestManager
+    private val requestManager: RequestManager,
+    val showMoreReviewInteraction: ShowMoreReviewInteraction
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
+    private val SHOW_MORE_ITEMS = -2
 
     private val NO_MORE_RESULTS_BLOG_MARKER = Review(
         NO_MORE_RESULTS
+    )
+    private val SHOW_MORE_ITEMS_MARKER = Review(
+        SHOW_MORE_ITEMS
     )
 
     val DIFF_CALLBACK = object: DiffUtil.ItemCallback<Review>(){
@@ -61,6 +70,16 @@ class ApartmentsReviewsPageAdapter(
                         false
                     ),
                     requestManager = requestManager
+                )
+            }
+            SHOW_MORE_ITEMS -> {
+                return ShowMoreReviewViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.show_more_reviews_item,
+                        parent,
+                        false
+                    ),
+                    showMoreReviewInteraction = showMoreReviewInteraction
                 )
             }
             else -> {
@@ -112,6 +131,8 @@ class ApartmentsReviewsPageAdapter(
         if(differ.currentList[position].id > -1){
             return BLOG_ITEM
         }
+        else if (differ.currentList[position].id == SHOW_MORE_ITEMS)
+            return SHOW_MORE_ITEMS
         return differ.currentList[position].id
     }
 
@@ -128,7 +149,10 @@ class ApartmentsReviewsPageAdapter(
     }
 
     fun submitList(items: List<Review>?,isQueryExhausted: Boolean = false){
-        val newList = items?.toMutableList()
+        val newList = items?.toMutableList()?.take(2)?.toMutableList()
+        if (newList?.size!! > 0){
+            newList.add(SHOW_MORE_ITEMS_MARKER)
+        }
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
         differ.submitList(newList)
@@ -158,5 +182,28 @@ class ApartmentsReviewsPageAdapter(
             rate.text = review.stars.toString()
             body.text = review.body
         }
+    }
+
+    class ShowMoreReviewViewHolder(
+        moreView: View,
+        private val showMoreReviewInteraction: ShowMoreReviewInteraction
+    ): RecyclerView.ViewHolder(moreView){
+
+        private val tv = moreView.show_more_reviews_tv
+
+        fun bind(){
+            tv.setText(tv.text.toString(), TextView.BufferType.SPANNABLE)
+            val span4 = tv.text as Spannable
+            span4.setSpan(UnderlineSpan(), 0, tv.text.toString().length, 0)
+
+            tv.setOnClickListener {
+                showMoreReviewInteraction.onShowMorePressed()
+            }
+        }
+
+    }
+
+    interface ShowMoreReviewInteraction{
+        fun onShowMorePressed()
     }
 }

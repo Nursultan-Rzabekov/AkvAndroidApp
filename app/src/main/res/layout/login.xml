@@ -38,7 +38,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonenumber_et"
             android:layout_width="match_parent"
-            android:inputType="phone"
             style="@style/BasicEditText"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
