@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        app:cardBackgroundColor="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dim_16dp">
+
+            <ImageButton
+                android:id="@+id/dialog_review_rating_close_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cancel_filter_16dp"
+                style="@style/BasicImageButton"
+                android:layout_gravity="end"
+                android:contentDescription="@string/cancel"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hotel_del_luxe"
+                android:textSize="18sp"
+                android:textColor="@color/primaryZero"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:text="@string/rate_your_trip"
+                android:textAlignment="center"
+                android:textSize="13sp"
+                android:textColor="@color/black"/>
+
+            <RatingBar
+                android:id="@+id/dialog_review_rating_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:layout_marginBottom="@dimen/dim_12dp"
+                style="@style/CustomRatingBar"
+                android:isIndicator="true"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:stepSize="0.1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/random_text7"
+                android:textAlignment="center"
+                android:layout_marginStart="@dimen/dim_8dp"
+                android:layout_marginEnd="@dimen/dim_8dp"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_review_text_l_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_12dp"
+                android:layout_marginBottom="@dimen/dim_12dp"
+                android:layout_marginStart="@dimen/dim_8dp"
+                android:layout_marginEnd="@dimen/dim_8dp"
+                style="@style/BasicTextFilled"
+                app:hintEnabled="false"
+                app:counterEnabled="true"
+                app:counterMaxLength="200"
+                app:boxCollapsedPaddingTop="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_review_text_et"
+                    style="@style/BasicEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:hint="@string/your_review"
+                    android:maxLines="3"
+                    android:textSize="12sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialog_review_rating_send_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="@style/AllButton.Unelevated"
+                android:text="@string/send"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/dialog_review_rating_skip_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skip"
+                android:textColor="@color/secondaryFirst"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

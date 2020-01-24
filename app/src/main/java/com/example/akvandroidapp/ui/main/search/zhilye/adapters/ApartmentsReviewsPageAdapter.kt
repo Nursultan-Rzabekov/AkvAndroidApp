@@ -22,7 +22,6 @@ class ApartmentsReviewsPageAdapter(
     val showMoreReviewInteraction: ShowMoreReviewInteraction
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
     private val SHOW_MORE_ITEMS = -2
@@ -56,7 +55,7 @@ class ApartmentsReviewsPageAdapter(
             NO_MORE_RESULTS ->{
                 return GenericViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.layout_no_more_results,
+                        R.layout.no_reviews_item,
                         parent,
                         false
                     )
@@ -124,6 +123,9 @@ class ApartmentsReviewsPageAdapter(
             is ReviewViewHolder -> {
                 holder.bind(differ.currentList[position])
             }
+            is ShowMoreReviewViewHolder -> {
+                holder.bind()
+            }
         }
     }
 
@@ -153,7 +155,7 @@ class ApartmentsReviewsPageAdapter(
         if (newList?.size!! > 0){
             newList.add(SHOW_MORE_ITEMS_MARKER)
         }
-        if (isQueryExhausted)
+        if (newList?.isEmpty())
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
         differ.submitList(newList)
         Log.e("ReviewsPageAdapter", "${differ.currentList}")
