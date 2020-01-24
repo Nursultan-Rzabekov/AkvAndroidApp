@@ -63,8 +63,6 @@ class RegisterFragment : BaseAuthFragment() {
         arg_user_name = arguments?.getString("arg_user_name")
 
 
-
-
         sign_detail_create_btn.setOnClickListener {
             register()
         }
@@ -217,15 +215,10 @@ class RegisterFragment : BaseAuthFragment() {
         val mm = date.split('-')[1]
         val yy = date.split('-')[0]
 
-//        val c = Calendar.getInstance()
-//        val brYear = c.get(Calendar.YEAR)
-//        val brMonth = c.get(Calendar.MONTH)
-//        val brDay = c.get(Calendar.DAY_OF_MONTH)
-
         val dpd = DatePickerDialog(requireContext(), R.style.MySpinnerDatePickerStyle,
-            DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+            DatePickerDialog.OnDateSetListener { _, i, i2, i3 ->
                 sign_detail_birth_et.setText(("$i-${i2+1}-$i3"))
-            }, yy.toInt(), mm.toInt()-1, dd.toInt())
+            }, yy.toInt(), mm.toInt()+1, dd.toInt())
 
         dpd.show()
         dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)

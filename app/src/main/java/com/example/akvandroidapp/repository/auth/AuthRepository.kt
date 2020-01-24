@@ -179,12 +179,12 @@ constructor(
 
                 val result1 = accountPropertiesDao.insertAndReplace(
                     AccountProperties(
-                        response.body.user.id,
-                        response.body.user.email,
-                        response.body.user.gender,
-                        response.body.user.name,
-                        response.body.user.phone,
-                        response.body.user.birth_day
+                        response.body.id,
+                        response.body.email,
+                        response.body.gender,
+                        response.body.first_name,
+                        response.body.phone,
+                        response.body.birth_day
                     )
                 )
 
@@ -196,33 +196,25 @@ constructor(
                     return
                 }
 
-                // will return -1 if failure
-                val result2 = authTokenDao.insert(
-                    AuthToken(
-                        response.body.user.id,
-                        response.body.token
-                    )
-                )
-                if(result2 < 0){
-                    onCompleteJob(DataState.error(
-                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog())
-                    ))
-                    return
-                }
-
-                //saveAuthenticatedUserToPrefs(email)
-
                 onCompleteJob(
                     DataState.data(
                         data = AuthViewState(
-                            authToken = AuthToken(response.body.user.id, response.body.token)
+                            authToken = AuthToken(response.body.id, response.body.first_name)
                         )
                     )
                 )
             }
 
             override fun createCall(): LiveData<GenericApiResponse<RegistrationResponse>> {
-                return openApiAuthService.register(email, gender, phone, password, first_name, last_name, birth_day)
+                return openApiAuthService.register(
+                    email = email,
+                    gender = gender,
+                    phone = phone,
+                    password = password,
+                    re_password = password,
+                    first_name = first_name,
+                    last_name = last_name,
+                    birth_day = birth_day)
             }
 
             override fun setJob(job: Job) {
@@ -341,7 +333,6 @@ constructor(
         }.asLiveData()
     }
 
-
     fun checkPreviousAuthUser(): LiveData<DataState<AuthViewState>>{
 
         val previousAuthUserEmail: String? = sharedPreferences.getString(PreferenceKeys.PREVIOUS_AUTH_USER, null)
@@ -377,8 +368,8 @@ constructor(
                             Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
 
                             accountProperties?.let {
-                                if(accountProperties.id > -1){
-                                    authTokenDao.searchByPk(accountProperties.id).let { authToken ->
+                                if(accountProperties.id!! > -1){
+                                    authTokenDao.searchByPk(accountProperties.id!!).let { authToken ->
                                         if(authToken != null){
                                             if(authToken.token != null){
                                                 onCompleteJob(
@@ -411,8 +402,8 @@ constructor(
                             Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
 
                             accountProperties?.let {
-                                if(accountProperties.id > -1){
-                                    authTokenDao.searchByPk(accountProperties.id).let { authToken ->
+                                if(accountProperties.id!! > -1){
+                                    authTokenDao.searchByPk(accountProperties.id!!).let { authToken ->
                                         if(authToken != null){
                                             if(authToken.token != null){
                                                 onCompleteJob(

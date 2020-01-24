@@ -41,8 +41,6 @@ class LoginFragment : BaseAuthFragment() {
         forgot_password_tv.setOnClickListener {
             navForgetLoginFragment()
         }
-
-
     }
 
     fun subscribeObservers(){

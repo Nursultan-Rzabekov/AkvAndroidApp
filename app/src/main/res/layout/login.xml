@@ -37,13 +37,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonenumber_et"
-            style="@style/BasicEditText"
             android:layout_width="match_parent"
+            android:inputType="phone"
+            style="@style/BasicEditText"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:hint="@string/phone_number_email_enter"
-            android:textSize="@dimen/text_input1"
-            android:typeface="normal" />
+            android:textSize="14sp"
+            android:typeface="normal"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

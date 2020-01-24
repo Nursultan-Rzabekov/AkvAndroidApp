@@ -5,25 +5,55 @@ import com.google.gson.annotations.SerializedName
 
 class RegistrationResponse(
 
+    @SerializedName("id")
+    @Expose
+    var id: Int? = null,
+
     @SerializedName("email")
     @Expose
-    var email: List<String>? = null,
+    var email: String? = null,
 
-    @SerializedName("token")
+    @SerializedName("gender")
     @Expose
-    var token: String,
+    var gender: Int? = null,
 
-    @SerializedName("user")
+    @SerializedName("phone")
     @Expose
-    var user: UserResponse,
+    var phone: String? = null,
+
+    @SerializedName("first_name")
+    @Expose
+    var first_name: String? = null,
+
+    @SerializedName("last_name")
+    @Expose
+    var last_name: String? = null,
+
+    @SerializedName("birth_day")
+    @Expose
+    var birth_day: String? = null,
+
+    @SerializedName("userpic")
+    @Expose
+    var userpic: String? = null,
+
+    @SerializedName("is_active")
+    @Expose
+    var is_active: Boolean? = null,
+
+    @SerializedName("is_phone_confirmed")
+    @Expose
+    var is_phone_confirmed: Boolean? = null,
+
+    @SerializedName("user_type")
+    @Expose
+    var user_type: Int? = null,
 
     @SerializedName("error_message")
     @Expose
-    var errorMessage: String
+    var errorMessage: String? = null,
 
-    )
-{
-    override fun toString(): String {
-        return "RegistrationResponse(errorMessage='$errorMessage', token='$token', user='$user')"
-    }
-}
+    @SerializedName("response")
+    @Expose
+    var response: Boolean? = null
+)

@@ -12,7 +12,7 @@ data class AccountProperties(
     @SerializedName("id")
     @Expose
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "id") var id: Int,
+    @ColumnInfo(name = "id") var id: Int? = null,
 
     @SerializedName("email")
     @Expose
@@ -20,7 +20,7 @@ data class AccountProperties(
 
     @SerializedName("gender")
     @Expose
-    @ColumnInfo(name = "gender") var gender: Int,
+    @ColumnInfo(name = "gender") var gender: Int? = null,
 
     @SerializedName("phone")
     @Expose
@@ -32,7 +32,7 @@ data class AccountProperties(
 
     @SerializedName("birth_day")
     @Expose
-    @ColumnInfo(name = "birth_day") var birth_day: String
+    @ColumnInfo(name = "birth_day") var birth_day: String? = null
 
 )
 {
@@ -52,12 +52,12 @@ data class AccountProperties(
     }
 
     override fun hashCode(): Int {
-        var result = id
-        result = 31 * result + email.hashCode()
-        result = 31 * result + gender
-        result = 31 * result + phone.hashCode()
-        result = 31 * result + name.hashCode()
-        result = 31 * result + birth_day.hashCode()
+        var result = id ?: 0
+        result = 31 * result + (email?.hashCode() ?: 0)
+        result = 31 * result + (gender ?: 0)
+        result = 31 * result + (phone?.hashCode() ?: 0)
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (birth_day?.hashCode() ?: 0)
         return result
     }
 }

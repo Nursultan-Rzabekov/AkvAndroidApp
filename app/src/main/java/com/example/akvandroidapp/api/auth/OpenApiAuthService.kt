@@ -9,7 +9,6 @@ import retrofit2.http.*
 
 interface OpenApiAuthService {
 
-
     @POST("auth/token/login/")
     @FormUrlEncoded
     fun login(
@@ -18,24 +17,23 @@ interface OpenApiAuthService {
 
     ): LiveData<GenericApiResponse<LoginResponse>>
 
-    @POST("auth/register")
+    @POST("auth/users/")
     @FormUrlEncoded
     fun register(
         @Field("email") email: String,
         @Field("gender") gender: Int,
         @Field("phone") phone: String,
         @Field("password") password: String,
+        @Field("re_password") re_password: String,
         @Field("first_name") first_name: String,
         @Field("last_name") last_name: String,
         @Field("birth_day") birth_day: String
-
     ): LiveData<GenericApiResponse<RegistrationResponse>>
 
     @POST("auth/send_code")
     @FormUrlEncoded
     fun sendCode(
         @Field("phone") phone: String
-
     ): LiveData<GenericApiResponse<CodeResponse>>
 
 
@@ -44,8 +42,5 @@ interface OpenApiAuthService {
     fun verifyCode(
         @Field("phone") phone: String,
         @Field("code") code: String
-
     ): LiveData<GenericApiResponse<CodeResponse>>
-
-
 }
