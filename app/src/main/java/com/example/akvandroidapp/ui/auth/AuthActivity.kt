@@ -67,7 +67,7 @@ class AuthActivity : BaseActivity(), NavController.OnDestinationChangedListener
                 data.response?.let{event ->
                     event.peekContent().let{ response ->
                         response.message?.let{ message ->
-                            if(message.equals(RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE)){
+                            if(message == RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE){
                                 onFinishCheckPreviousAuthUser()
                             }
                         }
@@ -79,7 +79,7 @@ class AuthActivity : BaseActivity(), NavController.OnDestinationChangedListener
         viewModel.viewState.observe(this, Observer{
             Log.d(TAG, "AuthActivity, subscribeObservers: AuthViewState: ${it}")
             it.authToken?.let{
-                //sessionManager.login(it)
+                sessionManager.login(it)
             }
         })
 
