@@ -154,7 +154,17 @@ class MyHouseListAdapter(
         val newList = blogList?.toMutableList()
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
-        differ.submitList(newList)
+        val list = differ.currentList.toMutableList()
+        newList?.forEach {
+            list.add(it)
+        }
+        list.distinct()
+        differ.submitList(list)
+    }
+
+    fun clearList(){
+        differ.submitList(listOf())
+        notifyDataSetChanged()
     }
 
     class MyHouseViewHolder

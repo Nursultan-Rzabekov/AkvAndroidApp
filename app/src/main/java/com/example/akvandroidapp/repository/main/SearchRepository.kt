@@ -44,6 +44,8 @@ constructor(
 
     fun searchBlogPosts(
         authToken: AuthToken,
+        startDate: String,
+        endDate:String,
         query_name:String,
         city__name: String,
         accomadations:String,
@@ -120,6 +122,11 @@ constructor(
                 Log.d("qwe","result search ${query_name}")
 
                 val data: MutableMap<String, String> = HashMap()
+
+                if(startDate == "" || endDate == ""){
+                    data["date_start"] = startDate
+                    data["date_end"] = endDate
+                }
 
                 if(query_name.isNotEmpty()){
                     data["search"] = query_name

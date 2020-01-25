@@ -246,6 +246,7 @@ class SearchFragment :
     private fun onBlogSearchOrFilter(){
         viewModel.loadFirstPage().let {
             resetUI()
+            recyclerAdapter.clearList()
         }
     }
 
