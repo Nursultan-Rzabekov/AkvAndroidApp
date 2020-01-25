@@ -5,11 +5,12 @@
     android:background="@android:color/transparent"
     android:layout_width="wrap_content"
     android:orientation="horizontal"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         app:cardUseCompatPadding="true"
         android:elevation="@dimen/elevation_5"
         app:cardCornerRadius="@dimen/radius_20"
@@ -51,28 +52,22 @@
 
             </FrameLayout>
 
-            <androidx.core.widget.NestedScrollView
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            <com.savvi.rangedatepicker.CalendarPickerView
+                android:id="@+id/dialog_filter_dates_picker"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.savvi.rangedatepicker.CalendarPickerView
-                    android:id="@+id/dialog_filter_dates_picker"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbarStyle="outsideOverlay"
-                    android:clipToPadding="false"
-                    android:paddingStart="@dimen/dim_4dp"
-                    android:paddingTop="@dimen/dim_4dp"
-                    android:paddingEnd="@dimen/dim_4dp"
-                    android:paddingBottom="@dimen/dim_4dp"
-                    app:tsquare_titleTextColor="@color/primaryZero"
-                    app:tsquare_displayHeader="true"
-                    app:tsquare_orientation_horizontal="true"
-                    app:tsquare_dividerColor="@android:color/transparent"
-                    app:tsquare_headerTextColor="@color/black"/>
-
-            </androidx.core.widget.NestedScrollView>
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbarStyle="outsideOverlay"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/dim_4dp"
+                android:paddingTop="@dimen/dim_4dp"
+                android:paddingEnd="@dimen/dim_4dp"
+                android:paddingBottom="@dimen/dim_4dp"
+                app:tsquare_titleTextColor="@color/primaryZero"
+                app:tsquare_displayHeader="true"
+                app:tsquare_orientation_horizontal="false"
+                app:tsquare_dividerColor="@android:color/transparent"
+                app:tsquare_headerTextColor="@color/black"/>
 
             <FrameLayout
                 android:id="@+id/dialog_filter_dates_picker_bottom"

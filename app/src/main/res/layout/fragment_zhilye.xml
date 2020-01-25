@@ -85,7 +85,7 @@
                         android:paddingEnd="@dimen/dim_8dp"
                         android:text="@string/text_host"
                         android:textSize="12sp"
-                        app:icon="@drawable/ic_forward_12dp"
+                        app:icon="@drawable/ic_mail_16dp"
                         app:iconGravity="textEnd"
                         app:layout_constraintEnd_toStartOf="@id/fragment_zhilye_host_image_civ"
                         app:layout_constraintHorizontal_bias="0.0"

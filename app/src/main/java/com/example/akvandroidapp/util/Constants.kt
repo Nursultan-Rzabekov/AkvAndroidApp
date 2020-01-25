@@ -8,6 +8,8 @@ class Constants {
         const val BASE_URL = "http://akv-technopark.herokuapp.com/api/"
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
 
+        const val DEFAULT_YEAR_GAP = -12
+
         const val NETWORK_TIMEOUT = 60000L
         const val TESTING_NETWORK_DELAY = 0L // fake network delay for testing
         const val TESTING_CACHE_DELAY = 0L // fake cache delay for testing

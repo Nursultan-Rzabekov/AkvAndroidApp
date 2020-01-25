@@ -4,6 +4,8 @@ import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_PRICE_LEFT
 import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_PRICE_RIGHT
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchViewState (
     var blogFields: BlogFields = BlogFields(),
@@ -32,7 +34,10 @@ class SearchViewState (
         var beds_right: Int = 0,
 
         var verified: String = "false",
-        var ordering: String = "нет"
+        var ordering: String = "нет",
+
+        var dateStart: String = "",
+        var dateEnd: String = ""
 
     )
 
