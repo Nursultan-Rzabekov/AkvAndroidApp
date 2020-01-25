@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,9 @@ import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_city.*
+import kotlinx.android.synthetic.main.fragment_city_layout.*
 import kotlinx.android.synthetic.main.header_city.*
+import kotlinx.android.synthetic.main.header_city.header_city_et
 import javax.inject.Inject
 
 
@@ -38,10 +41,7 @@ class FilterCityFragment : BaseActivity(), FilterCityAdapter.CityInteraction {
 
         initRecyclerView()
         addCityDataset()
-
-        main_back_img_btn.setOnClickListener {
-            finish()
-        }
+        setToolbar()
 
         header_city_et.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -89,6 +89,17 @@ class FilterCityFragment : BaseActivity(), FilterCityAdapter.CityInteraction {
     override fun onItemSelected(position: Int, item: FilterCity) {
         sessionManager.filterCity(item)
         finish()
+    }
+
+    private fun setToolbar(){
+        header_city_toolbar.navigationIcon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_back)
+        setSupportActionBar(header_city_toolbar)
+        supportActionBar?.title = null
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        header_city_toolbar.setNavigationOnClickListener{
+            finish()
+        }
     }
 
 }

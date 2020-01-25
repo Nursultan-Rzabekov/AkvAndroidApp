@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -53,6 +53,44 @@
         android:layout_marginTop="@dimen/dim_20dp"
         android:layout_marginStart="@dimen/dim_36dp"
         android:layout_marginEnd="@dimen/dim_36dp"
+        android:layout_marginBottom="@dimen/dim_12dp"
         app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_available_dates_tv2"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.savvi.rangedatepicker.CalendarPickerView
+        android:id="@+id/fragment_add_ad_available_dates_datepicker"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:tsquare_titleTextColor="@color/primaryZero"
+        app:tsquare_displayHeader="true"
+        app:tsquare_orientation_horizontal="false"
+        app:tsquare_dividerColor="@android:color/transparent"
+        app:tsquare_headerTextColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/divider60"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginStart="@dimen/dim_36dp"
+            android:layout_marginEnd="@dimen/dim_36dp"
+            android:layout_marginBottom="@dimen/dim_16dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragment_add_ad_available_dates_next_btn"
+            style="@style/BasicButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim_36dp"
+            android:layout_marginEnd="@dimen/dim_36dp"
+            android:layout_marginBottom="@dimen/dim_36dp"
+            android:text="@string/next"/>
+
+    </LinearLayout>
+
+</LinearLayout>

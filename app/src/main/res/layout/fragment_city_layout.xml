@@ -9,9 +9,39 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white">
 
-        <include
-            android:id="@+id/header_city_base"
-            layout="@layout/header_city"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/header_city_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:buttonGravity="center_vertical"
+            android:elevation="0dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/header_city_l_et"
+                style="@style/CityTextOutlined.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dim_28dp"
+                android:layout_marginStart="@dimen/dim_4dp"
+                android:layout_gravity="center"
+                app:boxStrokeWidth="1dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/header_city_et"
+                    style="@style/BasicEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:hint="@string/find_city"
+                    android:paddingTop="@dimen/dim_4dp"
+                    android:paddingBottom="@dimen/dim_4dp"
+                    android:textSize="16sp"
+                    android:typeface="normal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

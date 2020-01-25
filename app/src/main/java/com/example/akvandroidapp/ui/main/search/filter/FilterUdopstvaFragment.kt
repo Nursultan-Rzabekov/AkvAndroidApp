@@ -11,6 +11,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
@@ -20,6 +21,7 @@ import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_udopstva.*
+import kotlinx.android.synthetic.main.fragment_udopstva_layout.*
 import javax.inject.Inject
 
 
@@ -31,10 +33,8 @@ class FilterUdopstvaFragment : BaseActivity() {
         setContentView(R.layout.fragment_udopstva_layout)
 
         setAllFacilities()
+        setToolbar()
 
-        main_back_img_btn.setOnClickListener {
-            finish()
-        }
     }
 
     override fun expandAppBar() {
@@ -68,6 +68,17 @@ class FilterUdopstvaFragment : BaseActivity() {
                 checkBox.isChecked = true
                 textView.setTextColor(Color.parseColor("#CD3232"))
             }
+        }
+    }
+
+    private fun setToolbar(){
+        header_udobstva_toolbar.navigationIcon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_back)
+        setSupportActionBar(header_udobstva_toolbar)
+        supportActionBar?.title = null
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        header_udobstva_toolbar.setNavigationOnClickListener{
+            finish()
         }
     }
 

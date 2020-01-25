@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
@@ -18,6 +19,7 @@ import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_type.*
+import kotlinx.android.synthetic.main.fragment_type_layout.*
 import javax.inject.Inject
 
 
@@ -28,9 +30,7 @@ class FilterTypeFragment : BaseActivity() {
         setContentView(R.layout.fragment_type_layout)
         setType()
 
-        main_back_img_btn.setOnClickListener {
-            finish()
-        }
+        setToolbar()
     }
 
     override fun expandAppBar() {
@@ -110,6 +110,17 @@ class FilterTypeFragment : BaseActivity() {
             fragment_type_home_tv.setTextColor(Color.BLACK)
 
             sessionManager.filterTypeOfApartment(Constants.mapTypes.getValue("Любой"))
+            finish()
+        }
+    }
+
+    private fun setToolbar(){
+        header_type_toolbar.navigationIcon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_back)
+        setSupportActionBar(header_type_toolbar)
+        supportActionBar?.title = null
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        header_type_toolbar.setNavigationOnClickListener{
             finish()
         }
     }

@@ -9,9 +9,28 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white">
 
-        <include
-            android:id="@+id/header_type_base"
-            layout="@layout/header_type"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/header_type_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:buttonGravity="center_vertical"
+            android:elevation="0dp">
+
+            <TextView
+                android:id="@+id/header_type_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dim_16dp"
+                android:layout_marginBottom="@dimen/dim_16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/type_of_appart"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

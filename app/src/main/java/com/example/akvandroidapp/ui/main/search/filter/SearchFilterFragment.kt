@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.appyvet.materialrangebar.RangeBar
@@ -20,7 +21,9 @@ import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_filter.*
+import kotlinx.android.synthetic.main.fragment_filter_layout.*
 import kotlinx.android.synthetic.main.header_filter.*
+import kotlinx.android.synthetic.main.header_filter.header_filter_drop_tv
 import loadFirstPage
 import javax.inject.Inject
 
@@ -42,15 +45,12 @@ class SearchFilterFragment : BaseActivity() {
 
         setContentView(R.layout.fragment_filter_layout)
 
-        header_filter_close_ibtn.setOnClickListener {
-            finish()
-        }
+        setToolbar()
+        subscribeObservers()
 
         fragment_filter_city_layout.setOnClickListener {
             navFilterCityFragment()
         }
-
-        subscribeObservers()
 
         fragment_filter_appart_type_layout.setOnClickListener {
             navFilterTypeFragment()
@@ -218,5 +218,16 @@ class SearchFilterFragment : BaseActivity() {
     private fun navFilterUdopstvaFragment(){
         val intent = Intent(this,FilterUdopstvaFragment::class.java)
         startActivity(intent)
+    }
+
+    private fun setToolbar(){
+        header_filter_toolbar.navigationIcon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_cancel_filter_16dp)
+        setSupportActionBar(header_filter_toolbar)
+        supportActionBar?.title = null
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        header_filter_toolbar.setNavigationOnClickListener{
+            finish()
+        }
     }
 }
