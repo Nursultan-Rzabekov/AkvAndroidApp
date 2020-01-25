@@ -3,6 +3,7 @@ package com.example.akvandroidapp.ui.main.search
 
 
 import android.app.Dialog
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -29,6 +31,7 @@ import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.chip.Chip
 import com.savvi.rangedatepicker.CalendarPickerView
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.dialog_filter_dates.*
@@ -144,6 +147,28 @@ class SearchFragment :
                             isQueryExhausted = viewState.blogFields.isQueryExhausted
                         )
                     }
+
+                    if (viewState.blogFields.dateStart == "" || viewState.blogFields.dateEnd == "")
+                        whenChipEmpty(
+                            by_date_chip,
+                            getString(R.string.dates)
+                        )
+                    else
+                        whenChipFiltered(
+                            by_date_chip,
+                            "${viewState.blogFields.dateStart}-${viewState.blogFields.dateEnd}"
+                        )
+
+                    if (viewState.blogFields.adultsCount + viewState.blogFields.childrenCount == 0)
+                        whenChipEmpty(
+                            by_guests_chip,
+                            getString(R.string.guests)
+                        )
+                    else
+                        whenChipFiltered(
+                            by_guests_chip,
+                            "${viewState.blogFields.adultsCount + viewState.blogFields.childrenCount} Гости"
+                        )
 //                }
             }
         })
@@ -399,6 +424,26 @@ class SearchFragment :
         Log.d("FilterDialog", "dates: ${dates}")
         return dates
 
+    }
+
+    private fun whenChipFiltered(chip: Chip, t: String){
+        chip.apply {
+            chipStrokeWidth = 0f
+            setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white)))
+            chipIconTint = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
+            chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.primaryZero))
+            text = t
+        }
+    }
+
+    private fun whenChipEmpty(chip: Chip, t: String){
+        chip.apply {
+            chipStrokeWidth = 3f
+            setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.secondaryFirst)))
+            chipIconTint = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.secondaryFirst))
+            chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
+            text = t
+        }
     }
 }
 
