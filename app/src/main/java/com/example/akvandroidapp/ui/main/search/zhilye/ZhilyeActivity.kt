@@ -20,6 +20,7 @@ import com.example.akvandroidapp.entity.ZhilyeDetailProperties
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
+import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
@@ -56,6 +57,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     //bundle
     private var houseRules: List<ZhilyeDetailProperties> = listOf()
+
+    private var itemEmail:String? = null
 
     //Adapters
     private lateinit var facilitiesAdapter: ApartmentPropertiesAdapter
@@ -106,6 +109,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         fragment_zhile_book_btn.setOnClickListener {
             navBookReserv()
         }
+
+        chat_target_email.setOnClickListener {
+            navigateChatActivity()
+        }
     }
 
     private fun subscribeObservers(){
@@ -150,6 +157,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     viewState.zhilyeFields.zhilyeDetail.latitude,
                     viewState.zhilyeFields.zhilyeDetail.longitude
                 ))
+
+                itemEmail = viewState.zhilyeFields.zhilyeUser.email
 
                 facilitiesAdapter.submitList(viewState.zhilyeFields.zhilyeDetailAccomadations)
                 nearsAdapter.submitList(viewState.zhilyeFields.zhilyeDetailNearBuildings)
@@ -365,6 +374,12 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun navigateChatActivity(){
+        val intent = Intent(this, MessagesDetailActivity::class.java)
+        intent.putExtra("name",itemEmail)
+        startActivity(intent)
     }
 
     private fun changeFavouriteMenuBtnDrawable(item: MenuItem?){

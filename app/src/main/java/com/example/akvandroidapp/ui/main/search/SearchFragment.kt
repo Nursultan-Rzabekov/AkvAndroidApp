@@ -3,6 +3,7 @@ package com.example.akvandroidapp.ui.main.search
 
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -22,6 +23,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
@@ -79,10 +81,6 @@ class SearchFragment :
         subscribeObservers()
 
 
-//        if(savedInstanceState == null){
-//            onBlogSearchOrFilter()
-//        }
-
         main_filter_img_btn.setOnClickListener {
             navFilter()
         }
@@ -92,7 +90,7 @@ class SearchFragment :
         }
 
         fragment_explore_homes_iv.setOnClickListener {
-            //navFilter()
+
         }
 
         by_map_chip.setOnClickListener {

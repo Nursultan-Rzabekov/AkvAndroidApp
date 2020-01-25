@@ -83,6 +83,7 @@
                         android:layout_height="@dimen/dim_36dp"
                         android:paddingStart="@dimen/dim_8dp"
                         android:paddingEnd="@dimen/dim_8dp"
+                        android:id="@+id/chat_target_email"
                         android:text="@string/text_host"
                         android:textSize="12sp"
                         app:icon="@drawable/ic_mail_16dp"
