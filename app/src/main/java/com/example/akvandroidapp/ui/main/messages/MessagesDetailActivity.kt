@@ -44,6 +44,7 @@ import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
+import kotlinx.android.synthetic.main.header_dialog.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import okhttp3.MediaType
@@ -113,6 +114,8 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         }
 
         val target =  intent.getStringExtra("name")
+
+        header_dialog_nickname_tv.text = target
 
         viewModel.setQuery(target!!).let {
             onBlogSearchOrFilter()

@@ -95,8 +95,9 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             }
         }
 
-        subscribeObservers()
         setToolbar()
+
+        subscribeObservers()
         setMapView()
         setFlipperLayout(arrayListOf())
         initRecyclerViews()
@@ -384,13 +385,13 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     private fun changeFavouriteMenuBtnDrawable(item: MenuItem?){
         if (isFavouriteChecked) {
-            viewModel.setStateEvent(ZhilyeStateEvent.СreateFavoriteItemEvent())
+            //viewModel.setStateEvent(ZhilyeStateEvent.СreateFavoriteItemEvent())
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_liked)
         }
         else if (isToolbarColapsed)
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_like_dark)
         else {
-            viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent())
+            //viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent())
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_like_white)
         }
     }
