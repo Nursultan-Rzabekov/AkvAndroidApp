@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -27,6 +28,8 @@ import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.PasswordChecker
 import com.example.akvandroidapp.util.SuccessHandling
+import com.redmadrobot.inputmask.MaskedTextChangedListener
+import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingProfileInfo
@@ -55,6 +58,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
     lateinit var sessionManager: SessionManager
     var image1: Uri? = null
     private var imageUrl: String? = null
+    private var phoneNumber:String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,6 +77,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
         attachUserAccounts()
+        setupSuffixSample()
 
         header_profile_account_edit_cancel_tv.setOnClickListener {
             findNavController().navigateUp()
@@ -102,8 +107,13 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
     }
 
     private fun saveUserAccounts(){
-        subscribeObservers()
-        editInfo()
+        val phoneTotal = "+7".plus(phoneNumber)
+        if(phoneTotal.trim().length != 12)
+            showErrorDialog(getString(R.string.invalid_number))
+        else {
+            subscribeObservers()
+            editInfo()
+        }
     }
 
     private fun attachUserAccounts(){
@@ -299,5 +309,28 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
 
             }
         }
+    }
+
+    private fun setupSuffixSample() {
+        val affineFormats: MutableList<String> = ArrayList()
+        affineFormats.add("+7 ([000]) [000]-[00]-[00]")
+        val listener =
+            MaskedTextChangedListener.installOn(
+                fragment_profile_account_edit_phonenumber_tv,
+                "+7 ([000]) [000]-[00]-[00]",
+                affineFormats, AffinityCalculationStrategy.WHOLE_STRING,
+                object : MaskedTextChangedListener.ValueListener {
+                    override fun onTextChanged(maskFilled: Boolean, @NonNull extractedValue: String, @NonNull formattedValue: String) {
+                        logValueListener(extractedValue)
+                    }
+                }
+            )
+        fragment_profile_account_edit_phonenumber_tv.hint = listener.placeholder()
+    }
+
+    private fun logValueListener(
+        extractedValue: String
+    ) {
+        phoneNumber  = extractedValue
     }
 }
