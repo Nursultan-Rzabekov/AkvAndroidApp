@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
@@ -25,34 +26,21 @@ import kotlinx.android.synthetic.main.header_city.*
 import javax.inject.Inject
 
 
-class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteraction {
+class FilterCityFragment : BaseActivity(), FilterCityAdapter.CityInteraction {
 
     private lateinit var cityAdapter: FilterCityAdapter
 
-    @Inject
-    lateinit var sessionManager: SessionManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_city_layout, container, false)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_city_layout)
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        setHasOptionsMenu(true)
-        Log.d(TAG, "SearchFragment: ${viewModel}")
 
         initRecyclerView()
         addCityDataset()
 
         main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
+            finish()
         }
 
         header_city_et.addTextChangedListener(object: TextWatcher {
@@ -72,6 +60,11 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
         })
     }
 
+    override fun expandAppBar() {
+    }
+    override fun displayProgressBar(bool: Boolean) {
+    }
+
     private fun addCityDataset(){
         val data = mutableListOf<FilterCity>()
         for(city in Constants.cityList)
@@ -87,7 +80,7 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
 
     private fun initRecyclerView(){
         fragment_city_recycler_view.apply {
-            layoutManager = LinearLayoutManager(this@FilterCityFragment.context)
+            layoutManager = LinearLayoutManager(this@FilterCityFragment)
             cityAdapter = FilterCityAdapter(this@FilterCityFragment)
             adapter = cityAdapter
         }
@@ -95,11 +88,7 @@ class FilterCityFragment : BaseSearchFragment(), FilterCityAdapter.CityInteracti
 
     override fun onItemSelected(position: Int, item: FilterCity) {
         sessionManager.filterCity(item)
-        
-//        Log.d("just","just + ${item.location} + ${item.isSelected} + ${item.isMyLocation}")
-//        val bundle = bundleOf("city" to item.location)
-//        findNavController().navigate(R.id.action_filterCityFragment_to_back_filter,bundle)
-        findNavController().navigateUp()
+        finish()
     }
 
 }

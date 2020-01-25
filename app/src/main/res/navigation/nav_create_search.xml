@@ -82,116 +82,12 @@
         </activity>
 
 
-        <fragment android:id="@+id/searchFilterFragment"
+        <activity
+            android:id="@+id/searchFilterFragment"
             android:name="com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment"
             android:label="@string/fragment_update_blog"
             tools:layout="@layout/fragment_filter_layout">
-
-
-                <action
-                    android:id="@+id/action_searchFilterFragment_to_home"
-                    app:destination="@id/searchFragment"
-                    app:popEnterAnim="@anim/fade_in"
-                    app:popExitAnim="@anim/fade_out"
-                    app:enterAnim="@anim/fade_in"
-                    app:exitAnim="@anim/fade_out"
-                    app:popUpTo="@+id/nav_create_search"
-                    app:popUpToInclusive="true" />
-
-
-                <action android:id="@+id/action_searchFilterFragment_to_filterTypeFragment"
-                    app:destination="@id/filterTypeFragment"
-                    app:popEnterAnim="@anim/slide_in_left"
-                    app:popExitAnim="@anim/slide_out_right"
-                    app:enterAnim="@anim/slide_in_right"
-                    app:exitAnim="@anim/slide_out_left"
-                    />
-
-
-                <action android:id="@+id/action_searchFilterFragment_to_filterCityFragment"
-                    app:destination="@id/filterCityFragment"
-                    app:popEnterAnim="@anim/slide_in_left"
-                    app:popExitAnim="@anim/slide_out_right"
-                    app:enterAnim="@anim/slide_in_right"
-                    app:exitAnim="@anim/slide_out_left"
-                    />
-
-                <action android:id="@+id/action_searchFilterFragment_to_filterUdopstvaFragment"
-                    app:destination="@id/filterUdopstvaFragment"
-                    app:popEnterAnim="@anim/slide_in_left"
-                    app:popExitAnim="@anim/slide_out_right"
-                    app:enterAnim="@anim/slide_in_right"
-                    app:exitAnim="@anim/slide_out_left"
-                    />
-
-        </fragment>
-
-
-        <fragment android:id="@+id/filterTypeFragment"
-            android:name="com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment"
-            android:label="@string/fragment_view_blog"
-            tools:layout="@layout/fragment_type_layout">
-
-
-                <action
-                    android:id="@+id/action_filterTypeFragment_to_home"
-                    app:destination="@id/searchFragment"
-                    app:popEnterAnim="@anim/fade_in"
-                    app:popExitAnim="@anim/fade_out"
-                    app:enterAnim="@anim/fade_in"
-                    app:exitAnim="@anim/fade_out"
-                    app:popUpTo="@+id/nav_create_search"
-                    app:popUpToInclusive="true" />
-
-
-        </fragment>
-
-
-        <fragment android:id="@+id/filterCityFragment"
-            android:name="com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment"
-            android:label="@string/fragment_view_blog"
-            tools:layout="@layout/fragment_city_layout">
-
-                <action
-                    android:id="@+id/action_filterCityFragment_to_home"
-                    app:destination="@id/searchFragment"
-                    app:popEnterAnim="@anim/fade_in"
-                    app:popExitAnim="@anim/fade_out"
-                    app:enterAnim="@anim/fade_in"
-                    app:exitAnim="@anim/fade_out"
-                    app:popUpTo="@+id/nav_create_search"
-                    app:popUpToInclusive="true" />
-
-
-                <action
-                    android:id="@+id/action_filterCityFragment_to_back_filter"
-                    app:destination="@id/searchFilterFragment"
-                    app:popEnterAnim="@anim/fade_in"
-                    app:popExitAnim="@anim/fade_out"
-                    app:enterAnim="@anim/fade_in"
-                    app:exitAnim="@anim/fade_out"
-                    />
-
-        </fragment>
-
-
-        <fragment android:id="@+id/filterUdopstvaFragment"
-            android:name="com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment"
-            android:label="@string/fragment_view_blog"
-            tools:layout="@layout/fragment_udopstva_layout">
-
-                <action
-                    android:id="@+id/action_filterUdopstvaFragment_to_home"
-                    app:destination="@id/searchFragment"
-                    app:popEnterAnim="@anim/fade_in"
-                    app:popExitAnim="@anim/fade_out"
-                    app:enterAnim="@anim/fade_in"
-                    app:exitAnim="@anim/fade_out"
-                    app:popUpTo="@+id/nav_create_search"
-                    app:popUpToInclusive="true" />
-
-
-        </fragment>
+        </activity>
 
 
         <activity android:id="@+id/zhilyeFragment"

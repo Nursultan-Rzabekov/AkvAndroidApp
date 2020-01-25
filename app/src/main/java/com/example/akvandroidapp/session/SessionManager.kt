@@ -70,6 +70,9 @@ constructor(
     //House Update Data
     private val _houseUpdateData = MutableLiveData<HouseUpdateData>()
 
+    //Filter Update Data
+    private val _filterUpdateData = MutableLiveData<FilterUpdateData>()
+
     init {
         _chekedFilterCity.value = FilterCity("нет", false, true, -1)
         _typeOfApartment.value = DEFAULT_TYPE
@@ -148,6 +151,9 @@ constructor(
     val houseUpdateData: LiveData<HouseUpdateData>
         get() = _houseUpdateData
 
+    val filterUpdateData: LiveData<FilterUpdateData>
+        get() = _filterUpdateData
+
     // Room
     val isHostMode: LiveData<Boolean>
         get() = hostMode
@@ -183,6 +189,14 @@ constructor(
             _locationList.value = point
             Log.d(TAG, "location ${_locationList.value}")
         }
+    }
+
+
+    fun setFilterUpdateData(filterUpdateData: FilterUpdateData) {
+        GlobalScope.launch(Main) {
+            _filterUpdateData.value = filterUpdateData
+        }
+        Log.e("HOUSE_UPDATE_DATA", "${_houseUpdateData.value}")
     }
 
     // House Update Data

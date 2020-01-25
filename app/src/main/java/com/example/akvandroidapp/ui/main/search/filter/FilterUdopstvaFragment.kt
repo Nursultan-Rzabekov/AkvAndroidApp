@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
@@ -22,31 +23,23 @@ import kotlinx.android.synthetic.main.fragment_udopstva.*
 import javax.inject.Inject
 
 
-class FilterUdopstvaFragment : BaseSearchFragment() {
+class FilterUdopstvaFragment : BaseActivity() {
 
-    @Inject
-    lateinit var sessionManager: SessionManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_udopstva_layout, container, false)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_udopstva_layout)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        setHasOptionsMenu(true)
-        Log.d(TAG, "SearchFragment: ${viewModel}")
         setAllFacilities()
 
         main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
+            finish()
         }
+    }
 
+    override fun expandAppBar() {
+    }
+    override fun displayProgressBar(bool: Boolean) {
     }
 
     private fun setAllFacilities(){

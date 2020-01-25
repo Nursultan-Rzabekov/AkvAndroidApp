@@ -29,6 +29,7 @@ import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
+import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
@@ -39,6 +40,7 @@ import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.dialog_filter_dates.*
 import kotlinx.android.synthetic.main.fragment_explore.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
+import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlinx.android.synthetic.main.header_searcher_base_layout.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
@@ -80,6 +82,20 @@ class SearchFragment :
         initRecyclerView()
         subscribeObservers()
 
+
+        sessionManager.filterUpdateData.observe(viewLifecycleOwner, Observer {
+            viewModel.apply {
+                setCityQuery(it.setCityQuery)
+                setBlogFilterTypeHouse(it.setBlogFilterTypeHouse)
+                //setBlogFilterAccomadations(accomdationListString)
+                setBlogFilterPrice(it.setBlogFilterPriceLeft,it.setBlogFilterPriceRight)
+                setBlogFilterRooms(it.setBlogFilterRoomsLeft,it.setBlogFilterRoomsRight)
+                setBlogFilterBeds(it.setBlogFilterBedsLeft,it.setBlogFilterBedsRight)
+                setBlogOrdering(it.setBlogOrdering)
+                setBlogVerified(it.setBlogVerified)
+            }
+            onBlogSearchOrFilter()
+        })
 
         main_filter_img_btn.setOnClickListener {
             navFilter()

@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.search.filter
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,9 @@ import com.appyvet.materialrangebar.RangeBar
 import com.appyvet.materialrangebar.RangeBar.OnRangeBarChangeListener
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.persistence.BlogQueryUtils
+import com.example.akvandroidapp.session.FilterUpdateData
 import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.Constants
@@ -22,18 +25,7 @@ import loadFirstPage
 import javax.inject.Inject
 
 
-class SearchFilterFragment : BaseSearchFragment() {
-
-    @Inject
-    lateinit var sessionManager: SessionManager
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_filter_layout, container, false)
-    }
+class SearchFilterFragment : BaseActivity() {
 
     private var price_left:Int = 1
     private var price_right:Int = 30000
@@ -45,10 +37,14 @@ class SearchFilterFragment : BaseSearchFragment() {
     private var sortMethod:String = Constants.FILTER_TYPE1
     private var accomdationListString:String = ""
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        Log.d(TAG, "SearchFilterFragment: ${viewModel}")
+        setContentView(R.layout.fragment_filter_layout)
+
+        header_filter_close_ibtn.setOnClickListener {
+            finish()
+        }
 
         fragment_filter_city_layout.setOnClickListener {
             navFilterCityFragment()
@@ -64,10 +60,6 @@ class SearchFilterFragment : BaseSearchFragment() {
             navFilterUdopstvaFragment()
         }
 
-        header_filter_close_ibtn.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
         header_filter_drop_tv.setOnClickListener {
             clearAll()
         }
@@ -76,18 +68,27 @@ class SearchFilterFragment : BaseSearchFragment() {
         tuneRadioGroup()
 
         fragment_filter_show_results_btn.setOnClickListener {
-            viewModel.apply {
-                setCityQuery(fragment_filter_city_tv.text.toString())
-                setBlogFilterTypeHouse(Constants.mapTypes.getValue(fragment_filter_appart_type_tv.text.toString()))
-                //setBlogFilterAccomadations(accomdationListString)
-                setBlogFilterPrice(price_left,price_right)
-                setBlogFilterRooms(room_left,room_right)
-                setBlogFilterBeds(beds_left,beds_right)
-                setBlogOrdering(sortMethod)
-                setBlogVerified(fragment_filter_passed_switch.isChecked.toString())
-            }
-            onBlogSearchOrFilter()
+            sessionManager.setFilterUpdateData(FilterUpdateData(
+                setCityQuery = fragment_filter_city_tv.text.toString(),
+                setBlogFilterTypeHouse = Constants.mapTypes.getValue(fragment_filter_appart_type_tv.text.toString()),
+                setBlogFilterPriceLeft = price_left,
+                setBlogFilterPriceRight = price_right,
+                setBlogFilterRoomsLeft = room_left,
+                setBlogFilterRoomsRight = room_right,
+                setBlogFilterBedsLeft = beds_left,
+                setBlogFilterBedsRight = beds_right,
+                setBlogOrdering = sortMethod,
+                setBlogVerified = fragment_filter_passed_switch.isChecked.toString(),
+                setBlogFilterAccomadations = accomdationListString
+            ))
+            finish()
         }
+    }
+
+    override fun expandAppBar() {
+    }
+
+    override fun displayProgressBar(bool: Boolean) {
     }
 
     private fun subscribeObservers(){
@@ -109,12 +110,6 @@ class SearchFilterFragment : BaseSearchFragment() {
             else
                 fragment_filter_udopstva_layout_tv.text = getString(R.string.no )
         })
-    }
-
-    private fun onBlogSearchOrFilter(){
-        findNavController().popBackStack().let {
-            viewModel.loadFirstPage()
-        }
     }
 
     private fun tuneRadioGroup(){
@@ -211,16 +206,17 @@ class SearchFilterFragment : BaseSearchFragment() {
     }
 
     private fun navFilterCityFragment(){
-        findNavController().navigate(R.id.action_searchFilterFragment_to_filterCityFragment)
+        val intent = Intent(this,FilterCityFragment::class.java)
+        startActivity(intent)
     }
 
     private fun navFilterTypeFragment(){
-        findNavController().navigate(R.id.action_searchFilterFragment_to_filterTypeFragment)
+        val intent = Intent(this,FilterTypeFragment::class.java)
+        startActivity(intent)
     }
 
     private fun navFilterUdopstvaFragment(){
-        findNavController().navigate(R.id.action_searchFilterFragment_to_filterUdopstvaFragment)
+        val intent = Intent(this,FilterUdopstvaFragment::class.java)
+        startActivity(intent)
     }
-
-
 }

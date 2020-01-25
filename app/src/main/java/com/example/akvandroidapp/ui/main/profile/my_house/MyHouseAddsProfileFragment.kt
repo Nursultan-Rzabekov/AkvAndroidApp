@@ -19,12 +19,9 @@ import com.example.akvandroidapp.session.AddAdInfo
 import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
-import com.example.akvandroidapp.ui.main.favorite.FavoriteListAdapter
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
-import com.example.akvandroidapp.ui.main.search.SearchListAdapter
-import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.ui.main.search.viewmodel.setState
@@ -32,12 +29,7 @@ import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.fragment_my_adds.*
-import kotlinx.android.synthetic.main.fragment_saved_pages_filled.*
-import kotlinx.android.synthetic.main.fragment_saved_pages_filled.swipe_refresh
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import nextPage
 import javax.inject.Inject

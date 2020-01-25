@@ -118,23 +118,6 @@ class MainActivity : BaseActivity(),
             navController.navigate(R.id.action_profileAddTypeFragment_to_home)
         }
 
-
-        is FilterCityFragment -> {
-            navController.navigate(R.id.action_filterCityFragment_to_home)
-        }
-
-        is FilterTypeFragment -> {
-            navController.navigate(R.id.action_filterTypeFragment_to_home)
-        }
-
-        is FilterUdopstvaFragment -> {
-            navController.navigate(R.id.action_filterUdopstvaFragment_to_home)
-        }
-
-        is SearchFilterFragment -> {
-            navController.navigate(R.id.action_searchFilterFragment_to_home)
-        }
-
         is ApartmentsFragment -> {
             navController.navigate(R.id.action_apartmentsFragment_to_home)
         }

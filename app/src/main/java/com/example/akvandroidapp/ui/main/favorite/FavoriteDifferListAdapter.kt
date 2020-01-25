@@ -12,21 +12,53 @@ import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
-
-class FavoriteListAdapter(
+class FavoriteDifferListAdapter(
     private val requestManager: RequestManager,
     private val interaction: Interaction? = null,
     private val interactionCheck: InteractionCheck? = null
     ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
 
-    private var items: MutableList<BlogPost> = ArrayList()
+    private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
+        NO_MORE_RESULTS,
+        "" ,
+        0,
+        0,
+        false,
+        0.0,
+        0.0,
+        "",
+        "",
+        0,
+        0,
+        "",
+        0.0
+    )
+
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
+
+        override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    private val differ =
+        AsyncListDiffer(
+            BlogRecyclerChangeCallback(this),
+            AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
+        )
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
         when(viewType){
             NO_MORE_RESULTS ->{
                 Log.e(TAG, "onCreateViewHolder: No more results...")
@@ -66,17 +98,44 @@ class FavoriteListAdapter(
         }
     }
 
+    internal inner class BlogRecyclerChangeCallback(
+        private val adapter: FavoriteDifferListAdapter
+    ) : ListUpdateCallback {
+
+        override fun onChanged(position: Int, count: Int, payload: Any?) {
+            adapter.notifyItemRangeChanged(position, count, payload)
+        }
+
+        override fun onInserted(position: Int, count: Int) {
+            adapter.notifyItemRangeChanged(position, count)
+        }
+
+        override fun onMoved(fromPosition: Int, toPosition: Int) {
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun onRemoved(position: Int, count: Int) {
+            adapter.notifyDataSetChanged()
+        }
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BlogViewHolder -> {
-                holder.bind(items[position])
+                holder.bind(differ.currentList[position])
             }
         }
+    }
 
+    override fun getItemViewType(position: Int): Int {
+        if(differ.currentList[position].id > -1){
+            return BLOG_ITEM
+        }
+        return differ.currentList[position].id
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return differ.currentList.size
     }
 
     // Prepare the images that will be displayed in the RecyclerView.
@@ -94,15 +153,31 @@ class FavoriteListAdapter(
     }
 
     fun removeAt(position: Int) {
-        items.removeAt(position)
-        notifyItemRemoved(position)
+//        val result = differ.currentList.toMutableList()
+//        result.removeAt(position)
+//        differ.submitList(result)
+
+        differ.removeListListener { previousList, currentList ->
+            currentList.removeAt(position)
+        }
+    }
+
+    fun clearList(){
+        differ.submitList(listOf())
+        notifyDataSetChanged()
     }
 
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
-        newList?.let {
-            items = newList
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+
+        val list = differ.currentList.toMutableList()
+        newList?.forEach {
+            list.add(it)
         }
+        list.distinct()
+        differ.submitList(list)
     }
 
     class BlogViewHolder
@@ -148,7 +223,4 @@ class FavoriteListAdapter(
         fun onItemSelected(position: Int, item: BlogPost,boolean: Boolean)
     }
 
-    override fun onClick(p0: View?) {
-
-    }
 }

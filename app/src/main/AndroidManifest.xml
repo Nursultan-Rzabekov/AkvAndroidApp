@@ -74,6 +74,31 @@
         </activity>
 
         <activity
+            android:name=".ui.main.search.filter.FilterCityFragment"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity
+            android:name=".ui.main.search.filter.FilterTypeFragment"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity
+            android:name=".ui.main.search.filter.FilterUdopstvaFragment"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+
+        <activity
+            android:name=".ui.main.search.filter.SearchFilterFragment"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity
             android:name=".ui.main.profile.support.SupportProfileActivity"
             android:windowSoftInputMode="adjustPan"/>
 

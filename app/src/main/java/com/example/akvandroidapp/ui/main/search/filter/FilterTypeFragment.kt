@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
@@ -20,35 +21,24 @@ import kotlinx.android.synthetic.main.fragment_type.*
 import javax.inject.Inject
 
 
-class FilterTypeFragment : BaseSearchFragment() {
+class FilterTypeFragment : BaseActivity() {
 
-    @Inject
-    lateinit var sessionManager: SessionManager
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_type_layout, container, false)
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        setHasOptionsMenu(true)
-        Log.d(TAG, "SearchFragment: ${viewModel}")
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_type_layout)
         setType()
 
         main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
+            finish()
         }
-
-
     }
+
+    override fun expandAppBar() {
+    }
+
+    override fun displayProgressBar(bool: Boolean) {
+    }
+
 
     private fun setType(){
         Log.e("GroupRai", sessionManager.typeOfApartment.value.toString())
@@ -94,7 +84,7 @@ class FilterTypeFragment : BaseSearchFragment() {
             fragment_type_home_tv.setTextColor(Color.parseColor("#CD3232"))
 
             sessionManager.filterTypeOfApartment(Constants.mapTypes.getValue("Дом"))
-            findNavController().navigateUp()
+            finish()
         }
 
         fragment_type_apparts_layout.setOnClickListener {
@@ -107,7 +97,7 @@ class FilterTypeFragment : BaseSearchFragment() {
             fragment_type_home_tv.setTextColor(Color.BLACK)
 
             sessionManager.filterTypeOfApartment(Constants.mapTypes.getValue("Квартира"))
-            findNavController().navigateUp()
+            finish()
         }
 
         fragment_type_any_layout.setOnClickListener {
@@ -120,7 +110,7 @@ class FilterTypeFragment : BaseSearchFragment() {
             fragment_type_home_tv.setTextColor(Color.BLACK)
 
             sessionManager.filterTypeOfApartment(Constants.mapTypes.getValue("Любой"))
-            findNavController().navigateUp()
+            finish()
         }
     }
 

@@ -18,6 +18,10 @@ import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity
 import com.example.akvandroidapp.ui.main.search.MapActivity
+import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
+import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
+import com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment
+import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookActivity
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity
@@ -43,6 +47,22 @@ abstract class ActivityBuildersModule {
     @MainScope
     @ContributesAndroidInjector
     abstract fun contributeMapActivity(): MapActivity
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeSearchFilterFragment(): SearchFilterFragment
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeFilterTypeFragment(): FilterTypeFragment
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeFilterUdopstvaFragment(): FilterUdopstvaFragment
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun contributeFilterCityFragment(): FilterCityFragment
 
     @MainScope
     @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])

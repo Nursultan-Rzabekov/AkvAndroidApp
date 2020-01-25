@@ -48,18 +48,6 @@ abstract class MainFragmentBuildersModule {
     abstract fun contributeProfileFragment(): ProfileFragment
 
     @ContributesAndroidInjector()
-    abstract fun contributeSearchFilterFragmentFragment(): SearchFilterFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeFilterCityFragment(): FilterCityFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeFilterTypeFragment(): FilterTypeFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeFilterUdopstvaFragment(): FilterUdopstvaFragment
-
-    @ContributesAndroidInjector()
     abstract fun contributeProfileAddAddressFragment(): ProfileAddAddressFragment
 
 
