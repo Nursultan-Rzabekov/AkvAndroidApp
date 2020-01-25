@@ -202,6 +202,7 @@ class MainActivity : BaseActivity(),
         }
 
 //        sessionManager.login(AuthToken(1,"305f6398506c603c7b811cd48c039d9d5e4687ea"))
+        //qwe
         subscribeObservers()
     }
 
