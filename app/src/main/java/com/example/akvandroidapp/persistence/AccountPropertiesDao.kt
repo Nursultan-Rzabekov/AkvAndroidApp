@@ -19,6 +19,9 @@ interface AccountPropertiesDao {
     @Query("SELECT * FROM account_properties WHERE id = :id")
     fun searchByPk(id: Int): LiveData<AccountProperties>
 
+    @Query("SELECT * FROM account_properties WHERE id = :id")
+    fun searchByPkUser(id: Int): AccountProperties
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAndReplace(accountProperties: AccountProperties): Long
 

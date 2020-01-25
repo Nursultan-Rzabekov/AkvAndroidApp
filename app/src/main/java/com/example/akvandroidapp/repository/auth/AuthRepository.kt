@@ -98,8 +98,7 @@ constructor(
 
                 if(result < 0){
                     return onCompleteJob(DataState.error(
-                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog())
-                    )
+                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog()))
                     )
                 }
 
@@ -112,10 +111,7 @@ constructor(
                     saveAuthenticatedUserToPrefs(email = email)
                 }
 
-                sessionManager.login(
-                    AuthToken(response.body.user.id,
-                        response.body.token)
-                )
+                sessionManager.login(AuthToken(response.body.user.id, response.body.token))
 
                 onCompleteJob(
                     DataState.data(

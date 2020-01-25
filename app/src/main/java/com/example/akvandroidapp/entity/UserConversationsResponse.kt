@@ -1,12 +1,13 @@
-package com.example.akvandroidapp.api.main.responses
+package com.example.akvandroidapp.entity
 
 import android.os.Parcelable
+import com.example.akvandroidapp.api.main.responses.UserConversationsImagesResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class UserConversationsInfoResponse(
+class UserConversationsResponse(
 
     @SerializedName("id")
     @Expose
@@ -26,7 +27,7 @@ class UserConversationsInfoResponse(
 
     @SerializedName("images")
     @Expose
-    var images: List<UserConversationsImagesResponse>? = null,
+    var images: String? = null,
 
     @SerializedName("created_at")
     @Expose

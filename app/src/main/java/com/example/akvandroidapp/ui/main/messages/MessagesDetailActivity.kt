@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.api.main.responses.UserConversationsInfoResponse
+import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsStateEvent
@@ -66,7 +68,8 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     lateinit var providerFactory: ViewModelProviderFactory
     lateinit var viewModel: DetailsViewModel
 
-    private var mUserId: String = "nurs@gmail.com"
+    private var mUserId: String = "admin@mail.com"
+    private var userId: Int = 0
     private val myDataTransfer = arrayOf<Bundle?>(null)
     private lateinit var currentPhotoPath: String
     private lateinit var currentPhotoUri: Uri
@@ -86,9 +89,14 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         stateChangeListener = this
 
 
+        sessionManager.cachedToken.observe(this, androidx.lifecycle.Observer{
+            it.id?.let { userIdAccount ->
+                userId = userIdAccount
+            }
+        })
+
         initRecyclerView()
         subscribeObservers()
-
 
         swipe_messages.setOnRefreshListener(this)
 
@@ -136,21 +144,44 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
         viewModel.viewState.observe(this, androidx.lifecycle.Observer{ viewState ->
             if(viewState != null){
+                val userConversationResponse = arrayListOf<UserConversationsResponse>()
+
+                userConversationResponse.clear()
+                clearMessages()
+
                 if(viewState.myChatFields.blogList.isNotEmpty()){
-                    clearMessages()
-                    for(i in viewState.myChatFields.blogList.asReversed()){
-                        sendMessageWithType(
-                            i.user.toString(),
-                            Constants.MESSAGE_TYPE_TEXT,
-                            body = i.body.toString()
-                        )
+                    viewState.myChatFields.blogList.forEach {
+                        userConversationResponse.add(
+                            UserConversationsResponse(
+                                id = it.id,
+                                body = it.body.toString(),
+                                user = it.user.toString(),
+                                recipient = it.recipient.toString(),
+                                created_at = it.created_at.toString(),
+                                updated_at = it.updated_at.toString()
+                        ))
                     }
                 }
 
-                for(i in viewState.myChatFields.blogListImages.asReversed()){
-                    if(i!=null){
+                if(viewState.myChatFields.blogListImages.isNotEmpty()){
+                    viewState.myChatFields.blogListImages.forEach { imagesList ->
+                        userConversationResponse.forEach {
+                            if(it.id == imagesList?.message){
+                                it.images = imagesList.image
+                            }
+                        }
+                    }
+                }
+                userConversationResponse.asReversed().forEach {
+                    Log.e("MESSAGE_CAMERA_BITMAP", "user rec + ${it.user}")
+                    if(it.images!=null){
                         chatAdapter.addMessage(
-                            MessagePhoto(mUserId, image = i.image)
+                            MessagePhoto(it.user, image = it.images)
+                        )
+                    }
+                    else{
+                        chatAdapter.addMessage(
+                            MessageText(it.user, body = it.body)
                         )
                     }
                 }
@@ -184,7 +215,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     private fun initRecyclerView(){
         activity_dialog_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@MessagesDetailActivity).apply { stackFromEnd = true }
-            chatAdapter = ChatRecyclerAdapter(requestManager, mUserId)
+            chatAdapter = ChatRecyclerAdapter(requestManager, userId.toString())
             adapter = chatAdapter
         }
     }

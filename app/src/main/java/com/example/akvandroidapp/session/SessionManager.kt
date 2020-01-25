@@ -8,8 +8,10 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.akvandroidapp.entity.AccountProperties
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.persistence.AccountPropertiesDao
 import com.example.akvandroidapp.persistence.AuthTokenDao
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.ui.main.search.filter.FilterCity
@@ -19,15 +21,17 @@ import kotlinx.coroutines.Dispatchers.Main
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
+
 @Singleton
 class SessionManager
 @Inject
 constructor(
     val authTokenDao: AuthTokenDao,
+    val accountPropertiesDao: AccountPropertiesDao,
     val blogPostDao: BlogPostDao,
     val application: Application
 ) {
-
     private val TAG: String = "AppDebug"
     private val DEFAULT_TYPE = 0
 
@@ -39,6 +43,9 @@ constructor(
 
     //Token
     private val _cachedToken = MutableLiveData<AuthToken>()
+
+    //AccountProperties
+    private val _accountProperties = MutableLiveData<AccountProperties>()
 
     //Favorite
     private val _favoritePostList = MutableLiveData<MutableList<BlogPost>>()
@@ -64,7 +71,6 @@ constructor(
     private val _houseUpdateData = MutableLiveData<HouseUpdateData>()
 
     init {
-        _favoritePostList.value = mutableListOf()
         _chekedFilterCity.value = FilterCity("нет", false, true, -1)
         _typeOfApartment.value = DEFAULT_TYPE
         _facilitiesList.value = mutableListOf()
@@ -97,6 +103,29 @@ constructor(
         }else{
             _favoritePostList
         }
+
+    val accountProperties: LiveData<AccountProperties>
+        get() = if(_accountProperties.value == null){
+            var casheTimeList: ArrayList<AccountProperties> = ArrayList()
+
+            CoroutineScope(IO).launch {
+                _cachedToken.value?.id?.let {
+                    val result = accountPropertiesDao.searchByPkUser(it)
+                    Log.e("TOKEN DATA", "TOKEN DATA RESULT  + ${result}")
+                    casheTimeList.add(result)
+                }
+            }
+
+            Log.e("TOKEN DATA", "TOKEN DATA  + ${casheTimeList}")
+            if(casheTimeList.isNotEmpty()){
+                Log.e("TOKEN DATA", "TOKEN DATA 223 + ${casheTimeList.first()}")
+                _accountProperties.value = casheTimeList.first()
+            }
+            _accountProperties
+        }else{
+            _accountProperties
+        }
+
 
     val checkedFilterCity: LiveData<FilterCity>
         get() = _chekedFilterCity
@@ -464,8 +493,8 @@ constructor(
         CoroutineScope(IO).launch{
             var errorMessage: String? = null
             try{
-                _cachedToken.value!!.token?.let {
-//                    authTokenDao.nullifyToken(it)
+                _cachedToken.value!!.id?.let {
+                    authTokenDao.nullifyToken(it)
                 } ?: throw CancellationException("Token Error. Logging out user.")
             }catch (e: CancellationException) {
                 Log.e(TAG, "logout: ${e.message}")
@@ -481,7 +510,6 @@ constructor(
                 }
                 Log.d(TAG, "logout: finally")
                 setValue(null)
-
             }
         }
     }
