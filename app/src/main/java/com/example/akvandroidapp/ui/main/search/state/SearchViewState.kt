@@ -37,7 +37,10 @@ class SearchViewState (
         var ordering: String = "нет",
 
         var dateStart: String = "",
-        var dateEnd: String = ""
+        var dateEnd: String = "",
+
+        var adultsCount: Int = 0,
+        var childrenCount: Int = 0
 
     )
 

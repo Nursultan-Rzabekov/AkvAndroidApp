@@ -70,6 +70,18 @@ fun SearchViewModel.getEndDateFilter(): String{
     }
 }
 
+fun SearchViewModel.getFilterAdultsCount(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.adultsCount
+    }
+}
+
+fun SearchViewModel.getFilterChildrenCount(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.childrenCount
+    }
+}
+
 fun ZhilyeViewModel.getHouseId(): Int {
     getCurrentViewStateOrNew().let {
         return it.zhilyeFields.houseId

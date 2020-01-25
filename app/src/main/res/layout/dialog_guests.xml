@@ -94,6 +94,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageButton
+                            android:contentDescription="@string/minus"
                             android:id="@+id/dialog_guests_adult_minus_btn"
                             style="@style/BasicImageButton"
                             android:layout_width="24dp"
@@ -105,6 +106,8 @@
                             android:id="@+id/dialog_guests_adult_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="@dimen/dim_24dp"
+                            android:textAlignment="center"
                             android:layout_marginStart="@dimen/dim_12dp"
                             android:layout_marginEnd="@dimen/dim_12dp"
                             android:text="@string/_0"
@@ -112,6 +115,7 @@
                             android:textSize="18sp" />
 
                         <ImageButton
+                            android:contentDescription="@string/plus"
                             android:id="@+id/dialog_guests_adult_plus_btn"
                             style="@style/BasicImageButton"
                             android:layout_width="24dp"
@@ -153,6 +157,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageButton
+                            android:contentDescription="@string/minus"
                             android:id="@+id/dialog_guests_children_minus_btn"
                             style="@style/BasicImageButton"
                             android:layout_width="24dp"
@@ -164,6 +169,8 @@
                             android:id="@+id/dialog_guests_children_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="@dimen/dim_24dp"
+                            android:textAlignment="center"
                             android:layout_marginStart="@dimen/dim_12dp"
                             android:layout_marginEnd="@dimen/dim_12dp"
                             android:text="@string/_0"
@@ -171,6 +178,7 @@
                             android:textSize="18sp" />
 
                         <ImageButton
+                            android:contentDescription="@string/plus"
                             android:id="@+id/dialog_guests_children_plus_btn"
                             style="@style/BasicImageButton"
                             android:layout_width="24dp"
