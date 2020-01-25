@@ -82,6 +82,7 @@ fun SearchViewModel.getFilterChildrenCount(): Int{
     }
 }
 
+
 fun ZhilyeViewModel.getHouseId(): Int {
     getCurrentViewStateOrNew().let {
         return it.zhilyeFields.houseId

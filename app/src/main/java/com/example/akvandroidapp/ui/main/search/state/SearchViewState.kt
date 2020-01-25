@@ -4,13 +4,16 @@ import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_PRICE_LEFT
 import com.example.akvandroidapp.persistence.BlogQueryUtils.Companion.BLOG_ORDER_PRICE_RIGHT
+import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
 import java.util.*
 import kotlin.collections.ArrayList
 
 class SearchViewState (
     var blogFields: BlogFields = BlogFields(),
     var viewBlogFields: ViewBlogFields = ViewBlogFields(),
-    var updatedBlogFields: UpdatedBlogFields = UpdatedBlogFields()
+    var updatedBlogFields: UpdatedBlogFields = UpdatedBlogFields(),
+    var deleteblogFields: FavoriteDeleteFields = FavoriteDeleteFields(),
+    var createblogFields: FavoriteCreateFields = FavoriteCreateFields()
 
 )
 {
@@ -54,6 +57,14 @@ class SearchViewState (
         var updatedBlogBody: String? = null,
         var updatedImageUri: Uri? = null
     )
+
+    data class FavoriteDeleteFields(
+        var isDeleted: Boolean = false,
+        var houseId: Int = 1)
+
+    data class FavoriteCreateFields(
+        var isDeleted: Boolean = false,
+        var houseId: Int = 1)
 }
 
 

@@ -4,6 +4,7 @@ package com.example.akvandroidapp.repository.main
 import com.yandex.mapkit.geometry.Point
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
@@ -16,6 +17,7 @@ import com.example.akvandroidapp.repository.JobManager
 import com.example.akvandroidapp.repository.NetworkBoundResource
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
@@ -492,6 +494,208 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("reviewsList", job)
+            }
+
+        }.asLiveData()
+    }
+
+
+    fun deleteMyFavoritePosts(
+        authToken: AuthToken,
+        houseId: Int
+    ): LiveData<DataState<ZhilyeViewState>> {
+
+        return object: NetworkBoundResource<GenericResponse, List<BlogPost>, ZhilyeViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<GenericResponse>
+            ) {
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeViewState( deleteblogFields =
+                            ZhilyeViewState.FavoriteDeleteFields(response.body.response))
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                return openApiMainService.deleteFavoritePost(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+                // ignore
+            }
+
+            override fun setJob(job: Job) {
+                addJob("favoritePosts", job)
+            }
+
+        }.asLiveData()
+    }
+
+
+    fun createMyFavoritePosts(
+        authToken: AuthToken,
+        houseId: Int
+    ): LiveData<DataState<ZhilyeViewState>> {
+
+        return object: NetworkBoundResource<GenericResponse, List<BlogPost>, ZhilyeViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<GenericResponse>
+            ) {
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeViewState( createblogFields =
+                            ZhilyeViewState.FavoriteCreateFields(response.body.response))
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                return openApiMainService.createFavoritePost(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+                // ignore
+            }
+
+            override fun setJob(job: Job) {
+                addJob("favoritePosts", job)
+            }
+
+        }.asLiveData()
+    }
+
+
+    fun deleteMyFavoritePostsSearch(
+        authToken: AuthToken,
+        houseId: Int
+    ): LiveData<DataState<SearchViewState>> {
+
+        return object: NetworkBoundResource<GenericResponse, List<BlogPost>, SearchViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<GenericResponse>
+            ) {
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = SearchViewState( deleteblogFields =
+                            SearchViewState.FavoriteDeleteFields(response.body.response))
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                return openApiMainService.deleteFavoritePost(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId
+                )
+            }
+
+            override fun loadFromCache(): LiveData<SearchViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+                // ignore
+            }
+
+            override fun setJob(job: Job) {
+                addJob("favoritePosts", job)
+            }
+
+        }.asLiveData()
+    }
+
+
+    fun createMyFavoritePostsSearch(
+        authToken: AuthToken,
+        houseId: Int
+    ): LiveData<DataState<SearchViewState>> {
+
+        return object: NetworkBoundResource<GenericResponse, List<BlogPost>, SearchViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ) {
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(
+                response: ApiSuccessResponse<GenericResponse>
+            ) {
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = SearchViewState( createblogFields =
+                            SearchViewState.FavoriteCreateFields(response.body.response))
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                return openApiMainService.createFavoritePost(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId
+                )
+            }
+
+            override fun loadFromCache(): LiveData<SearchViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+                // ignore
+            }
+
+            override fun setJob(job: Job) {
+                addJob("favoritePosts", job)
             }
 
         }.asLiveData()

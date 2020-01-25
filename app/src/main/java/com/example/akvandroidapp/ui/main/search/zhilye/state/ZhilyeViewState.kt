@@ -3,7 +3,9 @@ package com.example.akvandroidapp.ui.main.search.zhilye.state
 import com.example.akvandroidapp.entity.*
 
 class ZhilyeViewState (
-    var zhilyeFields: ZhilyeFields = ZhilyeFields()
+    var zhilyeFields: ZhilyeFields = ZhilyeFields(),
+    var deleteblogFields: FavoriteDeleteFields = FavoriteDeleteFields(),
+    var createblogFields: FavoriteCreateFields = FavoriteCreateFields()
 
     )
 {
@@ -20,6 +22,14 @@ class ZhilyeViewState (
         var zhilyeReviewsList: List<Review> = ArrayList(),
         var houseId: Int = 1
     )
+
+    data class FavoriteDeleteFields(
+        var isDeleted: Boolean = false,
+        var houseId: Int = 1)
+
+    data class FavoriteCreateFields(
+        var isDeleted: Boolean = false,
+        var houseId: Int = 1)
 }
 
 

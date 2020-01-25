@@ -9,8 +9,10 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
+import com.example.akvandroidapp.ui.main.favorite.state.FavoriteStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.PreferenceKeys.Companion.Search_FILTER_BEDS_LEFT
 import com.example.akvandroidapp.util.PreferenceKeys.Companion.Search_FILTER_BEDS_RIGHT
@@ -123,6 +125,24 @@ constructor(
                         beds_gte = getFilterBedsLeft(),
                         beds_lte = getFilterBedsRight(),
                         page = getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is SearchStateEvent.DeleteFavoriteItemEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    searchRepository.deleteMyFavoritePostsSearch(
+                        authToken = authToken,
+                        houseId = stateEvent.houseId
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is SearchStateEvent.СreateFavoriteItemEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    searchRepository.createMyFavoritePostsSearch(
+                        authToken = authToken,
+                        houseId = stateEvent.houseId
                     )
                 }?: AbsentLiveData.create()
             }

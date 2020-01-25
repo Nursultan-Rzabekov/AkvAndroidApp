@@ -57,6 +57,12 @@ interface OpenApiMainService {
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<GenericResponse>>
 
+    @POST("houses/{house_id}/save_favourite/")
+    fun createFavoritePost(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int
+    ): LiveData<GenericApiResponse<GenericResponse>>
+
 
     @GET("auth/users/me/")
     fun getProfileInfo(

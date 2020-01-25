@@ -21,8 +21,10 @@ import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
+import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
@@ -231,7 +233,12 @@ class SearchFragment :
 
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
         Log.d("favorite", "favorite search ${item} and ${boolean}")
-        sessionManager.favorite(item,boolean)
+        if(boolean){
+            viewModel.setStateEvent(SearchStateEvent.СreateFavoriteItemEvent(item.id))
+        }
+        else{
+            viewModel.setStateEvent(SearchStateEvent.DeleteFavoriteItemEvent(item.id))
+        }
     }
 
     override fun onDestroyView() {

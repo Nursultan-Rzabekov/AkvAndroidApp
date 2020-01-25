@@ -44,6 +44,25 @@ constructor(
                 }?: AbsentLiveData.create()
             }
 
+
+            is ZhilyeStateEvent.DeleteFavoriteItemEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    searchRepository.deleteMyFavoritePosts(
+                        authToken = authToken,
+                        houseId = getHouseId()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is ZhilyeStateEvent.СreateFavoriteItemEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    searchRepository.createMyFavoritePosts(
+                        authToken = authToken,
+                        houseId = getHouseId()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
             is ZhilyeStateEvent.None ->{
                 return liveData {
                     emit(
