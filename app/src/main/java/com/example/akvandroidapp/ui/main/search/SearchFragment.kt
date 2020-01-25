@@ -23,6 +23,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
+import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import com.google.android.material.button.MaterialButton
@@ -35,8 +36,10 @@ import kotlinx.android.synthetic.main.header_searcher_base_layout.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import nextPage
+import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
 class SearchFragment :
@@ -296,21 +299,61 @@ class SearchFragment :
                 nextyear.set(Calendar.MONTH, Calendar.DECEMBER)
                 nextyear.set(Calendar.DAY_OF_MONTH, 31)
 
-                dialog_filter_dates_picker.init(lastyear.time, nextyear.time)
+                dialog_filter_dates_picker
+                    .init(lastyear.time, nextyear.time)
                     .inMode(CalendarPickerView.SelectionMode.RANGE)
+                    .withSelectedDates(getFilterDatesOrEmpty())
 
                 findViewById<ImageButton>(R.id.dialog_filter_dates_picker_cancel).setOnClickListener {
-                    Log.d(TAG, "FilterDialog: cancelling filter.")
+                    Log.d("FilterDialog", "FilterDialog: cancelling filter.")
                     dismiss()
                 }
 
                 findViewById<MaterialButton>(R.id.dialog_filter_dates_save_btn).setOnClickListener {
-                    Log.d(TAG, "FilterDialog: save filter.")
+                    Log.d("FilterDialog", "FilterDialog: save filter.")
+                    Log.d("FilterDialog", "FilterDialog: ${dialog_filter_dates_picker.selectedDates}")
+                    if (dialog_filter_dates_picker.selectedDates.isNotEmpty()){
+                        viewModel.setStartDateFilter(dialog_filter_dates_picker.selectedDates.first())
+                        viewModel.setEndDateFilter(dialog_filter_dates_picker.selectedDates.last())
+                    }else{
+                        viewModel.clearDateFilter()
+                    }
+                    dismiss()
+                }
+
+                findViewById<MaterialButton>(R.id.dialog_filter_dates_clear_all_btn).setOnClickListener {
+                    Log.d("FilterDialog", "FilterDialog: clear filter.")
+                    dialog_filter_dates_picker.clearSelectedDates()
+                    viewModel.clearDateFilter()
+                    Log.d("FilterDialog", "FilterDialog: ${dialog_filter_dates_picker.selectedDates}")
                 }
 
                 show()
             }
         }
+    }
+
+    private fun getFilterDatesOrEmpty(): List<Date>{
+        if (viewModel.getStartDateFilter() == "" || viewModel.getEndDateFilter() == ""){
+            return listOf()
+        }
+        val startDate = DateUtils.convertStringToDate(viewModel.getStartDateFilter())
+        val endDate = DateUtils.convertStringToDate(viewModel.getEndDateFilter())
+
+        val dates = listOf(startDate, endDate)
+//        val c = Calendar.getInstance()
+//        val c_end = Calendar.getInstance()
+//        c.time = startDate
+//        c_end.time = endDate
+//
+//        while (c <= c_end){
+//            val result = c.time
+//            dates.add(result)
+//            c.add(Calendar.DATE, 1)
+//        }
+        Log.d("FilterDialog", "dates: ${dates}")
+        return dates
+
     }
 
     private fun showCustomDateDialog(){

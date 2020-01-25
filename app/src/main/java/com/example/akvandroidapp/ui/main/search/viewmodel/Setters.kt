@@ -12,10 +12,31 @@ import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookView
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeReviewViewModel
+import com.example.akvandroidapp.util.DateUtils
+import java.util.*
 
 fun SearchViewModel.setQuery(query: String){
     val update = getCurrentViewStateOrNew()
     update.blogFields.searchQuery = query
+    setViewState(update)
+}
+
+fun SearchViewModel.setStartDateFilter(start: Date){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.dateStart = DateUtils.convertDateToString(start)
+    setViewState(update)
+}
+
+fun SearchViewModel.setEndDateFilter(end: Date){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.dateEnd = DateUtils.convertDateToString(end)
+    setViewState(update)
+}
+
+fun SearchViewModel.clearDateFilter(){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.dateStart = ""
+    update.blogFields.dateEnd = ""
     setViewState(update)
 }
 

@@ -58,6 +58,18 @@ fun SearchViewModel.getCityQuery(): String {
     }
 }
 
+fun SearchViewModel.getStartDateFilter(): String{
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.dateStart
+    }
+}
+
+fun SearchViewModel.getEndDateFilter(): String{
+    getCurrentViewStateOrNew().let {
+        return it.blogFields.dateEnd
+    }
+}
+
 fun ZhilyeViewModel.getHouseId(): Int {
     getCurrentViewStateOrNew().let {
         return it.zhilyeFields.houseId

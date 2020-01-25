@@ -30,6 +30,8 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.RegistrationFields
 import com.example.akvandroidapp.ui.main.MainActivity
+import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.util.DateUtils
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.sign_up_detail.*
 import java.util.*
@@ -208,17 +210,34 @@ class RegisterFragment : BaseAuthFragment() {
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
-    private fun showDatePicker(date: String){
+    private fun showDatePicker(d: String){
         Locale.setDefault(Locale("ru"))
 
-        val dd = date.split('-')[2]
-        val mm = date.split('-')[1]
-        val yy = date.split('-')[0]
+        var dateString = d.toString()
+        if (dateString == ""){
+            dateString = DateUtils.convertDateToString(
+                DateUtils.getDateFromNYear(Constants.DEFAULT_YEAR_GAP)
+            )
+        }
+
+        Log.e("DateSpinner", "$dateString")
+
+        val date = Calendar.getInstance()
+        date.time = DateUtils.convertStringToDate(dateString)
+        val dd = date.get(Calendar.DAY_OF_MONTH)
+        val mm = date.get(Calendar.MONTH)
+        val yy = date.get(Calendar.YEAR)
+
+        Log.e("DateSpinner", "$yy-$mm-$dd")
 
         val dpd = DatePickerDialog(requireContext(), R.style.MySpinnerDatePickerStyle,
             DatePickerDialog.OnDateSetListener { _, i, i2, i3 ->
-                sign_detail_birth_et.setText(("$i-${i2+1}-$i3"))
-            }, yy.toInt(), mm.toInt()+1, dd.toInt())
+                sign_detail_birth_et.setText(
+                    DateUtils.convertDateToString(
+                        DateUtils.convertCalendarToDate(i,i2,i3)
+                    )
+                )
+            }, yy, mm, dd)
 
         dpd.show()
         dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)

@@ -30,6 +30,38 @@ class DateUtils {
                 throw Exception(e)
             }
         }
+
+        fun convertStringToDate(date: String): Date{
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            try {
+                val d = sdf.parse(date)
+                return d
+            } catch (e: Exception){
+                throw Exception(e)
+            }
+        }
+
+        fun convertDateToString(date: Date): String{
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            try {
+                val d = sdf.format(date)
+                return d
+            }catch (e: Exception){
+                throw Exception(e)
+            }
+        }
+
+        fun convertCalendarToDate(year: Int, month: Int, day: Int): Date{
+            val c = GregorianCalendar(year, month, day)
+            return c.time
+        }
+
+        fun getDateFromNYear(n: Int): Date{
+            val c = Calendar.getInstance()
+            c.add(Calendar.YEAR, n)
+
+            return c.time
+        }
     }
 
 
