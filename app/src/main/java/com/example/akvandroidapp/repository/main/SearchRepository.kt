@@ -46,6 +46,8 @@ constructor(
         authToken: AuthToken,
         startDate: String,
         endDate:String,
+        adultsCount:Int,
+        childrenCount:Int,
         query_name:String,
         city__name: String,
         accomadations:String,
@@ -102,9 +104,11 @@ constructor(
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
-                            data = SearchViewState(SearchViewState.BlogFields(blogPostList,
+                            data = SearchViewState(SearchViewState.BlogFields(
+                                blogPostList,
                                 isQueryInProgress = false,
-                                isQueryExhausted = booleanQuery(blogPostList)))
+                                isQueryExhausted = booleanQuery(blogPostList)
+                            ))
                         )
                     )
                 }
