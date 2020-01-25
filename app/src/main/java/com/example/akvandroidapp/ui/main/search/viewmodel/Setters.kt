@@ -40,6 +40,25 @@ fun SearchViewModel.clearDateFilter(){
     setViewState(update)
 }
 
+fun SearchViewModel.setAdultCount(count: Int){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.adultsCount = count
+    setViewState(update)
+}
+
+fun SearchViewModel.setChildrenCount(count: Int){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.childrenCount = count
+    setViewState(update)
+}
+
+fun SearchViewModel.clearCounts(){
+    val update = getCurrentViewStateOrNew()
+    update.blogFields.adultsCount = 0
+    update.blogFields.childrenCount = 0
+    setViewState(update)
+}
+
 fun DetailsViewModel.setQuery(query: String){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.target = query

@@ -46,10 +46,11 @@ class SearchFragment :
     BaseSearchFragment(),
     SearchListAdapter.Interaction,
     SearchListAdapter.InteractionCheck,
-    SwipeRefreshLayout.OnRefreshListener,
-    DateRangePickerDialog.DatePickerDialogInteraction{
+    SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var recyclerAdapter: SearchListAdapter
+    private var adultsCount = 0
+    private var childrenCount = 0
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -259,23 +260,69 @@ class SearchFragment :
     private fun showGuestDialog(){
 
         activity?.let {
-            val dialog = Dialog(it, R.style.CustomBasicDialog)
-            dialog.setCancelable(false)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.window?.setDimAmount(0F)
-            dialog.setContentView(R.layout.dialog_guests)
+            val dialog = Dialog(it, R.style.CustomBasicDialog).apply {
+                setCancelable(false)
+                requestWindowFeature(Window.FEATURE_NO_TITLE)
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                window?.setDimAmount(0F)
+                setContentView(R.layout.dialog_guests)
 
-            dialog.findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {
-                Log.d(TAG, "FilterDialog: cancelling filter.")
-                dialog.dismiss()
+                val adults = findViewById<TextView>(R.id.dialog_guests_adult_tv)
+                val children = findViewById<TextView>(R.id.dialog_guests_children_tv)
+
+                adultsCount = viewModel.getFilterAdultsCount()
+                childrenCount = viewModel.getFilterChildrenCount()
+
+                adults.text = adultsCount.toString()
+                children.text = childrenCount.toString()
+
+                findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {
+                    Log.d(TAG, "FilterDialog: cancelling filter.")
+                    dismiss()
+                }
+
+                findViewById<MaterialButton>(R.id.dialog_guests_save_btn).setOnClickListener {
+                    Log.d(TAG, "FilterDialog: save filter.")
+                    viewModel.setAdultCount(adultsCount)
+                    viewModel.setChildrenCount(childrenCount)
+                    dismiss()
+                }
+
+                findViewById<MaterialButton>(R.id.dialog_guests_clear_all_btn).setOnClickListener {
+                    viewModel.clearCounts()
+                    adultsCount = 0
+                    childrenCount = 0
+                    adults.text = adultsCount.toString()
+                    children.text = childrenCount.toString()
+                }
+
+                findViewById<ImageButton>(R.id.dialog_guests_adult_minus_btn).setOnClickListener {
+                    if (adultsCount > 1)
+                        adultsCount -= 1
+                    adults.text = adultsCount.toString()
+                }
+
+                findViewById<ImageButton>(R.id.dialog_guests_adult_plus_btn).setOnClickListener {
+                    adultsCount += 1
+                    adults.text = adultsCount.toString()
+                }
+
+                findViewById<ImageButton>(R.id.dialog_guests_children_minus_btn).setOnClickListener {
+                    if (childrenCount > 0)
+                        childrenCount -= 1
+                    children.text = childrenCount.toString()
+                }
+
+                findViewById<ImageButton>(R.id.dialog_guests_children_plus_btn).setOnClickListener {
+                    if (adultsCount == 0)
+                        adultsCount += 1
+                    childrenCount += 1
+                    children.text = childrenCount.toString()
+                    adults.text = adultsCount.toString()
+                }
+
+                show()
             }
-
-            dialog.findViewById<MaterialButton>(R.id.dialog_guests_save_btn).setOnClickListener {
-                Log.d(TAG, "FilterDialog: save filter.")
-            }
-
-            dialog.show()
         }
     }
 
@@ -342,42 +389,8 @@ class SearchFragment :
         val endDate = DateUtils.convertStringToDate(viewModel.getEndDateFilter())
 
         val dates = listOf(startDate, endDate)
-//        val c = Calendar.getInstance()
-//        val c_end = Calendar.getInstance()
-//        c.time = startDate
-//        c_end.time = endDate
-//
-//        while (c <= c_end){
-//            val result = c.time
-//            dates.add(result)
-//            c.add(Calendar.DATE, 1)
-//        }
         Log.d("FilterDialog", "dates: ${dates}")
         return dates
-
-    }
-
-    private fun showCustomDateDialog(){
-        val dialog = DateRangePickerDialog(this)
-        val ft = fragmentManager?.beginTransaction()
-        val prev = fragmentManager?.findFragmentByTag("dialog")
-        if (prev != null)
-        {
-            ft?.remove(prev)
-        }
-        ft?.addToBackStack(null)
-        dialog.show(ft!!, "dialog")
-    }
-
-    override fun onCloseBtnListener() {
-
-    }
-
-    override fun onClearBtnListener() {
-
-    }
-
-    override fun onSaveBtnListener() {
 
     }
 }
