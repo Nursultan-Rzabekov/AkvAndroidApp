@@ -12,7 +12,7 @@ class ZhilyeViewState (
     data class ZhilyeFields(
         var zhilyeDetail: ZhilyeDetail = ZhilyeDetail(
             0,"","",0,0,"",0.0,0.0,"",
-            0,0,0,0,0.0,"",false,0,0),
+            0,false,0,0,0.0,"",false,0,0),
         var zhilyeUser: UserChatMessages = UserChatMessages(0,"","","",""),
         var zhilyeDetailAccomadations: List<ZhilyeDetailProperties> = ArrayList(),
         var zhilyeDetailRules: List<ZhilyeDetailProperties> = ArrayList(),

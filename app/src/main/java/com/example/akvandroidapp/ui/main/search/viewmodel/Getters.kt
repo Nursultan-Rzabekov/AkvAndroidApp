@@ -216,7 +216,7 @@ fun SearchViewModel.getBlogPost(): BlogPost {
 }
 
 fun SearchViewModel.getDummyBlogPost(): BlogPost {
-    return BlogPost(-1, "" , 0,0, false, 0.0, 0.0, "","",0,0,"",0.0)
+    return BlogPost(-1, "" , 0,0, false, 0.0, 0.0, "","",0,false,"",0.0)
 }
 
 fun SearchViewModel.getUpdatedBlogUri(): Uri? {

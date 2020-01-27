@@ -36,7 +36,7 @@ class MyHouseListAdapter(
         "",
         "",
         0,
-        0,
+        false,
         "",
         0.0
     )
@@ -179,7 +179,7 @@ class MyHouseListAdapter(
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
-            if(item.status == 1){
+            if(item.status){
                 itemView.my_adds_recycler_view_item_state_btn.text = resources.getString(R.string.deactivate)
                 itemView.my_adds_recycler_view_item_state_btn.setTextColor(resources.getColor(R.color.red))
             }

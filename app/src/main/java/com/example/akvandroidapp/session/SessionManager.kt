@@ -91,31 +91,19 @@ constructor(
     val cachedToken: LiveData<AuthToken>
         get() = _cachedToken
 
-    val favoritePostListItem: LiveData<MutableList<BlogPost>>
-        get() = if(_favoritePostList.value == null){
-            CoroutineScope(IO).launch {
-                withContext(Main){
-                    _favoritePostList.value = blogPostDao.getFavoriteBlogPost().toMutableList()
-                }
-            }
-            _favoritePostList
-        }else{
-            _favoritePostList
-        }
-
-    val accountProperties: LiveData<AccountProperties>
-        get() = if(_accountProperties.value == null){
-            CoroutineScope(IO).launch {
-                _cachedToken.value?.id?.let {
-                    withContext(Main) {
-                        _accountProperties.value = accountPropertiesDao.searchByPkUser(it)
-                    }
-                }
-            }
-            _accountProperties
-        }else{
-            _accountProperties
-        }
+//    val accountProperties: LiveData<AccountProperties>
+//        get() = if(_accountProperties.value == null){
+//            CoroutineScope(IO).launch {
+//                _cachedToken.value?.id?.let {
+//                    withContext(Main) {
+//                        _accountProperties.value = accountPropertiesDao.searchByPkUser(it)
+//                    }
+//                }
+//            }
+//            _accountProperties
+//        }else{
+//            _accountProperties
+//        }
 
 
     val checkedFilterCity: LiveData<FilterCity>

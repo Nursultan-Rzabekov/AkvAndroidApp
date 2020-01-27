@@ -45,7 +45,7 @@ data class BlogPost(
     var price: Int,
 
     @ColumnInfo(name = "status")
-    var status: Int,
+    var status: Boolean,
 
     @ColumnInfo(name = "image")
     var image: String,

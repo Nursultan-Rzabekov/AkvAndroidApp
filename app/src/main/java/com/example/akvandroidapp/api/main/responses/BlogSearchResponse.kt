@@ -35,7 +35,7 @@ class BlogSearchResponse(
 
     @SerializedName("status")
     @Expose
-    var status: Int,
+    var status: Boolean,
 
     @SerializedName("beds")
     @Expose

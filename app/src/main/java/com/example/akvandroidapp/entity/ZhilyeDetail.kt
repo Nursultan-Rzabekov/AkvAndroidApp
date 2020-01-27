@@ -45,7 +45,7 @@ data class ZhilyeDetail(
     var price: Int,
 
     @ColumnInfo(name = "status")
-    var status: Int,
+    var status: Boolean,
 
     @ColumnInfo(name = "beds")
     var beds: Int,

@@ -91,15 +91,15 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             }
         })
 
-        sessionManager.accountProperties.observe(this, androidx.lifecycle.Observer{ it ->
-            it.id?.let { userIdAccount ->
-                userId = userIdAccount
-            }
-
-            it.email?.let {
-                mUserId = it
-            }
-        })
+//        sessionManager.accountProperties.observe(this, androidx.lifecycle.Observer{ it ->
+//            it.id?.let { userIdAccount ->
+//                userId = userIdAccount
+//            }
+//
+//            it.email?.let {
+//                mUserId = it
+//            }
+//        })
 
         initRecyclerView()
         subscribeObservers()

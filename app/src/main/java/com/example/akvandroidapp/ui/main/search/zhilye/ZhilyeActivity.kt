@@ -97,11 +97,11 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         setToolbar()
 
-        subscribeObservers()
         setMapView()
         setFlipperLayout(arrayListOf())
         initRecyclerViews()
 
+        subscribeObservers()
 
         fragment_zhilye_house_rules_card.setOnClickListener {
             navHouseRules()
