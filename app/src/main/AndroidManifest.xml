@@ -42,6 +42,12 @@
 
         </activity>
 
+        <activity
+            android:name=".ui.main.profile.add_ad.AddAdMainActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
         <activity android:name=".ui.main.MainActivity"
             android:windowSoftInputMode="adjustPan">
 

@@ -78,46 +78,6 @@ class MainActivity : BaseActivity(),
         fragment: Fragment
     ) = when(fragment){
 
-        is ProfileAddAddressFragment -> {
-            navController.navigate(R.id.action_profileAddAddressFragment_to_home)
-        }
-
-        is ProfileAddCheckFragment -> {
-            navController.navigate(R.id.action_profileAddCheckFragment_to_home)
-        }
-
-        is ProfileAddDescriptionFragment -> {
-            navController.navigate(R.id.action_profileAddDescriptionFragment_to_home)
-        }
-
-        is ProfileAddGalleryFragment -> {
-            navController.navigate(R.id.action_profileAddGalleryFragment_to_home)
-        }
-
-        is ProfileAddNearFragment -> {
-            navController.navigate(R.id.action_profileAddNearFragment_to_home)
-        }
-
-        is ProfileAddPriceFragment -> {
-            navController.navigate(R.id.action_profileAddPriceFragment_to_home)
-        }
-
-        is ProfileAddQuestsFragment -> {
-            navController.navigate(R.id.action_profileAddQuestsFragment_to_home)
-        }
-
-        is ProfileAddRequirementFragment -> {
-            navController.navigate(R.id.action_profileAddRequirementFragment_to_home)
-        }
-
-        is ProfileAddRulesFragment -> {
-            navController.navigate(R.id.action_profileAddRulesFragment_to_home)
-        }
-
-        is ProfileAddTypeFragment -> {
-            navController.navigate(R.id.action_profileAddTypeFragment_to_home)
-        }
-
         is ApartmentsFragment -> {
             navController.navigate(R.id.action_apartmentsFragment_to_home)
         }

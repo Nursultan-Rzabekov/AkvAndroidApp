@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_add_house"
+        app:startDestination="@id/profileAddTypeFragment">
+
+    <fragment android:id="@+id/profileAddTypeFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddTypeFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_type_of_appartment">
+
+        <action android:id="@+id/action_profileAddTypeFragment_to_profileAddQuestsFragment"
+            app:destination="@id/profileAddQuestsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddQuestsFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddQuestsFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_guests_count">
+
+        <action android:id="@+id/action_profileAddQuestsFragment_to_profileAddAddressFragment"
+            app:destination="@id/profileAddAddressFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddAddressFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddAddressFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_address">
+
+
+        <action android:id="@+id/action_pprofileAddAddressFragment_to_profileAddGalleryFragment"
+            app:destination="@id/profileAddGalleryFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddGalleryFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddGalleryFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_gallery">
+
+
+        <action android:id="@+id/action_profileAddGalleryFragment_to_profileAddDescriptionFragment"
+            app:destination="@id/profileAddDescriptionFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddDescriptionFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddDescriptionFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_description">
+
+
+        <action android:id="@+id/action_profileAddDescriptionFragment_to_profileAddCheckFragment"
+            app:destination="@id/profileAddCheckFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddCheckFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddCheckFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_check">
+
+
+        <action android:id="@+id/action_profileAddCheckFragment_to_profileAddNearFragment"
+            app:destination="@id/profileAddNearFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddNearFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddNearFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_near">
+
+
+        <action android:id="@+id/profileAddNearFragment_to_profileAddRequirementFragment"
+            app:destination="@id/profileAddRequirementFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddRequirementFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddRequirementFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_requirement">
+
+
+        <action android:id="@+id/profileAddRequirementFragment_to_profileAddRulesFragment"
+            app:destination="@id/profileAddRulesFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddRulesFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddRulesFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_rules">
+
+
+        <action android:id="@+id/profileAddRulesFragment_to_profileAddPriceFragment"
+            app:destination="@id/profileAddPriceFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+
+
+    </fragment>
+
+    <fragment android:id="@+id/profileAddPriceFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddPriceFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_price">
+
+
+        <action android:id="@+id/profileAddPriceFragment_to_profileAddPostFragment"
+            app:destination="@+id/profileAddPostFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddPostFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddPostFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_post">
+
+    </fragment>
+
+</navigation>

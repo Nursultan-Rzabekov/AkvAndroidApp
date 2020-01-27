@@ -18,6 +18,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
+import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
@@ -64,9 +65,9 @@ constructor(
         discount30days:RequestBody,
         regionId:RequestBody,
         countryId:RequestBody
-    ): LiveData<DataState<ProfileViewState>> {
+    ): LiveData<DataState<AddAdViewState>> {
         return object :
-            NetworkBoundResource<BlogCreateUpdateResponse, BlogPost, ProfileViewState>(
+            NetworkBoundResource<BlogCreateUpdateResponse, BlogPost, AddAdViewState>(
                 sessionManager.isConnectedToTheInternet(),
                 true,
                 true,
@@ -122,7 +123,7 @@ constructor(
             }
 
             // not applicable
-            override fun loadFromCache(): LiveData<ProfileViewState> {
+            override fun loadFromCache(): LiveData<AddAdViewState> {
                 return AbsentLiveData.create()
             }
 

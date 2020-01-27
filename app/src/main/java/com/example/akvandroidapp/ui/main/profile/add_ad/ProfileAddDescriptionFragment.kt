@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_description.*
 import javax.inject.Inject
 
 
-class ProfileAddDescriptionFragment : BaseProfileFragment(){
+class ProfileAddDescriptionFragment : BaseAddHouseFragment(){
 
     @Inject
     lateinit var sessionManager: SessionManager

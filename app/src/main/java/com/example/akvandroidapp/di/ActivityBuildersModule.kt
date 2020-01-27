@@ -1,10 +1,11 @@
 package com.example.akvandroidapp.di
 
 
-import com.example.akvandroidapp.di.auth.AuthFragmentBuildersModule
-import com.example.akvandroidapp.di.auth.AuthModule
-import com.example.akvandroidapp.di.auth.AuthScope
-import com.example.akvandroidapp.di.auth.AuthViewModelModule
+import com.example.akvandroidapp.di.addadhouse.AddAddFragmentBuildersModule
+import com.example.akvandroidapp.di.addadhouse.AddAddModule
+import com.example.akvandroidapp.di.addadhouse.AddAddScope
+import com.example.akvandroidapp.di.addadhouse.AddAddViewModelModule
+import com.example.akvandroidapp.di.auth.*
 import com.example.akvandroidapp.di.main.MainFragmentBuildersModule
 import com.example.akvandroidapp.di.main.MainModule
 import com.example.akvandroidapp.di.main.MainScope
@@ -16,6 +17,7 @@ import com.example.akvandroidapp.di.support.SupportViewModelModule
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
+import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity
 import com.example.akvandroidapp.ui.main.search.MapActivity
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
@@ -37,6 +39,12 @@ abstract class ActivityBuildersModule {
         modules = [AuthModule::class, AuthFragmentBuildersModule::class, AuthViewModelModule::class]
     )
     abstract fun contributeAuthActivity(): AuthActivity
+
+    @AddAddScope
+    @ContributesAndroidInjector(
+        modules = [AddAddModule::class, AddAddFragmentBuildersModule::class, AddAddViewModelModule::class]
+    )
+    abstract fun contributeAddAdMainActivity(): AddAdMainActivity
 
     @MainScope
     @ContributesAndroidInjector(

@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.profile
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.MainActivity
+import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
@@ -77,7 +80,9 @@ class ProfileFragment : BaseProfileFragment(){
     }
 
     private fun navNextFragment(){
-        findNavController().navigate(R.id.action_profileFragment_to_profileAddTypeFragment)
+        Log.d(TAG, "AddAdMainActivity: called.")
+        val intent = Intent(context, AddAdMainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateAboutFragment(){

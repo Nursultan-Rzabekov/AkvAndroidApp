@@ -93,15 +93,11 @@ constructor(
 
     val favoritePostListItem: LiveData<MutableList<BlogPost>>
         get() = if(_favoritePostList.value == null){
-            val casheTimeList: ArrayList<BlogPost> = ArrayList()
             CoroutineScope(IO).launch {
-                blogPostDao.getFavoriteBlogPost().let {
-                    for (i in it) {
-                        casheTimeList.add(i)
-                    }
+                withContext(Main){
+                    _favoritePostList.value = blogPostDao.getFavoriteBlogPost().toMutableList()
                 }
             }
-            _favoritePostList.value = casheTimeList
             _favoritePostList
         }else{
             _favoritePostList
@@ -109,20 +105,12 @@ constructor(
 
     val accountProperties: LiveData<AccountProperties>
         get() = if(_accountProperties.value == null){
-            var casheTimeList: ArrayList<AccountProperties> = ArrayList()
-
             CoroutineScope(IO).launch {
                 _cachedToken.value?.id?.let {
-                    val result = accountPropertiesDao.searchByPkUser(it)
-                    Log.e("TOKEN DATA", "TOKEN DATA RESULT  + ${result}")
-                    casheTimeList.add(result)
+                    withContext(Main) {
+                        _accountProperties.value = accountPropertiesDao.searchByPkUser(it)
+                    }
                 }
-            }
-
-            Log.e("TOKEN DATA", "TOKEN DATA  + ${casheTimeList}")
-            if(casheTimeList.isNotEmpty()){
-                Log.e("TOKEN DATA", "TOKEN DATA 223 + ${casheTimeList.first()}")
-                _accountProperties.value = casheTimeList.first()
             }
             _accountProperties
         }else{

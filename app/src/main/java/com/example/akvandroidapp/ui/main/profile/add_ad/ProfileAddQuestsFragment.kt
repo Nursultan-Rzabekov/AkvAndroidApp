@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_guests_count.*
 import javax.inject.Inject
 
 
-class ProfileAddQuestsFragment : BaseProfileFragment(){
+class ProfileAddQuestsFragment : BaseAddHouseFragment(){
 
     @Inject
     lateinit var sessionManager: SessionManager

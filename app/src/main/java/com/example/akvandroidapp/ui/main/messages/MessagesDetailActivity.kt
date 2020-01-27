@@ -2,23 +2,18 @@ package com.example.akvandroidapp.ui.main.messages
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
-import android.view.View
 import androidx.core.content.FileProvider
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.api.main.responses.UserConversationsInfoResponse
 import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
@@ -93,6 +88,16 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         sessionManager.cachedToken.observe(this, androidx.lifecycle.Observer{
             it.id?.let { userIdAccount ->
                 userId = userIdAccount
+            }
+        })
+
+        sessionManager.accountProperties.observe(this, androidx.lifecycle.Observer{ it ->
+            it.id?.let { userIdAccount ->
+                userId = userIdAccount
+            }
+
+            it.email?.let {
+                mUserId = it
             }
         })
 
@@ -475,7 +480,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
     }
 
-    fun clearMessages(){
+    private fun clearMessages(){
         chatAdapter.clearMessages()
     }
 

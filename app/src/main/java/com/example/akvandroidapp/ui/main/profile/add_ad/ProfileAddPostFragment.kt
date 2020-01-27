@@ -21,8 +21,7 @@ import java.io.File
 import java.util.ArrayList
 import javax.inject.Inject
 
-
-class ProfileAddPostFragment : BaseProfileFragment(){
+class ProfileAddPostFragment : BaseAddHouseFragment(){
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -108,7 +107,7 @@ class ProfileAddPostFragment : BaseProfileFragment(){
         Log.d(TAG, "PostCreateHouse 22222: ${multipartBodyList}")
 
         viewModel.setStateEvent(
-            ProfileStateEvent.CreateNewBlogEvent(
+            AddAdStateEvent.CreateNewBlogEvent(
                 addAdInfo._addAdType,
                 addAdInfo._addAdGuestsCount,
                 addAdInfo._addAdRoomsCount,

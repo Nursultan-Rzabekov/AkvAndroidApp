@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import javax.inject.Inject
 
 
-class ProfileAddAddressFragment : BaseProfileFragment(){
+class ProfileAddAddressFragment : BaseAddHouseFragment(){
 
     @Inject
     lateinit var sessionManager: SessionManager

@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_gallery.*
 import javax.inject.Inject
 
-class ProfileAddGalleryFragment : BaseProfileFragment(){
+class ProfileAddGalleryFragment : BaseAddHouseFragment(){
 
     private val myDataTransfer = arrayOf<Bundle?>(null)
     private var onlineId:String? = null

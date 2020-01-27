@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_type_of_appartment.*
 import javax.inject.Inject
 
 
-class ProfileAddTypeFragment : BaseProfileFragment(){
+class ProfileAddTypeFragment : BaseAddHouseFragment(){
 
     private val typesOfAppartments = listOf("Квартира", "Дом", "Коттедж", "Комната")
 

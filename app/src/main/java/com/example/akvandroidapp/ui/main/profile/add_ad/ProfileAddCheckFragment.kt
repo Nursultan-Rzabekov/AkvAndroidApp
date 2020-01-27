@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_check.*
 import javax.inject.Inject
 
 
-class ProfileAddCheckFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
+class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
     private val facilities = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter

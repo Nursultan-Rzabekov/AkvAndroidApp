@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_price.*
 import javax.inject.Inject
 
 
-class ProfileAddPriceFragment : BaseProfileFragment(){
+class ProfileAddPriceFragment : BaseAddHouseFragment(){
 
     @Inject
     lateinit var sessionManager: SessionManager

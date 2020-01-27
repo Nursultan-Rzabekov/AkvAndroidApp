@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_rules.*
 import javax.inject.Inject
 
 
-class ProfileAddRulesFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCheckInteraction, AddAdCheckboxAdapter.CheckboxCloseInteraction{
+class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.CheckboxCheckInteraction, AddAdCheckboxAdapter.CheckboxCloseInteraction{
 
     private val rules = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter

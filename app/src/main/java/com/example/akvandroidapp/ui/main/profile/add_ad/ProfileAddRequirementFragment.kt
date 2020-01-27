@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_requirement.*
 
 
-class ProfileAddRequirementFragment : BaseProfileFragment(){
+class ProfileAddRequirementFragment : BaseAddHouseFragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

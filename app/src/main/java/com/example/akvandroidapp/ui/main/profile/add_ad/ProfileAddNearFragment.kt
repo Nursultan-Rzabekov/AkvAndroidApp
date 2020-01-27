@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_near.*
 import javax.inject.Inject
 
 
-class ProfileAddNearFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
+class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
     private val nears = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter

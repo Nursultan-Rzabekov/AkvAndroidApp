@@ -48,42 +48,6 @@ abstract class MainFragmentBuildersModule {
     abstract fun contributeProfileFragment(): ProfileFragment
 
     @ContributesAndroidInjector()
-    abstract fun contributeProfileAddAddressFragment(): ProfileAddAddressFragment
-
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileProfileAddCheckFragment(): ProfileAddCheckFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileProfileAddDescriptionFragment(): ProfileAddDescriptionFragment
-
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileProfileAddGalleryFragment(): ProfileAddGalleryFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileAddNearFragment(): ProfileAddNearFragment
-
-
-    @ContributesAndroidInjector()
-    abstract fun contributePProfileAddPriceFragment(): ProfileAddPriceFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileAddQuestsFragment(): ProfileAddQuestsFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileAddRequirementFragment(): ProfileAddRequirementFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileAddRulesFragment(): ProfileAddRulesFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileAddTypeFragment(): ProfileAddTypeFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeProfileAddPostFragment(): ProfileAddPostFragment
-
-    @ContributesAndroidInjector()
     abstract fun contributeAboutProfileFragment(): AboutProfileFragment
 
     @ContributesAndroidInjector()
