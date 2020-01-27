@@ -96,16 +96,12 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
 
     private fun setObservers(){
         sessionManager.houseUpdateData.observe(viewLifecycleOwner, Observer{
-            val initialItems = mutableListOf<String>()
-            for(item in it.houseRulesList!!) {
-                initialItems.add(item)
-            }
-            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+            checkboxAdapter.addItems(staticRulesList, it.houseRulesList!!, isChecked = true, isStatic = false)
         })
     }
 
     private fun setAllStaticChechboxes(){
-        checkboxAdapter.addAllItems(staticRulesList, isStatic = true)
+        checkboxAdapter.addStaticItems(staticRulesList)
     }
 
     private fun initialState(){
@@ -123,7 +119,9 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
     }
 
     private fun addNewRule(rule: String) {
-        if (!checkboxAdapter.getList().contains(rule.capitalize()) &&
+        val items = mutableListOf<String>()
+        for(item in checkboxAdapter.getList()) items.add(item.title)
+        if (!items.contains(rule.capitalize()) &&
             rule != "")
             checkboxAdapter.addItem(rule)
         fragment_add_ad_rules_add_chkbox_et.setText("")

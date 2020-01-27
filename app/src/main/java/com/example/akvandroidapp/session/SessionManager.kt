@@ -300,12 +300,10 @@ constructor(
 
     // Add Ad
 
-    fun setAddAdFacilityListItem(facility: String, checked: Boolean) {
+    fun setAddAdFacilityListItem(facilities: List<String>, checked: Boolean) {
         GlobalScope.launch(Main){
             if (checked)
-                _addAdInfo.value?._addAdFacilityList?.add(facility)
-            else
-                _addAdInfo.value?._addAdFacilityList?.remove(facility)
+                _addAdInfo.value?._addAdFacilityList = facilities.toMutableList()
         }
         Log.e("SESSION_ADD_AD_FACILITI", "${_addAdInfo.value?._addAdFacilityList}")
     }
@@ -317,12 +315,10 @@ constructor(
         Log.e("SESSION_CLEAR_FACILITY", "${_addAdInfo.value?._addAdFacilityList}")
     }
 
-    fun setAddAdNearByListItem(near: String, checked: Boolean) {
+    fun setAddAdNearByListItem(near: List<String>, checked: Boolean) {
         GlobalScope.launch(Main){
             if (checked)
-                _addAdInfo.value?._addAdNearByList?.add(near)
-            else
-                _addAdInfo.value?._addAdNearByList?.remove(near)
+                _addAdInfo.value?._addAdNearByList = near.toMutableList()
         }
         Log.e("SESSION_ADD_AD_NEAR", "${_addAdInfo.value?._addAdNearByList}")
     }
@@ -334,12 +330,10 @@ constructor(
         Log.e("SESSION_CLEAR_NEAR", "${_addAdInfo.value?._addAdNearByList}")
     }
 
-    fun setAddAdRulesListItem(rule: String, checked: Boolean) {
+    fun setAddAdRulesListItem(rule: List<String>, checked: Boolean) {
         GlobalScope.launch(Main){
             if (checked)
-                _addAdInfo.value?._addAdRulesList?.add(rule)
-            else
-                _addAdInfo.value?._addAdRulesList?.remove(rule)
+                _addAdInfo.value?._addAdRulesList = rule.toMutableList()
         }
         Log.e("SESSION_ADD_AD_RULES", "${_addAdInfo.value?._addAdRulesList}")
     }

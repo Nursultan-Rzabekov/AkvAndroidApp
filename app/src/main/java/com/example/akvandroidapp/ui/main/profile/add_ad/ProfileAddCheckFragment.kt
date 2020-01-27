@@ -24,7 +24,6 @@ import javax.inject.Inject
 
 class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
-    private val facilities = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticFacilityList = mutableListOf(
         "Кондиционер",
@@ -53,15 +52,13 @@ class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
 
         setSpanable()
         initRecyclerView()
-        setAllStaticChechboxes()
         setObservers()
         initialState()
 
         fragment_add_ad_check_next_btn.setOnClickListener {
             sessionManager.clearAddAdFacilityList()
             saveFacilities()
-            Log.e("Sesssion_test_faci", "$facilities")
-            facilities.clear()
+            Log.e("Sesssion_test_faci", "asdasd")
             navNextFragment()
         }
 
@@ -95,11 +92,7 @@ class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
 
     private fun setObservers(){
         sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
-            val initialItems = mutableListOf<String>()
-            for(item in it._addAdFacilityList) {
-                initialItems.add(item)
-            }
-            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+            checkboxAdapter.addItems(staticFacilityList, it._addAdFacilityList, isChecked = true, isStatic = false)
         })
     }
 
@@ -110,7 +103,7 @@ class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
     }
 
     private fun setAllStaticChechboxes(){
-        checkboxAdapter.addAllItems(staticFacilityList, isStatic = true)
+        checkboxAdapter.addStaticItems(staticFacilityList)
     }
 
     private fun initialState(){
@@ -128,7 +121,9 @@ class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
     }
 
     private fun addNewFacility(facility: String) {
-        if (!checkboxAdapter.getList().contains(facility.capitalize()) &&
+        val items = mutableListOf<String>()
+        for(item in checkboxAdapter.getList()) items.add(item.title)
+        if (!items.contains(facility.capitalize()) &&
             facility != "")
             checkboxAdapter.addItem(facility)
         fragment_add_ad_check_add_chkbox_et.setText("")
@@ -136,28 +131,23 @@ class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
 
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
-        facilities.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        addOrRemoveFacility(item, checked)
+        checkboxAdapter.isCheckItem(position, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        addOrRemoveFacility(item, false)
         checkboxAdapter.removeItem(position)
     }
 
-    private fun addOrRemoveFacility(item: String, checked: Boolean) {
-        if (checked)
-            facilities.add(item)
-        else
-            facilities.remove(item)
-    }
-
     private fun saveFacilities(){
-        for (item in facilities)
-            sessionManager.setAddAdFacilityListItem(item, true)
+        val facilities = mutableListOf<String>()
+        for (item in checkboxAdapter.getList())
+            if (item.isCheked)
+                facilities.add(item.title)
+
+        sessionManager.setAddAdFacilityListItem(facilities, true)
     }
 }
 

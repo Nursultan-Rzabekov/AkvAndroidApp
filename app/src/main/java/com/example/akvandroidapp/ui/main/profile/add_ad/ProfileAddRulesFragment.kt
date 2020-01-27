@@ -47,7 +47,6 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
         super.onViewCreated(view, savedInstanceState)
         setSpanable()
         initRecyclerView()
-        setAllStaticChechboxes()
         setObservers()
         initialState()
 
@@ -94,16 +93,12 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
 
     private fun setObservers(){
         sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
-            val initialItems = mutableListOf<String>()
-            for(item in it._addAdRulesList) {
-                initialItems.add(item)
-            }
-            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+            checkboxAdapter.addItems(staticRulesList, it._addAdRulesList, isChecked = true, isStatic = false)
         })
     }
 
     private fun setAllStaticChechboxes(){
-        checkboxAdapter.addAllItems(staticRulesList, isStatic = true)
+        checkboxAdapter.addStaticItems(staticRulesList)
     }
 
     private fun initialState(){
@@ -121,7 +116,9 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
     }
 
     private fun addNewRule(rule: String) {
-        if (!checkboxAdapter.getList().contains(rule.capitalize()) &&
+        val items = mutableListOf<String>()
+        for(item in checkboxAdapter.getList()) items.add(item.title)
+        if (!items.contains(rule.capitalize()) &&
             rule != "")
             checkboxAdapter.addItem(rule)
         fragment_add_ad_rules_add_chkbox_et.setText("")
@@ -133,24 +130,20 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        addOrRemoveRule(item, checked)
+        checkboxAdapter.isCheckItem(position, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        addOrRemoveRule(item, false)
         checkboxAdapter.removeItem(position)
     }
 
-    private fun addOrRemoveRule(item: String, checked: Boolean) {
-        if (checked)
-            rules.add(item)
-        else
-            rules.remove(item)
-    }
-
     private fun saveRules(){
-        for (item in rules)
-            sessionManager.setAddAdRulesListItem(item, true)
+        val rules = mutableListOf<String>()
+        for (item in checkboxAdapter.getList())
+            if (item.isCheked)
+                rules.add(item.title)
+
+        sessionManager.setAddAdRulesListItem(rules, true)
     }
 }
 

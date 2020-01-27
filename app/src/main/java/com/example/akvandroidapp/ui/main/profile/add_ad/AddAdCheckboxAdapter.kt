@@ -1,9 +1,10 @@
 package com.example.akvandroidapp.ui.main.profile.add_ad
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.example.akvandroidapp.R
 import kotlinx.android.synthetic.main.add_ad_checkbox_recycler_view_item.view.*
 
@@ -12,7 +13,44 @@ class AddAdCheckboxAdapter(
     private val closeInteraction: CheckboxCloseInteraction? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: MutableList<CheckboxItem> = ArrayList()
+    private val TAG: String = "AppDebug"
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CheckboxItem>() {
+
+        override fun areItemsTheSame(oldItem: CheckboxItem, newItem: CheckboxItem): Boolean {
+            return oldItem.title == newItem.title
+        }
+
+        override fun areContentsTheSame(oldItem: CheckboxItem, newItem: CheckboxItem): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    private val differ =
+        AsyncListDiffer(
+            BlogRecyclerChangeCallback(this),
+            AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
+        )
+
+    internal inner class BlogRecyclerChangeCallback(
+        private val adapter: AddAdCheckboxAdapter
+    ) : ListUpdateCallback {
+
+        override fun onChanged(position: Int, count: Int, payload: Any?) {
+            adapter.notifyItemRangeChanged(position, count, payload)
+        }
+
+        override fun onInserted(position: Int, count: Int) {
+            adapter.notifyItemRangeChanged(position, count)
+        }
+
+        override fun onMoved(fromPosition: Int, toPosition: Int) {
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun onRemoved(position: Int, count: Int) {
+            adapter.notifyDataSetChanged()
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CheckBoxViewHolder(
@@ -22,57 +60,72 @@ class AddAdCheckboxAdapter(
         )
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
        when(holder) {
            is CheckBoxViewHolder -> {
-               holder.bind(items[holder.adapterPosition])
+               holder.bind(differ.currentList[holder.adapterPosition])
            }
        }
     }
 
     fun submitList(items: MutableList<CheckboxItem>){
-        this.items = items
+        val newList = items.toMutableList()
+        differ.submitList(newList)
         notifyDataSetChanged()
     }
 
     fun addItem(text: String, isChecked: Boolean = false){
-        items.add(CheckboxItem(text, isChecked))
-        notifyItemChanged(items.size - 1)
+        val newList = differ.currentList.toMutableList()
+        newList.add(CheckboxItem(text, isChecked))
+        differ.submitList(newList)
     }
 
-    fun addAllItems(list: List<String>, isChecked: Boolean = false, isStatic: Boolean = false){
-        val start = items.size
-        val listOfTitles = mutableListOf<String>()
-        for (item in items) listOfTitles.add(item.title)
+    fun addItems(staticList: List<String>, list: List<String>, isChecked: Boolean = false, isStatic: Boolean = false){
+        val checkboxes = mutableListOf<CheckboxItem>()
+
+        for (item in staticList)
+            checkboxes.add(
+                CheckboxItem(item, isCheked = false, isStatic = true)
+            )
+
         for(item in list) {
-            if (item in listOfTitles){
-                items[listOfTitles.indexOf(item)].isCheked = isChecked
-                items[listOfTitles.indexOf(item)].isStatic = true
+            if (item in staticList){
+                checkboxes[staticList.indexOf(item)].isCheked = true
             }
             else
-                items.add(CheckboxItem(item, isChecked, isStatic))
+                checkboxes.add(CheckboxItem(item, isChecked, isStatic = false))
         }
-        notifyItemRangeChanged(start, items.size - 1)
-        notifyDataSetChanged()
+        differ.submitList(checkboxes)
+        Log.e("Checkbox Adapter", "$checkboxes")
+    }
+
+    fun addStaticItems(list: List<String>) {
+        val newList = mutableListOf<CheckboxItem>()
+        for (item in list)
+            newList.add(CheckboxItem(item, isCheked = false, isStatic = true))
+        differ.submitList(newList)
+        Log.e("Checkbox Adapter", "$newList")
     }
 
     fun removeItem(position: Int) {
-        items.removeAt(position)
-        notifyItemRemoved(position)
+        val newList = differ.currentList.toMutableList()
+        newList.removeAt(position)
+        differ.submitList(newList)
     }
 
     fun uncheckAll(){
-        items.forEach { it.isCheked = false }
+        differ.currentList.forEach { it.isCheked = false }
         notifyDataSetChanged()
     }
 
-    fun getList(): MutableList<String>{
-        val titles = mutableListOf<String>()
-        for(item in items)
-            titles.add(item.title)
-        return titles
+    fun isCheckItem(position: Int, isChecked: Boolean){
+        differ.currentList[position].isCheked = isChecked
+    }
+
+    fun getList(): MutableList<CheckboxItem>{
+        return differ.currentList.toMutableList()
     }
 
     class CheckBoxViewHolder constructor(

@@ -103,16 +103,12 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
 
     private fun setObservers(){
         sessionManager.houseUpdateData.observe(viewLifecycleOwner, Observer{
-            val initialItems = mutableListOf<String>()
-            for(item in it.nearByList!!) {
-                initialItems.add(item)
-            }
-            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+            checkboxAdapter.addItems(staticNearList, it.nearByList!!, isChecked = true, isStatic = false)
         })
     }
 
     private fun setAllStaticChechboxes(){
-        checkboxAdapter.addAllItems(staticNearList, isStatic = true)
+        checkboxAdapter.addStaticItems(staticNearList)
     }
 
     private fun initialState(){
@@ -130,7 +126,9 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
     }
 
     private fun addNewNear(near: String) {
-        if (!checkboxAdapter.getList().contains(near.capitalize()) &&
+        val items = mutableListOf<String>()
+        for(item in checkboxAdapter.getList()) items.add(item.title)
+        if (!items.contains(near.capitalize()) &&
             near != "")
             checkboxAdapter.addItem(near)
         fragment_add_ad_near_add_chkbox_et.setText("")

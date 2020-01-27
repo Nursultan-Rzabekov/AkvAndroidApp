@@ -50,7 +50,6 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
 
         setSpanable()
         initRecyclerView()
-        setAllStaticChechboxes()
         setObservers()
         initialState()
 
@@ -94,16 +93,12 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
 
     private fun setObservers(){
         sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
-            val initialItems = mutableListOf<String>()
-            for(item in it._addAdNearByList) {
-                initialItems.add(item)
-            }
-            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+            checkboxAdapter.addItems(staticNearList, it._addAdNearByList, isChecked = true, isStatic = false)
         })
     }
 
     private fun setAllStaticChechboxes(){
-        checkboxAdapter.addAllItems(staticNearList, isStatic = true)
+        checkboxAdapter.addStaticItems(staticNearList)
     }
 
     private fun navNextFragment(){
@@ -125,7 +120,9 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
     }
 
     private fun addNewNear(near: String) {
-        if (!checkboxAdapter.getList().contains(near.capitalize()) &&
+        val items = mutableListOf<String>()
+        for(item in checkboxAdapter.getList()) items.add(item.title)
+        if (!items.contains(near.capitalize()) &&
             near != "")
             checkboxAdapter.addItem(near)
         fragment_add_ad_near_add_chkbox_et.setText("")
@@ -137,24 +134,20 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        addOrRemoveNear(item, checked)
+        checkboxAdapter.isCheckItem(position, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        addOrRemoveNear(item, false)
         checkboxAdapter.removeItem(position)
     }
 
-    private fun addOrRemoveNear(item: String, checked: Boolean) {
-        if (checked)
-            nears.add(item)
-        else
-            nears.remove(item)
-    }
-
     private fun saveNears(){
-        for (item in nears)
-            sessionManager.setAddAdNearByListItem(item, true)
+        val nears = mutableListOf<String>()
+        for (item in checkboxAdapter.getList())
+            if (item.isCheked)
+                nears.add(item.title)
+
+        sessionManager.setAddAdNearByListItem(nears, true)
     }
 }
 

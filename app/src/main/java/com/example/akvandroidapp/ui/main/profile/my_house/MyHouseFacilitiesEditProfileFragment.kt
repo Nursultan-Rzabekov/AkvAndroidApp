@@ -100,11 +100,7 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
 
     private fun setObservers(){
         sessionManager.houseUpdateData.observe(viewLifecycleOwner, Observer{
-            val initialItems = mutableListOf<String>()
-            for(item in it.facilitiesList!!) {
-                initialItems.add(item)
-            }
-            checkboxAdapter.addAllItems(initialItems, isChecked = true, isStatic = false)
+            checkboxAdapter.addItems(staticFacilityList, it.facilitiesList!!, isChecked = true, isStatic = false)
         })
     }
 
@@ -115,7 +111,7 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
     }
 
     private fun setAllStaticChechboxes(){
-        checkboxAdapter.addAllItems(staticFacilityList, isStatic = true)
+        checkboxAdapter.addStaticItems(staticFacilityList)
     }
 
     private fun initialState(){
@@ -124,7 +120,9 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
     }
 
     private fun addNewFacility(facility: String) {
-        if (!checkboxAdapter.getList().contains(facility.capitalize()) &&
+        val items = mutableListOf<String>()
+        for(item in checkboxAdapter.getList()) items.add(item.title)
+        if (!items.contains(facility.capitalize()) &&
             facility != "")
             checkboxAdapter.addItem(facility)
         fragment_add_ad_check_add_chkbox_et.setText("")
