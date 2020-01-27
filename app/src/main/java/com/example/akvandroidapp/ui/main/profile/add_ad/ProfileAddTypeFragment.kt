@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class ProfileAddTypeFragment : BaseAddHouseFragment(){
 
-    private val typesOfAppartments = listOf("Квартира", "Дом", "Коттедж", "Комната")
+    private val typesOfAppartments = listOf("Квартира", "Дом")
 
     @Inject
     lateinit var sessionManager: SessionManager
