@@ -9,14 +9,15 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
+import kotlinx.android.synthetic.main.requests_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
 class RequestListAdapter(
     private val requestManager: RequestManager,
-    private val interaction: Interaction? = null,
-    private val interactionCheck: InteractionCheck? = null
+    private val interaction: Interaction? = null
     ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -24,29 +25,28 @@ class RequestListAdapter(
     private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
 
-    private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
+    private val NO_MORE_RESULTS_BLOG_MARKER = HomeReservation(
         NO_MORE_RESULTS,
         "" ,
+        "",
         0,
         0,
+        "",
         false,
-        0.0,
-        0.0,
-        "",
-        "",
         0,
         0,
         "",
-        0.0
+        "",
+        0
     )
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HomeReservation>() {
 
-        override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+        override fun areItemsTheSame(oldItem: HomeReservation, newItem: HomeReservation): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
+        override fun areContentsTheSame(oldItem: HomeReservation, newItem: HomeReservation): Boolean {
             return oldItem == newItem
         }
 
@@ -73,26 +73,24 @@ class RequestListAdapter(
             }
 
             BLOG_ITEM ->{
-                return BlogViewHolder(
+                return OrderViewHolder(
                     LayoutInflater.from(parent.context).inflate(
                             R.layout.requests_recycler_view_item,
                         parent,
                         false
                     ),
                     interaction = interaction,
-                    interactionCheck = interactionCheck,
                     requestManager = requestManager
                 )
             }
             else -> {
-                return BlogViewHolder(
+                return OrderViewHolder(
                     LayoutInflater.from(parent.context).inflate(
                         R.layout.requests_recycler_view_item,
                         parent,
                         false
                     ),
                     interaction = interaction,
-                    interactionCheck = interactionCheck,
                     requestManager = requestManager
                 )
             }
@@ -122,7 +120,7 @@ class RequestListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is BlogViewHolder -> {
+            is OrderViewHolder -> {
                 holder.bind(differ.currentList[position])
             }
         }
@@ -143,28 +141,45 @@ class RequestListAdapter(
     // This also ensures if the network connection is lost, they will be in the cache
     fun preloadGlideImages(
         requestManager: RequestManager,
-        list: List<BlogPost>
+        list: List<HomeReservation>
     ){
 
     }
 
 
-    fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
+    fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
         differ.submitList(newList)
     }
 
-    class BlogViewHolder
+    class OrderViewHolder
     constructor(
         itemView: View,
         val requestManager: RequestManager,
-        private val interaction: Interaction?,
-        private val interactionCheck: InteractionCheck?
+        private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: BlogPost) = with(itemView) {
+        private val image = itemView.requests_recycler_view_item_iv
+        private val title = itemView.requests_recycler_view_item_title_tv
+        private val nickname = itemView.requests_recycler_view_item_message_tv
+
+        fun bind(item: HomeReservation) = with(itemView) {
+
+            title.text = item.house_name
+            nickname.text = ("@${item.user_id} хочет быть вашем гостем.")
+
+            if (item.house_image != null)
+                requestManager
+                    .load(item.house_image)
+                    .transition(withCrossFade())
+                    .error(R.drawable.test_image_back)
+                    .into(image)
+            else
+                requestManager
+                    .load(R.drawable.test_image_back)
+                    .into(image)
 
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
@@ -173,11 +188,7 @@ class RequestListAdapter(
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: BlogPost)
-    }
-
-    interface InteractionCheck {
-        fun onItemSelected(position: Int, item: BlogPost,boolean: Boolean)
+        fun onItemSelected(position: Int, item: HomeReservation)
     }
 
 }

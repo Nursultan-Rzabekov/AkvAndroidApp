@@ -76,6 +76,12 @@ fun MessagesViewModel.resetPage(){
     setViewState(update)
 }
 
+fun MessagesViewModel.resetOrderPage(){
+    val update = getCurrentViewStateOrNew()
+    update.ordersField.page = 1
+    setViewState(update)
+}
+
 fun DetailsViewModel.resetPage(){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.page = 1
@@ -128,6 +134,13 @@ fun MessagesViewModel.loadFirstPage() {
     setStateEvent(MessagesStateEvent.ChatInfoEvent())
 }
 
+fun MessagesViewModel.loadOrderFirstPage() {
+    setOrderQueryInProgress(true)
+    setOrderQueryExhausted(false)
+    resetOrderPage()
+    Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.ordersField}")
+    setStateEvent(MessagesStateEvent.OrdersListStateEvent())
+}
 
 fun DetailsViewModel.loadFirstPage() {
     setQueryInProgress(true)
@@ -163,6 +176,13 @@ private fun MessagesViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.myChatFields.page // get current page
     update.myChatFields.page = page + 1
+    setViewState(update)
+}
+
+private fun MessagesViewModel.incrementOrderPageNumber(){
+    val update = getCurrentViewStateOrNew()
+    val page = update.ordersField.page // get current page
+    update.ordersField.page = page + 1
     setViewState(update)
 }
 
@@ -208,6 +228,16 @@ fun MessagesViewModel.nextPage(){
         incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(MessagesStateEvent.ChatInfoEvent())
+    }
+}
+
+fun MessagesViewModel.nextOrderPage(){
+    if(!viewState.value!!.ordersField.isQueryInProgress
+        && !viewState.value!!.ordersField.isQueryExhausted){
+        Log.d(TAG, "MessagesViewModel: Attempting to load next page...")
+        incrementOrderPageNumber()
+        setOrderQueryInProgress(true)
+        setStateEvent(MessagesStateEvent.OrdersListStateEvent())
     }
 }
 
@@ -264,6 +294,17 @@ fun MessagesViewModel.handleIncomingBlogListData(viewState: MessagesViewState){
     setQueryInProgress(viewState.myChatFields.isQueryInProgress)
     setQueryExhausted(viewState.myChatFields.isQueryExhausted)
     setBlogListData(viewState.myChatFields.blogList)
+}
+
+fun MessagesViewModel.handleIncomingOrdersListData(viewState: MessagesViewState){
+    Log.d(TAG, "MessagesViewModel, DataState: ${viewState}")
+    Log.d(TAG, "MessagesViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.ordersField.isQueryInProgress}")
+    Log.d(TAG, "MessagesViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.ordersField.isQueryExhausted}")
+    setOrderQueryInProgress(viewState.ordersField.isQueryInProgress)
+    setOrderQueryExhausted(viewState.ordersField.isQueryExhausted)
+    setOrderListData(viewState.ordersField.orders)
 }
 
 fun DetailsViewModel.handleIncomingBlogListData(viewState: DetailsViewState){

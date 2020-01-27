@@ -145,6 +145,23 @@ interface OpenApiMainService {
         @Path("house_id") house_id: Int,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<ReviewsListResponse>>
+
+    @GET("orders/")
+    fun getOrders(
+        @Header("Authorization")  authorization: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<HomeListResponse>>
+
+    @Multipart
+    @PATCH("auth/users/me/")
+    fun updateZhilyeInfo(
+        @Header("Authorization") authorization: String,
+        @Part("email") email: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("phone") phone: RequestBody,
+        @Part("birth_day") birth_day: RequestBody,
+        @Part userpic: MultipartBody.Part?
+    ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
 }
 
 
