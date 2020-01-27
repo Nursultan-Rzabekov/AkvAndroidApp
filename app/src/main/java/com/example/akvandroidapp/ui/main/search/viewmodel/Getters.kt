@@ -156,6 +156,12 @@ fun MessagesViewModel.getPage(): Int{
     }
 }
 
+fun MessagesViewModel.getOrdersPage(): Int{
+    getCurrentViewStateOrNew().let {
+        return it.ordersField.page
+    }
+}
+
 fun DetailsViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.myChatFields.page

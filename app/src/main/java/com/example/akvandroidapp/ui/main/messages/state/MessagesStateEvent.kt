@@ -7,4 +7,5 @@ import okhttp3.MultipartBody
 sealed class MessagesStateEvent {
     class ChatInfoEvent: MessagesStateEvent()
     class None: MessagesStateEvent()
+    class OrdersListStateEvent: MessagesStateEvent()
 }

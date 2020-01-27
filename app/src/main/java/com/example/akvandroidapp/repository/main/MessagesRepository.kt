@@ -3,9 +3,7 @@ package com.example.akvandroidapp.repository.main
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
-import com.example.akvandroidapp.api.main.responses.AllChatsResponse
-import com.example.akvandroidapp.api.main.responses.ConverstaionsResponse
-import com.example.akvandroidapp.api.main.responses.UserConversationsInfoResponse
+import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.repository.JobManager
@@ -255,6 +253,82 @@ constructor(
             override fun setJob(job: Job) {
                 addJob("messagesSend", job)
             }
+        }.asLiveData()
+    }
+
+    fun ordersList(
+        authToken: AuthToken,
+        page: Int
+    ): LiveData<DataState<MessagesViewState>>{
+        return object:
+            NetworkBoundResource<HomeListResponse, List<BlogPost>, MessagesViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<HomeListResponse>) {
+                Log.d("orders list", "orders ${response.body.results}")
+
+                val ordersList: ArrayList<HomeReservation> = ArrayList()
+                for (order in response.body.results){
+                    val image: String = order.house.photos?.get(0)?.image ?: "////////////////"
+                    ordersList.add(
+                        HomeReservation(
+                            order.id,
+                            order.check_in,
+                            order.check_out,
+                            order.guests,
+                            order.status,
+                            order.created_at,
+                            order.accepted_house,
+                            order.user.id,
+                            order.house.id,
+                            order.house.name,
+                            "https://akv-technopark.herokuapp.com$image",
+                            order.owner.id
+                        )
+                    )
+                }
+
+                withContext(Dispatchers.Main) {
+                    onCompleteJob(
+                        DataState.data(
+                            data = MessagesViewState(
+                                ordersField = MessagesViewState.OrdersField(
+                                    ordersList,
+                                    isQueryInProgress = false,
+                                    isQueryExhausted = true
+                                )
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<HomeListResponse>> {
+                Log.d("orders list", "orders ")
+                return openApiMainService
+                    .getOrders(
+                        authorization = "Token ${authToken.token!!}",
+                        page = page
+                    )
+            }
+
+            override fun loadFromCache(): LiveData<MessagesViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+            }
+
+            override fun setJob(job: Job) {
+                addJob("ordersList", job)
+            }
+
         }.asLiveData()
     }
 }

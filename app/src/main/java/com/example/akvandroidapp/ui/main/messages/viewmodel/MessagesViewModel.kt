@@ -13,6 +13,7 @@ import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
+import com.example.akvandroidapp.ui.main.search.viewmodel.getOrdersPage
 import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.Constants
@@ -51,6 +52,16 @@ constructor(
                     )
                 }
             }
+
+            is MessagesStateEvent.OrdersListStateEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    messagesRepository.ordersList(
+                        it,
+                        page = getOrdersPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
         }
     }
 

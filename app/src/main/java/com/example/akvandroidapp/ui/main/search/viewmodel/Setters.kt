@@ -156,6 +156,12 @@ fun MessagesViewModel.setBlogListData(blogList: List<UserChatMessages>){
     setViewState(update)
 }
 
+fun MessagesViewModel.setOrderListData(blogList: List<HomeReservation>){
+    val update = getCurrentViewStateOrNew()
+    update.ordersField.orders = blogList
+    setViewState(update)
+}
+
 fun ZhilyeReviewViewModel.setBlogListData(reviewList: List<Review>){
     val update = getCurrentViewStateOrNew()
     update.reviewsField.reviewList = reviewList
@@ -223,6 +229,12 @@ fun MessagesViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun MessagesViewModel.setOrderQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.ordersField.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun DetailsViewModel.setQueryExhausted(isExhausted: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.isQueryExhausted = isExhausted
@@ -268,6 +280,12 @@ fun ZhilyeReviewViewModel.setQueryInProgress(isInProgress: Boolean){
 fun MessagesViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun MessagesViewModel.setOrderQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.ordersField.isQueryInProgress = isInProgress
     setViewState(update)
 }
 
