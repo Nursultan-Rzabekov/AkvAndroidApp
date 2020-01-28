@@ -150,7 +150,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment(),
                 price = item.price,
                 address = item.house_type.toString())
         )
-        sessionManager.setHouseUpdateFacilityItem("Утюг", true)
+        sessionManager.setHouseUpdateFacilityItem(listOf("Утюг"), true)
 
         findNavController().navigate(R.id.action_profileMyHouseAddsProfileFragment_to_profileMyHouseDetailProfileFragment,bundle)
     }

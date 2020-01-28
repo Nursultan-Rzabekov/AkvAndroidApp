@@ -14,6 +14,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.savvi.rangedatepicker.CalendarPickerView
+                android:id="@+id/fragment_my_adds_detailed_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_8dp"
+                android:layout_marginEnd="@dimen/dim_8dp"
+                app:tsquare_titleTextColor="@color/primaryZero"
+                app:tsquare_displayHeader="true"
+                app:tsquare_orientation_horizontal="true"
+                app:tsquare_dividerColor="@android:color/transparent"
+                app:tsquare_headerTextColor="@color/black"
+                android:clickable="false" />
+
             <View
                 android:id="@+id/divider48"
                 android:layout_width="match_parent"
@@ -26,6 +39,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingTop="@dimen/dim_8dp"
                 android:paddingBottom="@dimen/dim_8dp"
                 android:paddingStart="@dimen/dim_20dp"

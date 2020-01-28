@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
@@ -20,6 +21,7 @@ import com.example.akvandroidapp.util.Constants.Companion.GALLERY_REQUEST_CODE
 import com.example.akvandroidapp.util.ErrorHandling.Companion.ERROR_SOMETHING_WRONG_WITH_IMAGE
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_gallery.*
 import javax.inject.Inject
@@ -44,11 +46,16 @@ class ProfileAddGalleryFragment : BaseAddHouseFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        activity_add_ad_toolbar.setNavigationOnClickListener {
+//            findNavController().navigateUp()
+//        }
         return inflater.inflate(R.layout.fragment_add_ad_gallery, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setToolbar()
 
         fragment_add_ad_gallery_next_btn.setOnClickListener {
             sessionManager.setAddAdImage(image1,image2,image3,image4,image5,image6)
@@ -89,10 +96,6 @@ class ProfileAddGalleryFragment : BaseAddHouseFragment(){
             if(stateChangeListener.isStoragePermissionGranted()){
                 pickFromGallery("fragment_add_ad_gallery_iv6")
             }
-        }
-
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
         }
     }
 
@@ -197,6 +200,18 @@ class ProfileAddGalleryFragment : BaseAddHouseFragment(){
                 Data(Event.dataEvent(null), null)
             )
         )
+    }
+
+    private fun setToolbar(){
+        fragment_add_ad_gallery_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_gallery_toolbar.setNavigationOnClickListener{
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_gallery_cancel.setOnClickListener {
+            activity?.finish()
+        }
     }
 }
 

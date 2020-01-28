@@ -30,7 +30,6 @@ import javax.inject.Inject
 
 class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction {
 
-    private val nears = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticNearList = mutableListOf(
         "Больница",
@@ -62,7 +61,6 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
 
         setSpanable()
         initRecyclerView()
-        setAllStaticChechboxes()
         setObservers()
         initialState()
 
@@ -71,8 +69,7 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
         main_back_img_btn.setOnClickListener {
             sessionManager.clearHouseUpdateNears()
             saveNears()
-            Log.e("Sesssion_test_near", "$nears")
-            nears.clear()
+            Log.e("Sesssion_test_near", "asdasd")
             findNavController().navigateUp()
         }
 
@@ -107,10 +104,6 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
         })
     }
 
-    private fun setAllStaticChechboxes(){
-        checkboxAdapter.addStaticItems(staticNearList)
-    }
-
     private fun initialState(){
         fragment_add_ad_near_add_chkbox_layout.visibility = View.GONE
         fragment_add_ad_near_add_chkbox.visibility = View.VISIBLE
@@ -136,28 +129,22 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
 
     private fun clearAllNear() {
         checkboxAdapter.uncheckAll()
-        sessionManager.clearHouseUpdateNears()
-        nears.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        addOrRemoveNear(item, checked)
+        checkboxAdapter.isCheckItem(position, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        addOrRemoveNear(item, false)
         checkboxAdapter.removeItem(position)
     }
 
-    private fun addOrRemoveNear(item: String, checked: Boolean) {
-        if (checked)
-            nears.add(item)
-        else
-            nears.remove(item)
-    }
-
     private fun saveNears(){
-        for (item in nears)
-            sessionManager.setHouseUpdateNearItem(item, true)
+        val nears = mutableListOf<String>()
+        for (item in checkboxAdapter.getList())
+            if (item.isCheked)
+                nears.add(item.title)
+
+        sessionManager.setHouseUpdateNearItem(nears, true)
     }
 }

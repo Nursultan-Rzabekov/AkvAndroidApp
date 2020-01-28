@@ -195,32 +195,26 @@ constructor(
         Log.e("HOUSE_CLEAR_DATA", "${_houseUpdateData.value}")
     }
 
-    fun setHouseUpdateFacilityItem(facility: String, checked: Boolean){
+    fun setHouseUpdateFacilityItem(facility: List<String>, checked: Boolean){
         GlobalScope.launch(Main){
             if (checked)
-                _houseUpdateData.value?.facilitiesList?.add(facility)
-            else
-                _houseUpdateData.value?.facilitiesList?.remove(facility)
+                _houseUpdateData.value?.facilitiesList = facility.toMutableList()
         }
         Log.e("HOUSE_UPDATE_FACILITI", "${_houseUpdateData.value?.facilitiesList}")
     }
 
-    fun setHouseUpdateNearItem(near: String, checked: Boolean){
+    fun setHouseUpdateNearItem(near: List<String>, checked: Boolean){
         GlobalScope.launch(Main){
             if (checked)
-                _houseUpdateData.value?.nearByList?.add(near)
-            else
-                _houseUpdateData.value?.nearByList?.remove(near)
+                _houseUpdateData.value?.nearByList = near.toMutableList()
         }
         Log.e("HOUSE_UPDATE_NEAR", "${_houseUpdateData.value?.nearByList}")
     }
 
-    fun setHouseUpdateRulesItem(rule: String, checked: Boolean){
+    fun setHouseUpdateRulesItem(rule: List<String>, checked: Boolean){
         GlobalScope.launch(Main){
             if (checked)
-                _houseUpdateData.value?.houseRulesList?.add(rule)
-            else
-                _houseUpdateData.value?.houseRulesList?.remove(rule)
+                _houseUpdateData.value?.houseRulesList = rule.toMutableList()
         }
         Log.e("HOUSE_UPDATE_RULES", "${_houseUpdateData.value?.houseRulesList}")
     }

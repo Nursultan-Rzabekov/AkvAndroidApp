@@ -1,46 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:backgroundTint="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include
-        android:id="@+id/fragment_add_ad_submit_back_btn"
-        layout="@layout/back_button_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_28dp"
-        android:layout_marginTop="@dimen/dim_24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/fragment_add_ad_submit_tv1"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_60dp"
-        android:layout_marginTop="@dimen/dim_16dp"
-        android:layout_marginEnd="@dimen/dim_60dp"
-        android:text="@string/book_rules"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_submit_back_btn" />
+        app:elevation="0dp"
+        android:backgroundTint="@android:color/transparent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/fragment_add_ad_submit_toolbar"
+            app:buttonGravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_add_ad_submit_next_btn"
-        style="@style/BasicButton"
+            <TextView
+                android:id="@+id/fragment_add_ad_submit_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textAlignment="center"
+                android:textColor="@color/primaryZero"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/dim_20dp"
+                android:layout_marginBottom="@dimen/dim_20dp"
+                android:layout_marginEnd="@dimen/dim_16dp"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_48dp"
-        android:layout_marginEnd="@dimen/dim_48dp"
-        android:layout_marginBottom="@dimen/dim_36dp"
-        android:text="@string/submit_ad"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/fragment_add_ad_submit_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim_60dp"
+            android:layout_marginTop="@dimen/dim_16dp"
+            android:layout_marginEnd="@dimen/dim_60dp"
+            android:text="@string/book_rules"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragment_add_ad_submit_next_btn"
+            style="@style/BasicButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim_48dp"
+            android:layout_marginEnd="@dimen/dim_48dp"
+            android:layout_marginBottom="@dimen/dim_36dp"
+            android:text="@string/submit_ad"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

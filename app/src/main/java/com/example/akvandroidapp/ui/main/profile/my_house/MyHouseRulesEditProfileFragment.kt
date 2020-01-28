@@ -25,7 +25,6 @@ import javax.inject.Inject
 
 class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCheckInteraction, AddAdCheckboxAdapter.CheckboxCloseInteraction{
 
-    private val rules = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticRulesList = mutableListOf(
         "Не курить",
@@ -55,7 +54,6 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
 
         setSpanable()
         initRecyclerView()
-        setAllStaticChechboxes()
         setObservers()
         initialState()
 
@@ -64,8 +62,7 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
         main_back_img_btn.setOnClickListener {
             sessionManager.clearHouseUpdateRules()
             saveRules()
-            Log.e("Sesssion_test_rule", "$rules")
-            rules.clear()
+            Log.e("Sesssion_test_rule", "sadsd")
             findNavController().navigateUp()
         }
 
@@ -100,10 +97,6 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
         })
     }
 
-    private fun setAllStaticChechboxes(){
-        checkboxAdapter.addStaticItems(staticRulesList)
-    }
-
     private fun initialState(){
         fragment_add_ad_rules_add_chkbox_layout.visibility = View.GONE
         fragment_add_ad_rules_add_chkbox.visibility = View.VISIBLE
@@ -129,28 +122,22 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
 
     private fun clearAllRules() {
         checkboxAdapter.uncheckAll()
-        sessionManager.clearHouseUpdateRules()
-        rules.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        addOrRemoveRule(item, checked)
+        checkboxAdapter.isCheckItem(position, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        addOrRemoveRule(item, false)
         checkboxAdapter.removeItem(position)
     }
 
-    private fun addOrRemoveRule(item: String, checked: Boolean) {
-        if (checked)
-            rules.add(item)
-        else
-            rules.remove(item)
-    }
-
     private fun saveRules(){
-        for (item in rules)
-            sessionManager.setHouseUpdateRulesItem(item, true)
+        val rules = mutableListOf<String>()
+        for (item in checkboxAdapter.getList())
+            if (item.isCheked)
+                rules.add(item.title)
+
+        sessionManager.setHouseUpdateRulesItem(rules, true)
     }
 }

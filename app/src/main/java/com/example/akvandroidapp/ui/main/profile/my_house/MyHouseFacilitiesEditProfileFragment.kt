@@ -34,7 +34,6 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
-    private var facilities: MutableList<String>? = mutableListOf()
     private val staticFacilityList = mutableListOf(
         "Кондиционер",
         "Фен",
@@ -64,7 +63,6 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
 
         initialState()
         initRecyclerView()
-        setAllStaticChechboxes()
         setObservers()
         setSpanable()
 
@@ -75,7 +73,6 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         main_back_img_btn.setOnClickListener {
             sessionManager.clearHouseUpdateFacilities()
             saveFacilities()
-            facilities?.clear()
             findNavController().navigateUp()
         }
 
@@ -110,10 +107,6 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
         span4.setSpan(UnderlineSpan(), 0, fragment_add_ad_check_drop_all.text.toString().length, 0)
     }
 
-    private fun setAllStaticChechboxes(){
-        checkboxAdapter.addStaticItems(staticFacilityList)
-    }
-
     private fun initialState(){
         fragment_add_ad_check_add_chkbox_layout.visibility = View.GONE
         fragment_add_ad_check_add_chkbox.visibility = View.VISIBLE
@@ -141,28 +134,22 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
 
     private fun clearAllFacilities() {
         checkboxAdapter.uncheckAll()
-        sessionManager.clearHouseUpdateFacilities()
-        facilities?.clear()
-    }
-
-    private fun addOrRemoveFacility(item: String, checked: Boolean) {
-        if (checked)
-            facilities?.add(item)
-        else
-            facilities?.remove(item)
     }
 
     private fun saveFacilities(){
-        for (item in facilities!!)
-            sessionManager.setHouseUpdateFacilityItem(item, true)
+        val facilities = mutableListOf<String>()
+        for (item in checkboxAdapter.getList())
+            if (item.isCheked)
+                facilities.add(item.title)
+
+        sessionManager.setHouseUpdateFacilityItem(facilities, true)
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
-        addOrRemoveFacility(item, checked)
+        checkboxAdapter.isCheckItem(position, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
-        addOrRemoveFacility(item, false)
         checkboxAdapter.removeItem(position)
     }
 }

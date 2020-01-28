@@ -7,6 +7,7 @@ import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.google.android.material.checkbox.MaterialCheckBox
+import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_near.*
 import javax.inject.Inject
@@ -21,7 +23,6 @@ import javax.inject.Inject
 
 class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
-    private val nears = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticNearList = mutableListOf(
         "Больница",
@@ -42,12 +43,17 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        activity_add_ad_toolbar.setNavigationOnClickListener {
+//            sessionManager.clearAddAdNearList()
+//            findNavController().navigateUp()
+//        }
         return inflater.inflate(R.layout.fragment_add_ad_near, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setToolbar()
         setSpanable()
         initRecyclerView()
         setObservers()
@@ -56,14 +62,8 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
         fragment_add_ad_near_next_btn.setOnClickListener {
             sessionManager.clearAddAdNearList()
             saveNears()
-            Log.e("Sesssion_test_near", "$nears")
-            nears.clear()
+            Log.e("Sesssion_test_near", "asdasd")
             navNextFragment()
-        }
-
-        main_back_img_btn.setOnClickListener {
-            sessionManager.clearAddAdNearList()
-            findNavController().navigateUp()
         }
 
         fragment_add_ad_near_add_chkbox.setOnClickListener {
@@ -97,10 +97,6 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
         })
     }
 
-    private fun setAllStaticChechboxes(){
-        checkboxAdapter.addStaticItems(staticNearList)
-    }
-
     private fun navNextFragment(){
         findNavController().navigate(R.id.profileAddNearFragment_to_profileAddRequirementFragment)
     }
@@ -130,7 +126,6 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
 
     private fun clearAllNear() {
         checkboxAdapter.uncheckAll()
-        nears.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
@@ -148,6 +143,24 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
                 nears.add(item.title)
 
         sessionManager.setAddAdNearByListItem(nears, true)
+    }
+
+    private fun setToolbar(){
+        fragment_add_ad_near_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_near_toolbar.setNavigationOnClickListener{
+            sessionManager.clearAddAdNearList()
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_near_cancel.setOnClickListener {
+            activity?.finish()
+        }
+    }
+
+    override fun onDestroy() {
+        sessionManager.clearAddAdNearList()
+        super.onDestroy()
     }
 }
 

@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.navigateUp
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
@@ -21,6 +22,7 @@ import com.example.akvandroidapp.ui.main.profile.add_ad.adapter.RegionAutoComple
 import com.example.akvandroidapp.util.CityList
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ReqionList
+import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import javax.inject.Inject
@@ -39,22 +41,20 @@ class ProfileAddAddressFragment : BaseAddHouseFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_add_ad_address, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setToolbar()
         initiateContent()
         initDropDown()
 
         fragment_add_ad_address_next_btn.setOnClickListener {
             if (checkInputs())
                 navNextFragment()
-        }
-
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
         }
     }
 
@@ -156,6 +156,18 @@ class ProfileAddAddressFragment : BaseAddHouseFragment(){
         fragment_add_ad_address_city_et.setOnItemClickListener { adapterView, view, i, l ->
             val city = (adapterView.adapter.getItem(i) as CityList)
             city_id = city.id
+        }
+    }
+
+    private fun setToolbar(){
+        fragment_add_ad_address_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_address_toolbar.setNavigationOnClickListener{
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_address_cancel.setOnClickListener {
+            activity?.finish()
         }
     }
 }

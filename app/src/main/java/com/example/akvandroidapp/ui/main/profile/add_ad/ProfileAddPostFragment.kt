@@ -4,6 +4,7 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
@@ -12,6 +13,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.util.SuccessHandling.Companion.SUCCESS_BLOG_CREATED
+import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_post.*
 import okhttp3.MediaType
@@ -31,15 +33,16 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        activity_add_ad_toolbar.setNavigationOnClickListener {
+//            findNavController().navigateUp()
+//        }
         return inflater.inflate(R.layout.fragment_add_ad_post, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        setToolbar()
 
         fragment_add_ad_post_next_btn.setOnClickListener {
             subscribeObservers()
@@ -127,6 +130,18 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
                 multipartBodyList
             )
         )
+    }
+
+    private fun setToolbar(){
+        fragment_add_ad_post_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_post_toolbar.setNavigationOnClickListener{
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_post_cancel.setOnClickListener {
+            activity?.finish()
+        }
     }
 }
 

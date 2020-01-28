@@ -188,6 +188,11 @@ class Constants {
             CityList(77,"Abay",11),
             CityList(78,"Stepnogorsk",6)
         )
+
+        val typeList = listOf(
+            ReqionList("Квартира", 1),
+            ReqionList("Дом", 2)
+        )
     }
 }
 

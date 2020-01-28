@@ -100,6 +100,7 @@ public class CalendarPickerView extends RecyclerView {
             "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
             "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
     DateFormatSymbols dfs = DateFormatSymbols.getInstance(new Locale("ru"));
+    public boolean isDisabled = false;
 
     private OnDateSelectedListener dateListener;
     private DateSelectableFilter dateConfiguredListener;
@@ -968,7 +969,7 @@ public class CalendarPickerView extends RecyclerView {
     }
 
     private boolean isDateSelectable(Date date) {
-        return dateConfiguredListener == null || dateConfiguredListener.isDateSelectable(date);
+        return !isDisabled && (dateConfiguredListener == null || dateConfiguredListener.isDateSelectable(date));
     }
 
     public void setOnDateSelectedListener(OnDateSelectedListener listener) {

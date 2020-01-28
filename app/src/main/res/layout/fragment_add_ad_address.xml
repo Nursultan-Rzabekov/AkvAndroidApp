@@ -1,197 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:backgroundTint="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include
-        android:id="@+id/fragment_add_ad_address_back_btn"
-        layout="@layout/back_button_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_28dp"
-        android:layout_marginTop="@dimen/dim_24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/fragment_add_ad_address_tv1"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_60dp"
-        android:layout_marginTop="@dimen/dim_8dp"
-        android:layout_marginEnd="@dimen/dim_60dp"
-        android:text="@string/appartment_address"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_address_back_btn" />
+        app:elevation="0dp"
+        android:backgroundTint="@android:color/transparent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_add_ad_address_show_map_btn"
-        style="@style/BasicOutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_8dp"
-        android:layout_marginEnd="@dimen/dim_36dp"
-        android:paddingLeft="@dimen/dim_16dp"
-        android:paddingTop="0dp"
-        android:paddingRight="@dimen/dim_16dp"
-        android:paddingBottom="0dp"
-        android:text="@string/show_by_map"
-        app:icon="@drawable/ic_location"
-        app:iconPadding="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_address_tv1" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/fragment_add_ad_address_toolbar"
+            app:buttonGravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ScrollView
-        android:id="@+id/fragment_add_ad_address_scrollview"
+            <TextView
+                android:id="@+id/fragment_add_ad_address_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textAlignment="center"
+                android:textColor="@color/primaryZero"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/dim_20dp"
+                android:layout_marginBottom="@dimen/dim_20dp"
+                android:layout_marginEnd="@dimen/dim_16dp"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dim_16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_address_show_map_btn">
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/fragment_add_ad_address_tv1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dim_48dp"
-            android:layout_marginEnd="@dimen/dim_48dp"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/dim_60dp"
+            android:layout_marginTop="@dimen/dim_8dp"
+            android:layout_marginEnd="@dimen/dim_60dp"
+            android:text="@string/appartment_address"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/fragment_add_ad_address_country_tv"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragment_add_ad_address_show_map_btn"
+            style="@style/BasicOutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim_8dp"
+            android:layout_marginEnd="@dimen/dim_36dp"
+            android:paddingLeft="@dimen/dim_16dp"
+            android:paddingTop="0dp"
+            android:paddingRight="@dimen/dim_16dp"
+            android:paddingBottom="0dp"
+            android:text="@string/show_by_map"
+            app:icon="@drawable/ic_location"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_address_tv1" />
+
+        <ScrollView
+            android:id="@+id/fragment_add_ad_address_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dim_16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_address_show_map_btn">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Country"
-                android:textAlignment="textStart"
-                android:textColor='@color/black'
-                android:textSize="16sp" />
+                android:layout_marginStart="@dimen/dim_48dp"
+                android:layout_marginEnd="@dimen/dim_48dp"
+                android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_add_ad_address_country_l_et"
-                style="@style/BasicDropDown"
-                app:hintEnabled="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_12dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/fragment_add_ad_address_country_et"
+                <TextView
+                    android:id="@+id/fragment_add_ad_address_country_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:focusable="false"
-                    android:hint="@string/country" />
+                    android:text="@string/Country"
+                    android:textAlignment="textStart"
+                    android:textColor='@color/black'
+                    android:textSize="16sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/fragment_add_ad_address_region_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_16dp"
-                android:text="@string/region_"
-                android:textAlignment="textStart"
-                android:textColor='@color/black'
-                android:textSize="16sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_add_ad_address_region_l_et"
-                style="@style/BasicDropDown"
-                app:hintEnabled="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_12dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/fragment_add_ad_address_region_et"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fragment_add_ad_address_country_l_et"
+                    style="@style/BasicDropDown"
+                    app:hintEnabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:focusable="false"
-                    android:hint="@string/region_" />
+                    android:layout_marginTop="@dimen/dim_12dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/fragment_add_ad_address_country_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:focusable="false"
+                        android:hint="@string/country" />
 
-            <TextView
-                android:id="@+id/fragment_add_ad_address_city_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_16dp"
-                android:text="@string/city_must"
-                android:textAlignment="textStart"
-                android:textColor='@color/black'
-                android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_add_ad_address_city_l_et"
-                style="@style/BasicDropDown"
-                app:hintEnabled="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_12dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/fragment_add_ad_address_city_et"
+                <TextView
+                    android:id="@+id/fragment_add_ad_address_region_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:focusable="false"
-                    android:hint="@string/city" />
+                    android:layout_marginTop="@dimen/dim_16dp"
+                    android:text="@string/region_"
+                    android:textAlignment="textStart"
+                    android:textColor='@color/black'
+                    android:textSize="16sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/fragment_add_ad_address_address_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_16dp"
-                android:text="@string/address_must"
-                android:textAlignment="textStart"
-                android:textColor='@color/black'
-                android:textSize="16sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_add_ad_address_address_l_et"
-                style="@style/BasicTextOutlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_12dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fragment_add_ad_address_address_et"
-                    style="@style/BasicEditText"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fragment_add_ad_address_region_l_et"
+                    style="@style/BasicDropDown"
+                    app:hintEnabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:hint="@string/address" />
+                    android:layout_marginTop="@dimen/dim_12dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/fragment_add_ad_address_region_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:focusable="false"
+                        android:hint="@string/region_" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/fragment_add_ad_address_next_btn"
-                style="@style/BasicButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="@dimen/dim_48dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="@dimen/dim_36dp"
-                android:text="@string/next"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/fragment_add_ad_address_city_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_16dp"
+                    android:text="@string/city_must"
+                    android:textAlignment="textStart"
+                    android:textColor='@color/black'
+                    android:textSize="16sp" />
 
-    </ScrollView>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fragment_add_ad_address_city_l_et"
+                    style="@style/BasicDropDown"
+                    app:hintEnabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_12dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/fragment_add_ad_address_city_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:focusable="false"
+                        android:hint="@string/city" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/fragment_add_ad_address_address_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_16dp"
+                    android:text="@string/address_must"
+                    android:textAlignment="textStart"
+                    android:textColor='@color/black'
+                    android:textSize="16sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fragment_add_ad_address_address_l_et"
+                    style="@style/BasicTextOutlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/fragment_add_ad_address_address_et"
+                        style="@style/BasicEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:hint="@string/address" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fragment_add_ad_address_next_btn"
+                    style="@style/BasicButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="@dimen/dim_48dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="@dimen/dim_36dp"
+                    android:text="@string/next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+        </ScrollView>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

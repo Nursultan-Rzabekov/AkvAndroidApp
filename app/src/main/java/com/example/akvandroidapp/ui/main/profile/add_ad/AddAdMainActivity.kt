@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination

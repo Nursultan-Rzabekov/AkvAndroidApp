@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_description.*
 import javax.inject.Inject
@@ -26,21 +27,21 @@ class ProfileAddDescriptionFragment : BaseAddHouseFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        activity_add_ad_toolbar.setNavigationOnClickListener {
+//            findNavController().navigateUp()
+//        }
         return inflater.inflate(R.layout.fragment_add_ad_description, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setToolbar()
         initiateContent()
 
         fragment_add_ad_description_next_btn.setOnClickListener {
             if (checkInputs())
                 navNextFragment()
-        }
-
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
         }
     }
 
@@ -81,6 +82,18 @@ class ProfileAddDescriptionFragment : BaseAddHouseFragment(){
             fragment_add_ad_description_title_l_et.error = getString(R.string.invalid)
         }
         return false
+    }
+
+    private fun setToolbar(){
+        fragment_add_ad_description_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_description_toolbar.setNavigationOnClickListener{
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_description_cancel.setOnClickListener {
+            activity?.finish()
+        }
     }
 }
 

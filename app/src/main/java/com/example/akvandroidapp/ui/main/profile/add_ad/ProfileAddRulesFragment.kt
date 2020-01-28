@@ -7,6 +7,7 @@ import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.google.android.material.checkbox.MaterialCheckBox
+import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_rules.*
 import javax.inject.Inject
@@ -21,7 +23,6 @@ import javax.inject.Inject
 
 class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.CheckboxCheckInteraction, AddAdCheckboxAdapter.CheckboxCloseInteraction{
 
-    private val rules = mutableListOf<String>()
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticRulesList = mutableListOf(
         "Не курить",
@@ -40,11 +41,17 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        activity_add_ad_toolbar.setNavigationOnClickListener {
+//            sessionManager.clearAddAdRulesList()
+//            findNavController().navigateUp()
+//        }
         return inflater.inflate(R.layout.fragment_add_ad_rules, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setToolbar()
         setSpanable()
         initRecyclerView()
         setObservers()
@@ -53,15 +60,10 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
         fragment_add_ad_rules_next_btn.setOnClickListener {
             sessionManager.clearAddAdRulesList()
             saveRules()
-            Log.e("Sesssion_test_rule", "$rules")
-            rules.clear()
+            Log.e("Sesssion_test_rule", "asdasd")
             navNextFragment()
         }
 
-        main_back_img_btn.setOnClickListener {
-            sessionManager.clearAddAdRulesList()
-            findNavController().navigateUp()
-        }
         fragment_add_ad_rules_add_chkbox.setOnClickListener {
             fragment_add_ad_rules_add_chkbox.visibility = View.GONE
             fragment_add_ad_rules_add_chkbox_layout.visibility = View.VISIBLE
@@ -97,10 +99,6 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
         })
     }
 
-    private fun setAllStaticChechboxes(){
-        checkboxAdapter.addStaticItems(staticRulesList)
-    }
-
     private fun initialState(){
         fragment_add_ad_rules_add_chkbox_layout.visibility = View.GONE
         fragment_add_ad_rules_add_chkbox.visibility = View.VISIBLE
@@ -126,7 +124,6 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
 
     private fun clearAllRules() {
         checkboxAdapter.uncheckAll()
-        rules.clear()
     }
 
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
@@ -144,6 +141,24 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
                 rules.add(item.title)
 
         sessionManager.setAddAdRulesListItem(rules, true)
+    }
+
+    private fun setToolbar(){
+        fragment_add_ad_rules_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_rules_toolbar.setNavigationOnClickListener{
+            sessionManager.clearAddAdRulesList()
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_rules_cancel.setOnClickListener {
+            activity?.finish()
+        }
+    }
+
+    override fun onDestroy() {
+        sessionManager.clearAddAdRulesList()
+        super.onDestroy()
     }
 }
 

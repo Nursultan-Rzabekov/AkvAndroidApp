@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -12,6 +13,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.util.Converters
+import com.example.akvandroidapp.util.MoneyTextWatcher
+import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_price.*
 import javax.inject.Inject
@@ -33,19 +37,19 @@ class ProfileAddPriceFragment : BaseAddHouseFragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        activity_add_ad_toolbar.setNavigationOnClickListener {
+//            sessionManager.clearAddAdPriceAndDiscounts()
+//            findNavController().navigateUp()
+//        }
         return inflater.inflate(R.layout.fragment_add_ad_price, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setToolbar()
         initialState()
         setObservers()
-
-        main_back_img_btn.setOnClickListener {
-            sessionManager.clearAddAdPriceAndDiscounts()
-            findNavController().navigateUp()
-        }
 
         fragment_add_ad_price_next_btn.setOnClickListener {
             savePrice()
@@ -94,6 +98,8 @@ class ProfileAddPriceFragment : BaseAddHouseFragment(){
         fragment_add_ad_price_discounts_add_30_days_rbtn.setOnClickListener {
             fragment_add_ad_price_one_option_tv.text = ("Кол-во дней: 7 дней")
         }
+
+        fragment_add_ad_price_et.addTextChangedListener(MoneyTextWatcher(fragment_add_ad_price_et))
     }
 
     private fun navNextFragment(){
@@ -234,6 +240,24 @@ class ProfileAddPriceFragment : BaseAddHouseFragment(){
             fragment_add_ad_price_add_discount_btn.visibility = View.GONE
         else
             fragment_add_ad_price_add_discount_btn.visibility = View.VISIBLE
+    }
+
+    private fun setToolbar(){
+        fragment_add_ad_price_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_price_toolbar.setNavigationOnClickListener{
+            sessionManager.clearAddAdPriceAndDiscounts()
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_price_cancel.setOnClickListener {
+            activity?.finish()
+        }
+    }
+
+    override fun onDestroy() {
+        sessionManager.clearAddAdPriceAndDiscounts()
+        super.onDestroy()
     }
 }
 
