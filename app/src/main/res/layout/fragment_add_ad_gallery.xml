@@ -68,64 +68,16 @@
             app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_gallery_tv"
             />
 
-        <GridLayout
-            android:id="@+id/fragment_add_ad_gallery_grid_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_add_ad_gallery_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dim_60dp"
             android:layout_marginTop="@dimen/dim_24dp"
             android:layout_marginEnd="@dimen/dim_60dp"
-            android:columnCount="3"
-            android:useDefaultMargins="true"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_add_ad_gallery_max_lb">
-
-            <ImageView
-                android:id="@+id/fragment_add_ad_gallery_iv1"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_add_photo_camera" />
-
-            <ImageView
-                android:id="@+id/fragment_add_ad_gallery_iv2"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_plus_photo" />
-
-            <ImageView
-                android:id="@+id/fragment_add_ad_gallery_iv3"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_plus_photo" />
-
-            <ImageView
-                android:id="@+id/fragment_add_ad_gallery_iv4"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_plus_photo" />
-
-            <ImageView
-                android:id="@+id/fragment_add_ad_gallery_iv5"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_plus_photo" />
-
-            <ImageView
-                android:id="@+id/fragment_add_ad_gallery_iv6"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_plus_photo" />
-
-        </GridLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_add_ad_gallery_max_lb"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/fragment_add_ad_gallery_next_btn"

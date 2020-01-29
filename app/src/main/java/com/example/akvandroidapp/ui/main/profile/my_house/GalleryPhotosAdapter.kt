@@ -18,6 +18,9 @@ class GalleryPhotosAdapter(
     private val closeInteraction: PhotoCloseInteraction? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private val MAX_PHOTOS: Int = 15
+    private var counter: Int = 0
+
     val DIFF_CALLBACK = object: DiffUtil.ItemCallback<GalleryPhoto>(){
         override fun areItemsTheSame(oldItem: GalleryPhoto, newItem: GalleryPhoto): Boolean {
             if (oldItem.url != null && newItem.url != null)
@@ -109,26 +112,44 @@ class GalleryPhotosAdapter(
 
     fun submitList(items: MutableList<GalleryPhoto>){
         val newList = items.toMutableList()
+        counter = newList.size
         newList.add(GalleryPhoto(null, null))
         differ.submitList(newList)
         Log.e("GALLERYADAPTER", "${differ.currentList}")
     }
 
     fun addGalleryPhoto(item: GalleryPhoto){
-        val newList = differ.currentList.toMutableList()
-        newList.add(differ.currentList.size-1, item)
-        differ.submitList(newList)
-        Log.e("GALLERYADAPTER", "${differ.currentList}")
+        if (differ.currentList.size < MAX_PHOTOS + 1) {
+            val newList = differ.currentList.toMutableList()
+            newList.add(differ.currentList.size - 1, item)
+            counter += 1
+
+            if (newList.size == MAX_PHOTOS + 1)
+                newList.removeAt(newList.lastIndex)
+
+            differ.submitList(newList)
+            Log.e("GALLERYADAPTER", "${differ.currentList}")
+        }
     }
 
     fun removeItem(position: Int) {
         val newList = differ.currentList.toMutableList()
+
+        if (counter == MAX_PHOTOS)
+            newList.add(GalleryPhoto(null,null))
+
         newList.removeAt(position)
+
+        counter -= 1
         differ.submitList(newList)
     }
 
     fun getPhotos(): MutableList<GalleryPhoto> {
-        return ArrayList(differ.currentList)
+        val allPhotos = mutableListOf<GalleryPhoto>()
+        for (photo in differ.currentList)
+            if (photo.uri != null)
+                allPhotos.add(photo)
+        return allPhotos
     }
 
     class PhotoViewHolder constructor(

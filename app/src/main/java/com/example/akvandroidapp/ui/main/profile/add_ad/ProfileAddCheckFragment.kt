@@ -158,6 +158,7 @@ class ProfileAddCheckFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
 
         fragment_add_ad_check_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 

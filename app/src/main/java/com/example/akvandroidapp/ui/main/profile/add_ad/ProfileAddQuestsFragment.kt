@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
@@ -41,6 +42,7 @@ class ProfileAddQuestsFragment : BaseAddHouseFragment(){
 
         setToolbar()
         clearAll()
+        setObservers()
 
         fragment_add_ad_guests_count_next_btn.setOnClickListener {
             navNextFragment()
@@ -88,6 +90,18 @@ class ProfileAddQuestsFragment : BaseAddHouseFragment(){
         fragment_add_ad_guests_count_bed_counter_tv.text = bedsCount.toString()
     }
 
+    private fun setObservers(){
+        sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{
+            guestsCount = it._addAdGuestsCount
+            roomsCount = it._addAdRoomsCount
+            bedsCount = it._addAdBedsCount
+
+            fragment_add_ad_guests_count_guest_counter_tv.text = guestsCount.toString()
+            fragment_add_ad_guests_count_rooms_counter_tv.text = roomsCount.toString()
+            fragment_add_ad_guests_count_bed_counter_tv.text = bedsCount.toString()
+        })
+    }
+
     private fun setToolbar(){
         fragment_add_ad_guests_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
 
@@ -97,6 +111,7 @@ class ProfileAddQuestsFragment : BaseAddHouseFragment(){
 
         fragment_add_ad_guests_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 }

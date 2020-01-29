@@ -2,12 +2,15 @@ package com.example.akvandroidapp.util
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import com.google.android.material.textfield.TextInputEditText
+import java.lang.Exception
 import java.lang.IllegalArgumentException
 import java.lang.ref.WeakReference
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.*
 import kotlin.math.abs
 
 class Converters {
@@ -35,6 +38,14 @@ class Converters {
             } else return "${BigDecimal(b/1e3).setScale(1, RoundingMode.HALF_EVEN)} PB"
         }
 
+        fun formatPriceToInt(str: String): Int {
+            if (str.isBlank()) return 0
+            var newStr = str
+
+            if(str.contains(","))
+                newStr = str.replace(",","")
+            return newStr.toInt()
+        }
 
     }
 }
@@ -44,20 +55,35 @@ class MoneyTextWatcher(
     val weakReference = WeakReference<TextInputEditText>(editText)
 
     override fun afterTextChanged(p0: Editable?) {
-        val editText = weakReference.get()
-        if (editText == null) throw IllegalArgumentException("Money is not all")
+        val editText = weakReference.get() ?: throw IllegalArgumentException("Money is not all")
 
-        val str = p0.toString()
-        if (str.isNotBlank()){
-            val formatter = DecimalFormat("#,###")
-            editText.removeTextChangedListener(this)
-            editText.setText(formatter.format(str))
-            editText.setSelection(str.length)
-            editText.addTextChangedListener(this)
+        editText.removeTextChangedListener(this)
+
+        try {
+            var str = p0.toString()
+            if (str.isNotEmpty()) {
+                if (str.contains(","))
+                    str = str.replace(",", "")
+
+                val long = str.toLong()
+
+                val formatter = DecimalFormat("#,###,###")
+                editText.setText(formatter.format(long))
+                editText.setSelection(editText.text.toString().length)
+            } else {
+                editText.setText("0")
+                editText.setSelection(editText.text.toString().length)
+            }
+        }catch (e: Exception){
+            Log.e("PriceWatcher", e.stackTrace.toString())
         }
+
+
+        editText.addTextChangedListener(this)
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
     }
 
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

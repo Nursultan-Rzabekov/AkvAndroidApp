@@ -45,8 +45,8 @@
                 android:layout_marginStart="@dimen/dim_16dp"
                 android:layout_marginEnd="@dimen/dim_16dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                app:layout_constraintBottom_toTopOf="@id/book_requests_recycler_view_item_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/book_requests_recycler_view_item_iv_card"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0">
@@ -154,16 +154,27 @@
 
             </LinearLayout>
 
-            <ImageButton
-                android:contentDescription="@string/cancel"
-                android:id="@+id/imageButton"
-                style="@style/BasicImageButton"
-                android:layout_width="@dimen/dim_12dp"
-                android:layout_height="@dimen/dim_12dp"
-                android:tint="@color/secondaryFirst"
-                android:src="@drawable/ic_cancel_filter"
+<!--            <ImageButton-->
+<!--                android:contentDescription="@string/cancel"-->
+<!--                android:id="@+id/imageButton"-->
+<!--                style="@style/BasicImageButton"-->
+<!--                android:layout_width="@dimen/dim_12dp"-->
+<!--                android:layout_height="@dimen/dim_12dp"-->
+<!--                android:tint="@color/secondaryFirst"-->
+<!--                android:src="@drawable/ic_cancel_filter"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <TextView
+                android:id="@+id/book_requests_recycler_view_item_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_book"
+                android:textColor="@color/primaryZero"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

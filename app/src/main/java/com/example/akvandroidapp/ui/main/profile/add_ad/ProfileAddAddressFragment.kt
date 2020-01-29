@@ -168,6 +168,7 @@ class ProfileAddAddressFragment : BaseAddHouseFragment(){
 
         fragment_add_ad_address_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 }

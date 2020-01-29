@@ -66,12 +66,12 @@ class HomeListAdapter(
         }
 
     }
+
     private val differ =
         AsyncListDiffer(
             BlogRecyclerChangeCallback(this),
             AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
         )
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -178,7 +178,6 @@ class HomeListAdapter(
         }
     }
 
-
     fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean) {
 
         Log.e("HOME FRAGMENT adapter", "${blogList}")
@@ -250,6 +249,5 @@ class HomeListAdapter(
     interface Interaction {
         fun onItemSelected(position: Int, item: HomeReservation)
     }
-
 
 }

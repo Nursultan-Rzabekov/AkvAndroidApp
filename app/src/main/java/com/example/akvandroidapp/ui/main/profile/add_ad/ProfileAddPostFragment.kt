@@ -141,6 +141,7 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
 
         fragment_add_ad_post_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 }

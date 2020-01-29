@@ -155,6 +155,7 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
 
         fragment_add_ad_near_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 

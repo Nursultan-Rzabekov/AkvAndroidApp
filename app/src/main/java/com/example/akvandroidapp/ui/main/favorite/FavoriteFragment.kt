@@ -57,11 +57,6 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
         initRecyclerView()
         subscribeObservers()
         onBlogSearchOrFilter()
-
-        fragment_saved_pages_empty_find_btn.setOnClickListener {
-            fragment_saved_pages_empty_id.visibility = View.GONE
-            fragment_saved_pages_filled_id.visibility = View.VISIBLE
-        }
     }
 
     private fun subscribeObservers(){
@@ -72,8 +67,6 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
             }
         })
 
-
-
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
             if(viewState != null){
                 if(viewState.deleteblogFields.isDeleted){
@@ -81,8 +74,11 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
                 }
 
                 Log.d(TAG, "favorite: 123 ${viewState.blogFields.blogList}")
-                fragment_saved_pages_empty_id.visibility = View.GONE
-                fragment_saved_pages_filled_id.visibility = View.VISIBLE
+
+                if (viewState.blogFields.blogList.isEmpty())
+                    emptyState()
+                else
+                    filledState()
 
                 recyclerAdapter.apply {
 
@@ -178,6 +174,16 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
         viewModel.setHouseId(item.id).let {
             viewModel.setStateEvent(FavoriteStateEvent.DeleteFavoriteItemEvent())
         }
+    }
+
+    private fun emptyState(){
+        fragment_saved_pages_empty_id.visibility = View.VISIBLE
+        fragment_saved_pages_filled_id.visibility = View.GONE
+    }
+
+    private fun filledState(){
+        fragment_saved_pages_empty_id.visibility = View.GONE
+        fragment_saved_pages_filled_id.visibility = View.VISIBLE
     }
 }
 

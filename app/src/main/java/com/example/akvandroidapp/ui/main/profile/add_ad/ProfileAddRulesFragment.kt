@@ -153,6 +153,7 @@ class ProfileAddRulesFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Che
 
         fragment_add_ad_rules_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 
