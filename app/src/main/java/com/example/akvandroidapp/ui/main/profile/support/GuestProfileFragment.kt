@@ -27,7 +27,6 @@ class GuestProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_support_fo_guest, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)

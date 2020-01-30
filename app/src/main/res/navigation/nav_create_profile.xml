@@ -11,7 +11,6 @@
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/profile_part_layout">
 
-
             <action android:id="@+id/action_profileFragment_to_profileAboutProfileFragment"
                 app:destination="@id/profileAboutProfileFragment"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -27,15 +26,6 @@
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 />
-
-            <action android:id="@+id/action_profileFragment_to_supportActivity"
-                app:destination="@id/supportProfileActivity"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                />
-
 
             <action android:id="@+id/action_profileFragment_to_profileAccountUserProfileFragment"
                 app:destination="@id/profileAccountUserProfileFragment"
@@ -70,21 +60,6 @@
 
     </fragment>
 
-
-    <activity
-        android:id="@+id/supportProfileActivity"
-        android:name="com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity"
-        android:label="@string/fragment_view_blog"
-        tools:layout="@layout/support_main_layout">
-
-    </activity>
-
-    <fragment android:id="@+id/profileSupportProfileReviewFragment"
-        android:name="com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment"
-        android:label="@string/fragment_create_blog"
-        tools:layout="@layout/fragment_support_notify_error">
-
-    </fragment>
 
     <fragment android:id="@+id/profileAboutProfileFragment"
         android:name="com.example.akvandroidapp.ui.main.profile.AboutProfileFragment"

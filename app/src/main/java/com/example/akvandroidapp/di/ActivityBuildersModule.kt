@@ -23,7 +23,8 @@ import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
-import com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity
+import com.example.akvandroidapp.ui.main.profile.support.SupportMainActivity
+import com.example.akvandroidapp.ui.main.profile.support.SupportProfileFragment
 import com.example.akvandroidapp.ui.main.search.MapActivity
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
@@ -56,6 +57,12 @@ abstract class ActivityBuildersModule {
         modules = [MyHouseModule::class, MyHouseFragmentBuildersModule::class, MyHouseViewModelModule::class]
     )
     abstract fun contributeMyHouseMainActivity(): MyHouseMainActivity
+
+    @SupportScope
+    @ContributesAndroidInjector(
+        modules = [SupportModule::class, SupportFragmentBuildersModule::class, SupportViewModelModule::class]
+    )
+    abstract fun contributeSupportMainActivity(): SupportMainActivity
 
     @MainScope
     @ContributesAndroidInjector(
@@ -104,10 +111,5 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
     abstract fun contributeMessagesDetailActivity(): MessagesDetailActivity
 
-    @SupportScope
-    @ContributesAndroidInjector(
-        modules = [SupportModule::class, SupportFragmentBuildersModule::class, SupportViewModelModule::class]
-    )
-    abstract fun contributeSupportProfileActivity(): SupportProfileActivity
 
 }

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.header_support.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
 
 
-class SupportProfileReviewFragment : BaseProfileFragment() {
+class SupportProfileReviewFragment : BaseSupportFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +34,5 @@ class SupportProfileReviewFragment : BaseProfileFragment() {
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
 
-        header_support_back_btn.setOnClickListener {
-            fragmentManager?.popBackStack()
-        }
-
     }
-
-
-
-
 }

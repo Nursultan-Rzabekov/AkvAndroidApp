@@ -147,13 +147,9 @@ class ChatMesFragment : BaseMessagesFragment(),
     }
 
     override fun onItemSelected(position: Int, item: UserChatMessages) {
-        //viewModel.setBlogPost(item)
-
         val intent = Intent(context,MessagesDetailActivity::class.java)
         intent.putExtra("name",item.email)
         startActivity(intent)
-
-//        findNavController().navigate(R.id.action_ChatMesFragment_to_MessagesDetailFragmentt)
     }
 
     override fun onDestroyView() {

@@ -16,6 +16,7 @@ import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.profile.support.SupportMainActivity
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.SuccessHandling
 import handleIncomingProfileInfo
@@ -90,7 +91,8 @@ class ProfileFragment : BaseProfileFragment(){
     }
 
     private fun navigateSupportFragment(){
-        findNavController().navigate(R.id.action_profileFragment_to_supportActivity)
+        val intent = Intent(context, SupportMainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateSettingsFragment(){
