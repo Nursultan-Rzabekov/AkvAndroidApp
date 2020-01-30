@@ -11,7 +11,9 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
-import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseStateStateEvent
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewModel
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
@@ -64,7 +66,7 @@ fun DetailsViewModel.setImageMultipart(photos:  MultipartBody.Part?) {
     setViewState(update)
 }
 
-fun ProfileViewModel.resetPage(){
+fun MyHouseViewModel.resetPage(){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.page = 1
     setViewState(update)
@@ -119,11 +121,11 @@ fun ZhilyeReviewViewModel.loadFirstPage() {
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.reviewsField.reviewList}")
 }
 
-fun ProfileViewModel.loadFirstPage() {
+fun MyHouseViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
     resetPage()
-    setStateEvent(ProfileStateEvent.MyHouseEvent())
+    setStateEvent(MyHouseStateStateEvent.MyHouseEvent())
 }
 
 fun MessagesViewModel.loadFirstPage() {
@@ -186,7 +188,7 @@ private fun MessagesViewModel.incrementOrderPageNumber(){
     setViewState(update)
 }
 
-private fun ProfileViewModel.incrementPageNumber(){
+private fun MyHouseViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.myHouseFields.page // get current page
     update.myHouseFields.page = page + 1
@@ -241,13 +243,13 @@ fun MessagesViewModel.nextOrderPage(){
     }
 }
 
-fun ProfileViewModel.nextPage(){
+fun MyHouseViewModel.nextPage(){
     if(!viewState.value!!.myHouseFields.isQueryInProgress
         && !viewState.value!!.myHouseFields.isQueryExhausted){
         Log.d(TAG, "BlogViewModel: Attempting to load next page...")
         incrementPageNumber()
         setQueryInProgress(true)
-        setStateEvent(ProfileStateEvent.MyHouseEvent())
+        setStateEvent(MyHouseStateStateEvent.MyHouseEvent())
     }
 }
 
@@ -324,7 +326,7 @@ fun ZhilyeBookViewModel.handleIncomingRequest(viewState: ZhilyeBookViewState){
     setResponse(viewState.reservationRequestField.response.response)
 }
 
-fun ProfileViewModel.handleIncomingBlogListData(viewState: ProfileViewState){
+fun MyHouseViewModel.handleIncomingBlogListData(viewState: MyHouseViewState){
     Log.d(TAG, "BlogViewModel, DataState: ${viewState}")
     Log.d(TAG, "BlogViewModel, DataState: isQueryInProgress?: " +
             "${viewState.myHouseFields.isQueryInProgress}")

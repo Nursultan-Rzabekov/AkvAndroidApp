@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_my_adds_earnings.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
-class MyHouseMoneyProfileFragment : BaseProfileFragment() {
+class MyHouseMoneyProfileFragment : BaseMyHouseFragment() {
 
     private lateinit var earningRecycler: EarningsListAdapter
 
@@ -40,9 +40,9 @@ class MyHouseMoneyProfileFragment : BaseProfileFragment() {
 
         earningRecycler.submitList(earnings!!.toList())
 
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
-        }
+//        main_back_img_btn.setOnClickListener {
+//            findNavController().navigateUp()
+//        }
     }
 
     private fun initRecyclerView(){

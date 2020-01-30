@@ -64,34 +64,6 @@ constructor(
                 }?: AbsentLiveData.create()
             }
 
-            is ProfileStateEvent.MyHouseEvent -> {
-                return sessionManager.cachedToken.value?.let { authToken ->
-                    profileRepository.myHouseList(
-                        authToken = authToken,
-                        page = getPage()
-                    )
-                }?: AbsentLiveData.create()
-            }
-
-            is ProfileStateEvent.MyHouseStateEvent -> {
-                return sessionManager.cachedToken.value?.let { authToken ->
-                    Log.d("Go", "Go go go go  + ${getState()}")
-                    Log.d("Go", "Go go go go  + ${getHouseId()}")
-                    if(getState() == 0){
-                        profileRepository.myHouseStateActivate(
-                            authToken = authToken,
-                            houseId = getHouseId()
-                        )
-                    }
-                    else{
-                        profileRepository.myHouseStateDeactivate(
-                            authToken = authToken,
-                            houseId = getHouseId()
-                        )
-                    }
-                }?: AbsentLiveData.create()
-            }
-
             is ProfileStateEvent.None -> {
                 return liveData {
                     emit(

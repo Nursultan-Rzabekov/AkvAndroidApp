@@ -27,7 +27,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class MyHouseDetailProfileFragment : BaseProfileFragment() {
+class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_rules.*
 import javax.inject.Inject
 
 
-class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCheckInteraction, AddAdCheckboxAdapter.CheckboxCloseInteraction{
+class MyHouseRulesEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdapter.CheckboxCheckInteraction, AddAdCheckboxAdapter.CheckboxCloseInteraction{
 
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticRulesList = mutableListOf(
@@ -59,12 +59,12 @@ class MyHouseRulesEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdap
 
         fragment_add_ad_rules_next_btn.visibility = View.GONE
 
-        main_back_img_btn.setOnClickListener {
-            sessionManager.clearHouseUpdateRules()
-            saveRules()
-            Log.e("Sesssion_test_rule", "sadsd")
-            findNavController().navigateUp()
-        }
+//        main_back_img_btn.setOnClickListener {
+//            sessionManager.clearHouseUpdateRules()
+//            saveRules()
+//            Log.e("Sesssion_test_rule", "sadsd")
+//            findNavController().navigateUp()
+//        }
 
         fragment_add_ad_rules_add_chkbox.setOnClickListener {
             fragment_add_ad_rules_add_chkbox.visibility = View.GONE

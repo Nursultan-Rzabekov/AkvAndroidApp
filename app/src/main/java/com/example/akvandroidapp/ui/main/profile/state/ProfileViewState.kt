@@ -7,11 +7,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ProfileViewState (
-    var myHouseFields: MyHouseFields = MyHouseFields(),
     var profileInfoFields: ProfileInfoFields = ProfileInfoFields(),
     var profileInfoUpdateFields: ProfileInfoUpdateFields = ProfileInfoUpdateFields(),
-    var blogFields: NewBlogFields = NewBlogFields(),
-    var myHouseStateFields: MyHouseStateFields = MyHouseStateFields()
+    var blogFields: NewBlogFields = NewBlogFields()
+
 ) : Parcelable
 {
     @Parcelize
@@ -47,19 +46,6 @@ data class ProfileViewState (
         var newImageUri: String? = null
     ) : Parcelable
 
-    @Parcelize
-    data class MyHouseFields(
-        var blogList: List<BlogPost> = ArrayList(),
-        var page: Int = 1,
-        var isQueryInProgress: Boolean = false,
-        var isQueryExhausted: Boolean = false
-    ) : Parcelable
-
-    @Parcelize
-    data class MyHouseStateFields(
-        var houseId: Int = 1,
-        var state: Int = 0
-    ) : Parcelable
 }
 
 

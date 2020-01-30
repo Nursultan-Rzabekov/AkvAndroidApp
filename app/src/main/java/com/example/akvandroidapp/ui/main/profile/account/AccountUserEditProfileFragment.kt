@@ -256,7 +256,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
                 gender = getGender(),
                 email = fragment_profile_account_edit_email_tv.text.toString(),
                 birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
-                image = multipartBody )
+                image = multipartBody)
         )
     }
 
@@ -279,17 +279,18 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.profileInfoUpdateFields.let{ newBlogFields ->
-                Log.d("qwe","qwerty + ${newBlogFields.first_name}")
+                Log.d("qwe","qwerty + ${imageUrl}")
                 Log.d("qwe","qwerty image + ${newBlogFields.newImageUri}")
 
                 newBlogFields.gender?.let {gender ->
                         sessionManager.setProfileInfo(
-                            newBlogFields.first_name.toString(),
-                            newBlogFields.birth_day.toString(),
-                            gender,
-                            newBlogFields.phone.toString(),
-                            newBlogFields.email.toString(),
-                            imageBackend = if(newBlogFields.newImageUri == null) {imageUrl} else {newBlogFields.newImageUri})
+                            nickname = newBlogFields.first_name.toString(),
+                            birthdate = newBlogFields.birth_day.toString(),
+                            gender = gender,
+                            phonenumber = newBlogFields.phone.toString(),
+                            email = newBlogFields.email.toString(),
+                            imageBackend = if(newBlogFields.newImageUri == null) imageUrl else newBlogFields.newImageUri
+                        )
                         findNavController().navigateUp()
                 }
             }

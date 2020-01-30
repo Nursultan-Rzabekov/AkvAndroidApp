@@ -13,6 +13,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
@@ -80,7 +81,6 @@ class ProfileFragment : BaseProfileFragment(){
     }
 
     private fun navNextFragment(){
-        Log.d(TAG, "AddAdMainActivity: called.")
         val intent = Intent(context, AddAdMainActivity::class.java)
         startActivity(intent)
     }
@@ -98,7 +98,8 @@ class ProfileFragment : BaseProfileFragment(){
     }
 
     private fun navigateMyHouseAddsFragment(){
-        findNavController().navigate(R.id.action_profileFragment_to_profileMyHouseAddsProfileFragment)
+        val intent = Intent(context, MyHouseMainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateAccountUserProfileFragment(){

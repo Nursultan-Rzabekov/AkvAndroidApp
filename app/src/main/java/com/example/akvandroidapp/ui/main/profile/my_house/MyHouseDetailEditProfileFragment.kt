@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.header_my_adds_change.*
 import javax.inject.Inject
 
 
-class MyHouseDetailEditProfileFragment : BaseProfileFragment(), GalleryPhotosAdapter.PhotoCloseInteraction {
+class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAdapter.PhotoCloseInteraction {
 
     private lateinit var photosAdapter: GalleryPhotosAdapter
 

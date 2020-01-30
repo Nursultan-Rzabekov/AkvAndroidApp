@@ -17,9 +17,7 @@ sealed class ProfileStateEvent {
         val image: MultipartBody.Part? = null
     ): ProfileStateEvent()
 
-    class MyHouseEvent : ProfileStateEvent()
 
-    class MyHouseStateEvent : ProfileStateEvent()
 
     class None: ProfileStateEvent()
 }

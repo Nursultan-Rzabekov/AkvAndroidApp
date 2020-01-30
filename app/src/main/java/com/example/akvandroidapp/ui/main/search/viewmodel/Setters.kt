@@ -6,6 +6,7 @@ import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
@@ -83,13 +84,13 @@ fun FavoriteViewModel.setHouseId(houseId: Int){
     setViewState(update)
 }
 
-fun ProfileViewModel.setHouseId(houseId: Int){
+fun MyHouseViewModel.setHouseId(houseId: Int){
     val update = getCurrentViewStateOrNew()
     update.myHouseStateFields.houseId = houseId
     setViewState(update)
 }
 
-fun ProfileViewModel.setState(state: Int){
+fun MyHouseViewModel.setState(state: Int){
     val update = getCurrentViewStateOrNew()
     update.myHouseStateFields.state = state
     setViewState(update)
@@ -181,7 +182,7 @@ fun DetailsViewModel.setBlogListDataImages(blogList: List<UserConversationImages
 }
 
 
-fun ProfileViewModel.setBlogListData(blogList: List<BlogPost>){
+fun MyHouseViewModel.setBlogListData(blogList: List<BlogPost>){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.blogList = blogList
     setViewState(update)
@@ -217,7 +218,7 @@ fun FavoriteViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
-fun ProfileViewModel.setQueryExhausted(isExhausted: Boolean){
+fun MyHouseViewModel.setQueryExhausted(isExhausted: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.isQueryExhausted = isExhausted
     setViewState(update)
@@ -265,7 +266,7 @@ fun FavoriteViewModel.setQueryInProgress(isInProgress: Boolean){
     setViewState(update)
 }
 
-fun ProfileViewModel.setQueryInProgress(isInProgress: Boolean){
+fun MyHouseViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.myHouseFields.isQueryInProgress = isInProgress
     setViewState(update)

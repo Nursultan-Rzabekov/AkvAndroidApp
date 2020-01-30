@@ -6,6 +6,7 @@ import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
@@ -229,22 +230,21 @@ fun SearchViewModel.getUpdatedBlogUri(): Uri? {
 }
 
 
-fun ProfileViewModel.getPage(): Int{
+fun MyHouseViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.myHouseFields.page
     }
 }
 
-fun ProfileViewModel.getHouseId(): Int{
+fun MyHouseViewModel.getHouseId(): Int{
     getCurrentViewStateOrNew().let {
         return it.myHouseStateFields.houseId
     }
 }
 
-
 // 0 -> activate
 // 1 -> deactivate
-fun ProfileViewModel.getState(): Int{
+fun MyHouseViewModel.getState(): Int{
     getCurrentViewStateOrNew().let {
         return it.myHouseStateFields.state
     }

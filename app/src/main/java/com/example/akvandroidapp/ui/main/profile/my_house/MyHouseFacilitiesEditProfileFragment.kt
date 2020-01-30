@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.sign_up_pass.*
 import javax.inject.Inject
 
 
-class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
+class MyHouseFacilitiesEditProfileFragment : BaseMyHouseFragment(),
         AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction{
 
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
@@ -70,11 +70,11 @@ class MyHouseFacilitiesEditProfileFragment : BaseProfileFragment(),
 
         fragment_add_ad_check_next_btn.visibility = View.GONE
 
-        main_back_img_btn.setOnClickListener {
-            sessionManager.clearHouseUpdateFacilities()
-            saveFacilities()
-            findNavController().navigateUp()
-        }
+//        main_back_img_btn.setOnClickListener {
+//            sessionManager.clearHouseUpdateFacilities()
+//            saveFacilities()
+//            findNavController().navigateUp()
+//        }
 
         fragment_add_ad_check_add_chkbox.setOnClickListener {
             fragment_add_ad_check_add_chkbox.visibility = View.GONE

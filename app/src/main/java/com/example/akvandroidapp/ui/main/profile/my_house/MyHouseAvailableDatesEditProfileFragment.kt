@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_add_ad_rules.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
 
 
-class MyHouseAvailableDatesEditProfileFragment : BaseProfileFragment() {
+class MyHouseAvailableDatesEditProfileFragment : BaseMyHouseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +35,8 @@ class MyHouseAvailableDatesEditProfileFragment : BaseProfileFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
-        }
+//        main_back_img_btn.setOnClickListener {
+//            findNavController().navigateUp()
+//        }
     }
 }

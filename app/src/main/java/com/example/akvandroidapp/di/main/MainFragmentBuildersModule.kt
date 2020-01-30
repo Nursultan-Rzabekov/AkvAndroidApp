@@ -60,34 +60,10 @@ abstract class MainFragmentBuildersModule {
     abstract fun contributeSettingsRegionProfileFragment(): SettingsRegionProfileFragment
 
     @ContributesAndroidInjector()
-    abstract fun contributeMyHouseAddsProfileFragment(): MyHouseAddsProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeMyHouseDetailProfileFragment(): MyHouseDetailProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeMyHouseMoneyProfileFragment(): MyHouseMoneyProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeMyHouseDetailEditProfileFragment(): MyHouseDetailEditProfileFragment
-
-    @ContributesAndroidInjector()
     abstract fun contributeAccountUserEditProfileFragment(): AccountUserEditProfileFragment
 
     @ContributesAndroidInjector()
     abstract fun contributeAccountUserProfileFragment(): AccountUserProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeMyHouseAvailableDatesEditProfileFragment(): MyHouseAvailableDatesEditProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeMyHouseFacilitiesEditProfileFragment(): MyHouseFacilitiesEditProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeMyHouseNearEditProfileFragment(): MyHouseNearEditProfileFragment
-
-    @ContributesAndroidInjector()
-    abstract fun contributeMyHouseRulesEditProfileFragment(): MyHouseRulesEditProfileFragment
 
     @ContributesAndroidInjector()
     abstract fun contributeChatMesFragment(): ChatMesFragment

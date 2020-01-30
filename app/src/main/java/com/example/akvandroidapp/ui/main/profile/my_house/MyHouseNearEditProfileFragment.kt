@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.sign_up_pass.*
 import javax.inject.Inject
 
 
-class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction {
+class MyHouseNearEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdapter.CheckboxCloseInteraction, AddAdCheckboxAdapter.CheckboxCheckInteraction {
 
     private lateinit var checkboxAdapter: AddAdCheckboxAdapter
     private val staticNearList = mutableListOf(
@@ -66,12 +66,12 @@ class MyHouseNearEditProfileFragment : BaseProfileFragment(), AddAdCheckboxAdapt
 
         fragment_add_ad_near_next_btn.visibility = View.GONE
 
-        main_back_img_btn.setOnClickListener {
-            sessionManager.clearHouseUpdateNears()
-            saveNears()
-            Log.e("Sesssion_test_near", "asdasd")
-            findNavController().navigateUp()
-        }
+//        main_back_img_btn.setOnClickListener {
+//            sessionManager.clearHouseUpdateNears()
+//            saveNears()
+//            Log.e("Sesssion_test_near", "asdasd")
+//            findNavController().navigateUp()
+//        }
 
         fragment_add_ad_near_add_chkbox.setOnClickListener {
             fragment_add_ad_near_add_chkbox.visibility = View.GONE

@@ -12,7 +12,6 @@ import kotlin.math.abs
 
 class Converters {
     companion object {
-
         fun humanReadableByteCountSI(bytes: Long): String {
             val s = if (bytes < 0) "-" else ""
             var b = if (bytes == Long.MIN_VALUE) Long.MAX_VALUE else abs(bytes)

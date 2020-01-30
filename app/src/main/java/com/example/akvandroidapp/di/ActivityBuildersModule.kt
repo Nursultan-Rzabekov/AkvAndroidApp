@@ -10,6 +10,10 @@ import com.example.akvandroidapp.di.main.MainFragmentBuildersModule
 import com.example.akvandroidapp.di.main.MainModule
 import com.example.akvandroidapp.di.main.MainScope
 import com.example.akvandroidapp.di.main.MainViewModelModule
+import com.example.akvandroidapp.di.myHouse.MyHouseFragmentBuildersModule
+import com.example.akvandroidapp.di.myHouse.MyHouseModule
+import com.example.akvandroidapp.di.myHouse.MyHouseScope
+import com.example.akvandroidapp.di.myHouse.MyHouseViewModelModule
 import com.example.akvandroidapp.di.support.SupportFragmentBuildersModule
 import com.example.akvandroidapp.di.support.SupportModule
 import com.example.akvandroidapp.di.support.SupportScope
@@ -18,6 +22,7 @@ import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportProfileActivity
 import com.example.akvandroidapp.ui.main.search.MapActivity
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
@@ -45,6 +50,12 @@ abstract class ActivityBuildersModule {
         modules = [AddAddModule::class, AddAddFragmentBuildersModule::class, AddAddViewModelModule::class]
     )
     abstract fun contributeAddAdMainActivity(): AddAdMainActivity
+
+    @MyHouseScope
+    @ContributesAndroidInjector(
+        modules = [MyHouseModule::class, MyHouseFragmentBuildersModule::class, MyHouseViewModelModule::class]
+    )
+    abstract fun contributeMyHouseMainActivity(): MyHouseMainActivity
 
     @MainScope
     @ContributesAndroidInjector(

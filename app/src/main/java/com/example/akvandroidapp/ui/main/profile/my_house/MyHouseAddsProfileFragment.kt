@@ -35,7 +35,7 @@ import nextPage
 import javax.inject.Inject
 
 
-class MyHouseAddsProfileFragment : BaseProfileFragment(),
+class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
     MyHouseListAdapter.Interaction,
     SwipeRefreshLayout.OnRefreshListener{
 
@@ -107,7 +107,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment(),
         })
     }
 
-    private fun handlePagination(dataState: DataState<ProfileViewState>){
+    private fun handlePagination(dataState: DataState<MyHouseViewState>){
 
         // Handle incoming data from DataState
         dataState.data?.let {
@@ -188,7 +188,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment(),
             item.id.let {
                 viewModel.setHouseId(it).let {
                     viewModel.setState(0).let {
-                        viewModel.setStateEvent(ProfileStateEvent.MyHouseStateEvent())
+                        viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
                     }
                 }
             }
@@ -197,7 +197,7 @@ class MyHouseAddsProfileFragment : BaseProfileFragment(),
             item.id.let {
                 viewModel.setHouseId(it).let {
                     viewModel.setState(1).let {
-                        viewModel.setStateEvent(ProfileStateEvent.MyHouseStateEvent())
+                        viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
                     }
                 }
             }

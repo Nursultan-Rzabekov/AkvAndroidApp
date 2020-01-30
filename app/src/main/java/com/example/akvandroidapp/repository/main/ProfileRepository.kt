@@ -19,6 +19,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdViewState
+import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
@@ -281,9 +282,9 @@ constructor(
     fun myHouseList(
         authToken: AuthToken,
         page: Int
-    ): LiveData<DataState<ProfileViewState>> {
+    ): LiveData<DataState<MyHouseViewState>> {
 
-        return object: NetworkBoundResource<BlogListSearchResponse, List<BlogPost>, ProfileViewState>(
+        return object: NetworkBoundResource<BlogListSearchResponse, List<BlogPost>, MyHouseViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             false,
@@ -327,8 +328,8 @@ constructor(
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
-                            data = ProfileViewState(
-                                ProfileViewState.MyHouseFields(
+                            data = MyHouseViewState(
+                                MyHouseViewState.MyHouseFields(
                                     blogPostList,
                                     isQueryInProgress = false,
                                     isQueryExhausted = booleanQuery(blogPostList)))
@@ -351,7 +352,7 @@ constructor(
                 )
             }
 
-            override fun loadFromCache(): LiveData<ProfileViewState> {
+            override fun loadFromCache(): LiveData<MyHouseViewState> {
                 return AbsentLiveData.create()
             }
 
@@ -371,9 +372,9 @@ constructor(
     fun myHouseStateActivate(
         authToken: AuthToken,
         houseId: Int
-    ): LiveData<DataState<ProfileViewState>> {
+    ): LiveData<DataState<MyHouseViewState>> {
 
-        return object: NetworkBoundResource<MyHouseStateResponse, List<BlogPost>, ProfileViewState>(
+        return object: NetworkBoundResource<MyHouseStateResponse, List<BlogPost>, MyHouseViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             false,
@@ -391,8 +392,8 @@ constructor(
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
-                            data = ProfileViewState( myHouseStateFields =
-                                ProfileViewState.MyHouseStateFields())
+                            data = MyHouseViewState( myHouseStateFields =
+                            MyHouseViewState.MyHouseStateFields())
                         )
                     )
                 }
@@ -403,7 +404,7 @@ constructor(
                     "Token ${authToken.token!!}", houseId)
             }
 
-            override fun loadFromCache(): LiveData<ProfileViewState> { return AbsentLiveData.create() }
+            override fun loadFromCache(): LiveData<MyHouseViewState> { return AbsentLiveData.create() }
 
             override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {}
 
@@ -416,9 +417,9 @@ constructor(
     fun myHouseStateDeactivate(
         authToken: AuthToken,
         houseId: Int
-    ): LiveData<DataState<ProfileViewState>> {
+    ): LiveData<DataState<MyHouseViewState>> {
 
-        return object: NetworkBoundResource<MyHouseStateResponse, List<BlogPost>, ProfileViewState>(
+        return object: NetworkBoundResource<MyHouseStateResponse, List<BlogPost>, MyHouseViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             false,
@@ -433,8 +434,8 @@ constructor(
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
-                            data = ProfileViewState( myHouseStateFields =
-                            ProfileViewState.MyHouseStateFields())
+                            data = MyHouseViewState( myHouseStateFields =
+                            MyHouseViewState.MyHouseStateFields())
                         )
                     )
                 }
@@ -445,7 +446,7 @@ constructor(
                     "Token ${authToken.token!!}", houseId)
             }
 
-            override fun loadFromCache(): LiveData<ProfileViewState> { return AbsentLiveData.create() }
+            override fun loadFromCache(): LiveData<MyHouseViewState> { return AbsentLiveData.create() }
 
             override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {}
 
