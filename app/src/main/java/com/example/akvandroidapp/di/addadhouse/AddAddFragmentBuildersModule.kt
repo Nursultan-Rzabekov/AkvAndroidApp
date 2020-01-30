@@ -23,6 +23,8 @@ abstract class AddAddFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeProfileAddNearFragment(): ProfileAddNearFragment
 
+    @ContributesAndroidInjector()
+    abstract fun contributeProfileAddDatesFragment(): ProfileAddDatesFragment
 
     @ContributesAndroidInjector()
     abstract fun contributePProfileAddPriceFragment(): ProfileAddPriceFragment

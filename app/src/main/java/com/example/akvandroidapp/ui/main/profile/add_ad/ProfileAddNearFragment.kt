@@ -98,7 +98,7 @@ class ProfileAddNearFragment : BaseAddHouseFragment(), AddAdCheckboxAdapter.Chec
     }
 
     private fun navNextFragment(){
-        findNavController().navigate(R.id.profileAddNearFragment_to_profileAddRequirementFragment)
+        findNavController().navigate(R.id.profileAddNearFragment_to_profileAddDatesFragment)
     }
 
     private fun initialState(){

@@ -112,8 +112,24 @@
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_near">
 
+        <action android:id="@+id/profileAddNearFragment_to_profileAddDatesFragment"
+            app:destination="@id/profileAddDatesFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
 
-        <action android:id="@+id/profileAddNearFragment_to_profileAddRequirementFragment"
+    </fragment>
+
+
+    <fragment android:id="@+id/profileAddDatesFragment"
+        android:name="com.example.akvandroidapp.ui.main.profile.add_ad.ProfileAddDatesFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/fragment_add_ad_available_dates">
+
+
+        <action android:id="@+id/profileAddDatesFragment_to_profileAddRequirementFragment"
             app:destination="@id/profileAddRequirementFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
