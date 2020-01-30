@@ -52,7 +52,7 @@ constructor(
                 val reservationsList: ArrayList<HomeReservation> = ArrayList()
                 val count = response.body.count
                 for(reservation in response.body.results){
-                    val image: String = reservation.house.photos?.get(0)?.image ?: "////////////////"
+                    //val image: String = reservation.house.photos?.get(0)?.image ?: "////////////////"
                     reservationsList.add(
                         HomeReservation(
                             reservation.id,
@@ -63,9 +63,9 @@ constructor(
                             reservation.created_at,
                             reservation.accepted_house,
                             reservation.user.id,
-                            reservation.house.id,
-                            reservation.house.name,
-                            "https://akv-technopark.herokuapp.com$image",
+                            reservation.house_id,
+                            "qwerty",
+                            "https://akv-technopark.herokuapp.com",
                             reservation.owner.id
                         )
                     )

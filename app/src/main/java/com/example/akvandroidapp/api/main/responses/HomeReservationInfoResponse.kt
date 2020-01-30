@@ -17,6 +17,10 @@ class HomeReservationInfoResponse(
     @Expose
     var check_out: String,
 
+    @SerializedName("days")
+    @Expose
+    var days: Int,
+
     @SerializedName("guests")
     @Expose
     var guests: Int,
@@ -37,12 +41,16 @@ class HomeReservationInfoResponse(
     @Expose
     var user: UserProfileInfoResponse,
 
-    @SerializedName("house")
+    @SerializedName("house_id")
     @Expose
-    var house: BlogSearchResponse,
+    var house_id: Int,
 
     @SerializedName("owner")
     @Expose
-    var owner: UserProfileInfoResponse
+    var owner: UserProfileInfoResponse,
+
+    @SerializedName("message")
+    @Expose
+    var message: String
 
 )
