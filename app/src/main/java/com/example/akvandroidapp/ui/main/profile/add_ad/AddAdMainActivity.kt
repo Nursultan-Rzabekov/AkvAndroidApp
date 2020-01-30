@@ -11,6 +11,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_add_ad.*
+import java.util.*
 import javax.inject.Inject
 
 class AddAdMainActivity : BaseActivity(), NavController.OnDestinationChangedListener
@@ -31,6 +32,8 @@ class AddAdMainActivity : BaseActivity(), NavController.OnDestinationChangedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_ad)
+
+        Locale.setDefault(Locale.forLanguageTag("ru"))
 
         viewModel = ViewModelProvider(this, providerFactory).get(AddAdViewModel::class.java)
         findNavController(R.id.add_ad_nav_host_fragment).addOnDestinationChangedListener(this)

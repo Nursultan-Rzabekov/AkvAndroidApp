@@ -73,6 +73,16 @@ class DateUtils {
             return c.time
         }
 
+        fun getDatesFromToday(dates: List<Date>): List<Date> {
+            val today = Calendar.getInstance()
+            val fromToday = mutableListOf<Date>()
+            for (date in dates){
+                if (today.time <= date)
+                    fromToday.add(date)
+            }
+            return fromToday
+        }
+
         fun getOtherDates(dates: List<Date>, start: Date, end: Date): ArrayList<Date>{
             val others = arrayListOf<Date>()
             val startcal = Calendar.getInstance()

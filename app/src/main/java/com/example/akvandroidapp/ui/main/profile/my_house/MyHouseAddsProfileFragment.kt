@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -30,6 +31,7 @@ import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_my_adds.*
+import kotlinx.android.synthetic.main.fragment_my_adds_layout.*
 import loadFirstPage
 import nextPage
 import javax.inject.Inject
@@ -62,15 +64,12 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
 
         swipe_refresh_1.setOnRefreshListener(this)
 
+        setToolbar()
         initRecyclerView()
         subscribeObservers()
 
         if(savedInstanceState == null){
             viewModel.loadFirstPage()
-        }
-
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
         }
 
         fragment_my_adds_add_more_btn.setOnClickListener {
@@ -142,15 +141,6 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
 
     private fun navNextDetailFragment(item: BlogPost){
         val bundle = bundleOf("item" to item)
-        sessionManager.setHouseUpdateData(
-            HouseUpdateData(
-                -1,
-                item.name,
-                item.name,
-                price = item.price,
-                address = item.house_type.toString())
-        )
-        sessionManager.setHouseUpdateFacilityItem(listOf("Утюг"), true)
 
         findNavController().navigate(R.id.action_profileMyHouseAddsProfileFragment_to_profileMyHouseDetailProfileFragment,bundle)
     }
@@ -225,5 +215,13 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
         fragment_my_adds_recycler_view.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
         focusable_view_adds.requestFocus()
+    }
+
+    private fun setToolbar(){
+        fragment_my_adds_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_my_adds_toolbar.setNavigationOnClickListener{
+            activity?.finish()
+        }
     }
 }

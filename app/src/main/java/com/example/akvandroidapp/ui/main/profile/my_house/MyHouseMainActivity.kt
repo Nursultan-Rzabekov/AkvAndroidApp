@@ -10,6 +10,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_my_house_main.*
+import java.util.*
 import javax.inject.Inject
 
 class MyHouseMainActivity : BaseActivity(), NavController.OnDestinationChangedListener
@@ -30,6 +31,7 @@ class MyHouseMainActivity : BaseActivity(), NavController.OnDestinationChangedLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_house_main)
+        Locale.setDefault(Locale.forLanguageTag("ru"))
 
         viewModel = ViewModelProvider(this, providerFactory).get(MyHouseViewModel::class.java)
         findNavController(R.id.my_house_nav_host_fragment).addOnDestinationChangedListener(this)

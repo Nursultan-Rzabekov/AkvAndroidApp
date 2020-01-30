@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -62,6 +63,7 @@ class MyHouseFacilitiesEditProfileFragment : BaseMyHouseFragment(),
         setHasOptionsMenu(true)
 
         initialState()
+        setToolbar()
         initRecyclerView()
         setObservers()
         setSpanable()
@@ -69,12 +71,6 @@ class MyHouseFacilitiesEditProfileFragment : BaseMyHouseFragment(),
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
         fragment_add_ad_check_next_btn.visibility = View.GONE
-
-//        main_back_img_btn.setOnClickListener {
-//            sessionManager.clearHouseUpdateFacilities()
-//            saveFacilities()
-//            findNavController().navigateUp()
-//        }
 
         fragment_add_ad_check_add_chkbox.setOnClickListener {
             fragment_add_ad_check_add_chkbox.visibility = View.GONE
@@ -145,11 +141,27 @@ class MyHouseFacilitiesEditProfileFragment : BaseMyHouseFragment(),
         sessionManager.setHouseUpdateFacilityItem(facilities, true)
     }
 
+    private fun setToolbar(){
+        fragment_add_ad_check_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_check_toolbar.setNavigationOnClickListener{
+            saveFacilities()
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_check_cancel.visibility = View.INVISIBLE
+    }
+
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
         checkboxAdapter.isCheckItem(position, checked)
     }
 
     override fun onItemClosed(position: Int, item: String) {
         checkboxAdapter.removeItem(position)
+    }
+
+    override fun onDestroy() {
+        saveFacilities()
+        super.onDestroy()
     }
 }

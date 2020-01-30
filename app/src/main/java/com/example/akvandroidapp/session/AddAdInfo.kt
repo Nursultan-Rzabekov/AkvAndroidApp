@@ -3,6 +3,7 @@ package com.example.akvandroidapp.session
 import android.net.Uri
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 
 @Parcelize
@@ -23,5 +24,6 @@ data class AddAdInfo(
     var _addAdImage: MutableList<Uri> = mutableListOf(),
     var _addAdFacilityList: MutableList<String> = mutableListOf(),
     var _addAdNearByList: MutableList<String> = mutableListOf(),
-    var _addAdRulesList: MutableList<String> = mutableListOf()
+    var _addAdRulesList: MutableList<String> = mutableListOf(),
+    var _addAdAvailableList: MutableList<Date> = mutableListOf()
     ) : Parcelable

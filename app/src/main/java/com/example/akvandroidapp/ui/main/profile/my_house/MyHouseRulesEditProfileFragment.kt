@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,18 +54,12 @@ class MyHouseRulesEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdap
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
         setSpanable()
+        setToolbar()
         initRecyclerView()
         setObservers()
         initialState()
 
         fragment_add_ad_rules_next_btn.visibility = View.GONE
-
-//        main_back_img_btn.setOnClickListener {
-//            sessionManager.clearHouseUpdateRules()
-//            saveRules()
-//            Log.e("Sesssion_test_rule", "sadsd")
-//            findNavController().navigateUp()
-//        }
 
         fragment_add_ad_rules_add_chkbox.setOnClickListener {
             fragment_add_ad_rules_add_chkbox.visibility = View.GONE
@@ -124,6 +119,17 @@ class MyHouseRulesEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdap
         checkboxAdapter.uncheckAll()
     }
 
+    private fun setToolbar(){
+        fragment_add_ad_rules_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_rules_toolbar.setNavigationOnClickListener{
+            saveRules()
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_rules_cancel.visibility = View.INVISIBLE
+    }
+
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
         checkboxAdapter.isCheckItem(position, checked)
     }
@@ -139,5 +145,10 @@ class MyHouseRulesEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdap
                 rules.add(item.title)
 
         sessionManager.setHouseUpdateRulesItem(rules, true)
+    }
+
+    override fun onDestroy() {
+        saveRules()
+        super.onDestroy()
     }
 }

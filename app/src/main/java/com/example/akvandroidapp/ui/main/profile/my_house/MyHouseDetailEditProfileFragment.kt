@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,7 @@ import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
+import com.example.akvandroidapp.util.MoneyTextWatcher
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.back_button_layout.*
@@ -49,12 +51,12 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
         return inflater.inflate(R.layout.fragment_my_adds_change_layout, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         setHasOptionsMenu(true)
 
+        setToolbar()
         initRecyclerView()
 
         Log.d(TAG, "MyHouseDetailEditProfileFragment: ${viewModel}")
@@ -62,20 +64,14 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
         setObservers()
 
         header_my_adds_change_cancel.setOnClickListener {
-            sessionManager.clearHouseUpdateData()
+            cancelUpdate()
             findNavController().navigateUp()
         }
 
+        fragment_my_adds_change_price_et.addTextChangedListener(MoneyTextWatcher(fragment_my_adds_change_price_et))
+
         header_my_adds_change_save.setOnClickListener {
-            sessionManager.setHouseUpdateData(
-                HouseUpdateData(
-                    -1,
-                    fragment_my_adds_change_title_et.text.toString().trim(),
-                    fragment_my_adds_change_desc_et.text.toString().trim(),
-                    photosAdapter.getPhotos(),
-                    price = fragment_my_adds_change_price_et.text.toString().toIntOrNull(),
-                    address = fragment_my_adds_change_address_et.text.toString().trim())
-            )
+            saveUpdate()
         }
 
         fragment_my_adds_change_rules.setOnClickListener {
@@ -193,5 +189,29 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
                 Data(Event.dataEvent(null), null)
             )
         )
+    }
+
+    private fun saveUpdate(){
+        sessionManager.setHouseUpdateData(
+            HouseUpdateData(
+                -1,
+                fragment_my_adds_change_title_et.text.toString().trim(),
+                fragment_my_adds_change_desc_et.text.toString().trim(),
+                photosAdapter.getPhotos(),
+                price = fragment_my_adds_change_price_et.text.toString().toIntOrNull(),
+                address = fragment_my_adds_change_address_et.text.toString().trim())
+        )
+    }
+
+    private fun cancelUpdate(){
+        sessionManager.clearHouseUpdateData()
+    }
+
+    private fun setToolbar(){
+    }
+
+    override fun onDestroy() {
+        sessionManager.clearHouseUpdateData()
+        super.onDestroy()
     }
 }

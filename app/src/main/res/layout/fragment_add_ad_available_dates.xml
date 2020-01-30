@@ -88,6 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:paddingStart="@dimen/dim_24dp"
+            android:paddingEnd="@dimen/dim_24dp"
             app:tsquare_titleTextColor="@color/primaryZero"
             app:tsquare_displayHeader="true"
             app:tsquare_orientation_horizontal="false"
@@ -95,6 +97,7 @@
             app:tsquare_headerTextColor="@color/black" />
 
         <LinearLayout
+            android:id="@+id/fragment_add_ad_available_dates_next_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

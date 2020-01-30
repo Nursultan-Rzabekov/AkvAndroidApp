@@ -18,9 +18,10 @@ import com.example.akvandroidapp.ui.main.search.filter.FilterCity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-
+import kotlin.collections.ArrayList
 
 
 @Singleton
@@ -219,6 +220,13 @@ constructor(
         Log.e("HOUSE_UPDATE_RULES", "${_houseUpdateData.value?.houseRulesList}")
     }
 
+    fun setHouseUpdateDates(dates: List<Date>){
+        GlobalScope.launch(Main){
+            _houseUpdateData.value?.availableDates = dates.toMutableList()
+        }
+        Log.e("HOUSE_UPDATE_DATES", "${_houseUpdateData.value?.houseRulesList}")
+    }
+
     fun clearHouseUpdateFacilities(){
         GlobalScope.launch(Main) {
             _houseUpdateData.value?.facilitiesList?.clear()
@@ -234,6 +242,12 @@ constructor(
     fun clearHouseUpdateRules(){
         GlobalScope.launch(Main) {
             _houseUpdateData.value?.houseRulesList?.clear()
+        }
+    }
+
+    fun clearHouseUpdateDates(){
+        GlobalScope.launch(Main){
+            _houseUpdateData.value?.availableDates?.clear()
         }
     }
 
@@ -300,6 +314,20 @@ constructor(
                 _addAdInfo.value?._addAdFacilityList = facilities.toMutableList()
         }
         Log.e("SESSION_ADD_AD_FACILITI", "${_addAdInfo.value?._addAdFacilityList}")
+    }
+
+    fun setAddAdAvailableDates(dates: List<Date>){
+        GlobalScope.launch(Main) {
+            _addAdInfo.value?._addAdAvailableList = dates.toMutableList()
+        }
+        Log.e("SESSION_ADD_AD_DATES", "${_addAdInfo.value?._addAdAvailableList}")
+    }
+
+    fun clearAddAdAvailableDates(){
+        GlobalScope.launch(Main) {
+            _addAdInfo.value?._addAdAvailableList?.clear()
+        }
+        Log.e("SESSION_ADD_AD_DATES", "${_addAdInfo.value?._addAdAvailableList}")
     }
 
     fun clearAddAdFacilityList(){
@@ -392,6 +420,16 @@ constructor(
             _addAdInfo.value?._addAdGuestsCount = guests
             _addAdInfo.value?._addAdRoomsCount = rooms
             _addAdInfo.value?._addAdBedsCount = beds
+        }
+        Log.e("SESSION_ADD_AD_COUNTS",
+            "${_addAdInfo.value?._addAdGuestsCount}, ${_addAdInfo.value?._addAdRoomsCount}, ${_addAdInfo.value?._addAdBedsCount}")
+    }
+
+    fun clearAddAdCounts(){
+        GlobalScope.launch(Main){
+            _addAdInfo.value?._addAdGuestsCount = 0
+            _addAdInfo.value?._addAdRoomsCount = 0
+            _addAdInfo.value?._addAdBedsCount = 0
         }
         Log.e("SESSION_ADD_AD_COUNTS",
             "${_addAdInfo.value?._addAdGuestsCount}, ${_addAdInfo.value?._addAdRoomsCount}, ${_addAdInfo.value?._addAdBedsCount}")

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.DateUtils
@@ -21,6 +23,7 @@ import com.savvi.rangedatepicker.CalendarPickerView
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_my_adds_change.*
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
+import kotlinx.android.synthetic.main.fragment_my_adds_detailed_layout.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.my_adds_recycler_view_item.view.*
 import java.util.*
@@ -48,11 +51,8 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
         setHasOptionsMenu(true)
         Log.d(TAG, "SettingsProfileFragment: ${viewModel}")
 
+        setToolbar()
         initCalendar()
-
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
-        }
 
         argument = arguments?.getParcelable("item")
 
@@ -81,6 +81,15 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
     }
 
     private fun navNextDetailEditFragment(){
+        sessionManager.setHouseUpdateData(
+            HouseUpdateData(
+                -1,
+                argument?.name,
+                argument?.name,
+                price = argument?.price,
+                address = argument?.house_type.toString())
+        )
+        sessionManager.setHouseUpdateFacilityItem(listOf("Утюг"), true)
         findNavController().navigate(R.id.action_profileMyHouseDetailProfileFragment_to_myHouseDetailEditProfileFragment)
     }
 
@@ -124,6 +133,14 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
         return listOf(
             HouseEarning(-1, "asda", 25000, Date())
         )
+    }
+
+    private fun setToolbar(){
+        fragment_my_adds_detailed_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_my_adds_detailed_toolbar.setNavigationOnClickListener{
+            findNavController().navigateUp()
+        }
     }
 
 }

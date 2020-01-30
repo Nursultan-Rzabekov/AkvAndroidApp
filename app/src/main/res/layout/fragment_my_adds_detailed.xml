@@ -42,8 +42,8 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:paddingTop="@dimen/dim_8dp"
-                android:paddingBottom="@dimen/dim_8dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingBottom="@dimen/dim_12dp"
                 android:paddingStart="@dimen/dim_20dp"
                 android:paddingEnd="@dimen/dim_16dp">
 

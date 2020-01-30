@@ -63,8 +63,11 @@ class MoneyTextWatcher(
             if (str.isNotEmpty()) {
                 if (str.contains(","))
                     str = str.replace(",", "")
-
+                if (str.contains(" "))
+                    str = str.replace(" ", "")
                 val long = str.toLong()
+
+                Log.e("MoneyTextWatcher", str)
 
                 val formatter = DecimalFormat("#,###,###")
                 editText.setText(formatter.format(long))
@@ -74,7 +77,9 @@ class MoneyTextWatcher(
                 editText.setSelection(editText.text.toString().length)
             }
         }catch (e: Exception){
-            Log.e("PriceWatcher", e.stackTrace.toString())
+            editText.setText("0")
+            editText.setSelection(editText.text.toString().length)
+            Log.e("PriceWatcher", e.message.toString())
         }
 
 

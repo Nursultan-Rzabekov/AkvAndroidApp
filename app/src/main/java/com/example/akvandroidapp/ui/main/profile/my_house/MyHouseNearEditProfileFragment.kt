@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -60,18 +61,12 @@ class MyHouseNearEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdapt
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
         setSpanable()
+        setToolbar()
         initRecyclerView()
         setObservers()
         initialState()
 
         fragment_add_ad_near_next_btn.visibility = View.GONE
-
-//        main_back_img_btn.setOnClickListener {
-//            sessionManager.clearHouseUpdateNears()
-//            saveNears()
-//            Log.e("Sesssion_test_near", "asdasd")
-//            findNavController().navigateUp()
-//        }
 
         fragment_add_ad_near_add_chkbox.setOnClickListener {
             fragment_add_ad_near_add_chkbox.visibility = View.GONE
@@ -131,6 +126,17 @@ class MyHouseNearEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdapt
         checkboxAdapter.uncheckAll()
     }
 
+    private fun setToolbar(){
+        fragment_add_ad_near_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_add_ad_near_toolbar.setNavigationOnClickListener{
+            saveNears()
+            findNavController().navigateUp()
+        }
+
+        fragment_add_ad_near_cancel.visibility = View.INVISIBLE
+    }
+
     override fun onItemChecked(position: Int, item: String, checked: Boolean) {
         checkboxAdapter.isCheckItem(position, checked)
     }
@@ -146,5 +152,10 @@ class MyHouseNearEditProfileFragment : BaseMyHouseFragment(), AddAdCheckboxAdapt
                 nears.add(item.title)
 
         sessionManager.setHouseUpdateNearItem(nears, true)
+    }
+
+    override fun onDestroy() {
+        saveNears()
+        super.onDestroy()
     }
 }

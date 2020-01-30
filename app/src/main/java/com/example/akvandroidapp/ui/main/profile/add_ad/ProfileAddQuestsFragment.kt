@@ -106,12 +106,13 @@ class ProfileAddQuestsFragment : BaseAddHouseFragment(){
         fragment_add_ad_guests_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
 
         fragment_add_ad_guests_toolbar.setNavigationOnClickListener{
+            sessionManager.clearAddAdCounts()
             findNavController().navigateUp()
         }
 
         fragment_add_ad_guests_cancel.setOnClickListener {
-            activity?.finish()
             sessionManager.clearAddAdAllInfo()
+            activity?.finish()
         }
     }
 }

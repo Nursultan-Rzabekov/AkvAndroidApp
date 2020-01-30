@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_my_adds_earnings.*
+import kotlinx.android.synthetic.main.fragment_my_adds_earnings_layout.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -36,6 +38,7 @@ class MyHouseMoneyProfileFragment : BaseMyHouseFragment() {
 
         val earnings = arguments?.getParcelableArrayList<HouseEarning>("earnings")
 
+        setToolbar()
         initRecyclerView()
 
         earningRecycler.submitList(earnings!!.toList())
@@ -52,5 +55,13 @@ class MyHouseMoneyProfileFragment : BaseMyHouseFragment() {
             adapter = earningRecycler
         }
         earningRecycler.submitList(listOf())
+    }
+
+    private fun setToolbar(){
+        fragment_my_adds_earnings_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        fragment_my_adds_earnings_toolbar.setNavigationOnClickListener{
+            findNavController().navigateUp()
+        }
     }
 }
