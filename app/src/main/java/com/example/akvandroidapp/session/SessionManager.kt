@@ -357,26 +357,15 @@ constructor(
         Log.e("SESSION_CLEAR_PRICE", "${_addAdInfo.value?._addAd7DaysDiscount}")
     }
 
-    fun setAddAdImage(imageUri1: Uri?, imageUri2: Uri?, imageUri3: Uri?, imageUri4: Uri?, imageUri5: Uri?, imageUri6: Uri?){
+    fun setAddAdImage(images: List<Uri>){
         GlobalScope.launch(Main){
-            imageUri1?.let {
-                _addAdInfo.value?._addAdImage?.add(imageUri1)
-            }
-            imageUri2?.let {
-                _addAdInfo.value?._addAdImage?.add(imageUri2)
-            }
-            imageUri3?.let {
-                _addAdInfo.value?._addAdImage?.add(imageUri3)
-            }
-            imageUri4?.let {
-                _addAdInfo.value?._addAdImage?.add(imageUri4)
-            }
-            imageUri5?.let {
-                _addAdInfo.value?._addAdImage?.add(imageUri5)
-            }
-            imageUri6?.let {
-                _addAdInfo.value?._addAdImage?.add(imageUri6)
-            }
+            _addAdInfo.value?._addAdImage = images.toMutableList()
+        }
+    }
+
+    fun clearAddAdImages(){
+        GlobalScope.launch(Main) {
+            _addAdInfo.value?._addAdImage = mutableListOf()
         }
     }
 
@@ -408,14 +397,20 @@ constructor(
             "${_addAdInfo.value?._addAdGuestsCount}, ${_addAdInfo.value?._addAdRoomsCount}, ${_addAdInfo.value?._addAdBedsCount}")
     }
 
-
-
     fun setAddAdType(type: String){
         GlobalScope.launch(Main){
             _addAdInfo.value?._addAdType = type
         }
         Log.e("SESSION_ADD_AD_TYPE", "${_addAdInfo.value?._addAdType}")
     }
+
+    fun clearAddAdAllInfo(){
+        GlobalScope.launch(Main){
+            _addAdInfo.value = AddAdInfo()
+        }
+        Log.e("SESSION_ADD_AD_ALL", "${_addAdInfo.value}")
+    }
+
 
     fun setFilterTypeOfApartment(type: Int){
         GlobalScope.launch(Main) {

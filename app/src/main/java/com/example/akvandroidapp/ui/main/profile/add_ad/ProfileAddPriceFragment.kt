@@ -132,7 +132,7 @@ class ProfileAddPriceFragment : BaseAddHouseFragment(){
     private fun savePrice(){
         Log.e("Add ad discount", "$discountOn7Days and $discountOn30Days")
         sessionManager.setAddAdPriceAndDiscounts(
-            fragment_add_ad_price_et.text.toString().toInt(),
+            Converters.formatPriceToInt(fragment_add_ad_price_et.text.toString()),
             discountOn7Days,
             discountOn30Days)
     }
@@ -252,6 +252,7 @@ class ProfileAddPriceFragment : BaseAddHouseFragment(){
 
         fragment_add_ad_price_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 

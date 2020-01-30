@@ -93,6 +93,7 @@ class ProfileAddDescriptionFragment : BaseAddHouseFragment(){
 
         fragment_add_ad_description_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 }

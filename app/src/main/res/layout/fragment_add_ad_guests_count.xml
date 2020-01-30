@@ -114,7 +114,8 @@
 
                         <TextView
                             android:id="@+id/fragment_add_ad_guests_count_guest_counter_tv"
-                            android:layout_width="wrap_content"
+                            android:layout_width="24dp"
+                            android:textAlignment="center"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dim_12dp"
                             android:layout_marginEnd="@dimen/dim_12dp"
@@ -208,7 +209,8 @@
 
                         <TextView
                             android:id="@+id/fragment_add_ad_guests_count_rooms_counter_tv"
-                            android:layout_width="wrap_content"
+                            android:layout_width="24dp"
+                            android:textAlignment="center"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dim_12dp"
                             android:layout_marginEnd="@dimen/dim_12dp"
@@ -301,7 +303,8 @@
 
                         <TextView
                             android:id="@+id/fragment_add_ad_guests_count_bed_counter_tv"
-                            android:layout_width="wrap_content"
+                            android:layout_width="24dp"
+                            android:textAlignment="center"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dim_12dp"
                             android:layout_marginEnd="@dimen/dim_12dp"

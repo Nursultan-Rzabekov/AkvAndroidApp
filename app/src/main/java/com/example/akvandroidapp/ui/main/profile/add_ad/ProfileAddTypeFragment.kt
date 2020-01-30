@@ -72,10 +72,12 @@ class ProfileAddTypeFragment : BaseAddHouseFragment(){
 
         fragment_add_ad_type_of_appartment_toolbar.setNavigationOnClickListener{
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
 
         fragment_add_ad_type_of_appartment_cancel.setOnClickListener {
             activity?.finish()
+            sessionManager.clearAddAdAllInfo()
         }
     }
 }

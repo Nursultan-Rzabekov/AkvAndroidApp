@@ -37,6 +37,7 @@
         android:id="@+id/fragment_my_adds_add_more_btn_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:insetTop="2dp"
             android:insetBottom="2dp"
+            app:backgroundTint="@color/white"
             android:layout_marginStart="@dimen/dim_16dp"
             android:layout_marginEnd="@dimen/dim_16dp"
             android:layout_marginTop="@dimen/dim_16dp"
