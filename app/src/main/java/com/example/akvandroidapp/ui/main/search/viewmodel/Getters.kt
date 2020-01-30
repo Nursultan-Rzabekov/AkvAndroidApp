@@ -182,14 +182,14 @@ fun DetailsViewModel.getMessageImages(): MultipartBody.Part? {
     }
 }
 
-fun DetailsViewModel.getEmailName(): String {
+fun DetailsViewModel.getEmailName(): Int {
     getCurrentViewStateOrNew().let {
-        return it.sendMessageFields.email
+        return it.sendMessageFields.userId
     }
 }
 
 
-fun DetailsViewModel.getTargetQuery(): String {
+fun DetailsViewModel.getTargetQuery(): Int {
     getCurrentViewStateOrNew().let {
         return it.myChatFields.target
     }

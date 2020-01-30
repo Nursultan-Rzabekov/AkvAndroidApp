@@ -69,7 +69,6 @@ class ChatMesFragment : BaseMessagesFragment(),
         initRecyclerView()
         subscribeObservers()
 
-
         viewModel.loadFirstPage()
 
     }
@@ -148,7 +147,8 @@ class ChatMesFragment : BaseMessagesFragment(),
 
     override fun onItemSelected(position: Int, item: UserChatMessages) {
         val intent = Intent(context,MessagesDetailActivity::class.java)
-        intent.putExtra("name",item.email)
+        intent.putExtra("userId",item.id)
+        intent.putExtra("name",item.first_name)
         startActivity(intent)
     }
 

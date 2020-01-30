@@ -21,6 +21,4 @@ class AllChatsResponse(
     @Expose
     var previous: String
 
-) {
-
-}
+)

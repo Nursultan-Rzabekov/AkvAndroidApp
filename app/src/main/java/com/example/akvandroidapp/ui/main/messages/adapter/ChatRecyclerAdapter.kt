@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.message_recycler_view_item.view.*
 
 class ChatRecyclerAdapter(
     private val requestManager: RequestManager,
-    private val mUserId: String
+    private val mUserId: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var messageList: MutableList<mMessage> = ArrayList()

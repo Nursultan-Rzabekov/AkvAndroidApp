@@ -60,9 +60,9 @@ fun SearchViewModel.clearCounts(){
     setViewState(update)
 }
 
-fun DetailsViewModel.setQuery(query: String){
+fun DetailsViewModel.setQuery(userId: Int){
     val update = getCurrentViewStateOrNew()
-    update.myChatFields.target = query
+    update.myChatFields.target = userId
     setViewState(update)
 }
 

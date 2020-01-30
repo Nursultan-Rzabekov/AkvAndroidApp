@@ -14,11 +14,11 @@ class UserConversationsInfoResponse(
 
     @SerializedName("user")
     @Expose
-    var user: String,
+    var user: UserProfileInfoResponse,
 
     @SerializedName("recipient")
     @Expose
-    var recipient: String,
+    var recipient: UserProfileInfoResponse,
 
     @SerializedName("body")
     @Expose

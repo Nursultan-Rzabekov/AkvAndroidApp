@@ -41,7 +41,7 @@ constructor(
 
             is DetailsStateEvent.SendMessageEvent -> {
                 return sessionManager.cachedToken.value?.let {
-                    val _recipient = RequestBody.create(MediaType.parse("text/plain"), getEmailName())
+                    val _recipient = RequestBody.create(MediaType.parse("text/plain"), getEmailName().toString())
                     val _body = RequestBody.create(MediaType.parse("text/plain"), getMessageBody())
 
                     messagesRepository.sendMessage(

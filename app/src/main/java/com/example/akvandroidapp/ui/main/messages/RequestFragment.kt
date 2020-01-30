@@ -1,40 +1,24 @@
 package com.example.akvandroidapp.ui.main.messages
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
-import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
 import com.example.akvandroidapp.ui.main.messages.adapter.RequestListAdapter
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
-import com.example.akvandroidapp.ui.main.profile.support.MyPagerAdapter
 import com.example.akvandroidapp.ui.main.search.viewmodel.setOrderQueryExhausted
-import com.example.akvandroidapp.util.Constants.Companion.MAPKIT_API_KEY
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
-import com.yandex.mapkit.Animation
-import com.yandex.mapkit.MapKitFactory
-import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.mapview.MapView
 import handleIncomingOrdersListData
-import kotlinx.android.synthetic.main.fragment_chat_main.*
-import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.fragment_requests.*
-import kotlinx.android.synthetic.main.fragment_support_main.*
-import kotlinx.android.synthetic.main.map.*
 import loadOrderFirstPage
 import nextOrderPage
 import javax.inject.Inject
@@ -54,7 +38,6 @@ class RequestFragment : BaseMessagesFragment(),
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_requests, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,10 +45,14 @@ class RequestFragment : BaseMessagesFragment(),
 
         swipe_request.setOnRefreshListener(this)
 
+
+        viewModel.loadOrderFirstPage()
+
+
         initRecyclerView()
         subscribeObservers()
 
-        viewModel.loadOrderFirstPage()
+
     }
 
     private fun subscribeObservers(){

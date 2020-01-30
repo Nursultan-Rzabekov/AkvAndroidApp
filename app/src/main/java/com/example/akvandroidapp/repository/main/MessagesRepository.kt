@@ -14,6 +14,7 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
+import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.GenericApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -50,9 +51,6 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<AllChatsResponse>
             ) {
-                Log.d("qwe", "result count ${response.body.count}")
-                Log.d("qwe", "result response ${response.body.results}")
-
 
                 val blogPostList: ArrayList<UserChatMessages> = ArrayList()
                 for(blogPostResponse in response.body.results){
@@ -74,16 +72,23 @@ constructor(
                                 MessagesViewState.MyChatFields(
                                     blogPostList,
                                     isQueryInProgress = false,
-                                    isQueryExhausted = true
+                                    isQueryExhausted = booleanQuery(blogPostList)
                                 )
                             )
                         )
                     )
                 }
-
             }
+
+            private fun booleanQuery(blogPostList: ArrayList<UserChatMessages>):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE > blogPostList.size){
+                    return true
+                }
+                return false
+            }
+
             override fun createCall(): LiveData<GenericApiResponse<AllChatsResponse>> {
-                Log.d("wqe","loadChat + ${page}")
+                Log.d(TAG,"loadChat + ${page}")
                 return openApiMainService.getAllChats(
                     "Token ${authToken.token!!}",
                     page
@@ -104,7 +109,7 @@ constructor(
 
     fun myConversationsList(
         authToken: AuthToken,
-        target: String,
+        target: Int,
         page:Int
     ): LiveData<DataState<DetailsViewState>> {
         return object :
@@ -121,9 +126,8 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<ConverstaionsResponse>
             ) {
-                Log.d("qwe", "result count ${response.body.count}")
-                Log.d("qwe", "result response ${response.body.results}")
-
+                Log.d(TAG, "result count ${response.body.count}")
+                Log.d(TAG, "result response ${response.body.results}")
 
                 val blogPostList: ArrayList<UserConversationMessages> = ArrayList()
                 val blogPostListImages: ArrayList<UserConversationImages?> = ArrayList()
@@ -132,14 +136,19 @@ constructor(
                     blogPostList.add(
                         UserConversationMessages(
                             id = blogPostResponse.id,
-                            user = blogPostResponse.user,
-                            recipient = blogPostResponse.recipient,
+                            userId = blogPostResponse.user.id,
+                            userName = blogPostResponse.user.first_name,
+                            userEmail = blogPostResponse.user.email,
+                            userPic = blogPostResponse.user.userpic,
+                            recipientId = blogPostResponse.recipient.id,
+                            recipientName = blogPostResponse.recipient.first_name,
+                            recipientEmail = blogPostResponse.recipient.email,
+                            recipientPic = blogPostResponse.recipient.userpic,
                             body = blogPostResponse.body,
                             created_at = blogPostResponse.created_at,
                             updated_at = blogPostResponse.updated_at
                         )
                     )
-
 
                     blogPostListImages.add(
                         blogPostResponse.images?.let {
@@ -169,7 +178,7 @@ constructor(
 
             }
             override fun createCall(): LiveData<GenericApiResponse<ConverstaionsResponse>> {
-                Log.d("wqe","loadChat + ${page}")
+                Log.d(TAG,"loadChat + ${page}")
                 return openApiMainService.getConversations(
                     "Token ${authToken.token!!}",
                     target,
@@ -208,12 +217,18 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<UserConversationsInfoResponse>
             ) {
-                Log.d("send message", "recipient ${response.body.recipient}")
+                Log.d(TAG, "recipient ${response.body.recipient}")
 
                 val sendMessageInfo = UserConversationMessages(
                     id = response.body.id,
-                    user = response.body.user,
-                    recipient = response.body.recipient,
+                    userId = response.body.user.id,
+                    userName = response.body.user.first_name,
+                    userEmail = response.body.user.email,
+                    userPic = response.body.user.userpic,
+                    recipientId = response.body.recipient.id,
+                    recipientName = response.body.recipient.first_name,
+                    recipientEmail = response.body.recipient.email,
+                    recipientPic = response.body.recipient.userpic,
                     body = response.body.body,
                     created_at = response.body.created_at,
                     updated_at = response.body.updated_at
@@ -233,7 +248,7 @@ constructor(
             }
 
             override fun createCall(): LiveData<GenericApiResponse<UserConversationsInfoResponse>> {
-                Log.d("send message call", "send message $recipient")
+                Log.d(TAG, "send message $recipient")
                 return openApiMainService.sendMessageTo(
                     "Token ${authToken.token!!}",
                     recipient,
@@ -271,7 +286,7 @@ constructor(
             }
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<HomeListResponse>) {
-                Log.d("orders list", "orders ${response.body.results}")
+                Log.d(TAG, "orders ${response.body.count}")
 
                 val ordersList: ArrayList<HomeReservation> = ArrayList()
                 for (order in response.body.results){
@@ -294,6 +309,8 @@ constructor(
                     )
                 }
 
+                Log.d(TAG, "orders ${ordersList}")
+
                 withContext(Dispatchers.Main) {
                     onCompleteJob(
                         DataState.data(
@@ -301,12 +318,19 @@ constructor(
                                 ordersField = MessagesViewState.OrdersField(
                                     ordersList,
                                     isQueryInProgress = false,
-                                    isQueryExhausted = true
+                                    isQueryExhausted = booleanQuery(ordersList)
                                 )
                             )
                         )
                     )
                 }
+            }
+
+            private fun booleanQuery(blogPostList: ArrayList<HomeReservation>):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE > blogPostList.size){
+                    return true
+                }
+                return false
             }
 
             override fun createCall(): LiveData<GenericApiResponse<HomeListResponse>> {

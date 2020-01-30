@@ -54,9 +54,9 @@ fun DetailsViewModel.setMessageBody(messagesBody: String){
     setViewState(update)
 }
 
-fun DetailsViewModel.setEmailName(email: String){
+fun DetailsViewModel.setUserId(userId: Int){
     val update = getCurrentViewStateOrNew()
-    update.sendMessageFields.email = email
+    update.sendMessageFields.userId = userId
     setViewState(update)
 }
 
@@ -140,7 +140,7 @@ fun MessagesViewModel.loadOrderFirstPage() {
     setOrderQueryInProgress(true)
     setOrderQueryExhausted(false)
     resetOrderPage()
-    Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.ordersField}")
+    Log.e(TAG, "loadFirstPageChatOrder: ${viewState.value!!.ordersField}")
     setStateEvent(MessagesStateEvent.OrdersListStateEvent())
 }
 

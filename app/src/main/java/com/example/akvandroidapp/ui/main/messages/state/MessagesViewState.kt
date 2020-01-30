@@ -18,7 +18,7 @@ class MessagesViewState (
     )
 
     data class OrdersField(
-        var orders: List<HomeReservation> = arrayListOf(),
+        var orders: List<HomeReservation> = ArrayList(),
         var page: Int = 1,
         var isQueryInProgress: Boolean = false,
         var isQueryExhausted: Boolean = false

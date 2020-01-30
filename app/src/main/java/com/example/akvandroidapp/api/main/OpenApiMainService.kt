@@ -98,7 +98,7 @@ interface OpenApiMainService {
     @GET("messages/")
     fun getConversations(
         @Header("Authorization") authorization: String,
-        @Query("target") target: String,
+        @Query("target") target: Int,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<ConverstaionsResponse>>
 

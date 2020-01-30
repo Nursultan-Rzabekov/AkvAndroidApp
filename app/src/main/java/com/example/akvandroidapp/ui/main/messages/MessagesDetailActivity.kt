@@ -12,6 +12,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.UserConversationsResponse
@@ -38,16 +39,14 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
 import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.header_dialog.*
-import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import setEmailName
 import setImageMultipart
 import setMessageBody
+import setUserId
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -64,7 +63,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     lateinit var providerFactory: ViewModelProviderFactory
     lateinit var viewModel: DetailsViewModel
 
-    private var mUserId: String = "admin@mail.com"
     private var userId: Int = 0
     private val myDataTransfer = arrayOf<Bundle?>(null)
     private lateinit var currentPhotoPath: String
@@ -118,11 +116,12 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             sendMessage()
         }
 
-        val target =  intent.getStringExtra("name")
+        val targetName =  intent.getStringExtra("name")
+        val targetUserId =  intent.getIntExtra("userId",1)
 
-        header_dialog_nickname_tv.text = target
+        header_dialog_nickname_tv.text = targetName
 
-        viewModel.setQuery(target!!).let {
+        viewModel.setQuery(targetUserId).let {
             onBlogSearchOrFilter()
         }
     }
@@ -163,12 +162,23 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                             UserConversationsResponse(
                                 id = it.id,
                                 body = it.body.toString(),
-                                user = it.user.toString(),
-                                recipient = it.recipient.toString(),
+                                userName = it.userName.toString(),
+                                userId = it.userId,
+                                userEmail = it.userEmail,
+                                userPic = it.userPic,
+                                recipientName = it.recipientName.toString(),
+                                recipientId = it.recipientId,
+                                recipientEmail = it.recipientEmail,
+                                recipientPic = it.recipientPic,
                                 created_at = it.created_at.toString(),
                                 updated_at = it.updated_at.toString()
                         ))
                     }
+
+                    Glide.with(this)
+                        .load(userConversationResponse.first().recipientPic)
+                        .error(R.drawable.profile_default_avavatar)
+                        .into(header_dialog_civ)
                 }
 
                 if(viewState.myChatFields.blogListImages.isNotEmpty()){
@@ -181,15 +191,15 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                     }
                 }
                 userConversationResponse.asReversed().forEach {
-                    Log.e("MESSAGE_CAMERA_BITMAP", "user rec + ${it.user}")
+                    Log.e("MESSAGE_CAMERA_BITMAP", "user rec + ${it.userId}")
                     if(it.images!=null){
                         chatAdapter.addMessage(
-                            MessagePhoto(it.user, image = it.images)
+                            MessagePhoto(it.userId!!, image = it.images)
                         )
                     }
                     else{
                         chatAdapter.addMessage(
-                            MessageText(it.user, body = it.body)
+                            MessageText(it.userId!!, body = it.body)
                         )
                     }
                 }
@@ -223,7 +233,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     private fun initRecyclerView(){
         activity_dialog_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@MessagesDetailActivity).apply { stackFromEnd = true }
-            chatAdapter = ChatRecyclerAdapter(requestManager, userId.toString())
+            chatAdapter = ChatRecyclerAdapter(requestManager, userId)
             adapter = chatAdapter
         }
     }
@@ -233,7 +243,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
         if (message.trim() != ""){
             viewModel.setMessageBody(message)
-            viewModel.setEmailName(viewModel.getTargetQuery())
+            viewModel.setUserId(viewModel.getTargetQuery())
             viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
         }
         activity_dialog_message_et.setText("")
@@ -336,7 +346,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                 REQUEST_IMAGE_CAPTURE -> {
                     try {
                         sendMessageWithType(
-                            mUserId,
+                            userId,
                             Constants.MESSAGE_TYPE_PHOTO,
                             uriOfFile = currentPhotoUri)
                     }catch (ex: Exception){
@@ -361,7 +371,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
                     currentPhotoUri = resultUri
                     sendMessageWithType(
-                        mUserId,
+                        userId,
                         Constants.MESSAGE_TYPE_PHOTO,
                         uriOfFile = resultUri)
 
@@ -387,7 +397,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                                 fileName = cursor.getString(nameIndex)
                                 fileSize = cursor.getLong(sizeIndex)
                                 sendMessageWithType(
-                                    mUserId,
+                                    userId,
                                     Constants.MESSAGE_TYPE_DOC,
                                     fileName = fileName,
                                     fileSize = fileSize)
@@ -432,7 +442,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         )
     }
 
-    fun sendMessageWithType(userId: String, type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
+    fun sendMessageWithType(userId: Int, type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
         when( type ){
             Constants.MESSAGE_TYPE_TEXT -> {
                 chatAdapter.addMessage(
@@ -464,7 +474,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                     multipartBody.let {
                         viewModel.setMessageBody("Фотка")
                         viewModel.setImageMultipart(it)
-                        viewModel.setEmailName(viewModel.getTargetQuery())
+                        viewModel.setUserId(viewModel.getTargetQuery())
                         viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
                     }
                 }
