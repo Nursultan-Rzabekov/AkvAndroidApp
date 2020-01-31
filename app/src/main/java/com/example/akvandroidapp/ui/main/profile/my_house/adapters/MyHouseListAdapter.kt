@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.profile.my_house
+package com.example.akvandroidapp.ui.main.profile.my_house.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,11 +9,8 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
-import com.example.akvandroidapp.session.AddAdInfo
-import com.example.akvandroidapp.ui.main.search.SearchListAdapter
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.my_adds_recycler_view_item.view.*
-import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
 
 class MyHouseListAdapter(
@@ -96,7 +93,7 @@ class MyHouseListAdapter(
             BLOG_ITEM ->{
                 return MyHouseViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                            R.layout.my_adds_recycler_view_item,
+                        R.layout.my_adds_recycler_view_item,
                         parent,
                         false
                     ),

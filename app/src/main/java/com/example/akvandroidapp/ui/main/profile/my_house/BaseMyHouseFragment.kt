@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
 import com.example.akvandroidapp.ui.DataStateChangeListener
 import com.example.akvandroidapp.ui.UICommunicationListener
-import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

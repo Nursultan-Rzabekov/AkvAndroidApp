@@ -37,7 +37,7 @@ class DateUtils {
                 val d = sdf.parse(date)
                 return d
             } catch (e: Exception){
-                throw Exception(e)
+                return Date()
             }
         }
 

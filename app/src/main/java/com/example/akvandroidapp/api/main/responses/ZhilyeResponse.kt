@@ -103,5 +103,9 @@ class ZhilyeResponse(
 
     @SerializedName("recommendations")
     @Expose
-    var recommendations: List<BlogSearchResponse>
+    var recommendations: List<BlogSearchResponse>,
+
+    @SerializedName("reservations")
+    @Expose
+    var reservations: List<ZhilyeUserReservationResponse>? = null
 )

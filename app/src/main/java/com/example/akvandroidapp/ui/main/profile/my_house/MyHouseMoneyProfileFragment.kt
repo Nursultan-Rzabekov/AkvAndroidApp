@@ -11,11 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
-import kotlinx.android.synthetic.main.back_button_layout.*
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.EarningsListAdapter
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.HouseEarning
+import com.example.akvandroidapp.util.Converters
 import kotlinx.android.synthetic.main.fragment_my_adds_earnings.*
 import kotlinx.android.synthetic.main.fragment_my_adds_earnings_layout.*
-import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class MyHouseMoneyProfileFragment : BaseMyHouseFragment() {
@@ -41,20 +41,20 @@ class MyHouseMoneyProfileFragment : BaseMyHouseFragment() {
         setToolbar()
         initRecyclerView()
 
-        earningRecycler.submitList(earnings!!.toList())
+        fragment_my_adds_earnings_total_tv.text =
+            ("+${Converters.pretifyPrice(getTotalIncome(earnings!!.toList()))}kzt")
 
-//        main_back_img_btn.setOnClickListener {
-//            findNavController().navigateUp()
-//        }
+        earningRecycler.submitList(earnings!!.toList())
+        Log.e("MyHouseMoneyProfile", "$earnings")
     }
 
     private fun initRecyclerView(){
         fragment_my_adds_earnings_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@MyHouseMoneyProfileFragment.context)
-            earningRecycler = EarningsListAdapter()
+            earningRecycler =
+                EarningsListAdapter()
             adapter = earningRecycler
         }
-        earningRecycler.submitList(listOf())
     }
 
     private fun setToolbar(){
@@ -63,5 +63,12 @@ class MyHouseMoneyProfileFragment : BaseMyHouseFragment() {
         fragment_my_adds_earnings_toolbar.setNavigationOnClickListener{
             findNavController().navigateUp()
         }
+    }
+
+    private fun getTotalIncome(earnings: List<HouseEarning>): Int{
+        var total = 0
+        for (earning in earnings)
+            total += earning.earning
+        return total
     }
 }

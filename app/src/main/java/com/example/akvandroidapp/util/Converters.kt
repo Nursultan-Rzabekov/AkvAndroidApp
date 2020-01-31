@@ -46,6 +46,11 @@ class Converters {
             return newStr.toInt()
         }
 
+        fun pretifyPrice(price: Int): String {
+            val formatter = DecimalFormat("#,###")
+            return formatter.format(price)
+        }
+
     }
 }
 class MoneyTextWatcher(

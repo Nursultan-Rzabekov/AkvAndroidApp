@@ -14,20 +14,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
-import com.example.akvandroidapp.ui.main.profile.my_house.GalleryPhoto
-import com.example.akvandroidapp.ui.main.profile.my_house.GalleryPhotosAdapter
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhoto
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhotosAdapter
 import com.example.akvandroidapp.util.Constants.Companion.GALLERY_REQUEST_CODE
 import com.example.akvandroidapp.util.ErrorHandling.Companion.ERROR_SOMETHING_WRONG_WITH_IMAGE
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import kotlinx.android.synthetic.main.activity_add_ad.*
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_gallery.*
 import javax.inject.Inject
 
@@ -73,7 +68,10 @@ class ProfileAddGalleryFragment : BaseAddHouseFragment(), GalleryPhotosAdapter.P
             val photos = mutableListOf<GalleryPhoto>()
             for (image in it._addAdImage)
                 photos.add(
-                    GalleryPhoto(null, image)
+                    GalleryPhoto(
+                        null,
+                        image
+                    )
                 )
             photosAdapter.submitList(photos)
         })
@@ -83,10 +81,11 @@ class ProfileAddGalleryFragment : BaseAddHouseFragment(), GalleryPhotosAdapter.P
         fragment_add_ad_gallery_recycler_view.apply {
             layoutManager = GridLayoutManager(
                 this@ProfileAddGalleryFragment.context, 3)
-            photosAdapter = GalleryPhotosAdapter(
-                requestManager = requestManager,
-                closeInteraction = this@ProfileAddGalleryFragment
-            )
+            photosAdapter =
+                GalleryPhotosAdapter(
+                    requestManager = requestManager,
+                    closeInteraction = this@ProfileAddGalleryFragment
+                )
             adapter = photosAdapter
         }
     }
@@ -179,7 +178,12 @@ class ProfileAddGalleryFragment : BaseAddHouseFragment(), GalleryPhotosAdapter.P
     }
 
     private fun addGalleryPhoto(uri: Uri){
-        photosAdapter.addGalleryPhoto(GalleryPhoto(null, uri))
+        photosAdapter.addGalleryPhoto(
+            GalleryPhoto(
+                null,
+                uri
+            )
+        )
     }
 
     private fun getPhotos(): List<Uri> {

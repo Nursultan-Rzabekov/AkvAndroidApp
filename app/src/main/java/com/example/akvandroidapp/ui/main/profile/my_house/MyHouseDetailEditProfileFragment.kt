@@ -10,28 +10,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhoto
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhotosAdapter
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.MoneyTextWatcher
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_my_adds_change.*
-import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
-import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.header_my_adds_change.*
 import javax.inject.Inject
 
@@ -101,7 +95,11 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
                 this@MyHouseDetailEditProfileFragment.context,
                 LinearLayoutManager.HORIZONTAL,
                 false)
-            photosAdapter = GalleryPhotosAdapter(requestManager, this@MyHouseDetailEditProfileFragment)
+            photosAdapter =
+                GalleryPhotosAdapter(
+                    requestManager,
+                    this@MyHouseDetailEditProfileFragment
+                )
             adapter = photosAdapter
         }
     }
@@ -129,7 +127,12 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
     }
 
     private fun addGalleryPhoto(uri: Uri){
-        photosAdapter.addGalleryPhoto(GalleryPhoto(null, uri))
+        photosAdapter.addGalleryPhoto(
+            GalleryPhoto(
+                null,
+                uri
+            )
+        )
         fragment_my_adds_change_photos_tv.text = ("${photosAdapter.itemCount}/15")
     }
 
