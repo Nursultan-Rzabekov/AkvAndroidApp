@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.profile.my_house
 
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.example.akvandroidapp.entity.ZhilyeReservation
 import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhoto
 import com.example.akvandroidapp.ui.main.profile.my_house.adapters.HouseEarning
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
@@ -50,6 +52,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
 
     private var houseId:Int? = null
     private var earnings: ArrayList<HouseEarning>? = null
+    private var houseUpdateData: HouseUpdateData? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +71,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
 
         setToolbar()
         subscribeObservers()
-        initCalendar()
+        initCalendar(getBlockedDates())
 
         earning.setOnClickListener {
             navNextFragment()
@@ -109,6 +112,62 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                         .error(R.drawable.test_image_back)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(fragment_my_adds_detailed_iv)
+
+                val galleryPhotos = mutableListOf<GalleryPhoto>()
+                viewState.zhilyeFields.zhilyeDetailPhotos.forEach {
+                    galleryPhotos.add(
+                        GalleryPhoto(null, Uri.parse(it.image))
+                    )
+                }
+
+                val rules = mutableListOf<String>()
+                viewState.zhilyeFields.zhilyeDetailRules.forEach {
+                    rules.add(
+                        it.name.toString()
+                    )
+                }
+
+                val facilities = mutableListOf<String>()
+                viewState.zhilyeFields.zhilyeDetailAccomadations.forEach {
+                    facilities.add(
+                        it.name.toString()
+                    )
+                }
+
+                val nears = mutableListOf<String>()
+                viewState.zhilyeFields.zhilyeDetailNearBuildings.forEach {
+                    nears.add(
+                        it.name.toString()
+                    )
+                }
+
+                val dates = mutableListOf<Date>()
+                dates.add(Date())
+
+                val blockedDates = mutableListOf<Date>()
+                viewState.zhilyeFields.zhilyeReservationsList.forEach {
+                    blockedDates.addAll(
+                        DateUtils.getDatesBetween(
+                            DateUtils.convertStringToDate(it.check_in.toString()),
+                            DateUtils.convertStringToDate(it.check_out.toString())
+                        )
+                    )
+                }
+
+                initCalendar(blockedDates)
+
+                houseUpdateData = HouseUpdateData(
+                    id = viewState.zhilyeFields.houseId,
+                    title = viewState.zhilyeFields.zhilyeDetail.name,
+                    description = viewState.zhilyeFields.zhilyeDetail.description,
+                    address = viewState.zhilyeFields.zhilyeDetail.address,
+                    price = viewState.zhilyeFields.zhilyeDetail.price,
+                    photosList = galleryPhotos,
+                    facilitiesList = facilities,
+                    nearByList = nears,
+                    houseRulesList = rules,
+                    availableDates = dates
+                )
             }
         })
     }
@@ -136,19 +195,16 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
     }
 
     private fun navNextDetailEditFragment(){
-        sessionManager.setHouseUpdateData(
-            HouseUpdateData(
-                -1,
-                argument?.name,
-                argument?.name,
-                price = argument?.price,
-                address = argument?.house_type.toString())
-        )
-        sessionManager.setHouseUpdateFacilityItem(listOf("Утюг"), true)
+        if (houseUpdateData != null)
+            sessionManager.setHouseUpdateData(
+                houseUpdateData!!
+            )
+        else
+            activity?.finish()
         findNavController().navigate(R.id.action_profileMyHouseDetailProfileFragment_to_myHouseDetailEditProfileFragment)
     }
 
-    private fun initCalendar(){
+    private fun initCalendar(dates: List<Date>){
 
         val lastyear = Calendar.getInstance()
         lastyear.add(Calendar.YEAR, 0)
@@ -167,20 +223,13 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
             .init(lastyear.time, nextyear.time)
             .inMode(CalendarPickerView.SelectionMode.MULTIPLE)
             .withHighlightedDates(
-                getBlockedDates()
+                DateUtils.getDatesFromToday(dates)
             )
 
     }
 
     private fun getBlockedDates(): List<Date>{
         return listOf(
-            DateUtils.convertStringToDate("2020-01-28"),
-            DateUtils.convertStringToDate("2020-02-27"),
-            DateUtils.convertStringToDate("2020-02-28"),
-            DateUtils.convertStringToDate("2020-02-15"),
-            DateUtils.convertStringToDate("2020-02-16"),
-            DateUtils.convertStringToDate("2020-02-17"),
-            DateUtils.convertStringToDate("2020-02-18")
         )
     }
 

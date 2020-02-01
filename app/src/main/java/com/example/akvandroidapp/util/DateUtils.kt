@@ -66,6 +66,21 @@ class DateUtils {
             return c.time
         }
 
+        fun getDatesBetween(d1: Date, d2: Date): List<Date> {
+            val dates = arrayListOf<Date>()
+            val startcal = Calendar.getInstance()
+            startcal.time = d1
+            val endcal = Calendar.getInstance()
+            endcal.time = d2
+
+            while (startcal.before(endcal)){
+                dates.add(startcal.time)
+                startcal.add(Calendar.DATE, 1)
+            }
+
+            return dates
+        }
+
         fun getDateFromNYear(n: Int): Date{
             val c = Calendar.getInstance()
             c.add(Calendar.YEAR, n)

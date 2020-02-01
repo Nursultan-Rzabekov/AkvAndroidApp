@@ -637,6 +637,66 @@ constructor(
 
         }.asLiveData()
     }
+
+    fun updateZhilyeInfo(
+        authToken: AuthToken,
+        houseId: Int,
+        title: RequestBody?,
+        description: RequestBody?,
+        address: RequestBody?,
+        price: RequestBody?,
+        photoList: List<RequestBody>?,
+        nearsList: List<RequestBody>?,
+        facilitiesList: List<RequestBody>?,
+        rulesList: List<RequestBody>?,
+        datesList: List<RequestBody>?
+    ): LiveData<DataState<MyHouseViewState>>{
+        return object: NetworkBoundResource<VerifyUpdateResponse, List<BlogPost>, MyHouseViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<VerifyUpdateResponse>) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<VerifyUpdateResponse>> {
+
+                val data: MutableMap<String, RequestBody> = HashMap()
+
+                if (title != null)
+                    data["title"] = title
+                if (description != null)
+                    data["description"] = description
+                if (address != null)
+                    data["address"] = address
+                if (price != null)
+                    data["price"] = price
+
+                return openApiMainService.updateZhilyeInfo(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId,
+                    options = data)
+            }
+
+            override fun loadFromCache(): LiveData<MyHouseViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+            }
+
+            override fun setJob(job: Job) {
+                addJob("updateHouseInfo", job)
+            }
+
+        }.asLiveData()
+    }
 }
 
 

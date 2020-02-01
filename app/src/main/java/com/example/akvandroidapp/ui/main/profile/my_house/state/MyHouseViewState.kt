@@ -8,7 +8,8 @@ import kotlinx.android.parcel.Parcelize
 data class MyHouseViewState (
     var myHouseFields: MyHouseFields = MyHouseFields(),
     var myHouseStateFields: MyHouseStateFields = MyHouseStateFields(),
-    var zhilyeFields: MyHouseZhilyeFields = MyHouseZhilyeFields()
+    var zhilyeFields: MyHouseZhilyeFields = MyHouseZhilyeFields(),
+    var updateHouseDetail: String? = null
     ) : Parcelable
 {
     @Parcelize
