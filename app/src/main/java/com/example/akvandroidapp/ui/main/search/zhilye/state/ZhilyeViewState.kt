@@ -20,6 +20,7 @@ class ZhilyeViewState (
         var zhilyeDetailPhotos: List<ZhilyeDetailPhotos> = ArrayList(),
         var blogListRecommendations: List<BlogPost> = ArrayList(),
         var zhilyeReviewsList: List<Review> = ArrayList(),
+        var zhilyeReservationsList: List<ZhilyeReservation> = ArrayList(),
         var houseId: Int = 1
     )
 

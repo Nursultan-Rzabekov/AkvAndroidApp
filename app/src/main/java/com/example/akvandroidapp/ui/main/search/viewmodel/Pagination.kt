@@ -11,9 +11,9 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseStateStateEvent
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewModel
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewState
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
@@ -251,6 +251,10 @@ fun MyHouseViewModel.nextPage(){
         setQueryInProgress(true)
         setStateEvent(MyHouseStateStateEvent.MyHouseEvent())
     }
+}
+
+fun MyHouseViewModel.handleIncomingZhilyeData(viewState: MyHouseViewState){
+    setZhilyeData(viewState.zhilyeFields)
 }
 
 fun HomeViewModel.nextPage(){

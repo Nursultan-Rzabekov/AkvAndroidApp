@@ -8,6 +8,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_my_house_main.*
 import java.util.*

@@ -333,6 +333,22 @@ constructor(
                     )
                 }
 
+                val reservations = arrayListOf<ZhilyeReservation>()
+                response.body.reservations?.forEach {
+                    reservations.add(
+                        ZhilyeReservation(
+                            check_in = it.check_in,
+                            check_out = it.check_out,
+                            user_id = it.user.id,
+                            userpic = it.user.userpic,
+                            first_name = it.user.first_name,
+                            last_name = it.user.last_name,
+                            email = it.user.email,
+                            income = it.income
+                        )
+                    )
+                }
+
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
@@ -343,7 +359,9 @@ constructor(
                                 zhilyeDetailPhotos = blogZhilyePhotosList,
                                 zhilyeUser = userChatMessages,
                                 blogListRecommendations = blogPostList,
-                                zhilyeReviewsList = reviewsList))
+                                zhilyeReviewsList = reviewsList,
+                                zhilyeReservationsList = reservations,
+                                zhilyeDetailRules = blogZhilyeRulesList))
                         )
                     )
                 }

@@ -17,19 +17,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.AddAdInfo
-import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
-import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
-import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.MyHouseListAdapter
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.ui.main.search.viewmodel.setState
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_my_adds.*
 import kotlinx.android.synthetic.main.fragment_my_adds_layout.*
 import loadFirstPage
@@ -152,7 +150,11 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
-            recyclerAdapter = MyHouseListAdapter(requestManager,  this@MyHouseAddsProfileFragment)
+            recyclerAdapter =
+                MyHouseListAdapter(
+                    requestManager,
+                    this@MyHouseAddsProfileFragment
+                )
             addOnScrollListener(object: RecyclerView.OnScrollListener(){
 
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

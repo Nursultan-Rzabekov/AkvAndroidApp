@@ -153,15 +153,12 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<HomeListResponse>>
 
     @Multipart
-    @PATCH("auth/users/me/")
+    @PATCH("houses/{house_id}/")
     fun updateZhilyeInfo(
         @Header("Authorization") authorization: String,
-        @Part("email") email: RequestBody,
-        @Part("gender") gender: RequestBody,
-        @Part("phone") phone: RequestBody,
-        @Part("birth_day") birth_day: RequestBody,
-        @Part userpic: MultipartBody.Part?
-    ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
+        @Path("house_id") house_id: Int,
+        @QueryMap  options : Map<String, RequestBody>
+    ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
 }
 
 

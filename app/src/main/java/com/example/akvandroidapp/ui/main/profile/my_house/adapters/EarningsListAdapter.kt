@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.profile.my_house
+package com.example.akvandroidapp.ui.main.profile.my_house.adapters
 
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.DateUtils
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.earnings_recycler_view_item.view.*
@@ -17,11 +16,11 @@ class EarningsListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val DIFF_CALLBACK = object: DiffUtil.ItemCallback<HouseEarning>(){
         override fun areItemsTheSame(oldItem: HouseEarning, newItem: HouseEarning): Boolean {
-            return oldItem.id == newItem.id
+            return false
         }
 
         override fun areContentsTheSame(oldItem: HouseEarning, newItem: HouseEarning): Boolean {
-            return oldItem == newItem
+            return false
         }
     }
 

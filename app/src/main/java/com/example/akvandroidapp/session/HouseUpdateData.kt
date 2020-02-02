@@ -1,6 +1,6 @@
 package com.example.akvandroidapp.session
 
-import com.example.akvandroidapp.ui.main.profile.my_house.GalleryPhoto
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhoto
 import java.util.*
 
 data class HouseUpdateData(

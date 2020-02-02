@@ -49,7 +49,7 @@ class ZhilyeRulesOfHouseActivity : BaseActivity() {
         if (rules.isEmpty())
             rulesText = "Не указано"
         else
-            for(i in 1..(rules.size))
+            for(i in rules.indices)
                 rulesText += "${i+1}. ${rules[i].name}\n"
         rules_house_tv.text = rulesText
     }

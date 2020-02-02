@@ -134,6 +134,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                 Log.d("yes","list DetailRules +${viewState.zhilyeFields.zhilyeDetailRules}")
                 Log.d("yes","list User +${viewState.zhilyeFields.zhilyeUser}")
                 Log.d("yes","list DetailNearBuildings +${viewState.zhilyeFields.zhilyeDetailNearBuildings}")
+                Log.d("yes","list Reservations +${viewState.zhilyeFields.zhilyeReservationsList}")
 
                 fragment_zhilye_host_nickname_tv.text =
                     ("@${viewState.zhilyeFields.zhilyeUser.first_name}")

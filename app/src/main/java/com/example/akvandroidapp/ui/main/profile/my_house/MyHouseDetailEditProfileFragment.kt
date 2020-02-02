@@ -10,29 +10,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.HouseUpdateData
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhoto
+import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhotosAdapter
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.MoneyTextWatcher
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_my_adds_change.*
-import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
-import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.header_my_adds_change.*
+import java.util.*
 import javax.inject.Inject
 
 
@@ -42,6 +37,11 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
 
     @Inject
     lateinit var sessionManager: SessionManager
+
+    private var nears: List<String> = listOf()
+    private var rules: List<String> = listOf()
+    private var dates: List<Date> = listOf()
+    private var facilities: List<String> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,7 +71,8 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
         fragment_my_adds_change_price_et.addTextChangedListener(MoneyTextWatcher(fragment_my_adds_change_price_et))
 
         header_my_adds_change_save.setOnClickListener {
-            saveUpdate()
+            if (saveUpdate())
+                findNavController().navigateUp()
         }
 
         fragment_my_adds_change_rules.setOnClickListener {
@@ -101,7 +102,11 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
                 this@MyHouseDetailEditProfileFragment.context,
                 LinearLayoutManager.HORIZONTAL,
                 false)
-            photosAdapter = GalleryPhotosAdapter(requestManager, this@MyHouseDetailEditProfileFragment)
+            photosAdapter =
+                GalleryPhotosAdapter(
+                    requestManager,
+                    this@MyHouseDetailEditProfileFragment
+                )
             adapter = photosAdapter
         }
     }
@@ -116,6 +121,11 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
 
             val photos = it.photosList.toMutableList()
             photosAdapter.submitList(photos)
+
+            facilities = it.facilitiesList!!
+            nears = it.nearByList!!
+            rules = it.houseRulesList!!
+            dates = it.availableDates!!
         })
     }
 
@@ -129,7 +139,12 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
     }
 
     private fun addGalleryPhoto(uri: Uri){
-        photosAdapter.addGalleryPhoto(GalleryPhoto(null, uri))
+        photosAdapter.addGalleryPhoto(
+            GalleryPhoto(
+                null,
+                uri
+            )
+        )
         fragment_my_adds_change_photos_tv.text = ("${photosAdapter.itemCount}/15")
     }
 
@@ -191,16 +206,38 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
         )
     }
 
-    private fun saveUpdate(){
-        sessionManager.setHouseUpdateData(
-            HouseUpdateData(
-                -1,
-                fragment_my_adds_change_title_et.text.toString().trim(),
-                fragment_my_adds_change_desc_et.text.toString().trim(),
-                photosAdapter.getPhotos(),
-                price = fragment_my_adds_change_price_et.text.toString().toIntOrNull(),
-                address = fragment_my_adds_change_address_et.text.toString().trim())
-        )
+    private fun saveUpdate(): Boolean{
+        if (checkInputs()) {
+            sessionManager.setHouseUpdateData(
+                HouseUpdateData(
+                    id = -1,
+                    title = fragment_my_adds_change_title_et.text.toString().trim(),
+                    description = fragment_my_adds_change_desc_et.text.toString().trim(),
+                    photosList = photosAdapter.getPhotos(),
+                    price = fragment_my_adds_change_price_et.text.toString().toIntOrNull(),
+                    address = fragment_my_adds_change_address_et.text.toString().trim(),
+                    houseRulesList = rules.toMutableList(),
+                    facilitiesList = facilities.toMutableList(),
+                    nearByList = nears.toMutableList(),
+                    availableDates = dates.toMutableList()
+                )
+            )
+            return true
+        }
+        else {
+            showErrorDialog("Some inputs are not filled")
+            return false
+        }
+    }
+
+    private fun checkInputs(): Boolean{
+        if (fragment_my_adds_change_title_et.text.toString().trim().isBlank()
+            || fragment_my_adds_change_desc_et.text.toString().trim().isBlank()
+            || fragment_my_adds_change_price_et.text.toString().toIntOrNull() == 0
+            || fragment_my_adds_change_price_et.text.toString().toIntOrNull() == null
+            || fragment_my_adds_change_address_et.text.toString().trim().isBlank())
+            return false
+        return true
     }
 
     private fun cancelUpdate(){

@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.profile.my_house
+package com.example.akvandroidapp.ui.main.profile.my_house.state
 
 
 import android.util.Log
@@ -11,6 +11,7 @@ import com.example.akvandroidapp.ui.Loading
 import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
 import com.example.akvandroidapp.ui.main.search.viewmodel.getState
+import com.example.akvandroidapp.ui.main.search.viewmodel.getZhilyeHouseId
 import com.example.akvandroidapp.util.AbsentLiveData
 import javax.inject.Inject
 
@@ -53,6 +54,11 @@ constructor(
                 }?: AbsentLiveData.create()
             }
 
+            is MyHouseStateStateEvent.MyHouseZhilyeEvent -> {
+                return profileRepository.getZhilyeWithHouseId(
+                    houseId = getZhilyeHouseId()
+                )
+            }
 
             is MyHouseStateStateEvent.None ->{
                 return liveData {

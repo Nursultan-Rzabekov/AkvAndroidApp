@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.profile.my_house
+package com.example.akvandroidapp.ui.main.profile.my_house.adapters
 
 import android.net.Uri
 import android.util.Log
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
@@ -113,7 +112,12 @@ class GalleryPhotosAdapter(
     fun submitList(items: MutableList<GalleryPhoto>){
         val newList = items.toMutableList()
         counter = newList.size
-        newList.add(GalleryPhoto(null, null))
+        newList.add(
+            GalleryPhoto(
+                null,
+                null
+            )
+        )
         differ.submitList(newList)
         Log.e("GALLERYADAPTER", "${differ.currentList}")
     }
@@ -136,7 +140,12 @@ class GalleryPhotosAdapter(
         val newList = differ.currentList.toMutableList()
 
         if (counter == MAX_PHOTOS)
-            newList.add(GalleryPhoto(null,null))
+            newList.add(
+                GalleryPhoto(
+                    null,
+                    null
+                )
+            )
 
         newList.removeAt(position)
 

@@ -6,7 +6,8 @@ import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
-import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseViewModel
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
@@ -90,9 +91,29 @@ fun MyHouseViewModel.setHouseId(houseId: Int){
     setViewState(update)
 }
 
+fun MyHouseViewModel.setZhilyeHouseId(houseId: Int){
+    val update = getCurrentViewStateOrNew()
+    update.zhilyeFields.houseId = houseId
+    setViewState(update)
+}
+
 fun MyHouseViewModel.setState(state: Int){
     val update = getCurrentViewStateOrNew()
     update.myHouseStateFields.state = state
+    setViewState(update)
+}
+
+fun MyHouseViewModel.setZhilyeData(zhilyeFields: MyHouseViewState.MyHouseZhilyeFields){
+    val update = getCurrentViewStateOrNew()
+    update.zhilyeFields.blogListRecommendations = zhilyeFields.blogListRecommendations
+    update.zhilyeFields.zhilyeDetail = zhilyeFields.zhilyeDetail
+    update.zhilyeFields.zhilyeDetailAccomadations = zhilyeFields.zhilyeDetailAccomadations
+    update.zhilyeFields.zhilyeDetailNearBuildings = zhilyeFields.zhilyeDetailNearBuildings
+    update.zhilyeFields.zhilyeDetailPhotos = zhilyeFields.zhilyeDetailPhotos
+    update.zhilyeFields.zhilyeDetailRules = zhilyeFields.zhilyeDetailRules
+    update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
+    update.zhilyeFields.zhilyeReviewsList = zhilyeFields.zhilyeReviewsList
+    update.zhilyeFields.zhilyeReservationsList = zhilyeFields.zhilyeReservationsList
     setViewState(update)
 }
 
@@ -113,6 +134,7 @@ fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
     update.zhilyeFields.zhilyeDetailRules = zhilyeFields.zhilyeDetailRules
     update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
     update.zhilyeFields.zhilyeReviewsList = zhilyeFields.zhilyeReviewsList
+    update.zhilyeFields.zhilyeReservationsList = zhilyeFields.zhilyeReservationsList
     setViewState(update)
 }
 
