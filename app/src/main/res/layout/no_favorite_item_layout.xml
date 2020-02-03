@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/dim_28dp"
-    android:layout_marginEnd="@dimen/dim_28dp">
+    android:paddingStart="@dimen/dim_28dp"
+    android:paddingEnd="@dimen/dim_28dp">
 
     <ImageView
         android:id="@+id/fragment_saved_pages_empty_heart"
-        android:layout_width="@dimen/dim_48dp"
-        android:layout_height="@dimen/dim_48dp"
+        android:layout_width="48dp"
+        android:layout_height="42dp"
         android:contentDescription="@string/liked_"
         android:scaleType="fitXY"
         android:tint="@color/primaryZero"
-        app:srcCompat="@drawable/ic_like_dark" />
+        app:srcCompat="@drawable/ic_liked" />
 
     <TextView
         android:id="@+id/fragment_saved_pages_empty_lb"
@@ -37,4 +38,5 @@
         android:text="@string/find_appartment"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/dim_36dp"/>
+
 </LinearLayout>
