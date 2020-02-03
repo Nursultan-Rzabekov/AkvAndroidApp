@@ -1,7 +1,5 @@
 package com.example.akvandroidapp.ui.main.messages.chatkit;
 
-
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

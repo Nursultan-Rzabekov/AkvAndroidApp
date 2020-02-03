@@ -39,6 +39,8 @@ class Constants {
         const val MESSAGE_TYPE_DOC = 2
         const val MESSAGE_TYPE_REQUEST = 3
 
+        const val TOTAL_MESSAGES_COUNT = 100
+
         val mapFacilities = mapOf(
             "Отопление" to 1,
             "Wifi" to 2,

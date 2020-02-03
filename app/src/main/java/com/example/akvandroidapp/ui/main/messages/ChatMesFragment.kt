@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.messages
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +16,7 @@ import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
-import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutDialogsActivity
+import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.ErrorHandling
@@ -129,12 +130,9 @@ class ChatMesFragment : BaseMessagesFragment(),
     }
 
     override fun onItemSelected(position: Int, item: UserChatMessages) {
-//        val intent = Intent(context,MessagesDetailActivity::class.java)
-//        intent.putExtra("userId",item.id)
-//        intent.putExtra("name",item.first_name)
-//        startActivity(intent)
-
-        CustomLayoutDialogsActivity.open(context)
+        val intent = Intent(context,CustomLayoutMessagesActivity::class.java)
+        intent.putExtra("item",item)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

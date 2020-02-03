@@ -1,43 +1,69 @@
-<RelativeLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.stfalcon.chatkit.messages.MessagesList
-        android:id="@+id/messagesList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/input"
-        app:incomingAvatarHeight="56dp"
-        app:incomingAvatarWidth="56dp"
-        app:incomingBubbleDrawable="@drawable/bg_custom_incoming_message"
-        app:outcomingBubbleDrawable="@drawable/bg_custom_outcoming_message"
-        app:outcomingTimeTextColor="@color/dark_gray"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/input"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/gray"/>
-
-    <com.stfalcon.chatkit.messages.MessageInput
-        android:id="@+id/input"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:attachmentButtonBackground="?attr/selectableItemBackgroundBorderless"
-        app:attachmentButtonDefaultIconColor="@color/green"
-        app:attachmentButtonDefaultIconPressedColor="@color/green"
-        app:attachmentButtonHeight="27dp"
-        app:attachmentButtonWidth="27dp"
-        app:inputButtonBackground="@drawable/bg_custom_layout_send"
-        app:inputButtonDefaultIconColor="@color/white"
-        app:inputButtonDefaultIconDisabledColor="@color/white60"
-        app:inputHint="@string/hint_enter_a_message"
-        app:showAttachmentButton="true"/>
+        android:fitsSystemWindows="true"
+        android:id="@+id/app_bar_layout_chat"
+        android:backgroundTint="@color/white">
 
-</RelativeLayout>
+        <include
+            android:id="@+id/header_dialog_base"
+            layout="@layout/header_dialog"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <FrameLayout
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.stfalcon.chatkit.messages.MessagesList
+                android:id="@+id/messagesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/input"
+                app:incomingAvatarHeight="56dp"
+                app:incomingAvatarWidth="56dp"
+                app:incomingBubbleDrawable="@drawable/bg_custom_incoming_message"
+                app:outcomingBubbleDrawable="@drawable/bg_custom_outcoming_message"
+                app:outcomingTimeTextColor="@color/dark_gray"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_above="@+id/input"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/gray"/>
+
+            <com.stfalcon.chatkit.messages.MessageInput
+                android:id="@+id/input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:attachmentButtonBackground="?attr/selectableItemBackgroundBorderless"
+                app:attachmentButtonDefaultIconColor="@color/red"
+                app:attachmentButtonDefaultIconPressedColor="@color/green"
+                app:attachmentButtonHeight="27dp"
+                app:attachmentButtonWidth="27dp"
+                app:inputButtonBackground="@drawable/ic_circle_red"
+                app:inputButtonDefaultIconColor="@color/white"
+                app:inputButtonDefaultIconDisabledColor="@color/white60"
+                app:inputHint="@string/enter_message"
+                app:showAttachmentButton="true"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

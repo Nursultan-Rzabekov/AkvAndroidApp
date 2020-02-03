@@ -109,7 +109,7 @@ interface OpenApiMainService {
         @Part("recipient") recipient: RequestBody,
         @Part("body") body: RequestBody,
         @Part images: MultipartBody.Part?
-    ):LiveData<GenericApiResponse<UserConversationsInfoResponse>>
+    ):LiveData<GenericApiResponse<UserConversationsInfoSendResponse>>
 
     @GET("reservations/")
     fun getReservations(

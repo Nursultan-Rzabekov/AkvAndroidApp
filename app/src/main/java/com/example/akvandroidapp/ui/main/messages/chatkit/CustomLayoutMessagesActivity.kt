@@ -1,45 +1,53 @@
-package com.example.akvandroidapp.ui.main.messages
+package com.example.akvandroidapp.ui.main.messages.chatkit
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.*
-import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
+import com.example.akvandroidapp.ui.main.messages.ModalBottomSheetChat
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsStateEvent
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
-import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
 import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
 import com.example.akvandroidapp.ui.main.messages.models.MessageText
+import com.example.akvandroidapp.ui.main.messages.models.mMessage
 import com.example.akvandroidapp.ui.main.search.viewmodel.getTargetQuery
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQuery
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
-import com.example.akvandroidapp.util.Constants.Companion.GALLERY_REQUEST_CODE
-import com.example.akvandroidapp.util.Constants.Companion.PICK_FILE_CODE
-import com.example.akvandroidapp.util.Constants.Companion.REQUEST_IMAGE_CAPTURE
-import com.example.akvandroidapp.util.Converters
+import com.example.akvandroidapp.util.Constants.Companion.TOTAL_MESSAGES_COUNT
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
+import com.squareup.picasso.Picasso
+import com.stfalcon.chatkit.commons.ImageLoader
+import com.stfalcon.chatkit.messages.MessageHolders
+import com.stfalcon.chatkit.messages.MessageInput
+import com.stfalcon.chatkit.messages.MessageInput.AttachmentsListener
+import com.stfalcon.chatkit.messages.MessagesList
+import com.stfalcon.chatkit.messages.MessagesListAdapter
+import com.stfalcon.chatkit.messages.MessagesListAdapter.OnMessageLongClickListener
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.header_dialog.*
 import loadFirstPage
 import okhttp3.MediaType
@@ -54,78 +62,66 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+class CustomLayoutMessagesActivity : BaseActivity(),
+    OnMessageLongClickListener<mMessage?>,
+    MessagesListAdapter.SelectionListener, MessagesListAdapter.OnLoadMoreListener,
+    MessageInput.InputListener, AttachmentsListener , ModalBottomSheetChat.BottomSheetDialogChatInteraction{
 
-class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetDialogChatInteraction,
-    SwipeRefreshLayout.OnRefreshListener
-{
+    private var senderId = "1"
+    private var imageLoader: ImageLoader? = null
+    private var messagesAdapter: MessagesListAdapter<mMessage>? = null
+    private var menu: Menu? = null
+    private var selectionCount = 0
+    private var lastLoadedDate: Date? = null
 
     lateinit var stateChangeListener: DataStateChangeListener
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
     lateinit var viewModel: DetailsViewModel
 
-    private var userId: Int = 1
-    private val myDataTransfer = arrayOf<Bundle?>(null)
+    private var messagesList: MessagesList? = null
+
     private lateinit var currentPhotoPath: String
     private lateinit var currentPhotoUri: Uri
     private lateinit var currentFileUri: Uri
-
+    private val myDataTransfer = arrayOf<Bundle?>(null)
     private val calendar = Calendar.getInstance()
-    private lateinit var chatAdapter: ChatRecyclerAdapter
     private val modalBottomSheet: ModalBottomSheetChat = ModalBottomSheetChat(this)
 
-    override fun displayProgressBar(bool: Boolean) {
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dialog_layout)
+        setContentView(R.layout.activity_custom_layout_messages)
 
         viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
         stateChangeListener = this
 
-
-        sessionManager.cachedToken.observe(this, androidx.lifecycle.Observer{
-            it.id?.let { userIdAccount ->
-                userId = userIdAccount
+        imageLoader =
+            ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
+                Picasso.with(this@CustomLayoutMessagesActivity).load(url).into(imageView)
             }
-        })
 
-//        sessionManager.accountProperties.observe(this, androidx.lifecycle.Observer{ it ->
-//            it.id?.let { userIdAccount ->
-//                userId = userIdAccount
-//            }
-//
-//            it.email?.let {
-//                mUserId = it
-//            }
-//        })
+        messagesList = findViewById(R.id.messagesList)
 
-        swipe_messages.setOnRefreshListener(this)
-
-        activity_dialog_attach_btn.setOnClickListener {
-            showDialog()
-        }
-
-        main_back_img_btn.setOnClickListener {
-            finish()
-        }
-
-        activity_dialog_send_btn.setOnClickListener {
-            sendMessage()
-        }
+        val input = findViewById<MessageInput>(R.id.input)
+        input.setInputListener(this)
+        input.setAttachmentsListener(this)
 
         val target =  intent.getParcelableExtra<UserChatMessages>("item")
-        userId = target!!.id
+        senderId = target!!.id.toString()
         header_dialog_nickname_tv.text = target.first_name
 
-        initRecyclerView()
+        Glide.with(this)
+            .load(target.userpic)
+            .error(R.drawable.profile_default_avavatar)
+            .into(header_dialog_civ)
+
+        initAdapter()
         subscribeObservers()
 
         viewModel.setQuery(target.id).let {
             onBlogSearchOrFilter()
         }
-
     }
 
     private fun onBlogSearchOrFilter(){
@@ -135,11 +131,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
     }
 
     private  fun resetUI(){
-        activity_dialog_recycler_view.smoothScrollToPosition(0)
         stateChangeListener.hideSoftKeyboard()
-    }
-
-    override fun expandAppBar() {
     }
 
     private fun subscribeObservers(){
@@ -154,9 +146,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         viewModel.viewState.observe(this, androidx.lifecycle.Observer{ viewState ->
             if(viewState != null){
                 val userConversationResponse = arrayListOf<UserConversationsResponse>()
-
                 userConversationResponse.clear()
-                clearMessages()
 
                 if(viewState.myChatFields.blogList.isNotEmpty()){
                     viewState.myChatFields.blogList.forEach {
@@ -174,13 +164,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                                 recipientPic = it.recipientPic,
                                 created_at = it.created_at.toString(),
                                 updated_at = it.updated_at.toString()
-                        ))
+                            )
+                        )
                     }
-
-                    Glide.with(this)
-                        .load(userConversationResponse.first().recipientPic)
-                        .error(R.drawable.profile_default_avavatar)
-                        .into(header_dialog_civ)
                 }
 
                 if(viewState.myChatFields.blogListImages.isNotEmpty()){
@@ -193,15 +179,14 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                     }
                 }
                 userConversationResponse.asReversed().forEach {
-                    Log.e("MESSAGE_CAMERA_BITMAP", "user rec + ${it.userId}")
                     if(it.images!=null){
-                        chatAdapter.addMessage(
-                            MessagePhoto(it.userId!!, image = it.images,created_at = calendar.time)
+                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = it.images,
+                            user = User(it.recipientId.toString(),it.userName.toString(),"http://i.imgur.com/ROz4Jgh.png",true)
                         )
                     }
                     else{
-                        chatAdapter.addMessage(
-                            MessageText(it.userId!!, body = it.body,created_at = calendar.time)
+                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
+                            user = User(it.recipientId.toString(),it.userName.toString(),"http://i.imgur.com/ROz4Jgh.png",true)
                         )
                     }
                 }
@@ -232,27 +217,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         }
     }
 
-    private fun initRecyclerView(){
-        activity_dialog_recycler_view.apply {
-            layoutManager = LinearLayoutManager(this@MessagesDetailActivity).apply { stackFromEnd = true }
-            chatAdapter = ChatRecyclerAdapter(requestManager, userId)
-            adapter = chatAdapter
-        }
-    }
-
-    private fun sendMessage(){
-        val message = activity_dialog_message_et.text.toString()
-
-        if (message.trim() != ""){
-            viewModel.setMessageBody(message)
-            viewModel.setUserId(viewModel.getTargetQuery())
-            viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
-        }
-        activity_dialog_message_et.setText("")
-    }
-
-    private fun showDialog(){
-        modalBottomSheet.show(supportFragmentManager, ModalBottomSheetChat.TAG)
+    override fun onStart() {
+        super.onStart()
+        //messagesAdapter!!.addToStart(MessagesFixtures.getTextMessage(), true)
     }
 
     override fun onCameraClicked() {
@@ -281,11 +248,6 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             modalBottomSheet.dismiss()
     }
 
-    override fun onRefresh() {
-        onBlogSearchOrFilter()
-        swipe_messages.isRefreshing = false
-    }
-
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             .also { takePictureIntent ->
@@ -307,7 +269,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                             currentPhotoUri = photoUri
                             Log.e("MESSAGE_CAMERA_BITMAP", "$photoUri")
-                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                            startActivityForResult(takePictureIntent,
+                                Constants.REQUEST_IMAGE_CAPTURE
+                            )
                         }
                     }
             }
@@ -320,7 +284,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             }.also {
                 startActivityForResult(
                     Intent.createChooser(it, "Choose a file"),
-                    PICK_FILE_CODE
+                    Constants.PICK_FILE_CODE
                 )
             }
     }
@@ -334,10 +298,12 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
         val myData = Bundle()
         myData.putString("where", "RED")
-        myDataTransfer[GALLERY_REQUEST_CODE] = myData
+        myDataTransfer[Constants.GALLERY_REQUEST_CODE] = myData
 
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        startActivityForResult(Intent.createChooser(intent, "Choose photos"), GALLERY_REQUEST_CODE)
+        startActivityForResult(Intent.createChooser(intent, "Choose photos"),
+            Constants.GALLERY_REQUEST_CODE
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -345,19 +311,21 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
         if (resultCode == Activity.RESULT_OK){
             when(requestCode){
-                REQUEST_IMAGE_CAPTURE -> {
+                Constants.REQUEST_IMAGE_CAPTURE -> {
                     try {
-                        sendMessageWithType(
-                            userId,
-                            Constants.MESSAGE_TYPE_PHOTO,
-                            uriOfFile = currentPhotoUri)
+//                        sendMessageWithType(
+//                            1,
+//                            Constants.MESSAGE_TYPE_PHOTO,
+//                            uriOfFile = currentPhotoUri,
+//                            user = User(senderId,"Nurs","qweq",true)
+//                        )
                     }catch (ex: Exception){
                         showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                     }
                     Log.e("MESSAGE_CAMERA_URI", "$currentPhotoUri")
                 }
 
-                GALLERY_REQUEST_CODE -> {
+                Constants.GALLERY_REQUEST_CODE -> {
                     data?.data?.let { uri ->
                         launchImageCrop(uri)
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
@@ -372,10 +340,30 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                     Log.d(TAG, "CROP: CROP_IMAGE_ACTIVITY_REQUEST_CODE: uri: ${resultUri}")
 
                     currentPhotoUri = resultUri
-                    sendMessageWithType(
-                        userId,
-                        Constants.MESSAGE_TYPE_PHOTO,
-                        uriOfFile = resultUri)
+
+                    currentPhotoUri.path?.let { filePath->
+                        val imageFile = File(filePath)
+                        Log.d(TAG, "CreateBlogFragment, imageFile: file: ${imageFile}")
+
+                        val requestBody =
+                            RequestBody.create(
+                                MediaType.parse("multipart/form-data"),
+                                imageFile
+                            )
+                        Log.d(TAG, "PostCreateHouse request777: ${requestBody}")
+
+                        val multipartBody = MultipartBody.Part.createFormData(
+                            "images",
+                            imageFile.name,
+                            requestBody
+                        )
+                        multipartBody.let {
+                            viewModel.setMessageBody("Only Photos")
+                            viewModel.setImageMultipart(it)
+                            viewModel.setUserId(viewModel.getTargetQuery())
+                            viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
+                        }
+                    }
 
                     Log.e("MESSAGE_GALLEY_URI", currentPhotoUri.toString())
                 }
@@ -385,7 +373,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                     showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                 }
 
-                PICK_FILE_CODE -> {
+                Constants.PICK_FILE_CODE -> {
                     var fileName: String
                     var fileSize: Long
                     data?.data?.let {
@@ -398,12 +386,13 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                                 cursor.moveToFirst()
                                 fileName = cursor.getString(nameIndex)
                                 fileSize = cursor.getLong(sizeIndex)
-                                sendMessageWithType(
-                                    userId,
-                                    Constants.MESSAGE_TYPE_DOC,
-                                    fileName = fileName,
-                                    fileSize = fileSize)
-                        }
+//                                sendMessageWithType(
+//                                    1,
+//                                    Constants.MESSAGE_TYPE_DOC,
+//                                    fileName = fileName,
+//                                    fileSize = fileSize,
+//                                    user = User(senderId,"Nurs","qweq",true))
+                            }
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_FILE)
                     Log.e("MESSAGE_DOCUMENT_URI", currentFileUri.toString())
                 }
@@ -444,57 +433,136 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
         )
     }
 
-    fun sendMessageWithType(userId: Int, type: Int, body: String = "", uriOfFile: Uri? = null, fileName: String = "", fileSize: Long = 0){
-        when( type ){
+    fun sendMessageWithType(userId: Int, type: Int,
+                            body: String = "", uriOfFile: Uri? = null,
+                            user: User,
+                            imageUrl:String? = null, fileName: String = "", fileSize: Long = 0){
+        when(type){
             Constants.MESSAGE_TYPE_TEXT -> {
-                chatAdapter.addMessage(
-                    MessageText(userId, body,calendar.time)
+                messagesAdapter?.addToStart(
+                    MessageText(userId, body,calendar.time,user = user), true
                 )
             }
             Constants.MESSAGE_TYPE_PHOTO -> {
-                chatAdapter.addMessage(
-                    MessagePhoto(userId, uriOfFile,created_at = calendar.time)
-                )
-
-                uriOfFile?.path?.let { filePath->
-                    val imageFile = File(filePath)
-                    Log.d(TAG, "CreateBlogFragment, imageFile: file: ${imageFile}")
-
-                    val requestBody =
-                        RequestBody.create(
-                            MediaType.parse("multipart/form-data"),
-                            imageFile
-                        )
-                    Log.d(TAG, "PostCreateHouse request777: ${requestBody}")
-
-                    val multipartBody = MultipartBody.Part.createFormData(
-                        "images",
-                        imageFile.name,
-                        requestBody
-                    )
-
-                    multipartBody.let {
-                        viewModel.setMessageBody("Фотка")
-                        viewModel.setImageMultipart(it)
-                        viewModel.setUserId(viewModel.getTargetQuery())
-                        viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
-                    }
-                }
-            }
-            Constants.MESSAGE_TYPE_DOC -> {
-                chatAdapter.addMessage(
-                    MessageDocument(userId,
-                        fileName = fileName,
-                        fileSize = Converters.humanReadableByteCountSI(fileSize),
-                        created_at = calendar.time)
-                )
+                messagesAdapter?.addToStart(MessagePhoto(userId = userId, photo = uriOfFile,
+                    user = user,
+                    image = imageUrl,
+                    created_at = calendar.time), true)
             }
         }
-        activity_dialog_recycler_view.smoothScrollToPosition(chatAdapter.itemCount)
     }
 
-    private fun clearMessages(){
-        chatAdapter.clearMessages()
+    private fun showDialog(){
+        modalBottomSheet.show(supportFragmentManager, ModalBottomSheetChat.TAG)
     }
+
+    override fun onSubmit(input: CharSequence): Boolean {
+        messagesAdapter?.addToStart(
+            MessageText(senderId.toInt(), input.toString(),calendar.time,
+                user = User(senderId,"Nurs","qwe",true)), true
+        )
+        viewModel.setMessageBody(input.toString())
+        viewModel.setUserId(viewModel.getTargetQuery())
+        viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
+
+        return true
+    }
+
+    override fun onAddAttachments() {
+        showDialog()
+    }
+
+    override fun onMessageLongClick(message: mMessage?) {
+
+    }
+
+    private fun initAdapter() {
+        val holdersConfig = MessageHolders()
+            .setIncomingTextLayout(R.layout.item_custom_incoming_text_message)
+            .setOutcomingTextLayout(R.layout.item_custom_outcoming_text_message)
+            .setIncomingImageLayout(R.layout.item_custom_incoming_image_message)
+            .setOutcomingImageLayout(R.layout.item_custom_outcoming_image_message)
+        messagesAdapter =
+            MessagesListAdapter(
+                senderId,
+                holdersConfig,
+                imageLoader
+            )
+
+        messagesAdapter?.setOnMessageLongClickListener(this)
+        messagesAdapter?.setLoadMoreListener(this)
+        messagesList!!.setAdapter(messagesAdapter)
+    }
+
+    override fun displayProgressBar(bool: Boolean) {}
+    override fun expandAppBar() {}
+
+    override fun onLoadMore(page: Int, totalItemsCount: Int) {
+        Log.i("TAG", "onLoadMore: $page $totalItemsCount")
+        if (totalItemsCount < TOTAL_MESSAGES_COUNT) {
+            loadMessages()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (selectionCount == 0) {
+            super.onBackPressed()
+        } else {
+            messagesAdapter!!.unselectAllItems()
+        }
+    }
+
+    private fun loadMessages() {
+//        Handler().postDelayed(
+//        {
+//            val messages = MessagesFixtures.getMessages(lastLoadedDate)
+//            lastLoadedDate = messages[messages.size - 1].createdAt
+//            messagesAdapter!!.addToEnd(messages, false)
+//        }, 1000
+//        )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        this.menu = menu
+        menuInflater.inflate(R.menu.chat_actions_menu, menu)
+        onSelectionChanged(0)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_delete -> messagesAdapter!!.deleteSelectedMessages()
+            R.id.action_copy -> {
+                messagesAdapter!!.copySelectedMessagesText(this, messageStringFormatter, true)
+                Toast.makeText(
+                    this,
+                    R.string.copied_message,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        return true
+    }
+
+    override fun onSelectionChanged(count: Int) {
+        selectionCount = count
+        menu!!.findItem(R.id.action_delete).isVisible = count > 0
+        menu!!.findItem(R.id.action_copy).isVisible = count > 0
+    }
+
+    private val messageStringFormatter: MessagesListAdapter.Formatter<mMessage>
+        get() = MessagesListAdapter.Formatter { message: mMessage ->
+            val createdAt: String = SimpleDateFormat(
+                "MMM d, EEE 'at' h:mm a",
+                Locale.getDefault()
+            )
+                .format(message.getCreatedAt())
+            var text: String? = message.getText()
+            if (text == null) text = "[attachment]"
+            String.format(
+                Locale.getDefault(), "%s: %s (%s)",
+                message.user.name, text, createdAt
+            )
+        }
 
 }

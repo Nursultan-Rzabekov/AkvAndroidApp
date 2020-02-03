@@ -155,7 +155,7 @@ constructor(
                         blogPostResponse.images?.let {
                             UserConversationImages(
                                 message = it.first().message,
-                                image = it.first().image
+                                image = "https://akv-technopark.house.herokuapp.com${it.first().image}"
                             )
                         }
 
@@ -206,7 +206,7 @@ constructor(
         photos: MultipartBody.Part?
         ): LiveData<DataState<DetailsViewState>>{
         return object:
-            NetworkBoundResource<UserConversationsInfoResponse, List<BlogPost>, DetailsViewState>(
+            NetworkBoundResource<UserConversationsInfoSendResponse, List<BlogPost>, DetailsViewState>(
                 sessionManager.isConnectedToTheInternet(),
                 true,
                 false,
@@ -216,20 +216,14 @@ constructor(
             }
 
             override suspend fun handleApiSuccessResponse(
-                response: ApiSuccessResponse<UserConversationsInfoResponse>
+                response: ApiSuccessResponse<UserConversationsInfoSendResponse>
             ) {
                 Log.d(TAG, "recipient ${response.body.recipient}")
 
                 val sendMessageInfo = UserConversationMessages(
                     id = response.body.id,
-                    userId = response.body.user.id,
-                    userName = response.body.user.first_name,
-                    userEmail = response.body.user.email,
-                    userPic = response.body.user.userpic,
-                    recipientId = response.body.recipient.id,
-                    recipientName = response.body.recipient.first_name,
-                    recipientEmail = response.body.recipient.email,
-                    recipientPic = response.body.recipient.userpic,
+                    userId = response.body.user,
+                    recipientId = response.body.recipient,
                     body = response.body.body,
                     created_at = response.body.created_at,
                     updated_at = response.body.updated_at
@@ -248,7 +242,7 @@ constructor(
                 }
             }
 
-            override fun createCall(): LiveData<GenericApiResponse<UserConversationsInfoResponse>> {
+            override fun createCall(): LiveData<GenericApiResponse<UserConversationsInfoSendResponse>> {
                 Log.d(TAG, "send message $recipient")
                 return openApiMainService.sendMessageTo(
                     "Token ${authToken.token!!}",

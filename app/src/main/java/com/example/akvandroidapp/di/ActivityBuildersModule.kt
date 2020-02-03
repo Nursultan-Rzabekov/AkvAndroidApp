@@ -117,7 +117,7 @@ abstract class ActivityBuildersModule {
     abstract fun contributeCustomLayoutDialogsActivity(): CustomLayoutDialogsActivity
 
     @MainScope
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
     abstract fun contributeCustomLayoutMessagesActivity(): CustomLayoutMessagesActivity
 
 
