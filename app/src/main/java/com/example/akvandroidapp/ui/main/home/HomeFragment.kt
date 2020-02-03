@@ -4,7 +4,9 @@ package com.example.akvandroidapp.ui.main.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -126,8 +128,8 @@ class HomeFragment : BaseHomeFragment(),
     }
 
     override fun onItemSelected(position: Int, item: HomeReservation) {
-        //viewModel.setBlogPost(item)
-        //findNavController().navigate(R.id.action_searchFragment_to_zhilyeFragment)
+        val bundle = bundleOf("houseId" to item.house_id)
+        findNavController().navigate(R.id.action_homeFragment_to_zhilyeFragment,bundle)
     }
 
     override fun onDestroyView() {

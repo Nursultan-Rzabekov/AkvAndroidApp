@@ -11,5 +11,23 @@
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/fragment_saved_booking">
 
+        <action android:id="@+id/action_homeFragment_to_zhilyeFragment"
+            app:destination="@id/zhilyeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
     </fragment>
+
+
+    <activity android:id="@+id/zhilyeFragment"
+        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
+        android:label="@string/fragment_view_blog"
+        tools:layout="@layout/fragment_zhilye_layout">
+
+
+    </activity>
+
 </navigation>

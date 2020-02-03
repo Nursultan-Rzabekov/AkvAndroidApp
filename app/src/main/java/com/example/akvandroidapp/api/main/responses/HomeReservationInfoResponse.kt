@@ -41,9 +41,9 @@ class HomeReservationInfoResponse(
     @Expose
     var user: UserProfileInfoResponse,
 
-    @SerializedName("house_id")
+    @SerializedName("house")
     @Expose
-    var house_id: Int,
+    var house: MyHouseInfoResponse,
 
     @SerializedName("owner")
     @Expose

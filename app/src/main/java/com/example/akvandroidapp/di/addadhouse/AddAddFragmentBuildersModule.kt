@@ -16,7 +16,6 @@ abstract class AddAddFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeProfileProfileAddDescriptionFragment(): ProfileAddDescriptionFragment
 
-
     @ContributesAndroidInjector()
     abstract fun contributeProfileProfileAddGalleryFragment(): ProfileAddGalleryFragment
 

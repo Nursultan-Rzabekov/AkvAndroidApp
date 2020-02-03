@@ -201,6 +201,10 @@ class HomeListAdapter(
 
         fun bind(item: HomeReservation) = with(itemView) {
 
+            itemView.book_requests_recycler_view_item_iv.setOnClickListener {
+                interaction?.onItemSelected(adapterPosition, item)
+            }
+
             itemView.book_requests_recycler_view_item_title_tv.text = item.house_name
 
             when(item.status){

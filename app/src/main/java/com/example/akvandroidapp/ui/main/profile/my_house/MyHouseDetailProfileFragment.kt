@@ -23,6 +23,8 @@ import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhoto
 import com.example.akvandroidapp.ui.main.profile.my_house.adapters.HouseEarning
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
+import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
+import com.example.akvandroidapp.ui.main.search.viewmodel.setState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setZhilyeHouseId
 import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.DateUtils
@@ -30,6 +32,7 @@ import com.savvi.rangedatepicker.CalendarPickerView
 import handleIncomingZhilyeData
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed_layout.*
+import kotlinx.android.synthetic.main.my_adds_recycler_view_item.view.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -73,12 +76,51 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
         subscribeObservers()
         initCalendar(getBlockedDates())
 
+
+        setState()
+
         earning.setOnClickListener {
             navNextFragment()
         }
 
         fragment_my_adds_detailed_change_btn.setOnClickListener {
             navNextDetailEditFragment()
+        }
+    }
+
+    private fun setState(){
+        argument?.let {
+            if(it.status){
+                fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.deactivate)
+                fragment_my_adds_detailed_state_btn.setTextColor(resources.getColor(R.color.red))
+            }
+            else{
+                fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.activate)
+                fragment_my_adds_detailed_state_btn.setTextColor(resources.getColor(R.color.green))
+            }
+        }
+
+        fragment_my_adds_detailed_state_btn.setOnClickListener {
+            if(fragment_my_adds_detailed_state_btn.text == resources.getString(R.string.activate)){
+                houseId?.let {
+                    viewModel.setHouseId(it).let {
+                        viewModel.setState(0).let {
+                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
+                            fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.deactivate)
+                        }
+                    }
+                }
+            }
+            else{
+                houseId?.let {
+                    viewModel.setHouseId(it).let {
+                        viewModel.setState(1).let {
+                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
+                            fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.activate)
+                        }
+                    }
+                }
+            }
         }
     }
 

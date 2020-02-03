@@ -290,7 +290,6 @@ constructor(
 
                 val ordersList: ArrayList<HomeReservation> = ArrayList()
                 for (order in response.body.results){
-                    //val image: String = order.house.photos?.get(0)?.image ?: "////////////////"
                     ordersList.add(
                         HomeReservation(
                             order.id,
@@ -301,9 +300,9 @@ constructor(
                             order.created_at,
                             order.accepted_house,
                             order.user.id,
-                            order.house_id,
-                            "qwerty",
-                            "https://akv-technopark.herokuapp.com",
+                            order.house.id,
+                            order.house.name,
+                            "https://akv-technopark.herokuapp.com${order.house.photos?.first()?.image}",
                             order.owner.id
                         )
                     )
