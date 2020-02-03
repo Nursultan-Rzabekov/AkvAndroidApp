@@ -13,7 +13,7 @@
         android:contentDescription="@string/liked_"
         android:scaleType="fitXY"
         android:tint="@color/primaryZero"
-        app:srcCompat="@drawable/ic_liked" />
+        app:srcCompat="@drawable/ic_like_dark" />
 
     <TextView
         android:id="@+id/fragment_saved_pages_empty_lb"

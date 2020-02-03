@@ -290,9 +290,8 @@ fun FavoriteViewModel.handleIncomingBlogListData(viewState: FavoriteViewState){
     setQueryInProgress(viewState.blogFields.isQueryInProgress)
     setQueryExhausted(viewState.blogFields.isQueryExhausted)
     setBlogListData(viewState.blogFields.blogList)
+    setDeleteState(viewState.deleteblogFields.isDeleted)
 }
-
-
 
 fun MessagesViewModel.handleIncomingBlogListData(viewState: MessagesViewState){
     Log.d(TAG, "BlogViewModel, DataState: ${viewState}")

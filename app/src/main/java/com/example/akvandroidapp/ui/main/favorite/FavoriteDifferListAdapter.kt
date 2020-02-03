@@ -10,21 +10,40 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.util.GenericViewHolder
+import kotlinx.android.synthetic.main.no_favorite_item_layout.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
 class FavoriteDifferListAdapter(
     private val requestManager: RequestManager,
     private val interaction: Interaction? = null,
-    private val interactionCheck: InteractionCheck? = null
+    private val interactionCheck: InteractionCheck? = null,
+    private val interactionAddMore: InteractionAddMore? = null
     ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
+    private val NO_RESULT = -2
     private val BLOG_ITEM = 0
 
     private val NO_MORE_RESULTS_BLOG_MARKER = BlogPost(
         NO_MORE_RESULTS,
+        "" ,
+        0,
+        0,
+        false,
+        0.0,
+        0.0,
+        "",
+        "",
+        0,
+        false,
+        "",
+        0.0
+    )
+
+    private val NO_RESULTS_BLOG_MARKER = BlogPost(
+        NO_RESULT,
         "" ,
         0,
         0,
@@ -68,6 +87,19 @@ class FavoriteDifferListAdapter(
                         parent,
                         false
                     )
+                )
+            }
+
+            NO_RESULT -> {
+                Log.e(TAG, "onCreateViewHolder: No results...")
+                return NoFavoritesViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.no_favorite_item_layout,
+                        parent,
+                        false
+                    ),
+                    requestManager = requestManager,
+                    interactionAddMore = interactionAddMore
                 )
             }
 
@@ -124,6 +156,9 @@ class FavoriteDifferListAdapter(
             is BlogViewHolder -> {
                 holder.bind(differ.currentList[position])
             }
+            is NoFavoritesViewHolder -> {
+                holder.bind()
+            }
         }
     }
 
@@ -169,15 +204,36 @@ class FavoriteDifferListAdapter(
 
     fun submitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
+        val currentList = differ.currentList.toMutableList()
+
+        currentList.removeAll { it.id == NO_RESULT || it.id == NO_MORE_RESULTS }
+
+        newList?.forEach {
+            currentList.add(it)
+        }
+
+        if (currentList.isEmpty())
+            currentList.add(
+                NO_RESULTS_BLOG_MARKER
+            )
+
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
 
-        val list = differ.currentList.toMutableList()
-        newList?.forEach {
-            list.add(it)
-        }
-        list.distinct()
-        differ.submitList(list)
+        differ.submitList(currentList)
+    }
+
+    fun clearAndSubmitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
+        val newList = blogList?.toMutableList()
+        if (newList.isNullOrEmpty())
+            newList?.add(
+                NO_RESULTS_BLOG_MARKER
+            )
+
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+
+        differ.submitList(newList)
     }
 
     class BlogViewHolder
@@ -215,6 +271,23 @@ class FavoriteDifferListAdapter(
         }
     }
 
+    class NoFavoritesViewHolder
+    constructor(
+        itemView: View,
+        val requestManager: RequestManager,
+        val interactionAddMore: InteractionAddMore?
+    ): RecyclerView.ViewHolder(itemView){
+
+        private val goToSearchBtn = itemView.fragment_saved_pages_empty_find_btn
+
+        fun bind(){
+            goToSearchBtn.setOnClickListener {
+                interactionAddMore?.onAddMoreClicked()
+            }
+        }
+
+    }
+
     interface Interaction {
         fun onItemSelected(position: Int, item: BlogPost)
     }
@@ -223,4 +296,7 @@ class FavoriteDifferListAdapter(
         fun onItemSelected(position: Int, item: BlogPost,boolean: Boolean)
     }
 
+    interface InteractionAddMore{
+        fun onAddMoreClicked()
+    }
 }

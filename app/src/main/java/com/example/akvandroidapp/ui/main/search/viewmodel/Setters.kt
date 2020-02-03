@@ -180,6 +180,11 @@ fun FavoriteViewModel.setBlogListData(blogList: List<BlogPost>){
     setViewState(update)
 }
 
+fun FavoriteViewModel.setDeleteState(delete: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.deleteblogFields.isDeleted = delete
+    setViewState(update)
+}
 
 fun MessagesViewModel.setBlogListData(blogList: List<UserChatMessages>){
     val update = getCurrentViewStateOrNew()

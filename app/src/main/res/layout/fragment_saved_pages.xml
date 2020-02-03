@@ -17,12 +17,7 @@
         android:layout_marginBottom="@dimen/dim_24dp"/>
 
     <include
-        android:visibility="visible"
-        android:id="@+id/fragment_saved_pages_empty_id"
-        layout="@layout/fragment_saved_pages_empty"/>
-
-    <include
-        android:visibility="gone"
         android:id="@+id/fragment_saved_pages_filled_id"
         layout="@layout/fragment_saved_pages_filled"/>
+
 </LinearLayout>

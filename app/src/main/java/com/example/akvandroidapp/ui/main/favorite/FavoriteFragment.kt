@@ -16,6 +16,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.favorite.state.FavoriteStateEvent
 import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
+import com.example.akvandroidapp.ui.main.search.viewmodel.setDeleteState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.ui.main.search.viewmodel.setState
@@ -31,15 +32,16 @@ import loadFirstPage
 import javax.inject.Inject
 
 
-class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Interaction ,FavoriteDifferListAdapter.InteractionCheck,
+class FavoriteFragment : BaseFavoriteFragment(),
+    FavoriteDifferListAdapter.Interaction ,
+    FavoriteDifferListAdapter.InteractionCheck,
+    FavoriteDifferListAdapter.InteractionAddMore,
     SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var recyclerAdapter: FavoriteDifferListAdapter
 
     @Inject
     lateinit var sessionManager: SessionManager
-
-    private var isDeleted: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +64,7 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
     private fun subscribeObservers(){
         viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
             if(dataState != null) {
+                Log.d(TAG, "favorites dataState changed")
                 handlePagination(dataState)
                 stateChangeListener.onDataStateChange(dataState)
             }
@@ -70,28 +73,30 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
             if(viewState != null){
                 if(viewState.deleteblogFields.isDeleted){
-                    recyclerAdapter.clearList()
+                    Log.d(TAG, "favorites deleted: page: ${viewState.blogFields.page}, ${viewState.blogFields.blogList.size}")
+                    onBlogSearchOrFilter()
+                    viewModel.setDeleteState(false)
                 }
-
-                Log.d(TAG, "favorite: 123 ${viewState.blogFields.blogList}")
-
-                if (viewState.blogFields.blogList.isEmpty())
-                    emptyState()
-                else
-                    filledState()
 
                 recyclerAdapter.apply {
 
-                    Log.d(TAG, "favorite:  123 ${viewState.blogFields.blogList}")
+                    Log.d(TAG, "favorites: page: ${viewState.blogFields.page}, ${viewState.blogFields.blogList.size}")
 
                     preloadGlideImages(
                         requestManager = requestManager,
                         list = viewState.blogFields.blogList
                     )
-                    submitList(
-                        blogList = viewState.blogFields.blogList,
-                        isQueryExhausted = viewState.blogFields.isQueryExhausted
-                    )
+
+                    if (viewState.blogFields.page != 1)
+                        submitList(
+                            blogList = viewState.blogFields.blogList,
+                            isQueryExhausted = viewState.blogFields.isQueryExhausted
+                        )
+                    else
+                        clearAndSubmitList(
+                            blogList = viewState.blogFields.blogList,
+                            isQueryExhausted = viewState.blogFields.isQueryExhausted
+                        )
                 }
             }
         })
@@ -133,7 +138,11 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
-            recyclerAdapter = FavoriteDifferListAdapter(requestManager,  this@FavoriteFragment,this@FavoriteFragment)
+            recyclerAdapter = FavoriteDifferListAdapter(
+                requestManager,
+                this@FavoriteFragment,
+                this@FavoriteFragment,
+                this@FavoriteFragment)
 
             adapter = recyclerAdapter
         }
@@ -170,21 +179,15 @@ class FavoriteFragment : BaseFavoriteFragment(), FavoriteDifferListAdapter.Inter
 
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
         recyclerAdapter.removeAt(position)
-        isDeleted = true
         viewModel.setHouseId(item.id).let {
             viewModel.setStateEvent(FavoriteStateEvent.DeleteFavoriteItemEvent())
         }
     }
 
-    private fun emptyState(){
-        fragment_saved_pages_empty_id.visibility = View.VISIBLE
-        fragment_saved_pages_filled_id.visibility = View.GONE
+    override fun onAddMoreClicked() {
+
     }
 
-    private fun filledState(){
-        fragment_saved_pages_empty_id.visibility = View.GONE
-        fragment_saved_pages_filled_id.visibility = View.VISIBLE
-    }
 }
 
 
