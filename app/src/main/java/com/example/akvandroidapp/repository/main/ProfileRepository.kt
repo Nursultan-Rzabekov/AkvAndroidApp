@@ -294,7 +294,6 @@ constructor(
                 val blogPostList: ArrayList<BlogPost> = ArrayList()
                 for(blogPostResponse in response.body.results){
                     location.add(Point(blogPostResponse.latitude,blogPostResponse.longitude))
-                    val imagePost = blogPostResponse.photos?.get(0) ?: "//////////////////////////////////////////////////////////////////////"
                     blogPostList.add(
                         BlogPost(
                             id = blogPostResponse.id,
@@ -308,7 +307,7 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "https://akv-technopark.herokuapp.com" + imagePost.toString().substring(24,imagePost.toString().length - 1),
+                            image = "http://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
                             rating = blogPostResponse.rating
                         )
                     )
@@ -495,7 +494,7 @@ constructor(
                     blogZhilyePhotosList.add(
                         ZhilyeDetailPhotos(
                             house = it.house,
-                            image = "https://akv-technopark.herokuapp.com$image"
+                            image = "http://akv-technopark.herokuapp.com$image"
                         )
                     )
                 }
@@ -576,7 +575,7 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "https://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
+                            image = "http://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
                             rating = blogPostResponse.rating
                         )
                     )

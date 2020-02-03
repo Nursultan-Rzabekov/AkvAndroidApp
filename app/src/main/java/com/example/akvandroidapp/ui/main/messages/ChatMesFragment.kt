@@ -131,7 +131,10 @@ class ChatMesFragment : BaseMessagesFragment(),
 
     override fun onItemSelected(position: Int, item: UserChatMessages) {
         val intent = Intent(context,CustomLayoutMessagesActivity::class.java)
-        intent.putExtra("item",item)
+        intent.putExtra("email",item.email)
+        intent.putExtra("name",item.first_name)
+        intent.putExtra("image",item.userpic)
+        intent.putExtra("id",item.id)
         startActivity(intent)
     }
 

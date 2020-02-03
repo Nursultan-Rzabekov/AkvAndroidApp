@@ -155,7 +155,7 @@ constructor(
                         blogPostResponse.images?.let {
                             UserConversationImages(
                                 message = it.first().message,
-                                image = "https://akv-technopark.house.herokuapp.com${it.first().image}"
+                                image = it.first().image
                             )
                         }
 
@@ -220,11 +220,12 @@ constructor(
             ) {
                 Log.d(TAG, "recipient ${response.body.recipient}")
 
-                val sendMessageInfo = UserConversationMessages(
+                val sendMessageInfo = UserConversationSendMessages(
                     id = response.body.id,
                     userId = response.body.user,
                     recipientId = response.body.recipient,
                     body = response.body.body,
+                    image = response.body.images?.first()?.image,
                     created_at = response.body.created_at,
                     updated_at = response.body.updated_at
                 )

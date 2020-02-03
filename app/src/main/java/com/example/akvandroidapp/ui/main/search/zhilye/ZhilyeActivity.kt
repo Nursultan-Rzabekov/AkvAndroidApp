@@ -21,6 +21,7 @@ import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
 import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
+import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
@@ -58,7 +59,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     //bundle
     private var houseRules: List<ZhilyeDetailProperties> = listOf()
 
-    private var itemEmail:String? = null
+    private var userEmail:String? = null
+    private var userName:String? = null
+    private var userPic:String? = null
+    private var userId:Int? = null
 
     //Adapters
     private lateinit var facilitiesAdapter: ApartmentPropertiesAdapter
@@ -160,7 +164,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     viewState.zhilyeFields.zhilyeDetail.longitude
                 ))
 
-                itemEmail = viewState.zhilyeFields.zhilyeUser.email
+                userEmail = viewState.zhilyeFields.zhilyeUser.email
+                userName = viewState.zhilyeFields.zhilyeUser.first_name
+                userPic = viewState.zhilyeFields.zhilyeUser.userpic
+                userId = viewState.zhilyeFields.zhilyeUser.id
 
                 facilitiesAdapter.submitList(viewState.zhilyeFields.zhilyeDetailAccomadations)
                 nearsAdapter.submitList(viewState.zhilyeFields.zhilyeDetailNearBuildings)
@@ -379,8 +386,12 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     }
 
     private fun navigateChatActivity(){
-        val intent = Intent(this, MessagesDetailActivity::class.java)
-        intent.putExtra("name",itemEmail)
+
+        val intent = Intent(this, CustomLayoutMessagesActivity::class.java)
+        intent.putExtra("email",userEmail)
+        intent.putExtra("name",userName)
+        intent.putExtra("image",userPic)
+        intent.putExtra("id",userId)
         startActivity(intent)
     }
 

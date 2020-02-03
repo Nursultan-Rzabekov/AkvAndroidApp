@@ -65,7 +65,7 @@ constructor(
                             city = blogPostResponse.house.city,
                             price = blogPostResponse.house.price,
                             status = blogPostResponse.house.status,
-                            image = "https://akv-technopark.house.herokuapp.com${blogPostResponse.house.photos?.first()?.image}",
+                            image = "http://akv-technopark.house.herokuapp.com${blogPostResponse.house.photos?.first()?.image}",
                             rating = blogPostResponse.house.rating
                         )
                     )

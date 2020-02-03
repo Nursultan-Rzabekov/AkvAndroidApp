@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.*
@@ -115,9 +116,9 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
             sendMessage()
         }
 
-        val target =  intent.getParcelableExtra<UserChatMessages>("item")
-        userId = target!!.id
-        header_dialog_nickname_tv.text = target.first_name
+        val target =  intent.getParcelableExtra<HomeReservation>("item")
+        userId = target!!.user_id!!
+        header_dialog_nickname_tv.text = target.house_name
 
         initRecyclerView()
         subscribeObservers()

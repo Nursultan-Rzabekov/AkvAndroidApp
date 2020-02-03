@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.messages.detailState
 
 import com.example.akvandroidapp.entity.UserConversationImages
 import com.example.akvandroidapp.entity.UserConversationMessages
+import com.example.akvandroidapp.entity.UserConversationSendMessages
 import okhttp3.MultipartBody
 
 class DetailsViewState (
@@ -21,7 +22,7 @@ class DetailsViewState (
 
 
     data class SendMessageFields(
-        var blogPost: UserConversationMessages? = null,
+        var blogPost: UserConversationSendMessages? = null,
         var messageBody: String = "",
         var userId: Int = 1,
         var images: MultipartBody.Part? = null

@@ -79,7 +79,6 @@ class FavoriteFragment : BaseFavoriteFragment(),
                 }
 
                 recyclerAdapter.apply {
-
                     Log.d(TAG, "favorites: page: ${viewState.blogFields.page}, ${viewState.blogFields.blogList.size}")
 
                     preloadGlideImages(

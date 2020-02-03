@@ -96,7 +96,7 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "https://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
+                            image = "http://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
                             rating = blogPostResponse.rating
                         )
                     )
@@ -246,7 +246,7 @@ constructor(
                     blogZhilyePhotosList.add(
                         ZhilyeDetailPhotos(
                             house = it.house,
-                            image = "https://akv-technopark.herokuapp.com$image"
+                            image = "http://akv-technopark.herokuapp.com$image"
                         )
                     )
                 }
@@ -327,7 +327,7 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "https://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
+                            image = "http://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
                             rating = blogPostResponse.rating
                         )
                     )

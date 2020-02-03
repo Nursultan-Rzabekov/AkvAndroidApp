@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.messages
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,6 +14,7 @@ import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.RequestListAdapter
+import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setOrderQueryExhausted
@@ -129,8 +131,9 @@ class RequestFragment : BaseRequestFragment(),
     }
 
     override fun onItemSelected(position: Int, item: HomeReservation) {
-        //viewModel.setBlogPost(item)
-
+        val intent = Intent(context, MessagesDetailActivity::class.java)
+        intent.putExtra("item",item)
+        startActivity(intent)
 //        val intent = Intent(context,MessagesDetailActivity::class.java)
 //        startActivity(intent)
 //        findNavController().navigate(R.id.action_RequestFragment_to_MessagesDetailFragmentt)

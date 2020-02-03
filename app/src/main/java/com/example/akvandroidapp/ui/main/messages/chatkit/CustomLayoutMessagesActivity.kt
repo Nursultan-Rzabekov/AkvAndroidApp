@@ -26,6 +26,7 @@ import com.example.akvandroidapp.ui.main.messages.ModalBottomSheetChat
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsStateEvent
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
+import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
 import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
 import com.example.akvandroidapp.ui.main.messages.models.MessageText
 import com.example.akvandroidapp.ui.main.messages.models.mMessage
@@ -34,6 +35,7 @@ import com.example.akvandroidapp.ui.main.search.viewmodel.setQuery
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Constants.Companion.TOTAL_MESSAGES_COUNT
+import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import com.squareup.picasso.Picasso
@@ -48,6 +50,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
+import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.header_dialog.*
 import loadFirstPage
 import okhttp3.MediaType
@@ -80,6 +83,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     lateinit var viewModel: DetailsViewModel
 
     private var messagesList: MessagesList? = null
+    private var targetPic :String? = null
 
     private lateinit var currentPhotoPath: String
     private lateinit var currentPhotoUri: Uri
@@ -96,9 +100,13 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
         stateChangeListener = this
 
+        main_back_img_btn.setOnClickListener {
+            finish()
+        }
+
         imageLoader =
             ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
-                Picasso.with(this@CustomLayoutMessagesActivity).load(url).into(imageView)
+                Glide.with(this@CustomLayoutMessagesActivity).load(url).error(R.drawable.test_image_back).into(imageView!!)
             }
 
         messagesList = findViewById(R.id.messagesList)
@@ -107,19 +115,25 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         input.setInputListener(this)
         input.setAttachmentsListener(this)
 
-        val target =  intent.getParcelableExtra<UserChatMessages>("item")
-        senderId = target!!.id.toString()
-        header_dialog_nickname_tv.text = target.first_name
+        val targetEmail =  intent.getStringExtra("email")
+        val targetName =  intent.getStringExtra("name")
+        val targetId =  intent.getIntExtra("id",1)
+        val targetImage =  intent.getStringExtra("image")
+
+        senderId = targetId.toString()
+
+        header_dialog_nickname_tv.text = targetName
+        targetPic = targetImage
 
         Glide.with(this)
-            .load(target.userpic)
+            .load(targetImage)
             .error(R.drawable.profile_default_avavatar)
             .into(header_dialog_civ)
 
         initAdapter()
         subscribeObservers()
 
-        viewModel.setQuery(target.id).let {
+        viewModel.setQuery(targetId).let {
             onBlogSearchOrFilter()
         }
     }
@@ -147,6 +161,19 @@ class CustomLayoutMessagesActivity : BaseActivity(),
             if(viewState != null){
                 val userConversationResponse = arrayListOf<UserConversationsResponse>()
                 userConversationResponse.clear()
+
+//                viewState.sendMessageFields.blogPost?.let {
+//                    if(it.image!=null){
+//                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = it.image,
+//                            user = User(it.recipientId.toString(),"wqe",targetPic.toString(),true)
+//                        )
+//                    }
+//                    else{
+//                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body.toString(),
+//                            user = User(it.recipientId.toString(),"qwe",targetPic.toString(),true)
+//                        )
+//                    }
+//                }
 
                 if(viewState.myChatFields.blogList.isNotEmpty()){
                     viewState.myChatFields.blogList.forEach {
@@ -178,18 +205,20 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                         }
                     }
                 }
+
                 userConversationResponse.asReversed().forEach {
                     if(it.images!=null){
-                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = it.images,
-                            user = User(it.recipientId.toString(),it.userName.toString(),"http://i.imgur.com/ROz4Jgh.png",true)
+                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "http://akv-technopark.herokuapp.com${it.images}",
+                            user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
                         )
                     }
                     else{
                         sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
-                            user = User(it.recipientId.toString(),it.userName.toString(),"http://i.imgur.com/ROz4Jgh.png",true)
+                            user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
                         )
                     }
                 }
+
             }
         })
     }
@@ -313,12 +342,14 @@ class CustomLayoutMessagesActivity : BaseActivity(),
             when(requestCode){
                 Constants.REQUEST_IMAGE_CAPTURE -> {
                     try {
-//                        sendMessageWithType(
-//                            1,
-//                            Constants.MESSAGE_TYPE_PHOTO,
-//                            uriOfFile = currentPhotoUri,
-//                            user = User(senderId,"Nurs","qweq",true)
-//                        )
+                        sendMessageWithType(
+                            senderId.toInt(),
+                            imageUrl = currentPhotoUri.toString(),
+                            user = User(senderId,"qwew","qwe",true),
+                            type = Constants.MESSAGE_TYPE_PHOTO,
+                            uriOfFile = currentPhotoUri)
+
+
                     }catch (ex: Exception){
                         showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                     }
@@ -340,6 +371,13 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                     Log.d(TAG, "CROP: CROP_IMAGE_ACTIVITY_REQUEST_CODE: uri: ${resultUri}")
 
                     currentPhotoUri = resultUri
+
+                    sendMessageWithType(
+                        senderId.toInt(),
+                        imageUrl = resultUri.toString(),
+                        user = User(senderId,"qwew","qwe",true),
+                        type = Constants.MESSAGE_TYPE_PHOTO,
+                        uriOfFile = resultUri)
 
                     currentPhotoUri.path?.let { filePath->
                         val imageFile = File(filePath)
@@ -386,12 +424,12 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                                 cursor.moveToFirst()
                                 fileName = cursor.getString(nameIndex)
                                 fileSize = cursor.getLong(sizeIndex)
-//                                sendMessageWithType(
-//                                    1,
-//                                    Constants.MESSAGE_TYPE_DOC,
-//                                    fileName = fileName,
-//                                    fileSize = fileSize,
-//                                    user = User(senderId,"Nurs","qweq",true))
+                                sendMessageWithType(
+                                    1,
+                                    Constants.MESSAGE_TYPE_DOC,
+                                    fileName = fileName,
+                                    fileSize = fileSize,
+                                    user = User(senderId,"Nurs","qweq",true))
                             }
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_FILE)
                     Log.e("MESSAGE_DOCUMENT_URI", currentFileUri.toString())
@@ -444,10 +482,19 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 )
             }
             Constants.MESSAGE_TYPE_PHOTO -> {
-                messagesAdapter?.addToStart(MessagePhoto(userId = userId, photo = uriOfFile,
+                messagesAdapter?.addToStart(
+                    MessagePhoto(userId = userId, photo = uriOfFile,
                     user = user,
                     image = imageUrl,
                     created_at = calendar.time), true)
+            }
+            Constants.MESSAGE_TYPE_DOC -> {
+                messagesAdapter?.addToStart(
+                    MessageDocument(userId,
+                        fileName = fileName,
+                        fileSize = Converters.humanReadableByteCountSI(fileSize),
+                        created_at = calendar.time),true
+                )
             }
         }
     }
@@ -517,6 +564,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
 //        {
 //            val messages = MessagesFixtures.getMessages(lastLoadedDate)
 //            lastLoadedDate = messages[messages.size - 1].createdAt
+//
 //            messagesAdapter!!.addToEnd(messages, false)
 //        }, 1000
 //        )
