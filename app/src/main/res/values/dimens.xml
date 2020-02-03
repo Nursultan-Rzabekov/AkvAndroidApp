@@ -54,6 +54,6 @@
     <dimen name="dim_8dp">8dp</dimen>
     <dimen name="dim_36dp">36dp</dimen>
     <dimen name="dim_40dp">40dp</dimen>
-    <dimen name="card_item_height">170dp</dimen>
+    <dimen name="card_item_height">192dp</dimen>
     <dimen name="recycler_loading_view_height">80dp</dimen>
 </resources>

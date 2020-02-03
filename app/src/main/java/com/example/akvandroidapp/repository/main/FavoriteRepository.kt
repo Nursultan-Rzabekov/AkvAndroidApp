@@ -1,5 +1,6 @@
 package com.example.akvandroidapp.repository.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.api.main.OpenApiMainService
@@ -71,6 +72,10 @@ constructor(
                     )
                 }
 
+                Log.e("FavoriteRepository", "next page: ${response.body.next}")
+                Log.e("FavoriteRepository", "exhausted: ${booleanQuery(response.body.count)}")
+                Log.e("FavoriteRepository", "page: $page")
+
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
@@ -78,14 +83,14 @@ constructor(
                                 FavoriteViewState.FavoriteFields(
                                     blogPostList,
                                     isQueryInProgress = false,
-                                    isQueryExhausted = booleanQuery(blogPostList)))
+                                    isQueryExhausted = booleanQuery(response.body.count)))
                         )
                     )
                 }
             }
 
-            private fun booleanQuery(blogPostList: ArrayList<BlogPost>):Boolean{
-                if(page * Constants.PAGINATION_PAGE_SIZE > blogPostList.size){
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE_FAVORITE >= blogPostListSize){
                     return true
                 }
                 return false

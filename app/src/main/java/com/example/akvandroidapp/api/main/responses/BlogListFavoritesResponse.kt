@@ -16,10 +16,10 @@ class BlogListFavoritesResponse(
 
     @SerializedName("next")
     @Expose
-    var next: String,
+    var next: String?,
 
     @SerializedName("previous")
     @Expose
-    var previous: String
+    var previous: String?
 
 )

@@ -15,6 +15,7 @@ class Constants {
         const val TESTING_CACHE_DELAY = 0L // fake cache delay for testing
 
         const val PAGINATION_PAGE_SIZE = 3
+        const val PAGINATION_PAGE_SIZE_FAVORITE = 10
 
         const val GALLERY_REQUEST_CODE = 0
         const val REQUEST_IMAGE_CAPTURE = 15
