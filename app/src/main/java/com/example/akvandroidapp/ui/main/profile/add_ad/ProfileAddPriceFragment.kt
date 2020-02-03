@@ -18,6 +18,7 @@ import com.example.akvandroidapp.util.MoneyTextWatcher
 import kotlinx.android.synthetic.main.activity_add_ad.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_price.*
+import java.util.*
 import javax.inject.Inject
 
 
@@ -46,6 +47,8 @@ class ProfileAddPriceFragment : BaseAddHouseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Locale.setDefault(Locale.forLanguageTag("ru"))
 
         setToolbar()
         initialState()

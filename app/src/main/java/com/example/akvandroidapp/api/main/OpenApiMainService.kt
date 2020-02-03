@@ -153,11 +153,19 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<HomeListResponse>>
 
     @Multipart
-    @PATCH("houses/{house_id}/")
+    @PUT("houses/{house_id}/")
     fun updateZhilyeInfo(
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int,
-        @QueryMap  options : Map<String, RequestBody>
+        @PartMap  options : HashMap<String, RequestBody>,
+        @Query("accommodations[]") fac: ArrayList<String>
+    ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
+
+    @PATCH("reservations/{house_id}/cancel/")
+    fun cancelReservation(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int,
+        @Query("message") message: String
     ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
 }
 

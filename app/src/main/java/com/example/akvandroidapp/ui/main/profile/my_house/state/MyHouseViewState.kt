@@ -9,7 +9,7 @@ data class MyHouseViewState (
     var myHouseFields: MyHouseFields = MyHouseFields(),
     var myHouseStateFields: MyHouseStateFields = MyHouseStateFields(),
     var zhilyeFields: MyHouseZhilyeFields = MyHouseZhilyeFields(),
-    var updateHouseDetail: String? = null
+    var myHouseUpdateFields: MyHouseUpdateFields = MyHouseUpdateFields()
     ) : Parcelable
 {
     @Parcelize
@@ -24,6 +24,12 @@ data class MyHouseViewState (
     data class MyHouseStateFields(
         var houseId: Int = 1,
         var state: Int = 0
+    ) : Parcelable
+
+    @Parcelize
+    data class MyHouseUpdateFields(
+        var response: Boolean = false,
+        var message: String = ""
     ) : Parcelable
 
     @Parcelize

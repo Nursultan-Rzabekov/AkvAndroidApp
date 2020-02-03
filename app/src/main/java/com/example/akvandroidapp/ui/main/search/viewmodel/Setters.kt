@@ -117,6 +117,13 @@ fun MyHouseViewModel.setZhilyeData(zhilyeFields: MyHouseViewState.MyHouseZhilyeF
     setViewState(update)
 }
 
+fun MyHouseViewModel.setUpdateResponse(updateFields: MyHouseViewState.MyHouseUpdateFields){
+    val update = getCurrentViewStateOrNew()
+    update.myHouseUpdateFields.response = updateFields.response
+    update.myHouseUpdateFields.message = updateFields.message
+    setViewState(update)
+}
+
 
 fun ZhilyeBookViewModel.setResponse(response: Boolean) {
     val update = getCurrentViewStateOrNew()

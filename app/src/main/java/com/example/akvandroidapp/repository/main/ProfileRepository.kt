@@ -658,19 +658,32 @@ constructor(
             true
         ){
             override suspend fun createCacheRequestAndReturn() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<VerifyUpdateResponse>) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Log.d(TAG,"updateZhilyeInfo + ${response.body}")
+
+                withContext(Dispatchers.Main) {
+                    onCompleteJob(
+                        DataState.data(
+                            data = MyHouseViewState(
+                                myHouseUpdateFields = MyHouseViewState.MyHouseUpdateFields(
+                                    response = response.body.response,
+                                    message = response.body.message
+                                )
+                            )
+                        )
+                    )
+                }
             }
 
             override fun createCall(): LiveData<GenericApiResponse<VerifyUpdateResponse>> {
 
-                val data: MutableMap<String, RequestBody> = HashMap()
+                val data: HashMap<String, RequestBody> = HashMap()
+                val lists: HashMap<String, List<RequestBody>> = HashMap()
 
                 if (title != null)
-                    data["title"] = title
+                    data["name"] = title
                 if (description != null)
                     data["description"] = description
                 if (address != null)
@@ -681,7 +694,9 @@ constructor(
                 return openApiMainService.updateZhilyeInfo(
                     "Token ${authToken.token!!}",
                     house_id = houseId,
-                    options = data)
+                    options = data,
+                    fac = arrayListOf("Фен")
+                )
             }
 
             override fun loadFromCache(): LiveData<MyHouseViewState> {

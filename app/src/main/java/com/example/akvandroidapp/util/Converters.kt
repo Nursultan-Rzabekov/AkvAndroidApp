@@ -43,6 +43,8 @@ class Converters {
 
             if(str.contains(","))
                 newStr = str.replace(",","")
+            if(str.contains(" "))
+                newStr = str.replace(" ","")
             return newStr.toInt()
         }
 
