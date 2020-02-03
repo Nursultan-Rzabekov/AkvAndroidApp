@@ -11,6 +11,8 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
 import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
+import com.example.akvandroidapp.ui.main.messages.state.RequestStateEvent
+import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.ui.main.search.viewmodel.getOrdersPage
@@ -21,27 +23,27 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 import javax.inject.Inject
 
-class MessagesViewModel
+class RequestViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
     private val messagesRepository: MessagesRepository,
     private val sharedPreferences: SharedPreferences,
     private val editor: SharedPreferences.Editor
-): BaseViewModel<MessagesStateEvent, MessagesViewState>(){
+): BaseViewModel<RequestStateEvent, RequestViewState>(){
 
-    override fun handleStateEvent(stateEvent: MessagesStateEvent): LiveData<DataState<MessagesViewState>> {
+    override fun handleStateEvent(stateEvent: RequestStateEvent): LiveData<DataState<RequestViewState>> {
         when(stateEvent){
-            is MessagesStateEvent.ChatInfoEvent -> {
-                return sessionManager.cachedToken.value?.let { authToken ->
-                    messagesRepository.myChatsList(
-                        authToken = authToken,
-                        page = getPage()
+            is RequestStateEvent.OrdersListStateEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    messagesRepository.ordersList(
+                        it,
+                        page = getOrdersPage()
                     )
                 }?: AbsentLiveData.create()
             }
 
-            is MessagesStateEvent.None -> {
+            is RequestStateEvent.None -> {
                 return liveData {
                     emit(
                         DataState(
@@ -52,11 +54,12 @@ constructor(
                     )
                 }
             }
+
         }
     }
 
-    override fun initNewViewState(): MessagesViewState {
-        return MessagesViewState()
+    override fun initNewViewState(): RequestViewState {
+        return RequestViewState()
     }
 
 //    fun cancelActiveJobs(){
@@ -65,7 +68,7 @@ constructor(
 //    }
 
     fun handlePendingData(){
-        setStateEvent(MessagesStateEvent.None())
+        setStateEvent(RequestStateEvent.None())
     }
 
     override fun onCleared() {

@@ -10,7 +10,10 @@ import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.state.MessagesStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
+import com.example.akvandroidapp.ui.main.messages.state.RequestStateEvent
+import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
+import com.example.akvandroidapp.ui.main.messages.viewmodel.RequestViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
@@ -78,7 +81,7 @@ fun MessagesViewModel.resetPage(){
     setViewState(update)
 }
 
-fun MessagesViewModel.resetOrderPage(){
+fun RequestViewModel.resetOrderPage(){
     val update = getCurrentViewStateOrNew()
     update.ordersField.page = 1
     setViewState(update)
@@ -136,12 +139,12 @@ fun MessagesViewModel.loadFirstPage() {
     setStateEvent(MessagesStateEvent.ChatInfoEvent())
 }
 
-fun MessagesViewModel.loadOrderFirstPage() {
+fun RequestViewModel.loadOrderFirstPage() {
     setOrderQueryInProgress(true)
     setOrderQueryExhausted(false)
     resetOrderPage()
     Log.e(TAG, "loadFirstPageChatOrder: ${viewState.value!!.ordersField}")
-    setStateEvent(MessagesStateEvent.OrdersListStateEvent())
+    setStateEvent(RequestStateEvent.OrdersListStateEvent())
 }
 
 fun DetailsViewModel.loadFirstPage() {
@@ -181,7 +184,7 @@ private fun MessagesViewModel.incrementPageNumber(){
     setViewState(update)
 }
 
-private fun MessagesViewModel.incrementOrderPageNumber(){
+private fun RequestViewModel.incrementOrderPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.ordersField.page // get current page
     update.ordersField.page = page + 1
@@ -233,13 +236,13 @@ fun MessagesViewModel.nextPage(){
     }
 }
 
-fun MessagesViewModel.nextOrderPage(){
+fun RequestViewModel.nextOrderPage(){
     if(!viewState.value!!.ordersField.isQueryInProgress
         && !viewState.value!!.ordersField.isQueryExhausted){
         Log.d(TAG, "MessagesViewModel: Attempting to load next page...")
         incrementOrderPageNumber()
         setOrderQueryInProgress(true)
-        setStateEvent(MessagesStateEvent.OrdersListStateEvent())
+        setStateEvent(RequestStateEvent.OrdersListStateEvent())
     }
 }
 
@@ -302,7 +305,7 @@ fun MessagesViewModel.handleIncomingBlogListData(viewState: MessagesViewState){
     setBlogListData(viewState.myChatFields.blogList)
 }
 
-fun MessagesViewModel.handleIncomingOrdersListData(viewState: MessagesViewState){
+fun RequestViewModel.handleIncomingOrdersListData(viewState: RequestViewState){
     Log.d(TAG, "MessagesViewModel, DataState: ${viewState}")
     Log.d(TAG, "MessagesViewModel, DataState: isQueryInProgress?: " +
             "${viewState.ordersField.isQueryInProgress}")

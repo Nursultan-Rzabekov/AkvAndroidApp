@@ -6,6 +6,7 @@ import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
+import com.example.akvandroidapp.ui.main.messages.viewmodel.RequestViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
@@ -156,7 +157,7 @@ fun MessagesViewModel.getPage(): Int{
     }
 }
 
-fun MessagesViewModel.getOrdersPage(): Int{
+fun RequestViewModel.getOrdersPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.ordersField.page
     }

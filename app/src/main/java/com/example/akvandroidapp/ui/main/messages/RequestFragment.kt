@@ -14,6 +14,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.RequestListAdapter
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
+import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setOrderQueryExhausted
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
@@ -24,7 +25,7 @@ import nextOrderPage
 import javax.inject.Inject
 
 
-class RequestFragment : BaseMessagesFragment(),
+class RequestFragment : BaseRequestFragment(),
     RequestListAdapter.Interaction, SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var recyclerAdapter: RequestListAdapter
@@ -67,7 +68,7 @@ class RequestFragment : BaseMessagesFragment(),
             if(viewState != null){
                 if(viewState.ordersField.orders.isNotEmpty()){
                     recyclerAdapter.apply {
-                        Log.d(TAG, "Search results responses: ${viewState.myChatFields.blogList}")
+                        Log.d(TAG, "Search results responses: ${viewState.ordersField.orders}")
 
                         preloadGlideImages(
                             requestManager = requestManager,
@@ -75,7 +76,7 @@ class RequestFragment : BaseMessagesFragment(),
                         )
                         submitList(
                             blogList = viewState.ordersField.orders,
-                            isQueryExhausted = viewState.myChatFields.isQueryExhausted
+                            isQueryExhausted = viewState.ordersField.isQueryExhausted
                         )
                     }
                 }
@@ -83,7 +84,7 @@ class RequestFragment : BaseMessagesFragment(),
         })
     }
 
-    private fun handlePagination(dataState: DataState<MessagesViewState>){
+    private fun handlePagination(dataState: DataState<RequestViewState>){
         dataState.data?.let {
             it.data?.let{
                 it.getContentIfNotHandled()?.let{

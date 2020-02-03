@@ -108,11 +108,9 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeZhilyeRulesOfHouseActivity(): ZhilyeRulesOfHouseActivity
 
-
     @MainScope
     @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
     abstract fun contributeMessagesDetailActivity(): MessagesDetailActivity
-
 
     @MainScope
     @ContributesAndroidInjector()

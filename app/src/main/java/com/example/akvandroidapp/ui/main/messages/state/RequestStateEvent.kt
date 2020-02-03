@@ -4,7 +4,7 @@ import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import okhttp3.MultipartBody
 
 
-sealed class MessagesStateEvent {
-    class ChatInfoEvent: MessagesStateEvent()
-    class None: MessagesStateEvent()
+sealed class RequestStateEvent {
+    class None: RequestStateEvent()
+    class OrdersListStateEvent: RequestStateEvent()
 }

@@ -12,6 +12,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
+import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
 import com.example.akvandroidapp.util.Constants
@@ -274,9 +275,9 @@ constructor(
     fun ordersList(
         authToken: AuthToken,
         page: Int
-    ): LiveData<DataState<MessagesViewState>>{
+    ): LiveData<DataState<RequestViewState>>{
         return object:
-            NetworkBoundResource<HomeListResponse, List<BlogPost>, MessagesViewState>(
+            NetworkBoundResource<HomeListResponse, List<BlogPost>, RequestViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             false,
@@ -313,8 +314,8 @@ constructor(
                 withContext(Dispatchers.Main) {
                     onCompleteJob(
                         DataState.data(
-                            data = MessagesViewState(
-                                ordersField = MessagesViewState.OrdersField(
+                            data = RequestViewState(
+                                ordersField = RequestViewState.OrdersField(
                                     ordersList,
                                     isQueryInProgress = false,
                                     isQueryExhausted = booleanQuery(ordersList)
@@ -341,7 +342,7 @@ constructor(
                     )
             }
 
-            override fun loadFromCache(): LiveData<MessagesViewState> {
+            override fun loadFromCache(): LiveData<RequestViewState> {
                 return AbsentLiveData.create()
             }
 

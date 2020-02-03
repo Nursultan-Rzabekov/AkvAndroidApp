@@ -71,5 +71,4 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector()
     abstract fun contributeRequestFragment(): RequestFragment
 
-
 }

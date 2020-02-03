@@ -6,6 +6,7 @@ import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
+import com.example.akvandroidapp.ui.main.messages.viewmodel.RequestViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
@@ -186,7 +187,7 @@ fun MessagesViewModel.setBlogListData(blogList: List<UserChatMessages>){
     setViewState(update)
 }
 
-fun MessagesViewModel.setOrderListData(blogList: List<HomeReservation>){
+fun RequestViewModel.setOrderListData(blogList: List<HomeReservation>){
     val update = getCurrentViewStateOrNew()
     update.ordersField.orders = blogList
     setViewState(update)
@@ -259,7 +260,7 @@ fun MessagesViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
-fun MessagesViewModel.setOrderQueryExhausted(isExhausted: Boolean){
+fun RequestViewModel.setOrderQueryExhausted(isExhausted: Boolean){
     val update = getCurrentViewStateOrNew()
     update.ordersField.isQueryExhausted = isExhausted
     setViewState(update)
@@ -313,7 +314,7 @@ fun MessagesViewModel.setQueryInProgress(isInProgress: Boolean){
     setViewState(update)
 }
 
-fun MessagesViewModel.setOrderQueryInProgress(isInProgress: Boolean){
+fun RequestViewModel.setOrderQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.ordersField.isQueryInProgress = isInProgress
     setViewState(update)
