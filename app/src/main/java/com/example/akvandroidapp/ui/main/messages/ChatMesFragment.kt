@@ -1,44 +1,27 @@
 package com.example.akvandroidapp.ui.main.messages
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
+import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutDialogsActivity
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
-import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
-import com.example.akvandroidapp.ui.main.profile.support.MyPagerAdapter
-import com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment
-import com.example.akvandroidapp.ui.main.search.SearchListAdapter
-import com.example.akvandroidapp.ui.main.search.viewmodel.setBlogPost
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
-import com.example.akvandroidapp.util.Constants.Companion.MAPKIT_API_KEY
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
-import com.yandex.mapkit.Animation
-import com.yandex.mapkit.MapKitFactory
-import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.mapview.MapView
 import handleIncomingBlogListData
-import kotlinx.android.synthetic.main.fragment_chat_main.*
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.android.synthetic.main.fragment_explore_active.*
-import kotlinx.android.synthetic.main.fragment_support_main.*
-import kotlinx.android.synthetic.main.map.*
-import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import nextPage
 import javax.inject.Inject
@@ -146,10 +129,12 @@ class ChatMesFragment : BaseMessagesFragment(),
     }
 
     override fun onItemSelected(position: Int, item: UserChatMessages) {
-        val intent = Intent(context,MessagesDetailActivity::class.java)
-        intent.putExtra("userId",item.id)
-        intent.putExtra("name",item.first_name)
-        startActivity(intent)
+//        val intent = Intent(context,MessagesDetailActivity::class.java)
+//        intent.putExtra("userId",item.id)
+//        intent.putExtra("name",item.first_name)
+//        startActivity(intent)
+
+        CustomLayoutDialogsActivity.open(context)
     }
 
     override fun onDestroyView() {

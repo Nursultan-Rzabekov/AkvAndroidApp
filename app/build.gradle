@@ -143,4 +143,14 @@ dependencies {
 
     //Custom Calendar Picker
     implementation project(':addLibs:rangedatepicker')
+
+    //Chatkit
+    implementation 'com.github.stfalcon:chatkit:0.3.3'
+
+    //Picasso
+    def picassoVersion = "2.5.2"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    def shapeImageViewVersion = '0.9.3'
+    implementation "com.github.siyamed:android-shape-imageview:$shapeImageViewVersion"
 }

@@ -80,6 +80,18 @@
 
         </activity>
 
+        <activity
+            android:name=".ui.main.messages.chatkit.CustomLayoutDialogsActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity
+            android:name=".ui.main.messages.chatkit.CustomLayoutMessagesActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
 
         <activity
             android:name=".ui.main.search.zhilye.ZhilyeRulesOfHouseActivity"
