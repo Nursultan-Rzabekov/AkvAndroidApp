@@ -156,7 +156,7 @@ class GalleryPhotosAdapter(
     fun getPhotos(): MutableList<GalleryPhoto> {
         val allPhotos = mutableListOf<GalleryPhoto>()
         for (photo in differ.currentList)
-            if (photo.uri != null)
+            if (photo.uri != null || photo.uri != null)
                 allPhotos.add(photo)
         return allPhotos
     }

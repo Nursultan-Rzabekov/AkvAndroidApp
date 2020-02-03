@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,7 +21,11 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhoto
 import com.example.akvandroidapp.ui.main.profile.my_house.adapters.GalleryPhotosAdapter
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
+import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
+import com.example.akvandroidapp.ui.main.search.viewmodel.setUpdateResponse
 import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.MoneyTextWatcher
 import com.theartofdev.edmodo.cropper.CropImage
@@ -38,10 +43,7 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
     @Inject
     lateinit var sessionManager: SessionManager
 
-    private var nears: List<String> = listOf()
-    private var rules: List<String> = listOf()
-    private var dates: List<Date> = listOf()
-    private var facilities: List<String> = listOf()
+    private var house: HouseUpdateData? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,8 +73,8 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
         fragment_my_adds_change_price_et.addTextChangedListener(MoneyTextWatcher(fragment_my_adds_change_price_et))
 
         header_my_adds_change_save.setOnClickListener {
-            if (saveUpdate())
-                findNavController().navigateUp()
+            saveUpdate()
+            //findNavController().navigateUp()
         }
 
         fragment_my_adds_change_rules.setOnClickListener {
@@ -119,13 +121,22 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
             fragment_my_adds_change_address_et.setText(it.address.toString())
             fragment_my_adds_change_photos_tv.text = ("${it.photosList.size}/15")
 
+            house = HouseUpdateData(
+                id = it.id,
+                title = it.title,
+                description = it.description,
+                address = it.address,
+                facilitiesList = it.facilitiesList,
+                nearByList = it.nearByList,
+                houseRulesList = it.houseRulesList,
+                photosList = it.photosList,
+                availableDates = it.availableDates
+            )
+
+            Toast.makeText(requireContext(), "${it.id}", Toast.LENGTH_SHORT).show()
+
             val photos = it.photosList.toMutableList()
             photosAdapter.submitList(photos)
-
-            facilities = it.facilitiesList!!
-            nears = it.nearByList!!
-            rules = it.houseRulesList!!
-            dates = it.availableDates!!
         })
     }
 
@@ -206,38 +217,82 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
         )
     }
 
-    private fun saveUpdate(): Boolean{
-        if (checkInputs()) {
-            sessionManager.setHouseUpdateData(
-                HouseUpdateData(
-                    id = -1,
-                    title = fragment_my_adds_change_title_et.text.toString().trim(),
-                    description = fragment_my_adds_change_desc_et.text.toString().trim(),
-                    photosList = photosAdapter.getPhotos(),
-                    price = fragment_my_adds_change_price_et.text.toString().toIntOrNull(),
-                    address = fragment_my_adds_change_address_et.text.toString().trim(),
-                    houseRulesList = rules.toMutableList(),
-                    facilitiesList = facilities.toMutableList(),
-                    nearByList = nears.toMutableList(),
-                    availableDates = dates.toMutableList()
-                )
-            )
-            return true
-        }
-        else {
+    private fun saveUpdate(){
+        if (checkInputs())
+            updateHouseRequest()
+        else
             showErrorDialog("Some inputs are not filled")
-            return false
-        }
     }
 
     private fun checkInputs(): Boolean{
         if (fragment_my_adds_change_title_et.text.toString().trim().isBlank()
             || fragment_my_adds_change_desc_et.text.toString().trim().isBlank()
-            || fragment_my_adds_change_price_et.text.toString().toIntOrNull() == 0
-            || fragment_my_adds_change_price_et.text.toString().toIntOrNull() == null
+            || Converters.formatPriceToInt(fragment_my_adds_change_price_et.text.toString()) == 0
             || fragment_my_adds_change_address_et.text.toString().trim().isBlank())
             return false
         return true
+    }
+
+    private fun updateHouseRequest(){
+        if (house != null)
+            viewModel.setStateEvent(
+                MyHouseStateStateEvent.MyHouseUpdateEvent(
+                    house_id = house?.id!!,
+                    title =
+                    if(fragment_my_adds_change_title_et.text.toString().trim() != house?.title)
+                        fragment_my_adds_change_title_et.text.toString().trim()
+                    else null,
+                    description =
+                    if (fragment_my_adds_change_desc_et.text.toString().trim() != house?.description)
+                        fragment_my_adds_change_desc_et.text.toString().trim()
+                    else null,
+                    price =
+                    if (Converters.formatPriceToInt(fragment_my_adds_change_price_et.text.toString()) == house?.price)
+                        Converters.formatPriceToInt(fragment_my_adds_change_price_et.text.toString())
+                    else null,
+                    address =
+                    if (fragment_my_adds_change_address_et.text.toString().trim() == house?.address)
+                        fragment_my_adds_change_address_et.text.toString().trim()
+                    else null,
+                    photoList = null,
+                    rulesList = null,
+                    facilitiesList = listOf("Фен"),
+                    nearsList = null,
+                    datesList = null
+                )
+            )
+        observeRequest()
+    }
+
+    private fun observeRequest(){
+        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+            if (dataState != null) {
+                stateChangeListener.onDataStateChange(dataState)
+                handleUpdate(dataState)
+            }
+        })
+
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            if (viewState != null){
+                if (viewState.myHouseUpdateFields.response == true)
+                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun handleUpdate(dataState: DataState<MyHouseViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.setUpdateResponse(it.myHouseUpdateFields)
+                }
+            }
+        }
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+
+            }
+        }
     }
 
     private fun cancelUpdate(){

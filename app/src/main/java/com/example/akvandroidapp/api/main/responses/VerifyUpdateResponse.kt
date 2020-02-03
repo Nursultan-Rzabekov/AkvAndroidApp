@@ -4,7 +4,11 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class VerifyUpdateResponse(
-    @SerializedName("detail")
+    @SerializedName("response")
     @Expose
-    var detail: String? = null
+    var response: Boolean,
+
+    @SerializedName("message")
+    @Expose
+    var message: String
 )

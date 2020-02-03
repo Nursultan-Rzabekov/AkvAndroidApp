@@ -32,10 +32,6 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        activity_add_ad_toolbar.setNavigationOnClickListener {
-//            findNavController().navigateUp()
-//        }
         return inflater.inflate(R.layout.fragment_add_ad_post, container, false)
     }
 

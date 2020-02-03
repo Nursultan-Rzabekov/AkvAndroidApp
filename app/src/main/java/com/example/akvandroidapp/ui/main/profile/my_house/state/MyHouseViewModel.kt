@@ -13,6 +13,8 @@ import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
 import com.example.akvandroidapp.ui.main.search.viewmodel.getState
 import com.example.akvandroidapp.ui.main.search.viewmodel.getZhilyeHouseId
 import com.example.akvandroidapp.util.AbsentLiveData
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 
@@ -58,6 +60,78 @@ constructor(
                 return profileRepository.getZhilyeWithHouseId(
                     houseId = getZhilyeHouseId()
                 )
+            }
+
+            is MyHouseStateStateEvent.MyHouseUpdateEvent -> {
+                var facilities: MutableList<RequestBody>? = null
+                if (stateEvent.facilitiesList != null){
+                    facilities = mutableListOf()
+                    stateEvent.facilitiesList?.forEach {
+                        Log.e("ASASDASD", "$it")
+                        facilities.add(
+                            RequestBody.create(MediaType.parse("text/plain"), it)
+                        )
+                    }
+                }
+                Log.e("ASASDASD", "$facilities")
+
+                var rules: MutableList<RequestBody>? = null
+                if (stateEvent.rulesList != null){
+                    rules = mutableListOf()
+                    stateEvent.rulesList?.forEach {
+                        rules.add(
+                            RequestBody.create(MediaType.parse("text/plain"), it)
+                        )
+                    }
+                }
+
+                var nears: MutableList<RequestBody>? = null
+                if (stateEvent.nearsList != null){
+                    nears = mutableListOf()
+                    stateEvent.nearsList?.forEach {
+                        nears.add(
+                            RequestBody.create(MediaType.parse("text/plain"), it)
+                        )
+                    }
+                }
+
+                var photoList: MutableList<RequestBody>? = null
+                if (stateEvent.photoList != null){
+                    photoList = mutableListOf()
+                    stateEvent.photoList?.forEach {
+                        photoList.add(
+                            RequestBody.create(MediaType.parse("text/plain"), it)
+                        )
+                    }
+                }
+
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    profileRepository.updateZhilyeInfo(
+                        authToken = authToken,
+                        houseId = stateEvent.house_id,
+                        title =
+                        if (!stateEvent.title.isNullOrBlank())
+                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.title)
+                        else null,
+                        description =
+                        if (!stateEvent.description.isNullOrBlank())
+                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.description)
+                        else null,
+                        price =
+                        if (stateEvent.price != null)
+                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.price.toString())
+                        else null,
+                        address =
+                        if (stateEvent.address != null)
+                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.address)
+                        else null,
+                        facilitiesList = facilities,
+                        nearsList = nears,
+                        rulesList = rules,
+                        photoList = photoList,
+                        datesList = null
+                    )
+                }?: AbsentLiveData.create()
             }
 
             is MyHouseStateStateEvent.None ->{
