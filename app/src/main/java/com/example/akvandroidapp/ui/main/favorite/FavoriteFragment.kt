@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
@@ -23,12 +24,14 @@ import com.example.akvandroidapp.ui.main.search.viewmodel.setState
 import com.example.akvandroidapp.util.ErrorHandling
 
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
+import com.example.akvandroidapp.util.VerticalSpacingItemDecoration
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.fragment_saved_pages.*
 import kotlinx.android.synthetic.main.fragment_saved_pages_empty.*
 import kotlinx.android.synthetic.main.fragment_saved_pages_filled.*
 import kotlinx.android.synthetic.main.fragment_saved_pages_filled.swipe_refresh
 import loadFirstPage
+import nextPage
 import javax.inject.Inject
 
 
@@ -77,25 +80,30 @@ class FavoriteFragment : BaseFavoriteFragment(),
                     onBlogSearchOrFilter()
                     viewModel.setDeleteState(false)
                 }
+                else {
+                    recyclerAdapter.apply {
 
-                recyclerAdapter.apply {
-                    Log.d(TAG, "favorites: page: ${viewState.blogFields.page}, ${viewState.blogFields.blogList.size}")
-
-                    preloadGlideImages(
-                        requestManager = requestManager,
-                        list = viewState.blogFields.blogList
-                    )
-
-                    if (viewState.blogFields.page != 1)
-                        submitList(
-                            blogList = viewState.blogFields.blogList,
-                            isQueryExhausted = viewState.blogFields.isQueryExhausted
+                        Log.d(
+                            TAG,
+                            "favorites: page: ${viewState.blogFields.page}, ${viewState.blogFields.blogList.size}"
                         )
-                    else
-                        clearAndSubmitList(
-                            blogList = viewState.blogFields.blogList,
-                            isQueryExhausted = viewState.blogFields.isQueryExhausted
+
+                        preloadGlideImages(
+                            requestManager = requestManager,
+                            list = viewState.blogFields.blogList
                         )
+
+                        if (viewState.blogFields.page != 1)
+                            submitList(
+                                blogList = viewState.blogFields.blogList,
+                                isQueryExhausted = viewState.blogFields.isQueryExhausted
+                            )
+                        else
+                            clearAndSubmitList(
+                                blogList = viewState.blogFields.blogList,
+                                isQueryExhausted = viewState.blogFields.isQueryExhausted
+                            )
+                    }
                 }
             }
         })
@@ -133,15 +141,28 @@ class FavoriteFragment : BaseFavoriteFragment(),
     private fun initRecyclerView(){
         fragment_saved_pages_filled_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@FavoriteFragment.context)
-            val topSpacingDecorator = TopSpacingItemDecoration(30)
-            removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
-            addItemDecoration(topSpacingDecorator)
+            val verticalSpacingDecorator = VerticalSpacingItemDecoration(16)
+            removeItemDecoration(verticalSpacingDecorator) // does nothing if not applied already
+            addItemDecoration(verticalSpacingDecorator)
 
             recyclerAdapter = FavoriteDifferListAdapter(
                 requestManager,
                 this@FavoriteFragment,
                 this@FavoriteFragment,
                 this@FavoriteFragment)
+
+            addOnScrollListener(object: RecyclerView.OnScrollListener(){
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val lastPosition = layoutManager.findLastVisibleItemPosition()
+                    if (lastPosition == recyclerAdapter.itemCount.minus(1)) {
+                        Log.d(TAG, "BlogFragment: attempting to load next page...")
+                        viewModel.nextPage()
+                    }
+                }
+            })
 
             adapter = recyclerAdapter
         }

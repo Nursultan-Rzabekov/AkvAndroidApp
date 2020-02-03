@@ -170,6 +170,13 @@ private fun SearchViewModel.incrementPageNumber(){
     setViewState(update)
 }
 
+private fun FavoriteViewModel.incrementPageNumber(){
+    val update = getCurrentViewStateOrNew()
+    val page = update.blogFields.page // get current page
+    update.blogFields.page = page + 1
+    setViewState(update)
+}
+
 private fun ZhilyeReviewViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.reviewsField.page // get current page
@@ -215,6 +222,16 @@ fun SearchViewModel.nextPage(){
     }
 }
 
+fun FavoriteViewModel.nextPage(){
+    if (!viewState.value!!.blogFields.isQueryInProgress
+        && !viewState.value!!.blogFields.isQueryExhausted){
+        Log.d(TAG, "FavoriteViewModel: Attempting to load next page...")
+        incrementPageNumber()
+        setBlogListData(listOf())
+        setQueryInProgress(true)
+        setStateEvent(FavoriteStateEvent.FavoriteMyListEvent())
+    }
+}
 
 fun ZhilyeReviewViewModel.nextPage(){
     if(!viewState.value!!.reviewsField.isQueryInProgress
