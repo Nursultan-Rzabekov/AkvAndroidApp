@@ -217,6 +217,7 @@ fun SearchViewModel.nextPage(){
         && !viewState.value!!.blogFields.isQueryExhausted){
         Log.d(TAG, "BlogViewModel: Attempting to load next page...")
         incrementPageNumber()
+        setBlogListData(listOf())
         setQueryInProgress(true)
         setStateEvent(SearchStateEvent.BlogSearchEvent())
     }
@@ -238,6 +239,7 @@ fun ZhilyeReviewViewModel.nextPage(){
         && !viewState.value!!.reviewsField.isQueryExhausted){
         Log.d(TAG, "BlogViewModel: Attempting to load next page...")
         incrementPageNumber()
+        setBlogListData(listOf())
         setQueryInProgress(true)
         setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent())
     }
@@ -248,6 +250,7 @@ fun MessagesViewModel.nextPage(){
         && !viewState.value!!.myChatFields.isQueryExhausted){
         Log.d(TAG, "BlogViewModel: Attempting to load next page...")
         incrementPageNumber()
+        setBlogListData(listOf())
         setQueryInProgress(true)
         setStateEvent(MessagesStateEvent.ChatInfoEvent())
     }
@@ -258,6 +261,7 @@ fun RequestViewModel.nextOrderPage(){
         && !viewState.value!!.ordersField.isQueryExhausted){
         Log.d(TAG, "MessagesViewModel: Attempting to load next page...")
         incrementOrderPageNumber()
+        setOrderListData(listOf())
         setOrderQueryInProgress(true)
         setStateEvent(RequestStateEvent.OrdersListStateEvent())
     }
@@ -268,6 +272,7 @@ fun MyHouseViewModel.nextPage(){
         && !viewState.value!!.myHouseFields.isQueryExhausted){
         Log.d(TAG, "BlogViewModel: Attempting to load next page...")
         incrementPageNumber()
+        setBlogListData(listOf())
         setQueryInProgress(true)
         setStateEvent(MyHouseStateStateEvent.MyHouseEvent())
     }
@@ -275,6 +280,7 @@ fun MyHouseViewModel.nextPage(){
 
 fun MyHouseViewModel.handleIncomingZhilyeData(viewState: MyHouseViewState){
     setZhilyeData(viewState.zhilyeFields)
+    setResponseState(viewState.myHouseStateFields.response)
 }
 
 fun HomeViewModel.nextPage(){
@@ -282,6 +288,7 @@ fun HomeViewModel.nextPage(){
         && !viewState.value!!.homeReservationField.isQueryExhausted){
         Log.d(TAG, "HomeViewModel: Attempting to load next page...")
         incrementPageNumber()
+        setBlogListData(listOf())
         setQueryInProgress(true)
         setStateEvent(HomeStateEvent.HomeInfoEvent())
     }
@@ -358,6 +365,7 @@ fun MyHouseViewModel.handleIncomingBlogListData(viewState: MyHouseViewState){
     setQueryInProgress(viewState.myHouseFields.isQueryInProgress)
     setQueryExhausted(viewState.myHouseFields.isQueryExhausted)
     setBlogListData(viewState.myHouseFields.blogList)
+    setResponseState(viewState.myHouseStateFields.response)
 }
 
 

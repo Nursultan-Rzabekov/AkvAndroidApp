@@ -32,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_saved_pages_filled.*
 import kotlinx.android.synthetic.main.fragment_saved_pages_filled.swipe_refresh
 import loadFirstPage
 import nextPage
+import java.util.*
 import javax.inject.Inject
 
 
@@ -56,6 +57,8 @@ class FavoriteFragment : BaseFavoriteFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Locale.setDefault(Locale.forLanguageTag("ru"))
 
         swipe_refresh.setOnRefreshListener(this)
 
@@ -141,7 +144,7 @@ class FavoriteFragment : BaseFavoriteFragment(),
     private fun initRecyclerView(){
         fragment_saved_pages_filled_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@FavoriteFragment.context)
-            val verticalSpacingDecorator = VerticalSpacingItemDecoration(16)
+            val verticalSpacingDecorator = VerticalSpacingItemDecoration(8)
             removeItemDecoration(verticalSpacingDecorator) // does nothing if not applied already
             addItemDecoration(verticalSpacingDecorator)
 
@@ -170,7 +173,7 @@ class FavoriteFragment : BaseFavoriteFragment(),
 
     override fun onItemSelected(position: Int, item: BlogPost) {
         val bundle = bundleOf("houseId" to item.id)
-        findNavController().navigate(R.id.action_favoriteFragment_to_zhilyeFragment,bundle)
+        findNavController().navigate(R.id.action_favoriteFragment_to_zhilyeFragment, bundle)
     }
 
     override fun onDestroyView() {

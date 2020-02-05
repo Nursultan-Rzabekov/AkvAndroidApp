@@ -374,15 +374,17 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<MyHouseStateResponse>
             ) {
-                Log.d("qwe","result details ${response.body.response}")
-                Log.d("qwe","result details ${response.body.message}")
+
+                Log.d(TAG, "my house activate: ${response.body.response}")
 
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
                             data = MyHouseViewState(
                                 myHouseStateFields =
-                                MyHouseViewState.MyHouseStateFields()
+                                MyHouseViewState.MyHouseStateFields(
+                                    response = response.body.response,
+                                    message = response.body.message.toString())
                             )
                         )
                     )
@@ -420,12 +422,17 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<MyHouseStateResponse>
             ) {
+                Log.d(TAG, "my house activate: ${response.body.response}")
+
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
                             data = MyHouseViewState(
                                 myHouseStateFields =
-                                MyHouseViewState.MyHouseStateFields()
+                                MyHouseViewState.MyHouseStateFields(
+                                    response = response.body.response,
+                                    message = response.body.message.toString()
+                                )
                             )
                         )
                     )
@@ -465,6 +472,7 @@ constructor(
             ) {
 
                 Log.d("qweqwe","house_id  + ${houseId}")
+                Log.d("getZhilyeWithHouseId","house_status  + ${response.body.status}")
 
                 val zhilyeDetail = ZhilyeDetail(
                     id = response.body.id,
@@ -646,7 +654,7 @@ constructor(
         price: RequestBody?,
         photoList: List<RequestBody>?,
         nearsList: List<RequestBody>?,
-        facilitiesList: List<RequestBody>?,
+        facilitiesList: List<String>?,
         rulesList: List<RequestBody>?,
         datesList: List<RequestBody>?
     ): LiveData<DataState<MyHouseViewState>>{
@@ -679,7 +687,7 @@ constructor(
             override fun createCall(): LiveData<GenericApiResponse<VerifyUpdateResponse>> {
 
                 val data: HashMap<String, RequestBody> = HashMap()
-                val lists: HashMap<String, List<RequestBody>> = HashMap()
+                val lists: HashMap<String, List<String>> = HashMap()
 
                 if (title != null)
                     data["name"] = title
@@ -690,11 +698,13 @@ constructor(
                 if (price != null)
                     data["price"] = price
 
+                lists["rules[]"] = facilitiesList!!
+
                 return openApiMainService.updateZhilyeInfo(
                     "Token ${authToken.token!!}",
                     house_id = houseId,
                     options = data,
-                    fac = arrayListOf("Фен")
+                    lists = lists
                 )
             }
 

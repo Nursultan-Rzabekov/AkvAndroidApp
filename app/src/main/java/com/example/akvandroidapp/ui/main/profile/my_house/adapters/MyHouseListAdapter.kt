@@ -159,6 +159,15 @@ class MyHouseListAdapter(
         differ.submitList(list)
     }
 
+    fun clearAndSubmitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
+        val newList = blogList?.toMutableList()
+
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+
+        differ.submitList(newList)
+    }
+
     fun clearList(){
         differ.submitList(listOf())
         notifyDataSetChanged()

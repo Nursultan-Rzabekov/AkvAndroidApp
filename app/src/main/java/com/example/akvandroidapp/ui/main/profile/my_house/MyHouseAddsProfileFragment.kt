@@ -24,6 +24,7 @@ import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStat
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
+import com.example.akvandroidapp.ui.main.search.viewmodel.setResponseState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setState
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
@@ -85,19 +86,36 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
             if(viewState != null){
-                if(viewState.myHouseFields.blogList.isNotEmpty()){
-                    recyclerAdapter.apply {
-                        Log.d(TAG, "Search results responses: ${viewState.myHouseFields.blogList}")
+                Log.d(TAG, "Search results responses ${viewState.myHouseStateFields.response}")
+                if (viewState.myHouseStateFields.response){
+                    Log.d(TAG, "Search results responses state changed: ${viewState.myHouseFields.page}, ${viewState.myHouseFields.blogList.size}")
+                    onBlogSearchOrFilter()
+                    viewModel.setResponseState(false)
+                }else {
+                    if (viewState.myHouseFields.blogList.isNotEmpty()) {
+                        recyclerAdapter.apply {
 
+                            Log.d(
+                                TAG,
+                                "Search results responses: ${viewState.myHouseFields.page}, ${viewState.myHouseFields.blogList.size}"
+                            )
 
-                        preloadGlideImages(
-                            requestManager = requestManager,
-                            list = viewState.myHouseFields.blogList
-                        )
-                        submitList(
-                            blogList = viewState.myHouseFields.blogList,
-                            isQueryExhausted = viewState.myHouseFields.isQueryExhausted
-                        )
+                            preloadGlideImages(
+                                requestManager = requestManager,
+                                list = viewState.myHouseFields.blogList
+                            )
+
+                            if (viewState.myHouseFields.page != 1)
+                                submitList(
+                                    blogList = viewState.myHouseFields.blogList,
+                                    isQueryExhausted = viewState.myHouseFields.isQueryExhausted
+                                )
+                            else
+                                clearAndSubmitList(
+                                    blogList = viewState.myHouseFields.blogList,
+                                    isQueryExhausted = viewState.myHouseFields.isQueryExhausted
+                                )
+                        }
                     }
                 }
             }

@@ -63,13 +63,14 @@ constructor(
             }
 
             is MyHouseStateStateEvent.MyHouseUpdateEvent -> {
-                var facilities: MutableList<RequestBody>? = null
+                var facilities: MutableList<String>? = null
                 if (stateEvent.facilitiesList != null){
                     facilities = mutableListOf()
                     stateEvent.facilitiesList?.forEach {
                         Log.e("ASASDASD", "$it")
                         facilities.add(
-                            RequestBody.create(MediaType.parse("text/plain"), it)
+                            //RequestBody.create(MediaType.parse("text/plain"), it)
+                            it
                         )
                     }
                 }

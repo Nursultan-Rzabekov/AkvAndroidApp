@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
@@ -125,6 +126,12 @@ fun MyHouseViewModel.setUpdateResponse(updateFields: MyHouseViewState.MyHouseUpd
     setViewState(update)
 }
 
+fun MyHouseViewModel.setResponseState(state: Boolean){
+    val update = getCurrentViewStateOrNew()
+    Log.e("qwe","qweqweqweqweqwe +${state}")
+    update.myHouseStateFields.response = state
+    setViewState(update)
+}
 
 fun ZhilyeBookViewModel.setResponse(response: Boolean) {
     val update = getCurrentViewStateOrNew()

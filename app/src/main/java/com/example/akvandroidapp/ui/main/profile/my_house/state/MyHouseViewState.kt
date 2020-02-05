@@ -23,7 +23,9 @@ data class MyHouseViewState (
     @Parcelize
     data class MyHouseStateFields(
         var houseId: Int = 1,
-        var state: Int = 0
+        var state: Int = 0,
+        var response: Boolean = false,
+        var message: String = ""
     ) : Parcelable
 
     @Parcelize
