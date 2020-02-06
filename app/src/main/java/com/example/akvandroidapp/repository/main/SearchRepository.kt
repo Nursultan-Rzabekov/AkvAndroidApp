@@ -22,11 +22,8 @@ import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
-import com.example.akvandroidapp.util.AbsentLiveData
-import com.example.akvandroidapp.util.ApiSuccessResponse
+import com.example.akvandroidapp.util.*
 import com.example.akvandroidapp.util.Constants.Companion.PAGINATION_PAGE_SIZE
-import com.example.akvandroidapp.util.DateUtils
-import com.example.akvandroidapp.util.GenericApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
@@ -82,7 +79,8 @@ constructor(
                 val location = arrayListOf<Point>()
                 val blogPostList: ArrayList<BlogPost> = ArrayList()
                 for(blogPostResponse in response.body.results){
-                    location.add(Point(blogPostResponse.latitude,blogPostResponse.longitude))
+                    Log.e("SearchRepository", "is favorite ${blogPostResponse.toString()}")
+                    location.add(Point(blogPostResponse.latitude, blogPostResponse.longitude))
                     blogPostList.add(
                         BlogPost(
                             id = blogPostResponse.id,
@@ -101,6 +99,7 @@ constructor(
                         )
                     )
                 }
+                Log.e("SearchRepository", "is favorite ${blogPostList}")
 
                 sessionManager.locationItemCount(location)
                 withContext(Dispatchers.Main){
@@ -109,15 +108,15 @@ constructor(
                             data = SearchViewState(SearchViewState.BlogFields(
                                 blogPostList,
                                 isQueryInProgress = false,
-                                isQueryExhausted = booleanQuery(blogPostList)
+                                isQueryExhausted = booleanQuery(response.body.count)
                             ))
                         )
                     )
                 }
             }
 
-            private fun booleanQuery(blogPostList: ArrayList<BlogPost>):Boolean{
-                if(page * PAGINATION_PAGE_SIZE > blogPostList.size){
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * PAGINATION_PAGE_SIZE >= blogPostListSize){
                     return true
                 }
                 return false
@@ -177,6 +176,7 @@ constructor(
                 data["verified"] = verified
 
                 return openApiMainService.searchListBlogPosts(
+                    authorization = "Token ${authToken.token!!}",
                     options = data,
                     page = page
                 )
@@ -520,7 +520,6 @@ constructor(
 
         }.asLiveData()
     }
-
 
     fun deleteMyFavoritePosts(
         authToken: AuthToken,

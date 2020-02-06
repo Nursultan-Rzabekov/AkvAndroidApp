@@ -9,6 +9,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
@@ -167,8 +168,15 @@ class SearchListAdapter(
         newList?.forEach {
             list.add(it)
         }
-        list.distinct()
         differ.submitList(list)
+    }
+
+    fun clearAndSubmitList(blogList: List<BlogPost>?, isQueryExhausted: Boolean){
+        val newList = blogList?.toMutableList()
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+
+        differ.submitList(newList)
     }
 
     class BlogViewHolder
@@ -181,17 +189,16 @@ class SearchListAdapter(
 
         fun bind(item: BlogPost) = with(itemView) {
 
+            Log.e("SearchListAdapter", "is favorite ${item.is_favourite}")
+            itemView.search_recycler_item_favourite_btn.isChecked = item.is_favourite
+
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
             itemView.search_recycler_item_favourite_btn.setOnClickListener {
-                if(itemView.search_recycler_item_favourite_btn.isChecked){
-                    interactionCheck?.onItemSelected(adapterPosition,item,true)
-                }
-                else{
-                    interactionCheck?.onItemSelected(adapterPosition,item,false)
-                }
+                val isChecked = itemView.search_recycler_item_favourite_btn.isChecked
+                interactionCheck?.onItemSelected(adapterPosition, item, isChecked)
             }
 
             requestManager
@@ -202,7 +209,7 @@ class SearchListAdapter(
 
             itemView.search_recycler_item_header.text = item.name
             itemView.search_recycler_item_location.text = item.city.toString()
-            itemView.search_recycler_item_cost.text = item.price.toString()
+            itemView.search_recycler_item_cost.text = ("${Converters.pretifyPrice(item.price)}kzt")
         }
     }
 

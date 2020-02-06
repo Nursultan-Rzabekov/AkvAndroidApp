@@ -156,10 +156,18 @@ class SearchFragment :
                             requestManager = requestManager,
                             list = viewState.blogFields.blogList
                         )
-                        submitList(
-                            blogList = viewState.blogFields.blogList,
-                            isQueryExhausted = viewState.blogFields.isQueryExhausted
-                        )
+
+                        if (viewState.blogFields.page != 1)
+                            submitList(
+                                blogList = viewState.blogFields.blogList,
+                                isQueryExhausted = viewState.blogFields.isQueryExhausted
+                            )
+                        else
+                            clearAndSubmitList(
+                                blogList = viewState.blogFields.blogList,
+                                isQueryExhausted = viewState.blogFields.isQueryExhausted
+                            )
+
                     }
 
                     if (viewState.blogFields.dateStart == "" || viewState.blogFields.dateEnd == "")
