@@ -15,6 +15,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
+import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.GenericApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -76,14 +77,21 @@ constructor(
                             data = HomeViewState(
                                 HomeViewState.HomeReservationField(
                                     reservationList = reservationsList,
-                                    isQueryExhausted = false,
-                                    isQueryInProgress = true,
+                                    isQueryExhausted = booleanQuery(count),
+                                    isQueryInProgress = false,
                                     count = count
                                 )
                             )
                         )
                     )
                 }
+            }
+
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE >= blogPostListSize){
+                    return true
+                }
+                return false
             }
 
             override fun createCall(): LiveData<GenericApiResponse<HomeListResponse>> {

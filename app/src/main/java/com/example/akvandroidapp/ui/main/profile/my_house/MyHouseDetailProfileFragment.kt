@@ -1,12 +1,14 @@
 package com.example.akvandroidapp.ui.main.profile.my_house
 
 
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
@@ -24,6 +26,7 @@ import com.example.akvandroidapp.ui.main.profile.my_house.adapters.HouseEarning
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
+import com.example.akvandroidapp.ui.main.search.viewmodel.setResponseState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setZhilyeHouseId
 import com.example.akvandroidapp.util.Converters
@@ -91,12 +94,10 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
     private fun setState(){
         argument?.let {
             if(it.status){
-                fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.deactivate)
-                fragment_my_adds_detailed_state_btn.setTextColor(resources.getColor(R.color.red))
+                //deactivateState()
             }
             else{
-                fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.activate)
-                fragment_my_adds_detailed_state_btn.setTextColor(resources.getColor(R.color.green))
+                //activateState()
             }
         }
 
@@ -106,7 +107,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                     viewModel.setHouseId(it).let {
                         viewModel.setState(0).let {
                             viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
-                            fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.deactivate)
+                            //deactivateState()
                         }
                     }
                 }
@@ -116,7 +117,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                     viewModel.setHouseId(it).let {
                         viewModel.setState(1).let {
                             viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
-                            fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.activate)
+                            //activateState()
                         }
                     }
                 }
@@ -134,82 +135,122 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
 
         viewModel.viewState.observe(viewLifecycleOwner, androidx.lifecycle.Observer{ viewState ->
             if(viewState != null){
-                Log.d("MyHouseDetailProfile","list house +${viewState.zhilyeFields.houseId}")
-                Log.d("MyHouseDetailProfile","list zhilyeDetail +${viewState.zhilyeFields.zhilyeDetail}")
-                Log.d("MyHouseDetailProfile","list Recommendations +${viewState.zhilyeFields.blogListRecommendations}")
-                Log.d("MyHouseDetailProfile","list Accomadations +${viewState.zhilyeFields.zhilyeDetailAccomadations}")
-                Log.d("MyHouseDetailProfile","list Photos +${viewState.zhilyeFields.zhilyeDetailPhotos}")
-                Log.d("MyHouseDetailProfile","list DetailRules +${viewState.zhilyeFields.zhilyeDetailRules}")
-                Log.d("MyHouseDetailProfile","list User +${viewState.zhilyeFields.zhilyeUser}")
-                Log.d("MyHouseDetailProfile","list DetailNearBuildings +${viewState.zhilyeFields.zhilyeDetailNearBuildings}")
-                Log.d("MyHouseDetailProfile","list Reservations +${viewState.zhilyeFields.zhilyeReservationsList}")
 
-                setEarnings(viewState.zhilyeFields.zhilyeReservationsList)
-
-                fragment_my_adds_detailed_title_tv.text = viewState.zhilyeFields.zhilyeDetail.name.toString()
-
-                if (viewState.zhilyeFields.zhilyeDetailPhotos.isNotEmpty())
-                    Glide.with(this)
-                        .load(viewState.zhilyeFields.zhilyeDetailPhotos[0].image)
-                        .error(R.drawable.test_image_back)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(fragment_my_adds_detailed_iv)
-
-                val galleryPhotos = mutableListOf<GalleryPhoto>()
-                viewState.zhilyeFields.zhilyeDetailPhotos.forEach {
-                    galleryPhotos.add(
-                        GalleryPhoto(null, Uri.parse(it.image))
-                    )
+                if (viewState.myHouseStateFields.response){
+                    houseId?.let {
+                        viewModel.setZhilyeHouseId(it).let {
+                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseZhilyeEvent())
+                        }
+                    }
+                    viewModel.setResponseState(false)
                 }
 
-                val rules = mutableListOf<String>()
-                viewState.zhilyeFields.zhilyeDetailRules.forEach {
-                    rules.add(
-                        it.name.toString()
+                else {
+
+                    Log.d("MyHouseDetailProfile", "list house +${viewState.zhilyeFields.houseId}")
+                    Log.d(
+                        "MyHouseDetailProfile",
+                        "list zhilyeDetail +${viewState.zhilyeFields.zhilyeDetail}"
                     )
-                }
-
-                val facilities = mutableListOf<String>()
-                viewState.zhilyeFields.zhilyeDetailAccomadations.forEach {
-                    facilities.add(
-                        it.name.toString()
+                    Log.d(
+                        "MyHouseDetailProfile",
+                        "list Recommendations +${viewState.zhilyeFields.blogListRecommendations}"
                     )
-                }
-
-                val nears = mutableListOf<String>()
-                viewState.zhilyeFields.zhilyeDetailNearBuildings.forEach {
-                    nears.add(
-                        it.name.toString()
+                    Log.d(
+                        "MyHouseDetailProfile",
+                        "list Accomadations +${viewState.zhilyeFields.zhilyeDetailAccomadations}"
                     )
-                }
+                    Log.d(
+                        "MyHouseDetailProfile",
+                        "list Photos +${viewState.zhilyeFields.zhilyeDetailPhotos}"
+                    )
+                    Log.d(
+                        "MyHouseDetailProfile",
+                        "list DetailRules +${viewState.zhilyeFields.zhilyeDetailRules}"
+                    )
+                    Log.d("MyHouseDetailProfile", "list User +${viewState.zhilyeFields.zhilyeUser}")
+                    Log.d(
+                        "MyHouseDetailProfile",
+                        "list DetailNearBuildings +${viewState.zhilyeFields.zhilyeDetailNearBuildings}"
+                    )
+                    Log.d(
+                        "MyHouseDetailProfile",
+                        "list Reservations +${viewState.zhilyeFields.zhilyeReservationsList}"
+                    )
 
-                val dates = mutableListOf<Date>()
-                dates.add(Date())
+                    setEarnings(viewState.zhilyeFields.zhilyeReservationsList)
 
-                val blockedDates = mutableListOf<Date>()
-                viewState.zhilyeFields.zhilyeReservationsList.forEach {
-                    blockedDates.addAll(
-                        DateUtils.getDatesBetween(
-                            DateUtils.convertStringToDate(it.check_in.toString()),
-                            DateUtils.convertStringToDate(it.check_out.toString())
+                    fragment_my_adds_detailed_title_tv.text =
+                        viewState.zhilyeFields.zhilyeDetail.name.toString()
+
+                    if (viewState.zhilyeFields.zhilyeDetailPhotos.isNotEmpty())
+                        Glide.with(this)
+                            .load(viewState.zhilyeFields.zhilyeDetailPhotos[0].image)
+                            .error(R.drawable.test_image_back)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(fragment_my_adds_detailed_iv)
+
+                    val galleryPhotos = mutableListOf<GalleryPhoto>()
+                    viewState.zhilyeFields.zhilyeDetailPhotos.forEach {
+                        galleryPhotos.add(
+                            GalleryPhoto(null, Uri.parse(it.image))
                         )
+                    }
+
+                    val rules = mutableListOf<String>()
+                    viewState.zhilyeFields.zhilyeDetailRules.forEach {
+                        rules.add(
+                            it.name.toString()
+                        )
+                    }
+
+                    val facilities = mutableListOf<String>()
+                    viewState.zhilyeFields.zhilyeDetailAccomadations.forEach {
+                        facilities.add(
+                            it.name.toString()
+                        )
+                    }
+
+                    val nears = mutableListOf<String>()
+                    viewState.zhilyeFields.zhilyeDetailNearBuildings.forEach {
+                        nears.add(
+                            it.name.toString()
+                        )
+                    }
+
+                    val dates = mutableListOf<Date>()
+                    dates.add(Date())
+
+                    val blockedDates = mutableListOf<Date>()
+                    viewState.zhilyeFields.zhilyeReservationsList.forEach {
+                        blockedDates.addAll(
+                            DateUtils.getDatesBetween(
+                                DateUtils.convertStringToDate(it.check_in.toString()),
+                                DateUtils.convertStringToDate(it.check_out.toString())
+                            )
+                        )
+                    }
+
+                    initCalendar(blockedDates)
+
+                    houseUpdateData = HouseUpdateData(
+                        id = viewState.zhilyeFields.houseId,
+                        title = viewState.zhilyeFields.zhilyeDetail.name,
+                        description = viewState.zhilyeFields.zhilyeDetail.description,
+                        address = viewState.zhilyeFields.zhilyeDetail.address,
+                        price = viewState.zhilyeFields.zhilyeDetail.price,
+                        photosList = galleryPhotos,
+                        facilitiesList = facilities,
+                        nearByList = nears,
+                        houseRulesList = rules,
+                        availableDates = dates
                     )
+
+                    if (viewState.zhilyeFields.zhilyeDetail.status)
+                        deactivateState()
+                    else
+                        activateState()
                 }
-
-                initCalendar(blockedDates)
-
-                houseUpdateData = HouseUpdateData(
-                    id = viewState.zhilyeFields.houseId,
-                    title = viewState.zhilyeFields.zhilyeDetail.name,
-                    description = viewState.zhilyeFields.zhilyeDetail.description,
-                    address = viewState.zhilyeFields.zhilyeDetail.address,
-                    price = viewState.zhilyeFields.zhilyeDetail.price,
-                    photosList = galleryPhotos,
-                    facilitiesList = facilities,
-                    nearByList = nears,
-                    houseRulesList = rules,
-                    availableDates = dates
-                )
             }
         })
     }
@@ -302,6 +343,25 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
         fragment_my_adds_detailed_toolbar.setNavigationOnClickListener{
             findNavController().navigateUp()
         }
+    }
+
+    private fun deactivateState(){
+        fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.deactivate)
+        fragment_my_adds_detailed_state_btn.setTextColor(
+            ContextCompat.getColor(requireContext(), R.color.red)
+        )
+        fragment_my_adds_detailed_state_btn.strokeColor = ColorStateList.valueOf(
+            ContextCompat.getColor(requireContext(), R.color.red)
+        )
+    }
+
+    private fun activateState(){
+        fragment_my_adds_detailed_state_btn.text = resources.getString(R.string.activate)
+        fragment_my_adds_detailed_state_btn.setTextColor(
+            ContextCompat.getColor(requireContext(), R.color.green))
+        fragment_my_adds_detailed_state_btn.strokeColor = ColorStateList.valueOf(
+            ContextCompat.getColor(requireContext(), R.color.green)
+        )
     }
 
 }

@@ -45,7 +45,9 @@ import kotlinx.android.synthetic.main.header_zhilye.*
 import kotlinx.android.synthetic.main.map.*
 import technolifestyle.com.imageslider.FlipperLayout
 import technolifestyle.com.imageslider.FlipperView
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
 class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreReviewInteraction {
@@ -86,6 +88,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         MapKitFactory.setApiKey(Constants.MAPKIT_API_KEY)
         MapKitFactory.initialize(this)
         setContentView(R.layout.fragment_zhilye_layout)
+
+        Locale.setDefault(Locale.forLanguageTag("ru"))
 
         houseId = intent.getIntExtra("houseId",67)
 
@@ -158,6 +162,12 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     viewState.zhilyeFields.zhilyeDetail.rating.toString()
                 fragment_zhile_price_tv.text =
                     ("${viewState.zhilyeFields.zhilyeDetail.price}kzt/ночь")
+
+                isFavouriteChecked = viewState.zhilyeFields.zhilyeDetail.is_favourite
+
+                changeFavouriteMenuBtnDrawable(
+                    toolbar_zhilye_header.menu?.findItem(R.id.favourite)
+                )
 
                 moveMapTo(Point(
                     viewState.zhilyeFields.zhilyeDetail.latitude,

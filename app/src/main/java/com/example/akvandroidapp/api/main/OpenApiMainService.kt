@@ -158,7 +158,7 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int,
         @PartMap  options : HashMap<String, RequestBody>,
-        @Query("accommodations[]") fac: ArrayList<String>
+        @QueryMap lists: HashMap<String, List<String>>
     ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
 
     @PATCH("reservations/{house_id}/cancel/")

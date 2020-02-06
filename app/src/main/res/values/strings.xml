@@ -289,8 +289,8 @@
     <string name="geolocation_support">Служба геолокации</string>
     <string name="saved">Сохранённые</string>
     <string name="my_booking">Мои \nбронирования</string>
-    <string name="random_trips">2 поездки</string>
-    <string name="random_guests5">5 гостей</string>
+    <string name="random_trips">0 поездки</string>
+    <string name="random_guests5">0 гостей</string>
     <string name="dot">•</string>
     <string name="booking_check_stantard_text">Бронируйте места в жильё и проводите свои лучшие время с нами.</string>
     <string name="book_appartment">Забранировать жильё</string>

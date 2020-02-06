@@ -9,6 +9,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.no_favorite_item_layout.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
@@ -267,7 +268,7 @@ class FavoriteDifferListAdapter(
                 .into(itemView.search_recycler_item_image_back)
             itemView.search_recycler_item_header.text = item.name
             itemView.search_recycler_item_location.text = item.city.toString()
-            itemView.search_recycler_item_cost.text = ("${item.price}kzt")
+            itemView.search_recycler_item_cost.text = ("${Converters.pretifyPrice(item.price)}kzt")
         }
     }
 
