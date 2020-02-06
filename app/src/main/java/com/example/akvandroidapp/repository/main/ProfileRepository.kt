@@ -320,7 +320,7 @@ constructor(
                                 MyHouseViewState.MyHouseFields(
                                     blogPostList,
                                     isQueryInProgress = false,
-                                    isQueryExhausted = booleanQuery(blogPostList)
+                                    isQueryExhausted = booleanQuery(response.body.count)
                                 )
                             )
                         )
@@ -328,8 +328,8 @@ constructor(
                 }
             }
 
-            private fun booleanQuery(blogPostList: ArrayList<BlogPost>):Boolean{
-                if(page * Constants.PAGINATION_PAGE_SIZE > blogPostList.size){
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE >= blogPostListSize){
                     return true
                 }
                 return false
