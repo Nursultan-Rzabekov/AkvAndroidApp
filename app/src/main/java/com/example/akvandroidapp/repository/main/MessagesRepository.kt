@@ -52,7 +52,6 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<AllChatsResponse>
             ) {
-
                 val blogPostList: ArrayList<UserChatMessages> = ArrayList()
                 for(blogPostResponse in response.body.results){
                     blogPostList.add(
@@ -220,27 +219,27 @@ constructor(
             ) {
                 Log.d(TAG, "recipient ${response.body.recipient}")
 
-                val sendMessageInfo = UserConversationSendMessages(
-                    id = response.body.id,
-                    userId = response.body.user,
-                    recipientId = response.body.recipient,
-                    body = response.body.body,
-                    image = response.body.images?.first()?.image,
-                    created_at = response.body.created_at,
-                    updated_at = response.body.updated_at
-                )
-
-                withContext(Dispatchers.Main) {
-                    onCompleteJob(
-                        DataState.data(
-                            data = DetailsViewState(
-                                sendMessageFields = DetailsViewState.SendMessageFields(
-                                    blogPost = sendMessageInfo
-                                )
-                            )
-                        )
-                    )
-                }
+//                val sendMessageInfo = UserConversationSendMessages(
+//                    id = response.body.id,
+//                    userId = response.body.user,
+//                    recipientId = response.body.recipient,
+//                    body = response.body.body,
+//                    image = response.body.images?.first()?.image,
+//                    created_at = response.body.created_at,
+//                    updated_at = response.body.updated_at
+//                )
+//
+//                withContext(Dispatchers.Main) {
+//                    onCompleteJob(
+//                        DataState.data(
+//                            data = DetailsViewState(
+//                                sendMessageFields = DetailsViewState.SendMessageFields(
+//                                    blogPost = sendMessageInfo
+//                                )
+//                            )
+//                        )
+//                    )
+//                }
             }
 
             override fun createCall(): LiveData<GenericApiResponse<UserConversationsInfoSendResponse>> {

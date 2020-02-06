@@ -123,6 +123,7 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
                 addAdInfo._addAdFacilityList,
                 addAdInfo._addAdNearByList,
                 addAdInfo._addAdRulesList,
+                addAdInfo._addAdAvailableList,
                 multipartBodyList
             )
         )

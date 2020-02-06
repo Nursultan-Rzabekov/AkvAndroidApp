@@ -2,6 +2,8 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 
 
 import okhttp3.MultipartBody
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 sealed class AddAdStateEvent {
@@ -22,6 +24,7 @@ sealed class AddAdStateEvent {
         val facilitiesList: List<String>,
         val nearbyList: List<String>,
         val rulesList: List<String>,
+        val _availableList: List<Date>,
         val image: ArrayList<MultipartBody.Part>? = null
     ): AddAdStateEvent()
 

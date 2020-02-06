@@ -20,14 +20,6 @@ class MapActivity : BaseActivity(), ClusterListener, ClusterTapListener
 {
     private lateinit var mapView: MapView
     private val cluster = arrayListOf(Point(60.0,15.0))
-    private val CLUSTER_CENTERS =
-        listOf(
-            Point(43.2565, 76.9285),
-            Point(47.105045, 51.924622),
-            Point(42.341686, 69.590103),
-            Point(43.693695, 51.260834),
-            Point(51.169392, 71.449074)
-        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.setApiKey(MAPKIT_API_KEY)
