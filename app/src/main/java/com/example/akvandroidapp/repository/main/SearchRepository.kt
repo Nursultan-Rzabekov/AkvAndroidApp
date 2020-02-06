@@ -176,6 +176,7 @@ constructor(
                 data["verified"] = verified
 
                 return openApiMainService.searchListBlogPosts(
+                    authorization = "Token ${authToken.token!!}",
                     options = data,
                     page = page
                 )

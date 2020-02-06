@@ -198,7 +198,7 @@ class SearchListAdapter(
 
             itemView.search_recycler_item_favourite_btn.setOnClickListener {
                 val isChecked = itemView.search_recycler_item_favourite_btn.isChecked
-                interactionCheck?.onItemSelected(adapterPosition, item, !isChecked)
+                interactionCheck?.onItemSelected(adapterPosition, item, isChecked)
             }
 
             requestManager
