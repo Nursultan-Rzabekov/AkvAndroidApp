@@ -11,8 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginStart="@dimen/dim_36dp"
-        android:layout_marginEnd="@dimen/dim_36dp"
         app:tabBackground="@color/white"
         app:tabIndicatorColor="@color/primaryZero"
         app:tabTextColor="@color/primaryZero"/>

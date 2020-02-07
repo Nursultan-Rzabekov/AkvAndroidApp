@@ -336,6 +336,8 @@ fun RequestViewModel.handleIncomingOrdersListData(viewState: RequestViewState){
             "${viewState.ordersField.isQueryExhausted}")
     setOrderQueryInProgress(viewState.ordersField.isQueryInProgress)
     setOrderQueryExhausted(viewState.ordersField.isQueryExhausted)
+    setAcceptState(viewState.acceptReservationField.isAccepted, viewState.acceptReservationField.message.toString())
+    setRejectState(viewState.rejectReservationField.isRejected, viewState.rejectReservationField.message.toString())
     setOrderListData(viewState.ordersField.orders)
 }
 

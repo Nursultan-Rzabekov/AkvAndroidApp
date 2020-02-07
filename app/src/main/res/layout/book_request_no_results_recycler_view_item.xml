@@ -11,6 +11,15 @@
         android:text="@string/booking_check_stantard_text"
         android:textColor="@color/grey8"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/dim_36dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_saved_booking_book_more_btn"
+        style="@style/BasicOutlinedButton.BottomButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/book_appartment"
+        android:textStyle="bold"/>
 
 </LinearLayout>

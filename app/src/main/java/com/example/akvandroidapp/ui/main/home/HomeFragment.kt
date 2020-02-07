@@ -132,6 +132,10 @@ class HomeFragment : BaseHomeFragment(),
         findNavController().navigate(R.id.action_homeFragment_to_zhilyeFragment,bundle)
     }
 
+    override fun onBookMoreBtnPressed() {
+        //navigateToSearch
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         // clear references (can leak memory)

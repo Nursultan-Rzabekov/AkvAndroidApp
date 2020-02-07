@@ -11,6 +11,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
+import kotlinx.android.synthetic.main.book_request_no_results_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.book_requests_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
@@ -83,7 +84,8 @@ class HomeListAdapter(
                         R.layout.book_request_no_results_recycler_view_item,
                         parent,
                         false
-                    )
+                    ),
+                    interaction = interaction
                 )
             }
 
@@ -149,6 +151,10 @@ class HomeListAdapter(
             is ReservationViewHolder -> {
                 holder.bind(differ.currentList[position])
             }
+
+            is NoMoreReservationViewHolder ->{
+                holder.bind()
+            }
         }
     }
 
@@ -207,33 +213,26 @@ class HomeListAdapter(
 
             itemView.book_requests_recycler_view_item_title_tv.text = item.house_name
 
-            when(item.status){
-                0 -> {
+            when(item.accepted_house){
+                null -> {
                     itemView.let {
                         book_requests_recycler_view_item_processing_layout.visibility = View.VISIBLE
                         book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
                         book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
                     }
                 }
-                1 -> {
+                true -> {
                     itemView.let {
                         book_requests_recycler_view_item_processing_layout.visibility = View.GONE
                         book_requests_recycler_view_item_accepted_layout.visibility = View.VISIBLE
                         book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
                     }
                 }
-                2 -> {
+                false -> {
                     itemView.let {
                         book_requests_recycler_view_item_processing_layout.visibility = View.GONE
                         book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
                         book_requests_recycler_view_item_canceled_layout.visibility = View.VISIBLE
-                    }
-                }
-                else -> {
-                    itemView.let {
-                        book_requests_recycler_view_item_processing_layout.visibility = View.VISIBLE
-                        book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
-                        book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
                     }
                 }
             }
@@ -247,11 +246,22 @@ class HomeListAdapter(
 
     class NoMoreReservationViewHolder
     constructor(
-        itemView: View
-    ): RecyclerView.ViewHolder(itemView)
+        itemView: View,
+        private val interaction: Interaction?
+    ): RecyclerView.ViewHolder(itemView) {
+
+        fun bind() {
+            itemView.fragment_saved_booking_book_more_btn.setOnClickListener {
+                interaction?.onBookMoreBtnPressed()
+            }
+        }
+
+    }
 
     interface Interaction {
         fun onItemSelected(position: Int, item: HomeReservation)
+
+        fun onBookMoreBtnPressed()
     }
 
 }

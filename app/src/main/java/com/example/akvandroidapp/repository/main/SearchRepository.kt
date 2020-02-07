@@ -491,11 +491,18 @@ constructor(
                             data = ZhilyeReviewsViewState(ZhilyeReviewsViewState.ReviewField(
                                 reviewList = reviewsList,
                                 isQueryInProgress = false,
-                                isQueryExhausted = true)
+                                isQueryExhausted = booleanQuery(response.body.count))
                             )
                         )
                     )
                 }
+            }
+
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE_FAVORITE >= blogPostListSize){
+                    return true
+                }
+                return false
             }
 
             override fun createCall(): LiveData<GenericApiResponse<ReviewsListResponse>> {

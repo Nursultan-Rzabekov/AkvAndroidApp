@@ -19,6 +19,7 @@ import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
+import com.example.akvandroidapp.util.AllSidesSpacingItemDecoration
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
@@ -108,7 +109,7 @@ class ChatMesFragment : BaseMessagesFragment(),
     private fun initRecyclerView(){
         fragment_chats_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@ChatMesFragment.context)
-            val topSpacingDecorator = TopSpacingItemDecoration(30)
+            val topSpacingDecorator = AllSidesSpacingItemDecoration(12)
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 

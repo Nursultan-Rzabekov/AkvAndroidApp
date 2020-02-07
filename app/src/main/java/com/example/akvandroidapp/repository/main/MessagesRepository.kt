@@ -313,7 +313,7 @@ constructor(
                                 ordersField = RequestViewState.OrdersField(
                                     ordersList,
                                     isQueryInProgress = false,
-                                    isQueryExhausted = booleanQuery(ordersList)
+                                    isQueryExhausted = booleanQuery(response.body.count)
                                 )
                             )
                         )
@@ -321,8 +321,8 @@ constructor(
                 }
             }
 
-            private fun booleanQuery(blogPostList: ArrayList<HomeReservation>):Boolean{
-                if(page * Constants.PAGINATION_PAGE_SIZE > blogPostList.size){
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE_FAVORITE >= blogPostListSize){
                     return true
                 }
                 return false
@@ -346,6 +346,112 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("ordersList", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun acceptReservation(
+        authToken: AuthToken,
+        reservation_id: Int
+    ): LiveData<DataState<RequestViewState>>{
+        return object:
+            NetworkBoundResource<VerifyUpdateResponse, List<BlogPost>, RequestViewState>(
+                sessionManager.isConnectedToTheInternet(),
+                true,
+                false,
+                true
+            ){
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<VerifyUpdateResponse>) {
+                Log.d("Accept Reservation", response.body.message)
+
+                withContext(Dispatchers.Main) {
+                    onCompleteJob(
+                        DataState.data(
+                            data = RequestViewState(
+                                acceptReservationField = RequestViewState.AcceptReservationField(
+                                    isAccepted = response.body.response,
+                                    message = response.body.message
+                                )
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<VerifyUpdateResponse>> {
+                Log.d("Accept Reservation", "reservation id: $reservation_id")
+                return openApiMainService.acceptReservation(
+                    authorization = "Token ${authToken.token!!}",
+                    reservation_id = reservation_id
+                )
+            }
+
+            override fun loadFromCache(): LiveData<RequestViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+            }
+
+            override fun setJob(job: Job) {
+                addJob("acceptReservation", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun rejectReservation(
+        authToken: AuthToken,
+        reservation_id: Int
+    ): LiveData<DataState<RequestViewState>>{
+        return object: NetworkBoundResource<VerifyUpdateResponse, List<BlogPost>, RequestViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<VerifyUpdateResponse>) {
+                Log.d("Reject Reservation", response.body.message)
+
+                withContext(Dispatchers.Main) {
+                    onCompleteJob(
+                        DataState.data(
+                            data = RequestViewState(
+                                rejectReservationField = RequestViewState.RejectReservationField(
+                                    isRejected = response.body.response,
+                                    message = response.body.message
+                                )
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<VerifyUpdateResponse>> {
+                Log.d("Reject Reservation", "reservation id: $reservation_id")
+                return openApiMainService.rejectReservation(
+                    authorization = "Token ${authToken.token!!}",
+                    reservation_id = reservation_id
+                )
+            }
+
+            override fun loadFromCache(): LiveData<RequestViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+            }
+
+            override fun setJob(job: Job) {
+                addJob("rejectReservation", job)
             }
 
         }.asLiveData()

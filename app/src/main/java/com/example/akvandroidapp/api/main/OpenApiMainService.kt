@@ -168,6 +168,18 @@ interface OpenApiMainService {
         @Path("house_id") house_id: Int,
         @Query("message") message: String
     ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
+
+    @PATCH("orders/{reservation_id}/accept/")
+    fun acceptReservation(
+        @Header("Authorization") authorization: String,
+        @Path("reservation_id") reservation_id: Int
+    ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
+
+    @PATCH("orders/{reservation_id}/reject/")
+    fun rejectReservation(
+        @Header("Authorization") authorization: String,
+        @Path("reservation_id") reservation_id: Int
+    ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
 }
 
 
