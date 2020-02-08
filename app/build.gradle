@@ -153,4 +153,6 @@ dependencies {
 
     def shapeImageViewVersion = '0.9.3'
     implementation "com.github.siyamed:android-shape-imageview:$shapeImageViewVersion"
+
+
 }

@@ -39,7 +39,6 @@ interface OpenApiMainService {
 
     @GET("houses")
     fun searchListBlogPosts(
-//        @Header("Authorization") authorization: String,
         @QueryMap  options : Map<String, String>,
         @Query("page") page: Int,
         @Header("Authorization") authorization: String

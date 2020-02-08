@@ -84,36 +84,24 @@ class RegisterFragment : BaseAuthFragment() {
             Pair("правилами пользования.", View.OnClickListener {
                 findNavController().navigate(R.id.action_registerFragment_to_privacyPolicyFragment)
             }))
-
-
         subscribeObservers()
-
-
     }
 
     private fun subscribeObservers(){
         viewModel.viewState.observe(viewLifecycleOwner, Observer{viewState ->
             viewState.registrationFields?.let {
-                sendCode()
-                it.registration_email?.let{sign_detail_email_et.setText(it)}
-                it.registration_username?.let{sign_detail_last_name_et.setText(it)
-
+                    sendCode()
+                    it.registration_email?.let{sign_detail_email_et.setText(it)}
+                    it.registration_username?.let{sign_detail_last_name_et.setText(it)
                 }
             }
-
-            viewState.sendCodeFields?.let {
-                //it.phone?.let { body.setText(it)}
-            }
-
 
             viewState.verifyCodeFields?.let {
                 it.phone?.let { body.setText(it)}
                 //navMainActivity()
-
             }
         })
     }
-
 
     private fun showDialog() {
         val dialog = Dialog(context!!)
@@ -135,14 +123,13 @@ class RegisterFragment : BaseAuthFragment() {
             }
         }
         send.setOnClickListener {
-            verifyCode()
+            sendCode()
             dialog.dismiss()
         }
 
         close.setOnClickListener {
             dialog.dismiss()
         }
-
         dialog.show()
 
     }

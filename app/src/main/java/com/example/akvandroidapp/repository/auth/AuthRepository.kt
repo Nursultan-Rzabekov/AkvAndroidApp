@@ -173,8 +173,10 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<RegistrationResponse>) {
 
-                if(response.body.errorMessage.equals(GENERIC_AUTH_ERROR)){
-                    return onErrorReturn(response.body.errorMessage, true, false)
+                response.body.response?.let {
+                    if(!it){
+                        return onErrorReturn(response.body.errorMessage, true, false)
+                    }
                 }
 
                 val result1 = accountPropertiesDao.insertAndReplace(
@@ -195,14 +197,6 @@ constructor(
                     )
                     return
                 }
-
-                onCompleteJob(
-                    DataState.data(
-                        data = AuthViewState(
-                            authToken = AuthToken(response.body.id, response.body.first_name)
-                        )
-                    )
-                )
             }
 
             override fun createCall(): LiveData<GenericApiResponse<RegistrationResponse>> {
@@ -225,11 +219,6 @@ constructor(
 
 
     fun sendCode(phone: String): LiveData<DataState<AuthViewState>>{
-
-//        val sendCodeFieldErrors = SendCodeFields(phone).isValidForSendCode()
-//        if(!sendCodeFieldErrors.equals(SendCodeFields.SendCodeError.none())){
-//            return returnErrorResponse(sendCodeFieldErrors, ResponseType.Dialog())
-//        }
 
         return object: NetworkBoundResource<CodeResponse, Any, AuthViewState>(
             sessionManager.isConnectedToTheInternet(),
@@ -258,22 +247,15 @@ constructor(
 
                 Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
 
-
-                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
+                if(!response.body.response){
                     return onErrorReturn(response.body.message, true, false)
                 }
 
-//                onCompleteJob(
-//                    DataState.data(
-//                        data = AuthViewState(
-//                            authToken = AuthToken(response.body.response)
-//                        )
-//                    )
-//                )
             }
 
             override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
-                return openApiAuthService.sendCode(phone)
+                return openApiAuthService.
+                    sendCode(phone)
             }
 
             override fun setJob(job: Job) {
@@ -316,11 +298,33 @@ constructor(
 
                 Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
 
-
-                if(response.body.response.equals(GENERIC_AUTH_ERROR)){
+                if(!response.body.response){
                     return onErrorReturn(response.body.message, true, false)
                 }
 
+//                val result = authTokenDao.insert(
+//                    AuthToken(
+//                        response.body.user.id,
+//                        response.body.token
+//                    )
+//                )
+//
+//                if(result < 0){
+//                    return onCompleteJob(DataState.error(
+//                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog()))
+//                    )
+//                }
+//
+//
+//                sessionManager.login(AuthToken(response.body.user.id, response.body.token))
+//
+//                onCompleteJob(
+//                    DataState.data(
+//                        data = AuthViewState(
+//                            authToken = AuthToken(response.body.user.id, response.body.token)
+//                        )
+//                    )
+//                )
             }
 
             override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
