@@ -77,8 +77,6 @@
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/explore_map">
 
-
-
         </activity>
 
 
@@ -95,10 +93,6 @@
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/fragment_zhilye_layout">
 
-
         </activity>
-
-
-
 
 </navigation>

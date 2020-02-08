@@ -88,7 +88,7 @@ class LoginFragment : BaseAuthFragment() {
     }
 
     fun navLauncherFragment(){
-        findNavController().navigate(R.id.action_loginFragment_to_LauncherFragment)
+        findNavController().navigate(R.id.action_loginFragment_to_register_up_Fragment)
     }
 
     fun navForgetLoginFragment(){

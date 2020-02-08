@@ -4,33 +4,27 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_graph"
-        app:startDestination="@id/launcherFragment">
+        app:startDestination="@id/loginFragment">
 
 
-    <fragment
-            android:id="@+id/launcherFragment"
-            android:name="com.example.akvandroidapp.ui.auth.LauncherFragment"
-            android:label="fragment_launcher"
-            tools:layout="@layout/sign_up_nickname" >
+<!--    <fragment-->
+<!--            android:id="@+id/launcherFragment"-->
+<!--            android:name="com.example.akvandroidapp.ui.auth.LauncherFragment"-->
+<!--            android:label="fragment_launcher"-->
+<!--            tools:layout="@layout/sign_up_nickname" >-->
 
 
-        <action
-                android:id="@+id/action_launcherFragment_to_loginFragment"
-                app:destination="@id/loginFragment"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"/>
+<!--        <action-->
+<!--                android:id="@+id/action_launcherFragment_to_loginFragment"-->
+<!--                app:destination="@id/loginFragment"-->
+<!--                app:popEnterAnim="@anim/slide_in_left"-->
+<!--                app:popExitAnim="@anim/slide_out_right"-->
+<!--                app:enterAnim="@anim/slide_in_right"-->
+<!--                app:exitAnim="@anim/slide_out_left"/>-->
 
-        <action
-                android:id="@+id/action_launcherFragment_to_register_up_Fragment"
-                app:destination="@id/register_up_Fragment"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"/>
 
-    </fragment>
+
+<!--    </fragment>-->
 
     <fragment
             android:id="@+id/loginFragment"
@@ -39,8 +33,8 @@
             tools:layout="@layout/login">
 
             <action
-                android:id="@+id/action_loginFragment_to_LauncherFragment"
-                app:destination="@id/launcherFragment"
+                android:id="@+id/action_loginFragment_to_register_up_Fragment"
+                app:destination="@id/register_up_Fragment"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:enterAnim="@anim/slide_in_right"

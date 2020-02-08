@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dim_60dp"
-        android:layout_marginTop="167dp"
+        android:layout_marginTop="67dp"
         android:layout_marginEnd="@dimen/dim_60dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/enter_account"

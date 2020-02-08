@@ -49,7 +49,6 @@ class RegisterFragment : BaseAuthFragment() {
     private var password1:String?=null
     private var password2:String?=null
     private var arg_number:String?=null
-    private var arg_user_name:String?=null
 
     private lateinit var body:EditText
     private lateinit var close:ImageButton
@@ -58,12 +57,9 @@ class RegisterFragment : BaseAuthFragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterFragment: ${viewModel}")
 
-
         password1 = arguments?.getString("password1")
         password2 = arguments?.getString("password2")
         arg_number = arguments?.getString("arg_number")
-        arg_user_name = arguments?.getString("arg_user_name")
-
 
         sign_detail_create_btn.setOnClickListener {
             register()
@@ -95,10 +91,8 @@ class RegisterFragment : BaseAuthFragment() {
                     it.registration_username?.let{sign_detail_last_name_et.setText(it)
                 }
             }
-
             viewState.verifyCodeFields?.let {
                 it.phone?.let { body.setText(it)}
-                //navMainActivity()
             }
         })
     }
@@ -107,6 +101,8 @@ class RegisterFragment : BaseAuthFragment() {
         val dialog = Dialog(context!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setDimAmount(0F)
         dialog.setContentView(R.layout.dialog_sign_up_valid)
         body = dialog.findViewById(R.id.dialog_sign_up_valid_code_et) as EditText
         close = dialog.findViewById(R.id.dialog_sign_up_valid_close_btn) as ImageButton
@@ -124,7 +120,6 @@ class RegisterFragment : BaseAuthFragment() {
         }
         send.setOnClickListener {
             sendCode()
-            dialog.dismiss()
         }
 
         close.setOnClickListener {
@@ -141,12 +136,11 @@ class RegisterFragment : BaseAuthFragment() {
                 getGender(),
                 arg_number.toString(),
                 password1.toString(),
-                arg_user_name.toString(),
+                sign_detail_last_name_et.text.toString(),
                 sign_detail_last_name_et.text.toString(),
                 sign_detail_birth_et.text.toString()
             )
         )
-
         showDialog()
     }
 
