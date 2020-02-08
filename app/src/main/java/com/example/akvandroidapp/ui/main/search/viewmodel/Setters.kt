@@ -205,6 +205,20 @@ fun RequestViewModel.setOrderListData(blogList: List<HomeReservation>){
     setViewState(update)
 }
 
+fun RequestViewModel.setAcceptState(state: Boolean, message: String){
+    val update = getCurrentViewStateOrNew()
+    update.acceptReservationField.isAccepted = state
+    update.acceptReservationField.message = message
+    setViewState(update)
+}
+
+fun RequestViewModel.setRejectState(state: Boolean, message: String){
+    val update = getCurrentViewStateOrNew()
+    update.rejectReservationField.isRejected = state
+    update.rejectReservationField.message = message
+    setViewState(update)
+}
+
 fun ZhilyeReviewViewModel.setBlogListData(reviewList: List<Review>){
     val update = getCurrentViewStateOrNew()
     update.reviewsField.reviewList = reviewList

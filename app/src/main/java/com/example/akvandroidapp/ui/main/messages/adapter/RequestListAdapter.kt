@@ -143,7 +143,12 @@ class RequestListAdapter(
         requestManager: RequestManager,
         list: List<HomeReservation>
     ){
-
+        for(reserv in list){
+            requestManager
+                .load(reserv.house_image)
+                .error(R.drawable.test_image_back)
+                .preload()
+        }
     }
 
 
@@ -151,8 +156,24 @@ class RequestListAdapter(
         val newList = blogList?.toMutableList()
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+
+        val list = differ.currentList.toMutableList()
+        list.removeAll { it.id == NO_MORE_RESULTS }
+
+        newList?.forEach {
+            list.add(it)
+        }
+        differ.submitList(list)
+    }
+
+    fun clearAndSubmitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean){
+        val newList = blogList?.toMutableList()
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+
         differ.submitList(newList)
     }
+
 
     class OrderViewHolder
     constructor(
@@ -163,12 +184,12 @@ class RequestListAdapter(
 
         private val image = itemView.requests_recycler_view_item_iv
         private val title = itemView.requests_recycler_view_item_title_tv
-        private val nickname = itemView.requests_recycler_view_item_message_tv
+        private val accept = itemView.requests_recycler_view_item_accept_btn
+        private val cancel = itemView.requests_recycler_view_item_cancel_btn
 
         fun bind(item: HomeReservation) = with(itemView) {
 
-            title.text = item.house_name
-            nickname.text = ("@${item.user_id} хочет быть вашем гостем.")
+            title.text = ("@${item.user_id} хочет быть вашем гостем в ${item.house_name}")
 
             if (item.house_image != null)
                 requestManager
@@ -181,14 +202,23 @@ class RequestListAdapter(
                     .load(R.drawable.test_image_back)
                     .into(image)
 
-            itemView.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
+//            itemView.setOnClickListener {
+//                interaction?.onItemSelected(adapterPosition, item)
+//            }
+
+            accept.setOnClickListener {
+                interaction?.onAcceptItem(adapterPosition, item)
+            }
+
+            cancel.setOnClickListener {
+                interaction?.onCancelItem(adapterPosition, item)
             }
         }
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: HomeReservation)
+        fun onAcceptItem(position: Int, item: HomeReservation)
+        fun onCancelItem(position: Int, item: HomeReservation)
     }
 
 }

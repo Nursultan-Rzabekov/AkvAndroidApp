@@ -134,7 +134,15 @@ class ReviewsPageAdapter(
         val newList = items?.toMutableList()
         if (isQueryExhausted)
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
-        differ.submitList(newList)
+
+        val list = differ.currentList.toMutableList()
+        list.removeAll { it.id == NO_MORE_RESULTS }
+
+        newList?.forEach {
+            list.add(it)
+        }
+
+        differ.submitList(list)
         Log.e("ReviewsPageAdapter", "${differ.currentList}")
     }
 

@@ -55,6 +55,24 @@ constructor(
                 }
             }
 
+            is RequestStateEvent.AcceptReservationEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    messagesRepository.acceptReservation(
+                        it,
+                        reservation_id = stateEvent.reservation_id
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is RequestStateEvent.RejectReservationEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    messagesRepository.rejectReservation(
+                        it,
+                        reservation_id = stateEvent.reservation_id
+                    )
+                }?: AbsentLiveData.create()
+            }
+
         }
     }
 

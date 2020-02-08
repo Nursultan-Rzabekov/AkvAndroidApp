@@ -11,95 +11,101 @@
         app:cardUseCompatPadding="true"
         app:cardElevation="@dimen/elevation_3"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/cornerRadius3">
+        app:cardCornerRadius="@dimen/cornerRadius1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingTop="@dimen/dim_20dp"
-            android:paddingStart="@dimen/dim_24dp"
-            android:paddingBottom="@dimen/dim_20dp"
-            android:paddingEnd="@dimen/dim_12dp">
+            android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="2dp"
-                app:cardUseCompatPadding="true">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingStart="@dimen/dim_16dp"
+                android:paddingBottom="@dimen/dim_12dp"
+                android:paddingEnd="@dimen/dim_16dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/requests_recycler_view_item_iv"
                     android:contentDescription="@string/appartment"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/test_image_back"
                     android:scaleType="centerCrop"/>
 
-            </com.google.android.material.card.MaterialCardView>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="@dimen/dim_12dp"
-                android:layout_marginEnd="@dimen/dim_12dp">
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/dim_12dp"
+                    android:layout_marginEnd="@dimen/dim_12dp">
 
                     <TextView
                         android:id="@+id/requests_recycler_view_item_title_tv"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/hotel_del_luxe"
-                        android:layout_marginEnd="@dimen/dim_8dp"
-                        android:lines="1"
+                        android:text="@string/test_text_orders"
                         android:ellipsize="end"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
-                    <TextView
-                        android:id="@+id/requests_recycler_view_item_date_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/random_time1"
-                        android:textSize="12sp"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/requests_recycler_view_item_message_tv"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/random_guest1"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:maxLines="2"-->
+<!--                        android:ellipsize="end"/>-->
 
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/divider54"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/dim_4dp"
-                    android:layout_marginEnd="@dimen/dim_60dp"
-                    android:background="?android:attr/listDivider" />
-
-                <TextView
-                    android:id="@+id/requests_recycler_view_item_message_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/random_guest1"
-                    android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:maxLines="2"
-                    android:ellipsize="end"/>
-
             </LinearLayout>
 
-            <ImageView
-                android:contentDescription="@string/next"
-                android:layout_width="wrap_content"
+            <View
+                android:id="@+id/divider54"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_forward"
-                android:tint="@color/grey8"
-                android:layout_gravity="center_vertical"/>
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/requests_recycler_view_item_cancel_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/AllButton.TextButton"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:cornerRadius="0dp"
+                    android:text="@string/cancel"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/requests_recycler_view_item_accept_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/AllButton.TextButton"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/primaryZero"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:cornerRadius="0dp"
+                    android:text="@string/accept"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -165,6 +165,8 @@ class SearchListAdapter(
             newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
 
         val list = differ.currentList.toMutableList()
+        list.removeAll { it.id == NO_MORE_RESULTS }
+
         newList?.forEach {
             list.add(it)
         }
