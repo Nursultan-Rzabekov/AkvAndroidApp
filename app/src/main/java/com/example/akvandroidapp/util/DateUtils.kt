@@ -1,5 +1,7 @@
 package com.example.akvandroidapp.util
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,6 +55,16 @@ class DateUtils {
 
         fun convertDateToStringWithSlash(date: Date): String{
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            try {
+                val d = sdf.format(date)
+                return d
+            }catch (e: Exception){
+                throw Exception(e)
+            }
+        }
+
+        fun convertDateToStringForBooking(date: Date): String{
+            val sdf = SimpleDateFormat("dd MMM", Locale.getDefault())
             try {
                 val d = sdf.format(date)
                 return d
@@ -123,7 +135,11 @@ class DateUtils {
 
             return others
         }
+
     }
 
-
+    @Parcelize
+    data class DateBundle(
+        val date: Date
+    ): Parcelable
 }

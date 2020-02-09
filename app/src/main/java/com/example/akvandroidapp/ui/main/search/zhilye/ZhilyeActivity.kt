@@ -16,12 +16,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.ZhilyeDetail
 import com.example.akvandroidapp.entity.ZhilyeDetailProperties
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
-import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
+import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
+import com.example.akvandroidapp.ui.main.search.dialogs.GuestCounterDialog
 import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
@@ -30,6 +32,7 @@ import com.example.akvandroidapp.ui.main.search.zhilye.adapters.RecommendationsA
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.EndSpacingItemDecoration
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import com.google.android.material.appbar.AppBarLayout
@@ -50,7 +53,9 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
-class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreReviewInteraction {
+class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreReviewInteraction,
+    DateRangePickerDialog.DatePickerDialogInteraction,
+    GuestCounterDialog.GuestCounterDialogInteraction{
 
     private val TAGV = "Zhilye Activity"
 
@@ -60,6 +65,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     //bundle
     private var houseRules: List<ZhilyeDetailProperties> = listOf()
+    private var selectedDates: List<Date> = listOf()
+    private lateinit var zhilyeDetail: ZhilyeDetail
 
     private var userEmail:String? = null
     private var userName:String? = null
@@ -76,12 +83,13 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     private var isToolbarColapsed = false
 
     lateinit var stateChangeListener: DataStateChangeListener
+
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
     lateinit var viewModel: ZhilyeViewModel
 
-    private var houseId:Int?=null
-
+    private var houseId: Int? = null
+    private var isCancelState: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,6 +100,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         Locale.setDefault(Locale.forLanguageTag("ru"))
 
         houseId = intent.getIntExtra("houseId",67)
+        isCancelState = intent.getBooleanExtra("isCancelState", false)
 
         viewModel = ViewModelProvider(this, providerFactory).get(ZhilyeViewModel::class.java)
         stateChangeListener = this
@@ -105,6 +114,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         setToolbar()
 
+        initStateOfHouse()
         setMapView()
         setFlipperLayout(arrayListOf())
         initRecyclerViews()
@@ -162,6 +172,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     viewState.zhilyeFields.zhilyeDetail.rating.toString()
                 fragment_zhile_price_tv.text =
                     ("${viewState.zhilyeFields.zhilyeDetail.price}kzt/ночь")
+
+                zhilyeDetail = viewState.zhilyeFields.zhilyeDetail
 
                 isFavouriteChecked = viewState.zhilyeFields.zhilyeDetail.is_favourite
 
@@ -229,8 +241,9 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     }
 
     private fun navBookReserv(){
-        val intent = Intent(this, ZhilyeBookActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, ZhilyeBookActivity::class.java)
+//        startActivity(intent)
+        showDatePicker()
     }
 
     override fun onStop() {
@@ -425,7 +438,57 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_white)
     }
 
+    private fun initStateOfHouse(){
+        if (isCancelState){
+
+        }else{
+
+        }
+    }
+
+    private fun showDatePicker(){
+        val datePickerDialog = DateRangePickerDialog(this, listOf(), this)
+        datePickerDialog.show()
+    }
+
+    private fun showCounterPicker(){
+        val guestCounterDialog = GuestCounterDialog(this, 0,0, this)
+        guestCounterDialog.show()
+    }
+
     override fun onShowMorePressed() {
         navReviews(viewModel.getHouseId())
+    }
+
+    override fun onCloseBtnListener() {}
+
+    override fun onClearBtnListener() {}
+
+    override fun onSaveBtnListener(dates: List<Date>) {
+        selectedDates = dates.toList()
+        Log.d(TAGV, "selected dates: $selectedDates")
+        showCounterPicker()
+    }
+
+    override fun onCloseBtnListenerCounter() {}
+
+    override fun onClearBtnListenerCounter() {}
+
+    override fun onSaveBtnListenerCounter(adultsCount: Int, childrenCount: Int) {
+        val datesInLong = ArrayList<DateUtils.DateBundle>()
+        for (date in selectedDates)
+            datesInLong.add(DateUtils.DateBundle(date))
+        Log.d(TAGV, "selected dates: $datesInLong")
+
+        val bundle = bundleOf(
+            "house_id" to houseId,
+            "adultsCounter" to adultsCount,
+            "children" to childrenCount,
+            "zhilyeDetail" to zhilyeDetail
+        )
+        bundle.putParcelableArrayList("datesList", datesInLong)
+        val intent = Intent(this, ZhilyeBookActivity::class.java)
+        intent.putExtra("booking", bundle)
+        startActivity(intent)
     }
 }

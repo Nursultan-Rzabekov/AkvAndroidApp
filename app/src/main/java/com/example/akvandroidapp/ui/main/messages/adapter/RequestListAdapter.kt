@@ -23,10 +23,26 @@ class RequestListAdapter(
 
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
+    private val NO_RESULTS = -2
     private val BLOG_ITEM = 0
 
     private val NO_MORE_RESULTS_BLOG_MARKER = HomeReservation(
         NO_MORE_RESULTS,
+        "" ,
+        "",
+        0,
+        0,
+        "",
+        false,
+        0,
+        0,
+        "",
+        "",
+        0
+    )
+
+    private val NO_RESULTS_BLOG_MARKER = HomeReservation(
+        NO_RESULTS,
         "" ,
         "",
         0,
@@ -83,6 +99,17 @@ class RequestListAdapter(
                     requestManager = requestManager
                 )
             }
+
+            NO_RESULTS -> {
+                return GenericViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.no_orders_item_layout,
+                        parent,
+                        false
+                    )
+                )
+            }
+
             else -> {
                 return OrderViewHolder(
                     LayoutInflater.from(parent.context).inflate(
@@ -168,8 +195,12 @@ class RequestListAdapter(
 
     fun clearAndSubmitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean){
         val newList = blogList?.toMutableList()
-        if (isQueryExhausted)
-            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+
+        if (newList.isNullOrEmpty())
+            newList?.add(NO_RESULTS_BLOG_MARKER)
+        else
+            if (isQueryExhausted)
+                newList.add(NO_MORE_RESULTS_BLOG_MARKER)
 
         differ.submitList(newList)
     }

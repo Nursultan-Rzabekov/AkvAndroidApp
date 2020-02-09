@@ -128,8 +128,11 @@ class HomeFragment : BaseHomeFragment(),
     }
 
     override fun onItemSelected(position: Int, item: HomeReservation) {
-        val bundle = bundleOf("houseId" to item.house_id)
-        findNavController().navigate(R.id.action_homeFragment_to_zhilyeFragment,bundle)
+        val bundle = bundleOf(
+            "houseId" to item.house_id,
+            "isCancelState" to true
+        )
+        findNavController().navigate(R.id.action_homeFragment_to_zhilyeFragment, bundle)
     }
 
     override fun onBookMoreBtnPressed() {

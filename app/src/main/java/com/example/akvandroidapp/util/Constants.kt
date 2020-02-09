@@ -7,6 +7,7 @@ class Constants {
 
         const val BASE_URL = "http://akv-technopark.herokuapp.com/api/"
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
+        const val AKV_TAX = 5
 
         const val DEFAULT_YEAR_GAP = -12
 
