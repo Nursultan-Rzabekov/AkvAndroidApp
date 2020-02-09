@@ -19,6 +19,7 @@ import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import kotlinx.android.synthetic.main.fragment_zhilye_book.*
 import kotlinx.android.synthetic.main.fragment_zhilye_book_layout.*
+import java.lang.Math.round
 import java.util.*
 import javax.inject.Inject
 
@@ -40,7 +41,7 @@ class ZhilyeBookActivity : BaseActivity() {
         viewModel = ViewModelProvider(this, providerFactory).get(ZhilyeBookViewModel::class.java)
         stateChangeListener = this
 
-        val bundle = intent.extras
+        val bundle = intent.extras?.getBundle("booking")
         val zhilyeDetail = bundle?.getParcelable<ZhilyeDetail>("zhilyeDetail")
         val houseId = bundle?.getInt("house_id", -1)?: -1
         val adults = bundle?.getInt("adultsCounter",0)?: 0
@@ -59,10 +60,12 @@ class ZhilyeBookActivity : BaseActivity() {
         fragment_zhilye_book_arrival_tv.text = DateUtils.convertDateToStringForBooking(dates.first())
         fragment_zhilye_book_departure_tv.text = DateUtils.convertDateToStringForBooking(dates.last())
         fragment_zhilye_book_nights_lb.text = ("${zhilyeDetail?.price}kzt x ${dates.size} ночей")
-        fragment_zhilye_book_nights_tv.text = ("${zhilyeDetail?.price?: 0 * dates.size}kzt")
-        fragment_zhilye_book_tax_tv.text = ("${zhilyeDetail?.price?: 0 * dates.size * Constants.AKV_TAX}")
+        fragment_zhilye_book_nights_tv.text = ("${(zhilyeDetail?.price?:0) * dates.size}kzt")
+        fragment_zhilye_book_tax_tv.text = ("${
+            (zhilyeDetail?.price?: 0) * dates.size * Constants.AKV_TAX / 100}kzt"
+        )
         fragment_zhilye_book_total_tv.text = ("${
-        zhilyeDetail?.price?: 0 * dates.size * Constants.AKV_TAX + (zhilyeDetail?.price?: 0 * dates.size)
+        (zhilyeDetail?.price?: 0) * dates.size * Constants.AKV_TAX / 100 + ((zhilyeDetail?.price?: 0) * dates.size)
         }kzt")
 
         setToolbar()
