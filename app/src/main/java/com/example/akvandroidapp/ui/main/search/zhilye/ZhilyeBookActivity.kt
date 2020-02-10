@@ -3,6 +3,7 @@ package com.example.akvandroidapp.ui.main.search.zhilye
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -121,6 +122,12 @@ class ZhilyeBookActivity : BaseActivity() {
     }
 
     override fun displayProgressBar(bool: Boolean) {
+        if(bool){
+            progress_bar_zhilye_book.visibility = View.VISIBLE
+        }
+        else{
+            progress_bar_zhilye_book.visibility = View.GONE
+        }
     }
 
     private fun setToolbar(){

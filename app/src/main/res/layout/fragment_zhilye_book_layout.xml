@@ -43,6 +43,14 @@
             android:id="@+id/fragment_zhilye_book_base"
             layout="@layout/fragment_zhilye_book"/>
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress_bar_zhilye_book"
+            android:layout_gravity="top|center"
+            android:visibility="invisible"
+            />
+
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
