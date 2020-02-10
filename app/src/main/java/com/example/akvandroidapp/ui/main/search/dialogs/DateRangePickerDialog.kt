@@ -3,83 +3,83 @@ package com.example.akvandroidapp.ui.main.search.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.akvandroidapp.R
 import com.google.android.material.button.MaterialButton
 import com.savvi.rangedatepicker.CalendarPickerView
+import kotlinx.android.synthetic.main.dialog_filter_dates.*
 import java.lang.IllegalStateException
 import java.util.*
 import kotlin.collections.ArrayList
 
 class DateRangePickerDialog(
+    context: Context,
+    var selectedDates: List<Date>,
     val interaction: DatePickerDialogInteraction
-): DialogFragment(){
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.dialog_filter_dates, container, false)
-    }
+): Dialog(context, R.style.CustomBasicDialog){
 
-//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//        val dialog =  activity?.let {
-//            val builder = AlertDialog.Builder(it)
-//            builder.setCancelable(false)
-//
-//            builder.setTitle("asdasd")
-//
-//            builder.create()
-//        }?: throw IllegalStateException("Activity can not be null")
-//
-//        return dialog
-//    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val closeBtn = view.findViewById<ImageButton>(R.id.dialog_filter_dates_picker_cancel)
-        val clearAllBtn = view.findViewById<MaterialButton>(R.id.dialog_filter_dates_clear_all_btn)
-        val saveBtn = view.findViewById<MaterialButton>(R.id.dialog_filter_dates_save_btn)
-        val calendarPicker = view.findViewById<CalendarPickerView>(R.id.dialog_filter_dates_picker)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setCancelable(false)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window?.setDimAmount(0F)
+        setContentView(R.layout.dialog_filter_dates)
 
         val lastyear = Calendar.getInstance()
         lastyear.add(Calendar.YEAR, 0)
         lastyear.add(Calendar.MONTH, 0)
         lastyear.add(Calendar.DAY_OF_MONTH, 0)
 
-        calendarPicker.deactivateDates(ArrayList())
+        dialog_filter_dates_picker.deactivateDates(ArrayList())
 
         val nextyear = Calendar.getInstance()
         nextyear.set(Calendar.YEAR, nextyear.get(Calendar.YEAR)+1)
         nextyear.set(Calendar.MONTH, Calendar.DECEMBER)
         nextyear.set(Calendar.DAY_OF_MONTH, 31)
 
-        calendarPicker
+        dialog_filter_dates_picker
             .init(lastyear.time, nextyear.time)
             .inMode(CalendarPickerView.SelectionMode.RANGE)
+            .withSelectedDates(selectedDates)
 
-        closeBtn.setOnClickListener {
+        findViewById<ImageButton>(R.id.dialog_filter_dates_picker_cancel).setOnClickListener {
+            Log.d("FilterDialog", "FilterDialog: cancelling filter.")
             interaction.onCloseBtnListener()
             dismiss()
         }
-        clearAllBtn.setOnClickListener {
-            interaction.onClearBtnListener()
+
+        findViewById<MaterialButton>(R.id.dialog_filter_dates_save_btn).setOnClickListener {
+            Log.d("FilterDialog", "FilterDialog: save filter.")
+            Log.d("FilterDialog", "FilterDialog: ${dialog_filter_dates_picker.selectedDates}")
+            if (dialog_filter_dates_picker.selectedDates.isNotEmpty()) {
+                interaction.onSaveBtnListener(dialog_filter_dates_picker.selectedDates)
+                dismiss()
+            }else
+                Toast.makeText(context, "Select dates", Toast.LENGTH_SHORT).show()
         }
-        saveBtn.setOnClickListener {
-            interaction.onSaveBtnListener()
+
+        findViewById<MaterialButton>(R.id.dialog_filter_dates_clear_all_btn).setOnClickListener {
+            Log.d("FilterDialog", "FilterDialog: clear filter.")
+            dialog_filter_dates_picker.clearSelectedDates()
+            interaction.onClearBtnListener()
+            Log.d("FilterDialog", "FilterDialog: ${dialog_filter_dates_picker.selectedDates}")
         }
     }
 
     interface DatePickerDialogInteraction{
         fun onCloseBtnListener()
         fun onClearBtnListener()
-        fun onSaveBtnListener()
+        fun onSaveBtnListener(dates: List<Date>)
     }
 }
