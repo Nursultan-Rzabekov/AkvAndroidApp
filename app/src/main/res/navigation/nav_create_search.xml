@@ -79,7 +79,6 @@
 
         </activity>
 
-
         <activity
             android:id="@+id/searchFilterFragment"
             android:name="com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment"

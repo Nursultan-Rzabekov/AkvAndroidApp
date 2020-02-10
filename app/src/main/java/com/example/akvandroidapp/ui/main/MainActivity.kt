@@ -16,8 +16,14 @@ import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
 import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
 import com.example.akvandroidapp.ui.main.messages.BaseMessagesFragment
+import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment
+import com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.*
+import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
+import com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment
+import com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment
 import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
@@ -80,6 +86,30 @@ class MainActivity : BaseActivity(),
 
         is ApartmentsFragment -> {
             navController.navigate(R.id.action_apartmentsFragment_to_home)
+        }
+
+        is AccountUserProfileFragment -> {
+            navController.navigate(R.id.action_profileAccountUserProfileFragment_to_home)
+        }
+
+        is AccountUserEditProfileFragment -> {
+            navController.navigate(R.id.action_profileAccountUserEditProfileFragment_to_home)
+        }
+
+        is AboutProfileFragment -> {
+            navController.navigate(R.id.action_profileAboutProfileFragment_to_home)
+        }
+
+        is SettingsProfileFragment -> {
+            navController.navigate(R.id.action_profileSettingsProfileFragment_to_home)
+        }
+
+        is SettingsRegionProfileFragment -> {
+            navController.navigate(R.id.action_profileSettingsRegionProfileFragment_to_home)
+        }
+
+        is SettingsGeolocationProfileFragment -> {
+            navController.navigate(R.id.action_profileSettingsGeolocationProfileFragment_to_home)
         }
 
         else -> {

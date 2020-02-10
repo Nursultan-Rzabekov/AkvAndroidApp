@@ -50,12 +50,33 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+        <action
+            android:id="@+id/action_profileAccountUserProfileFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
     <fragment android:id="@+id/profileAccountUserEditProfileFragment"
         android:name="com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_profile_account_edit_layout">
+
+
+        <action
+            android:id="@+id/action_profileAccountUserEditProfileFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
 
     </fragment>
@@ -65,6 +86,17 @@
         android:name="com.example.akvandroidapp.ui.main.profile.AboutProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_about_us">
+
+
+        <action
+            android:id="@+id/action_profileAboutProfileFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -90,6 +122,17 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+
+        <action
+            android:id="@+id/action_profileSettingsProfileFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -98,6 +141,17 @@
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_region_layout">
 
+        <action
+            android:id="@+id/action_profileSettingsRegionProfileFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
+
+
     </fragment>
 
 
@@ -105,6 +159,16 @@
         android:name="com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_geolocation_layout">
+
+        <action
+            android:id="@+id/action_profileSettingsGeolocationProfileFragment_to_home"
+            app:destination="@id/profileFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_profile"
+            app:popUpToInclusive="true" />
 
     </fragment>
 

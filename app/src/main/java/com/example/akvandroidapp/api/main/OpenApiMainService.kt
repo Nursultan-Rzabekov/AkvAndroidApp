@@ -25,7 +25,7 @@ interface OpenApiMainService {
         @Part("price") price: RequestBody,
         @Part("beds") beds: RequestBody,
         @Part("guests") guests: RequestBody,
-        @Part("rules") rules: RequestBody,
+        @Field("rules") rules: RequestBody,
         @Part("near_buildings") near_buildings: RequestBody,
         @Part("house_type_id") house_type_id: RequestBody,
         @Part("blocked_dates") blocked_dates: RequestBody,
@@ -157,8 +157,7 @@ interface OpenApiMainService {
     fun updateZhilyeInfo(
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int,
-        @PartMap  options : HashMap<String, RequestBody>,
-        @QueryMap lists: HashMap<String, List<String>>
+        @PartMap  options : HashMap<String, RequestBody>
     ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
 
     @PATCH("reservations/{house_id}/cancel/")

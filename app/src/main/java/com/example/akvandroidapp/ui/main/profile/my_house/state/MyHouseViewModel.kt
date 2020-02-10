@@ -63,18 +63,16 @@ constructor(
             }
 
             is MyHouseStateStateEvent.MyHouseUpdateEvent -> {
-                var facilities: MutableList<String>? = null
+                var facilities: MutableList<RequestBody>? = null
                 if (stateEvent.facilitiesList != null){
                     facilities = mutableListOf()
                     stateEvent.facilitiesList?.forEach {
                         Log.e("ASASDASD", "$it")
                         facilities.add(
-                            //RequestBody.create(MediaType.parse("text/plain"), it)
-                            it
+                            RequestBody.create(MediaType.parse("text/plain"), it)
                         )
                     }
                 }
-                Log.e("ASASDASD", "$facilities")
 
                 var rules: MutableList<RequestBody>? = null
                 if (stateEvent.rulesList != null){
@@ -105,6 +103,9 @@ constructor(
                         )
                     }
                 }
+
+                Log.e("ASASDASD rrr", "${stateEvent.rulesList}")
+                Log.e("ASASDASD rrrr", "${rules}")
 
                 return sessionManager.cachedToken.value?.let { authToken ->
                     profileRepository.updateZhilyeInfo(

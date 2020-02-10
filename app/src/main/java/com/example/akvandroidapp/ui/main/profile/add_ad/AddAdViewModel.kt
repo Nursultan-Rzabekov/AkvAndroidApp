@@ -49,15 +49,14 @@ constructor(
                     val nearBuildings = RequestBody.create(MediaType.parse("text/plain"), stateEvent.nearbyList[0])
                     val blockedDates = RequestBody.create(MediaType.parse("text/plain"), "[{\"check_in\": \"2019-12-20\", \"check_out\": \"2019-12-31\"}, {\"check_in\": \"2019-12-10\", \"check_out\": \"2012-12-19\"}]")
 
-
-//                    val blockedDatesV2: MutableList<RequestBody>?
-//                    blockedDatesV2 = mutableListOf()
-//                    stateEvent._availableList.forEach {
-//                        Log.e("ASASDASD", "ASASDASD $it")
-//                        blockedDatesV2.add(
-//                            RequestBody.create(MediaType.parse("text/plain"), it)
-//                        )
-//                    }
+                    val rulesList: MutableList<RequestBody>?
+                    rulesList = mutableListOf()
+                    stateEvent.rulesList.forEach {
+                        Log.e("ASASDASD", "ASASDASD $it")
+                        rulesList.add(
+                            RequestBody.create(MediaType.parse("text/plain"), it)
+                        )
+                    }
 
                     val houseTypeId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapTypeHouse.getValue(stateEvent._addAdType).toString()))
                     val accommodations = RequestBody.create(MediaType.parse("text/plain"), stateEvent.facilitiesList[0])

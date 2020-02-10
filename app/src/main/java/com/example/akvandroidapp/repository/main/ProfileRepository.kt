@@ -48,7 +48,7 @@ constructor(
         price:RequestBody,
         beds:RequestBody,
         guests:RequestBody,
-        rules:RequestBody,
+        rules: RequestBody,
         near_buildings:RequestBody,
         blocked_dates:RequestBody,
         photos: ArrayList<MultipartBody.Part>?,
@@ -89,6 +89,12 @@ constructor(
 
             override fun createCall(): LiveData<GenericApiResponse<BlogCreateUpdateResponse>> {
                 Log.d(TAG,"PostCreateHouse 3333333 + ${name}")
+
+//                val rulesArray = arrayListOf<String>()
+//                rules.forEach {
+//                    rulesArray.add(it)
+//                }
+
                 return openApiMainService.createBlog(
                     "Token ${authToken.token!!}",
                     name = name,
@@ -654,7 +660,7 @@ constructor(
         price: RequestBody?,
         photoList: List<RequestBody>?,
         nearsList: List<RequestBody>?,
-        facilitiesList: List<String>?,
+        facilitiesList: List<RequestBody>?,
         rulesList: List<RequestBody>?,
         datesList: List<RequestBody>?
     ): LiveData<DataState<MyHouseViewState>>{
@@ -687,7 +693,6 @@ constructor(
             override fun createCall(): LiveData<GenericApiResponse<VerifyUpdateResponse>> {
 
                 val data: HashMap<String, RequestBody> = HashMap()
-                val lists: HashMap<String, List<String>> = HashMap()
 
                 if (title != null)
                     data["name"] = title
@@ -698,13 +703,29 @@ constructor(
                 if (price != null)
                     data["price"] = price
 
-                lists["rules[]"] = facilitiesList!!
+
+                if(rulesList !=null){
+                    for (i in rulesList.indices){
+                        data["rule$i"] = rulesList[i]
+                    }
+                }
+
+                if(facilitiesList !=null){
+                    for (i in facilitiesList.indices){
+                        data["accommodations"] = facilitiesList[i]
+                    }
+                }
+
+//                if(nearsList !=null){
+//                    for (i in nearsList.indices){
+//                        data["near_buildings"] = nearsList[i]
+//                    }
+//                }
 
                 return openApiMainService.updateZhilyeInfo(
                     "Token ${authToken.token!!}",
                     house_id = houseId,
-                    options = data,
-                    lists = lists
+                    options = data
                 )
             }
 

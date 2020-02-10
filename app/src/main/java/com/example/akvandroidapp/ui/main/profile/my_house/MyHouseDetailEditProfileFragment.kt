@@ -121,6 +121,8 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
             fragment_my_adds_change_address_et.setText(it.address.toString())
             fragment_my_adds_change_photos_tv.text = ("${it.photosList.size}/15")
 
+
+
             house = HouseUpdateData(
                 id = it.id,
                 title = it.title,
@@ -255,9 +257,9 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
                         fragment_my_adds_change_address_et.text.toString().trim()
                     else null,
                     photoList = null,
-                    rulesList = null,
-                    facilitiesList = listOf("Фен"),
-                    nearsList = null,
+                    rulesList = house?.houseRulesList,
+                    facilitiesList = house?.facilitiesList,
+                    nearsList = house?.nearByList,
                     datesList = null
                 )
             )
