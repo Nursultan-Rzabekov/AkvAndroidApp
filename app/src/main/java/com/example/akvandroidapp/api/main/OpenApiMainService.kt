@@ -119,6 +119,7 @@ interface OpenApiMainService {
 
     @GET("houses/{house_id}")
     fun getZhilyeWithHouseId(
+        @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<ZhilyeResponse>>
 

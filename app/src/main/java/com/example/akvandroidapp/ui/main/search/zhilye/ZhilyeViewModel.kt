@@ -39,6 +39,7 @@ constructor(
             is ZhilyeStateEvent.BlogZhilyeEvent -> {
                 return sessionManager.cachedToken.value?.let { authToken ->
                     searchRepository.getZhilyeWithHouseId(
+                        authToken = authToken,
                         houseId = getHouseId()
                     )
                 }?: AbsentLiveData.create()

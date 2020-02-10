@@ -57,9 +57,12 @@ constructor(
             }
 
             is MyHouseStateStateEvent.MyHouseZhilyeEvent -> {
-                return profileRepository.getZhilyeWithHouseId(
-                    houseId = getZhilyeHouseId()
-                )
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    profileRepository.getZhilyeWithHouseId(
+                        authToken,
+                        houseId = getZhilyeHouseId()
+                    )
+                }?: AbsentLiveData.create()
             }
 
             is MyHouseStateStateEvent.MyHouseUpdateEvent -> {
