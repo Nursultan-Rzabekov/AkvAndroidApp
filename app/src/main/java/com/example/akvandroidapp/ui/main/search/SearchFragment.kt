@@ -339,6 +339,7 @@ class SearchFragment :
                     Log.d(TAG, "FilterDialog: save filter.")
                     viewModel.setAdultCount(adultsCount)
                     viewModel.setChildrenCount(childrenCount)
+                    onBlogSearchOrFilter()
                     dismiss()
                 }
 
@@ -417,6 +418,7 @@ class SearchFragment :
                     if (dialog_filter_dates_picker.selectedDates.isNotEmpty()){
                         viewModel.setStartDateFilter(dialog_filter_dates_picker.selectedDates.first())
                         viewModel.setEndDateFilter(dialog_filter_dates_picker.selectedDates.last())
+                        onBlogSearchOrFilter()
                     }else{
                         viewModel.clearDateFilter()
                     }
