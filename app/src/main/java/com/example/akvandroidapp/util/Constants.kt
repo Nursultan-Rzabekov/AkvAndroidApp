@@ -37,7 +37,7 @@ class Constants {
         const val PERMISSIONS_REQUEST_READ_STORAGE: Int = 301
         const val CROP_IMAGE_INTENT_CODE: Int = 401
 
-        const val MAPKIT_API_KEY = "3a01a087-b63c-4c6a-bb70-8c629fb69d3d"
+        const val MAPKIT_API_KEY = "73777cb6-74ce-462b-874c-21db3b1bc84f"
 
         const val FILTER_TYPE1 = "Нет"
         const val FILTER_TYPE2 = "rating"

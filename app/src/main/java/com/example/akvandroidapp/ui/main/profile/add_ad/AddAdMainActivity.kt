@@ -89,7 +89,6 @@ class AddAdMainActivity : BaseLocationActivity(), NavController.OnDestinationCha
         })
     }
 
-
     fun navMainActivity(){
         Log.d(TAG, "navMainActivity: called.")
         val intent = Intent(this, MainActivity::class.java)

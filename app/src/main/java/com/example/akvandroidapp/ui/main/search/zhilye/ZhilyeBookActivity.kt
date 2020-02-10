@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.search.zhilye
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.akvandroidapp.entity.ZhilyeDetail
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
+import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookStateEvent
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
@@ -158,7 +160,7 @@ class ZhilyeBookActivity : BaseActivity() {
 
     private fun onBookRequestDone(){
         Toast.makeText(this, "Reservation done", Toast.LENGTH_SHORT).show()
-        finish()
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
     }
-
 }

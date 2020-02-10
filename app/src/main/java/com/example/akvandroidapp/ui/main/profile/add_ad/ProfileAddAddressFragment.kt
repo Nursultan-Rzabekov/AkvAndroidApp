@@ -1,13 +1,7 @@
 package com.example.akvandroidapp.ui.main.profile.add_ad
 
 
-import android.Manifest
-import android.app.Service
 import android.content.Intent
-import android.content.pm.ResolveInfo
-import android.location.LocationManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
@@ -20,15 +14,10 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
-import com.afollestad.assent.Permission
-import com.afollestad.assent.runWithPermissions
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
-import com.example.akvandroidapp.ui.findUnAskedPermissions
-import com.example.akvandroidapp.ui.getLastLocation
 import com.example.akvandroidapp.ui.main.profile.add_ad.adapter.CityAutoCompleteAdapter
 import com.example.akvandroidapp.ui.main.profile.add_ad.adapter.RegionAutoCompleteAdapter
-import com.example.akvandroidapp.ui.showSettingsAlert
 import com.example.akvandroidapp.util.CityList
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ReqionList
