@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -181,6 +182,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     else ""
 
                 isFavouriteChecked = viewState.zhilyeFields.zhilyeDetail.is_favourite
+                Log.d(TAGV, "ZhilyeActivity isFavourite: $isFavouriteChecked")
 
                 changeFavouriteMenuBtnDrawable(
                     toolbar_zhilye_header.menu?.findItem(R.id.favourite)

@@ -454,6 +454,7 @@ constructor(
     }
 
     fun getZhilyeWithHouseId(
+        authToken: AuthToken,
         houseId: Int
     ): LiveData<DataState<MyHouseViewState>> {
 
@@ -627,7 +628,9 @@ constructor(
             }
 
             override fun createCall(): LiveData<GenericApiResponse<ZhilyeResponse>> {
-                return openApiMainService.getZhilyeWithHouseId(house_id = houseId)
+                return openApiMainService.getZhilyeWithHouseId(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId)
             }
 
             override fun loadFromCache(): LiveData<MyHouseViewState> {
