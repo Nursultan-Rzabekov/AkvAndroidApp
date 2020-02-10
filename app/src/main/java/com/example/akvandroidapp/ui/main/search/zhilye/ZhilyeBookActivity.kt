@@ -53,6 +53,7 @@ class ZhilyeBookActivity : BaseActivity() {
         val adults = bundle?.getInt("adultsCounter",0)?: 0
         val children = bundle?.getInt("children",0)?: 0
         val bundleDates = bundle?.getParcelableArrayList("datesList") ?: listOf<DateUtils.DateBundle>()
+        val photo = bundle?.getString("zhilyePhoto", null)
         Log.d("ZhilyeBookActivity", "selected dates: $bundleDates")
 
         val dates = mutableListOf<Date>()
@@ -61,6 +62,12 @@ class ZhilyeBookActivity : BaseActivity() {
 
         fragment_zhilye_book_title_tv.text = zhilyeDetail?.name
         fragment_zhilye_book_address_tv.text = zhilyeDetail?.address
+
+        if (photo != null)
+            Glide.with(this)
+                .load(photo)
+                .error(R.drawable.test_image_back)
+                .into(fragment_zhilye_book_iv)
 
         fragment_zhilye_book_guests_tv.text = (adults+children).toString()
         fragment_zhilye_book_arrival_tv.text = DateUtils.convertDateToStringForBooking(dates.first())

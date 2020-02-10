@@ -67,6 +67,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     private var houseRules: List<ZhilyeDetailProperties> = listOf()
     private var selectedDates: List<Date> = listOf()
     private lateinit var zhilyeDetail: ZhilyeDetail
+    private var zhilyeOnePhoto: String? = null
 
     private var userEmail:String? = null
     private var userName:String? = null
@@ -174,6 +175,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     ("${viewState.zhilyeFields.zhilyeDetail.price}kzt/ночь")
 
                 zhilyeDetail = viewState.zhilyeFields.zhilyeDetail
+                zhilyeOnePhoto =
+                    if (viewState.zhilyeFields.zhilyeDetailPhotos.isNotEmpty())
+                        viewState.zhilyeFields.zhilyeDetailPhotos.first().image
+                    else ""
 
                 isFavouriteChecked = viewState.zhilyeFields.zhilyeDetail.is_favourite
 
@@ -484,7 +489,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             "house_id" to houseId,
             "adultsCounter" to adultsCount,
             "children" to childrenCount,
-            "zhilyeDetail" to zhilyeDetail
+            "zhilyeDetail" to zhilyeDetail,
+            "zhilyePhoto" to zhilyeOnePhoto
         )
         bundle.putParcelableArrayList("datesList", datesInLong)
         val intent = Intent(this, ZhilyeBookActivity::class.java)
