@@ -124,6 +124,8 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
                 addAdInfo._addAdNearByList,
                 addAdInfo._addAdRulesList,
                 addAdInfo._addAdAvailableList,
+                addAdInfo._addAdAddressLatitude,
+                addAdInfo._addAdAddressLongitude,
                 multipartBodyList
             )
         )

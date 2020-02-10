@@ -40,8 +40,8 @@ constructor(
                     val description = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdDescription)
                     val rooms = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdRoomsCount.toString())
                     val address = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddress)
-                    val longitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
-                    val latitude = RequestBody.create(MediaType.parse("text/plain"), 55.5.toString())
+                    val longitude = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddressLongitude.toString())
+                    val latitude = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdAddressLatitude.toString())
                     val price = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdPrice.toString())
                     val beds = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdBedsCount.toString())
                     val guests = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdGuestsCount.toString())
@@ -49,14 +49,14 @@ constructor(
                     val nearBuildings = RequestBody.create(MediaType.parse("text/plain"), stateEvent.nearbyList[0])
                     val blockedDates = RequestBody.create(MediaType.parse("text/plain"), "[{\"check_in\": \"2019-12-20\", \"check_out\": \"2019-12-31\"}, {\"check_in\": \"2019-12-10\", \"check_out\": \"2012-12-19\"}]")
 
-                    val rulesList: MutableList<RequestBody>?
-                    rulesList = mutableListOf()
-                    stateEvent.rulesList.forEach {
-                        Log.e("ASASDASD", "ASASDASD $it")
-                        rulesList.add(
-                            RequestBody.create(MediaType.parse("text/plain"), it)
-                        )
-                    }
+//                    val rulesList: MutableList<RequestBody>?
+//                    rulesList = mutableListOf()
+//                    stateEvent.rulesList.forEach {
+//                        Log.e("ASASDASD", "ASASDASD $it")
+//                        rulesList.add(
+//                            RequestBody.create(MediaType.parse("text/plain"), it)
+//                        )
+//                    }
 
                     val houseTypeId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapTypeHouse.getValue(stateEvent._addAdType).toString()))
                     val accommodations = RequestBody.create(MediaType.parse("text/plain"), stateEvent.facilitiesList[0])

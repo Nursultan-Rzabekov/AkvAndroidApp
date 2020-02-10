@@ -24,6 +24,7 @@ import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutDialogsActivity
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
+import com.example.akvandroidapp.ui.main.profile.add_ad.MapSetPlacemarkActivity
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportMainActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportProfileFragment
@@ -75,6 +76,10 @@ abstract class ActivityBuildersModule {
     @MainScope
     @ContributesAndroidInjector
     abstract fun contributeMapActivity(): MapActivity
+
+    @AddAddScope
+    @ContributesAndroidInjector
+    abstract fun contributeMapSetPlacemarkActivity(): MapSetPlacemarkActivity
 
     @MainScope
     @ContributesAndroidInjector

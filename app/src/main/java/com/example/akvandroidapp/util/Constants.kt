@@ -9,7 +9,14 @@ class Constants {
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
         const val AKV_TAX = 5
 
+        const val SUCCESS = "Success"
+
         const val DEFAULT_YEAR_GAP = -12
+
+        const val ALL_PERMISSIONS_RESULT = 101
+        const val MIN_DISTANCE_CHANGE_FOR_UPDATES: Long = 10
+        const val MIN_TIME_BW_UPDATES = 1000 * 60 * 1.toLong()
+
 
         const val NETWORK_TIMEOUT = 60000L
         const val TESTING_NETWORK_DELAY = 0L // fake network delay for testing
@@ -30,7 +37,7 @@ class Constants {
         const val PERMISSIONS_REQUEST_READ_STORAGE: Int = 301
         const val CROP_IMAGE_INTENT_CODE: Int = 401
 
-        const val MAPKIT_API_KEY = "73777cb6-74ce-462b-874c-21db3b1bc84f"
+        const val MAPKIT_API_KEY = "3a01a087-b63c-4c6a-bb70-8c629fb69d3d"
 
         const val FILTER_TYPE1 = "Нет"
         const val FILTER_TYPE2 = "rating"

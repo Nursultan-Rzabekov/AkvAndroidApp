@@ -31,7 +31,7 @@ import javax.inject.Inject
 class SearchFilterFragment : BaseActivity() {
 
     private var price_left:Int = 1
-    private var price_right:Int = 30000
+    private var price_right:Int = Int.MAX_VALUE
     private var room_left:Int = 1
     private var room_right:Int = 15
     private var beds_left:Int = 1

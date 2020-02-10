@@ -77,23 +77,21 @@ constructor(
                 Log.d(TAG,"PostCreateHouse 444444 + ${response.body.name}")
 
                 withContext(Dispatchers.Main) {
-                    // finish with success response
+
                     onCompleteJob(
                         DataState.data(
                             null,
                             Response(response.body.id.toString(), ResponseType.Dialog())
                         )
                     )
+
+                    sessionManager.setSuccess(Constants.SUCCESS)
+
                 }
             }
 
             override fun createCall(): LiveData<GenericApiResponse<BlogCreateUpdateResponse>> {
                 Log.d(TAG,"PostCreateHouse 3333333 + ${name}")
-
-//                val rulesArray = arrayListOf<String>()
-//                rules.forEach {
-//                    rulesArray.add(it)
-//                }
 
                 return openApiMainService.createBlog(
                     "Token ${authToken.token!!}",

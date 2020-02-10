@@ -25,7 +25,7 @@ interface OpenApiMainService {
         @Part("price") price: RequestBody,
         @Part("beds") beds: RequestBody,
         @Part("guests") guests: RequestBody,
-        @Field("rules") rules: RequestBody,
+        @Part("rules") rules: RequestBody,
         @Part("near_buildings") near_buildings: RequestBody,
         @Part("house_type_id") house_type_id: RequestBody,
         @Part("blocked_dates") blocked_dates: RequestBody,

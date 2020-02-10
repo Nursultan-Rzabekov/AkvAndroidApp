@@ -16,6 +16,8 @@ data class AddAdInfo(
     var _addAdAddressRegionId: Int = -1,
     var _addAdAddressCityId: Int = -1,
     var _addAdAddressCountry: Int = -1,
+    var _addAdAddressLatitude: Double = 0.0,
+    var _addAdAddressLongitude: Double = 0.0,
     var _addAdDescription: String = "",
     var _addAdTitle: String = "",
     var _addAdPrice: Int = 0,

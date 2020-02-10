@@ -25,6 +25,8 @@ sealed class AddAdStateEvent {
         val nearbyList: List<String>,
         val rulesList: List<String>,
         val _availableList: List<Date>,
+        var _addAdAddressLatitude: Double,
+        var _addAdAddressLongitude: Double,
         val image: ArrayList<MultipartBody.Part>? = null
     ): AddAdStateEvent()
 

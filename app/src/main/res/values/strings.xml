@@ -10,6 +10,17 @@
         and check your spam folder.
     </string>
 
+
+    <string name="custom_dialog_text_location">Выберите ваше \n местоположение</string>
+    <string name="not_supported">Данная функция не поддерживается</string>
+    <string name="light">Светлый</string>
+    <string name="gps_not_active">Передача данных о местоположении не активна</string>
+    <string name="gps_question">Включить передачу геоданных?</string>
+    <string name="gps_impossible">Передача данных через GPS невозможна</string>
+    <string name="gps_try_network">Попробуйте включить передачу геоданных через мобильные сети и Wi-Fi</string>
+    <string name="gps_question_click">Вы действительно хотите открыть настройки местоположения?</string>
+    <string name="permission_text">Данное разрешение требуется для корректной работы</string>
+
     <string name="action_delete">Delete</string>
     <string name="action_copy">Copy</string>
     <string name="copied_message">Message copied!</string>

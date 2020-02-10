@@ -1,29 +1,37 @@
 package com.example.akvandroidapp.ui.main.profile.add_ad
 
 
+import android.Manifest
+import android.app.Service
+import android.content.Intent
+import android.content.pm.ResolveInfo
+import android.location.LocationManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
+import com.afollestad.assent.Permission
+import com.afollestad.assent.runWithPermissions
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.findUnAskedPermissions
+import com.example.akvandroidapp.ui.getLastLocation
 import com.example.akvandroidapp.ui.main.profile.add_ad.adapter.CityAutoCompleteAdapter
 import com.example.akvandroidapp.ui.main.profile.add_ad.adapter.RegionAutoCompleteAdapter
+import com.example.akvandroidapp.ui.showSettingsAlert
 import com.example.akvandroidapp.util.CityList
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ReqionList
-import kotlinx.android.synthetic.main.activity_add_ad.*
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_address.*
 import javax.inject.Inject
 
@@ -47,14 +55,19 @@ class ProfileAddAddressFragment : BaseAddHouseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setToolbar()
         initiateContent()
         initDropDown()
 
+
         fragment_add_ad_address_next_btn.setOnClickListener {
             if (checkInputs())
                 navNextFragment()
+        }
+
+        fragment_add_ad_address_show_map_btn.setOnClickListener {
+            val intent = Intent(this@ProfileAddAddressFragment.context, MapSetPlacemarkActivity::class.java)
+            startActivity(intent)
         }
     }
 

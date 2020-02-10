@@ -2,6 +2,7 @@ package com.example.akvandroidapp.session
 
 import android.app.Application
 import android.content.Context
+import android.location.Location
 import com.yandex.mapkit.geometry.Point
 import android.net.ConnectivityManager
 import android.net.Uri
@@ -35,6 +36,13 @@ constructor(
 ) {
     private val TAG: String = "AppDebug"
     private val DEFAULT_TYPE = 0
+
+    //userLocation
+    private val _location = MutableLiveData<Location>()
+
+
+    //success
+    private val _success = MutableLiveData<String>()
 
     //Room
     private val hostMode = MutableLiveData<Boolean>()
@@ -119,6 +127,13 @@ constructor(
     val addAdInfo: LiveData<AddAdInfo>
         get() = _addAdInfo
 
+
+    val success: LiveData<String>
+        get() = _success
+
+    val location: LiveData<Location>
+        get() = _location
+
     val settingsInfo: LiveData<SettingsInfo>
         get() = _settingsInfo
 
@@ -134,6 +149,17 @@ constructor(
     // Room
     val isHostMode: LiveData<Boolean>
         get() = hostMode
+
+
+    fun filterLocation(location: Location) {
+        setLastLocation(location)
+    }
+
+    fun setLastLocation(location: Location) {
+        GlobalScope.launch(Main) {
+            _location.value = location
+        }
+    }
 
     fun login(newValue: AuthToken){
         setValue(newValue)
@@ -174,6 +200,13 @@ constructor(
             _filterUpdateData.value = filterUpdateData
         }
         Log.e("HOUSE_UPDATE_DATA", "${_houseUpdateData.value}")
+    }
+
+    fun setSuccess(success: String) {
+        GlobalScope.launch(Main) {
+            _success.value = success
+        }
+        Log.e("Success", "${_success.value}")
     }
 
     // House Update Data
@@ -370,6 +403,14 @@ constructor(
             _addAdInfo.value?._addAd30DaysDiscount = days30
         }
         Log.e("SESSION_ADD_PRICE", "${_addAdInfo.value?._addAd7DaysDiscount}")
+    }
+
+    fun setAddAdHouseLocation(latitude:Double,longitude:Double){
+        GlobalScope.launch(Main){
+            _addAdInfo.value?._addAdAddressLatitude = latitude
+            _addAdInfo.value?._addAdAddressLongitude = longitude
+        }
+        Log.e("SESSION_ADD_Locaiton", "${_addAdInfo.value?._addAdAddressLatitude}")
     }
 
     fun clearAddAdPriceAndDiscounts(){

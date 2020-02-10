@@ -145,6 +145,14 @@
 
         </activity>
 
+
+        <activity
+            android:name=".ui.main.profile.add_ad.MapSetPlacemarkActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
     </application>
