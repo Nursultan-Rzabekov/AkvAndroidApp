@@ -9,8 +9,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class ReservationRequestResponse(
 
-    @SerializedName("response")
+    @SerializedName("check_in")
     @Expose
-    var response: Boolean
+    var check_in: String
 
 ): Parcelable

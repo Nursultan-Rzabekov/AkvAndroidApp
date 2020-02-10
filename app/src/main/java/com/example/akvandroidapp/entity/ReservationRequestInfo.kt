@@ -9,6 +9,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "reservation_requests")
 data class ReservationRequestInfo(
-    @ColumnInfo(name = "response")
-    var response: Boolean
+    @ColumnInfo(name = "check_in")
+    var check_in: String
 ): Parcelable

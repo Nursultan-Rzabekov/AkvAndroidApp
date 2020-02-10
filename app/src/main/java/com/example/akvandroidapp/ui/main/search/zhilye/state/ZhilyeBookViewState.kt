@@ -10,7 +10,7 @@ class ZhilyeBookViewState (
     var reservationRequestField: ReservationRequestField = ReservationRequestField()
 ){
     data class ReservationRequestField(
-        var response: ReservationRequestInfo = ReservationRequestInfo(false)
+        var response: ReservationRequestInfo = ReservationRequestInfo("")
     )
 }
 

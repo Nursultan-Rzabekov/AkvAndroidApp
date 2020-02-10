@@ -355,7 +355,7 @@ fun DetailsViewModel.handleIncomingBlogListData(viewState: DetailsViewState){
 
 fun ZhilyeBookViewModel.handleIncomingRequest(viewState: ZhilyeBookViewState){
     Log.d(TAG, "ZhilyeBookViewModel, DataState: ${viewState}")
-    setResponse(viewState.reservationRequestField.response.response)
+    setResponse(viewState.reservationRequestField.response.check_in)
 }
 
 fun MyHouseViewModel.handleIncomingBlogListData(viewState: MyHouseViewState){

@@ -11,12 +11,16 @@ import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.ZhilyeDetail
 import com.example.akvandroidapp.ui.BaseActivity
+import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookStateEvent
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
+import handleIncomingRequest
 import kotlinx.android.synthetic.main.fragment_zhilye_book.*
 import kotlinx.android.synthetic.main.fragment_zhilye_book_layout.*
 import java.lang.Math.round
@@ -31,6 +35,7 @@ class ZhilyeBookActivity : BaseActivity() {
     lateinit var providerFactory: ViewModelProviderFactory
     lateinit var viewModel: ZhilyeBookViewModel
 
+    private var validateDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +73,8 @@ class ZhilyeBookActivity : BaseActivity() {
         (zhilyeDetail?.price?: 0) * dates.size * Constants.AKV_TAX / 100 + ((zhilyeDetail?.price?: 0) * dates.size)
         }kzt")
 
+        validateDate = DateUtils.convertDateToString(dates.first())
+
         setToolbar()
         subscribeObservers()
 
@@ -81,17 +88,33 @@ class ZhilyeBookActivity : BaseActivity() {
         viewModel.dataState.observe(this, androidx.lifecycle.Observer{ dataState ->
             if(dataState != null) {
                 stateChangeListener.onDataStateChange(dataState)
+                handleResponse(dataState)
             }
         })
 
         viewModel.viewState.observe(this, androidx.lifecycle.Observer{ viewState ->
             if(viewState != null){
                 val res = viewState.reservationRequestField.response
-                if (res.response)
-                    finish()
-                Toast.makeText(applicationContext, "$res", Toast.LENGTH_SHORT).show()
+                if (res.check_in == validateDate) {
+                    onBookRequestDone()
+                }
             }
         })
+    }
+
+    private fun handleResponse(dataState: DataState<ZhilyeBookViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.handleIncomingRequest(it)
+                }
+            }
+        }
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+
+            }
+        }
     }
 
     override fun expandAppBar() {
@@ -117,6 +140,11 @@ class ZhilyeBookActivity : BaseActivity() {
             guests = guests,
             houseId = houseId
         ))
+    }
+
+    private fun onBookRequestDone(){
+        Toast.makeText(this, "Reservation done", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
 }

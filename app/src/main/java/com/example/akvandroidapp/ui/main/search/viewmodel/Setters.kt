@@ -133,9 +133,9 @@ fun MyHouseViewModel.setResponseState(state: Boolean){
     setViewState(update)
 }
 
-fun ZhilyeBookViewModel.setResponse(response: Boolean) {
+fun ZhilyeBookViewModel.setResponse(response: String) {
     val update = getCurrentViewStateOrNew()
-    update.reservationRequestField.response
+    update.reservationRequestField.response.check_in = response
     setViewState(update)
 }
 
