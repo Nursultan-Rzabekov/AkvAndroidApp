@@ -403,10 +403,10 @@ constructor(
             }
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<ReservationRequestResponse>) {
-                Log.d("response reservation", "response: ${response.body.response}")
+                Log.d("response reservation", "response: ${response.body.check_in}")
 
                 val responseInfo = ReservationRequestInfo(
-                    response = response.body.response
+                    check_in = response.body.check_in
                 )
 
                 withContext(Dispatchers.Main){
@@ -426,7 +426,7 @@ constructor(
                 Log.d("Reservation request cal", "send house_id $house_id")
                 return openApiMainService.sendReservationRequest(
                     "Token ${authToken.token!!}",
-                    CreateReservationBody(
+                    body = CreateReservationBody(
                         check_in = check_in,
                         check_out = check_out,
                         guests = guests,

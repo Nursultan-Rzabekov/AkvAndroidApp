@@ -195,9 +195,9 @@ fun DetailsViewModel.getTargetQuery(): Int {
     }
 }
 
-fun ZhilyeBookViewModel.getResponse(): Boolean{
+fun ZhilyeBookViewModel.getResponse(): String{
     getCurrentViewStateOrNew().let {
-        return it.reservationRequestField.response.response
+        return it.reservationRequestField.response.check_in
     }
 }
 
