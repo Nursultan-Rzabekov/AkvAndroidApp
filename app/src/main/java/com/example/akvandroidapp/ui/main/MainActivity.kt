@@ -15,6 +15,7 @@ import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
 import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
+import com.example.akvandroidapp.ui.main.home.PayBoxPayWebViewFragment
 import com.example.akvandroidapp.ui.main.messages.BaseMessagesFragment
 import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
@@ -110,6 +111,10 @@ class MainActivity : BaseActivity(),
 
         is SettingsGeolocationProfileFragment -> {
             navController.navigate(R.id.action_profileSettingsGeolocationProfileFragment_to_home)
+        }
+
+        is PayBoxPayWebViewFragment -> {
+            navController.navigate(R.id.action_payBoxPayWebViewFragment_to_home)
         }
 
         else -> {

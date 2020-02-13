@@ -23,13 +23,10 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
-import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
-import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
-import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeStateEvent
-import com.example.akvandroidapp.util.Constants
+
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
@@ -339,6 +336,7 @@ class SearchFragment :
                     Log.d(TAG, "FilterDialog: save filter.")
                     viewModel.setAdultCount(adultsCount)
                     viewModel.setChildrenCount(childrenCount)
+                    onBlogSearchOrFilter()
                     dismiss()
                 }
 
@@ -417,6 +415,7 @@ class SearchFragment :
                     if (dialog_filter_dates_picker.selectedDates.isNotEmpty()){
                         viewModel.setStartDateFilter(dialog_filter_dates_picker.selectedDates.first())
                         viewModel.setEndDateFilter(dialog_filter_dates_picker.selectedDates.last())
+                        onBlogSearchOrFilter()
                     }else{
                         viewModel.clearDateFilter()
                     }

@@ -205,6 +205,19 @@ fun FavoriteViewModel.setDeleteState(delete: Boolean){
     setViewState(update)
 }
 
+fun HomeViewModel.setCancelState(cancel: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.cancelReservationField.isCancelled = cancel
+    setViewState(update)
+}
+
+fun HomeViewModel.setPayState(pay: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.payReservationField.isPayed = pay
+    setViewState(update)
+}
+
+
 fun MessagesViewModel.setBlogListData(blogList: List<UserChatMessages>){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.blogList = blogList

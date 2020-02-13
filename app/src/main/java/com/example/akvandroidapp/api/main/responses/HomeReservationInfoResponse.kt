@@ -35,7 +35,7 @@ class HomeReservationInfoResponse(
 
     @SerializedName("accepted_house")
     @Expose
-    var accepted_house: Boolean,
+    var accepted_house: Boolean? = null,
 
     @SerializedName("user")
     @Expose

@@ -20,14 +20,12 @@ import com.example.akvandroidapp.di.support.SupportScope
 import com.example.akvandroidapp.di.support.SupportViewModelModule
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.MainActivity
-import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutDialogsActivity
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.MapSetPlacemarkActivity
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportMainActivity
-import com.example.akvandroidapp.ui.main.profile.support.SupportProfileFragment
 import com.example.akvandroidapp.ui.main.search.MapActivity
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
@@ -113,9 +111,9 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeZhilyeRulesOfHouseActivity(): ZhilyeRulesOfHouseActivity
 
-    @MainScope
-    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
-    abstract fun contributeMessagesDetailActivity(): MessagesDetailActivity
+//    @MainScope
+//    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
+//    abstract fun contributeMessagesDetailActivity(): MessagesDetailActivity
 
     @MainScope
     @ContributesAndroidInjector()

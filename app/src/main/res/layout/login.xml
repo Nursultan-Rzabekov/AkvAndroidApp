@@ -29,21 +29,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dim_36dp"
-        app:hintEnabled="false"
-        app:boxStrokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonenumber_et"
-            style="@style/BasicEditText"
             android:layout_width="match_parent"
+            android:inputType="phone"
+            style="@style/BasicEditText"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:hint="@string/phone_number_email_enter"
-            android:textSize="@dimen/text_input1"
-            android:typeface="normal" />
+            android:fontFamily="@font/montserrat" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

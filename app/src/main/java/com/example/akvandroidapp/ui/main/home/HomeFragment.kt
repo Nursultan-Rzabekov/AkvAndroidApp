@@ -4,6 +4,7 @@ package com.example.akvandroidapp.ui.main.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -11,21 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.home.state.HomeStateEvent
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
-import com.example.akvandroidapp.ui.main.search.viewmodel.getCount
-import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
+import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import com.yandex.mapkit.MapKitFactory
 import handleIncomingReservationListData
-import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.android.synthetic.main.fragment_explore_active.*
 import kotlinx.android.synthetic.main.fragment_saved_booking.*
 import loadFirstPage
 import nextPage
@@ -36,8 +34,6 @@ class HomeFragment : BaseHomeFragment(),
     HomeListAdapter.Interaction, SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var recyclerAdapter: HomeListAdapter
-
-    //
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -54,7 +50,6 @@ class HomeFragment : BaseHomeFragment(),
         super.onViewCreated(view, savedInstanceState)
 
         swipe_home.setOnRefreshListener(this)
-
         initRecyclerView()
         subscribeObservers()
 
@@ -75,7 +70,17 @@ class HomeFragment : BaseHomeFragment(),
                 Log.e("HOME FRAGMENT size", "${viewState.homeReservationField.reservationList.size}")
 
                 val trips = viewModel.getCount()
-
+                if(viewState.cancelReservationField.isCancelled){
+                    Log.d(TAG, "reserv canceled: page: ${viewState.homeReservationField.page}, ${viewState.homeReservationField.reservationList.size}")
+                    onBlogSearchOrFilter()
+                    viewModel.setCancelState(false)
+                }
+                if(viewState.payReservationField.isPayed){
+                    Log.d(TAG, "reserv payed: page: ${viewState.payReservationField.reservationResponse}, ${viewState.homeReservationField.reservationList.size}")
+                    Toast.makeText(context,"Yessssssss",Toast.LENGTH_SHORT).show()
+                    onBlogSearchOrFilter()
+                    viewModel.setPayState(false)
+                }
                 if (trips == 0){
                     recyclerAdapter.submitList(
                         blogList = viewState.homeReservationField.reservationList,
@@ -100,8 +105,17 @@ class HomeFragment : BaseHomeFragment(),
                 }
             }
         })
-    }
 
+        sessionManager.payBox.observe(this,Observer{
+            if(it.id != 0 && !it.location.isNullOrBlank() && !it.payment_page_url.isNullOrBlank()){
+                val bundle = bundleOf(
+                    "url" to it.payment_page_url,
+                    "item" to it
+                )
+                findNavController().navigate(R.id.action_homeFragment_to_payBoxPayWebViewFragment, bundle)
+            }
+        })
+    }
 
     private fun initRecyclerView(){
         fragment_saved_booking_recycler_view.apply {
@@ -133,6 +147,14 @@ class HomeFragment : BaseHomeFragment(),
             "isCancelState" to true
         )
         findNavController().navigate(R.id.action_homeFragment_to_zhilyeFragment, bundle)
+    }
+
+    override fun onItemPay(position: Int, item: HomeReservation) {
+        viewModel.setStateEvent(HomeStateEvent.HomePayReservationEvent(item.id))
+    }
+
+    override fun onItemCancelReserv(position: Int, item: HomeReservation) {
+        viewModel.setStateEvent(HomeStateEvent.HomeCancelReservationEvent(item.id,"Не очень"))
     }
 
     override fun onBookMoreBtnPressed() {

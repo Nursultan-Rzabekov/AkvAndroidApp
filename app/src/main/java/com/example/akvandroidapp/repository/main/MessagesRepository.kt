@@ -167,6 +167,7 @@ constructor(
                             data = DetailsViewState(
                                 DetailsViewState.MyChatDetailsFields(
                                     blogList = blogPostList,
+                                    count = response.body.count,
                                     blogListImages = blogPostListImages,
                                     isQueryInProgress = false,
                                     isQueryExhausted = true
@@ -228,18 +229,18 @@ constructor(
 //                    created_at = response.body.created_at,
 //                    updated_at = response.body.updated_at
 //                )
-//
-//                withContext(Dispatchers.Main) {
-//                    onCompleteJob(
-//                        DataState.data(
-//                            data = DetailsViewState(
-//                                sendMessageFields = DetailsViewState.SendMessageFields(
-//                                    blogPost = sendMessageInfo
-//                                )
-//                            )
-//                        )
-//                    )
-//                }
+
+                withContext(Dispatchers.Main) {
+                    onCompleteJob(
+                        DataState.data(
+                            data = DetailsViewState(
+                                sendMessageFields = DetailsViewState.SendMessageFields(
+                                    sended = true
+                                )
+                            )
+                        )
+                    )
+                }
             }
 
             override fun createCall(): LiveData<GenericApiResponse<UserConversationsInfoSendResponse>> {
@@ -282,6 +283,7 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<HomeListResponse>) {
                 Log.d(TAG, "orders ${response.body.count}")
+                Log.d(TAG, "orders  qweqwe ${response.body.results}")
 
                 val ordersList: ArrayList<HomeReservation> = ArrayList()
                 for (order in response.body.results){
@@ -353,14 +355,14 @@ constructor(
     fun acceptReservation(
         authToken: AuthToken,
         reservation_id: Int
-    ): LiveData<DataState<RequestViewState>>{
-        return object:
+    ): LiveData<DataState<RequestViewState>> {
+        return object :
             NetworkBoundResource<VerifyUpdateResponse, List<BlogPost>, RequestViewState>(
                 sessionManager.isConnectedToTheInternet(),
                 true,
                 false,
                 true
-            ){
+            ) {
             override suspend fun createCacheRequestAndReturn() {
             }
 
@@ -402,6 +404,7 @@ constructor(
 
         }.asLiveData()
     }
+
 
     fun rejectReservation(
         authToken: AuthToken,

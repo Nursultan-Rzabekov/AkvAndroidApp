@@ -1,12 +1,10 @@
 package com.example.akvandroidapp.ui.main.messages.chatkit
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.os.Handler
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
@@ -16,10 +14,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.UserChatMessages
 import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.ModalBottomSheetChat
@@ -38,7 +37,6 @@ import com.example.akvandroidapp.util.Constants.Companion.TOTAL_MESSAGES_COUNT
 import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
-import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessageHolders
 import com.stfalcon.chatkit.messages.MessageInput
@@ -49,10 +47,10 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter.OnMessageLongClickListe
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
-import kotlinx.android.synthetic.main.activity_dialog.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.header_dialog.*
 import loadFirstPage
+import nextPage
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -64,6 +62,8 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
 
 class CustomLayoutMessagesActivity : BaseActivity(),
     OnMessageLongClickListener<mMessage?>,
@@ -110,7 +110,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
             }
 
         messagesList = findViewById(R.id.messagesList)
-
         val input = findViewById<MessageInput>(R.id.input)
         input.setInputListener(this)
         input.setAttachmentsListener(this)
@@ -159,68 +158,70 @@ class CustomLayoutMessagesActivity : BaseActivity(),
 
         viewModel.viewState.observe(this, androidx.lifecycle.Observer{ viewState ->
             if(viewState != null){
-                val userConversationResponse = arrayListOf<UserConversationsResponse>()
-                userConversationResponse.clear()
-
-//                viewState.sendMessageFields.blogPost?.let {
-//                    if(it.image!=null){
-//                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = it.image,
-//                            user = User(it.recipientId.toString(),"wqe",targetPic.toString(),true)
-//                        )
-//                    }
-//                    else{
-//                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body.toString(),
-//                            user = User(it.recipientId.toString(),"qwe",targetPic.toString(),true)
-//                        )
-//                    }
-//                }
-
-                if(viewState.myChatFields.blogList.isNotEmpty()){
-                    viewState.myChatFields.blogList.forEach {
-                        userConversationResponse.add(
-                            UserConversationsResponse(
-                                id = it.id,
-                                body = it.body.toString(),
-                                userName = it.userName.toString(),
-                                userId = it.userId,
-                                userEmail = it.userEmail,
-                                userPic = it.userPic,
-                                recipientName = it.recipientName.toString(),
-                                recipientId = it.recipientId,
-                                recipientEmail = it.recipientEmail,
-                                recipientPic = it.recipientPic,
-                                created_at = it.created_at.toString(),
-                                updated_at = it.updated_at.toString()
-                            )
-                        )
-                    }
+                Log.d(TAG, "send message 123 : page: ${viewState.sendMessageFields.messageBody}")
+                if(viewState.sendMessageFields.sended){
+                    Log.d(TAG, "send message lll : page: ${viewState.sendMessageFields.messageBody}")
+                    onBlogSearchOrFilter()
+                    viewState.sendMessageFields.sended = false
                 }
-
-                if(viewState.myChatFields.blogListImages.isNotEmpty()){
-                    viewState.myChatFields.blogListImages.forEach { imagesList ->
-                        userConversationResponse.forEach {
-                            if(it.id == imagesList?.message){
-                                it.images = imagesList.image
+                else{
+                    Log.d(TAG, "send message vvvvvqqq: page: ${viewState.myChatFields.count}")
+                    if(viewState.myChatFields.blogList.isNotEmpty()){
+                        val set =  HashSet<UserConversationsResponse>()
+                        if(viewState.myChatFields.blogList.isNotEmpty()){
+                            viewState.myChatFields.blogList.forEach {
+                                set.add(UserConversationsResponse(
+                                    id = it.id,
+                                    body = it.body.toString(),
+                                    userName = it.userName.toString(),
+                                    userId = it.userId,
+                                    userEmail = it.userEmail,
+                                    userPic = it.userPic,
+                                    recipientName = it.recipientName.toString(),
+                                    recipientId = it.recipientId,
+                                    recipientEmail = it.recipientEmail,
+                                    recipientPic = it.recipientPic,
+                                    created_at = it.created_at.toString(),
+                                    updated_at = it.updated_at.toString()
+                                ))
                             }
+                        }
+                        if(viewState.myChatFields.blogListImages.isNotEmpty()){
+                            viewState.myChatFields.blogListImages.forEach { imagesList ->
+                                set.toList().forEach {
+                                    if(it.id == imagesList?.message){
+                                        it.images = imagesList.image
+                                    }
+                                }
+                            }
+                        }
+                        if (viewState.myChatFields.page == 1){
+                            Log.d(TAG, "send message hahaha : page: ${set.toList()}")
+                            sendMessageResponse(set.toList())
+                        }
+                        else {
+                            set.clear()
+                            sendMessageResponse(set.toList())
                         }
                     }
                 }
-
-                userConversationResponse.asReversed().forEach {
-                    if(it.images!=null){
-                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "http://akv-technopark.herokuapp.com${it.images}",
-                            user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
-                        )
-                    }
-                    else{
-                        sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
-                            user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
-                        )
-                    }
-                }
-
             }
         })
+    }
+
+    private fun sendMessageResponse(userConversationResponse: List<UserConversationsResponse>) {
+        userConversationResponse.asReversed().forEach {
+            if(it.images!=null){
+                sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "http://akv-technopark.herokuapp.com${it.images}",
+                    user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
+                )
+            }
+            else{
+                sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
+                    user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
+                )
+            }
+        }
     }
 
     private fun handlePagination(dataState: DataState<DetailsViewState>){
@@ -512,6 +513,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel.setUserId(viewModel.getTargetQuery())
         viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
 
+
         return true
     }
 
@@ -535,6 +537,18 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 holdersConfig,
                 imageLoader
             )
+
+        messagesList?.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastPosition = layoutManager.findLastVisibleItemPosition()
+                if (lastPosition == messagesAdapter?.itemCount?.minus(1)) {
+                    Log.d(TAG, "BlogFragment: attempting to load next page...")
+                    viewModel.nextPage()
+                }
+            }
+        })
 
         messagesAdapter?.setOnMessageLongClickListener(this)
         messagesAdapter?.setLoadMoreListener(this)

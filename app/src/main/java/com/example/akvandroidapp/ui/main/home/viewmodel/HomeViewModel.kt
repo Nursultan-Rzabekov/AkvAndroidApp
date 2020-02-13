@@ -34,6 +34,23 @@ constructor(
                     )
                 }?:AbsentLiveData.create()
             }
+            is HomeStateEvent.HomeCancelReservationEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    homeRepository.cancelReservation(
+                        authToken = it,
+                        reservation_id = stateEvent.reservation_id,
+                        messageOne = stateEvent.message
+                    )
+                }?:AbsentLiveData.create()
+            }
+            is HomeStateEvent.HomePayReservationEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    homeRepository.payReservationId(
+                        authToken = it,
+                        reservation_id = stateEvent.reservation_id
+                    )
+                }?:AbsentLiveData.create()
+            }
             is HomeStateEvent.None -> {
                 return liveData {
                     emit(

@@ -59,7 +59,6 @@ constructor(
         beds_lte: Int,
         page: Int
     ): LiveData<DataState<SearchViewState>> {
-
         return object: NetworkBoundResource<BlogListSearchResponse, List<BlogPost>, SearchViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,

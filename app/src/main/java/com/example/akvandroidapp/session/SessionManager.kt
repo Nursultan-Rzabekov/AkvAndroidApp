@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.akvandroidapp.entity.AccountProperties
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.PayReservationIdResponse
 import com.example.akvandroidapp.persistence.AccountPropertiesDao
 import com.example.akvandroidapp.persistence.AuthTokenDao
 import com.example.akvandroidapp.persistence.BlogPostDao
@@ -39,6 +40,9 @@ constructor(
 
     //userLocation
     private val _location = MutableLiveData<Location>()
+
+    //payboxResponse
+    private val _payBox = MutableLiveData<PayReservationIdResponse>()
 
 
     //success
@@ -118,6 +122,9 @@ constructor(
     val checkedFilterCity: LiveData<FilterCity>
         get() = _chekedFilterCity
 
+    val payBox: LiveData<PayReservationIdResponse>
+        get() = _payBox
+
     val typeOfApartment: LiveData<Int>
         get() = _typeOfApartment
 
@@ -193,6 +200,14 @@ constructor(
             Log.d(TAG, "location ${_locationList.value}")
         }
     }
+
+    fun setPayBox(point: PayReservationIdResponse) {
+        GlobalScope.launch(Main) {
+            _payBox.value = point
+            Log.d(TAG, "payBox ${_locationList.value}")
+        }
+    }
+
 
 
     fun setFilterUpdateData(filterUpdateData: FilterUpdateData) {

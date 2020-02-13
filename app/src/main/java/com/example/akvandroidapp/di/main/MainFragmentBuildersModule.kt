@@ -2,6 +2,7 @@ package com.example.akvandroidapp.di.main
 
 import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
 import com.example.akvandroidapp.ui.main.home.HomeFragment
+import com.example.akvandroidapp.ui.main.home.PayBoxPayWebViewFragment
 import com.example.akvandroidapp.ui.main.messages.ChatMesFragment
 import com.example.akvandroidapp.ui.main.messages.MessagesFragment
 import com.example.akvandroidapp.ui.main.messages.RequestFragment
@@ -31,6 +32,9 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeHomeFragmentFragment(): HomeFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributePayBoxPayWebViewFragment(): PayBoxPayWebViewFragment
 
     @ContributesAndroidInjector()
     abstract fun contributeSearchFragmentFragment(): SearchFragment
