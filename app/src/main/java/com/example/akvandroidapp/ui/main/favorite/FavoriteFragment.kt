@@ -85,12 +85,10 @@ class FavoriteFragment : BaseFavoriteFragment(),
                 }
                 else {
                     recyclerAdapter.apply {
-
                         Log.d(
                             TAG,
                             "favorites: page: ${viewState.blogFields.page}, ${viewState.blogFields.blogList.size}"
                         )
-
                         preloadGlideImages(
                             requestManager = requestManager,
                             list = viewState.blogFields.blogList
@@ -155,7 +153,6 @@ class FavoriteFragment : BaseFavoriteFragment(),
                 this@FavoriteFragment)
 
             addOnScrollListener(object: RecyclerView.OnScrollListener(){
-
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     val layoutManager = recyclerView.layoutManager as LinearLayoutManager

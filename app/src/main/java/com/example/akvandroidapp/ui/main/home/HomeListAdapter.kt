@@ -185,7 +185,6 @@ class HomeListAdapter(
     }
 
     fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean) {
-
         Log.e("HOME FRAGMENT adapter", "${blogList}")
         if (!blogList.isNullOrEmpty()) {
             val newList = blogList.toMutableList()
@@ -206,12 +205,19 @@ class HomeListAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: HomeReservation) = with(itemView) {
-
             itemView.book_requests_recycler_view_item_iv.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
+            itemView.book_requests_recycler_view_item_accept_btn.setOnClickListener {
+                interaction?.onItemPay(adapterPosition,item)
+            }
+            itemView.book_requests_recycler_view_item_cancel_btn.setOnClickListener {
+                interaction?.onItemCancelReserv(adapterPosition,item)
+            }
+
 
             itemView.book_requests_recycler_view_item_title_tv.text = item.house_name
+
 
             when(item.accepted_house){
                 null -> {
@@ -219,6 +225,11 @@ class HomeListAdapter(
                         book_requests_recycler_view_item_processing_layout.visibility = View.VISIBLE
                         book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
                         book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
+                        book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_accept_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_cancel_me_layout.visibility = View.GONE
                     }
                 }
                 true -> {
@@ -226,6 +237,11 @@ class HomeListAdapter(
                         book_requests_recycler_view_item_processing_layout.visibility = View.GONE
                         book_requests_recycler_view_item_accepted_layout.visibility = View.VISIBLE
                         book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
+                        book_requests_recycler_view_item_cancel_btn.visibility = View.VISIBLE
+                        book_requests_recycler_view_item_accept_btn.visibility = View.VISIBLE
+                        book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_cancel_me_layout.visibility = View.GONE
                     }
                 }
                 false -> {
@@ -233,8 +249,35 @@ class HomeListAdapter(
                         book_requests_recycler_view_item_processing_layout.visibility = View.GONE
                         book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
                         book_requests_recycler_view_item_canceled_layout.visibility = View.VISIBLE
+                        book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_accept_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
+                        book_requests_recycler_view_item_canceled_btn.visibility = View.VISIBLE
+                        book_requests_recycler_view_item_cancel_me_layout.visibility = View.GONE
                     }
                 }
+            }
+
+            if(item.status == 1){
+                book_requests_recycler_view_item_processing_layout.visibility = View.GONE
+                book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
+                book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
+                book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
+                book_requests_recycler_view_item_accept_btn.visibility = View.GONE
+                book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
+                book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
+                book_requests_recycler_view_item_cancel_me_layout.visibility = View.VISIBLE
+            }
+            if(item.status == 2){
+                book_requests_recycler_view_item_processing_layout.visibility = View.GONE
+                book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
+                book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
+                book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
+                book_requests_recycler_view_item_accept_btn.visibility = View.GONE
+                book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
+                book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
+                book_requests_recycler_view_item_cancel_lb1.text = resources.getString(R.string.request_expired)
+                book_requests_recycler_view_item_cancel_me_layout.visibility = View.VISIBLE
             }
 
             requestManager
@@ -260,7 +303,8 @@ class HomeListAdapter(
 
     interface Interaction {
         fun onItemSelected(position: Int, item: HomeReservation)
-
+        fun onItemPay(position: Int,item: HomeReservation)
+        fun onItemCancelReserv(position: Int,item: HomeReservation)
         fun onBookMoreBtnPressed()
     }
 

@@ -12,7 +12,7 @@ interface OpenApiAuthService {
     @POST("auth/token/login/")
     @FormUrlEncoded
     fun login(
-        @Field("email") email: String,
+        @Field("phone") email: String,
         @Field("password") password: String
 
     ): LiveData<GenericApiResponse<LoginResponse>>

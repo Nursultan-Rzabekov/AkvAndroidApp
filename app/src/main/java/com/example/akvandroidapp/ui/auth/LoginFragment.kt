@@ -6,15 +6,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.LoginFields
+import com.redmadrobot.inputmask.MaskedTextChangedListener
+import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.sign_up.*
 
 
 class LoginFragment : BaseAuthFragment() {
+
+    private var phoneNumber:String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +35,8 @@ class LoginFragment : BaseAuthFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "LoginFragment: ${viewModel}")
+
+        setupSuffixSample()
 
         sign_in_btn.setOnClickListener {
             login()
@@ -44,10 +54,8 @@ class LoginFragment : BaseAuthFragment() {
     }
 
     fun subscribeObservers(){
-
         viewModel.viewState.observe(viewLifecycleOwner, Observer{
             it.loginFields?.let{
-
                 it.login_email?.let{phonenumber_et.setText(it)
                     Log.d("Check","Okkkkkkkkkkkkkkkkk")}
                 it.login_password?.let{password_et.setText(it)}
@@ -56,21 +64,17 @@ class LoginFragment : BaseAuthFragment() {
     }
 
     fun login(){
-
-        if(phonenumber_et.text?.trim() == "" && password_et.text?.trim() == "") {
-            phonenumber_et.error = getString(R.string.invalid)
-            password_et.error = getString(R.string.invalid)
-        }
-
-        if(phonenumber_et.text?.trim() == "") password_et.error = getString(R.string.invalid)
+        val phoneTotal = "+7".plus(phoneNumber)
+        if(phoneTotal.trim().length != 12) phonenumber_l_et.error = getString(R.string.invalid_number)
+        if(phonenumber_et.text?.trim() == "") phonenumber_et.error = getString(R.string.invalid)
         else phonenumber_l_et.isErrorEnabled = false
-        if(phonenumber_et.text?.trim() == "") password_et.error = getString(R.string.invalid)
+        if(password_et.text?.trim() == "") password_et.error = getString(R.string.invalid)
         else password_l_et.isErrorEnabled = false
 
         if(phonenumber_et.text?.trim() != "" && password_et.text?.trim() != "") {
             viewModel.setStateEvent(
                 LoginAttemptEvent(
-                    phonenumber_et.text.toString(),
+                    phoneTotal,
                     password_et.text.toString()
                 )
             )
@@ -93,6 +97,29 @@ class LoginFragment : BaseAuthFragment() {
 
     fun navForgetLoginFragment(){
         findNavController().navigate(R.id.action_loginFragment_to_LoginGmailFragment)
+    }
+
+    private fun setupSuffixSample() {
+        val affineFormats: MutableList<String> = ArrayList()
+        affineFormats.add("+7 ([000]) [000]-[00]-[00]")
+        val listener =
+            MaskedTextChangedListener.installOn(
+                phonenumber_et,
+                "+7 ([000]) [000]-[00]-[00]",
+                affineFormats, AffinityCalculationStrategy.WHOLE_STRING,
+                object : MaskedTextChangedListener.ValueListener {
+                    override fun onTextChanged(maskFilled: Boolean, @NonNull extractedValue: String, @NonNull formattedValue: String) {
+                        logValueListener(extractedValue)
+                    }
+                }
+            )
+        phonenumber_et.hint = listener.placeholder()
+    }
+
+    private fun logValueListener(
+        extractedValue: String
+    ) {
+        phoneNumber  = extractedValue
     }
 }
 

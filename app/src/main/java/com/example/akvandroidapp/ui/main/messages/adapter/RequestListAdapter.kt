@@ -216,11 +216,34 @@ class RequestListAdapter(
         private val image = itemView.requests_recycler_view_item_iv
         private val title = itemView.requests_recycler_view_item_title_tv
         private val accept = itemView.requests_recycler_view_item_accept_btn
+        private val accepted = itemView.requests_recycler_view_item_accepted_btn
+        private val canceled = itemView.requests_recycler_view_item_canceled_btn
         private val cancel = itemView.requests_recycler_view_item_cancel_btn
 
         fun bind(item: HomeReservation) = with(itemView) {
 
             title.text = ("@${item.user_id} хочет быть вашем гостем в ${item.house_name}")
+
+            item.accepted_house?.let {
+                if(it){
+                    cancel.visibility = View.GONE
+                    accept.visibility = View.GONE
+                    canceled.visibility = View.GONE
+                    accepted.visibility = View.VISIBLE
+                }
+                else if(!it){
+                    cancel.visibility = View.GONE
+                    accept.visibility = View.GONE
+                    accepted.visibility = View.GONE
+                    canceled.visibility = View.VISIBLE
+                }
+                else{
+                    cancel.visibility = View.VISIBLE
+                    accept.visibility = View.VISIBLE
+                    canceled.visibility = View.GONE
+                    accepted.visibility = View.GONE
+                }
+            }
 
             if (item.house_image != null)
                 requestManager

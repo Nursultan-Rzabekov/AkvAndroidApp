@@ -2,6 +2,7 @@ package com.example.akvandroidapp.api.main
 
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
+import com.example.akvandroidapp.api.main.bodies.CreateCancelReservationBody
 import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.util.GenericApiResponse
 import okhttp3.MultipartBody
@@ -161,11 +162,11 @@ interface OpenApiMainService {
         @PartMap  options : HashMap<String, RequestBody>
     ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
 
-    @PATCH("reservations/{house_id}/cancel/")
+    @PATCH("reservations/{reservation_id}/cancel/")
     fun cancelReservation(
         @Header("Authorization") authorization: String,
-        @Path("house_id") house_id: Int,
-        @Query("message") message: String
+        @Path("reservation_id") reservation_id: Int,
+        @Body body: CreateCancelReservationBody
     ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
 
     @PATCH("orders/{reservation_id}/accept/")
@@ -179,6 +180,13 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Path("reservation_id") reservation_id: Int
     ): LiveData<GenericApiResponse<VerifyUpdateResponse>>
+
+    @FormUrlEncoded
+    @POST("pay")
+    fun createPayment(
+//        @Header("Authorization") authorization: String,
+        @Field("reservation_id") reservation_id: Int
+    ): LiveData<GenericApiResponse<PayRequestResponse>>
 }
 
 

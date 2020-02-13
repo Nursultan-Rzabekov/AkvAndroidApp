@@ -19,6 +19,31 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+        <action android:id="@+id/action_homeFragment_to_payBoxPayWebViewFragment"
+            app:destination="@id/payBoxPayWebViewFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+    <fragment android:id="@+id/payBoxPayWebViewFragment"
+        android:name="com.example.akvandroidapp.ui.main.home.PayBoxPayWebViewFragment"
+        android:label="@string/fragment_create_blog"
+        tools:layout="@layout/paybox_pay">
+
+        <action
+            android:id="@+id/action_payBoxPayWebViewFragment_to_home"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_create_home"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -26,7 +51,6 @@
         android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_zhilye_layout">
-
 
     </activity>
 

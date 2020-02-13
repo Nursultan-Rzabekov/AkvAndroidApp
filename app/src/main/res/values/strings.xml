@@ -306,7 +306,9 @@
     <string name="booking_check_stantard_text">Бронируйте места в жильё и проводите свои лучшие время с нами.</string>
     <string name="book_appartment">Забранировать жильё</string>
     <string name="request_under_procesing">Ваша заявка отправлена хозяйну. \nВ течении 24 часов вам придет ответ.</string>
-    <string name="request_accepted">Ваша заявка принета</string>
+    <string name="request_accepted">Ваша заявка принята</string>
+    <string name="request_сanceled_by_user">Вы отменили заявку</string>
+    <string name="request_expired">Запрос истек</string>
     <string name="request_accepted_lb">Можете связаться с хозяйном через чат. Перейти на чат</string>
     <string name="request_canceled">Ваша заявка откланена</string>
     <string name="request_canceled_lb1">Сообщение от хозяйна:</string>
@@ -400,6 +402,10 @@
     <string name="document">Документ</string>
     <string name="deny_and_delete">Откланить и удалить</string>
     <string name="accept">Принять</string>
+    <string name="pay">Оплатить</string>
+    <string name="cancel_reserv">Отменить</string>
+    <string name="accepted">Принята</string>
+    <string name="canceled">Отклонена</string>
     <string name="request_cancel_label">Напишите пожалуйста \nпочему вы откланяете заявку</string>
     <string name="message_two_dots">Сообщение:</string>
     <string name="send">Отправить</string>
