@@ -1,16 +1,14 @@
 package com.example.akvandroidapp.repository.main
 
 
+import android.nfc.Tag
 import com.yandex.mapkit.geometry.Point
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
-import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
-import com.example.akvandroidapp.api.main.responses.ReservationRequestResponse
-import com.example.akvandroidapp.api.main.responses.ReviewsListResponse
-import com.example.akvandroidapp.api.main.responses.ZhilyeResponse
+import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.repository.JobManager
@@ -548,18 +546,19 @@ constructor(
             override suspend fun handleApiSuccessResponse(
                 response: ApiSuccessResponse<GenericResponse>
             ) {
-
+                Log.e(TAG,"qweqweqweqweqwe ${response.body.response}")
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
-                            data = ZhilyeViewState( deleteblogFields =
-                            ZhilyeViewState.FavoriteDeleteFields(response.body.response))
+                            ZhilyeViewState(
+                                deleteblogFields = ZhilyeViewState.FavoriteDeleteFields(response.body.response))
                         )
                     )
                 }
             }
 
             override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                Log.e(TAG,"qweqweqweqweqwe ${houseId}")
                 return openApiMainService.deleteFavoritePost(
                     "Token ${authToken.token!!}",
                     house_id = houseId
@@ -587,7 +586,7 @@ constructor(
         houseId: Int
     ): LiveData<DataState<ZhilyeViewState>> {
 
-        return object: NetworkBoundResource<GenericResponse, List<BlogPost>, ZhilyeViewState>(
+        return object: NetworkBoundResource<FavoriteHouseResponse, List<BlogPost>, ZhilyeViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             false,
@@ -597,19 +596,19 @@ constructor(
             }
 
             override suspend fun handleApiSuccessResponse(
-                response: ApiSuccessResponse<GenericResponse>
+                response: ApiSuccessResponse<FavoriteHouseResponse>
             ) {
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
                             data = ZhilyeViewState( createblogFields =
-                            ZhilyeViewState.FavoriteCreateFields(response.body.response))
+                            ZhilyeViewState.FavoriteCreateFields(response.body.house.is_favourite))
                         )
                     )
                 }
             }
 
-            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+            override fun createCall(): LiveData<GenericApiResponse<FavoriteHouseResponse>> {
                 return openApiMainService.createFavoritePost(
                     "Token ${authToken.token!!}",
                     house_id = houseId
@@ -688,7 +687,7 @@ constructor(
         houseId: Int
     ): LiveData<DataState<SearchViewState>> {
 
-        return object: NetworkBoundResource<GenericResponse, List<BlogPost>, SearchViewState>(
+        return object: NetworkBoundResource<FavoriteHouseResponse, List<BlogPost>, SearchViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             false,
@@ -698,19 +697,19 @@ constructor(
             }
 
             override suspend fun handleApiSuccessResponse(
-                response: ApiSuccessResponse<GenericResponse>
+                response: ApiSuccessResponse<FavoriteHouseResponse>
             ) {
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
                             data = SearchViewState( createblogFields =
-                            SearchViewState.FavoriteCreateFields(response.body.response))
+                            SearchViewState.FavoriteCreateFields(response.body.house.is_favourite))
                         )
                     )
                 }
             }
 
-            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+            override fun createCall(): LiveData<GenericApiResponse<FavoriteHouseResponse>> {
                 return openApiMainService.createFavoritePost(
                     "Token ${authToken.token!!}",
                     house_id = houseId

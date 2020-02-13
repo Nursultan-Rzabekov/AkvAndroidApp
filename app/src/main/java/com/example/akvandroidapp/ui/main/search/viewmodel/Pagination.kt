@@ -396,6 +396,8 @@ fun HomeViewModel.handleIncomingReservationListData(viewState: HomeViewState){
 
 fun ZhilyeViewModel.handleIncomingZhilyeData(viewState: ZhilyeViewState){
     setZhilyeData(viewState.zhilyeFields)
+    setCreateFavourite(viewState.createblogFields.isCreated)
+    setDeleteFavourite(viewState.deleteblogFields.isDeleted)
 }
 
 fun ProfileViewModel.handleIncomingProfileInfo(viewState: ProfileViewState){

@@ -29,7 +29,7 @@ class ZhilyeViewState (
         var houseId: Int = 1)
 
     data class FavoriteCreateFields(
-        var isDeleted: Boolean = false,
+        var isCreated: Boolean = false,
         var houseId: Int = 1)
 }
 

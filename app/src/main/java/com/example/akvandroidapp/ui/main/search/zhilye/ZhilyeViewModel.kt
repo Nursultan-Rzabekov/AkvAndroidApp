@@ -55,7 +55,7 @@ constructor(
                 }?: AbsentLiveData.create()
             }
 
-            is ZhilyeStateEvent.СreateFavoriteItemEvent -> {
+            is ZhilyeStateEvent.CreateFavoriteItemEvent -> {
                 return sessionManager.cachedToken.value?.let { authToken ->
                     searchRepository.createMyFavoritePosts(
                         authToken = authToken,

@@ -26,6 +26,8 @@ import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesAc
 import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
 import com.example.akvandroidapp.ui.main.search.dialogs.GuestCounterDialog
 import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
+import com.example.akvandroidapp.ui.main.search.viewmodel.setCreateFavourite
+import com.example.akvandroidapp.ui.main.search.viewmodel.setDeleteFavourite
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentPropertiesAdapter
 import com.example.akvandroidapp.ui.main.search.zhilye.adapters.ApartmentsReviewsPageAdapter
@@ -146,69 +148,96 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         viewModel.viewState.observe(this, Observer{ viewState ->
             if(viewState != null){
-                Log.d("yes","list house +${viewState.zhilyeFields.houseId}")
-                Log.d("yes","list zhilyeDetail +${viewState.zhilyeFields.zhilyeDetail}")
-                Log.d("yes","list Recommendations +${viewState.zhilyeFields.blogListRecommendations}")
-                Log.d("yes","list Accomadations +${viewState.zhilyeFields.zhilyeDetailAccomadations}")
-                Log.d("yes","list Photos +${viewState.zhilyeFields.zhilyeDetailPhotos}")
-                Log.d("yes","list DetailRules +${viewState.zhilyeFields.zhilyeDetailRules}")
-                Log.d("yes","list User +${viewState.zhilyeFields.zhilyeUser}")
-                Log.d("yes","list DetailNearBuildings +${viewState.zhilyeFields.zhilyeDetailNearBuildings}")
-                Log.d("yes","list Reservations +${viewState.zhilyeFields.zhilyeReservationsList}")
+                Log.d("ZhilyeActivity", "zhilye fav states: " +
+                        "${viewState.createblogFields.isCreated} ${viewState.deleteblogFields.isDeleted}")
+                if (viewState.createblogFields.isCreated || viewState.deleteblogFields.isDeleted){
+                    viewModel.setStateEvent(ZhilyeStateEvent.BlogZhilyeEvent())
+                    viewModel.setCreateFavourite(false)
+                    viewModel.setDeleteFavourite(false)
+                }else {
+                    Log.d("yes", "list house +${viewState.zhilyeFields.houseId}")
+                    Log.d("yes", "list zhilyeDetail +${viewState.zhilyeFields.zhilyeDetail}")
+                    Log.d(
+                        "yes",
+                        "list Recommendations +${viewState.zhilyeFields.blogListRecommendations}"
+                    )
+                    Log.d(
+                        "yes",
+                        "list Accomadations +${viewState.zhilyeFields.zhilyeDetailAccomadations}"
+                    )
+                    Log.d("yes", "list Photos +${viewState.zhilyeFields.zhilyeDetailPhotos}")
+                    Log.d("yes", "list DetailRules +${viewState.zhilyeFields.zhilyeDetailRules}")
+                    Log.d("yes", "list User +${viewState.zhilyeFields.zhilyeUser}")
+                    Log.d(
+                        "yes",
+                        "list DetailNearBuildings +${viewState.zhilyeFields.zhilyeDetailNearBuildings}"
+                    )
+                    Log.d(
+                        "yes",
+                        "list Reservations +${viewState.zhilyeFields.zhilyeReservationsList}"
+                    )
 
-                fragment_zhilye_host_nickname_tv.text =
-                    ("@${viewState.zhilyeFields.zhilyeUser.first_name}")
-                requestManager
-                    .load(viewState.zhilyeFields.zhilyeUser.userpic)
-                    .error(R.drawable.profile_default_avavatar)
-                    .into(fragment_zhilye_host_image_civ)
-                fragment_zhilye_hotel_name_tv.text =
-                    viewState.zhilyeFields.zhilyeDetail.name
-                fragment_zhilye_hotel_location_tv.text =
-                    viewState.zhilyeFields.zhilyeDetail.city
-                fragment_zhilye_hotel_description_tv.text =
-                    viewState.zhilyeFields.zhilyeDetail.description
-                fragment_zhilye_address_tv.text =
-                    viewState.zhilyeFields.zhilyeDetail.address
-                fragment_zhile_rating_tv.text =
-                    viewState.zhilyeFields.zhilyeDetail.rating.toString()
-                fragment_zhile_price_tv.text =
-                    ("${viewState.zhilyeFields.zhilyeDetail.price}kzt/ночь")
+                    fragment_zhilye_host_nickname_tv.text =
+                        ("@${viewState.zhilyeFields.zhilyeUser.first_name}")
+                    requestManager
+                        .load(viewState.zhilyeFields.zhilyeUser.userpic)
+                        .error(R.drawable.profile_default_avavatar)
+                        .into(fragment_zhilye_host_image_civ)
+                    fragment_zhilye_hotel_name_tv.text =
+                        viewState.zhilyeFields.zhilyeDetail.name
+                    fragment_zhilye_hotel_location_tv.text =
+                        viewState.zhilyeFields.zhilyeDetail.city
+                    fragment_zhilye_hotel_description_tv.text =
+                        viewState.zhilyeFields.zhilyeDetail.description
+                    fragment_zhilye_address_tv.text =
+                        viewState.zhilyeFields.zhilyeDetail.address
+                    fragment_zhile_rating_tv.text =
+                        viewState.zhilyeFields.zhilyeDetail.rating.toString()
+                    fragment_zhile_price_tv.text =
+                        ("${viewState.zhilyeFields.zhilyeDetail.price}kzt/ночь")
 
-                zhilyeDetail = viewState.zhilyeFields.zhilyeDetail
-                zhilyeOnePhoto =
-                    if (viewState.zhilyeFields.zhilyeDetailPhotos.isNotEmpty())
-                        viewState.zhilyeFields.zhilyeDetailPhotos.first().image
-                    else ""
+                    zhilyeDetail = viewState.zhilyeFields.zhilyeDetail
+                    zhilyeOnePhoto =
+                        if (viewState.zhilyeFields.zhilyeDetailPhotos.isNotEmpty())
+                            viewState.zhilyeFields.zhilyeDetailPhotos.first().image
+                        else ""
 
-                isFavouriteChecked = viewState.zhilyeFields.zhilyeDetail.is_favourite
-                Log.d(TAGV, "ZhilyeActivity isFavourite: $isFavouriteChecked")
+                    isFavouriteChecked = viewState.zhilyeFields.zhilyeDetail.is_favourite
+                    Log.d(TAGV, "ZhilyeActivity isFavourite: $isFavouriteChecked")
 
-                changeFavouriteMenuBtnDrawable(
-                    toolbar_zhilye_header.menu?.findItem(R.id.favourite)
-                )
+                    changeFavouriteMenuBtnDrawable(
+                        toolbar_zhilye_header.menu?.findItem(R.id.favourite)
+                    )
 
-                moveMapTo(Point(
-                    viewState.zhilyeFields.zhilyeDetail.latitude,
-                    viewState.zhilyeFields.zhilyeDetail.longitude
-                ))
+                    moveMapTo(
+                        Point(
+                            viewState.zhilyeFields.zhilyeDetail.latitude,
+                            viewState.zhilyeFields.zhilyeDetail.longitude
+                        )
+                    )
 
-                userEmail = viewState.zhilyeFields.zhilyeUser.email
-                userName = viewState.zhilyeFields.zhilyeUser.first_name
-                userPic = viewState.zhilyeFields.zhilyeUser.userpic
-                userId = viewState.zhilyeFields.zhilyeUser.id
+                    userEmail = viewState.zhilyeFields.zhilyeUser.email
+                    userName = viewState.zhilyeFields.zhilyeUser.first_name
+                    userPic = viewState.zhilyeFields.zhilyeUser.userpic
+                    userId = viewState.zhilyeFields.zhilyeUser.id
 
-                facilitiesAdapter.submitList(viewState.zhilyeFields.zhilyeDetailAccomadations)
-                nearsAdapter.submitList(viewState.zhilyeFields.zhilyeDetailNearBuildings)
-                recommendationsAdapter.submitList(viewState.zhilyeFields.blogListRecommendations)
-                reviewsAdapter.submitList(viewState.zhilyeFields.zhilyeReviewsList)
+                    facilitiesAdapter.submitList(viewState.zhilyeFields.zhilyeDetailAccomadations)
+                    nearsAdapter.submitList(viewState.zhilyeFields.zhilyeDetailNearBuildings)
+                    recommendationsAdapter.submitList(
+                        if (viewState.zhilyeFields.blogListRecommendations.size > 3)
+                            viewState.zhilyeFields.blogListRecommendations.subList(0, 2)
+                        else
+                            viewState.zhilyeFields.blogListRecommendations
+                    )
+                    reviewsAdapter.submitList(viewState.zhilyeFields.zhilyeReviewsList)
 
-                val photos: ArrayList<String> = arrayListOf()
-                for(photo in viewState.zhilyeFields.zhilyeDetailPhotos)
-                    photos.add(photo.image!!)
-                setFlipperLayout(photos)
+                    val photos: ArrayList<String> = arrayListOf()
+                    for (photo in viewState.zhilyeFields.zhilyeDetailPhotos)
+                        photos.add(photo.image!!)
+                    setFlipperLayout(photos)
 
-                houseRules = viewState.zhilyeFields.zhilyeDetailRules
+                    houseRules = viewState.zhilyeFields.zhilyeDetailRules
+                }
             }
         })
     }
@@ -410,6 +439,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                 isFavouriteChecked = !item.isChecked
                 item.isChecked = isFavouriteChecked
                 changeFavouriteMenuBtnDrawable(item)
+                if (!isFavouriteChecked)
+                    viewModel.setStateEvent(ZhilyeStateEvent.CreateFavoriteItemEvent())
+                else
+                    viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent())
             }
         }
         return super.onOptionsItemSelected(item)
@@ -427,13 +460,12 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     private fun changeFavouriteMenuBtnDrawable(item: MenuItem?){
         if (isFavouriteChecked) {
-            //viewModel.setStateEvent(ZhilyeStateEvent.СreateFavoriteItemEvent())
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_liked)
         }
-        else if (isToolbarColapsed)
+        else if (isToolbarColapsed) {
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_like_dark)
+        }
         else {
-            //viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent())
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_like_white)
         }
     }

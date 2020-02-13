@@ -153,6 +153,18 @@ fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
     setViewState(update)
 }
 
+fun ZhilyeViewModel.setDeleteFavourite(state: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.deleteblogFields.isDeleted = state
+    setViewState(update)
+}
+
+fun ZhilyeViewModel.setCreateFavourite(state: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.createblogFields.isCreated = state
+    setViewState(update)
+}
+
 fun ProfileViewModel.setProfileInfo(profileInfoFields: ProfileViewState.ProfileInfoFields){
     val update = getCurrentViewStateOrNew()
     update.profileInfoFields.email = profileInfoFields.email

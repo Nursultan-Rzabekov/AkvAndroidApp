@@ -7,7 +7,7 @@ sealed class ZhilyeStateEvent {
 
     class DeleteFavoriteItemEvent: ZhilyeStateEvent()
 
-    class СreateFavoriteItemEvent: ZhilyeStateEvent()
+    class CreateFavoriteItemEvent: ZhilyeStateEvent()
 
     class None: ZhilyeStateEvent()
 

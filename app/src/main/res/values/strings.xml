@@ -419,4 +419,8 @@
     <string name="cancel_book">Отменить поездку</string>
     <string name="test_text_orders">\@juni_0984 хочет быть вашем гостем в Hotel De Lux</string>
     <string name="no_orders">На данный момент у вас нет заявок</string>
+    <string name="iban">IBAN</string>
+    <string name="add_iban">Добавить номер счета</string>
+    <string name="add_card">Добавить карту</string>
+    <string name="payments_history">История платежей</string>
 </resources>
