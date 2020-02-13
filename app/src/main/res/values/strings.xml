@@ -429,4 +429,5 @@
     <string name="add_iban">Добавить номер счета</string>
     <string name="add_card">Добавить карту</string>
     <string name="payments_history">История платежей</string>
+    <string name="no_payment_history">У вас пока нету истории платежей</string>
 </resources>

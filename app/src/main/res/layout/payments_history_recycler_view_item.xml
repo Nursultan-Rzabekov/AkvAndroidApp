@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:backgroundTint="@color/white"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dim_12dp">
+
+    <TextView
+        android:id="@+id/payments_history_recycler_view_item_nickname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/muratov_d"
+        android:textColor="@color/secondaryFirst"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/payments_history_recycler_view_item_price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/random_price1"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/primaryZero"
+        android:textAlignment="viewEnd"/>
+
+</LinearLayout>

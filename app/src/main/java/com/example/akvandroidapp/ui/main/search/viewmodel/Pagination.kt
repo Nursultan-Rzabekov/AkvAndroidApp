@@ -409,6 +409,8 @@ fun HomeViewModel.handleIncomingReservationListData(viewState: HomeViewState){
     setQueryInProgress(viewState.homeReservationField.isQueryInProgress)
     setQueryExhausted(viewState.homeReservationField.isQueryExhausted)
     setCount(viewState.homeReservationField.count)
+    setCancelState(viewState.cancelReservationField.isCancelled)
+    setPayState(viewState.payReservationField.isPayed)
     setBlogListData(viewState.homeReservationField.reservationList)
 }
 

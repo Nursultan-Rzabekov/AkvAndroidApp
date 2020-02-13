@@ -11,7 +11,8 @@
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/elevation_3"
-        app:cardCornerRadius="@dimen/cornerRadius1">
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,13 +20,12 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/book_requests_recycler_view_item_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dim_16dp">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/book_requests_recycler_view_item_iv_card"
+                    android:id="@+id/book_requests_canceled_recycler_view_item_iv_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="2dp"
@@ -34,7 +34,7 @@
 
                     <ImageView
                         android:contentDescription="@string/random_location"
-                        android:id="@+id/book_requests_recycler_view_item_iv"
+                        android:id="@+id/book_requests_canceled_recycler_view_item_iv"
                         android:layout_width="88dp"
                         android:layout_height="88dp"
                         android:background="@drawable/image_all_corner_back1"
@@ -51,11 +51,11 @@
                     android:layout_marginEnd="@dimen/dim_16dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/book_requests_recycler_view_item_iv_card"
+                    app:layout_constraintStart_toEndOf="@+id/book_requests_canceled_recycler_view_item_iv_card"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/book_requests_recycler_view_item_title_tv"
+                        android:id="@+id/book_requests_canceled_recycler_view_item_title_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/hotel_del_luxe"
@@ -71,12 +71,20 @@
                         android:background="?android:attr/listDivider" />
 
                     <TextView
-                        android:id="@+id/book_requests_recycler_view_item_processing_lb"
+                        android:id="@+id/book_requests_recycler_view_item_canceled_lb"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/request_under_procesing"
-                        android:textColor="@color/black"
+                        android:text="@string/request_canceled"
+                        android:textColor="@color/primaryZero"
+                        android:textStyle="bold"
                         android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/book_requests_recycler_view_item_host_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 

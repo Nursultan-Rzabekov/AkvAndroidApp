@@ -81,12 +81,13 @@ class HomeFragment : BaseHomeFragment(),
                     onBlogSearchOrFilter()
                     viewModel.setPayState(false)
                 }
-                if (trips == 0){
-                    recyclerAdapter.submitList(
-                        blogList = viewState.homeReservationField.reservationList,
-                        isQueryExhausted = viewState.homeReservationField.isQueryExhausted
-                    )
-                }else {
+//                if (trips == 0){
+//                    recyclerAdapter.clearAndSubmitList(
+//                        blogList = viewState.homeReservationField.reservationList,
+//                        isQueryExhausted = viewState.homeReservationField.isQueryExhausted
+//                    )
+//                }
+                else {
                     if (viewState.homeReservationField.reservationList.isNotEmpty()) {
                         val guests =
                             viewState.homeReservationField.reservationList.sumBy { it.guests!! }
@@ -96,10 +97,15 @@ class HomeFragment : BaseHomeFragment(),
                                 requestManager = requestManager,
                                 list = viewState.homeReservationField.reservationList
                             )
-                            submitList(
-                                blogList = viewState.homeReservationField.reservationList,
-                                isQueryExhausted = viewState.homeReservationField.isQueryExhausted
-                            )
+                            if (viewState.homeReservationField.page != 1)
+                                submitList(
+                                    blogList = viewState.homeReservationField.reservationList,
+                                    isQueryExhausted = viewState.homeReservationField.isQueryExhausted)
+                            else
+                                clearAndSubmitList(
+                                    blogList = viewState.homeReservationField.reservationList,
+                                    isQueryExhausted = viewState.homeReservationField.isQueryExhausted
+                                )
                         }
                     }
                 }
@@ -199,11 +205,6 @@ class HomeFragment : BaseHomeFragment(),
                 viewModel.setQueryExhausted(true)
             }
         }
-    }
-
-    private fun listEmptyState(){
-        fragment_saved_booking_trips_tv.text = "0 поездки"
-        fragment_saved_booking_guets_tv.text = "0 гостей"
     }
 
     private fun listFilledState(trips: Int, guests: Int){

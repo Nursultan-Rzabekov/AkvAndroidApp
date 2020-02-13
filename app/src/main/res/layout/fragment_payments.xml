@@ -80,13 +80,18 @@
                         android:paddingTop="@dimen/dim_16dp"
                         android:paddingBottom="@dimen/dim_16dp">
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/fragment_payments_iban_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/add_iban"
+                            android:hint="@string/add_iban"
+                            android:textColorHint="@color/primaryZero"
                             android:textSize="16sp"
+                            android:inputType="textCapSentences"
+                            android:enabled="false"
+                            android:background="@android:color/transparent"
                             android:textStyle="bold"
-                            android:textColor="@color/primaryZero"/>
+                            android:textColor="@color/black"/>
 
                     </LinearLayout>
 
@@ -102,6 +107,7 @@
                     android:layout_marginBottom="@dimen/dim_8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_payments_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

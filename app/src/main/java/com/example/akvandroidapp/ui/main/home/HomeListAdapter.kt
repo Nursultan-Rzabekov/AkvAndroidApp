@@ -12,6 +12,8 @@ import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.book_request_no_results_recycler_view_item.view.*
+import kotlinx.android.synthetic.main.book_requests_accepted_recycler_view_item.view.*
+import kotlinx.android.synthetic.main.book_requests_canceled_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.book_requests_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
@@ -23,7 +25,9 @@ class HomeListAdapter(
 
     private val TAG: String = "AppDebug"
     private val NO_MORE_RESULTS = -1
-    private val RESERVATION_ITEM = 0
+    private val RESERVATION_ITEM_DEFAULT = 0
+    private val RESERVATION_ITEM_ACCEPTED = 1
+    private val RESERVATION_ITEM_CANCELED = 2
     private val NO_RESULTS = -2
 
     private val NO_MORE_RESULTS_RESERVATION_MARKER = HomeReservation(
@@ -33,7 +37,7 @@ class HomeListAdapter(
         0,
         0,
         "",
-        false,
+        null,
         -1,
         -1,
         "",
@@ -48,7 +52,7 @@ class HomeListAdapter(
         0,
         0,
         "",
-        false,
+        null,
         -1,
         -1,
         "",
@@ -77,6 +81,7 @@ class HomeListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         when(viewType){
+
             NO_RESULTS -> {
                 Log.e(TAG, "onCreateViewHolder: No results at all...")
                 return NoMoreReservationViewHolder(
@@ -100,8 +105,8 @@ class HomeListAdapter(
                 )
             }
 
-            RESERVATION_ITEM ->{
-                return ReservationViewHolder(
+            RESERVATION_ITEM_DEFAULT ->{
+                return ReservationDefaultViewHolder(
                     LayoutInflater.from(parent.context).inflate(
                             R.layout.book_requests_recycler_view_item,
                         parent,
@@ -111,8 +116,33 @@ class HomeListAdapter(
                     requestManager = requestManager
                 )
             }
+
+            RESERVATION_ITEM_CANCELED -> {
+                return ReservationCanceledViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.book_requests_canceled_recycler_view_item,
+                        parent,
+                        false
+                    ),
+                    interaction = interaction,
+                    requestManager = requestManager
+                )
+            }
+
+            RESERVATION_ITEM_ACCEPTED -> {
+                return ReservationAcceptedViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.book_requests_accepted_recycler_view_item,
+                        parent,
+                        false
+                    ),
+                    interaction = interaction,
+                    requestManager = requestManager
+                )
+            }
+
             else -> {
-                return ReservationViewHolder(
+                return ReservationDefaultViewHolder(
                     LayoutInflater.from(parent.context).inflate(
                         R.layout.book_requests_recycler_view_item,
                         parent,
@@ -148,7 +178,15 @@ class HomeListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ReservationViewHolder -> {
+            is ReservationDefaultViewHolder -> {
+                holder.bind(differ.currentList[position])
+            }
+
+            is ReservationAcceptedViewHolder -> {
+                holder.bind(differ.currentList[position])
+            }
+
+            is ReservationCanceledViewHolder -> {
                 holder.bind(differ.currentList[position])
             }
 
@@ -160,7 +198,11 @@ class HomeListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         if(differ.currentList[position].id > -1){
-            return RESERVATION_ITEM
+            return when (differ.currentList[position].accepted_house){
+                true -> RESERVATION_ITEM_ACCEPTED
+                false -> RESERVATION_ITEM_CANCELED
+                null -> RESERVATION_ITEM_DEFAULT
+            }
         }
         return differ.currentList[position].id
     }
@@ -184,7 +226,7 @@ class HomeListAdapter(
         }
     }
 
-    fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean) {
+    fun clearAndSubmitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean) {
         Log.e("HOME FRAGMENT adapter", "${blogList}")
         if (!blogList.isNullOrEmpty()) {
             val newList = blogList.toMutableList()
@@ -197,7 +239,28 @@ class HomeListAdapter(
         }
     }
 
-    class ReservationViewHolder
+    fun submitList(blogList: List<HomeReservation>?, isQueryExhausted: Boolean) {
+        Log.e("HOME FRAGMENT adapter", "${blogList}")
+        val newList = blogList?.toMutableList()
+        Log.e("home adapter list", "$newList")
+        if (isQueryExhausted)
+            newList?.add(NO_MORE_RESULTS_RESERVATION_MARKER)
+
+        val currentList = differ.currentList.toMutableList()
+
+        currentList.removeAll { it.id == NO_RESULTS || it.id == NO_MORE_RESULTS }
+
+        newList?.forEach {
+            currentList.add(it)
+        }
+
+        if (currentList.isNullOrEmpty())
+            currentList.add(NO_RESULTS_RESERVATION_MARKER)
+
+        differ.submitList(currentList)
+    }
+
+    class ReservationDefaultViewHolder
     constructor(
         itemView: View,
         val requestManager: RequestManager,
@@ -205,85 +268,65 @@ class HomeListAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: HomeReservation) = with(itemView) {
-            itemView.book_requests_recycler_view_item_iv.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
-            }
-            itemView.book_requests_recycler_view_item_accept_btn.setOnClickListener {
-                interaction?.onItemPay(adapterPosition,item)
-            }
-            itemView.book_requests_recycler_view_item_cancel_btn.setOnClickListener {
-                interaction?.onItemCancelReserv(adapterPosition,item)
-            }
 
-
-            itemView.book_requests_recycler_view_item_title_tv.text = item.house_name
-
-
-            when(item.accepted_house){
-                null -> {
-                    itemView.let {
-                        book_requests_recycler_view_item_processing_layout.visibility = View.VISIBLE
-                        book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
-                        book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
-                        book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_accept_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_cancel_me_layout.visibility = View.GONE
-                    }
-                }
-                true -> {
-                    itemView.let {
-                        book_requests_recycler_view_item_processing_layout.visibility = View.GONE
-                        book_requests_recycler_view_item_accepted_layout.visibility = View.VISIBLE
-                        book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
-                        book_requests_recycler_view_item_cancel_btn.visibility = View.VISIBLE
-                        book_requests_recycler_view_item_accept_btn.visibility = View.VISIBLE
-                        book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_cancel_me_layout.visibility = View.GONE
-                    }
-                }
-                false -> {
-                    itemView.let {
-                        book_requests_recycler_view_item_processing_layout.visibility = View.GONE
-                        book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
-                        book_requests_recycler_view_item_canceled_layout.visibility = View.VISIBLE
-                        book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_accept_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
-                        book_requests_recycler_view_item_canceled_btn.visibility = View.VISIBLE
-                        book_requests_recycler_view_item_cancel_me_layout.visibility = View.GONE
-                    }
-                }
-            }
-
-            if(item.status == 1){
-                book_requests_recycler_view_item_processing_layout.visibility = View.GONE
-                book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
-                book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
-                book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
-                book_requests_recycler_view_item_accept_btn.visibility = View.GONE
-                book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
-                book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
-                book_requests_recycler_view_item_cancel_me_layout.visibility = View.VISIBLE
-            }
-            if(item.status == 2){
-                book_requests_recycler_view_item_processing_layout.visibility = View.GONE
-                book_requests_recycler_view_item_accepted_layout.visibility = View.GONE
-                book_requests_recycler_view_item_canceled_layout.visibility = View.GONE
-                book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
-                book_requests_recycler_view_item_accept_btn.visibility = View.GONE
-                book_requests_recycler_view_item_accepted_btn.visibility = View.GONE
-                book_requests_recycler_view_item_canceled_btn.visibility = View.GONE
-                book_requests_recycler_view_item_cancel_lb1.text = resources.getString(R.string.request_expired)
-                book_requests_recycler_view_item_cancel_me_layout.visibility = View.VISIBLE
-            }
+            itemView.book_requests_recycler_view_item_title_tv.text = item.house_name.toString()
 
             requestManager
                 .load(item.house_image)
                 .error(R.drawable.test_image_back)
                 .into(itemView.book_requests_recycler_view_item_iv)
+
+            itemView.book_requests_recycler_view_item_top.setOnClickListener {
+                interaction?.onItemSelected(adapterPosition, item)
+            }
+        }
+    }
+
+    class ReservationAcceptedViewHolder
+    constructor(
+        itemView: View,
+        val requestManager: RequestManager,
+        private val interaction: Interaction?
+    ) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(item: HomeReservation) = with(itemView) {
+
+            itemView.book_requests_accepted_recycler_view_item_title_tv.text = item.house_name.toString()
+
+            requestManager
+                .load(item.house_image)
+                .error(R.drawable.test_image_back)
+                .into(itemView.book_requests_accepted_recycler_view_item_iv)
+
+            itemView.book_requests_accepted_recycler_view_item_top.setOnClickListener {
+                interaction?.onItemSelected(adapterPosition, item)
+            }
+
+            itemView.book_requests_recycler_view_item_cancel_btn.setOnClickListener {
+                interaction?.onItemCancelReserv(adapterPosition, item)
+            }
+
+            itemView.book_requests_recycler_view_item_accept_btn.setOnClickListener {
+                interaction?.onItemPay(adapterPosition, item)
+            }
+        }
+    }
+
+    class ReservationCanceledViewHolder
+    constructor(
+        itemView: View,
+        val requestManager: RequestManager,
+        private val interaction: Interaction?
+    ) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(item: HomeReservation) = with(itemView) {
+
+            itemView.book_requests_canceled_recycler_view_item_title_tv.text = item.house_name.toString()
+
+            requestManager
+                .load(item.house_image)
+                .error(R.drawable.test_image_back)
+                .into(itemView.book_requests_canceled_recycler_view_item_iv)
         }
     }
 
