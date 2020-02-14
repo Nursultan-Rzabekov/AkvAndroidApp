@@ -19,6 +19,7 @@ import com.example.akvandroidapp.ui.main.home.state.HomeStateEvent
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
+import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
@@ -88,25 +89,23 @@ class HomeFragment : BaseHomeFragment(),
 //                    )
 //                }
                 else {
-                    if (viewState.homeReservationField.reservationList.isNotEmpty()) {
-                        val guests =
-                            viewState.homeReservationField.reservationList.sumBy { it.guests!! }
-                        listFilledState(trips, guests)
-                        recyclerAdapter.apply {
-                            preloadGlideImages(
-                                requestManager = requestManager,
-                                list = viewState.homeReservationField.reservationList
+                    val guests =
+                        viewState.homeReservationField.reservationList.sumBy { it.guests!! }
+                    listFilledState(trips, guests)
+                    recyclerAdapter.apply {
+                        preloadGlideImages(
+                            requestManager = requestManager,
+                            list = viewState.homeReservationField.reservationList
+                        )
+                        if (viewState.homeReservationField.page != 1)
+                            submitList(
+                                blogList = viewState.homeReservationField.reservationList,
+                                isQueryExhausted = viewState.homeReservationField.isQueryExhausted)
+                        else
+                            clearAndSubmitList(
+                                blogList = viewState.homeReservationField.reservationList,
+                                isQueryExhausted = viewState.homeReservationField.isQueryExhausted
                             )
-                            if (viewState.homeReservationField.page != 1)
-                                submitList(
-                                    blogList = viewState.homeReservationField.reservationList,
-                                    isQueryExhausted = viewState.homeReservationField.isQueryExhausted)
-                            else
-                                clearAndSubmitList(
-                                    blogList = viewState.homeReservationField.reservationList,
-                                    isQueryExhausted = viewState.homeReservationField.isQueryExhausted
-                                )
-                        }
                     }
                 }
             }
@@ -148,9 +147,14 @@ class HomeFragment : BaseHomeFragment(),
     }
 
     override fun onItemSelected(position: Int, item: HomeReservation) {
+        var fromState = ZhilyeActivity.DEFAULT_BOTTOM_BAR
+        when(item.accepted_house){
+            true -> fromState = ZhilyeActivity.BOTTOM_BAR_CANCEL
+            else -> fromState = ZhilyeActivity.NO_BOTTOM_BAR
+        }
         val bundle = bundleOf(
             "houseId" to item.house_id,
-            "isCancelState" to true
+            "fromState" to fromState
         )
         findNavController().navigate(R.id.action_homeFragment_to_zhilyeFragment, bundle)
     }
