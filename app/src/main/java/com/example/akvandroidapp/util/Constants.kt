@@ -18,6 +18,10 @@ class Constants {
         const val MIN_DISTANCE_CHANGE_FOR_UPDATES: Long = 10
         const val MIN_TIME_BW_UPDATES = 1000 * 60 * 1.toLong()
 
+        const val FILTER_MAX_PRICE = 1000000
+        const val FILTER_MAX_PRICE_INTERVAL = 10000
+        const val FILTER_MAX_ROOMS = 15
+        const val FILTER_MAX_BEDS = 30
 
         const val NETWORK_TIMEOUT = 60000L
         const val TESTING_NETWORK_DELAY = 0L // fake network delay for testing

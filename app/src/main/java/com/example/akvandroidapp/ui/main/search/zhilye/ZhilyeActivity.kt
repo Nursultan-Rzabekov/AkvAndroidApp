@@ -2,6 +2,7 @@ package com.example.akvandroidapp.ui.main.search.zhilye
 
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -62,6 +63,12 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     private val TAGV = "Zhilye Activity"
 
+    companion object {
+        const val BOTTOM_BAR_CANCEL = 1
+        const val NO_BOTTOM_BAR = 2
+        const val DEFAULT_BOTTOM_BAR = 0
+    }
+
     private lateinit var maPView: MapView
     private val TARGET_LOCATION = Point(59.945933, 30.320045)
     lateinit var flipperLayout : FlipperLayout
@@ -93,7 +100,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     lateinit var viewModel: ZhilyeViewModel
 
     private var houseId: Int? = null
-    private var isCancelState: Boolean = false
+    private var fromState: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +111,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         Locale.setDefault(Locale.forLanguageTag("ru"))
 
         houseId = intent.getIntExtra("houseId",67)
-        isCancelState = intent.getBooleanExtra("isCancelState", false)
+        fromState = intent.getIntExtra("fromState", DEFAULT_BOTTOM_BAR)
 
         viewModel = ViewModelProvider(this, providerFactory).get(ZhilyeViewModel::class.java)
         stateChangeListener = this
@@ -118,7 +125,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         setToolbar()
 
-        initStateOfHouse()
+        initStateOfHouse(fromState)
         setMapView()
         setFlipperLayout(arrayListOf())
         initRecyclerViews()
@@ -477,12 +484,21 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_white)
     }
 
-    private fun initStateOfHouse(){
-        if (isCancelState){
-
-        }else{
-
+    private fun initStateOfHouse(state: Int){
+        when(state){
+            DEFAULT_BOTTOM_BAR -> fragment_zhilye_frame_book_layout.visibility = View.VISIBLE
+            BOTTOM_BAR_CANCEL -> cancelState()
+            NO_BOTTOM_BAR -> fragment_zhilye_frame_book_layout.visibility = View.GONE
         }
+    }
+
+    private fun cancelState(){
+        fragment_zhilye_frame_book_layout.background = getDrawable(R.color.primaryZero)
+        fragment_zhile_price_tv.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        fragment_zhile_price_star_iv.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        fragment_zhile_rating_tv.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
+        fragment_zhile_book_btn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
+        fragment_zhile_book_btn.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.primaryZero)))
     }
 
     private fun showDatePicker(){

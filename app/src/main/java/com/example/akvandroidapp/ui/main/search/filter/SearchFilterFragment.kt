@@ -20,11 +20,13 @@ import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.Constants
+import com.example.akvandroidapp.util.Converters
 import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlinx.android.synthetic.main.fragment_filter_layout.*
 import kotlinx.android.synthetic.main.header_filter.*
 import kotlinx.android.synthetic.main.header_filter.header_filter_drop_tv
 import loadFirstPage
+import java.util.*
 import javax.inject.Inject
 
 
@@ -43,10 +45,13 @@ class SearchFilterFragment : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Locale.setDefault(Locale.forLanguageTag("ru"))
+
         setContentView(R.layout.fragment_filter_layout)
 
         setToolbar()
         subscribeObservers()
+        setViewInfo()
 
         fragment_filter_city_layout.setOnClickListener {
             navFilterCityFragment()
@@ -89,6 +94,16 @@ class SearchFilterFragment : BaseActivity() {
     }
 
     override fun displayProgressBar(bool: Boolean) {
+    }
+
+    private fun setViewInfo(){
+        fragment_filter_price_tv.text = ("0-${Converters.pretifyPrice(Constants.FILTER_MAX_PRICE)}kzt")
+        fragment_filter_room_count_tv.text = ("0-${Constants.FILTER_MAX_ROOMS}")
+        fragment_filter_bed_count_tv.text = ("0-${Constants.FILTER_MAX_BEDS}")
+
+        fragment_filter_price_rangeBar.tickEnd = Constants.FILTER_MAX_PRICE.toFloat()
+        fragment_filter_room_count_rangeBar.tickEnd = Constants.FILTER_MAX_ROOMS.toFloat()
+        fragment_filter_bed_count_rangeBar.tickEnd = Constants.FILTER_MAX_BEDS.toFloat()
     }
 
     private fun subscribeObservers(){
