@@ -431,4 +431,6 @@
     <string name="add_card">Добавить карту</string>
     <string name="payments_history">История платежей</string>
     <string name="no_payment_history">У вас пока нету истории платежей</string>
+    <string name="fill_iban">Необходимо вести IBAN номер для размещения обьявления</string>
+    <string name="put_iban">Введите IBAN номер</string>
 </resources>

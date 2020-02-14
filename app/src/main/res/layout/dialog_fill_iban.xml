@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/cornerRadius1"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/elevation_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dim_8dp">
+
+            <ImageButton
+                android:id="@+id/dialog_fill_iban_cancel_btn"
+                android:layout_width="@dimen/dim_16dp"
+                android:layout_height="@dimen/dim_16dp"
+                style="@style/BasicImageButton"
+                android:src="@drawable/ic_cancel_date_quests"
+                android:tint="@color/grey8"
+                android:layout_gravity="end"
+                android:contentDescription="@string/cancel"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/dim_20dp"
+                android:paddingEnd="@dimen/dim_20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_12dp"
+                    android:text="@string/fill_iban"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dialog_fill_iban_text_l_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_28dp"
+                    style="@style/BasicTextOutlined"
+                    app:hintEnabled="false"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="16">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dialog_fill_iban_text_et"
+                        style="@style/BasicEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/put_iban"
+                        android:maxLines="1"
+                        android:textSize="13sp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialog_fill_iban_send_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AllButton.Unelevated"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/dim_12dp"
+                    android:text="@string/post"
+                    android:textSize="13sp"
+                    android:paddingTop="0dp"
+                    android:insetTop="@dimen/dim_8dp"
+                    android:insetBottom="@dimen/dim_8dp"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="@dimen/dim_36dp"
+                    android:paddingEnd="@dimen/dim_36dp"/>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/dialog_request_deny_skip_tv"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:layout_marginTop="@dimen/dim_8dp"-->
+<!--                    android:layout_marginBottom="@dimen/dim_8dp"-->
+<!--                    android:text="@string/cancel"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/secondaryFirst"/>-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

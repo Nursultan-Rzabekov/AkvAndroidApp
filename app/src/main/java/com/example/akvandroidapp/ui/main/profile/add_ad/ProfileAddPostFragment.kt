@@ -11,6 +11,7 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.AddAdInfo
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.add_ad.dialogs.IbanRequestDialog
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.util.SuccessHandling.Companion.SUCCESS_BLOG_CREATED
 import kotlinx.android.synthetic.main.activity_add_ad.*
@@ -23,7 +24,7 @@ import java.io.File
 import java.util.ArrayList
 import javax.inject.Inject
 
-class ProfileAddPostFragment : BaseAddHouseFragment(){
+class ProfileAddPostFragment : BaseAddHouseFragment(), IbanRequestDialog.IbanRequestInteraction{
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -43,6 +44,11 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
         fragment_add_ad_post_next_btn.setOnClickListener {
             subscribeObservers()
         }
+    }
+
+    private fun showDialog(){
+        val ibanDialog = IbanRequestDialog(requireContext(), this)
+        ibanDialog.show()
     }
 
     private fun subscribeObservers(){
@@ -142,6 +148,14 @@ class ProfileAddPostFragment : BaseAddHouseFragment(){
             activity?.finish()
             sessionManager.clearAddAdAllInfo()
         }
+    }
+
+    override fun onCloseBtnListener() {}
+
+    override fun onCancelBtnListener() {}
+
+    override fun onPostBtnListener(iban: String) {
+
     }
 }
 

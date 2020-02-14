@@ -16,6 +16,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.RequestListAdapter
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
+import com.example.akvandroidapp.ui.main.messages.dialogs.RejectReservationDialog
 import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.messages.state.RequestStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
@@ -33,7 +34,8 @@ import javax.inject.Inject
 
 
 class RequestFragment : BaseRequestFragment(),
-    RequestListAdapter.Interaction, SwipeRefreshLayout.OnRefreshListener{
+    RequestListAdapter.Interaction, SwipeRefreshLayout.OnRefreshListener,
+    RejectReservationDialog.RejectReservationInteraction{
 
     private lateinit var recyclerAdapter: RequestListAdapter
 
@@ -200,11 +202,31 @@ class RequestFragment : BaseRequestFragment(),
     }
 
     override fun onCancelItem(position: Int, item: HomeReservation) {
+        showDialog(item.id)
+    }
+
+    private fun showDialog(id: Int){
+        val rejectDialog = RejectReservationDialog(requireContext(), id,this)
+        rejectDialog.show()
+    }
+
+    private fun rejectReservation(message: String, item: Int){
         viewModel.setStateEvent(
             RequestStateEvent.RejectReservationEvent(
-                reservation_id = item.id
+                reservation_id = item,
+                message = message
             )
         )
+    }
+
+    override fun onCloseBtnListener() {}
+
+    override fun onSkipBtnListener(itemId: Int) {
+        rejectReservation("", itemId)
+    }
+
+    override fun onSendBtnListener(itemId: Int, message: String) {
+        rejectReservation(message, itemId)
     }
 
 }

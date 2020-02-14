@@ -10,6 +10,7 @@ sealed class RequestStateEvent {
         var reservation_id: Int = -1
     ): RequestStateEvent()
     class RejectReservationEvent(
-        var reservation_id: Int = -1
+        var reservation_id: Int = -1,
+        var message: String = ""
     ): RequestStateEvent()
 }
