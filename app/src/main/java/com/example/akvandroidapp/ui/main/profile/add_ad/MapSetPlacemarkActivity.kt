@@ -29,20 +29,12 @@ class MapSetPlacemarkActivity : BaseActivity(), MapObjectDragListener
         setContentView(R.layout.map)
         mapView = findViewById(R.id.mapview)
 
-
         sessionManager.location.observe(this, androidx.lifecycle.Observer{ dataState ->
-            mapView.map.move(
-                CameraPosition(Point(dataState.latitude,dataState.longitude), 17.0f, 0.0f, 0.0f),
-                Animation(Animation.Type.SMOOTH, 1F),
-                null
-            )
             val imageProvider = ImageProvider.fromResource(this@MapSetPlacemarkActivity, R.drawable.pin)
-            val place = mapView.map.mapObjects
-                .addPlacemark(Point(dataState.latitude,dataState.longitude), imageProvider, IconStyle())
+            val place = mapView.map.mapObjects.addPlacemark(Point(dataState.latitude,dataState.longitude), imageProvider, IconStyle())
             place.isDraggable = true
             place.setDragListener(this)
         })
-
     }
     override fun displayProgressBar(bool: Boolean){
         if(bool){

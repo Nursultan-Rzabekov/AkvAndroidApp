@@ -56,4 +56,11 @@
     <dimen name="dim_40dp">40dp</dimen>
     <dimen name="card_item_height">192dp</dimen>
     <dimen name="recycler_loading_view_height">80dp</dimen>
+
+    <dimen name="float_button_fab_size">46dp</dimen>
+    <dimen name="margin_button_end_popular">30dp</dimen>
+    <dimen name="margin_button_start_popular">30dp</dimen>
+    <dimen name="margin_button_top_popular">30dp</dimen>
+    <dimen name="margin_button_bottom_popular">40dp</dimen>
+
 </resources>

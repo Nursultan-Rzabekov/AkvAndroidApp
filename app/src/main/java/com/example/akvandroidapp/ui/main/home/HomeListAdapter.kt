@@ -298,6 +298,20 @@ class HomeListAdapter(
                 .error(R.drawable.test_image_back)
                 .into(itemView.book_requests_accepted_recycler_view_item_iv)
 
+            if(item.status == 1){
+                book_requests_accepted_recycler_view_item_accepted_lb1.setTextColor(resources.getColor(R.color.primaryZero))
+                book_requests_accepted_recycler_view_item_accepted_lb1.text = resources.getString(R.string.request_сanceled_by_user)
+                itemView.book_requests_recycler_view_item_accept_btn.visibility = View.GONE
+                itemView.book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
+            }
+            if(item.status == 2){
+                book_requests_accepted_recycler_view_item_accepted_lb1.setTextColor(resources.getColor(R.color.primaryZero))
+                book_requests_accepted_recycler_view_item_accepted_lb1.text = resources.getString(R.string.request_expired)
+                itemView.book_requests_recycler_view_item_accept_btn.visibility = View.GONE
+                itemView.book_requests_recycler_view_item_cancel_btn.visibility = View.GONE
+            }
+
+
             itemView.book_requests_accepted_recycler_view_item_top.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }

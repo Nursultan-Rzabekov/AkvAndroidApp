@@ -67,6 +67,12 @@
 
         </activity>
 
+        <activity android:name=".ui.main.profile.payment.PaymentMainActivity"
+            android:windowSoftInputMode="adjustPan">
+
+
+        </activity>
+
 
         <activity
             android:name=".ui.main.search.zhilye.ZhilyeActivity"

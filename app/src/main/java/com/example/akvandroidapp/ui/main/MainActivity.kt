@@ -1,6 +1,10 @@
 package com.example.akvandroidapp.ui.main
 
+import android.Manifest
+import android.app.Service
 import android.content.Intent
+import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -11,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.AuthToken
-import com.example.akvandroidapp.ui.BaseActivity
+import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
 import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
@@ -34,13 +38,14 @@ import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity
 import com.example.akvandroidapp.util.BottomNavController
+import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.setUpNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.explore_active.*
 import java.util.*
 
 
-class MainActivity : BaseActivity(),
+class MainActivity : BaseLocationActivity(),
     BottomNavController.NavGraphProvider,
     BottomNavController.OnNavigationGraphChanged,
     BottomNavController.OnNavigationReselectedListener

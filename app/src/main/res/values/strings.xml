@@ -406,6 +406,7 @@
     <string name="cancel_reserv">Отменить</string>
     <string name="accepted">Принята</string>
     <string name="canceled">Отклонена</string>
+    <string name="geoNotFound">Геолокация неизвестно</string>
     <string name="request_cancel_label">Напишите пожалуйста \nпочему вы откланяете заявку</string>
     <string name="message_two_dots">Сообщение:</string>
     <string name="send">Отправить</string>

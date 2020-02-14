@@ -132,9 +132,7 @@ class SearchFragment :
         findNavController().navigate(R.id.action_searchFragment_to_mapActivity)
     }
 
-
     private fun subscribeObservers(){
-
         viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
             if(dataState != null) {
                 handlePagination(dataState)
@@ -342,6 +340,7 @@ class SearchFragment :
 
                 findViewById<MaterialButton>(R.id.dialog_guests_clear_all_btn).setOnClickListener {
                     viewModel.clearCounts()
+                    onBlogSearchOrFilter()
                     adultsCount = 0
                     childrenCount = 0
                     adults.text = adultsCount.toString()

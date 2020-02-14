@@ -11,15 +11,5 @@
         android:layout_centerInParent="true"/>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        style="@style/FloatButtonStyle"
-        android:id="@+id/zoom_map"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_gps_fixed_white_24dp"
-        />
-
-
-
 
 </RelativeLayout>

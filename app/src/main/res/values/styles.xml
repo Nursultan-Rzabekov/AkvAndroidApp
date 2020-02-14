@@ -24,6 +24,17 @@
         <item name="boxStrokeColor">@color/secondaryFirst</item>
     </style>
 
+    <style name="FloatButtonStyle" parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint">@color/primaryZero</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fabCustomSize">@dimen/float_button_fab_size</item>
+        <item name="android:layout_marginTop">@dimen/margin_button_top_popular</item>
+        <item name="android:layout_marginEnd">@dimen/margin_button_end_popular</item>
+        <item name="android:layout_marginBottom">@dimen/margin_button_bottom_popular</item>
+        <item name="android:layout_marginStart">@dimen/margin_button_start_popular</item>
+    </style>
+
     <style name="CityTextOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius1</item>
         <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius1</item>

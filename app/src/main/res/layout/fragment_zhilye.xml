@@ -206,7 +206,7 @@
 
             <include
                 android:id="@+id/fragment_zhilye_mini_map"
-                layout="@layout/map"
+                layout="@layout/map_zhilye"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
                 android:layout_marginStart="@dimen/dim_36dp"

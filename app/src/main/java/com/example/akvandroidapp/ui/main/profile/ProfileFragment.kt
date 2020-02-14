@@ -14,6 +14,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
+import com.example.akvandroidapp.ui.main.profile.payment.PaymentMainActivity
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.support.SupportMainActivity
@@ -70,6 +71,10 @@ class ProfileFragment : BaseProfileFragment(){
             navigateMyHouseAddsFragment()
         }
 
+        fragment_profile_owner_payment_layout.setOnClickListener {
+            navigatePaymentFragment()
+        }
+
         header_profile_civ.setOnClickListener {
             navigateAccountUserProfileFragment()
         }
@@ -101,6 +106,11 @@ class ProfileFragment : BaseProfileFragment(){
 
     private fun navigateMyHouseAddsFragment(){
         val intent = Intent(context, MyHouseMainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigatePaymentFragment(){
+        val intent = Intent(context, PaymentMainActivity::class.java)
         startActivity(intent)
     }
 

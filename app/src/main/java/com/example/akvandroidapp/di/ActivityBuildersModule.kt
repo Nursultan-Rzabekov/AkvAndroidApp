@@ -14,6 +14,10 @@ import com.example.akvandroidapp.di.myHouse.MyHouseFragmentBuildersModule
 import com.example.akvandroidapp.di.myHouse.MyHouseModule
 import com.example.akvandroidapp.di.myHouse.MyHouseScope
 import com.example.akvandroidapp.di.myHouse.MyHouseViewModelModule
+import com.example.akvandroidapp.di.payment.PaymentFragmentBuildersModule
+import com.example.akvandroidapp.di.payment.PaymentModule
+import com.example.akvandroidapp.di.payment.PaymentScope
+import com.example.akvandroidapp.di.payment.PaymentViewModelModule
 import com.example.akvandroidapp.di.support.SupportFragmentBuildersModule
 import com.example.akvandroidapp.di.support.SupportModule
 import com.example.akvandroidapp.di.support.SupportScope
@@ -25,6 +29,7 @@ import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesAc
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.MapSetPlacemarkActivity
 import com.example.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity
+import com.example.akvandroidapp.ui.main.profile.payment.PaymentMainActivity
 import com.example.akvandroidapp.ui.main.profile.support.SupportMainActivity
 import com.example.akvandroidapp.ui.main.search.MapActivity
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
@@ -64,6 +69,12 @@ abstract class ActivityBuildersModule {
         modules = [SupportModule::class, SupportFragmentBuildersModule::class, SupportViewModelModule::class]
     )
     abstract fun contributeSupportMainActivity(): SupportMainActivity
+
+    @PaymentScope
+    @ContributesAndroidInjector(
+        modules = [PaymentModule::class, PaymentFragmentBuildersModule::class, PaymentViewModelModule::class]
+    )
+    abstract fun contributePaymentMainActivity(): PaymentMainActivity
 
     @MainScope
     @ContributesAndroidInjector(
