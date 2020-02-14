@@ -130,9 +130,8 @@ constructor(
                 Log.d(TAG, "result response ${response.body.results}")
 
                 val blogPostList: ArrayList<UserConversationMessages> = ArrayList()
-                val blogPostListImages: ArrayList<UserConversationImages?> = ArrayList()
 
-                for(blogPostResponse in response.body.results){
+                for(blogPostResponse in response.body.results) {
                     blogPostList.add(
                         UserConversationMessages(
                             id = blogPostResponse.id,
@@ -146,18 +145,9 @@ constructor(
                             recipientPic = blogPostResponse.recipient.userpic,
                             body = blogPostResponse.body,
                             created_at = blogPostResponse.created_at,
-                            updated_at = blogPostResponse.updated_at
+                            updated_at = blogPostResponse.updated_at,
+                            image = blogPostResponse.images?.first()?.image
                         )
-                    )
-
-                    blogPostListImages.add(
-                        blogPostResponse.images?.let {
-                            UserConversationImages(
-                                message = it.first().message,
-                                image = it.first().image
-                            )
-                        }
-
                     )
                 }
 
@@ -168,9 +158,8 @@ constructor(
                                 DetailsViewState.MyChatDetailsFields(
                                     blogList = blogPostList,
                                     count = response.body.count,
-                                    blogListImages = blogPostListImages,
                                     isQueryInProgress = false,
-                                    isQueryExhausted = true
+                                    isQueryExhausted = booleanQuery(response.body.count)
                                 )
                             )
                         )
@@ -178,6 +167,14 @@ constructor(
                 }
 
             }
+
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE >= blogPostListSize){
+                    return true
+                }
+                return false
+            }
+
             override fun createCall(): LiveData<GenericApiResponse<ConverstaionsResponse>> {
                 Log.d(TAG,"loadChat + ${page}")
                 return openApiMainService.getConversations(

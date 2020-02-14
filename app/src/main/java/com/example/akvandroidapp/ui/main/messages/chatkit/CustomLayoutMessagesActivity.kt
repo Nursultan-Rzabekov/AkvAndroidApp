@@ -29,9 +29,7 @@ import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
 import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
 import com.example.akvandroidapp.ui.main.messages.models.MessageText
 import com.example.akvandroidapp.ui.main.messages.models.mMessage
-import com.example.akvandroidapp.ui.main.search.viewmodel.getTargetQuery
-import com.example.akvandroidapp.ui.main.search.viewmodel.setQuery
-import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
+import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Constants.Companion.TOTAL_MESSAGES_COUNT
 import com.example.akvandroidapp.util.Converters
@@ -148,7 +146,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     }
 
     private fun subscribeObservers(){
-
         viewModel.dataState.observe(this, androidx.lifecycle.Observer{ dataState ->
             if(dataState != null) {
                 handlePagination(dataState)
@@ -162,11 +159,11 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 if(viewState.sendMessageFields.sended){
                     Log.d(TAG, "send message lll : page: ${viewState.sendMessageFields.messageBody}")
                     onBlogSearchOrFilter()
-                    viewState.sendMessageFields.sended = false
+                    viewModel.setSendedState(false)
                 }
                 else{
-                    Log.d(TAG, "send message vvvvvqqq: page: ${viewState.myChatFields.count}")
                     if(viewState.myChatFields.blogList.isNotEmpty()){
+                        Log.d(TAG, "send message vvvvvqqq: page: ${viewState.myChatFields.blogList}")
                         val set =  HashSet<UserConversationsResponse>()
                         if(viewState.myChatFields.blogList.isNotEmpty()){
                             viewState.myChatFields.blogList.forEach {
@@ -182,25 +179,18 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                                     recipientEmail = it.recipientEmail,
                                     recipientPic = it.recipientPic,
                                     created_at = it.created_at.toString(),
-                                    updated_at = it.updated_at.toString()
+                                    updated_at = it.updated_at.toString(),
+                                    images = it.image
                                 ))
                             }
                         }
-                        if(viewState.myChatFields.blogListImages.isNotEmpty()){
-                            viewState.myChatFields.blogListImages.forEach { imagesList ->
-                                set.toList().forEach {
-                                    if(it.id == imagesList?.message){
-                                        it.images = imagesList.image
-                                    }
-                                }
-                            }
-                        }
+                        Log.d(TAG, "send message 123123 : page: ${set.toList()}")
+
                         if (viewState.myChatFields.page == 1){
                             Log.d(TAG, "send message hahaha : page: ${set.toList()}")
                             sendMessageResponse(set.toList())
                         }
                         else {
-                            set.clear()
                             sendMessageResponse(set.toList())
                         }
                     }
@@ -512,8 +502,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel.setMessageBody(input.toString())
         viewModel.setUserId(viewModel.getTargetQuery())
         viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
-
-
         return true
     }
 

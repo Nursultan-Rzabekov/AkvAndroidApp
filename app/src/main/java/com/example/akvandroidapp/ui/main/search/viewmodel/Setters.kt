@@ -205,6 +205,12 @@ fun FavoriteViewModel.setDeleteState(delete: Boolean){
     setViewState(update)
 }
 
+fun DetailsViewModel.setSendedState(sended: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.sendMessageFields.sended = sended
+    setViewState(update)
+}
+
 fun HomeViewModel.setCancelState(cancel: Boolean){
     val update = getCurrentViewStateOrNew()
     update.cancelReservationField.isCancelled = cancel
@@ -255,13 +261,6 @@ fun DetailsViewModel.setBlogListData(blogList: List<UserConversationMessages>){
     update.myChatFields.blogList = blogList
     setViewState(update)
 }
-
-fun DetailsViewModel.setBlogListDataImages(blogList: List<UserConversationImages?>){
-    val update = getCurrentViewStateOrNew()
-    update.myChatFields.blogListImages = blogList
-    setViewState(update)
-}
-
 
 fun MyHouseViewModel.setBlogListData(blogList: List<BlogPost>){
     val update = getCurrentViewStateOrNew()

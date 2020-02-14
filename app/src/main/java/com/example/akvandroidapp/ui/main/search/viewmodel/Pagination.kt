@@ -244,9 +244,8 @@ fun FavoriteViewModel.nextPage(){
 fun DetailsViewModel.nextPage(){
     if (!viewState.value!!.myChatFields.isQueryInProgress
         && !viewState.value!!.myChatFields.isQueryExhausted){
-        Log.d(TAG, "FavoriteViewModel: Attempting to load next page...")
+        Log.d(TAG, "DetailsViewModel: Attempting to load next page...")
         incrementPageNumber()
-        setBlogListData(listOf())
         setQueryInProgress(true)
         setStateEvent(DetailsStateEvent.ChatDetailEvent())
     }
@@ -368,7 +367,6 @@ fun DetailsViewModel.handleIncomingBlogListData(viewState: DetailsViewState){
     setQueryInProgress(viewState.myChatFields.isQueryInProgress)
     setQueryExhausted(viewState.myChatFields.isQueryExhausted)
     setBlogListData(viewState.myChatFields.blogList)
-    setBlogListDataImages(viewState.myChatFields.blogListImages)
 }
 
 fun ZhilyeBookViewModel.handleIncomingRequest(viewState: ZhilyeBookViewState){

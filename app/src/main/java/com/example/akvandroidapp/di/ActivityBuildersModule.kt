@@ -24,6 +24,7 @@ import com.example.akvandroidapp.di.support.SupportScope
 import com.example.akvandroidapp.di.support.SupportViewModelModule
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.MainActivity
+import com.example.akvandroidapp.ui.main.messages.MessagesDetailActivity
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutDialogsActivity
 import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
@@ -122,9 +123,9 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeZhilyeRulesOfHouseActivity(): ZhilyeRulesOfHouseActivity
 
-//    @MainScope
-//    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
-//    abstract fun contributeMessagesDetailActivity(): MessagesDetailActivity
+    @MainScope
+    @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
+    abstract fun contributeMessagesDetailActivity(): MessagesDetailActivity
 
     @MainScope
     @ContributesAndroidInjector()

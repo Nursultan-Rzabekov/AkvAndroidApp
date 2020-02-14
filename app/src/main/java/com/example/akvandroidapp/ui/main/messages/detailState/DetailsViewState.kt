@@ -13,7 +13,7 @@ class DetailsViewState (
 {
     data class MyChatDetailsFields(
         var blogList: List<UserConversationMessages> = ArrayList(),
-        var blogListImages: List<UserConversationImages?> = ArrayList(),
+//        var blogListImages: List<UserConversationImages?> = ArrayList(),
         var page: Int = 1,
         var count: Int = 0,
         var target :Int = 1,

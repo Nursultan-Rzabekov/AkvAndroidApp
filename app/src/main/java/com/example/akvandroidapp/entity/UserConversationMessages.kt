@@ -48,6 +48,9 @@ data class UserConversationMessages(
     var created_at: String? = null,
 
     @ColumnInfo(name = "updated_at")
-    var updated_at: String? = null
+    var updated_at: String? = null,
+
+    @ColumnInfo(name = "image")
+    var image: String? = null
 
     ): Parcelable
