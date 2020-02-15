@@ -37,6 +37,8 @@
     </fragment>
 
 
+
+
     <fragment android:id="@+id/profileAccountUserProfileFragment"
         android:name="com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment"
         android:label="@string/fragment_create_blog"

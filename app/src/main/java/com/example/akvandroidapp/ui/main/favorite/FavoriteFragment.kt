@@ -205,7 +205,10 @@ class FavoriteFragment : BaseFavoriteFragment(),
     }
 
     override fun onAddMoreClicked() {
-
+//        val bundle = bundleOf(
+//            "start" to "yes"
+//        )
+//        findNavController().navigate(R.id.action_favoriteFragment_to_searchFragment, bundle)
     }
 
 }

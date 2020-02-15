@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.fragment_chat_main.*
 
 class MessagesFragment : BaseMessagesFragment(){
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

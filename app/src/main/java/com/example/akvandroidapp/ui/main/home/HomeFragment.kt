@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.home
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -18,6 +19,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.home.state.HomeStateEvent
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatListAdapter
+import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity
 import com.example.akvandroidapp.util.Constants
@@ -55,6 +57,11 @@ class HomeFragment : BaseHomeFragment(),
         subscribeObservers()
 
         viewModel.loadFirstPage()
+    }
+
+    private fun navNextFragment(){
+        val intent = Intent(context, AddAdMainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun subscribeObservers(){
@@ -168,7 +175,10 @@ class HomeFragment : BaseHomeFragment(),
     }
 
     override fun onBookMoreBtnPressed() {
-        //navigateToSearch
+//        val bundle = bundleOf(
+//            "start" to "yes"
+//        )
+//        findNavController().navigate(R.id.action_homeFragment_to_searchFragment, bundle)
     }
 
     override fun onDestroyView() {

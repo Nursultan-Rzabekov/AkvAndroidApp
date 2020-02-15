@@ -19,6 +19,14 @@
             app:exitAnim="@anim/slide_out_left"
             />
 
+        <action android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/nav_create_search"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+
         <action android:id="@+id/action_homeFragment_to_payBoxPayWebViewFragment"
             app:destination="@id/payBoxPayWebViewFragment"
             app:popEnterAnim="@anim/slide_in_left"
@@ -28,6 +36,8 @@
             />
 
     </fragment>
+
+    <include app:graph="@navigation/nav_create_search" />
 
     <fragment android:id="@+id/payBoxPayWebViewFragment"
         android:name="com.example.akvandroidapp.ui.main.home.PayBoxPayWebViewFragment"

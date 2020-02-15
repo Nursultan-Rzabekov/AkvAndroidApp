@@ -18,6 +18,7 @@ import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
+import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
 import com.example.akvandroidapp.ui.main.home.BaseHomeFragment
 import com.example.akvandroidapp.ui.main.home.PayBoxPayWebViewFragment
 import com.example.akvandroidapp.ui.main.messages.BaseMessagesFragment
@@ -112,6 +113,10 @@ class MainActivity : BaseLocationActivity(),
 
         is SettingsRegionProfileFragment -> {
             navController.navigate(R.id.action_profileSettingsRegionProfileFragment_to_home)
+        }
+
+        is FavoriteFragment -> {
+            navController.navigate(R.id.action_favoriteFragment_to_favoriteFragment)
         }
 
         is SettingsGeolocationProfileFragment -> {

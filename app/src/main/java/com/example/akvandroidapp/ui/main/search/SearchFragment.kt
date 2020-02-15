@@ -79,6 +79,11 @@ class SearchFragment :
         initRecyclerView()
         subscribeObservers()
 
+        val start = arguments?.getString("start")
+        start?.let{
+            onBlogSearchOrFilter()
+        }
+
 
         sessionManager.filterUpdateData.observe(viewLifecycleOwner, Observer {
             viewModel.apply {

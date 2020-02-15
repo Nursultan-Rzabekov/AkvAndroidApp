@@ -45,6 +45,8 @@ fun FavoriteViewModel.resetPage(){
 }
 
 
+
+
 fun ZhilyeReviewViewModel.resetPage(){
     val update = getCurrentViewStateOrNew()
     update.reviewsField.page = 1

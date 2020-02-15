@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.ui.main.profile.my_house
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.AddAdInfo
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity
 import com.example.akvandroidapp.ui.main.profile.my_house.adapters.MyHouseListAdapter
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
@@ -152,7 +154,8 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
     }
 
     private fun navNextFragment(){
-        findNavController().navigate(R.id.action_profileMyHouseAddsProfileFragment_to_profileAddTypeFragment)
+        val intent = Intent(context, AddAdMainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navNextDetailFragment(item: BlogPost){
