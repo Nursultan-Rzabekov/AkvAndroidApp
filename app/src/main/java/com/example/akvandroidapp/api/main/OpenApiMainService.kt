@@ -185,6 +185,12 @@ interface OpenApiMainService {
 //        @Header("Authorization") authorization: String,
         @Field("reservation_id") reservation_id: Int
     ): LiveData<GenericApiResponse<PayRequestResponse>>
+
+    @GET("payments/")
+    fun getPayments(
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<PaymentsListResponse>>
 }
 
 

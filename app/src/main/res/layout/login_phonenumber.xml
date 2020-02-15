@@ -1,105 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/login_phonenumber_back_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/BackTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_32dp"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="@dimen/dim_32dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/enter_phone_number"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_header2"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_36dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="@dimen/dim_36dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/we_will_send_verific_phone"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_content1"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/login_phonenumber_phone_l_et"
-        style="@style/TextOutlined"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/login_phonenumber_phone_et"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/BasicEditText"
-            android:inputType="phone"
-            android:digits="0123456789+" />
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:gravity="center_horizontal">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_phonenumber_send_code_btn"
-        style="@style/BasicButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_48dp"
-        android:text="@string/send_code"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_phonenumber_phone_l_et" />
+                <TextView
+                    android:id="@+id/login_phonenumber_back_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/BackTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-    <LinearLayout
-        android:id="@+id/login_phonenumber_another_way_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_4dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_phonenumber_send_code_btn">
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_32dp"
+                    android:layout_marginTop="152dp"
+                    android:layout_marginEnd="@dimen/dim_32dp"
+                    android:text="@string/enter_phone_number"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_header2"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/login_phonenumber_another_way_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/another_one"
-            android:textColor="@color/primaryZero"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:typeface="normal" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_36dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="@dimen/dim_36dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/we_will_send_verific_phone"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/text_content1"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_phonenumber_phone_l_et"
+                    style="@style/TextOutlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_28dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/login_phonenumber_phone_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BasicEditText"
+                        android:inputType="phone"
+                        android:digits="0123456789+" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/login_phonenumber_send_code_btn"
+                    style="@style/BasicButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_48dp"
+                    android:text="@string/send_code"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.434"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_phonenumber_phone_l_et" />
+
+                <LinearLayout
+                    android:id="@+id/login_phonenumber_another_way_layout"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_phonenumber_send_code_btn">
+
+                    <TextView
+                        android:id="@+id/login_phonenumber_another_way_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/another_one"
+                        android:textColor="@color/primaryZero"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
     <TextView
         android:id="@+id/akv_label"
@@ -108,4 +135,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

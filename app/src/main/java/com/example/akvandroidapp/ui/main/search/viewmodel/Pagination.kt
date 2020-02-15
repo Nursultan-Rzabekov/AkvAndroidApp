@@ -17,6 +17,9 @@ import com.example.akvandroidapp.ui.main.messages.viewmodel.RequestViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseStateStateEvent
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
+import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentStateEvent
+import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewModel
+import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
@@ -44,8 +47,11 @@ fun FavoriteViewModel.resetPage(){
     setViewState(update)
 }
 
-
-
+fun PaymentViewModel.resetPage(){
+    val update = getCurrentViewStateOrNew()
+    update.paymentHistoryField.page = 1
+    setViewState(update)
+}
 
 fun ZhilyeReviewViewModel.resetPage(){
     val update = getCurrentViewStateOrNew()
@@ -107,6 +113,14 @@ fun SearchViewModel.loadFirstPage() {
     resetPage()
     setStateEvent(SearchStateEvent.BlogSearchEvent())
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.blogFields.searchQuery}")
+}
+
+fun PaymentViewModel.loadFirstPage() {
+    setQueryInProgress(true)
+    setQueryExhausted(false)
+    resetPage()
+    setStateEvent(PaymentStateEvent.PaymentHistoryEvent())
+    Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.paymentHistoryField.page}")
 }
 
 fun FavoriteViewModel.loadFirstPage() {
@@ -172,6 +186,13 @@ private fun SearchViewModel.incrementPageNumber(){
     setViewState(update)
 }
 
+private fun PaymentViewModel.incrementPageNumber(){
+    val update = getCurrentViewStateOrNew()
+    val page = update.paymentHistoryField.page
+    update.paymentHistoryField.page = page + 1
+    setViewState(update)
+}
+
 private fun FavoriteViewModel.incrementPageNumber(){
     val update = getCurrentViewStateOrNew()
     val page = update.blogFields.page // get current page
@@ -229,6 +250,17 @@ fun SearchViewModel.nextPage(){
         setBlogListData(listOf())
         setQueryInProgress(true)
         setStateEvent(SearchStateEvent.BlogSearchEvent())
+    }
+}
+
+fun PaymentViewModel.nextPage(){
+    if(!viewState.value!!.paymentHistoryField.isQueryInProgress
+        && !viewState.value!!.paymentHistoryField.isQueryExhausted){
+        Log.d(TAG, "BlogViewModel: Attempting to load next page...")
+        incrementPageNumber()
+        setPaymentHistoryData(listOf())
+        setQueryInProgress(true)
+        setStateEvent(PaymentStateEvent.PaymentHistoryEvent())
     }
 }
 
@@ -323,6 +355,17 @@ fun SearchViewModel.handleIncomingBlogListData(viewState: SearchViewState){
     setQueryInProgress(viewState.blogFields.isQueryInProgress)
     setQueryExhausted(viewState.blogFields.isQueryExhausted)
     setBlogListData(viewState.blogFields.blogList)
+}
+
+fun PaymentViewModel.handleIncomingBlogListData(viewState: PaymentViewState){
+    Log.d(TAG, "PaymentViewModel, DataState: ${viewState}")
+    Log.d(TAG, "PaymentViewModel, DataState: isQueryInProgress?: " +
+            "${viewState.paymentHistoryField.isQueryInProgress}")
+    Log.d(TAG, "PaymentViewModel, DataState: isQueryExhausted?: " +
+            "${viewState.paymentHistoryField.isQueryExhausted}")
+    setQueryInProgress(viewState.paymentHistoryField.isQueryInProgress)
+    setQueryExhausted(viewState.paymentHistoryField.isQueryExhausted)
+    setPaymentHistoryData(viewState.paymentHistoryField.payments)
 }
 
 fun FavoriteViewModel.handleIncomingBlogListData(viewState: FavoriteViewState){

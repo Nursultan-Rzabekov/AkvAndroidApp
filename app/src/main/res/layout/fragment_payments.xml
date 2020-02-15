@@ -10,7 +10,7 @@
         android:backgroundTint="@color/white">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/header_reviews_page_toolbar"
+            android:id="@+id/header_payment_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:buttonGravity="center_vertical">
@@ -34,6 +34,7 @@
                 android:text="@string/change"
                 android:textSize="12sp"
                 android:textColor="@color/primaryZero"
+                android:layout_marginEnd="@dimen/dim_8dp"
                 android:textStyle="bold"
                 android:layout_gravity="end"/>
 
@@ -70,15 +71,15 @@
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="0dp"
-                    app:cardElevation="@dimen/elevation_3">
+                    app:cardElevation="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/dim_12dp"
-                        android:paddingTop="@dimen/dim_16dp"
-                        android:paddingBottom="@dimen/dim_16dp">
+                        android:padding="@dimen/dim_16dp"
+                        android:paddingTop="@dimen/dim_24dp"
+                        android:paddingBottom="@dimen/dim_24dp">
 
                         <EditText
                             android:id="@+id/fragment_payments_iban_et"
@@ -87,6 +88,7 @@
                             android:hint="@string/add_iban"
                             android:textColorHint="@color/primaryZero"
                             android:textSize="16sp"
+                            android:maxLength="20"
                             android:inputType="textCapSentences"
                             android:enabled="false"
                             android:background="@android:color/transparent"

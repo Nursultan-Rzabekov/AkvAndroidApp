@@ -7,6 +7,8 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
+import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
+import com.example.akvandroidapp.util.AbsentLiveData
 import javax.inject.Inject
 
 
@@ -20,6 +22,14 @@ constructor(
     override fun handleStateEvent(stateEvent: PaymentStateEvent): LiveData<DataState<PaymentViewState>> {
         when(stateEvent){
 
+            is PaymentStateEvent.PaymentHistoryEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    profileRepository.getPaymentsHistory(
+                        it,
+                        getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
 
             is PaymentStateEvent.None ->{
                 return liveData {

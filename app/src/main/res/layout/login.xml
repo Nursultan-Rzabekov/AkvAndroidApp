@@ -1,168 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:backgroundTint="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/label1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_60dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginEnd="@dimen/dim_60dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/enter_account"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="@dimen/text_header1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lineHeight="43sp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phonenumber_l_et"
-        style="@style/TextOutlined"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label1">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phonenumber_et"
-            android:layout_width="match_parent"
-            android:inputType="phone"
-            style="@style/BasicEditText"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_l_et"
-        style="@style/TextOutlined"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_24dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phonenumber_l_et">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_et"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:inputType="textPassword"
-            style="@style/BasicEditText"
-            android:hint="@string/password"
-            android:textSize="@dimen/text_input1"
-            android:typeface="normal" />
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/forgot_password_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_4dp"
-        android:text="@string/forgot_password"
-        android:textAlignment="textEnd"
-        android:textColor="@color/secondaryFirst"
-        android:textSize="@dimen/text_content2"
-        app:layout_constraintEnd_toEndOf="@+id/password_l_et"
-        app:layout_constraintTop_toBottomOf="@+id/password_l_et" />
+                <TextView
+                    android:id="@+id/label1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_60dp"
+                    android:layout_marginTop="67dp"
+                    android:layout_marginEnd="@dimen/dim_60dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/enter_account"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/text_header1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lineHeight="43sp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_in_btn"
-        style="@style/BasicButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_48dp"
-        android:text="@string/Sign_in"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_l_et" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phonenumber_l_et"
+                    style="@style/TextOutlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_36dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label1">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_16dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/or"
-        android:textColor="@android:color/secondary_text_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phonenumber_et"
+                        android:layout_width="match_parent"
+                        android:inputType="phone"
+                        style="@style/BasicEditText"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_in_google_btn"
-        style="@style/GoogleLogButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_16dp"
-        android:text="@string/sign_in_Google"
-        app:icon="@mipmap/ic_google_logo_foreground"
-        app:iconGravity="textEnd"
-        app:iconPadding="@dimen/dim_4dp"
-        app:iconSize="@dimen/dim_24dp"
-        app:iconTint="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="150dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/dim_20dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_google_btn" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_l_et"
+                    style="@style/TextOutlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_24dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/phonenumber_l_et">
 
-    <LinearLayout
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_36dp"
-        android:layout_marginTop="@dimen/dim_20dp"
-        android:layout_marginEnd="@dimen/dim_36dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:inputType="textPassword"
+                        style="@style/BasicEditText"
+                        android:hint="@string/password"
+                        android:textSize="@dimen/text_input1"
+                        android:typeface="normal" />
 
-        <TextView
-            android:id="@+id/login_label2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/dont_have_account"
-            android:textSize="@dimen/text_content1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/create_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dim_4dp"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/create_"
-            android:layout_marginStart="@dimen/dim_4dp"
-            android:textColor="@color/primaryZero"
-            android:textSize="@dimen/text_content1" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/forgot_password_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_4dp"
+                    android:text="@string/forgot_password"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/secondaryFirst"
+                    android:textSize="@dimen/text_content2"
+                    app:layout_constraintEnd_toEndOf="@+id/password_l_et"
+                    app:layout_constraintTop_toBottomOf="@+id/password_l_et" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sign_in_btn"
+                    style="@style/BasicButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_48dp"
+                    android:text="@string/Sign_in"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/password_l_et" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dim_20dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
+
+                <LinearLayout
+                    android:layout_width="391dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_36dp"
+                    android:layout_marginTop="@dimen/dim_20dp"
+                    android:layout_marginEnd="@dimen/dim_36dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider">
+
+                    <TextView
+                        android:id="@+id/login_label2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/dont_have_account"
+                        android:textSize="@dimen/text_content1" />
+
+                    <TextView
+                        android:id="@+id/create_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dim_4dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/create_"
+                        android:layout_marginStart="@dimen/dim_4dp"
+                        android:textColor="@color/primaryZero"
+                        android:textSize="@dimen/text_content1" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--    <TextView-->
+        <!--        android:id="@+id/textView4"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="@dimen/dim_16dp"-->
+        <!--        android:fontFamily="@font/montserrat"-->
+        <!--        android:text="@string/or"-->
+        <!--        android:textColor="@android:color/secondary_text_light"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />-->
+
+        <!--    <com.google.android.material.button.MaterialButton-->
+        <!--        android:id="@+id/sign_in_google_btn"-->
+        <!--        style="@style/GoogleLogButton"-->
+        <!--        android:layout_width="0dp"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="@dimen/dim_16dp"-->
+        <!--        android:text="@string/sign_in_Google"-->
+        <!--        app:icon="@mipmap/ic_google_logo_foreground"-->
+        <!--        app:iconGravity="textEnd"-->
+        <!--        app:iconPadding="@dimen/dim_4dp"-->
+        <!--        app:iconSize="@dimen/dim_24dp"-->
+        <!--        app:iconTint="@null"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/textView4" />-->
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/akv_label"
@@ -172,4 +196,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

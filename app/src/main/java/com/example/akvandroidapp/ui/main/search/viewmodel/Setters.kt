@@ -10,6 +10,7 @@ import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.RequestViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
+import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewModel
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
@@ -193,6 +194,12 @@ fun SearchViewModel.setBlogListData(blogList: List<BlogPost>){
     setViewState(update)
 }
 
+fun PaymentViewModel.setPaymentHistoryData(payments: List<PaymentHistoryItem>){
+    val update = getCurrentViewStateOrNew()
+    update.paymentHistoryField.payments = payments
+    setViewState(update)
+}
+
 fun FavoriteViewModel.setBlogListData(blogList: List<BlogPost>){
     val update = getCurrentViewStateOrNew()
     update.blogFields.blogList = blogList
@@ -292,6 +299,12 @@ fun SearchViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun PaymentViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.paymentHistoryField.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun FavoriteViewModel.setQueryExhausted(isExhausted: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryExhausted = isExhausted
@@ -337,6 +350,12 @@ fun ZhilyeReviewViewModel.setQueryExhausted(isExhausted: Boolean){
 fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun PaymentViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.paymentHistoryField.isQueryInProgress = isInProgress
     setViewState(update)
 }
 

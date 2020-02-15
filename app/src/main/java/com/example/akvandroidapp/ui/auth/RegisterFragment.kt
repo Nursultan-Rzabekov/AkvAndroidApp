@@ -98,7 +98,7 @@ class RegisterFragment : BaseAuthFragment() {
     }
 
     private fun showDialog() {
-        val dialog = Dialog(context!!)
+        val dialog = Dialog(context!!, R.style.CustomBasicDialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

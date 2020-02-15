@@ -1,105 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/white"
+    android:gravity="center_horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/new_pass_label2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_36dp"
-        android:layout_marginTop="@dimen/dim_12dp"
-        android:layout_marginEnd="@dimen/dim_36dp"
-        android:text="@string/password_requierments"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/new_pass_back_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/BackTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim_36dp"
-        android:layout_marginTop="@dimen/dim_60dp"
-        android:layout_marginEnd="@dimen/dim_36dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/enter_new_password"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_header1"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/new_pass_back_tv" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_pass_password_l_et"
-        style="@style/TextOutlined"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_pass_label2">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/new_pass_password_et"
-            style="@style/BasicEditText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/new_pass"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_pass_password_re_l_et"
-        style="@style/TextOutlined"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_pass_password_l_et">
+                <TextView
+                    android:id="@+id/new_pass_label2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_36dp"
+                    android:layout_marginTop="@dimen/dim_12dp"
+                    android:layout_marginEnd="@dimen/dim_36dp"
+                    android:text="@string/password_requierments"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/new_pass_password_re_et"
-            android:layout_width="match_parent"
-            android:hint="@string/repeat_password"
-            android:inputType="textPassword"
-            style="@style/BasicEditText"
-            android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/new_pass_back_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/BackTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_36dp"
+                    android:layout_marginTop="@dimen/dim_60dp"
+                    android:layout_marginEnd="@dimen/dim_36dp"
+                    android:text="@string/enter_new_password"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_header1"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/new_pass_back_tv" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_gmail_send_code_btn"
-        style="@style/BasicButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim_48dp"
-        android:text="@string/enter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_pass_password_re_l_et" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/new_pass_password_l_et"
+                    style="@style/TextOutlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/new_pass_label2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/new_pass_password_et"
+                        style="@style/BasicEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/new_pass"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/new_pass_password_re_l_et"
+                    style="@style/TextOutlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/new_pass_password_l_et">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/new_pass_password_re_et"
+                        android:layout_width="match_parent"
+                        android:hint="@string/repeat_password"
+                        android:inputType="textPassword"
+                        style="@style/BasicEditText"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/login_gmail_send_code_btn"
+                    style="@style/BasicButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim_48dp"
+                    android:text="@string/enter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.434"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/new_pass_password_re_l_et" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/akv_label"
@@ -108,4 +128,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

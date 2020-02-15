@@ -44,6 +44,8 @@ constructor(
     //payboxResponse
     private val _payBox = MutableLiveData<PayReservationIdResponse>()
 
+    //payment Iban
+    private val _iban = MutableLiveData<String>()
 
     //success
     private val _success = MutableLiveData<String>()
@@ -96,7 +98,11 @@ constructor(
         _profileInfo.value = ProfileInfo()
         hostMode.value = false
         _houseUpdateData.value = HouseUpdateData()
+        _iban.value = ""
     }
+
+    val iban: LiveData<String>
+        get() = _iban
 
     val locationItem: LiveData<MutableList<Point>>
         get() = _locationList
@@ -157,6 +163,11 @@ constructor(
     val isHostMode: LiveData<Boolean>
         get() = hostMode
 
+    fun setIban(iban: String){
+        GlobalScope.launch(Main) {
+            _iban.value = iban
+        }
+    }
 
     fun filterLocation(location: Location) {
         setLastLocation(location)

@@ -15,6 +15,7 @@ import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdViewState
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
+import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.util.*
 import com.yandex.mapkit.geometry.Point
@@ -760,6 +761,80 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("updateHouseInfo", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun getPaymentsHistory(
+        authToken: AuthToken,
+        page: Int
+    ): LiveData<DataState<PaymentViewState>>{
+        return object: NetworkBoundResource<PaymentsListResponse, List<BlogPost>, PaymentViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<PaymentsListResponse>) {
+                Log.d("getPaymentsHistory","payment history count + ${response.body.count}")
+
+                val paymentHisory = mutableListOf<PaymentHistoryItem>()
+
+                response.body.results.forEach {
+                    paymentHisory.add(
+                        PaymentHistoryItem(
+                            it.id,
+                            it.amount,
+                            it.is_paid,
+                            it.payment_id,
+                            it.reservation_id
+                        )
+                    )
+                }
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = PaymentViewState(
+                                    paymentHistoryField = PaymentViewState.PaymentHistoryField(
+                                        payments = paymentHisory,
+                                        isQueryInProgress = false,
+                                        isQueryExhausted = booleanQuery(response.body.count)
+                                )
+                            )
+                        )
+                    )
+                }
+            }
+
+            private fun booleanQuery(blogPostListSize: Int):Boolean{
+                if(page * Constants.PAGINATION_PAGE_SIZE >= blogPostListSize){
+                    return true
+                }
+                return false
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<PaymentsListResponse>> {
+                return openApiMainService.getPayments(
+                    "Token ${authToken.token!!}",
+                    page = page
+                )
+            }
+
+            override fun loadFromCache(): LiveData<PaymentViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+            }
+
+            override fun setJob(job: Job) {
+                addJob("getPaymentsHistory", job)
             }
 
         }.asLiveData()
