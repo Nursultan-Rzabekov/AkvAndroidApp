@@ -161,7 +161,6 @@ class ChatMesFragment : BaseMessagesFragment(),
         stateChangeListener.hideSoftKeyboard()
         focusable_view_chat.requestFocus()
     }
-
 }
 
 
