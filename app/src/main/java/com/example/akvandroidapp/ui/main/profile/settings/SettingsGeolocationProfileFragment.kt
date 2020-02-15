@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
@@ -15,6 +16,7 @@ import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_geolocation.*
+import kotlinx.android.synthetic.main.fragment_geolocation_layout.*
 import javax.inject.Inject
 
 
@@ -39,12 +41,17 @@ class SettingsGeolocationProfileFragment : BaseProfileFragment() {
         Log.d(TAG, "SettingsGeolocationProfileFragment: ${viewModel}")
 
         setGeolocation()
+        setToolbar()
 
-        main_back_img_btn.setOnClickListener {
+
+    }
+
+    private fun setToolbar(){
+        header_geolocation_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        header_geolocation_toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-
-
     }
 
     private fun setGeolocation(){

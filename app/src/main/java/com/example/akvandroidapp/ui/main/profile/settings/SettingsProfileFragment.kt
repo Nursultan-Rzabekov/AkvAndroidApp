@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings_layout.*
 import javax.inject.Inject
 
 
@@ -39,6 +41,7 @@ class SettingsProfileFragment : BaseProfileFragment() {
         Log.d(TAG, "SettingsProfileFragment: ${viewModel}")
 
         initialState()
+        setToolbar()
 
         fragment_settings_region_layout.setOnClickListener {
             navigateRegion()
@@ -46,10 +49,6 @@ class SettingsProfileFragment : BaseProfileFragment() {
 
         fragment_settings_geolocation_layout.setOnClickListener {
             navigateGeolocation()
-        }
-
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
         }
 
         fragment_settings_push_switch.setOnCheckedChangeListener { compoundButton, b ->
@@ -80,5 +79,13 @@ class SettingsProfileFragment : BaseProfileFragment() {
             fragment_settings_region_tv.text = dataState._region.location
             fragment_settings_geolocation_tv.text = Constants.mapGeolocationReversed.getValue(dataState._geolocationState)
         })
+    }
+
+    private fun setToolbar(){
+        header_settings_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        header_settings_toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }

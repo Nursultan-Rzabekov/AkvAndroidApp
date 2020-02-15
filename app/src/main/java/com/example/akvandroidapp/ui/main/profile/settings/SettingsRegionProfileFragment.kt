@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.akvandroidapp.R
@@ -16,6 +17,7 @@ import com.example.akvandroidapp.ui.main.search.filter.FilterCity
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityAdapter
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_region.*
+import kotlinx.android.synthetic.main.fragment_region_layout.*
 import javax.inject.Inject
 
 
@@ -41,12 +43,10 @@ class SettingsRegionProfileFragment : BaseProfileFragment(), FilterCityAdapter.C
         setHasOptionsMenu(true)
         Log.d(TAG, "SettingsRegionProfileFragment: ${viewModel}")
 
+
+        setToolbar()
         initRecyclerView()
         addRegionDataset()
-
-        main_back_img_btn.setOnClickListener {
-            findNavController().navigateUp()
-        }
     }
 
     private fun initRecyclerView(){
@@ -76,5 +76,13 @@ class SettingsRegionProfileFragment : BaseProfileFragment(), FilterCityAdapter.C
 //        val bundle = bundleOf("city" to item.location)
 //        findNavController().navigate(R.id.action_filterCityFragment_to_back_filter,bundle)
         findNavController().navigateUp()
+    }
+
+    private fun setToolbar(){
+        header_region_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        header_region_toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }

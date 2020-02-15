@@ -32,6 +32,8 @@ class SupportProfileFragment : BaseSupportFragment(), ModalBottomSheet.BottomShe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setToolbar()
+
         val fragmentAdapter =
             MyPagerAdapter(
                 childFragmentManager
@@ -58,5 +60,13 @@ class SupportProfileFragment : BaseSupportFragment(), ModalBottomSheet.BottomShe
 
     override fun onCancelClicked() {
         modalBottomSheet.dismiss()
+    }
+
+    private fun setToolbar(){
+        header_support_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
+
+        header_support_toolbar.setNavigationOnClickListener{
+            activity?.finish()
+        }
     }
 }
