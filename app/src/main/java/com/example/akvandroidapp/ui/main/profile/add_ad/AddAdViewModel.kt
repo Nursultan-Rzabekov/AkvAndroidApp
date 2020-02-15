@@ -18,8 +18,13 @@ import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
+import okhttp3.Headers
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.HEAD
+import retrofit2.http.Header
+import java.util.ArrayList
 import javax.inject.Inject
 
 
@@ -36,7 +41,6 @@ constructor(
             is AddAdStateEvent.CreateNewBlogEvent -> {
                 Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
                 return sessionManager.cachedToken.value?.let { authToken ->
-
                     val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdTitle)
                     val description = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdDescription)
                     val rooms = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdRoomsCount.toString())
@@ -46,41 +50,27 @@ constructor(
                     val price = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdPrice.toString())
                     val beds = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdBedsCount.toString())
                     val guests = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdGuestsCount.toString())
-                    val rules = RequestBody.create(MediaType.parse("text/plain"), stateEvent.rulesList[0])
-                    val nearBuildings = RequestBody.create(MediaType.parse("text/plain"), stateEvent.nearbyList[0])
                     val blockedDates = RequestBody.create(MediaType.parse("text/plain"), "[{\"check_in\": \"2019-12-20\", \"check_out\": \"2019-12-31\"}, {\"check_in\": \"2019-12-10\", \"check_out\": \"2012-12-19\"}]")
-
-//
-
                     val houseTypeId = RequestBody.create(MediaType.parse("text/plain"),(Constants.mapTypeHouse.getValue(stateEvent._addAdType).toString()))
-                    val accommodations = RequestBody.create(MediaType.parse("text/plain"), stateEvent.facilitiesList[0])
                     val discount7days = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAd7DaysDiscount.toString())
                     val discount30days = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAd30DaysDiscount.toString())
-
                     val cityId = RequestBody.create(MediaType.parse("text/plain"),(stateEvent._addAdAddressCityId.toString()))
                     val regionId = RequestBody.create(MediaType.parse("text/plain"),(stateEvent._addAdAddressRegionId.toString()))
                     val countryId = RequestBody.create(MediaType.parse("text/plain"),(stateEvent._addAdAddressCountry.toString()))
 
-                    Log.d(TAG,"PostCreateHouse dis30 + ${stateEvent._addAd30DaysDiscount}")
-                    Log.d(TAG,"PostCreateHouse dis7 + ${stateEvent._addAd7DaysDiscount}")
-                    Log.d(TAG,"PostCreateHouse facilitiesList + ${stateEvent.facilitiesList}")
-                    Log.d(TAG,"PostCreateHouse nearbyList + ${stateEvent.nearbyList}")
-                    Log.d(TAG,"PostCreateHouse rulesList + ${stateEvent.rulesList}")
-                    Log.d(TAG,"PostCreateHouse cityId + ${stateEvent._addAdAddressCityId}")
-                    Log.d(TAG,"PostCreateHouse regionId + ${stateEvent._addAdAddressRegionId}")
-
-                    val availableList: MutableList<String>?
-                    availableList = mutableListOf()
-                    stateEvent._availableList.forEach {
-                        Log.e("ASASDASD", "ASASDASD ${DateUtils.convertDateToString(it)}")
-                        availableList.add(DateUtils.convertDateToString(it)
-                        )
+                    val multipartBodyList: ArrayList<MultipartBody.Part> = arrayListOf()
+                    stateEvent.rulesList.forEach {
+                        multipartBodyList.add(MultipartBody.Part.createFormData("rules",it))
                     }
-                    val blockedDatesV2 = RequestBody.create(MediaType.parse("text/plain"),availableList.toString())
-
-                    val rulesList = RequestBody.create(MediaType.parse("text/plain"),stateEvent.rulesList.toString())
-                    val facilitiesList = RequestBody.create(MediaType.parse("text/plain"),stateEvent.facilitiesList.toString())
-                    val nearbyList = RequestBody.create(MediaType.parse("text/plain"),stateEvent.nearbyList.toString())
+                    stateEvent.nearbyList.forEach {
+                        multipartBodyList.add(MultipartBody.Part.createFormData("near_buildings",it))
+                    }
+                    stateEvent.facilitiesList.forEach {
+                        multipartBodyList.add(MultipartBody.Part.createFormData("accommodations",it))
+                    }
+                    stateEvent._availableList.forEach {
+                        multipartBodyList.add(MultipartBody.Part.createFormData("blocked_dates",DateUtils.convertDateToString(it)))
+                    }
 
                     profileRepository.createNewBlogPost(
                         authToken,
@@ -94,12 +84,9 @@ constructor(
                         price,
                         beds,
                         guests,
-                        rulesList,
-                        nearbyList,
-                        blockedDates,
+                        multipartBodyList,
                         stateEvent.image,
                         houseTypeId,
-                        facilitiesList,
                         discount7days,
                         discount30days,
                         regionId,
@@ -107,7 +94,6 @@ constructor(
                     )
                 }?: AbsentLiveData.create()
             }
-
 
             is AddAdStateEvent.None ->{
                 return liveData {
@@ -122,6 +108,7 @@ constructor(
             }
         }
     }
+
 
     override fun initNewViewState(): AddAdViewState {
         return AddAdViewState()

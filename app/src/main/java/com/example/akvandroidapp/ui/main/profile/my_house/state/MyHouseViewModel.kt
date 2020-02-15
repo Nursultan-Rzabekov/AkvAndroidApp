@@ -66,36 +66,36 @@ constructor(
             }
 
             is MyHouseStateStateEvent.MyHouseUpdateEvent -> {
-                var facilities: MutableList<RequestBody>? = null
-                if (stateEvent.facilitiesList != null){
-                    facilities = mutableListOf()
-                    stateEvent.facilitiesList?.forEach {
-                        Log.e("ASASDASD", "$it")
-                        facilities.add(
-                            RequestBody.create(MediaType.parse("text/plain"), it)
-                        )
-                    }
-                }
-
-                var rules: MutableList<RequestBody>? = null
-                if (stateEvent.rulesList != null){
-                    rules = mutableListOf()
-                    stateEvent.rulesList?.forEach {
-                        rules.add(
-                            RequestBody.create(MediaType.parse("text/plain"), it)
-                        )
-                    }
-                }
-
-                var nears: MutableList<RequestBody>? = null
-                if (stateEvent.nearsList != null){
-                    nears = mutableListOf()
-                    stateEvent.nearsList?.forEach {
-                        nears.add(
-                            RequestBody.create(MediaType.parse("text/plain"), it)
-                        )
-                    }
-                }
+//                var facilities: MutableList<RequestBody>? = null
+//                if (stateEvent.facilitiesList != null){
+//                    facilities = mutableListOf()
+//                    stateEvent.facilitiesList?.forEach {
+//                        Log.e("ASASDASD", "$it")
+//                        facilities.add(
+//                            RequestBody.create(MediaType.parse("text/plain"), it)
+//                        )
+//                    }
+//                }
+//
+//                var rules: MutableList<RequestBody>? = null
+//                if (stateEvent.rulesList != null){
+//                    rules = mutableListOf()
+//                    stateEvent.rulesList?.forEach {
+//                        rules.add(
+//                            RequestBody.create(MediaType.parse("text/plain"), it)
+//                        )
+//                    }
+//                }
+//
+//                var nears: MutableList<RequestBody>? = null
+//                if (stateEvent.nearsList != null){
+//                    nears = mutableListOf()
+//                    stateEvent.nearsList?.forEach {
+//                        nears.add(
+//                            RequestBody.create(MediaType.parse("text/plain"), it)
+//                        )
+//                    }
+//                }
 
                 var photoList: MutableList<RequestBody>? = null
                 if (stateEvent.photoList != null){
@@ -108,7 +108,6 @@ constructor(
                 }
 
                 Log.e("ASASDASD rrr", "${stateEvent.rulesList}")
-                Log.e("ASASDASD rrrr", "${rules}")
 
                 return sessionManager.cachedToken.value?.let { authToken ->
                     profileRepository.updateZhilyeInfo(
@@ -116,11 +115,11 @@ constructor(
                         houseId = stateEvent.house_id,
                         title =
                         if (!stateEvent.title.isNullOrBlank())
-                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.title)
+                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.title.toString())
                         else null,
                         description =
                         if (!stateEvent.description.isNullOrBlank())
-                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.description)
+                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.description.toString())
                         else null,
                         price =
                         if (stateEvent.price != null)
@@ -128,13 +127,13 @@ constructor(
                         else null,
                         address =
                         if (stateEvent.address != null)
-                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.address)
+                            RequestBody.create(MediaType.parse("text/plain"), stateEvent.address.toString())
                         else null,
-                        facilitiesList = facilities,
-                        nearsList = nears,
-                        rulesList = rules,
+                        facilitiesList = stateEvent.facilitiesList,
+                        nearsList = stateEvent.nearsList,
+                        rulesList = stateEvent.rulesList,
                         photoList = photoList,
-                        datesList = null
+                        datesList = stateEvent.datesList
                     )
                 }?: AbsentLiveData.create()
             }

@@ -9,6 +9,9 @@ import com.example.akvandroidapp.R
 import kotlinx.android.synthetic.main.add_ad_checkbox_recycler_view_item.view.*
 
 class AddAdCheckboxAdapter(
+
+
+
     private val checklInteraction: CheckboxCheckInteraction? = null,
     private val closeInteraction: CheckboxCloseInteraction? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

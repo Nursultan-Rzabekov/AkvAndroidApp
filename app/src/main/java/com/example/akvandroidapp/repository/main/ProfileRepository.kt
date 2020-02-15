@@ -48,12 +48,9 @@ constructor(
         price:RequestBody,
         beds:RequestBody,
         guests:RequestBody,
-        rules: RequestBody,
-        near_buildings:RequestBody,
-        blocked_dates:RequestBody,
+        list: ArrayList<MultipartBody.Part>?,
         photos: ArrayList<MultipartBody.Part>?,
         house_type_id:RequestBody,
-        accommodations:RequestBody,
         discount7days:RequestBody,
         discount30days:RequestBody,
         regionId:RequestBody,
@@ -106,11 +103,8 @@ constructor(
                     price = price,
                     beds = beds,
                     guests = guests,
-                    rules = rules,
-                    near_buildings = near_buildings,
+                    list = list,
                     house_type_id = house_type_id,
-                    blocked_dates = blocked_dates,
-                    accommodations = accommodations,
                     discount7days = discount7days,
                     discount30days = discount30days,
                     country_id = countryId,
@@ -660,10 +654,10 @@ constructor(
         address: RequestBody?,
         price: RequestBody?,
         photoList: List<RequestBody>?,
-        nearsList: List<RequestBody>?,
-        facilitiesList: List<RequestBody>?,
-        rulesList: List<RequestBody>?,
-        datesList: List<RequestBody>?
+        nearsList: List<String>?,
+        facilitiesList: List<String>?,
+        rulesList: List<String>?,
+        datesList: List<String>?
     ): LiveData<DataState<MyHouseViewState>>{
         return object: NetworkBoundResource<VerifyUpdateResponse, List<BlogPost>, MyHouseViewState>(
             sessionManager.isConnectedToTheInternet(),
@@ -692,6 +686,33 @@ constructor(
             }
 
             override fun createCall(): LiveData<GenericApiResponse<VerifyUpdateResponse>> {
+//                rulesList?.forEach {
+//                    multipartBodyRulesList.add(MultipartBody.Part.createFormData("rules",it))
+//                }
+//                if(rulesList != null){
+//                    dataList["rules"] = multipartBodyRulesList
+//                }
+//
+//                facilitiesList?.forEach {
+//                    multipartBodyFacilitiesListList.add(MultipartBody.Part.createFormData("accommodations",it))
+//                }
+//                if(facilitiesList != null){
+//                    dataList["accommodations"] = multipartBodyFacilitiesListList
+//                }
+//
+//                nearsList?.forEach {
+//                    multipartBodyNearBuildingsList.add(MultipartBody.Part.createFormData("near_buildings",it))
+//                }
+//                if(nearsList != null){
+//                    dataList["near_buildings"] = multipartBodyNearBuildingsList
+//                }
+//
+//                datesList?.forEach {
+//                    multipartBodyBlockedDatesList.add(MultipartBody.Part.createFormData("blocked_dates",it))
+//                }
+//                if(datesList != null){
+//                    dataList["blocked_dates"] = multipartBodyBlockedDatesList
+//                }
 
                 val data: HashMap<String, RequestBody> = HashMap()
 
@@ -704,29 +725,29 @@ constructor(
                 if (price != null)
                     data["price"] = price
 
+                val multipartBodyList: ArrayList<MultipartBody.Part> = arrayListOf()
 
-                if(rulesList !=null){
-                    for (i in rulesList.indices){
-                        data["rule$i"] = rulesList[i]
-                    }
+                rulesList?.forEach {
+                    multipartBodyList.add(MultipartBody.Part.createFormData("rules",it))
                 }
 
-                if(facilitiesList !=null){
-                    for (i in facilitiesList.indices){
-                        data["accommodations"] = facilitiesList[i]
-                    }
+                facilitiesList?.forEach {
+                    multipartBodyList.add(MultipartBody.Part.createFormData("accommodations",it))
                 }
 
-//                if(nearsList !=null){
-//                    for (i in nearsList.indices){
-//                        data["near_buildings"] = nearsList[i]
-//                    }
-//                }
+                nearsList?.forEach {
+                    multipartBodyList.add(MultipartBody.Part.createFormData("near_buildings",it))
+                }
+
+                datesList?.forEach {
+                    multipartBodyList.add(MultipartBody.Part.createFormData("blocked_dates",it))
+                }
 
                 return openApiMainService.updateZhilyeInfo(
                     "Token ${authToken.token!!}",
                     house_id = houseId,
-                    options = data
+                    options = data,
+                    list = multipartBodyList
                 )
             }
 
