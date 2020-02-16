@@ -66,15 +66,11 @@ constructor(
                             city = blogPostResponse.house.city,
                             price = blogPostResponse.house.price,
                             status = blogPostResponse.house.status,
-                            image = "http://akv-technopark.house.herokuapp.com${blogPostResponse.house.photos?.first()?.image}",
+                            image = "${Constants.BASE_URL_IMAGE}${blogPostResponse.house.photos?.first()?.image}",
                             rating = blogPostResponse.house.rating
                         )
                     )
                 }
-
-                Log.e("FavoriteRepository", "next page: ${response.body.next}")
-                Log.e("FavoriteRepository", "exhausted: ${booleanQuery(response.body.count)}")
-                Log.e("FavoriteRepository", "page: $page")
 
                 withContext(Dispatchers.Main){
                     onCompleteJob(

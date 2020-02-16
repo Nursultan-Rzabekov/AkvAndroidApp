@@ -241,6 +241,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     val photos: ArrayList<String> = arrayListOf()
                     for (photo in viewState.zhilyeFields.zhilyeDetailPhotos)
                         photos.add(photo.image!!)
+
+                    Log.e("wqeqe","photos list first + ${photos.first()}")
                     setFlipperLayout(photos)
 
                     houseRules = viewState.zhilyeFields.zhilyeDetailRules

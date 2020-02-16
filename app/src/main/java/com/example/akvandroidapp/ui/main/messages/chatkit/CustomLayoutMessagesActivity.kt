@@ -202,7 +202,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     private fun sendMessageResponse(userConversationResponse: List<UserConversationsResponse>) {
         userConversationResponse.asReversed().forEach {
             if(it.images!=null){
-                sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "http://akv-technopark.herokuapp.com${it.images}",
+                sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${it.images}",
                     user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
                 )
             }

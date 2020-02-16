@@ -158,7 +158,7 @@ class ChatRecyclerAdapter(
 
             if(message.image != null){
                 Glide.with(photo.context)
-                    .load("http://akv-technopark.herokuapp.com${message.image}")
+                    .load("${Constants.BASE_URL_IMAGE}${message.image}")
                     .error(R.drawable.test_image_back)
                     .transition(withCrossFade())
                     .fitCenter()

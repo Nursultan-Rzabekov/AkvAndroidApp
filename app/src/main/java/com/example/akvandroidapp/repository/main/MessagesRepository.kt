@@ -296,7 +296,7 @@ constructor(
                             order.user.id,
                             order.house.id,
                             order.house.name,
-                            "https://akv-technopark.herokuapp.com${order.house.photos?.first()?.image}",
+                            "${Constants.BASE_URL_IMAGE}${order.house.photos?.first()?.image}",
                             order.owner.id
                         )
                     )

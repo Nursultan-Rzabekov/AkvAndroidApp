@@ -70,7 +70,7 @@ constructor(
                             reservation.user.id,
                             reservation.house.id,
                             reservation.house.name,
-                            "http://akv-technopark.herokuapp.com${reservation.house.photos?.first()?.image}",
+                            "${Constants.BASE_URL_IMAGE}${reservation.house.photos?.first()?.image}",
                             reservation.owner.id
                         )
                     )
