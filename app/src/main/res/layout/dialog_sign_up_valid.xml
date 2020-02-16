@@ -63,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
+                android:textColor="@color/black"
                 android:minWidth="128dp"
                 android:letterSpacing="0.1"
                 android:layout_marginTop="@dimen/dim_12dp"

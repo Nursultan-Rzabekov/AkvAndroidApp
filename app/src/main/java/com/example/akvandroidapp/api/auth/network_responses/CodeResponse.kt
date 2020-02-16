@@ -11,7 +11,15 @@ class CodeResponse(
 
     @SerializedName("message")
     @Expose
-    var message: String
+    var message: String,
+
+    @SerializedName("auth_token")
+    @Expose
+    var token: String,
+
+    @SerializedName("user")
+    @Expose
+    var user: UserResponse
 
 )
 {

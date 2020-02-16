@@ -198,6 +198,37 @@ constructor(
                     )
                     return
                 }
+
+
+                Log.e(TAG, "state not witsh  123123 + ${response.body.id} + ${response.body.email}")
+
+                sessionManager.setAccountProperties(AccountProperties(
+                    response.body.id,
+                    response.body.email,
+                    response.body.gender,
+                    response.body.first_name,
+                    response.body.phone,
+                    response.body.birth_day
+                ))
+
+                onCompleteJob(
+                    DataState.data(
+                        data = AuthViewState(
+                            authViewStateResponse = AuthViewStateResponse(
+                                AccountProperties(
+                                    response.body.id,
+                                    response.body.email,
+                                    response.body.gender,
+                                    response.body.first_name,
+                                    response.body.phone,
+                                    response.body.birth_day
+                                ),
+                                isQueryInProgress = false,
+                                isQueryExhausted = true
+                            )
+                        )
+                    )
+                )
             }
 
             override fun createCall(): LiveData<GenericApiResponse<RegistrationResponse>> {
@@ -220,7 +251,6 @@ constructor(
 
 
     fun sendCode(phone: String): LiveData<DataState<AuthViewState>>{
-
         return object: NetworkBoundResource<CodeResponse, Any, AuthViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
@@ -245,7 +275,6 @@ constructor(
 
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
-
                 Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
 
                 if(!response.body.response){
@@ -294,7 +323,6 @@ constructor(
 
             }
 
-
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
 
                 Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
@@ -303,29 +331,28 @@ constructor(
                     return onErrorReturn(response.body.message, true, false)
                 }
 
-//                val result = authTokenDao.insert(
-//                    AuthToken(
-//                        response.body.user.id,
-//                        response.body.token
-//                    )
-//                )
-//
-//                if(result < 0){
-//                    return onCompleteJob(DataState.error(
-//                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog()))
-//                    )
-//                }
-//
-//
-//                sessionManager.login(AuthToken(response.body.user.id, response.body.token))
-//
-//                onCompleteJob(
-//                    DataState.data(
-//                        data = AuthViewState(
-//                            authToken = AuthToken(response.body.user.id, response.body.token)
-//                        )
-//                    )
-//                )
+                val result = authTokenDao.insert(
+                    AuthToken(
+                        response.body.user.id,
+                        response.body.token
+                    )
+                )
+
+                if(result < 0){
+                    return onCompleteJob(DataState.error(
+                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog()))
+                    )
+                }
+
+                sessionManager.login(AuthToken(response.body.user.id, response.body.token))
+
+                onCompleteJob(
+                    DataState.data(
+                        data = AuthViewState(
+                            authToken = AuthToken(response.body.user.id, response.body.token)
+                        )
+                    )
+                )
             }
 
             override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {

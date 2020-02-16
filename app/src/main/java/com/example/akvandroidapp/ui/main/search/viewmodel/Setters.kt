@@ -3,6 +3,8 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 import android.net.Uri
 import android.util.Log
 import com.example.akvandroidapp.entity.*
+import com.example.akvandroidapp.ui.auth.AuthViewModel
+import com.example.akvandroidapp.ui.auth.state.AuthViewStateResponse
 import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
@@ -194,6 +196,12 @@ fun SearchViewModel.setBlogListData(blogList: List<BlogPost>){
     setViewState(update)
 }
 
+fun AuthViewModel.setBlogListData(blogList: AccountProperties?){
+    val update = getCurrentViewStateOrNew()
+    update.authViewStateResponse?.state = blogList
+    setViewState(update)
+}
+
 fun PaymentViewModel.setPaymentHistoryData(payments: List<PaymentHistoryItem>){
     val update = getCurrentViewStateOrNew()
     update.paymentHistoryField.payments = payments
@@ -347,9 +355,21 @@ fun ZhilyeReviewViewModel.setQueryExhausted(isExhausted: Boolean){
     setViewState(update)
 }
 
+fun AuthViewModel.setQueryExhausted(isExhausted: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.authViewStateResponse?.isQueryExhausted = isExhausted
+    setViewState(update)
+}
+
 fun SearchViewModel.setQueryInProgress(isInProgress: Boolean){
     val update = getCurrentViewStateOrNew()
     update.blogFields.isQueryInProgress = isInProgress
+    setViewState(update)
+}
+
+fun AuthViewModel.setQueryInProgress(isInProgress: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.authViewStateResponse?.isQueryInProgress = isInProgress
     setViewState(update)
 }
 

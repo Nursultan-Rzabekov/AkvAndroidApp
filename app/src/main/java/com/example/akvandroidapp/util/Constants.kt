@@ -5,6 +5,7 @@ class Constants {
 
     companion object{
         const val BASE_URL = "http://akv-technopark.herokuapp.com/api/"
+//        const val BASE_URL = "http://185.22.65.18/api/"
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
         const val PAYBOX_PAY_URL: String = "https://open-api.xyz/password_reset/"
         const val AKV_TAX = 5

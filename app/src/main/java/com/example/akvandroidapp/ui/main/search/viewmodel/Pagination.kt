@@ -1,4 +1,6 @@
 import android.util.Log
+import com.example.akvandroidapp.ui.auth.AuthViewModel
+import com.example.akvandroidapp.ui.auth.state.AuthViewState
 import com.example.akvandroidapp.ui.main.favorite.state.FavoriteStateEvent
 import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
 import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
@@ -355,6 +357,13 @@ fun SearchViewModel.handleIncomingBlogListData(viewState: SearchViewState){
     setQueryInProgress(viewState.blogFields.isQueryInProgress)
     setQueryExhausted(viewState.blogFields.isQueryExhausted)
     setBlogListData(viewState.blogFields.blogList)
+}
+
+fun AuthViewModel.handleIncomingBlogListData(viewState: AuthViewState){
+    Log.e(TAG, "state not witsh qqq  qqq + ${viewState.authViewStateResponse}")
+//    setQueryInProgress(viewState.authViewStateResponse?.isQueryInProgress!!)
+//    setQueryExhausted(viewState.authViewStateResponse?.isQueryExhausted!!)
+    setBlogListData(viewState.authViewStateResponse?.state)
 }
 
 fun PaymentViewModel.handleIncomingBlogListData(viewState: PaymentViewState){

@@ -26,8 +26,6 @@ class ForgotPasswordFragment : BaseAuthFragment() {
 
     lateinit var webView: WebView
 
-    lateinit var stateChangeListener: DataStateChangeListener
-
     val webInteractionCallback = object: OnWebInteractionCallback {
 
         override fun onError(errorMessage: String) {
@@ -141,15 +139,6 @@ class ForgotPasswordFragment : BaseAuthFragment() {
             animation.duration = 500
             password_reset_done_container.startAnimation(animation)
             password_reset_done_container.visibility = View.VISIBLE
-        }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        try{
-            stateChangeListener = context as DataStateChangeListener
-        }catch(e: ClassCastException){
-            Log.e(TAG, "$context must implement DataStateChangeListener" )
         }
     }
 }

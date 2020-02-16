@@ -11,18 +11,22 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.LoginFields
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.sign_up.*
+import javax.inject.Inject
 
 
 class LoginFragment : BaseAuthFragment() {
 
     private var phoneNumber:String? = null
 
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +60,12 @@ class LoginFragment : BaseAuthFragment() {
     fun subscribeObservers(){
         viewModel.viewState.observe(viewLifecycleOwner, Observer{
             it.loginFields?.let{
-                it.login_email?.let{phonenumber_et.setText(it)
-                    Log.d("Check","Okkkkkkkkkkkkkkkkk")}
+                it.login_email?.let{phonenumber_et.setText(it) }
                 it.login_password?.let{password_et.setText(it)}
             }
         })
+
+
     }
 
     fun login(){

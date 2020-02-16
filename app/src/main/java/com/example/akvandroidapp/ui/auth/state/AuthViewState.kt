@@ -1,5 +1,6 @@
 package com.example.akvandroidapp.ui.auth.state
 
+import com.example.akvandroidapp.entity.AccountProperties
 import com.example.akvandroidapp.entity.AuthToken
 
 
@@ -8,7 +9,14 @@ data class AuthViewState(
     var loginFields: LoginFields? = LoginFields(),
     var sendCodeFields: SendCodeFields? = SendCodeFields(),
     var verifyCodeFields: VerifyCodeFields? = VerifyCodeFields(),
-    var authToken: AuthToken? = null
+    var authToken: AuthToken? = null,
+    var authViewStateResponse: AuthViewStateResponse? = AuthViewStateResponse()
+)
+
+data class AuthViewStateResponse(
+    var state: AccountProperties? = null,
+    var isQueryInProgress: Boolean = false,
+    var isQueryExhausted: Boolean = false
 )
 
 data class RegistrationFields(

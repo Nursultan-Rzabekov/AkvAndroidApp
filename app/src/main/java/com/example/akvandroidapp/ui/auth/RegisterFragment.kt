@@ -27,17 +27,28 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
+import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
+import com.example.akvandroidapp.ui.auth.state.AuthViewState
 import com.example.akvandroidapp.ui.auth.state.RegistrationFields
 import com.example.akvandroidapp.ui.main.MainActivity
+import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
+import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
+import com.example.akvandroidapp.util.ErrorHandling
 import com.google.android.material.button.MaterialButton
+import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.sign_up_detail.*
 import java.util.*
+import javax.inject.Inject
 
 
 class RegisterFragment : BaseAuthFragment() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +72,10 @@ class RegisterFragment : BaseAuthFragment() {
         password2 = arguments?.getString("password2")
         arg_number = arguments?.getString("arg_number")
 
+        Log.e(TAG, "Salamalieyrkju mm ")
+
+        subscribeObservers()
+
         sign_detail_create_btn.setOnClickListener {
             register()
         }
@@ -80,21 +95,59 @@ class RegisterFragment : BaseAuthFragment() {
             Pair("правилами пользования.", View.OnClickListener {
                 findNavController().navigate(R.id.action_registerFragment_to_privacyPolicyFragment)
             }))
-        subscribeObservers()
+
     }
 
     private fun subscribeObservers(){
+        viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
+            if(dataState != null) {
+                Log.d(TAG, "favorites dataState changed")
+                handlePagination(dataState)
+                stateChangeListener.onDataStateChange(dataState)
+            }
+        })
+
         viewModel.viewState.observe(viewLifecycleOwner, Observer{viewState ->
             viewState.registrationFields?.let {
-                    sendCode()
                     it.registration_email?.let{sign_detail_email_et.setText(it)}
                     it.registration_username?.let{sign_detail_last_name_et.setText(it)
                 }
             }
-            viewState.verifyCodeFields?.let {
-                it.phone?.let { body.setText(it)}
+
+//            Log.e(TAG, "state not witsh + ${viewState.authViewStateResponse}")
+//            viewState.authViewStateResponse?.let {
+//                it.let {
+//                    sendCode()
+//                    showDialog()
+//                }
+//            }
+        })
+
+        sessionManager.accountProperties.observe(viewLifecycleOwner, Observer {
+            it.let {
+                sendCode()
+                showDialog()
             }
         })
+    }
+
+    private fun handlePagination(dataState: DataState<AuthViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.handleIncomingBlogListData(it)
+                }
+            }
+        }
+
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+                if(ErrorHandling.isPaginationDone(it)){
+                    event.getContentIfNotHandled()
+                    viewModel.setQueryExhausted(true)
+                }
+            }
+        }
     }
 
     private fun showDialog() {
@@ -115,7 +168,6 @@ class RegisterFragment : BaseAuthFragment() {
             if (body.text != null) {
                 verifyCode()
                 dialog.dismiss()
-
             }
         }
         send.setOnClickListener {
@@ -141,9 +193,7 @@ class RegisterFragment : BaseAuthFragment() {
                 sign_detail_birth_et.text.toString()
             )
         )
-        showDialog()
     }
-
 
     private fun sendCode(){
         viewModel.setStateEvent(

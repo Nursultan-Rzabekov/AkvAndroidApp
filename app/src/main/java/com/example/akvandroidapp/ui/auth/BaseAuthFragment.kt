@@ -1,8 +1,12 @@
 package com.example.akvandroidapp.ui.auth
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.example.akvandroidapp.ui.DataStateChangeListener
+import com.example.akvandroidapp.ui.UICommunicationListener
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -16,6 +20,8 @@ abstract class BaseAuthFragment: DaggerFragment(){
 
     lateinit var viewModel: AuthViewModel
 
+    lateinit var stateChangeListener: DataStateChangeListener
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -28,6 +34,15 @@ abstract class BaseAuthFragment: DaggerFragment(){
 
     private fun cancelActiveJobs(){
         viewModel.cancelActiveJobs()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            stateChangeListener = context as DataStateChangeListener
+        }catch(e: ClassCastException){
+            Log.e(TAG, "$context must implement DataStateChangeListener" )
+        }
     }
 
 }

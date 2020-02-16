@@ -110,6 +110,10 @@ constructor(
     val cachedToken: LiveData<AuthToken>
         get() = _cachedToken
 
+
+    val accountProperties: LiveData<AccountProperties>
+        get() = _accountProperties
+
 //    val accountProperties: LiveData<AccountProperties>
 //        get() = if(_accountProperties.value == null){
 //            CoroutineScope(IO).launch {
@@ -209,6 +213,12 @@ constructor(
         GlobalScope.launch(Main) {
             _locationList.value = point
             Log.d(TAG, "location ${_locationList.value}")
+        }
+    }
+
+    fun setAccountProperties(point: AccountProperties) {
+        GlobalScope.launch(Main) {
+            _accountProperties.value = point
         }
     }
 
