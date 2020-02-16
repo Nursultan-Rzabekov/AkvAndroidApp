@@ -24,8 +24,9 @@
                 android:layout_height="wrap_content"
                 style="@style/AllButton.TextButton"
                 android:text="@string/text_us"
-                android:paddingTop="@dimen/dim_8dp"
-                android:paddingBottom="@dimen/dim_8dp"
+                app:elevation="0dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingBottom="@dimen/dim_12dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
 
@@ -33,6 +34,7 @@
                 android:id="@+id/divider46"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:backgroundTint="@color/black"
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.button.MaterialButton
@@ -41,8 +43,9 @@
                 android:layout_height="wrap_content"
                 style="@style/AllButton.TextButton"
                 android:text="@string/call_us"
-                android:paddingTop="@dimen/dim_8dp"
-                android:paddingBottom="@dimen/dim_8dp"
+                app:elevation="0dp"
+                android:paddingTop="@dimen/dim_12dp"
+                android:paddingBottom="@dimen/dim_12dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
 

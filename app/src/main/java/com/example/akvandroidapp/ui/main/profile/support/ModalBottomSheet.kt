@@ -37,6 +37,11 @@ class ModalBottomSheet(
             bottomSheetDialogInteraction.onTextUsClicked()
             bottomSheetDialogInteraction.onCancelClicked()
         }
+
+        view.support_bottom_sheet_dialog_call_us_btn.setOnClickListener {
+            bottomSheetDialogInteraction.onCallUsClicked()
+            bottomSheetDialogInteraction.onCancelClicked()
+        }
     }
 
     companion object {
