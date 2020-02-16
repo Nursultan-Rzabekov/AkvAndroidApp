@@ -9,6 +9,7 @@ class Constants {
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
         const val PAYBOX_PAY_URL: String = "https://open-api.xyz/password_reset/"
         const val AKV_TAX = 5
+        const val AKV_PHONE = "+77026513909"
 
         const val SUCCESS = "Success"
 
