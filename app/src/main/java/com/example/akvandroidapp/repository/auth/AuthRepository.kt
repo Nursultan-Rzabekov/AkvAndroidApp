@@ -80,12 +80,12 @@ constructor(
 
                 accountPropertiesDao.insertOrIgnore(
                     AccountProperties(
-                        response.body.user.id,
-                        response.body.user.email,
-                        response.body.user.gender,
-                        response.body.user.name,
-                        response.body.user.phone,
-                        response.body.user.birth_day
+                        id = response.body.user.id,
+                        email = response.body.user.email,
+                        gender = response.body.user.gender,
+                        name = response.body.user.name,
+                        phone = response.body.user.phone,
+                        birth_day = response.body.user.birth_day
                     )
                 )
 
@@ -104,12 +104,7 @@ constructor(
 
                 Log.d(TAG,"phone or email ${email}")
 
-                if(email.startsWith("+7")){
-                    saveAuthenticatedUserToPrefs(phone = email)
-                }
-                else{
-                    saveAuthenticatedUserToPrefs(email = email)
-                }
+                saveAuthenticatedUserToPrefs(email = email)
 
                 sessionManager.login(AuthToken(response.body.user.id, response.body.token))
 
@@ -366,11 +361,9 @@ constructor(
     }
 
     fun checkPreviousAuthUser(): LiveData<DataState<AuthViewState>>{
-
         val previousAuthUserEmail: String? = sharedPreferences.getString(PreferenceKeys.PREVIOUS_AUTH_USER, null)
-        val previousAuthUserPhone: String? = sharedPreferences.getString(PreferenceKeys.PREVIOUS_AUTH_USER_PHONE, null)
 
-        if(previousAuthUserPhone.isNullOrBlank()) {
+        if(previousAuthUserEmail.isNullOrBlank()) {
             Log.d(TAG, "checkPreviousAuthUser: No previously authenticated user found.")
             return returnNoTokenFound()
         }
@@ -392,37 +385,36 @@ constructor(
                 }
 
                 override suspend fun createCacheRequestAndReturn() {
-                    if(!previousAuthUserPhone.isNullOrBlank()){
-                        Log.d(TAG,"token phone + ${previousAuthUserPhone}")
-                        accountPropertiesDao.searchByPhone(previousAuthUserPhone).let { accountProperties ->
-                            Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
-                            accountProperties?.let {
-                                if(accountProperties.id!! > -1){
-                                    authTokenDao.searchByPk(accountProperties.id!!).let { authToken ->
-                                        if(authToken != null){
-                                            if(authToken.token != null){
-                                                onCompleteJob(
-                                                    DataState.data(
-                                                        AuthViewState(authToken = authToken)
-                                                    )
+                    Log.d(TAG, "createCacheRequestAndReturn: searching for token... email : ${previousAuthUserEmail}")
+
+                    accountPropertiesDao.searchByPhone(previousAuthUserEmail).let { accountProperties ->
+                        Log.d(TAG, "createCacheRequestAndReturn: searching for token... account properties: ${accountProperties}")
+                        accountProperties?.let {
+                            if(accountProperties.id!! > -1){
+                                authTokenDao.searchByPk(accountProperties.id!!).let { authToken ->
+                                    if(authToken != null){
+                                        if(authToken.token != null){
+                                            onCompleteJob(
+                                                DataState.data(
+                                                    AuthViewState(authToken = authToken)
                                                 )
-                                                return
-                                            }
+                                            )
+                                            return
                                         }
                                     }
                                 }
                             }
-                            Log.d(TAG, "createCacheRequestAndReturn: AuthToken not found...")
-                            onCompleteJob(
-                                DataState.data(
-                                    null,
-                                    Response(
-                                        RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE,
-                                        ResponseType.None()
-                                    )
+                        }
+                        Log.d(TAG, "createCacheRequestAndReturn: AuthToken not found...")
+                        onCompleteJob(
+                            DataState.data(
+                                null,
+                                Response(
+                                    RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE,
+                                    ResponseType.None()
                                 )
                             )
-                        }
+                        )
                     }
                 }
 
@@ -444,9 +436,8 @@ constructor(
         }
     }
 
-    private fun saveAuthenticatedUserToPrefs(email: String? = null,phone: String? = null){
+    private fun saveAuthenticatedUserToPrefs(email: String? = null){
         sharedPrefsEditor.putString(PreferenceKeys.PREVIOUS_AUTH_USER, email)
-        sharedPrefsEditor.putString(PreferenceKeys.PREVIOUS_AUTH_USER_PHONE, phone)
         sharedPrefsEditor.apply()
     }
 

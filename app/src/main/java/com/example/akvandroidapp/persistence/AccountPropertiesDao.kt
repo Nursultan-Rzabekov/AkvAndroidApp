@@ -10,9 +10,6 @@ import com.example.akvandroidapp.entity.AccountProperties
 @Dao
 interface AccountPropertiesDao {
 
-    @Query("SELECT * FROM account_properties WHERE email = :email")
-    suspend fun searchByEmail(email: String): AccountProperties?
-
     @Query("SELECT * FROM account_properties WHERE phone = :phone")
     suspend fun searchByPhone(phone: String): AccountProperties?
 
