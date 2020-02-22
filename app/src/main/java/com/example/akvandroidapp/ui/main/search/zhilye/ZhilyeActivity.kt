@@ -451,6 +451,11 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                 else
                     viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent())
             }
+
+            R.id.share -> {
+                shareZhilyeLink()
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -482,6 +487,22 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_dark)
         else
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_white)
+    }
+
+    private fun shareZhilyeLink(){
+        try{
+            val shareIntent = Intent(Intent.ACTION_SEND)
+
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "AKV")
+
+            val shareMessage = "akv.kz $houseId"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+
+            startActivity(Intent.createChooser(shareIntent, "Apps"))
+        }catch (e: Exception){
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initStateOfHouse(state: Int){

@@ -181,6 +181,7 @@ class HomeFragment : BaseHomeFragment(),
 //        findNavController().navigate(R.id.action_homeFragment_to_searchFragment, bundle)
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         // clear references (can leak memory)

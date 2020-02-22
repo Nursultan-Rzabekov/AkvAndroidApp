@@ -33,6 +33,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/change"
                 android:textSize="12sp"
+                android:paddingTop="@dimen/dim_4dp"
+                android:paddingBottom="@dimen/dim_4dp"
                 android:textColor="@color/primaryZero"
                 android:layout_marginEnd="@dimen/dim_8dp"
                 android:textStyle="bold"

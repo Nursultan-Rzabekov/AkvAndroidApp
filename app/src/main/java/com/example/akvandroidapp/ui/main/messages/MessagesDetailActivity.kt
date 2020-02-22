@@ -8,6 +8,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,8 +40,11 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
+import kotlinx.android.synthetic.main.activity_dialog_layout.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.header_dialog.*
+import kotlinx.android.synthetic.main.header_dialog.header_dialog_civ
+import kotlinx.android.synthetic.main.header_dialog.header_dialog_nickname_tv
 import loadFirstPage
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -130,6 +134,7 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
 
         initRecyclerView()
         subscribeObservers()
+        setToolbar()
 
         viewModel.setQuery(targetId).let {
             onBlogSearchOrFilter()
@@ -230,6 +235,14 @@ class MessagesDetailActivity : BaseActivity(), ModalBottomSheetChat.BottomSheetD
                     viewModel.setQueryExhausted(true)
                 }
             }
+        }
+    }
+
+    private fun setToolbar(){
+        header_dialog_messenger_toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back)
+
+        header_dialog_messenger_toolbar.setNavigationOnClickListener {
+            finish()
         }
     }
 
