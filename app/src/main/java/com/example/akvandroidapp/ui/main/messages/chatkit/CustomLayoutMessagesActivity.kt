@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,8 +46,11 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter.OnMessageLongClickListe
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
+import kotlinx.android.synthetic.main.activity_custom_layout_messages.*
 import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.header_dialog.*
+import kotlinx.android.synthetic.main.header_dialog.header_dialog_civ
+import kotlinx.android.synthetic.main.header_dialog.header_dialog_nickname_tv
 import loadFirstPage
 import nextPage
 import okhttp3.MediaType
@@ -73,7 +77,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     private var messagesAdapter: MessagesListAdapter<mMessage>? = null
     private var menu: Menu? = null
     private var selectionCount = 0
-    private var lastLoadedDate: Date? = null
 
     lateinit var stateChangeListener: DataStateChangeListener
     @Inject
@@ -98,10 +101,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
         stateChangeListener = this
 
-        main_back_img_btn.setOnClickListener {
-            finish()
-        }
-
         imageLoader =
             ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
                 Glide.with(this@CustomLayoutMessagesActivity).load(url).error(R.drawable.test_image_back).into(imageView!!)
@@ -119,13 +118,15 @@ class CustomLayoutMessagesActivity : BaseActivity(),
 
         senderId = targetId.toString()
 
-        header_dialog_nickname_tv.text = targetName
+        setToolbar()
+
+        header_custom_dialog_nickname_tv.text = targetName
         targetPic = targetImage
 
         Glide.with(this)
             .load(targetImage)
             .error(R.drawable.profile_default_avavatar)
-            .into(header_dialog_civ)
+            .into(header_custom_dialog_civ)
 
         initAdapter()
         subscribeObservers()
@@ -352,7 +353,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                         launchImageCrop(uri)
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_IMAGE)
                     //temporary variable
-                    val myData = myDataTransfer[requestCode]
                 }
 
                 CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
@@ -541,6 +541,14 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         messagesAdapter?.setOnMessageLongClickListener(this)
         messagesAdapter?.setLoadMoreListener(this)
         messagesList!!.setAdapter(messagesAdapter)
+    }
+
+    private fun setToolbar(){
+        header_dialog_messenger_toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back)
+
+        header_dialog_messenger_toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     override fun displayProgressBar(bool: Boolean) {}

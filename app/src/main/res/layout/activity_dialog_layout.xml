@@ -11,9 +11,34 @@
         android:fitsSystemWindows="true"
         android:backgroundTint="@color/white">
 
-        <include
-            android:id="@+id/header_dialog_base"
-            layout="@layout/header_dialog"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/header_dialog_messenger_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonGravity="center_vertical">
+
+            <TextView
+                android:id="@+id/header_dialog_nickname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/muratov_d"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/header_dialog_civ"
+                android:layout_width="@dimen/dim_40dp"
+                android:layout_height="@dimen/dim_40dp"
+                android:src="@drawable/profile_default_avavatar"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="@dimen/dim_8dp"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

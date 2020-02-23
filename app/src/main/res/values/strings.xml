@@ -175,7 +175,7 @@
     <string name="cheked_text">Формированию позиции представляет собой \nинтересный эксперимент проверки модели развития.</string>
     <string name="checked_text_main">Проверенное жильё</string>
     <string name="Any">Любой</string>
-    <string name="muratov_d">\@muratov_d</string>
+    <string name="muratov_d">\@None</string>
     <string name="select">Выбрать</string>
     <string name="hotel_del_luxe">Hotel Del Luxe</string>
     <string name="arrival">Прибытие</string>
@@ -256,7 +256,7 @@
     <string name="sort">Сортировка</string>
     <string name="city">Город</string>
     <string name="type_of_house">Тип жилья</string>
-    <string name="show_300_results">Показать 5+ результатов</string>
+    <string name="show_300_results">Показать результаты</string>
     <string name="host_mode">Режим хозяина</string>
     <string name="random_text3">Формированию позиции представляет собой  интересный эксперимент проверки модели развития.</string>
     <string name="payments">Платежи и выплаты</string>

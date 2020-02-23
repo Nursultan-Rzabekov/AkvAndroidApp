@@ -4,14 +4,16 @@ package com.example.akvandroidapp.util
 class Constants {
 
     companion object{
-        const val BASE_URL = "https://akv.kz/api/"
-        const val BASE_URL_IMAGE = "https://akv.kz"
+        const val BASE_URL = "http://akv-technopark.herokuapp.com/api/"//"https://akv.kz/api/"
+        const val BASE_URL_IMAGE = "http://akv-technopark.herokuapp.com"//"https://akv.kz"
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
         const val PAYBOX_PAY_URL: String = "https://open-api.xyz/password_reset/"
         const val AKV_TAX = 5
         const val AKV_PHONE = "+77026513909"
 
         const val SUCCESS = "Success"
+
+        const val NOT_VALID_IMAGE = "http://akv-technopark.herokuapp.com/media/images/no.jpg"
 
         const val DEFAULT_YEAR_GAP = -12
 

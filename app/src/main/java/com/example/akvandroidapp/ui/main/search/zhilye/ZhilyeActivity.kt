@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -17,6 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.ZhilyeDetail
 import com.example.akvandroidapp.entity.ZhilyeDetailProperties
@@ -111,11 +114,14 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         Locale.setDefault(Locale.forLanguageTag("ru"))
 
         houseId = intent.getIntExtra("houseId",67)
+        val firstImage = intent.getStringExtra("firstImage")
         fromState = intent.getIntExtra("fromState", DEFAULT_BOTTOM_BAR)
 
         viewModel = ViewModelProvider(this, providerFactory).get(ZhilyeViewModel::class.java)
         stateChangeListener = this
 
+
+        setFlipperLayout(arrayListOf(firstImage))
 
         houseId?.let {
             viewModel.setHouseId(it).let {
@@ -127,7 +133,6 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         initStateOfHouse(fromState)
         setMapView()
-        setFlipperLayout(arrayListOf())
         initRecyclerViews()
 
         subscribeObservers()
@@ -242,7 +247,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     for (photo in viewState.zhilyeFields.zhilyeDetailPhotos)
                         photos.add(photo.image!!)
 
-                    Log.e("wqeqe","photos list first + ${photos.first()}")
+                    Log.e("wqeqe","photos list first + ${photos.size}")
                     setFlipperLayout(photos)
 
                     houseRules = viewState.zhilyeFields.zhilyeDetailRules
@@ -408,20 +413,20 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         flipperLayout.showInnerPagerIndicator()
         flipperLayout.setIndicatorBackgroundColor(Color.TRANSPARENT)
 
-        var photos: ArrayList<String> = arrayListOf("http://akv-technopark.herokuapp.com/media/userpics/_DSC0430.jpg")
+        var photos: ArrayList<String> = arrayListOf(Constants.NOT_VALID_IMAGE)
         if (urls.size > 0)
             photos = urls
 
         val flipperViewList: ArrayList<FlipperView> = ArrayList()
         for (i in photos.indices) {
             val view = FlipperView(this)
-            view.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+//                view.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
             view.setDescriptionBackgroundColor(Color.TRANSPARENT)
             view.setImage(photos[i]) { flipperImageView, image ->
-                requestManager
+                Glide.with(this)
                     .load(image)
+                    .fitCenter()
                     .error(R.drawable.test_image_back)
-                    .centerCrop()
                     .into(flipperImageView)
             }
             flipperViewList.add(view)
@@ -429,6 +434,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         flipperLayout.removeAllFlipperViews()
         flipperLayout.addFlipperViewList(flipperViewList)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -453,6 +460,11 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                 else
                     viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent())
             }
+
+            R.id.share -> {
+                shareZhilyeLink()
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -484,6 +496,22 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_dark)
         else
             item?.icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_share_white)
+    }
+
+    private fun shareZhilyeLink(){
+        try{
+            val shareIntent = Intent(Intent.ACTION_SEND)
+
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "AKV")
+
+            val shareMessage = "akv.kz $houseId"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+
+            startActivity(Intent.createChooser(shareIntent, "Apps"))
+        }catch (e: Exception){
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initStateOfHouse(state: Int){
