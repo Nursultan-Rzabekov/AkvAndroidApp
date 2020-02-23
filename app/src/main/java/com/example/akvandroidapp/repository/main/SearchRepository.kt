@@ -244,7 +244,7 @@ constructor(
                     blogZhilyePhotosList.add(
                         ZhilyeDetailPhotos(
                             house = it.house,
-                            image = "http://akv-technopark.herokuapp.com$image"
+                            image = "${Constants.BASE_IMAGE}$image"
                         )
                     )
                 }
@@ -325,7 +325,7 @@ constructor(
                             city = blogPostResponse.city,
                             price = blogPostResponse.price,
                             status = blogPostResponse.status,
-                            image = "http://akv-technopark.herokuapp.com${blogPostResponse.photos?.first()?.image}",
+                            image = "${Constants.BASE_IMAGE}${blogPostResponse.photos?.first()?.image}",
                             rating = blogPostResponse.rating
                         )
                     )
