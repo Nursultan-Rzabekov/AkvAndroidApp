@@ -74,17 +74,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     MessagesListAdapter.SelectionListener, MessagesListAdapter.OnLoadMoreListener,
     MessageInput.InputListener, AttachmentsListener , ModalBottomSheetChat.BottomSheetDialogChatInteraction{
 
-//    private val SERVER_URL = "ws://akv.kz/ws?token={{${sessionManager.cachedToken.value?.token.toString()}}}"
-
-//    private val mClient: ChatClient by lazy {
-//        ChatClient(URI(SERVER_URL))
-//    }
-
     private var senderId = "1"
-
-    private var recipientIdS: String? = null
-    private var recipientNameS: String? = null
-    private var userIdTo: Int? = null
 
     private var imageLoader: ImageLoader? = null
     private var messagesAdapter: MessagesListAdapter<mMessage>? = null
@@ -114,11 +104,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
         stateChangeListener = this
 
-        Log.e("qweqwe","just do it ${sessionManager.cachedToken.value?.token.toString()}")
-
-
         ChatClient(URI("ws://akv.kz/ws?token=${sessionManager.cachedToken.value?.token.toString()}")).connect()
-        //mClient.connect()
 
         imageLoader =
             ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
@@ -215,11 +201,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     private fun sendMessageResponse(userConversationResponse: List<UserConversationsResponse>) {
         val messages = mutableListOf<mMessage>()
         userConversationResponse.forEach {
-            userIdTo = it.userId
-            recipientIdS = it.recipientId.toString()
-            recipientNameS = it.recipientName.toString()
-
-
             if(it.images!=null){
                 messages.add(getMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${it.images}",
                     user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
@@ -282,11 +263,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 }
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        //messagesAdapter!!.addToStart(MessagesFixtures.getTextMessage(), true)
     }
 
     override fun onCameraClicked() {
@@ -541,16 +517,9 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     }
 
     override fun onSubmit(input: CharSequence): Boolean {
-//        messagesAdapter?.addToStart(
-//            MessageText(senderId.toInt(), input.toString(),calendar.time,
-//                user = User(senderId,"Nurs","qwe",true)), true
-//        )
         viewModel.setMessageBody(input.toString())
         viewModel.setUserId(viewModel.getTargetQuery())
         viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
-
-//        mClient.send("$mUsername: $msg")
-
         return true
     }
 
@@ -574,18 +543,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 holdersConfig,
                 imageLoader
             )
-
-//        messagesList?.addOnScrollListener(object: RecyclerView.OnScrollListener(){
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-//                val lastPosition = layoutManager.findLastVisibleItemPosition()
-//                if (lastPosition == messagesAdapter?.itemCount?.minus(1)) {
-//                    Log.d(TAG, "BlogFragment: attempting to load next page...")
-//                    viewModel.nextPage()
-//                }
-//            }
-//        })
 
         messagesAdapter?.setOnMessageLongClickListener(this)
         messagesAdapter?.setLoadMoreListener(this)
@@ -660,25 +617,28 @@ class CustomLayoutMessagesActivity : BaseActivity(),
             Log.e("nursultan","^^^^^^^^^^^^^^^^hahah $message")
 
             val json = ObjectMapper().readTree(message)
-
             val body = json.get("body").asText()
             val id = json.get("id").asText()
             val created_at = json.get("created_at").asText()
             val updated_at = json.get("updated_at").asText()
             val images = json.get("images")
-            val user = json.get("user").asText()
+            val userId = json.get("user").get("id").asText()
+            val userName = json.get("user").get("email").asText()
 
-            Log.e("nursultan","$$$$$$ userJson ${images}")
+            val recipientId = json.get("recipient").get("id").asText()
+            val recipientName = json.get("recipient").get("email").asText()
+
+            Log.e("nursultan","$$$$$$ userJson ${userName}")
             println("json msg ${message}")
 
             if(images == null){
-                sendMessageWithType(userIdTo!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${images}",
-                    user = User(recipientIdS.toString(),recipientNameS.toString(),targetPic.toString(),true)
+                sendMessageWithType(userId.toInt(),Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${images}",
+                    user = User(recipientId.toString(),recipientName.toString(),targetPic.toString(),true)
                 )
             }
             else{
-                sendMessageWithType(userIdTo!!,Constants.MESSAGE_TYPE_TEXT,body = body,
-                    user = User(recipientIdS.toString(),recipientNameS.toString(),targetPic.toString(),true)
+                sendMessageWithType(userId.toInt(),Constants.MESSAGE_TYPE_TEXT,body = body,
+                    user = User(recipientId.toString(),recipientName.toString(),targetPic.toString(),true)
                 )
             }
         }
@@ -699,13 +659,12 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 "MMM d, EEE 'at' h:mm a",
                 Locale.getDefault()
             )
-                .format(message.getCreatedAt())
-            var text: String? = message.getText()
+                .format(message.createdAt)
+            var text: String? = message.text
             if (text == null) text = "[attachment]"
             String.format(
                 Locale.getDefault(), "%s: %s (%s)",
                 message.user.name, text, createdAt
             )
         }
-
 }
