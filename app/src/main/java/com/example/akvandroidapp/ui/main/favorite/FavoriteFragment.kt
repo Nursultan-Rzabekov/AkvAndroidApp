@@ -169,7 +169,10 @@ class FavoriteFragment : BaseFavoriteFragment(),
     }
 
     override fun onItemSelected(position: Int, item: BlogPost) {
-        val bundle = bundleOf("houseId" to item.id)
+        val bundle = bundleOf(
+            "houseId" to item.id,
+            "firstImage" to item.image
+        )
         findNavController().navigate(R.id.action_favoriteFragment_to_zhilyeFragment, bundle)
     }
 

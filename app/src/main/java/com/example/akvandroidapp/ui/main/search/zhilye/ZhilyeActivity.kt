@@ -67,7 +67,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     private val TAGV = "Zhilye Activity"
 
     companion object {
-        const val BOTTOM_BAR_CANCEL = 1
+        const val CANCEL_BOTTOM_BAR = 1
         const val NO_BOTTOM_BAR = 2
         const val DEFAULT_BOTTOM_BAR = 0
     }
@@ -103,7 +103,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     lateinit var viewModel: ZhilyeViewModel
 
     private var houseId: Int? = null
-    private var fromState: Int = 0
+    private var homeState: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,8 +114,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         Locale.setDefault(Locale.forLanguageTag("ru"))
 
         houseId = intent.getIntExtra("houseId",67)
-        val firstImage = intent.getStringExtra("firstImage")
-        fromState = intent.getIntExtra("fromState", DEFAULT_BOTTOM_BAR)
+        val firstImage = intent.getStringExtra("firstImage")?:Constants.NOT_VALID_IMAGE
+        homeState = intent.getIntExtra("fromState", DEFAULT_BOTTOM_BAR)
 
         viewModel = ViewModelProvider(this, providerFactory).get(ZhilyeViewModel::class.java)
         stateChangeListener = this
@@ -131,7 +131,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         setToolbar()
 
-        initStateOfHouse(fromState)
+        initStateOfHouse(homeState)
         setMapView()
         initRecyclerViews()
 
@@ -142,7 +142,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         }
 
         fragment_zhile_book_btn.setOnClickListener {
-            navBookReserv()
+            if (homeState == DEFAULT_BOTTOM_BAR)
+                navBookReserv()
+            else
+                cancelBooking()
         }
 
         chat_target_email.setOnClickListener {
@@ -296,6 +299,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         showDatePicker()
     }
 
+    private fun cancelBooking(){
+
+    }
+
     override fun onStop() {
         maPView.onStop()
         MapKitFactory.getInstance().onStop()
@@ -434,8 +441,6 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         flipperLayout.removeAllFlipperViews()
         flipperLayout.addFlipperViewList(flipperViewList)
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -517,7 +522,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     private fun initStateOfHouse(state: Int){
         when(state){
             DEFAULT_BOTTOM_BAR -> fragment_zhilye_frame_book_layout.visibility = View.VISIBLE
-            BOTTOM_BAR_CANCEL -> cancelState()
+            CANCEL_BOTTOM_BAR -> cancelState()
             NO_BOTTOM_BAR -> fragment_zhilye_frame_book_layout.visibility = View.GONE
         }
     }
@@ -529,6 +534,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
         fragment_zhile_rating_tv.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)))
         fragment_zhile_book_btn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white))
         fragment_zhile_book_btn.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.primaryZero)))
+        fragment_zhile_book_btn.text = getString(R.string.cancel)
     }
 
     private fun showDatePicker(){
