@@ -35,7 +35,7 @@ interface OpenApiMainService {
         @Part photos: ArrayList<MultipartBody.Part>?
     ): LiveData<GenericApiResponse<BlogCreateUpdateResponse>>
 
-    @GET("houses")
+    @GET("houses/")
     fun searchListBlogPosts(
         @QueryMap  options : Map<String, String>,
         @Query("page") page: Int,
@@ -115,7 +115,7 @@ interface OpenApiMainService {
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<HomeListResponse>>
 
-    @GET("houses/{house_id}")
+    @GET("houses/{house_id}/")
     fun getZhilyeWithHouseId(
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int

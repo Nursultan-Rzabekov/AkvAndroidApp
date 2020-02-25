@@ -47,32 +47,39 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_custom_layout_messages.*
-import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.header_dialog.*
-import kotlinx.android.synthetic.main.header_dialog.header_dialog_civ
-import kotlinx.android.synthetic.main.header_dialog.header_dialog_nickname_tv
 import loadFirstPage
 import nextPage
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.java_websocket.client.WebSocketClient
+import org.java_websocket.handshake.ServerHandshake
 import setImageMultipart
 import setMessageBody
 import setUserId
 import java.io.File
 import java.io.IOException
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
+import kotlin.properties.Delegates
 
 class CustomLayoutMessagesActivity : BaseActivity(),
     OnMessageLongClickListener<mMessage?>,
     MessagesListAdapter.SelectionListener, MessagesListAdapter.OnLoadMoreListener,
     MessageInput.InputListener, AttachmentsListener , ModalBottomSheetChat.BottomSheetDialogChatInteraction{
 
+
+    private val SERVER_URL = "ws://akv.kz/ws?token={{${sessionManager.cachedToken.value}}}"
+
+    private val mClient: ChatClient by lazy {
+        ChatClient(URI(SERVER_URL))
+    }
+
     private var senderId = "1"
+
     private var imageLoader: ImageLoader? = null
     private var messagesAdapter: MessagesListAdapter<mMessage>? = null
     private var menu: Menu? = null
@@ -100,6 +107,8 @@ class CustomLayoutMessagesActivity : BaseActivity(),
 
         viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
         stateChangeListener = this
+
+        mClient.connect()
 
         imageLoader =
             ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
@@ -502,6 +511,9 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel.setMessageBody(input.toString())
         viewModel.setUserId(viewModel.getTargetQuery())
         viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
+
+//        mClient.send("$mUsername: $msg")
+
         return true
     }
 
@@ -606,6 +618,28 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         selectionCount = count
         menu!!.findItem(R.id.action_delete).isVisible = count > 0
         menu!!.findItem(R.id.action_copy).isVisible = count > 0
+    }
+
+
+    inner class ChatClient(url: URI): WebSocketClient(url) {
+        override fun onOpen(handshakedata: ServerHandshake?) {
+            Log.d("ChatClient", "ChatClient Connected")
+        }
+
+        override fun onMessage(message: String) = this@CustomLayoutMessagesActivity.runOnUiThread {
+//            sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
+//                user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
+//            )
+        }
+
+        override fun onClose(code: Int, reason: String?, remote: Boolean) {
+            Log.d("ChatClient", "ChatClient Disconnected")
+        }
+
+        override fun onError(ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
     }
 
     private val messageStringFormatter: MessagesListAdapter.Formatter<mMessage>

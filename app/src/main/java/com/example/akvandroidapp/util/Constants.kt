@@ -4,8 +4,8 @@ package com.example.akvandroidapp.util
 class Constants {
 
     companion object{
-        const val BASE_URL = "http://akv-technopark.herokuapp.com/api/"//"https://akv.kz/api/"
-        const val BASE_URL_IMAGE = "http://akv-technopark.herokuapp.com"//"https://akv.kz"
+        const val BASE_URL = "https://akv.kz/api/"//"http://akv-technopark.herokuapp.com/api/"//
+        const val BASE_URL_IMAGE = "https://akv.kz"// "http://akv-technopark.herokuapp.com"//"
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
         const val PAYBOX_PAY_URL: String = "https://open-api.xyz/password_reset/"
         const val AKV_TAX = 5
