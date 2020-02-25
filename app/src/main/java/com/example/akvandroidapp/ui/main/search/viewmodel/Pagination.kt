@@ -281,8 +281,8 @@ fun DetailsViewModel.nextPage(){
     if (!viewState.value!!.myChatFields.isQueryInProgress
         && !viewState.value!!.myChatFields.isQueryExhausted){
         Log.d(TAG, "DetailsViewModel: Attempting to load next page...")
-        incrementPageNumber()
         setBlogListData(listOf())
+        incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(DetailsStateEvent.ChatDetailEvent())
     }

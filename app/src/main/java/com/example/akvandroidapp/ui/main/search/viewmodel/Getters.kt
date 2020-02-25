@@ -2,6 +2,8 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
+import com.example.akvandroidapp.entity.UserConversationMessages
+import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
@@ -173,6 +175,12 @@ fun RequestViewModel.getOrdersPage(): Int{
 fun DetailsViewModel.getPage(): Int{
     getCurrentViewStateOrNew().let {
         return it.myChatFields.page
+    }
+}
+
+fun DetailsViewModel.getBlogList(): List<UserConversationMessages>{
+    getCurrentViewStateOrNew().let {
+        return it.myChatFields.blogList
     }
 }
 

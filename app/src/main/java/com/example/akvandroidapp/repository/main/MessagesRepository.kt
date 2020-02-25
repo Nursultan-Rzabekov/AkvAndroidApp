@@ -150,6 +150,7 @@ constructor(
                         )
                     )
                 }
+                Log.d(TAG, "result bloglist ${blogPostList.size}")
 
                 withContext(Dispatchers.Main) {
                     onCompleteJob(
@@ -169,7 +170,7 @@ constructor(
             }
 
             private fun booleanQuery(blogPostListSize: Int):Boolean{
-                if(page * Constants.PAGINATION_PAGE_SIZE >= blogPostListSize){
+                if(page * Constants.PAGINATION_MESSAGE_SIZE >= blogPostListSize){
                     return true
                 }
                 return false

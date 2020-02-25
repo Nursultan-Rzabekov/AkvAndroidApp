@@ -113,7 +113,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         Locale.setDefault(Locale.forLanguageTag("ru"))
 
-        houseId = intent.getIntExtra("houseId",67)
+        houseId = intent.getIntExtra("houseId",0)
         val firstImage = intent.getStringExtra("firstImage")?:Constants.NOT_VALID_IMAGE
         homeState = intent.getIntExtra("fromState", DEFAULT_BOTTOM_BAR)
 

@@ -32,6 +32,7 @@ class Constants {
 
         const val PAGINATION_PAGE_SIZE = 10
         const val PAGINATION_PAGE_SIZE_FAVORITE = 10
+        const val PAGINATION_MESSAGE_SIZE = 15
 
         const val GALLERY_REQUEST_CODE = 0
         const val REQUEST_IMAGE_CAPTURE = 15

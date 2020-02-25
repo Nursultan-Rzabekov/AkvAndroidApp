@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
@@ -38,6 +39,7 @@ import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.stfalcon.chatkit.commons.ImageLoader
+import com.stfalcon.chatkit.commons.models.IMessage
 import com.stfalcon.chatkit.messages.MessageHolders
 import com.stfalcon.chatkit.messages.MessageInput
 import com.stfalcon.chatkit.messages.MessageInput.AttachmentsListener
@@ -182,7 +184,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 else{
                     if(viewState.myChatFields.blogList.isNotEmpty()){
                         Log.d(TAG, "send message vvvvvqqq: page: ${viewState.myChatFields.blogList}")
-                        val set =  HashSet<UserConversationsResponse>()
+                        val set =  mutableListOf<UserConversationsResponse>()
                         if(viewState.myChatFields.blogList.isNotEmpty()){
                             viewState.myChatFields.blogList.forEach {
                                 set.add(UserConversationsResponse(
@@ -202,15 +204,8 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                                 ))
                             }
                         }
-                        Log.d(TAG, "send message 123123 : page: ${set.toList()}")
-
-                        if (viewState.myChatFields.page == 1){
-                            Log.d(TAG, "send message hahaha : page: ${set.toList()}")
-                            sendMessageResponse(set.toList())
-                        }
-                        else {
-                            sendMessageResponse(set.toList())
-                        }
+                        Log.d(TAG, "send message hahaha : page: ${viewModel.getPage()} size: ${set.size}")
+                        sendMessageResponse(set.toList())
                     }
                 }
             }
@@ -218,20 +213,50 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     }
 
     private fun sendMessageResponse(userConversationResponse: List<UserConversationsResponse>) {
-        userConversationResponse.asReversed().forEach {
+        val messages = mutableListOf<mMessage>()
+        userConversationResponse.forEach {
             userIdTo = it.userId
             recipientIdS = it.recipientId.toString()
             recipientNameS = it.recipientName.toString()
 
+
             if(it.images!=null){
-                sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${it.images}",
+                messages.add(getMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${it.images}",
                     user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
-                )
+                ))
             }
             else{
-                sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
+                messages.add(getMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
                     user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
-                )
+                ))
+            }
+        }
+        messagesAdapter?.addToEnd(messages, false)
+    }
+
+    private fun getMessageWithType(userId: Int, type: Int,
+                                   body: String = "", uriOfFile: Uri? = null,
+                                   user: User,
+                                   imageUrl:String? = null, fileName: String = "", fileSize: Long = 0): mMessage{
+        when(type){
+            Constants.MESSAGE_TYPE_TEXT -> {
+                return MessageText(userId, body,calendar.time,user = user)
+
+            }
+            Constants.MESSAGE_TYPE_PHOTO -> {
+                return MessagePhoto(userId = userId, photo = uriOfFile,
+                        user = user,
+                        image = imageUrl,
+                        created_at = calendar.time)
+            }
+            Constants.MESSAGE_TYPE_DOC -> {
+                return MessageDocument(userId,
+                        fileName = fileName,
+                        fileSize = Converters.humanReadableByteCountSI(fileSize),
+                        created_at = calendar.time)
+            }
+            else -> {
+                return MessageText(userId, body,calendar.time,user = user)
             }
         }
     }
@@ -516,10 +541,10 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     }
 
     override fun onSubmit(input: CharSequence): Boolean {
-        messagesAdapter?.addToStart(
-            MessageText(senderId.toInt(), input.toString(),calendar.time,
-                user = User(senderId,"Nurs","qwe",true)), true
-        )
+//        messagesAdapter?.addToStart(
+//            MessageText(senderId.toInt(), input.toString(),calendar.time,
+//                user = User(senderId,"Nurs","qwe",true)), true
+//        )
         viewModel.setMessageBody(input.toString())
         viewModel.setUserId(viewModel.getTargetQuery())
         viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
@@ -550,17 +575,17 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 imageLoader
             )
 
-        messagesList?.addOnScrollListener(object: RecyclerView.OnScrollListener(){
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val lastPosition = layoutManager.findLastVisibleItemPosition()
-                if (lastPosition == messagesAdapter?.itemCount?.minus(1)) {
-                    Log.d(TAG, "BlogFragment: attempting to load next page...")
-                    viewModel.nextPage()
-                }
-            }
-        })
+//        messagesList?.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+//                val lastPosition = layoutManager.findLastVisibleItemPosition()
+//                if (lastPosition == messagesAdapter?.itemCount?.minus(1)) {
+//                    Log.d(TAG, "BlogFragment: attempting to load next page...")
+//                    viewModel.nextPage()
+//                }
+//            }
+//        })
 
         messagesAdapter?.setOnMessageLongClickListener(this)
         messagesAdapter?.setLoadMoreListener(this)
@@ -580,9 +605,8 @@ class CustomLayoutMessagesActivity : BaseActivity(),
 
     override fun onLoadMore(page: Int, totalItemsCount: Int) {
         Log.i("TAG", "onLoadMore: $page $totalItemsCount")
-        if (totalItemsCount < TOTAL_MESSAGES_COUNT) {
-            loadMessages()
-        }
+
+        loadMessages()
     }
 
     override fun onBackPressed() {
@@ -594,14 +618,8 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     }
 
     private fun loadMessages() {
-//        Handler().postDelayed(
-//        {
-//            val messages = MessagesFixtures.getMessages(lastLoadedDate)
-//            lastLoadedDate = messages[messages.size - 1].createdAt
-//
-//            messagesAdapter!!.addToEnd(messages, false)
-//        }, 1000
-//        )
+        viewModel.nextPage()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -647,13 +665,13 @@ class CustomLayoutMessagesActivity : BaseActivity(),
             val id = json.get("id").asText()
             val created_at = json.get("created_at").asText()
             val updated_at = json.get("updated_at").asText()
-            val images = json.get("images").asText()
+            val images = json.get("images")
             val user = json.get("user").asText()
 
-            Log.e("nursultan","$$$$$$ userJson ${body}")
+            Log.e("nursultan","$$$$$$ userJson ${images}")
             println("json msg ${message}")
 
-            if(images!=null){
+            if(images == null){
                 sendMessageWithType(userIdTo!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${images}",
                     user = User(recipientIdS.toString(),recipientNameS.toString(),targetPic.toString(),true)
                 )
