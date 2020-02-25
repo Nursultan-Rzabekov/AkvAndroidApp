@@ -36,6 +36,7 @@ import com.example.akvandroidapp.util.Constants.Companion.TOTAL_MESSAGES_COUNT
 import com.example.akvandroidapp.util.Converters
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessageHolders
 import com.stfalcon.chatkit.messages.MessageInput
@@ -71,14 +72,17 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     MessagesListAdapter.SelectionListener, MessagesListAdapter.OnLoadMoreListener,
     MessageInput.InputListener, AttachmentsListener , ModalBottomSheetChat.BottomSheetDialogChatInteraction{
 
+//    private val SERVER_URL = "ws://akv.kz/ws?token={{${sessionManager.cachedToken.value?.token.toString()}}}"
 
-    private val SERVER_URL = "ws://akv.kz/ws?token={{${sessionManager.cachedToken.value}}}"
-
-    private val mClient: ChatClient by lazy {
-        ChatClient(URI(SERVER_URL))
-    }
+//    private val mClient: ChatClient by lazy {
+//        ChatClient(URI(SERVER_URL))
+//    }
 
     private var senderId = "1"
+
+    private var recipientIdS: String? = null
+    private var recipientNameS: String? = null
+    private var userIdTo: Int? = null
 
     private var imageLoader: ImageLoader? = null
     private var messagesAdapter: MessagesListAdapter<mMessage>? = null
@@ -108,7 +112,11 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
         stateChangeListener = this
 
-        mClient.connect()
+        Log.e("qweqwe","just do it ${sessionManager.cachedToken.value?.token.toString()}")
+
+
+        ChatClient(URI("ws://akv.kz/ws?token=${sessionManager.cachedToken.value?.token.toString()}")).connect()
+        //mClient.connect()
 
         imageLoader =
             ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
@@ -211,6 +219,10 @@ class CustomLayoutMessagesActivity : BaseActivity(),
 
     private fun sendMessageResponse(userConversationResponse: List<UserConversationsResponse>) {
         userConversationResponse.asReversed().forEach {
+            userIdTo = it.userId
+            recipientIdS = it.recipientId.toString()
+            recipientNameS = it.recipientName.toString()
+
             if(it.images!=null){
                 sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${it.images}",
                     user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
@@ -627,9 +639,30 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         }
 
         override fun onMessage(message: String) = this@CustomLayoutMessagesActivity.runOnUiThread {
-//            sendMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
-//                user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
-//            )
+            Log.e("nursultan","^^^^^^^^^^^^^^^^hahah $message")
+
+            val json = ObjectMapper().readTree(message)
+
+            val body = json.get("body").asText()
+            val id = json.get("id").asText()
+            val created_at = json.get("created_at").asText()
+            val updated_at = json.get("updated_at").asText()
+            val images = json.get("images").asText()
+            val user = json.get("user").asText()
+
+            Log.e("nursultan","$$$$$$ userJson ${body}")
+            println("json msg ${message}")
+
+            if(images!=null){
+                sendMessageWithType(userIdTo!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${images}",
+                    user = User(recipientIdS.toString(),recipientNameS.toString(),targetPic.toString(),true)
+                )
+            }
+            else{
+                sendMessageWithType(userIdTo!!,Constants.MESSAGE_TYPE_TEXT,body = body,
+                    user = User(recipientIdS.toString(),recipientNameS.toString(),targetPic.toString(),true)
+                )
+            }
         }
 
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
