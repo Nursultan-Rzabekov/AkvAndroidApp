@@ -35,6 +35,7 @@ import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Constants.Companion.TOTAL_MESSAGES_COUNT
 import com.example.akvandroidapp.util.Converters
+import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -116,7 +117,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         input.setInputListener(this)
         input.setAttachmentsListener(this)
 
-        val targetEmail =  intent.getStringExtra("email")
         val targetName =  intent.getStringExtra("name")
         val targetId =  intent.getIntExtra("id",1)
         val targetImage =  intent.getStringExtra("image")
@@ -141,14 +141,40 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         }
     }
 
-    private fun onBlogSearchOrFilter(){
-        viewModel.loadFirstPage().let {
-            resetUI()
+    private fun initAdapter() {
+        val holdersConfig = MessageHolders()
+            .setIncomingTextLayout(R.layout.item_custom_incoming_text_message)
+            .setOutcomingTextLayout(R.layout.item_custom_outcoming_text_message)
+            .setIncomingImageLayout(R.layout.item_custom_incoming_image_message)
+            .setOutcomingImageLayout(R.layout.item_custom_outcoming_image_message)
+        messagesAdapter =
+            MessagesListAdapter(
+                senderId,
+                holdersConfig,
+                imageLoader
+            )
+
+        messagesAdapter?.setOnMessageLongClickListener(this)
+        messagesAdapter?.setLoadMoreListener(this)
+        messagesList!!.setAdapter(messagesAdapter)
+    }
+
+    private fun setToolbar(){
+        header_dialog_messenger_toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back)
+
+        header_dialog_messenger_toolbar.setNavigationOnClickListener {
+            finish()
         }
     }
 
     private  fun resetUI(){
         stateChangeListener.hideSoftKeyboard()
+    }
+
+    private fun onBlogSearchOrFilter(){
+        viewModel.loadFirstPage().let {
+            resetUI()
+        }
     }
 
     private fun subscribeObservers(){
@@ -164,12 +190,14 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 Log.d(TAG, "send message 123 : page: ${viewState.sendMessageFields.messageBody}")
                 if(viewState.sendMessageFields.sended){
                     Log.d(TAG, "send message lll : page: ${viewState.sendMessageFields.messageBody}")
-                    onBlogSearchOrFilter()
+                    // onBlogSearchOrFilter()
+                    Toast.makeText(this, "Message sent", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "send message send : page: ${viewModel.getPage()} size: ${viewState.myChatFields.blogList.size}")
                     viewModel.setSendedState(false)
                 }
                 else{
                     if(viewState.myChatFields.blogList.isNotEmpty()){
-                        Log.d(TAG, "send message vvvvvqqq: page: ${viewState.myChatFields.blogList}")
+                        //Log.d(TAG, "send message vvvvvqqq: page: ${viewState.myChatFields.blogList}")
                         val set =  mutableListOf<UserConversationsResponse>()
                         if(viewState.myChatFields.blogList.isNotEmpty()){
                             viewState.myChatFields.blogList.forEach {
@@ -191,55 +219,12 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                             }
                         }
                         Log.d(TAG, "send message hahaha : page: ${viewModel.getPage()} size: ${set.size}")
-                        sendMessageResponse(set.toList())
+                        setMessageHistory(set.toList())
+                        viewModel.setBlogListData(listOf())
                     }
                 }
             }
         })
-    }
-
-    private fun sendMessageResponse(userConversationResponse: List<UserConversationsResponse>) {
-        val messages = mutableListOf<mMessage>()
-        userConversationResponse.forEach {
-            if(it.images!=null){
-                messages.add(getMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${it.images}",
-                    user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
-                ))
-            }
-            else{
-                messages.add(getMessageWithType(it.userId!!,Constants.MESSAGE_TYPE_TEXT,body = it.body,
-                    user = User(it.recipientId.toString(),it.recipientName.toString(),targetPic.toString(),true)
-                ))
-            }
-        }
-        messagesAdapter?.addToEnd(messages, false)
-    }
-
-    private fun getMessageWithType(userId: Int, type: Int,
-                                   body: String = "", uriOfFile: Uri? = null,
-                                   user: User,
-                                   imageUrl:String? = null, fileName: String = "", fileSize: Long = 0): mMessage{
-        when(type){
-            Constants.MESSAGE_TYPE_TEXT -> {
-                return MessageText(userId, body,calendar.time,user = user)
-
-            }
-            Constants.MESSAGE_TYPE_PHOTO -> {
-                return MessagePhoto(userId = userId, photo = uriOfFile,
-                        user = user,
-                        image = imageUrl,
-                        created_at = calendar.time)
-            }
-            Constants.MESSAGE_TYPE_DOC -> {
-                return MessageDocument(userId,
-                        fileName = fileName,
-                        fileSize = Converters.humanReadableByteCountSI(fileSize),
-                        created_at = calendar.time)
-            }
-            else -> {
-                return MessageText(userId, body,calendar.time,user = user)
-            }
-        }
     }
 
     private fun handlePagination(dataState: DataState<DetailsViewState>){
@@ -263,6 +248,88 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                 }
             }
         }
+    }
+
+    private fun setMessageHistory(userConversationResponse: List<UserConversationsResponse>) {
+        val messages = mutableListOf<mMessage>()
+        userConversationResponse.forEach {
+            if(it.images!=null){
+                messages.add(
+                    getMessageWithType(
+                        userId = it.userId!!,
+                        type = Constants.MESSAGE_TYPE_PHOTO,
+                        imageUrl = "${Constants.BASE_URL_IMAGE}${it.images}",
+                        createdAt = it.created_at.toString(),
+                        user = User(it.recipientId.toString(),
+                            it.recipientName.toString(),
+                            targetPic.toString(),
+                            true
+                        )
+                    )
+                )
+            }
+            else{
+                messages.add(
+                    getMessageWithType(
+                        userId = it.userId!!,
+                        type = Constants.MESSAGE_TYPE_TEXT,
+                        body = it.body,
+                        createdAt = it.created_at.toString(),
+                        user = User(it.recipientId.toString(),
+                            it.recipientName.toString(),
+                            targetPic.toString(),
+                            true
+                        )
+                    )
+                )
+            }
+        }
+        messagesAdapter?.addToEnd(messages, false)
+    }
+
+    private fun getMessageWithType(userId: Int, type: Int,
+                                   body: String = "", uriOfFile: Uri? = null,
+                                   user: User,
+                                   imageUrl:String? = null, fileName: String = "", fileSize: Long = 0,
+                                   createdAt: String): mMessage{
+        when(type){
+            Constants.MESSAGE_TYPE_TEXT -> {
+                return MessageText(
+                    userId = userId,
+                    body = body,
+                    created_at = DateUtils.convertLongStringToDate(createdAt),
+                    user = user
+                )
+
+            }
+            Constants.MESSAGE_TYPE_PHOTO -> {
+                return MessagePhoto(
+                    userId = userId,
+                    photo = uriOfFile,
+                    user = user,
+                    image = imageUrl,
+                    created_at = DateUtils.convertLongStringToDate(createdAt)
+                )
+            }
+            Constants.MESSAGE_TYPE_DOC -> {
+                return MessageDocument(
+                    userId = userId,
+                    fileName = fileName,
+                    fileSize = Converters.humanReadableByteCountSI(fileSize),
+                    created_at = DateUtils.convertLongStringToDate(createdAt)
+                )
+            }
+            else -> {
+                return MessageText(userId, body, DateUtils.convertLongStringToDate(createdAt), user = user)
+            }
+        }
+    }
+
+    override fun onSubmit(input: CharSequence): Boolean {
+        viewModel.setMessageBody(input.toString())
+        viewModel.setUserId(viewModel.getTargetQuery())
+        viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
+        return true
     }
 
     override fun onCameraClicked() {
@@ -289,6 +356,21 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     override fun onCancelClicked() {
         if (modalBottomSheet.isVisible)
             modalBottomSheet.dismiss()
+    }
+
+    override fun onAddAttachments() {
+        showDialog()
+    }
+
+    override fun onLoadMore(page: Int, totalItemsCount: Int) {
+        Log.i("TAG", "onLoadMore: $page $totalItemsCount")
+
+        loadMessages()
+    }
+
+    private fun loadMessages() {
+        viewModel.nextPage()
+
     }
 
     private fun dispatchTakePictureIntent() {
@@ -356,12 +438,13 @@ class CustomLayoutMessagesActivity : BaseActivity(),
             when(requestCode){
                 Constants.REQUEST_IMAGE_CAPTURE -> {
                     try {
-                        sendMessageWithType(
+                        messagesAdapter?.addToStart(getMessageWithType(
                             senderId.toInt(),
                             imageUrl = currentPhotoUri.toString(),
                             user = User(senderId,"qwew","qwe",true),
                             type = Constants.MESSAGE_TYPE_PHOTO,
-                            uriOfFile = currentPhotoUri)
+                            uriOfFile = currentPhotoUri,
+                            createdAt = calendar.time.toString()),true)
 
 
                     }catch (ex: Exception){
@@ -385,12 +468,13 @@ class CustomLayoutMessagesActivity : BaseActivity(),
 
                     currentPhotoUri = resultUri
 
-                    sendMessageWithType(
+                    messagesAdapter?.addToStart(getMessageWithType(
                         senderId.toInt(),
                         imageUrl = resultUri.toString(),
                         user = User(senderId,"qwew","qwe",true),
                         type = Constants.MESSAGE_TYPE_PHOTO,
-                        uriOfFile = resultUri)
+                        uriOfFile = resultUri,
+                        createdAt = calendar.time.toString()), true)
 
                     currentPhotoUri.path?.let { filePath->
                         val imageFile = File(filePath)
@@ -437,12 +521,13 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                                 cursor.moveToFirst()
                                 fileName = cursor.getString(nameIndex)
                                 fileSize = cursor.getLong(sizeIndex)
-                                sendMessageWithType(
+                                messagesAdapter?.addToStart(getMessageWithType(
                                     1,
                                     Constants.MESSAGE_TYPE_DOC,
                                     fileName = fileName,
                                     fileSize = fileSize,
-                                    user = User(senderId,"Nurs","qweq",true))
+                                    createdAt = calendar.time.toString(),
+                                    user = User(senderId,"Nurs","qweq",true)), true)
                             }
                     }?: showErrorDialog(ErrorHandling.ERROR_SOMETHING_WRONG_WITH_FILE)
                     Log.e("MESSAGE_DOCUMENT_URI", currentFileUri.toString())
@@ -484,87 +569,16 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         )
     }
 
-    fun sendMessageWithType(userId: Int, type: Int,
-                            body: String = "", uriOfFile: Uri? = null,
-                            user: User,
-                            imageUrl:String? = null, fileName: String = "", fileSize: Long = 0){
-        when(type){
-            Constants.MESSAGE_TYPE_TEXT -> {
-                messagesAdapter?.addToStart(
-                    MessageText(userId, body,calendar.time,user = user), true
-                )
-            }
-            Constants.MESSAGE_TYPE_PHOTO -> {
-                messagesAdapter?.addToStart(
-                    MessagePhoto(userId = userId, photo = uriOfFile,
-                    user = user,
-                    image = imageUrl,
-                    created_at = calendar.time), true)
-            }
-            Constants.MESSAGE_TYPE_DOC -> {
-                messagesAdapter?.addToStart(
-                    MessageDocument(userId,
-                        fileName = fileName,
-                        fileSize = Converters.humanReadableByteCountSI(fileSize),
-                        created_at = calendar.time),true
-                )
-            }
-        }
-    }
-
     private fun showDialog(){
         modalBottomSheet.show(supportFragmentManager, ModalBottomSheetChat.TAG)
-    }
-
-    override fun onSubmit(input: CharSequence): Boolean {
-        viewModel.setMessageBody(input.toString())
-        viewModel.setUserId(viewModel.getTargetQuery())
-        viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
-        return true
-    }
-
-    override fun onAddAttachments() {
-        showDialog()
     }
 
     override fun onMessageLongClick(message: mMessage?) {
 
     }
 
-    private fun initAdapter() {
-        val holdersConfig = MessageHolders()
-            .setIncomingTextLayout(R.layout.item_custom_incoming_text_message)
-            .setOutcomingTextLayout(R.layout.item_custom_outcoming_text_message)
-            .setIncomingImageLayout(R.layout.item_custom_incoming_image_message)
-            .setOutcomingImageLayout(R.layout.item_custom_outcoming_image_message)
-        messagesAdapter =
-            MessagesListAdapter(
-                senderId,
-                holdersConfig,
-                imageLoader
-            )
-
-        messagesAdapter?.setOnMessageLongClickListener(this)
-        messagesAdapter?.setLoadMoreListener(this)
-        messagesList!!.setAdapter(messagesAdapter)
-    }
-
-    private fun setToolbar(){
-        header_dialog_messenger_toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back)
-
-        header_dialog_messenger_toolbar.setNavigationOnClickListener {
-            finish()
-        }
-    }
-
     override fun displayProgressBar(bool: Boolean) {}
     override fun expandAppBar() {}
-
-    override fun onLoadMore(page: Int, totalItemsCount: Int) {
-        Log.i("TAG", "onLoadMore: $page $totalItemsCount")
-
-        loadMessages()
-    }
 
     override fun onBackPressed() {
         if (selectionCount == 0) {
@@ -572,11 +586,6 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         } else {
             messagesAdapter!!.unselectAllItems()
         }
-    }
-
-    private fun loadMessages() {
-        viewModel.nextPage()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -629,17 +638,34 @@ class CustomLayoutMessagesActivity : BaseActivity(),
             val recipientName = json.get("recipient").get("email").asText()
 
             Log.e("nursultan","$$$$$$ userJson ${userName}")
+            Log.e("nursultan","$$$$$$ created at ${created_at}")
             println("json msg ${message}")
 
             if(images == null){
-                sendMessageWithType(userId.toInt(),Constants.MESSAGE_TYPE_PHOTO,imageUrl = "${Constants.BASE_URL_IMAGE}${images}",
-                    user = User(recipientId.toString(),recipientName.toString(),targetPic.toString(),true)
-                )
+                messagesAdapter?.addToStart(getMessageWithType(
+                    userId = userId.toInt(),
+                    type = Constants.MESSAGE_TYPE_PHOTO,
+                    imageUrl = "${Constants.BASE_URL_IMAGE}${images}",
+                    createdAt = created_at,
+                    user = User(
+                        recipientId.toString(),
+                        recipientName.toString(),
+                        targetPic.toString(),
+                        true)
+                ),true)
             }
             else{
-                sendMessageWithType(userId.toInt(),Constants.MESSAGE_TYPE_TEXT,body = body,
-                    user = User(recipientId.toString(),recipientName.toString(),targetPic.toString(),true)
-                )
+                messagesAdapter?.addToStart(getMessageWithType(
+                    userId = userId.toInt(),
+                    type = Constants.MESSAGE_TYPE_TEXT,
+                    body = body,
+                    createdAt = created_at,
+                    user = User(
+                        recipientId.toString(),
+                        recipientName.toString(),
+                        targetPic.toString(),
+                        true)
+                ), true)
             }
         }
 

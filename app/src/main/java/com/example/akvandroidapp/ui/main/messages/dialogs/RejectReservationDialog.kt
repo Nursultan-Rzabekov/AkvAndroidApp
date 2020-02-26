@@ -26,7 +26,7 @@ class RejectReservationDialog(
         setCancelable(false)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        window?.setDimAmount(0F)
+        window?.setDimAmount(0.5F)
         setContentView(R.layout.dialog_request_deny)
 
         findViewById<ImageButton>(R.id.dialog_request_deny_cancel_btn).setOnClickListener {

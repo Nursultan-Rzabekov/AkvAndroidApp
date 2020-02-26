@@ -28,7 +28,7 @@ class GuestCounterDialog(
         setCancelable(false)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        window?.setDimAmount(0F)
+        window?.setDimAmount(0.5F)
         setContentView(R.layout.dialog_guests)
 
         val adults = findViewById<TextView>(R.id.dialog_guests_adult_tv)

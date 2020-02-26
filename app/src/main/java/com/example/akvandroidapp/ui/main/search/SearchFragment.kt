@@ -23,6 +23,8 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
+import com.example.akvandroidapp.ui.main.search.dialogs.GuestCounterDialog
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
@@ -52,7 +54,9 @@ class SearchFragment :
     BaseSearchFragment(),
     SearchListAdapter.Interaction,
     SearchListAdapter.InteractionCheck,
-    SwipeRefreshLayout.OnRefreshListener{
+    SwipeRefreshLayout.OnRefreshListener,
+    DateRangePickerDialog.DatePickerDialogInteraction,
+    GuestCounterDialog.GuestCounterDialogInteraction {
 
     private lateinit var recyclerAdapter: SearchListAdapter
     private var adultsCount = 0
@@ -313,130 +317,47 @@ class SearchFragment :
     }
 
     private fun showGuestDialog(){
-
         activity?.let {
-            val dialog = Dialog(it, R.style.CustomBasicDialog).apply {
-                setCancelable(false)
-                requestWindowFeature(Window.FEATURE_NO_TITLE)
-                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                window?.setDimAmount(0F)
-                setContentView(R.layout.dialog_guests)
-
-                val adults = findViewById<TextView>(R.id.dialog_guests_adult_tv)
-                val children = findViewById<TextView>(R.id.dialog_guests_children_tv)
-
-                adultsCount = viewModel.getFilterAdultsCount()
-                childrenCount = viewModel.getFilterChildrenCount()
-
-                adults.text = adultsCount.toString()
-                children.text = childrenCount.toString()
-
-                findViewById<ImageButton>(R.id.dialog_date_cancel).setOnClickListener {
-                    Log.d(TAG, "FilterDialog: cancelling filter.")
-                    dismiss()
-                }
-
-                findViewById<MaterialButton>(R.id.dialog_guests_save_btn).setOnClickListener {
-                    Log.d(TAG, "FilterDialog: save filter.")
-                    viewModel.setAdultCount(adultsCount)
-                    viewModel.setChildrenCount(childrenCount)
-                    onBlogSearchOrFilter()
-                    dismiss()
-                }
-
-                findViewById<MaterialButton>(R.id.dialog_guests_clear_all_btn).setOnClickListener {
-                    viewModel.clearCounts()
-                    onBlogSearchOrFilter()
-                    adultsCount = 0
-                    childrenCount = 0
-                    adults.text = adultsCount.toString()
-                    children.text = childrenCount.toString()
-                }
-
-                findViewById<ImageButton>(R.id.dialog_guests_adult_minus_btn).setOnClickListener {
-                    if (adultsCount > 1)
-                        adultsCount -= 1
-                    adults.text = adultsCount.toString()
-                }
-
-                findViewById<ImageButton>(R.id.dialog_guests_adult_plus_btn).setOnClickListener {
-                    adultsCount += 1
-                    adults.text = adultsCount.toString()
-                }
-
-                findViewById<ImageButton>(R.id.dialog_guests_children_minus_btn).setOnClickListener {
-                    if (childrenCount > 0)
-                        childrenCount -= 1
-                    children.text = childrenCount.toString()
-                }
-
-                findViewById<ImageButton>(R.id.dialog_guests_children_plus_btn).setOnClickListener {
-                    if (adultsCount == 0)
-                        adultsCount += 1
-                    childrenCount += 1
-                    children.text = childrenCount.toString()
-                    adults.text = adultsCount.toString()
-                }
-
-                show()
-            }
+            val guestCounterDialog = GuestCounterDialog(
+                it, viewModel.getFilterAdultsCount(),
+                viewModel.getFilterChildrenCount(),
+                this)
+            guestCounterDialog.show()
         }
+    }
+
+    override fun onClearBtnListenerCounter() {
+        viewModel.clearCounts()
+        onBlogSearchOrFilter()
+    }
+
+    override fun onCloseBtnListenerCounter() {
+    }
+
+    override fun onSaveBtnListenerCounter(adultsCount: Int, childrenCount: Int) {
+        viewModel.setAdultCount(adultsCount)
+        viewModel.setChildrenCount(childrenCount)
+        onBlogSearchOrFilter()
     }
 
     private fun showDatePickerDialog(){
         activity?.let {
-            val dialog = Dialog(it, R.style.CustomBasicDialog).apply {
-                setCancelable(false)
-                requestWindowFeature(Window.FEATURE_NO_TITLE)
-                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                window?.setDimAmount(0F)
-                setContentView(R.layout.dialog_filter_dates)
-
-                val lastyear = Calendar.getInstance()
-                lastyear.add(Calendar.YEAR, 0)
-                lastyear.add(Calendar.MONTH, 0)
-                lastyear.add(Calendar.DAY_OF_MONTH, 0)
-
-                dialog_filter_dates_picker.deactivateDates(ArrayList())
-
-                val nextyear = Calendar.getInstance()
-                nextyear.set(Calendar.YEAR, nextyear.get(Calendar.YEAR)+1)
-                nextyear.set(Calendar.MONTH, Calendar.DECEMBER)
-                nextyear.set(Calendar.DAY_OF_MONTH, 31)
-
-                dialog_filter_dates_picker
-                    .init(lastyear.time, nextyear.time)
-                    .inMode(CalendarPickerView.SelectionMode.RANGE)
-                    .withSelectedDates(getFilterDatesOrEmpty())
-
-                findViewById<ImageButton>(R.id.dialog_filter_dates_picker_cancel).setOnClickListener {
-                    Log.d("FilterDialog", "FilterDialog: cancelling filter.")
-                    dismiss()
-                }
-
-                findViewById<MaterialButton>(R.id.dialog_filter_dates_save_btn).setOnClickListener {
-                    Log.d("FilterDialog", "FilterDialog: save filter.")
-                    Log.d("FilterDialog", "FilterDialog: ${dialog_filter_dates_picker.selectedDates}")
-                    if (dialog_filter_dates_picker.selectedDates.isNotEmpty()){
-                        viewModel.setStartDateFilter(dialog_filter_dates_picker.selectedDates.first())
-                        viewModel.setEndDateFilter(dialog_filter_dates_picker.selectedDates.last())
-                        onBlogSearchOrFilter()
-                    }else{
-                        viewModel.clearDateFilter()
-                    }
-                    dismiss()
-                }
-
-                findViewById<MaterialButton>(R.id.dialog_filter_dates_clear_all_btn).setOnClickListener {
-                    Log.d("FilterDialog", "FilterDialog: clear filter.")
-                    dialog_filter_dates_picker.clearSelectedDates()
-                    viewModel.clearDateFilter()
-                    Log.d("FilterDialog", "FilterDialog: ${dialog_filter_dates_picker.selectedDates}")
-                }
-
-                show()
-            }
+            val datePickerDialog = DateRangePickerDialog(it, getFilterDatesOrEmpty(), this)
+            datePickerDialog.show()
         }
+    }
+
+    override fun onClearBtnListener() {
+        viewModel.clearDateFilter()
+    }
+
+    override fun onCloseBtnListener() {
+    }
+
+    override fun onSaveBtnListener(dates: List<Date>) {
+        viewModel.setStartDateFilter(dates.first())
+        viewModel.setEndDateFilter(dates.last())
+        onBlogSearchOrFilter()
     }
 
     private fun getFilterDatesOrEmpty(): List<Date>{

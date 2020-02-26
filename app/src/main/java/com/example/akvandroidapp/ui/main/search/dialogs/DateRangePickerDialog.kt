@@ -7,10 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
@@ -32,8 +29,9 @@ class DateRangePickerDialog(
         super.onCreate(savedInstanceState)
         setCancelable(false)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        window?.setDimAmount(0F)
+        window?.setDimAmount(0.5F)
         setContentView(R.layout.dialog_filter_dates)
 
         val lastyear = Calendar.getInstance()

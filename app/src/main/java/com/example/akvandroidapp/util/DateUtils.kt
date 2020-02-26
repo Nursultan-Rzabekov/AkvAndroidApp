@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.util
 
 import android.os.Parcelable
+import android.util.Log
 import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,6 +42,18 @@ class DateUtils {
             } catch (e: Exception){
                 return Date()
             }
+        }
+
+        fun convertLongStringToDate(date: String): Date{
+            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX", Locale.ENGLISH)
+            var d: Date
+            try {
+                d = sdf.parse(date)?:Date()
+            } catch (e: Exception){
+                Log.d("DateUtils:Convert", "string to date convertion: $e")
+                d = Date()
+            }
+            return d
         }
 
         fun convertDateToString(date: Date): String{
