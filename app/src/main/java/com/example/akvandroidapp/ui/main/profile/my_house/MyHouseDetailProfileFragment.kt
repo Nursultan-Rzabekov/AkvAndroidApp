@@ -308,6 +308,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
             .withHighlightedDates(
                 DateUtils.getDatesFromToday(dates)
             )
+            .displayOnly()
 
     }
 
