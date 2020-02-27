@@ -38,6 +38,9 @@ constructor(
     private val TAG: String = "AppDebug"
     private val DEFAULT_TYPE = 0
 
+    //Create User
+    private val _createAccountInfo = MutableLiveData<CreateAccountCacheInfo>()
+
     //userLocation
     private val _location = MutableLiveData<Location>()
 
@@ -99,6 +102,7 @@ constructor(
         hostMode.value = false
         _houseUpdateData.value = HouseUpdateData()
         _iban.value = ""
+        _createAccountInfo.value = CreateAccountCacheInfo()
     }
 
     val iban: LiveData<String>
@@ -110,6 +114,8 @@ constructor(
     val cachedToken: LiveData<AuthToken>
         get() = _cachedToken
 
+    val createAccountUserInfo: LiveData<CreateAccountCacheInfo>
+        get() = _createAccountInfo
 
     val accountProperties: LiveData<AccountProperties>
         get() = _accountProperties
@@ -144,7 +150,6 @@ constructor(
     val addAdInfo: LiveData<AddAdInfo>
         get() = _addAdInfo
 
-
     val success: LiveData<String>
         get() = _success
 
@@ -172,6 +177,38 @@ constructor(
             _iban.value = iban
         }
     }
+
+    // Create Account
+
+    fun setCreateAccountPhonenumber(phonenumber: String){
+        Log.d(TAG, "Create Account phonenumber: $phonenumber")
+        GlobalScope.launch(Main) {
+            _createAccountInfo.value?._phoneNumber = phonenumber
+        }
+    }
+
+    fun setCreateAccountPassword(password: String){
+        Log.d(TAG, "Create Account password: $password")
+        GlobalScope.launch(Main ) {
+            _createAccountInfo.value?._password = password
+        }
+    }
+
+    fun setCreateAccountUserDetail(
+        username: String,
+        email: String,
+        birthdate: String,
+        gender: Int){
+        Log.d(TAG, "Create Account detail: $username, $email, $birthdate, $gender")
+        GlobalScope.launch(Main) {
+            _createAccountInfo.value?._username = username
+            _createAccountInfo.value?._email = email
+            _createAccountInfo.value?.birthDate = birthdate
+            _createAccountInfo.value?._gender = gender
+        }
+    }
+
+    //
 
     fun filterLocation(location: Location) {
         setLastLocation(location)

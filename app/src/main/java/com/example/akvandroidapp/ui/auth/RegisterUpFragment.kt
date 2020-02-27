@@ -10,14 +10,19 @@ import androidx.annotation.NonNull
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import com.redmadrobot.inputmask.MaskedTextChangedListener.ValueListener
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import kotlinx.android.synthetic.main.sign_up.*
+import javax.inject.Inject
 
 
 class RegisterUpFragment : BaseAuthFragment() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     private var phoneNumber:String? = null
 
@@ -54,6 +59,7 @@ class RegisterUpFragment : BaseAuthFragment() {
         else{
             sign_up_l_et.isErrorEnabled = false
             val bundle = bundleOf("number" to phoneTotal,"arg_user_name" to argument)
+            sessionManager.setCreateAccountPhonenumber(phoneTotal)
             findNavController().navigate(R.id.action_register_upFragment_to_register_pass_Fragment,bundle)
         }
     }

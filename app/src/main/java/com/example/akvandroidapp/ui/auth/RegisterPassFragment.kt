@@ -10,11 +10,16 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.util.PasswordChecker
 import kotlinx.android.synthetic.main.sign_up_pass.*
+import javax.inject.Inject
 
 
 class RegisterPassFragment : BaseAuthFragment() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,6 +84,7 @@ class RegisterPassFragment : BaseAuthFragment() {
         if(isFirstPassCorrect && isSecondPassCorrect && !isNotMatch){
             val bundle = bundleOf("password1" to password1, "password2" to password2,
                 "arg_number" to arg_number, "arg_user_name" to arg_user_name)
+            sessionManager.setCreateAccountPassword(password1)
             findNavController().navigate(R.id.action_register_passFragment_to_registerFragment,bundle)
         }
     }

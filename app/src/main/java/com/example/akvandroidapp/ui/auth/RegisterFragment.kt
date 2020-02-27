@@ -50,6 +50,9 @@ class RegisterFragment : BaseAuthFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
 
+    private var phonenumber: String? = null
+    private var password: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -99,6 +102,12 @@ class RegisterFragment : BaseAuthFragment() {
     }
 
     private fun subscribeObservers(){
+        sessionManager.createAccountUserInfo.observe(viewLifecycleOwner, Observer {
+            password = it._password
+            phonenumber = it._phoneNumber
+            Log.d(TAG, "session create cache: password: $password, phonenumber: $phonenumber")
+        })
+
         viewModel.dataState.observe(viewLifecycleOwner, Observer{ dataState ->
             if(dataState != null) {
                 Log.d(TAG, "favorites dataState changed")
@@ -182,17 +191,54 @@ class RegisterFragment : BaseAuthFragment() {
     }
 
     private fun register(){
-        viewModel.setStateEvent(
-            RegisterAttemptEvent(
-                sign_detail_email_et.text.toString(),
-                getGender(),
-                arg_number.toString(),
-                password1.toString(),
-                sign_detail_last_name_et.text.toString(),
-                sign_detail_last_name_et.text.toString(),
-                sign_detail_birth_et.text.toString()
+        val username = sign_detail_last_name_et.text.toString().trim()
+        val email = sign_detail_email_et.text.toString().trim()
+        val birthdate = sign_detail_birth_et.text.toString()
+        val gender = getGender()
+
+        if (validateRegisterDetail(username = username, email = email, birthdate = birthdate)){
+            sessionManager.setCreateAccountUserDetail(
+                username = username,
+                email = email,
+                birthdate = birthdate,
+                gender = gender
             )
-        )
+            viewModel.setStateEvent(
+                RegisterAttemptEvent(
+                    email = email,
+                    gender = gender,
+                    phone = phonenumber.toString(),
+                    password = password.toString(),
+                    first_name = username,
+                    last_name = username,
+                    birth_day = birthdate
+                )
+            )
+        }
+
+    }
+
+    private fun validateRegisterDetail(username: String, email: String, birthdate: String): Boolean{
+        if (username.isBlank()) {
+            sign_detail_last_name_l_et.isErrorEnabled = true
+            sign_detail_last_name_l_et.error = getString(R.string.invalid)
+        }
+        if (email.isBlank()) {
+            sign_detail_email_l_et.isErrorEnabled = true
+            sign_detail_email_l_et.error = getString(R.string.invalid)
+        }
+        if (birthdate.isBlank()) {
+            sign_detail_birth_l_et.isErrorEnabled = true
+            sign_detail_birth_l_et.error = getString(R.string.invalid)
+        }
+        if (username.isNotBlank() && email.isNotBlank() && birthdate.isNotBlank()) {
+            sign_detail_last_name_l_et.isErrorEnabled = false
+            sign_detail_email_l_et.isErrorEnabled = false
+            sign_detail_birth_l_et.isErrorEnabled = false
+
+            return true
+        }
+        return false
     }
 
     private fun sendCode(){
