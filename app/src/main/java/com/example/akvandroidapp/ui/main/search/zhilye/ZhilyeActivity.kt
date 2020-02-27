@@ -141,6 +141,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             navHouseRules()
         }
 
+        fragment_zhilye_available_dates_card.setOnClickListener {
+            navAvailableDates()
+        }
+
         fragment_zhile_book_btn.setOnClickListener {
             if (homeState == DEFAULT_BOTTOM_BAR)
                 navBookReserv()
@@ -165,7 +169,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             if(viewState != null){
                 Log.d("ZhilyeActivity", "zhilye fav states: " +
                         "${viewState.createblogFields.isCreated} ${viewState.deleteblogFields.isDeleted}")
-                if (viewState.createblogFields.isCreated || viewState.deleteblogFields.isDeleted){
+
+                if (viewState.createblogFields.isCreated == true || viewState.deleteblogFields.isDeleted){
                     viewModel.setStateEvent(ZhilyeStateEvent.BlogZhilyeEvent())
                     viewModel.setCreateFavourite(false)
                     viewModel.setDeleteFavourite(false)
@@ -280,6 +285,15 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
             "houseRules" to houseRules
         )
         val intent = Intent(this, ZhilyeRulesOfHouseActivity::class.java)
+        intent.putExtra("houseRules", bundle)
+        startActivity(intent)
+    }
+
+    private fun navAvailableDates(){
+        val bundle = bundleOf(
+            "houseRules" to houseRules
+        )
+        val intent = Intent(this, ZhilyeDatesActivity::class.java)
         intent.putExtra("houseRules", bundle)
         startActivity(intent)
     }

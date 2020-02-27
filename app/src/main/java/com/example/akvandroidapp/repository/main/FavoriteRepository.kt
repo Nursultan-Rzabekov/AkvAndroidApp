@@ -55,19 +55,19 @@ constructor(
                 for(blogPostResponse in response.body.results){
                     blogPostList.add(
                         BlogPost(
-                            id = blogPostResponse.house.id,
-                            name = blogPostResponse.house.name,
-                            beds = blogPostResponse.house.beds,
-                            rooms = blogPostResponse.house.rooms,
-                            is_favourite = blogPostResponse.house.is_favourite,
-                            longitude = blogPostResponse.house.longitude,
-                            latitude = blogPostResponse.house.latitude,
-                            house_type = blogPostResponse.house.house_type,
-                            city = blogPostResponse.house.city,
-                            price = blogPostResponse.house.price,
-                            status = blogPostResponse.house.status,
-                            image = "${Constants.BASE_URL_IMAGE}${blogPostResponse.house.photos?.first()?.image}",
-                            rating = blogPostResponse.house.rating
+                            id = blogPostResponse.id,
+                            name = blogPostResponse.name,
+                            beds = blogPostResponse.beds,
+                            rooms = blogPostResponse.rooms,
+                            is_favourite = blogPostResponse.is_favourite,
+                            longitude = blogPostResponse.longitude,
+                            latitude = blogPostResponse.latitude,
+                            house_type = blogPostResponse.house_type,
+                            city = blogPostResponse.city,
+                            price = blogPostResponse.price,
+                            status = blogPostResponse.status,
+                            image = "${Constants.BASE_URL_IMAGE}${blogPostResponse.photos?.first()?.image}",
+                            rating = blogPostResponse.rating
                         )
                     )
                 }

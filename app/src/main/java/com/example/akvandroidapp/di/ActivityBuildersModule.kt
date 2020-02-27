@@ -37,10 +37,7 @@ import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment
 import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookActivity
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity
+import com.example.akvandroidapp.ui.main.search.zhilye.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -118,6 +115,10 @@ abstract class ActivityBuildersModule {
     @MainScope
     @ContributesAndroidInjector(modules = [MainModule::class,MainViewModelModule::class])
     abstract fun contributeZhilyeReviewActivity(): ZhilyeReviewActivity
+
+    @MainScope
+    @ContributesAndroidInjector()
+    abstract fun contributeZhilyeDatesActivity(): ZhilyeDatesActivity
 
     @MainScope
     @ContributesAndroidInjector

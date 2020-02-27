@@ -96,6 +96,9 @@
             android:name=".ui.main.messages.MessagesDetailActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".ui.main.search.zhilye.ZhilyeDatesActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".ui.main.search.MapActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan"></activity>

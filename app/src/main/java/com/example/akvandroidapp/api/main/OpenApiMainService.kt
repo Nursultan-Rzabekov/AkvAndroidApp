@@ -50,7 +50,7 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<BlogListFavoritesResponse>>
 
     @DELETE("houses/{house_id}/cancel_favourite/")
-    fun     deleteFavoritePost(
+    fun  deleteFavoritePost(
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<GenericResponse>>
@@ -59,7 +59,7 @@ interface OpenApiMainService {
     fun createFavoritePost(
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int
-    ): LiveData<GenericApiResponse<FavoriteHouseResponse>>
+    ): LiveData<GenericApiResponse<GenericResponse>>
 
 
     @GET("auth/users/me/")

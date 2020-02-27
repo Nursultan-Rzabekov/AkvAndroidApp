@@ -8,7 +8,7 @@ class BlogListFavoritesResponse(
 
     @SerializedName("results")
     @Expose
-    var results: List<FavoriteHouseResponse>,
+    var results: List<BlogSearchResponse>,
 
     @SerializedName("count")
     @Expose

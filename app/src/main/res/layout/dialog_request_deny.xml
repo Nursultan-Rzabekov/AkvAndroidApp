@@ -69,6 +69,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/dialog_request_deny_text_et"
                         style="@style/BasicEditText"
+                        android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textMultiLine"
