@@ -37,7 +37,7 @@ interface OpenApiAuthService {
     ): LiveData<GenericApiResponse<CodeResponse>>
 
 
-    @POST("auth/verify")
+    @POST("auth/verify/")
     @FormUrlEncoded
     fun verifyCode(
         @Field("phone") phone: String,

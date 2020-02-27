@@ -305,7 +305,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
         fragment_my_adds_detailed_calendar
             .init(lastyear.time, nextyear.time)
             .inMode(CalendarPickerView.SelectionMode.MULTIPLE)
-            .withHighlightedDates(
+            .withSelectedDates(
                 DateUtils.getDatesFromToday(dates)
             )
             .displayOnly()

@@ -78,6 +78,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     //bundle
     private var houseRules: List<ZhilyeDetailProperties> = listOf()
+    private var blockedDates: List<ZhilyeDatesActivity.BundleDateWrapper> = listOf()
     private var selectedDates: List<Date> = listOf()
     private lateinit var zhilyeDetail: ZhilyeDetail
     private var zhilyeOnePhoto: String? = null
@@ -291,10 +292,10 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     private fun navAvailableDates(){
         val bundle = bundleOf(
-            "houseRules" to houseRules
+            "blocked_dates" to blockedDates
         )
         val intent = Intent(this, ZhilyeDatesActivity::class.java)
-        intent.putExtra("houseRules", bundle)
+        intent.putExtra("dates", bundle)
         startActivity(intent)
     }
 
