@@ -30,14 +30,14 @@ interface OpenApiAuthService {
         @Field("birth_day") birth_day: String
     ): LiveData<GenericApiResponse<RegistrationResponse>>
 
-    @POST("auth/send_code/")
+    @POST("auth/send_code")
     @FormUrlEncoded
     fun sendCode(
         @Field("phone") phone: String
     ): LiveData<GenericApiResponse<CodeResponse>>
 
 
-    @POST("auth/verify/")
+    @POST("auth/verify")
     @FormUrlEncoded
     fun verifyCode(
         @Field("phone") phone: String,
