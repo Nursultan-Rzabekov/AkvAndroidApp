@@ -17,7 +17,7 @@ data class HouseUpdateData(
     var houseRulesList: MutableList<String>? = mutableListOf(),
     var facilitiesList: MutableList<String>? = mutableListOf(),
     var nearByList: MutableList<String>? = mutableListOf(),
-    var availableDates: MutableList<Date>? = mutableListOf(),
+    var blockedDates: MutableList<Date>? = mutableListOf(),
     var price: Int? = null,
     var address: String? = null
 )

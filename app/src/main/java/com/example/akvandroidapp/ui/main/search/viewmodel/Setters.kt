@@ -119,6 +119,7 @@ fun MyHouseViewModel.setZhilyeData(zhilyeFields: MyHouseViewState.MyHouseZhilyeF
     update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
     update.zhilyeFields.zhilyeReviewsList = zhilyeFields.zhilyeReviewsList
     update.zhilyeFields.zhilyeReservationsList = zhilyeFields.zhilyeReservationsList
+    update.zhilyeFields.zhilyeBlockedDates = zhilyeFields.zhilyeBlockedDates
     setViewState(update)
 }
 
@@ -153,6 +154,7 @@ fun ZhilyeViewModel.setZhilyeData(zhilyeFields: ZhilyeViewState.ZhilyeFields){
     update.zhilyeFields.zhilyeUser = zhilyeFields.zhilyeUser
     update.zhilyeFields.zhilyeReviewsList = zhilyeFields.zhilyeReviewsList
     update.zhilyeFields.zhilyeReservationsList = zhilyeFields.zhilyeReservationsList
+    update.zhilyeFields.zhilyeBlockedDatesList = zhilyeFields.zhilyeBlockedDatesList
     setViewState(update)
 }
 

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.ZhilyeBlockedDate
 import com.example.akvandroidapp.entity.ZhilyeDetail
 import com.example.akvandroidapp.entity.ZhilyeDetailProperties
 import com.example.akvandroidapp.ui.BaseActivity
@@ -78,7 +79,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
     //bundle
     private var houseRules: List<ZhilyeDetailProperties> = listOf()
-    private var blockedDates: List<ZhilyeDatesActivity.BundleDateWrapper> = listOf()
+    private var blockedDates: List<ZhilyeBlockedDate> = listOf()
     private var selectedDates: List<Date> = listOf()
     private lateinit var zhilyeDetail: ZhilyeDetail
     private var zhilyeOnePhoto: String? = null
@@ -197,6 +198,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                         "yes",
                         "list Reservations +${viewState.zhilyeFields.zhilyeReservationsList}"
                     )
+                    Log.d(TAG, "list Blocked Dates: ${viewState.zhilyeFields.zhilyeBlockedDatesList}")
 
                     fragment_zhilye_host_nickname_tv.text =
                         ("@${viewState.zhilyeFields.zhilyeUser.first_name}")
@@ -259,7 +261,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                     Log.e("wqeqe","photos list first + ${photos.size}")
                     setFlipperLayout(photos)
 
-                    houseRules = viewState.zhilyeFields.zhilyeDetailRules
+                    houseRules = viewState.zhilyeFields.zhilyeDetailRules.toList()
+                    blockedDates = viewState.zhilyeFields.zhilyeBlockedDatesList.toList()
                 }
             }
         })

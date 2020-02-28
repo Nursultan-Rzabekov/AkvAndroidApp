@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.entity.ZhilyeBlockedDate
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.DataStateChangeListener
+import com.example.akvandroidapp.ui.displayErrorDialog
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
@@ -62,19 +64,16 @@ class ZhilyeDatesActivity : BaseActivity() {
 
         val passedIntent = intent.extras
         val bundle = passedIntent?.getBundle("dates")
-        val bundle_dates = bundle?.getParcelableArrayList<BundleDateWrapper>("blocked_dates")
+        val bundle_dates = bundle?.getParcelableArrayList<ZhilyeBlockedDate>("blocked_dates")
 
         val dates = mutableListOf<Date>()
         bundle_dates?.forEach{
-            dates.add(
-                DateUtils.convertStringToDate(it.date)
+            dates.addAll(
+                DateUtils.getDatesBetween(
+                    DateUtils.convertStringToDate(it.check_in.toString()),
+                    DateUtils.convertStringToDate(it.check_out.toString())
+                )
             )
-        }
-        val mookup = listOf(
-            "2020-2-28"
-            )
-        mookup.forEach {
-            dates.add(DateUtils.convertStringToDate(it))
         }
         initCalendarPicker(dates)
     }
@@ -102,11 +101,19 @@ class ZhilyeDatesActivity : BaseActivity() {
         nextyear.set(Calendar.MONTH, Calendar.DECEMBER)
         nextyear.set(Calendar.DAY_OF_MONTH, 31)
 
-        fragment_add_ad_available_dates_datepicker
-            .init(lastyear.time, nextyear.time)
-            .inMode(CalendarPickerView.SelectionMode.RANGE)
-            .withHighlightedDates(DateUtils.getDatesFromToday(dates))
-            .displayOnly()
+        try {
+            fragment_add_ad_available_dates_datepicker
+                .init(lastyear.time, nextyear.time)
+                .inMode(CalendarPickerView.SelectionMode.RANGE)
+                .withHighlightedDates(DateUtils.getDatesFromToday(dates))
+                .displayOnly()
+        }catch (e: Exception){
+            displayErrorDialog("Something went wrong")
+            fragment_add_ad_available_dates_datepicker
+                .init(lastyear.time, nextyear.time)
+                .inMode(CalendarPickerView.SelectionMode.RANGE)
+                .displayOnly()
+        }
     }
 
     private fun setToolbar(){
@@ -117,10 +124,5 @@ class ZhilyeDatesActivity : BaseActivity() {
             finish()
         }
     }
-
-    @Parcelize
-    data class BundleDateWrapper(
-        var date: String
-    ): Parcelable
 
 }

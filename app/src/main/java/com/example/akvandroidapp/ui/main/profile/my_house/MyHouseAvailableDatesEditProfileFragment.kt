@@ -53,7 +53,7 @@ class MyHouseAvailableDatesEditProfileFragment : BaseMyHouseFragment() {
 
     private fun setObservers(){
         sessionManager.houseUpdateData.observe(viewLifecycleOwner, androidx.lifecycle.Observer{
-            initCalendarPicker(it.availableDates?: listOf())
+            initCalendarPicker(it.blockedDates?: listOf())
         })
     }
 

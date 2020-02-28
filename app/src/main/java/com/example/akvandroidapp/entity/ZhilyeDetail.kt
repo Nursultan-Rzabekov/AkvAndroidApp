@@ -62,6 +62,9 @@ data class ZhilyeDetail(
     @ColumnInfo(name = "is_favourite")
     var is_favourite: Boolean = false,
 
+    @ColumnInfo(name = "is_owner")
+    var is_owner: Boolean = false,
+
     @ColumnInfo(name = "discount7days")
     var discount7days: Int,
 

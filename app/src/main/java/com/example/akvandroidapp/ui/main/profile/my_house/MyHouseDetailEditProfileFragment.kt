@@ -132,7 +132,7 @@ class MyHouseDetailEditProfileFragment : BaseMyHouseFragment(), GalleryPhotosAda
                 nearByList = it.nearByList,
                 houseRulesList = it.houseRulesList,
                 photosList = it.photosList,
-                availableDates = it.availableDates
+                blockedDates = it.blockedDates
             )
 
             Toast.makeText(requireContext(), "${it.id}", Toast.LENGTH_SHORT).show()

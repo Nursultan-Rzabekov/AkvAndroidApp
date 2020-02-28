@@ -233,6 +233,7 @@ constructor(
                     rating = response.body.rating,
                     city = response.body.city,
                     is_favourite = response.body.is_favourite,
+                    is_owner = response.body.is_owner,
                     discount7days = response.body.discount7days,
                     discount30days = response.body.discount30days
                 )
@@ -347,6 +348,16 @@ constructor(
                     )
                 }
 
+                val blockedDates = arrayListOf<ZhilyeBlockedDate>()
+                response.body.blocked_dates?.forEach {
+                    blockedDates.add(
+                        ZhilyeBlockedDate(
+                            check_in = it.check_in,
+                            check_out = it.check_out
+                        )
+                    )
+                }
+
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
@@ -359,7 +370,9 @@ constructor(
                                 blogListRecommendations = blogPostList,
                                 zhilyeReviewsList = reviewsList,
                                 zhilyeReservationsList = reservations,
-                                zhilyeDetailRules = blogZhilyeRulesList))
+                                zhilyeDetailRules = blogZhilyeRulesList,
+                                zhilyeBlockedDatesList = blockedDates)
+                            )
                         )
                     )
                 }

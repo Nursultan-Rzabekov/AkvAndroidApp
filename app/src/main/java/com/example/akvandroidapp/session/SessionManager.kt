@@ -324,7 +324,7 @@ constructor(
 
     fun setHouseUpdateDates(dates: List<Date>){
         GlobalScope.launch(Main){
-            _houseUpdateData.value?.availableDates = dates.toMutableList()
+            _houseUpdateData.value?.blockedDates = dates.toMutableList()
         }
         Log.e("HOUSE_UPDATE_DATES", "${_houseUpdateData.value?.houseRulesList}")
     }
@@ -349,7 +349,7 @@ constructor(
 
     fun clearHouseUpdateDates(){
         GlobalScope.launch(Main){
-            _houseUpdateData.value?.availableDates?.clear()
+            _houseUpdateData.value?.blockedDates?.clear()
         }
     }
 

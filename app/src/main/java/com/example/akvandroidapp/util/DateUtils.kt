@@ -5,6 +5,7 @@ import android.util.Log
 import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DateUtils {
 
@@ -92,15 +93,19 @@ class DateUtils {
         }
 
         fun getDatesBetween(d1: Date, d2: Date): List<Date> {
-            val dates = arrayListOf<Date>()
+            var dates: ArrayList<Date> = arrayListOf()
             val startcal = Calendar.getInstance()
             startcal.time = d1
             val endcal = Calendar.getInstance()
             endcal.time = d2
 
-            while (startcal.before(endcal)){
-                dates.add(startcal.time)
-                startcal.add(Calendar.DATE, 1)
+            try {
+                while (startcal.before(endcal)) {
+                    dates.add(startcal.time)
+                    startcal.add(Calendar.DATE, 1)
+                }
+            }catch (e: Exception){
+                dates = arrayListOf()
             }
 
             return dates

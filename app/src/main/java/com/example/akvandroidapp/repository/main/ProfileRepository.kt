@@ -604,6 +604,16 @@ constructor(
                     )
                 }
 
+                val blockedDates = arrayListOf<ZhilyeBlockedDate>()
+                response.body.blocked_dates?.forEach {
+                    blockedDates.add(
+                        ZhilyeBlockedDate(
+                            check_in = it.check_in,
+                            check_out = it.check_out
+                        )
+                    )
+                }
+
                 withContext(Dispatchers.Main){
                     onCompleteJob(
                         DataState.data(
@@ -617,7 +627,8 @@ constructor(
                                     blogListRecommendations = blogPostList,
                                     zhilyeReviewsList = reviewsList,
                                     zhilyeReservationsList = reservations,
-                                    zhilyeDetailRules = blogZhilyeRulesList
+                                    zhilyeDetailRules = blogZhilyeRulesList,
+                                    zhilyeBlockedDates = blockedDates
                                 )
                             )
                         )

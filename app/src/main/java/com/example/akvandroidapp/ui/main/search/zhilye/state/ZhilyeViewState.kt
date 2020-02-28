@@ -12,7 +12,7 @@ class ZhilyeViewState (
     data class ZhilyeFields(
         var zhilyeDetail: ZhilyeDetail = ZhilyeDetail(
             0,"","",0,0,"",0.0,0.0,"",
-            0,false,0,0,0.0,"",false,0,0),
+            0,false,0,0,0.0,"",false,false, 0,0),
         var zhilyeUser: UserChatMessages = UserChatMessages(0,"","","",""),
         var zhilyeDetailAccomadations: List<ZhilyeDetailProperties> = ArrayList(),
         var zhilyeDetailRules: List<ZhilyeDetailProperties> = ArrayList(),
@@ -21,6 +21,7 @@ class ZhilyeViewState (
         var blogListRecommendations: List<BlogPost> = ArrayList(),
         var zhilyeReviewsList: List<Review> = ArrayList(),
         var zhilyeReservationsList: List<ZhilyeReservation> = ArrayList(),
+        var zhilyeBlockedDatesList: List<ZhilyeBlockedDate> = ArrayList(),
         var houseId: Int = 1
     )
 

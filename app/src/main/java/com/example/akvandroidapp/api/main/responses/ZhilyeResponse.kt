@@ -69,6 +69,10 @@ class ZhilyeResponse(
     @Expose
     var is_favourite: Boolean,
 
+    @SerializedName("is_owner")
+    @Expose
+    var is_owner: Boolean,
+
     @SerializedName("discount7days")
     @Expose
     var discount7days: Int,
@@ -107,5 +111,9 @@ class ZhilyeResponse(
 
     @SerializedName("reservations")
     @Expose
-    var reservations: List<ZhilyeUserReservationResponse>? = null
+    var reservations: List<ZhilyeUserReservationResponse>? = null,
+
+    @SerializedName("blocked_dates")
+    @Expose
+    var blocked_dates: List<BlockedDateResponse>? = null
 )

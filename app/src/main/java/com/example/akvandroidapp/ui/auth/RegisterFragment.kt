@@ -29,6 +29,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.auth.dialogs.CodeValidationDialog
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.AuthViewState
 import com.example.akvandroidapp.ui.auth.state.RegistrationFields
@@ -45,7 +46,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class RegisterFragment : BaseAuthFragment() {
+class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidationDialogInteraction {
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -64,9 +65,6 @@ class RegisterFragment : BaseAuthFragment() {
     private var password2:String?=null
     private var arg_number:String?=null
 
-    private lateinit var body:EditText
-    private lateinit var close:ImageButton
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterFragment: ${viewModel}")
@@ -74,8 +72,6 @@ class RegisterFragment : BaseAuthFragment() {
         password1 = arguments?.getString("password1")
         password2 = arguments?.getString("password2")
         arg_number = arguments?.getString("arg_number")
-
-        Log.e(TAG, "Salamalieyrkju mm ")
 
         subscribeObservers()
 
@@ -160,34 +156,21 @@ class RegisterFragment : BaseAuthFragment() {
     }
 
     private fun showDialog() {
-        val dialog = Dialog(context!!, R.style.CustomBasicDialog)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.window?.setDimAmount(0F)
-        dialog.setContentView(R.layout.dialog_sign_up_valid)
-        body = dialog.findViewById(R.id.dialog_sign_up_valid_code_et) as EditText
-        close = dialog.findViewById(R.id.dialog_sign_up_valid_close_btn) as ImageButton
-
-        val valid = dialog.findViewById(R.id.dialog_sign_up_valid_btn) as MaterialButton
-
-        val send = dialog.findViewById(R.id.dialog_sign_up_valid_repeat_code_tv) as TextView
-
-        valid.setOnClickListener {
-            if (body.text != null) {
-                verifyCode()
-                dialog.dismiss()
-            }
+        activity?.let {
+            val codevalidationDialog = CodeValidationDialog(it, this)
+            codevalidationDialog.show()
         }
-        send.setOnClickListener {
-            sendCode()
-        }
+    }
 
-        close.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
+    override fun onCloseBtnListener() {
+    }
 
+    override fun onSendMoreBtnListener() {
+        sendCode()
+    }
+
+    override fun onValidateBtnListener(code: String): Boolean {
+        return verifyCode(code)
     }
 
     private fun register(){
@@ -249,13 +232,14 @@ class RegisterFragment : BaseAuthFragment() {
         )
     }
 
-    private fun verifyCode(){
+    private fun verifyCode(code: String): Boolean{
         viewModel.setStateEvent(
             VerifyCodeEvent(
                 arg_number.toString(),
-                body.text.toString()
+                code
             )
         )
+        return true
     }
 
     override fun onDestroyView() {

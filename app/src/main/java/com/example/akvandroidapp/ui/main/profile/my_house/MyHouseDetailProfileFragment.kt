@@ -219,11 +219,8 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                     }
 
                     val dates = mutableListOf<Date>()
-                    dates.add(Date())
-
-                    val blockedDates = mutableListOf<Date>()
-                    viewState.zhilyeFields.zhilyeReservationsList.forEach {
-                        blockedDates.addAll(
+                    viewState.zhilyeFields.zhilyeBlockedDates.forEach {
+                        dates.addAll(
                             DateUtils.getDatesBetween(
                                 DateUtils.convertStringToDate(it.check_in.toString()),
                                 DateUtils.convertStringToDate(it.check_out.toString())
@@ -231,7 +228,17 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                         )
                     }
 
-                    initCalendar(blockedDates)
+                    val blockedDatesReservation = mutableListOf<Date>()
+                    viewState.zhilyeFields.zhilyeReservationsList.forEach {
+                        blockedDatesReservation.addAll(
+                            DateUtils.getDatesBetween(
+                                DateUtils.convertStringToDate(it.check_in.toString()),
+                                DateUtils.convertStringToDate(it.check_out.toString())
+                            )
+                        )
+                    }
+
+                    initCalendar(blockedDatesReservation)
 
                     houseUpdateData = HouseUpdateData(
                         id = viewState.zhilyeFields.houseId,
@@ -243,7 +250,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                         facilitiesList = facilities,
                         nearByList = nears,
                         houseRulesList = rules,
-                        availableDates = dates
+                        blockedDates = dates
                     )
 
                     if (viewState.zhilyeFields.zhilyeDetail.status)
@@ -288,7 +295,6 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
     }
 
     private fun initCalendar(dates: List<Date>){
-
         val lastyear = Calendar.getInstance()
         lastyear.add(Calendar.YEAR, 0)
         lastyear.add(Calendar.MONTH, 0)
@@ -296,20 +302,25 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
         lastyear.set(Calendar.DAY_OF_MONTH, 1)
 
         val nextyear = Calendar.getInstance()
-        nextyear.set(Calendar.YEAR, nextyear.get(Calendar.YEAR)+1)
+        nextyear.set(Calendar.YEAR, nextyear.get(Calendar.YEAR) + 1)
         nextyear.set(Calendar.MONTH, Calendar.DECEMBER)
         nextyear.set(Calendar.DAY_OF_MONTH, 31)
 
-        fragment_my_adds_detailed_calendar.isEnabled = false
-
-        fragment_my_adds_detailed_calendar
-            .init(lastyear.time, nextyear.time)
-            .inMode(CalendarPickerView.SelectionMode.MULTIPLE)
-            .withSelectedDates(
-                DateUtils.getDatesFromToday(dates)
-            )
-            .displayOnly()
-
+        try {
+            fragment_my_adds_detailed_calendar
+                .init(lastyear.time, nextyear.time)
+                .inMode(CalendarPickerView.SelectionMode.MULTIPLE)
+                .withSelectedDates(
+                    DateUtils.getDatesFromToday(dates)
+                )
+                .displayOnly()
+        }
+        catch (e: Exception){
+            fragment_my_adds_detailed_calendar
+                .init(lastyear.time, nextyear.time)
+                .inMode(CalendarPickerView.SelectionMode.MULTIPLE)
+                .displayOnly()
+        }
     }
 
     private fun getBlockedDates(): List<Date>{
