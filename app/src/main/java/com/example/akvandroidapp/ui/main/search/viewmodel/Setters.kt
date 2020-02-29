@@ -14,6 +14,7 @@ import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewModel
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
@@ -276,6 +277,12 @@ fun ZhilyeReviewViewModel.setBlogListData(reviewList: List<Review>){
 fun DetailsViewModel.setBlogListData(blogList: List<UserConversationMessages>){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.blogList = blogList
+    setViewState(update)
+}
+
+fun SupportViewModel.setFeedbackId(id: Int) {
+    val update = getCurrentViewStateOrNew()
+    update.id = id
     setViewState(update)
 }
 

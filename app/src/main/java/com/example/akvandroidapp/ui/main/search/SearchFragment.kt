@@ -153,49 +153,54 @@ class SearchFragment :
         viewModel.viewState.observe(viewLifecycleOwner, Observer{ viewState ->
             if(viewState != null){
 //                if(viewState.blogFields.blogList.isNotEmpty()){
-                    recyclerAdapter.apply {
-                        //Log.d(TAG, "Search results responses: ${viewState.blogFields.blogList}")
-                        fragement_explore_layout_id.visibility = View.GONE
-                        fragment_explore_active_layout_id.visibility = View.VISIBLE
-                        preloadGlideImages(
-                            requestManager = requestManager,
-                            list = viewState.blogFields.blogList
-                        )
+                recyclerAdapter.apply {
+                    //Log.d(TAG, "Search results responses: ${viewState.blogFields.blogList}")
+                    fragement_explore_layout_id.visibility = View.GONE
+                    fragment_explore_active_layout_id.visibility = View.VISIBLE
+                    preloadGlideImages(
+                        requestManager = requestManager,
+                        list = viewState.blogFields.blogList
+                    )
 
-                        if (viewState.blogFields.page != 1)
-                            submitList(
-                                blogList = viewState.blogFields.blogList,
-                                isQueryExhausted = viewState.blogFields.isQueryExhausted
-                            )
-                        else
-                            clearAndSubmitList(
-                                blogList = viewState.blogFields.blogList,
-                                isQueryExhausted = viewState.blogFields.isQueryExhausted
-                            )
-
-                    }
-
-                    if (viewState.blogFields.dateStart == "" || viewState.blogFields.dateEnd == "")
-                        whenChipEmpty(
-                            by_date_chip,
-                            getString(R.string.dates)
+                    if (viewState.blogFields.page != 1)
+                        submitList(
+                            blogList = viewState.blogFields.blogList,
+                            isQueryExhausted = viewState.blogFields.isQueryExhausted
                         )
                     else
-                        whenChipFiltered(
-                            by_date_chip,
-                            "${viewState.blogFields.dateStart}-${viewState.blogFields.dateEnd}"
+                        clearAndSubmitList(
+                            blogList = viewState.blogFields.blogList,
+                            isQueryExhausted = viewState.blogFields.isQueryExhausted
                         )
 
-                    if (viewState.blogFields.adultsCount + viewState.blogFields.childrenCount == 0)
-                        whenChipEmpty(
-                            by_guests_chip,
-                            getString(R.string.guests)
+                }
+
+                if (viewState.blogFields.dateStart == "" || viewState.blogFields.dateEnd == "")
+                    whenChipEmpty(
+                        by_date_chip,
+                        getString(R.string.dates)
+                    )
+                else
+                    whenChipFiltered(
+                        by_date_chip,
+                        DateUtils.convertDateToStringForBooking(
+                            DateUtils.convertStringToDate(viewState.blogFields.dateStart)
+                        ) + "-" +
+                        DateUtils.convertDateToStringForBooking(
+                            DateUtils.convertStringToDate(viewState.blogFields.dateEnd)
                         )
-                    else
-                        whenChipFiltered(
-                            by_guests_chip,
-                            "${viewState.blogFields.adultsCount + viewState.blogFields.childrenCount} Гости"
-                        )
+                    )
+
+                if (viewState.blogFields.adultsCount + viewState.blogFields.childrenCount == 0)
+                    whenChipEmpty(
+                        by_guests_chip,
+                        getString(R.string.guests)
+                    )
+                else
+                    whenChipFiltered(
+                        by_guests_chip,
+                        "${viewState.blogFields.adultsCount + viewState.blogFields.childrenCount} Гости"
+                    )
 //                }
             }
         })
@@ -343,7 +348,7 @@ class SearchFragment :
 
     private fun showDatePickerDialog(){
         activity?.let {
-            val datePickerDialog = DateRangePickerDialog(it, getFilterDatesOrEmpty(), this)
+            val datePickerDialog = DateRangePickerDialog(it, getFilterDatesOrEmpty(), listOf(), this)
             datePickerDialog.show()
         }
     }

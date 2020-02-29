@@ -17,6 +17,7 @@ import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdViewState
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewState
 import com.example.akvandroidapp.util.*
 import com.yandex.mapkit.geometry.Point
 import kotlinx.coroutines.Dispatchers
@@ -845,6 +846,57 @@ constructor(
 
             override fun setJob(job: Job) {
                 addJob("getPaymentsHistory", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun sendFeedback(
+        authToken: AuthToken,
+        message: RequestBody
+    ): LiveData<DataState<SupportViewState>>{
+        return object: NetworkBoundResource<FeedbackSendResponse, List<BlogPost>, SupportViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<FeedbackSendResponse>) {
+                Log.d(TAG, "feedback sended ${response.body.id}")
+                withContext(Dispatchers.Main) {
+                    onCompleteJob(
+                        DataState.data(
+                            data = SupportViewState(
+                                id = response.body.id
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<FeedbackSendResponse>> {
+                Log.d(TAG, "send feedback $message")
+                return openApiMainService.sendProblem(
+                    "Token ${authToken.token!!}",
+                    message
+                )
+            }
+
+            override fun loadFromCache(): LiveData<SupportViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+
+            }
+
+            override fun setJob(job: Job) {
+                addJob("sendFeedback", job)
             }
 
         }.asLiveData()

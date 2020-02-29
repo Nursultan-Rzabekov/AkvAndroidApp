@@ -34,7 +34,6 @@ class SupportMainActivity : BaseActivity(), NavController.OnDestinationChangedLi
 
         viewModel = ViewModelProvider(this, providerFactory).get(SupportViewModel::class.java)
         findNavController(R.id.support_nav_host_fragment).addOnDestinationChangedListener(this)
-
     }
 
     override fun displayProgressBar(bool: Boolean){

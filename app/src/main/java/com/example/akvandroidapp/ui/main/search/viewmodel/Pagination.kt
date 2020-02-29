@@ -23,6 +23,8 @@ import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentStateE
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewModel
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewState
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewModel
+import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewState
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
@@ -422,6 +424,11 @@ fun DetailsViewModel.handleIncomingBlogListData(viewState: DetailsViewState){
     setQueryInProgress(viewState.myChatFields.isQueryInProgress)
     setQueryExhausted(viewState.myChatFields.isQueryExhausted)
     setBlogListData(viewState.myChatFields.blogList)
+}
+
+fun SupportViewModel.handleFeedback(viewState: SupportViewState){
+    Log.d(TAG, "SupportViewModel, DataState: ${viewState}")
+    setFeedbackId(viewState.id)
 }
 
 fun ZhilyeBookViewModel.handleIncomingRequest(viewState: ZhilyeBookViewState){

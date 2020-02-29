@@ -6,11 +6,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class SupportViewState (
-
+    var id: Int = -1
     ) : Parcelable
 {
-
-
 }
 
 

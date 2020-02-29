@@ -22,6 +22,7 @@ import kotlin.collections.ArrayList
 class DateRangePickerDialog(
     context: Context,
     var selectedDates: List<Date>,
+    var blockedDates: List<Date>,
     val interaction: DatePickerDialogInteraction
 ): Dialog(context, R.style.CustomBasicDialog){
 
@@ -49,6 +50,7 @@ class DateRangePickerDialog(
         dialog_filter_dates_picker
             .init(lastyear.time, nextyear.time)
             .inMode(CalendarPickerView.SelectionMode.RANGE)
+            .withHighlightedDates(blockedDates)
             .withSelectedDates(selectedDates)
 
         findViewById<ImageButton>(R.id.dialog_filter_dates_picker_cancel).setOnClickListener {

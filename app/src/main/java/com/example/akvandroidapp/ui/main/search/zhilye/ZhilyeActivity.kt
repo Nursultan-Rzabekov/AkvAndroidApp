@@ -556,7 +556,16 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
     }
 
     private fun showDatePicker(){
-        val datePickerDialog = DateRangePickerDialog(this, listOf(), this)
+        val bd = mutableListOf<Date>()
+        blockedDates.forEach {
+            bd.addAll(
+                DateUtils.getDatesBetween(
+                    DateUtils.convertStringToDate(it.check_in.toString()),
+                    DateUtils.convertStringToDate(it.check_out.toString())
+                )
+            )
+        }
+        val datePickerDialog = DateRangePickerDialog(this, listOf(), DateUtils.getDatesFromToday(bd),this)
         datePickerDialog.show()
     }
 

@@ -7,6 +7,9 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
+import com.example.akvandroidapp.util.AbsentLiveData
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 
@@ -19,7 +22,15 @@ constructor(
 {
     override fun handleStateEvent(stateEvent: SupportStateEvent): LiveData<DataState<SupportViewState>> {
         when(stateEvent){
-
+            is SupportStateEvent.FeedbackSendEvent -> {
+                return sessionManager.cachedToken.value?.let { authToken ->
+                    val _message = RequestBody.create(MediaType.parse("text/plain"), stateEvent.message)
+                    profileRepository.sendFeedback(
+                        authToken,
+                        _message
+                    )
+                }?: AbsentLiveData.create()
+            }
 
             is SupportStateEvent.None ->{
                 return liveData {

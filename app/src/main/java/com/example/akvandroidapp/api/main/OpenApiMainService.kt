@@ -5,6 +5,7 @@ import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.bodies.CreateCancelReservationBody
 import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.util.GenericApiResponse
+import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -191,6 +192,13 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<PaymentsListResponse>>
+
+    @Multipart
+    @POST("feedback/")
+    fun sendProblem(
+        @Header("Authorization") authorization: String,
+        @Part("message") message: RequestBody
+    ): LiveData<GenericApiResponse<FeedbackSendResponse>>
 }
 
 

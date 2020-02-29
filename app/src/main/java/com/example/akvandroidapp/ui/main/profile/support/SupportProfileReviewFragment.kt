@@ -9,11 +9,19 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.displayErrorDialog
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
+import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportStateEvent
+import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewState
+import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.PasswordChecker
+import handleFeedback
+import kotlinx.android.synthetic.main.fragment_support_notify_error.*
 import kotlinx.android.synthetic.main.header_support.*
 import kotlinx.android.synthetic.main.sign_up_pass.*
 import kotlinx.android.synthetic.main.support_main_review_layout.*
@@ -36,6 +44,47 @@ class SupportProfileReviewFragment : BaseSupportFragment() {
         Log.d(TAG, "SearchFragment: ${viewModel}")
 
         setToobar()
+
+        fragment_support_notify_error_btn.setOnClickListener {
+            if (fragment_support_notify_error_et.text.toString().trim().isNotBlank()) {
+                subscribeObservers()
+                sendFeedback(fragment_support_notify_error_et.text.toString().trim())
+            }
+        }
+    }
+
+    private fun subscribeObservers(){
+        viewModel.dataState.observe(this, androidx.lifecycle.Observer{ dataState ->
+            if(dataState != null) {
+                handleFeedback(dataState)
+                stateChangeListener.onDataStateChange(dataState)
+            }
+        })
+
+        viewModel.viewState.observe(this, Observer { viewState ->
+            if (viewState != null){
+                if (viewState.id >= 0)
+                    findNavController().navigateUp()
+            }
+        })
+    }
+
+    private fun handleFeedback(dataState: DataState<SupportViewState>){
+        dataState.data?.let {
+            it.data?.let{
+                it.getContentIfNotHandled()?.let{
+                    viewModel.handleFeedback(it)
+                }
+            }
+        }
+        dataState.error?.let{ event ->
+            event.peekContent().response.message?.let{
+                if(ErrorHandling.isPaginationDone(it)){
+                    // handle the error message event so it doesn't display in UI
+                    event.getContentIfNotHandled()
+                }
+            }
+        }
     }
 
     private fun setToobar(){
@@ -44,5 +93,11 @@ class SupportProfileReviewFragment : BaseSupportFragment() {
         header_support_message_toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun sendFeedback(message: String){
+        viewModel.setStateEvent(
+            SupportStateEvent.FeedbackSendEvent(message)
+        )
     }
 }
