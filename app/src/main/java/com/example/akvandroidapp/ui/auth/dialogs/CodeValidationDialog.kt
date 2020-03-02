@@ -5,6 +5,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.View
 import android.view.Window
 import android.widget.EditText
 import android.widget.ImageButton
@@ -18,6 +20,8 @@ class CodeValidationDialog(
     context: Context,
     val interaction: CodeValidationDialogInteraction
 ): Dialog(context, R.style.CustomBasicDialog) {
+
+    private val countdown = 60L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +42,7 @@ class CodeValidationDialog(
         }
 
         send.setOnClickListener {
+            startCountDown(countdown)
             interaction.onSendMoreBtnListener()
         }
 
@@ -45,6 +50,26 @@ class CodeValidationDialog(
             if (interaction.onValidateBtnListener(it))
                 dismiss()
         }
+    }
+
+    private fun startCountDown(time: Long){
+        val timerTv = findViewById<TextView>(R.id.dialog_sign_up_valid_repeat_code_tv)
+        val send = findViewById<TextView>(R.id.dialog_sign_up_valid_repeat_code_tv)
+
+        timerTv.visibility = View.VISIBLE
+        send.visibility = View.GONE
+
+        val cTimer = object: CountDownTimer(time * 1000, 1000){
+            override fun onFinish() {
+                timerTv.visibility = View.GONE
+                send.visibility = View.VISIBLE
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                timerTv.text = ("${millisUntilFinished/1000} сек.")
+            }
+        }
+        cTimer.start()
     }
 
     interface CodeValidationDialogInteraction{

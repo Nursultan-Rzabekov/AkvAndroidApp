@@ -111,11 +111,20 @@
                 android:typeface="normal" />
 
             <TextView
+                android:id="@+id/dialog_sign_up_valid_countdown_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="9sp"/>
+
+            <TextView
                 android:id="@+id/dialog_sign_up_valid_repeat_code_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/send_again"
+                android:visibility="gone"
                 android:textAlignment="center"
                 android:textSize="9sp"
                 android:typeface="normal"

@@ -61,17 +61,17 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
         return inflater.inflate(R.layout.sign_up_detail, container, false)
     }
 
-    private var password1:String?=null
-    private var password2:String?=null
-    private var arg_number:String?=null
+//    private var password1:String?=null
+//    private var password2:String?=null
+//    private var arg_number:String?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterFragment: ${viewModel}")
 
-        password1 = arguments?.getString("password1")
-        password2 = arguments?.getString("password2")
-        arg_number = arguments?.getString("arg_number")
+//        password1 = arguments?.getString("password1")
+//        password2 = arguments?.getString("password2")
+//        arg_number = arguments?.getString("arg_number")
 
         subscribeObservers()
 
@@ -227,7 +227,7 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
     private fun sendCode(){
         viewModel.setStateEvent(
             SendCodeEvent(
-                arg_number.toString()
+                phonenumber.toString()
             )
         )
     }
@@ -235,7 +235,7 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
     private fun verifyCode(code: String): Boolean{
         viewModel.setStateEvent(
             VerifyCodeEvent(
-                arg_number.toString(),
+                phonenumber.toString(),
                 code
             )
         )
@@ -274,7 +274,7 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
     private fun showDatePicker(d: String){
         Locale.setDefault(Locale("ru"))
 
-        var dateString = d.toString()
+        var dateString = d
         if (dateString == ""){
             dateString = DateUtils.convertDateToString(
                 DateUtils.getDateFromNYear(Constants.DEFAULT_YEAR_GAP)

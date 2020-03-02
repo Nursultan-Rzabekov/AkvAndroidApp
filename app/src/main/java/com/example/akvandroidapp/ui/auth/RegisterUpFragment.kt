@@ -34,13 +34,9 @@ class RegisterUpFragment : BaseAuthFragment() {
         return inflater.inflate(R.layout.sign_up, container, false)
     }
 
-    private var argument:String? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterUpFragment: ${viewModel}")
-
-        argument = arguments?.getString("user_name")
 
         setupSuffixSample()
 
@@ -57,10 +53,10 @@ class RegisterUpFragment : BaseAuthFragment() {
         val phoneTotal = "+7".plus(phoneNumber)
         if(phoneTotal.trim().length != 12) sign_up_l_et.error = getString(R.string.invalid_number)
         else{
-            sign_up_l_et.isErrorEnabled = false
-            val bundle = bundleOf("number" to phoneTotal,"arg_user_name" to argument)
+//            sign_up_l_et.isErrorEnabled = false
+//            val bundle = bundleOf("number" to phoneTotal,"arg_user_name" to argument)
             sessionManager.setCreateAccountPhonenumber(phoneTotal)
-            findNavController().navigate(R.id.action_register_upFragment_to_register_pass_Fragment,bundle)
+            findNavController().navigate(R.id.action_register_upFragment_to_register_pass_Fragment)
         }
     }
 

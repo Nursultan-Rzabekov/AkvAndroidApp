@@ -29,8 +29,8 @@ class RegisterPassFragment : BaseAuthFragment() {
         return inflater.inflate(R.layout.sign_up_pass, container, false)
     }
 
-    private var arg_number:String? = null
-    private var arg_user_name:String? = null
+//    private var arg_number:String? = null
+//    private var arg_user_name:String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,8 +40,8 @@ class RegisterPassFragment : BaseAuthFragment() {
             navNextNavigationPage()
         }
 
-        arg_number = arguments?.getString("number")
-        arg_user_name = arguments?.getString("arg_user_name")
+//        arg_number = arguments?.getString("number")
+//        arg_user_name = arguments?.getString("arg_user_name")
 
         sign_up_pass_back_tv.setOnClickListener {
             findNavController().navigate(R.id.action_registerPassFragment_to_registerUpFragment)
@@ -82,10 +82,10 @@ class RegisterPassFragment : BaseAuthFragment() {
         }
 
         if(isFirstPassCorrect && isSecondPassCorrect && !isNotMatch){
-            val bundle = bundleOf("password1" to password1, "password2" to password2,
-                "arg_number" to arg_number, "arg_user_name" to arg_user_name)
+//            val bundle = bundleOf("password1" to password1, "password2" to password2,
+//                "arg_number" to arg_number, "arg_user_name" to arg_user_name)
             sessionManager.setCreateAccountPassword(password1)
-            findNavController().navigate(R.id.action_register_passFragment_to_registerFragment,bundle)
+            findNavController().navigate(R.id.action_register_passFragment_to_registerFragment)
         }
     }
 
