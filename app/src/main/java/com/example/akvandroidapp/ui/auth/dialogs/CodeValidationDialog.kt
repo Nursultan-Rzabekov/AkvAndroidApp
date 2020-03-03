@@ -50,10 +50,12 @@ class CodeValidationDialog(
             if (interaction.onValidateBtnListener(it))
                 dismiss()
         }
+
+        startCountDown(countdown)
     }
 
     private fun startCountDown(time: Long){
-        val timerTv = findViewById<TextView>(R.id.dialog_sign_up_valid_repeat_code_tv)
+        val timerTv = findViewById<TextView>(R.id.dialog_sign_up_valid_countdown_tv)
         val send = findViewById<TextView>(R.id.dialog_sign_up_valid_repeat_code_tv)
 
         timerTv.visibility = View.VISIBLE
