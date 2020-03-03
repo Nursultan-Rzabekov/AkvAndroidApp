@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewModel
-import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewModel
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_support_main.*
 import javax.inject.Inject

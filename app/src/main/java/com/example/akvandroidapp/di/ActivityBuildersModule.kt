@@ -5,7 +5,10 @@ import com.example.akvandroidapp.di.addadhouse.AddAddFragmentBuildersModule
 import com.example.akvandroidapp.di.addadhouse.AddAddModule
 import com.example.akvandroidapp.di.addadhouse.AddAddScope
 import com.example.akvandroidapp.di.addadhouse.AddAddViewModelModule
-import com.example.akvandroidapp.di.auth.*
+import com.example.akvandroidapp.di.auth.AuthFragmentBuildersModule
+import com.example.akvandroidapp.di.auth.AuthModule
+import com.example.akvandroidapp.di.auth.AuthScope
+import com.example.akvandroidapp.di.auth.AuthViewModelModule
 import com.example.akvandroidapp.di.main.MainFragmentBuildersModule
 import com.example.akvandroidapp.di.main.MainModule
 import com.example.akvandroidapp.di.main.MainScope

@@ -13,8 +13,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.*
+import com.example.akvandroidapp.ui.BaseLocationActivity
+import com.example.akvandroidapp.ui.findUnAskedPermissions
+import com.example.akvandroidapp.ui.getLastLocation
 import com.example.akvandroidapp.ui.main.MainActivity
+import com.example.akvandroidapp.ui.showSettingsAlert
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_add_ad.*

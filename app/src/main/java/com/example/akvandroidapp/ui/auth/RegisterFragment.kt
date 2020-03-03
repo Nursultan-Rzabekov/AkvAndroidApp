@@ -2,11 +2,6 @@ package com.example.akvandroidapp.ui.auth
 
 
 import android.app.DatePickerDialog
-import android.app.Dialog
-import android.app.TimePickerDialog
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Selection
 import android.text.Spannable
@@ -18,12 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
@@ -33,13 +23,10 @@ import com.example.akvandroidapp.ui.auth.dialogs.CodeValidationDialog
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.AuthViewState
 import com.example.akvandroidapp.ui.auth.state.RegistrationFields
-import com.example.akvandroidapp.ui.main.MainActivity
-import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
-import com.google.android.material.button.MaterialButton
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.sign_up_detail.*
 import java.util.*

@@ -3,17 +3,16 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.*
+import com.example.akvandroidapp.ui.BaseActivity
 import com.example.akvandroidapp.util.Constants.Companion.MAPKIT_API_KEY
-import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.*
+import com.yandex.mapkit.map.IconStyle
+import com.yandex.mapkit.map.MapObject
+import com.yandex.mapkit.map.MapObjectDragListener
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.runtime.image.ImageProvider
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MapSetPlacemarkActivity : BaseActivity(), MapObjectDragListener
@@ -37,12 +36,12 @@ class MapSetPlacemarkActivity : BaseActivity(), MapObjectDragListener
         })
     }
     override fun displayProgressBar(bool: Boolean){
-        if(bool){
-            progress_bar.visibility = View.VISIBLE
-        }
-        else{
-            progress_bar.visibility = View.GONE
-        }
+//        if(bool){
+//            progress_bar.visibility = View.VISIBLE
+//        }
+//        else{
+//            progress_bar.visibility = View.GONE
+//        }
     }
 
     override fun onStop() {

@@ -3,26 +3,15 @@ package com.example.akvandroidapp.ui.main.search.filter
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.findNavController
-
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseActivity
-import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_udopstva.*
 import kotlinx.android.synthetic.main.fragment_udopstva_layout.*
-import javax.inject.Inject
 
 
 class FilterUdopstvaFragment : BaseActivity() {

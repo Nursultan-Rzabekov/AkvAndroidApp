@@ -10,20 +10,11 @@ import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.ProfileFragment
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment
-import com.example.akvandroidapp.ui.main.profile.add_ad.*
-import com.example.akvandroidapp.ui.main.profile.my_house.*
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment
 import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
-import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
 import com.example.akvandroidapp.ui.main.search.SearchFragment
-import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
-import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
-import com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeBookActivity
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

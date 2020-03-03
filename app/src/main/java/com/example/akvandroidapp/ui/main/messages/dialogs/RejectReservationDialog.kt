@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import com.example.akvandroidapp.R

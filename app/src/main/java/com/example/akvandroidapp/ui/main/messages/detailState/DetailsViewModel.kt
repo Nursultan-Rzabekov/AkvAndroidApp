@@ -1,11 +1,8 @@
 package com.example.akvandroidapp.ui.main.messages.detailState
 
 import android.content.SharedPreferences
-import android.os.IBinder
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.liveData
 import com.example.akvandroidapp.repository.main.MessagesRepository
 import com.example.akvandroidapp.session.SessionManager

@@ -3,7 +3,6 @@ package com.example.akvandroidapp.session
 import android.app.Application
 import android.content.Context
 import android.location.Location
-import com.yandex.mapkit.geometry.Point
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.util.Log
@@ -17,13 +16,16 @@ import com.example.akvandroidapp.persistence.AccountPropertiesDao
 import com.example.akvandroidapp.persistence.AuthTokenDao
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.ui.main.search.filter.FilterCity
-import kotlinx.coroutines.*
+import com.yandex.mapkit.geometry.Point
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.collections.ArrayList
 
 
 @Singleton

@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.bodies.CreateCancelReservationBody
-import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.responses.HomeListResponse
 import com.example.akvandroidapp.api.main.responses.PayRequestResponse
 import com.example.akvandroidapp.api.main.responses.VerifyUpdateResponse
@@ -18,7 +17,6 @@ import com.example.akvandroidapp.repository.NetworkBoundResource
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.home.state.HomeViewState
-import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
 import com.example.akvandroidapp.util.Constants

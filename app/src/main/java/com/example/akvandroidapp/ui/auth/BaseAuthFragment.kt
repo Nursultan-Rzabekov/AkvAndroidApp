@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.akvandroidapp.ui.DataStateChangeListener
-import com.example.akvandroidapp.ui.UICommunicationListener
 import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

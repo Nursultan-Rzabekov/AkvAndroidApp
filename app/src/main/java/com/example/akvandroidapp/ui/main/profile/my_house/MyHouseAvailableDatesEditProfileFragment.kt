@@ -8,20 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.DateUtils
-import com.example.akvandroidapp.util.PasswordChecker
 import com.savvi.rangedatepicker.CalendarPickerView
-import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.fragment_about_us.*
 import kotlinx.android.synthetic.main.fragment_add_ad_available_dates.*
-import kotlinx.android.synthetic.main.fragment_add_ad_rules.*
-import kotlinx.android.synthetic.main.sign_up_pass.*
 import java.util.*
 import javax.inject.Inject
 

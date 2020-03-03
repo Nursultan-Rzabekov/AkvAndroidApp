@@ -1,6 +1,5 @@
 package com.example.akvandroidapp.ui.main.messages.detailState
 
-import com.example.akvandroidapp.entity.UserConversationImages
 import com.example.akvandroidapp.entity.UserConversationMessages
 import com.example.akvandroidapp.entity.UserConversationSendMessages
 import okhttp3.MultipartBody

@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.akvandroidapp.R
-import java.util.ArrayList
+import java.util.*
 
 
 fun Activity.displayToast(@StringRes message:Int){

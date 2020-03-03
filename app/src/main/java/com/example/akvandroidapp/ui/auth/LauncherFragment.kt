@@ -6,12 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
-
 import com.example.akvandroidapp.R
-import kotlinx.android.synthetic.main.sign_up_nickname.*
 
 
 class LauncherFragment : BaseAuthFragment() {

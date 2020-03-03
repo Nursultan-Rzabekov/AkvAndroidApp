@@ -2,19 +2,21 @@ package com.example.akvandroidapp.ui.auth
 
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.TranslateAnimation
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.navigation.fragment.findNavController
-
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.*
-import com.example.akvandroidapp.ui.auth.ForgotPasswordFragment.WebAppInterface.*
+import com.example.akvandroidapp.ui.DataState
+import com.example.akvandroidapp.ui.Response
+import com.example.akvandroidapp.ui.ResponseType
+import com.example.akvandroidapp.ui.auth.ForgotPasswordFragment.WebAppInterface.OnWebInteractionCallback
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 import kotlinx.coroutines.CoroutineScope

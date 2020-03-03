@@ -1,33 +1,32 @@
 package com.example.akvandroidapp.repository.main
 
 
-import android.nfc.Tag
-import com.yandex.mapkit.geometry.Point
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
-import com.example.akvandroidapp.api.main.responses.*
+import com.example.akvandroidapp.api.main.responses.BlogListSearchResponse
+import com.example.akvandroidapp.api.main.responses.ReservationRequestResponse
+import com.example.akvandroidapp.api.main.responses.ReviewsListResponse
+import com.example.akvandroidapp.api.main.responses.ZhilyeResponse
 import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.repository.JobManager
 import com.example.akvandroidapp.repository.NetworkBoundResource
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
-import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.util.*
 import com.example.akvandroidapp.util.Constants.Companion.PAGINATION_PAGE_SIZE
+import com.yandex.mapkit.geometry.Point
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
-import okhttp3.RequestBody
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 class SearchRepository
 @Inject

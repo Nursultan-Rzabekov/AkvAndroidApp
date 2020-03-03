@@ -11,7 +11,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.BaseActivity
-import com.example.akvandroidapp.ui.ResponseType
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.util.SuccessHandling.Companion.RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE

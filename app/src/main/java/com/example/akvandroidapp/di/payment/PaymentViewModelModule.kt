@@ -2,7 +2,6 @@ package com.example.akvandroidapp.di.payment
 
 import androidx.lifecycle.ViewModel
 import com.example.akvandroidapp.di.ViewModelKey
-import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewModel
 import dagger.Binds
 import dagger.Module

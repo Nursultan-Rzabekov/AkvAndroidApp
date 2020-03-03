@@ -8,14 +8,10 @@ import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.Review
-import com.example.akvandroidapp.ui.main.search.SearchListAdapter
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.reviews_page_recycler_view_item.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ReviewsPageAdapter(
     private val requestManager: RequestManager

@@ -32,7 +32,6 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_my_adds_change.*
 import kotlinx.android.synthetic.main.header_my_adds_change.*
-import java.util.*
 import javax.inject.Inject
 
 

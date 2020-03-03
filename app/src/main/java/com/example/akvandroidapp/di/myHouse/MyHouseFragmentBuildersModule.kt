@@ -1,6 +1,5 @@
 package com.example.akvandroidapp.di.myHouse
 
-import com.example.akvandroidapp.ui.main.profile.add_ad.*
 import com.example.akvandroidapp.ui.main.profile.my_house.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

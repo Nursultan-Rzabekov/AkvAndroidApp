@@ -10,17 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.BaseActivity
-import com.example.akvandroidapp.ui.main.messages.adapter.MyPagerChatAdapter
 import com.example.akvandroidapp.util.Constants
-import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.fragment_chat_main.*
 import kotlinx.android.synthetic.main.fragment_support_main.*
 import kotlinx.android.synthetic.main.support_main_layout.*
-import java.util.jar.Manifest
 
 
 class SupportProfileFragment : BaseSupportFragment(), ModalBottomSheet.BottomSheetDialogInteraction

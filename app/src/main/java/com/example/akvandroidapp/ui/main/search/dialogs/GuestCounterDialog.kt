@@ -11,9 +11,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.main.search.viewmodel.clearCounts
-import com.example.akvandroidapp.ui.main.search.viewmodel.setAdultCount
-import com.example.akvandroidapp.ui.main.search.viewmodel.setChildrenCount
 import com.google.android.material.button.MaterialButton
 
 class GuestCounterDialog(

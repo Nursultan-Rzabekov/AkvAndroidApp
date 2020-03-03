@@ -16,7 +16,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.*
 import com.example.akvandroidapp.ui.main.messages.adapter.ChatRecyclerAdapter
@@ -42,9 +41,6 @@ import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.activity_dialog.*
 import kotlinx.android.synthetic.main.activity_dialog_layout.*
 import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.header_dialog.*
-import kotlinx.android.synthetic.main.header_dialog.header_dialog_civ
-import kotlinx.android.synthetic.main.header_dialog.header_dialog_nickname_tv
 import loadFirstPage
 import okhttp3.MediaType
 import okhttp3.MultipartBody

@@ -3,7 +3,6 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 
 import okhttp3.MultipartBody
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 sealed class AddAdStateEvent {

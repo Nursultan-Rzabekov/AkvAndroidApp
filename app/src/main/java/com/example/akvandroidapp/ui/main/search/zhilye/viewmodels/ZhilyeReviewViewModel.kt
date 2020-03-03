@@ -10,8 +10,6 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
 import com.example.akvandroidapp.ui.main.search.viewmodel.getHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.getPage
-import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookStateEvent
-import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsStateEvent
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
 import com.example.akvandroidapp.util.AbsentLiveData

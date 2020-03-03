@@ -2,7 +2,8 @@ package com.example.akvandroidapp.ui.main.profile.my_house.state
 
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.akvandroidapp.repository.main.ProfileRepository
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel

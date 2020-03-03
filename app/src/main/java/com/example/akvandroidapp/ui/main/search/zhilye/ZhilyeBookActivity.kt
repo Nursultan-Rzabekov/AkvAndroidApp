@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.ZhilyeDetail
 import com.example.akvandroidapp.ui.BaseActivity
@@ -18,7 +17,6 @@ import com.example.akvandroidapp.ui.DataStateChangeListener
 import com.example.akvandroidapp.ui.main.MainActivity
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookStateEvent
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
-import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
@@ -26,7 +24,6 @@ import com.example.akvandroidapp.viewmodels.ViewModelProviderFactory
 import handleIncomingRequest
 import kotlinx.android.synthetic.main.fragment_zhilye_book.*
 import kotlinx.android.synthetic.main.fragment_zhilye_book_layout.*
-import java.lang.Math.round
 import java.util.*
 import javax.inject.Inject
 

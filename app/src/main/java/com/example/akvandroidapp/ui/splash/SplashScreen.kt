@@ -1,9 +1,9 @@
 package com.example.akvandroidapp.ui.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.auth.AuthActivity
 

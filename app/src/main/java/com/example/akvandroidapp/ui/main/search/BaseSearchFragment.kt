@@ -4,13 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.RequestManager
-import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.DataStateChangeListener
 import com.example.akvandroidapp.ui.UICommunicationListener
 import com.example.akvandroidapp.ui.main.search.viewmodel.SearchViewModel

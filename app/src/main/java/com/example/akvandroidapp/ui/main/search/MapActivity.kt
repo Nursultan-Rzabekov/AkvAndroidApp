@@ -10,10 +10,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.*
+import com.example.akvandroidapp.ui.BaseLocationActivity
+import com.example.akvandroidapp.ui.findUnAskedPermissions
+import com.example.akvandroidapp.ui.getLastLocation
+import com.example.akvandroidapp.ui.showSettingsAlert
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Constants.Companion.MAPKIT_API_KEY
 import com.example.akvandroidapp.util.Helper
@@ -24,7 +26,6 @@ import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.*
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.runtime.image.ImageProvider
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.map.*
 
 class MapActivity : BaseLocationActivity(), ClusterListener, ClusterTapListener,MapObjectTapListener
@@ -121,12 +122,12 @@ class MapActivity : BaseLocationActivity(), ClusterListener, ClusterTapListener,
 
 
     override fun displayProgressBar(bool: Boolean){
-        if(bool){
-            progress_bar.visibility = View.VISIBLE
-        }
-        else{
-            progress_bar.visibility = View.GONE
-        }
+//        if(bool){
+//            progress_bar.visibility = View.VISIBLE
+//        }
+//        else{
+//            progress_bar.visibility = View.GONE
+//        }
     }
 
     override fun onStop() {

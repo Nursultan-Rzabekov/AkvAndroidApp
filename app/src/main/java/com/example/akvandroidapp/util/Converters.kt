@@ -4,13 +4,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import com.google.android.material.textfield.TextInputEditText
-import java.lang.Exception
-import java.lang.IllegalArgumentException
 import java.lang.ref.WeakReference
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.math.abs
 
 class Converters {

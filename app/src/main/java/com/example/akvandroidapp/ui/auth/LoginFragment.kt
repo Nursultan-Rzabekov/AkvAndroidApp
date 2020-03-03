@@ -7,17 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
-import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
+import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.LoginAttemptEvent
 import com.example.akvandroidapp.ui.auth.state.LoginFields
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import kotlinx.android.synthetic.main.login.*
-import kotlinx.android.synthetic.main.sign_up.*
 import javax.inject.Inject
 
 
