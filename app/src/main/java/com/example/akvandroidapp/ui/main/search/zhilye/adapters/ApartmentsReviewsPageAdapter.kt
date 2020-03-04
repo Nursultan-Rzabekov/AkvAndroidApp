@@ -150,13 +150,13 @@ class ApartmentsReviewsPageAdapter(
         }
     }
 
-    fun submitList(items: List<Review>?,isQueryExhausted: Boolean = false){
+    fun submitList(items: List<Review>?){
         val newList = items?.toMutableList()?.take(2)?.toMutableList()
         if (newList?.size!! > 0){
             newList.add(SHOW_MORE_ITEMS_MARKER)
         }
-        if (newList?.isEmpty())
-            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
+        if (newList.isEmpty())
+            newList.add(NO_MORE_RESULTS_BLOG_MARKER)
         differ.submitList(newList)
         Log.e("ReviewsPageAdapter", "${differ.currentList}")
     }

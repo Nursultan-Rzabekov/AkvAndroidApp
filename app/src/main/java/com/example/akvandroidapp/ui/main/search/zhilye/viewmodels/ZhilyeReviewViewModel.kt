@@ -59,7 +59,7 @@ constructor(
     }
 
     fun handlePendingData(){
-        setStateEvent(ZhilyeReviewsStateEvent.None())
+        setStateEvent(ZhilyeReviewsStateEvent.None)
     }
 
     override fun onCleared() {

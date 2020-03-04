@@ -124,7 +124,7 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
 
         houseId?.let {
             viewModel.setHouseId(it).let {
-                viewModel.setStateEvent(ZhilyeStateEvent.BlogZhilyeEvent())
+                viewModel.setStateEvent(ZhilyeStateEvent.BlogZhilyeEvent)
             }
         }
 
@@ -169,8 +169,8 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                 Log.d("ZhilyeActivity", "zhilye fav states: " +
                         "${viewState.createblogFields.isCreated} ${viewState.deleteblogFields.isDeleted}")
 
-                if (viewState.createblogFields.isCreated == true || viewState.deleteblogFields.isDeleted){
-                    viewModel.setStateEvent(ZhilyeStateEvent.BlogZhilyeEvent())
+                if (viewState.createblogFields.isCreated || viewState.deleteblogFields.isDeleted){
+                    viewModel.setStateEvent(ZhilyeStateEvent.BlogZhilyeEvent)
                     viewModel.setCreateFavourite(false)
                     viewModel.setDeleteFavourite(false)
                 }else {
@@ -476,9 +476,9 @@ class ZhilyeActivity : BaseActivity(), ApartmentsReviewsPageAdapter.ShowMoreRevi
                 item.isChecked = isFavouriteChecked
                 changeFavouriteMenuBtnDrawable(item)
                 if (!isFavouriteChecked)
-                    viewModel.setStateEvent(ZhilyeStateEvent.CreateFavoriteItemEvent())
+                    viewModel.setStateEvent(ZhilyeStateEvent.CreateFavoriteItemEvent)
                 else
-                    viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent())
+                    viewModel.setStateEvent(ZhilyeStateEvent.DeleteFavoriteItemEvent)
             }
 
             R.id.share -> {

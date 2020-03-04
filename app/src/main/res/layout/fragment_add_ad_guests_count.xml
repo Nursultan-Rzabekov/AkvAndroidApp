@@ -27,7 +27,7 @@
                 android:textColor="@color/primaryZero"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_gravity="end"
+                android:layout_gravity="end|center_horizontal"
                 android:layout_marginTop="@dimen/dim_20dp"
                 android:layout_marginBottom="@dimen/dim_20dp"
                 android:layout_marginEnd="@dimen/dim_16dp"/>

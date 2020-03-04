@@ -28,7 +28,7 @@ sealed class AuthStateEvent{
         val code:String
     ):AuthStateEvent()
 
-    class CheckPreviousAuthEvent(): AuthStateEvent()
+    object CheckPreviousAuthEvent : AuthStateEvent()
 
-    class None: AuthStateEvent()
+    object None: AuthStateEvent()
 }

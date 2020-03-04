@@ -29,5 +29,5 @@ sealed class AddAdStateEvent {
         val image: ArrayList<MultipartBody.Part>? = null
     ): AddAdStateEvent()
 
-    class None: AddAdStateEvent()
+    object None : AddAdStateEvent()
 }

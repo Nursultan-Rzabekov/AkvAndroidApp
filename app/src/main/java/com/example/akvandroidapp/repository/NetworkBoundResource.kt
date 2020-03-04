@@ -28,7 +28,7 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject, ViewStateType>
 
     protected val result = MediatorLiveData<DataState<ViewStateType>>()
     protected lateinit var job: CompletableJob
-    protected lateinit var coroutineScope: CoroutineScope
+    private lateinit var coroutineScope: CoroutineScope
 
     init {
         setJob(initNewJob())

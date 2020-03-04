@@ -4,11 +4,11 @@ package com.example.akvandroidapp.ui.main.profile.my_house.state
 
 sealed class MyHouseStateStateEvent {
 
-    class MyHouseEvent : MyHouseStateStateEvent()
+    object MyHouseEvent : MyHouseStateStateEvent()
 
-    class MyHouseStateEvent : MyHouseStateStateEvent()
+    object MyHouseStateEvent : MyHouseStateStateEvent()
 
-    class MyHouseZhilyeEvent: MyHouseStateStateEvent()
+    object MyHouseZhilyeEvent: MyHouseStateStateEvent()
 
     data class MyHouseUpdateEvent(
         var house_id: Int,
@@ -23,5 +23,5 @@ sealed class MyHouseStateStateEvent {
         var datesList: List<String>?
     ): MyHouseStateStateEvent()
 
-    class None: MyHouseStateStateEvent()
+    object None: MyHouseStateStateEvent()
 }

@@ -77,7 +77,7 @@ constructor(
 //    }
 
     fun handlePendingData(){
-        setStateEvent(RequestStateEvent.None())
+        setStateEvent(RequestStateEvent.None)
     }
 
     override fun onCleared() {

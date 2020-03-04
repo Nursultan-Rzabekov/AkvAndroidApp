@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.akvandroidapp.ui.main.messages.ChatMesFragment
 import com.example.akvandroidapp.ui.main.messages.RequestFragment
 
-class MyPagerChatAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class MyPagerChatAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {

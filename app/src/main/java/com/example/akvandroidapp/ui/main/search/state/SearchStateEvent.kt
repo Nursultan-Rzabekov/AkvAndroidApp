@@ -5,11 +5,11 @@ import okhttp3.MultipartBody
 
 sealed class SearchStateEvent {
 
-    class BlogSearchEvent : SearchStateEvent()
+    object BlogSearchEvent : SearchStateEvent()
 
-    class CheckAuthorOfBlogPost: SearchStateEvent()
+    object CheckAuthorOfBlogPost: SearchStateEvent()
 
-    class DeleteBlogPostEvent: SearchStateEvent()
+    object DeleteBlogPostEvent: SearchStateEvent()
 
     class DeleteFavoriteItemEvent(
         val houseId:Int

@@ -20,7 +20,6 @@ import com.example.akvandroidapp.BuildConfig
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.*
-import com.example.akvandroidapp.ui.main.messages.ModalBottomSheetChat
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsStateEvent
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewState
@@ -88,7 +87,10 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     private lateinit var currentFileUri: Uri
     private val myDataTransfer = arrayOf<Bundle?>(null)
     private val calendar = Calendar.getInstance()
-    private val modalBottomSheet: ModalBottomSheetChat = ModalBottomSheetChat(this)
+    private val modalBottomSheet: ModalBottomSheetChat =
+        ModalBottomSheetChat(
+            this
+        )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -321,7 +323,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
     override fun onSubmit(input: CharSequence): Boolean {
         viewModel.setMessageBody(input.toString())
         viewModel.setUserId(viewModel.getTargetQuery())
-        viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
+        viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent)
         return true
     }
 
@@ -489,7 +491,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
                             viewModel.setMessageBody("Only Photos")
                             viewModel.setImageMultipart(it)
                             viewModel.setUserId(viewModel.getTargetQuery())
-                            viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent())
+                            viewModel.setStateEvent(DetailsStateEvent.SendMessageEvent)
                         }
                     }
 

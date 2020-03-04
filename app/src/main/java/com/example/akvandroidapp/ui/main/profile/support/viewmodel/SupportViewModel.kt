@@ -57,7 +57,7 @@ constructor(
     }
 
     fun handlePendingData(){
-        setStateEvent(SupportStateEvent.None())
+        setStateEvent(SupportStateEvent.None)
     }
 
     override fun onCleared() {

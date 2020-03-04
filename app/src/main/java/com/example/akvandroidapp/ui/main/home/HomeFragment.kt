@@ -120,7 +120,7 @@ class HomeFragment : BaseHomeFragment(),
             }
         })
 
-        sessionManager.payBox.observe(this,Observer{
+        sessionManager.payBox.observe(viewLifecycleOwner,Observer{
             if(it.id != 0 && !it.location.isNullOrBlank() && !it.payment_page_url.isNullOrBlank()){
                 val bundle = bundleOf(
                     "url" to it.payment_page_url,

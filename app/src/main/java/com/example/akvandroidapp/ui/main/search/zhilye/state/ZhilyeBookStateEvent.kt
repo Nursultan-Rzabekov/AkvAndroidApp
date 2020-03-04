@@ -3,7 +3,7 @@ package com.example.akvandroidapp.ui.main.search.zhilye.state
 
 sealed class ZhilyeBookStateEvent {
 
-    class None: ZhilyeBookStateEvent()
+    object None: ZhilyeBookStateEvent()
     data class ReservationEvent(
         var check_in: String = "",
         var check_out: String = "",

@@ -47,14 +47,14 @@ class SupportProfileReviewFragment : BaseSupportFragment() {
     }
 
     private fun subscribeObservers(){
-        viewModel.dataState.observe(this, androidx.lifecycle.Observer{ dataState ->
+        viewModel.dataState.observe(viewLifecycleOwner, androidx.lifecycle.Observer{ dataState ->
             if(dataState != null) {
                 handleFeedback(dataState)
                 stateChangeListener.onDataStateChange(dataState)
             }
         })
 
-        viewModel.viewState.observe(this, Observer { viewState ->
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null){
                 if (viewState.id >= 0)
                     findNavController().navigateUp()

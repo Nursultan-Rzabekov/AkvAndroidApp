@@ -130,7 +130,7 @@ class ProfileFragment : BaseProfileFragment(){
 
 
     private fun getInfo(){
-        viewModel.setStateEvent(ProfileStateEvent.GetProfileInfoEvent())
+        viewModel.setStateEvent(ProfileStateEvent.GetProfileInfoEvent)
     }
 
     private fun subscribeObservers(){

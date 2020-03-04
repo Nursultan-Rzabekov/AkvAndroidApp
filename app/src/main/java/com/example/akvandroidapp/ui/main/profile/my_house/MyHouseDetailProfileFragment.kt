@@ -68,7 +68,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
 
         houseId?.let {
             viewModel.setZhilyeHouseId(it).let {
-                viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseZhilyeEvent())
+                viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseZhilyeEvent)
             }
         }
 
@@ -103,7 +103,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                 houseId?.let {
                     viewModel.setHouseId(it).let {
                         viewModel.setState(0).let {
-                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
+                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent)
                             //deactivateState()
                         }
                     }
@@ -113,7 +113,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                 houseId?.let {
                     viewModel.setHouseId(it).let {
                         viewModel.setState(1).let {
-                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
+                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent)
                             //activateState()
                         }
                     }
@@ -136,7 +136,7 @@ class MyHouseDetailProfileFragment : BaseMyHouseFragment() {
                 if (viewState.myHouseStateFields.response){
                     houseId?.let {
                         viewModel.setZhilyeHouseId(it).let {
-                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseZhilyeEvent())
+                            viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseZhilyeEvent)
                         }
                     }
                     viewModel.setResponseState(false)

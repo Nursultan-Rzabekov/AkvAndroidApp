@@ -201,7 +201,7 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
             item.id.let {
                 viewModel.setHouseId(it).let {
                     viewModel.setState(0).let {
-                        viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
+                        viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent)
                     }
                 }
             }
@@ -210,7 +210,7 @@ class MyHouseAddsProfileFragment : BaseMyHouseFragment(),
             item.id.let {
                 viewModel.setHouseId(it).let {
                     viewModel.setState(1).let {
-                        viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent())
+                        viewModel.setStateEvent(MyHouseStateStateEvent.MyHouseStateEvent)
                     }
                 }
             }

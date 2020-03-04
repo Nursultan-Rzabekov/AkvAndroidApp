@@ -111,7 +111,7 @@ constructor(val authRepository: AuthRepository): BaseViewModel<AuthStateEvent, A
     }
 
     fun handlePendingData(){
-        setStateEvent(None())
+        setStateEvent(None)
     }
 
     override fun onCleared() {

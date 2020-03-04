@@ -46,66 +46,60 @@
         </activity>
         <activity
             android:name=".ui.main.profile.add_ad.AddAdMainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.profile.my_house.MyHouseMainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.profile.support.SupportMainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.profile.payment.PaymentMainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.zhilye.ZhilyeActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.zhilye.ZhilyeBookActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity
-            android:name=".ui.main.messages.chatkit.CustomLayoutDialogsActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.messages.chatkit.CustomLayoutMessagesActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.zhilye.ZhilyeRulesOfHouseActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.zhilye.ZhilyeReviewActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.filter.FilterCityFragment"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.filter.FilterTypeFragment"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.filter.FilterUdopstvaFragment"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.search.filter.SearchFilterFragment"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.profile.support.SupportProfileFragment"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".ui.main.messages.MessagesDetailActivity"
-            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.main.search.zhilye.ZhilyeDatesActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.main.search.MapActivity"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.profile.add_ad.MapSetPlacemarkActivity"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

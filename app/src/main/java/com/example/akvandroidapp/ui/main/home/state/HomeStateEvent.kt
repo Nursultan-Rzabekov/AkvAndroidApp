@@ -2,7 +2,7 @@ package com.example.akvandroidapp.ui.main.home.state
 
 
 sealed class HomeStateEvent {
-    class HomeInfoEvent: HomeStateEvent()
+    object HomeInfoEvent: HomeStateEvent()
     class HomeCancelReservationEvent(
         var reservation_id: Int = -1,
         var message:String = ""
@@ -10,5 +10,5 @@ sealed class HomeStateEvent {
     class HomePayReservationEvent(
         var reservation_id: Int = -1
     ): HomeStateEvent()
-    class None: HomeStateEvent()
+    object None: HomeStateEvent()
 }

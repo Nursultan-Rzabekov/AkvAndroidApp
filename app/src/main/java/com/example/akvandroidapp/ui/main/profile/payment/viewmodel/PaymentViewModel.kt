@@ -56,7 +56,7 @@ constructor(
     }
 
     fun handlePendingData(){
-        setStateEvent(PaymentStateEvent.None())
+        setStateEvent(PaymentStateEvent.None)
     }
 
     override fun onCleared() {

@@ -50,7 +50,7 @@ class ProfileAddPostFragment : BaseAddHouseFragment(), IbanRequestDialog.IbanReq
     }
 
     private fun subscribeObservers(){
-        sessionManager.addAdInfo.observe(this, Observer{ dataState ->
+        sessionManager.addAdInfo.observe(viewLifecycleOwner, Observer{ dataState ->
             Log.d(TAG, "PostCreateHouse : ${dataState}")
             publishNewBlog(dataState)
 

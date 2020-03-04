@@ -198,7 +198,7 @@ class FavoriteFragment : BaseFavoriteFragment(),
     override fun onItemSelected(position: Int, item: BlogPost, boolean: Boolean) {
         recyclerAdapter.removeAt(position)
         viewModel.setHouseId(item.id).let {
-            viewModel.setStateEvent(FavoriteStateEvent.DeleteFavoriteItemEvent())
+            viewModel.setStateEvent(FavoriteStateEvent.DeleteFavoriteItemEvent)
         }
     }
 

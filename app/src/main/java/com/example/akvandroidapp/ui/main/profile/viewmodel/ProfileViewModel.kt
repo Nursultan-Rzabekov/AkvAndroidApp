@@ -92,7 +92,7 @@ constructor(
     }
 
     fun handlePendingData(){
-        setStateEvent(ProfileStateEvent.None())
+        setStateEvent(ProfileStateEvent.None)
     }
 
     override fun onCleared() {

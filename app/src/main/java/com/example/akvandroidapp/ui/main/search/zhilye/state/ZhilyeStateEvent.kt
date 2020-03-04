@@ -3,12 +3,12 @@ package com.example.akvandroidapp.ui.main.search.zhilye.state
 
 sealed class ZhilyeStateEvent {
 
-    class BlogZhilyeEvent : ZhilyeStateEvent()
+    object BlogZhilyeEvent : ZhilyeStateEvent()
 
-    class DeleteFavoriteItemEvent: ZhilyeStateEvent()
+    object DeleteFavoriteItemEvent: ZhilyeStateEvent()
 
-    class CreateFavoriteItemEvent: ZhilyeStateEvent()
+    object CreateFavoriteItemEvent: ZhilyeStateEvent()
 
-    class None: ZhilyeStateEvent()
+    object None: ZhilyeStateEvent()
 
 }

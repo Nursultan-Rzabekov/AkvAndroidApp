@@ -1,4 +1,4 @@
-package com.example.akvandroidapp.ui.main.messages
+package com.example.akvandroidapp.ui.main.messages.chatkit
 
 import android.os.Bundle
 import android.view.LayoutInflater

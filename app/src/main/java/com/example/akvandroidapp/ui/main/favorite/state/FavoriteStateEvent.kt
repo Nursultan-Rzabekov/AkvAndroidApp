@@ -3,9 +3,9 @@ package com.example.akvandroidapp.ui.main.favorite.state
 
 sealed class FavoriteStateEvent {
 
-    class FavoriteMyListEvent: FavoriteStateEvent()
+    object FavoriteMyListEvent: FavoriteStateEvent()
 
-    class DeleteFavoriteItemEvent: FavoriteStateEvent()
+    object DeleteFavoriteItemEvent: FavoriteStateEvent()
 
-    class None: FavoriteStateEvent()
+    object None: FavoriteStateEvent()
 }

@@ -115,7 +115,7 @@ fun SearchViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
     resetPage()
-    setStateEvent(SearchStateEvent.BlogSearchEvent())
+    setStateEvent(SearchStateEvent.BlogSearchEvent)
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.blogFields.searchQuery}")
 }
 
@@ -123,7 +123,7 @@ fun PaymentViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
     resetPage()
-    setStateEvent(PaymentStateEvent.PaymentHistoryEvent())
+    setStateEvent(PaymentStateEvent.PaymentHistoryEvent)
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.paymentHistoryField.page}")
 }
 
@@ -131,7 +131,7 @@ fun FavoriteViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
     resetPage()
-    setStateEvent(FavoriteStateEvent.FavoriteMyListEvent())
+    setStateEvent(FavoriteStateEvent.FavoriteMyListEvent)
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.blogFields.blogList}")
 }
 
@@ -140,7 +140,7 @@ fun ZhilyeReviewViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
     resetPage()
-    setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent())
+    setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent)
     Log.e(TAG, "BlogViewModel: loadFirstPage: ${viewState.value!!.reviewsField.reviewList}")
 }
 
@@ -148,7 +148,7 @@ fun MyHouseViewModel.loadFirstPage() {
     setQueryInProgress(true)
     setQueryExhausted(false)
     resetPage()
-    setStateEvent(MyHouseStateStateEvent.MyHouseEvent())
+    setStateEvent(MyHouseStateStateEvent.MyHouseEvent)
 }
 
 fun MessagesViewModel.loadFirstPage() {
@@ -156,7 +156,7 @@ fun MessagesViewModel.loadFirstPage() {
     setQueryExhausted(false)
     resetPage()
     Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.myChatFields}")
-    setStateEvent(MessagesStateEvent.ChatInfoEvent())
+    setStateEvent(MessagesStateEvent.ChatInfoEvent)
 }
 
 fun RequestViewModel.loadOrderFirstPage() {
@@ -164,7 +164,7 @@ fun RequestViewModel.loadOrderFirstPage() {
     setOrderQueryExhausted(false)
     resetOrderPage()
     Log.e(TAG, "loadFirstPageChatOrder: ${viewState.value!!.ordersField}")
-    setStateEvent(RequestStateEvent.OrdersListStateEvent())
+    setStateEvent(RequestStateEvent.OrdersListStateEvent)
 }
 
 fun DetailsViewModel.loadFirstPage() {
@@ -172,7 +172,7 @@ fun DetailsViewModel.loadFirstPage() {
     setQueryExhausted(false)
     resetPage()
     Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.myChatFields}")
-    setStateEvent(DetailsStateEvent.ChatDetailEvent())
+    setStateEvent(DetailsStateEvent.ChatDetailEvent)
 }
 
 fun HomeViewModel.loadFirstPage(){
@@ -180,7 +180,7 @@ fun HomeViewModel.loadFirstPage(){
     setQueryExhausted(false)
     resetPage()
     Log.e(TAG, "loadFirstPageChat: ${viewState.value!!.homeReservationField}")
-    setStateEvent(HomeStateEvent.HomeInfoEvent())
+    setStateEvent(HomeStateEvent.HomeInfoEvent)
 }
 
 private fun SearchViewModel.incrementPageNumber(){
@@ -253,7 +253,7 @@ fun SearchViewModel.nextPage(){
         incrementPageNumber()
         setBlogListData(listOf())
         setQueryInProgress(true)
-        setStateEvent(SearchStateEvent.BlogSearchEvent())
+        setStateEvent(SearchStateEvent.BlogSearchEvent)
     }
 }
 
@@ -264,7 +264,7 @@ fun PaymentViewModel.nextPage(){
         incrementPageNumber()
         setPaymentHistoryData(listOf())
         setQueryInProgress(true)
-        setStateEvent(PaymentStateEvent.PaymentHistoryEvent())
+        setStateEvent(PaymentStateEvent.PaymentHistoryEvent)
     }
 }
 
@@ -275,7 +275,7 @@ fun FavoriteViewModel.nextPage(){
         incrementPageNumber()
         setBlogListData(listOf())
         setQueryInProgress(true)
-        setStateEvent(FavoriteStateEvent.FavoriteMyListEvent())
+        setStateEvent(FavoriteStateEvent.FavoriteMyListEvent)
     }
 }
 
@@ -286,7 +286,7 @@ fun DetailsViewModel.nextPage(){
         setBlogListData(listOf())
         incrementPageNumber()
         setQueryInProgress(true)
-        setStateEvent(DetailsStateEvent.ChatDetailEvent())
+        setStateEvent(DetailsStateEvent.ChatDetailEvent)
     }
 }
 
@@ -297,7 +297,7 @@ fun ZhilyeReviewViewModel.nextPage(){
         incrementPageNumber()
         setBlogListData(listOf())
         setQueryInProgress(true)
-        setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent())
+        setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent)
     }
 }
 
@@ -308,7 +308,7 @@ fun MessagesViewModel.nextPage(){
         incrementPageNumber()
         setBlogListData(listOf())
         setQueryInProgress(true)
-        setStateEvent(MessagesStateEvent.ChatInfoEvent())
+        setStateEvent(MessagesStateEvent.ChatInfoEvent)
     }
 }
 
@@ -319,7 +319,7 @@ fun RequestViewModel.nextOrderPage(){
         incrementOrderPageNumber()
         setOrderListData(listOf())
         setOrderQueryInProgress(true)
-        setStateEvent(RequestStateEvent.OrdersListStateEvent())
+        setStateEvent(RequestStateEvent.OrdersListStateEvent)
     }
 }
 
@@ -330,7 +330,7 @@ fun MyHouseViewModel.nextPage(){
         incrementPageNumber()
         setBlogListData(listOf())
         setQueryInProgress(true)
-        setStateEvent(MyHouseStateStateEvent.MyHouseEvent())
+        setStateEvent(MyHouseStateStateEvent.MyHouseEvent)
     }
 }
 
@@ -346,7 +346,7 @@ fun HomeViewModel.nextPage(){
         incrementPageNumber()
         setBlogListData(listOf())
         setQueryInProgress(true)
-        setStateEvent(HomeStateEvent.HomeInfoEvent())
+        setStateEvent(HomeStateEvent.HomeInfoEvent)
     }
 }
 

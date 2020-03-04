@@ -5,7 +5,7 @@ import okhttp3.MultipartBody
 
 
 sealed class ProfileStateEvent {
-    class GetProfileInfoEvent: ProfileStateEvent()
+    object GetProfileInfoEvent: ProfileStateEvent()
 
     data class EditProfileInfoEvent(
         var phone: String? = null,
@@ -19,5 +19,5 @@ sealed class ProfileStateEvent {
 
 
 
-    class None: ProfileStateEvent()
+    object None: ProfileStateEvent()
 }

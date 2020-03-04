@@ -44,7 +44,7 @@ class MyHouseMoneyProfileFragment : BaseMyHouseFragment() {
         fragment_my_adds_earnings_total_tv.text =
             ("+${Converters.pretifyPrice(getTotalIncome(earnings!!.toList()))}kzt")
 
-        earningRecycler.submitList(earnings!!.toList())
+        earningRecycler.submitList(earnings.toList())
         Log.e("MyHouseMoneyProfile", "$earnings")
     }
 

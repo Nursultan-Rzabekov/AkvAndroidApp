@@ -117,7 +117,7 @@ constructor(
     }
 
     fun handlePendingData(){
-        setStateEvent(AddAdStateEvent.None())
+        setStateEvent(AddAdStateEvent.None)
     }
 
     override fun onCleared() {
