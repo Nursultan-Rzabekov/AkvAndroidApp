@@ -1,7 +1,6 @@
 package com.example.akvandroidapp.ui.main.messages.state
 
 
-import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.entity.UserChatMessages
 
 

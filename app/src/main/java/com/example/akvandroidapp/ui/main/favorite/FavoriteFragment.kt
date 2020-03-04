@@ -3,7 +3,9 @@ package com.example.akvandroidapp.ui.main.favorite
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,20 +18,13 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.favorite.state.FavoriteStateEvent
 import com.example.akvandroidapp.ui.main.favorite.state.FavoriteViewState
-import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.search.viewmodel.setDeleteState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setHouseId
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
-import com.example.akvandroidapp.ui.main.search.viewmodel.setState
 import com.example.akvandroidapp.util.ErrorHandling
-
-import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import com.example.akvandroidapp.util.VerticalSpacingItemDecoration
 import handleIncomingBlogListData
-import kotlinx.android.synthetic.main.fragment_saved_pages.*
-import kotlinx.android.synthetic.main.fragment_saved_pages_empty.*
 import kotlinx.android.synthetic.main.fragment_saved_pages_filled.*
-import kotlinx.android.synthetic.main.fragment_saved_pages_filled.swipe_refresh
 import loadFirstPage
 import nextPage
 import java.util.*

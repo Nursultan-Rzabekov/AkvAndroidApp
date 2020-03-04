@@ -11,10 +11,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
-import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
-import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.AbsentLiveData
-import com.example.akvandroidapp.util.Constants
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import javax.inject.Inject

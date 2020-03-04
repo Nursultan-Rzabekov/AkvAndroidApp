@@ -2,7 +2,6 @@ package com.example.akvandroidapp.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
-import com.example.akvandroidapp.api.main.responses.UserConversationsImagesResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize

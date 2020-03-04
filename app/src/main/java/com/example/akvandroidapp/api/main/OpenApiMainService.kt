@@ -1,11 +1,10 @@
 package com.example.akvandroidapp.api.main
 
 import androidx.lifecycle.LiveData
-import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.bodies.CreateCancelReservationBody
+import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.util.GenericApiResponse
-import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*

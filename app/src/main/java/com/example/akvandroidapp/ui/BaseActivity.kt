@@ -3,8 +3,6 @@ package com.example.akvandroidapp.ui
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
@@ -16,7 +14,6 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.ArrayList
 import javax.inject.Inject
 
 abstract class BaseActivity: DaggerAppCompatActivity(),

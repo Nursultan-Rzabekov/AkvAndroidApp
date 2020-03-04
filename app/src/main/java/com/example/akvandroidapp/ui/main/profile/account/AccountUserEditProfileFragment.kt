@@ -13,11 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
@@ -26,28 +24,18 @@ import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
-import com.example.akvandroidapp.util.PasswordChecker
 import com.example.akvandroidapp.util.SuccessHandling
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import handleIncomingProfileInfo
 import handleIncomingProfileInfoUpdate
-import kotlinx.android.synthetic.main.back_button_layout.*
-import kotlinx.android.synthetic.main.fragment_add_ad_gallery.*
 import kotlinx.android.synthetic.main.fragment_profile_account_edit.*
-import kotlinx.android.synthetic.main.header_profile_account.*
 import kotlinx.android.synthetic.main.header_profile_account_edit.*
-import kotlinx.android.synthetic.main.sign_up_pass.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
 import javax.inject.Inject
 

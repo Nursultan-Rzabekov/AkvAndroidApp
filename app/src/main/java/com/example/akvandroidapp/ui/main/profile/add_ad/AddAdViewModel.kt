@@ -2,29 +2,20 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 
 
 import android.util.Log
-import androidx.lifecycle.*
-import com.example.akvandroidapp.entity.AuthToken
-import com.example.akvandroidapp.repository.auth.AuthRepository
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.akvandroidapp.repository.main.ProfileRepository
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
-import com.example.akvandroidapp.ui.auth.state.*
-import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
-import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
-import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
-import com.example.akvandroidapp.ui.main.profile.viewmodel.BlockedDates
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
-import okhttp3.Headers
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.HEAD
-import retrofit2.http.Header
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 

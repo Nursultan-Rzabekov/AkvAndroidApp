@@ -1,6 +1,5 @@
 package com.example.akvandroidapp.repository.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.api.main.OpenApiMainService

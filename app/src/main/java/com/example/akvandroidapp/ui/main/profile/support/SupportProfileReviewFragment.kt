@@ -8,22 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.DataState
-import com.example.akvandroidapp.ui.displayErrorDialog
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportStateEvent
 import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewState
 import com.example.akvandroidapp.util.ErrorHandling
-import com.example.akvandroidapp.util.PasswordChecker
 import handleFeedback
 import kotlinx.android.synthetic.main.fragment_support_notify_error.*
-import kotlinx.android.synthetic.main.header_support.*
-import kotlinx.android.synthetic.main.sign_up_pass.*
 import kotlinx.android.synthetic.main.support_main_review_layout.*
 
 

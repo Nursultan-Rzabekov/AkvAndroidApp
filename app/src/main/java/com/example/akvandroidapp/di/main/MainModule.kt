@@ -2,7 +2,6 @@ package com.example.akvandroidapp.di.main
 
 
 import com.example.akvandroidapp.api.main.OpenApiMainService
-import com.example.akvandroidapp.persistence.AppDatabase
 import com.example.akvandroidapp.persistence.BlogPostDao
 import com.example.akvandroidapp.repository.main.*
 import com.example.akvandroidapp.session.SessionManager

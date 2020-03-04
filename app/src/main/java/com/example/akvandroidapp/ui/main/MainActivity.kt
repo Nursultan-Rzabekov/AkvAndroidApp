@@ -1,10 +1,6 @@
 package com.example.akvandroidapp.ui.main
 
-import android.Manifest
-import android.app.Service
 import android.content.Intent
-import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -14,8 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.AuthToken
-import com.example.akvandroidapp.ui.*
+import com.example.akvandroidapp.ui.BaseLocationActivity
 import com.example.akvandroidapp.ui.auth.AuthActivity
 import com.example.akvandroidapp.ui.main.favorite.BaseFavoriteFragment
 import com.example.akvandroidapp.ui.main.favorite.FavoriteFragment
@@ -26,20 +21,12 @@ import com.example.akvandroidapp.ui.main.profile.AboutProfileFragment
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment
 import com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment
-import com.example.akvandroidapp.ui.main.profile.add_ad.*
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment
 import com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment
 import com.example.akvandroidapp.ui.main.search.ApartmentsFragment
 import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
-import com.example.akvandroidapp.ui.main.search.filter.FilterCityFragment
-import com.example.akvandroidapp.ui.main.search.filter.FilterTypeFragment
-import com.example.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment
-import com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity
-import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity
 import com.example.akvandroidapp.util.BottomNavController
-import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.setUpNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.explore_active.*

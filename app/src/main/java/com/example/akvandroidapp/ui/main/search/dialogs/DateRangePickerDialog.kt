@@ -1,21 +1,18 @@
 package com.example.akvandroidapp.ui.main.search.dialogs
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Window
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import com.example.akvandroidapp.R
 import com.google.android.material.button.MaterialButton
 import com.savvi.rangedatepicker.CalendarPickerView
 import kotlinx.android.synthetic.main.dialog_filter_dates.*
-import java.lang.IllegalStateException
 import java.util.*
 import kotlin.collections.ArrayList
 

@@ -1,14 +1,18 @@
 package com.example.akvandroidapp.ui.auth
 
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.repository.auth.AuthRepository
 import com.example.akvandroidapp.ui.BaseViewModel
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Loading
-import com.example.akvandroidapp.ui.auth.state.*
+import com.example.akvandroidapp.ui.auth.state.AuthStateEvent
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
+import com.example.akvandroidapp.ui.auth.state.AuthViewState
+import com.example.akvandroidapp.ui.auth.state.LoginFields
+import com.example.akvandroidapp.ui.auth.state.RegistrationFields
 import javax.inject.Inject
 
 

@@ -2,16 +2,13 @@ package com.example.akvandroidapp.ui.main.search
 
 
 
-import android.app.Dialog
-import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -23,32 +20,24 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
-import com.example.akvandroidapp.ui.auth.dialogs.CodeValidationDialog
 import com.example.akvandroidapp.ui.main.search.dialogs.DateRangePickerDialog
 import com.example.akvandroidapp.ui.main.search.dialogs.GuestCounterDialog
 import com.example.akvandroidapp.ui.main.search.state.SearchStateEvent
 import com.example.akvandroidapp.ui.main.search.state.SearchViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.*
-
 import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.TopSpacingItemDecoration
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
-import com.savvi.rangedatepicker.CalendarPickerView
 import handleIncomingBlogListData
-import kotlinx.android.synthetic.main.dialog_filter_dates.*
 import kotlinx.android.synthetic.main.fragment_explore.*
 import kotlinx.android.synthetic.main.fragment_explore_active.*
-import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlinx.android.synthetic.main.header_searcher_base_layout.*
 import kotlinx.android.synthetic.main.search_part_layout.*
 import loadFirstPage
 import nextPage
-import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 
 class SearchFragment :

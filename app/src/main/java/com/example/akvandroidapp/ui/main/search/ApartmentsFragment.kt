@@ -7,18 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
-
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.util.PasswordChecker
 import kotlinx.android.synthetic.main.header_searcher_base_layout.*
 import kotlinx.android.synthetic.main.search_part_layout.*
-import kotlinx.android.synthetic.main.sign_up_pass.*
 
 
 class ApartmentsFragment : BaseSearchFragment() {

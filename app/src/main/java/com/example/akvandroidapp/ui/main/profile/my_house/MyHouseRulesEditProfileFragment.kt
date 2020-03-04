@@ -14,12 +14,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdCheckboxAdapter
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_rules.*
 import javax.inject.Inject
 

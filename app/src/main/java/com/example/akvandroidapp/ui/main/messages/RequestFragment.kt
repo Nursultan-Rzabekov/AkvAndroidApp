@@ -1,10 +1,11 @@
 package com.example.akvandroidapp.ui.main.messages
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +16,7 @@ import com.example.akvandroidapp.entity.HomeReservation
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.main.messages.adapter.RequestListAdapter
-import com.example.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity
 import com.example.akvandroidapp.ui.main.messages.dialogs.RejectReservationDialog
-import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.messages.state.RequestStateEvent
 import com.example.akvandroidapp.ui.main.messages.state.RequestViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setAcceptState
@@ -25,7 +24,6 @@ import com.example.akvandroidapp.ui.main.search.viewmodel.setOrderQueryExhausted
 import com.example.akvandroidapp.ui.main.search.viewmodel.setRejectState
 import com.example.akvandroidapp.util.AllSidesSpacingItemDecoration
 import com.example.akvandroidapp.util.ErrorHandling
-import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingOrdersListData
 import kotlinx.android.synthetic.main.fragment_requests.*
 import loadOrderFirstPage

@@ -8,10 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -35,7 +33,6 @@ import com.savvi.rangedatepicker.CalendarPickerView
 import handleIncomingZhilyeData
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed.*
 import kotlinx.android.synthetic.main.fragment_my_adds_detailed_layout.*
-import kotlinx.android.synthetic.main.my_adds_recycler_view_item.view.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList

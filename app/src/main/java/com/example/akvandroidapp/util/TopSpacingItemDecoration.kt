@@ -1,8 +1,8 @@
 package com.example.akvandroidapp.util
 
-import androidx.recyclerview.widget.RecyclerView
 import android.graphics.Rect
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 
 class TopSpacingItemDecoration(private val padding: Int) : RecyclerView.ItemDecoration() {

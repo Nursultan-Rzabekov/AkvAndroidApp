@@ -7,14 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.util.PasswordChecker
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_about_us.*
-import kotlinx.android.synthetic.main.sign_up_pass.*
 
 
 class AboutProfileFragment : BaseProfileFragment() {

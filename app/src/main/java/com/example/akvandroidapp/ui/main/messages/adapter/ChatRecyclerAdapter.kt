@@ -10,7 +10,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.ui.main.messages.models.*
+import com.example.akvandroidapp.ui.main.messages.models.MessageDocument
+import com.example.akvandroidapp.ui.main.messages.models.MessagePhoto
+import com.example.akvandroidapp.ui.main.messages.models.MessageText
+import com.example.akvandroidapp.ui.main.messages.models.mMessage
 import com.example.akvandroidapp.util.Constants
 import kotlinx.android.synthetic.main.message_doc_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.message_photo_recycler_view_item.view.*

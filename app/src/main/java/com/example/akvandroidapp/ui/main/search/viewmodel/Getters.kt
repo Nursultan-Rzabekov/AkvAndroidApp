@@ -3,7 +3,6 @@ package com.example.akvandroidapp.ui.main.search.viewmodel
 import android.net.Uri
 import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.UserConversationMessages
-import com.example.akvandroidapp.entity.UserConversationsResponse
 import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
@@ -11,8 +10,8 @@ import com.example.akvandroidapp.ui.main.messages.viewmodel.MessagesViewModel
 import com.example.akvandroidapp.ui.main.messages.viewmodel.RequestViewModel
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewModel
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewModel
-import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeReviewViewModel
 import okhttp3.MultipartBody
 

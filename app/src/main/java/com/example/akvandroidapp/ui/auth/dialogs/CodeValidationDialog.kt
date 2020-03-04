@@ -8,13 +8,10 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.view.Window
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import com.broooapps.otpedittext2.OtpEditText
 import com.example.akvandroidapp.R
-import com.google.android.material.button.MaterialButton
 
 class CodeValidationDialog(
     context: Context,

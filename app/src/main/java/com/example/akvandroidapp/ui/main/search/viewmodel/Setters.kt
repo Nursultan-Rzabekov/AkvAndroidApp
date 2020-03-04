@@ -4,7 +4,6 @@ import android.net.Uri
 import android.util.Log
 import com.example.akvandroidapp.entity.*
 import com.example.akvandroidapp.ui.auth.AuthViewModel
-import com.example.akvandroidapp.ui.auth.state.AuthViewStateResponse
 import com.example.akvandroidapp.ui.main.favorite.viewmodel.FavoriteViewModel
 import com.example.akvandroidapp.ui.main.home.viewmodel.HomeViewModel
 import com.example.akvandroidapp.ui.main.messages.detailState.DetailsViewModel
@@ -16,9 +15,9 @@ import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewMo
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.ui.main.profile.support.viewmodel.SupportViewModel
 import com.example.akvandroidapp.ui.main.profile.viewmodel.ProfileViewModel
-import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.state.ZhilyeViewState
+import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeBookViewModel
 import com.example.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeReviewViewModel
 import com.example.akvandroidapp.util.DateUtils
 import java.util.*

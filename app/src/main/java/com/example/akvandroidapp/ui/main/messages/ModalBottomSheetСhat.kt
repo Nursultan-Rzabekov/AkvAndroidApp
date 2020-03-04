@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import com.example.akvandroidapp.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.chat_bottom_sheet_dialog.view.*
-import kotlinx.android.synthetic.main.support_bottom_sheet_dialog.view.*
-import kotlinx.android.synthetic.main.support_bottom_sheet_dialog.view.support_bottom_sheet_dialog_text_us_btn
 
 
 class ModalBottomSheetChat(

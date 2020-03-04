@@ -11,7 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.util.Constants
-import java.util.ArrayList
+import java.util.*
 
 abstract class BaseLocationActivity: BaseActivity(),LocationListener,
     DataStateChangeListener,

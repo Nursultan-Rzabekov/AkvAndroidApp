@@ -8,12 +8,9 @@ import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.HomeReservation
-import com.example.akvandroidapp.util.DateUtils
 import com.example.akvandroidapp.util.GenericViewHolder
 import kotlinx.android.synthetic.main.requests_recycler_view_item.view.*
-import kotlinx.android.synthetic.main.search_result_recycler_item.view.*
 
 class RequestListAdapter(
     private val requestManager: RequestManager,

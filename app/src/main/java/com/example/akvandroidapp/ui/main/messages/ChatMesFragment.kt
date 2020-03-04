@@ -21,7 +21,6 @@ import com.example.akvandroidapp.ui.main.messages.state.MessagesViewState
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.AllSidesSpacingItemDecoration
 import com.example.akvandroidapp.util.ErrorHandling
-import com.example.akvandroidapp.util.TopSpacingItemDecoration
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.fragment_chats.*
 import loadFirstPage

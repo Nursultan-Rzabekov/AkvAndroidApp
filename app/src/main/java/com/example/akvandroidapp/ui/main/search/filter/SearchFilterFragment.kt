@@ -4,30 +4,18 @@ package com.example.akvandroidapp.ui.main.search.filter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.appyvet.materialrangebar.RangeBar
 import com.appyvet.materialrangebar.RangeBar.OnRangeBarChangeListener
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.persistence.BlogQueryUtils
 import com.example.akvandroidapp.session.FilterUpdateData
-import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseActivity
-import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
-import com.example.akvandroidapp.ui.main.search.viewmodel.*
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.Converters
 import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlinx.android.synthetic.main.fragment_filter_layout.*
-import kotlinx.android.synthetic.main.header_filter.*
-import kotlinx.android.synthetic.main.header_filter.header_filter_drop_tv
-import loadFirstPage
 import java.util.*
-import javax.inject.Inject
 
 
 class SearchFilterFragment : BaseActivity() {

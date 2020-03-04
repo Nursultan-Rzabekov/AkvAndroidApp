@@ -1,30 +1,15 @@
 package com.example.akvandroidapp.ui.main.search.filter
 
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.RadioGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.BaseActivity
-import com.example.akvandroidapp.ui.main.search.BaseSearchFragment
 import com.example.akvandroidapp.util.Constants
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_type.*
 import kotlinx.android.synthetic.main.fragment_type_layout.*
-import java.util.*
-import javax.inject.Inject
 
 
 class FilterTypeFragment : BaseActivity(), FilterTypeAdapter.FilterTypeInteraction {

@@ -2,7 +2,9 @@ package com.example.akvandroidapp.ui.main.messages
 
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.ui.main.messages.adapter.MyPagerChatAdapter
 import kotlinx.android.synthetic.main.fragment_chat_main.*

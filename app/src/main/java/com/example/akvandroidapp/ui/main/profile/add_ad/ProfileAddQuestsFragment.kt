@@ -2,17 +2,14 @@ package com.example.akvandroidapp.ui.main.profile.add_ad
 
 
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
-import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
-import kotlinx.android.synthetic.main.activity_add_ad.*
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_add_ad_guests_count.*
 import javax.inject.Inject
 

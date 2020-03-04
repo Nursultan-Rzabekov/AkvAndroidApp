@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.example.akvandroidapp.R
-import com.example.akvandroidapp.entity.BlogPost
 import com.example.akvandroidapp.entity.PaymentHistoryItem
 import com.example.akvandroidapp.util.Converters
 import kotlinx.android.synthetic.main.payments_history_recycler_view_item.view.*

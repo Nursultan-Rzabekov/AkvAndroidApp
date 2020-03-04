@@ -15,7 +15,6 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.search.filter.FilterCity
 import com.example.akvandroidapp.ui.main.search.filter.FilterCityAdapter
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_region.*
 import kotlinx.android.synthetic.main.fragment_region_layout.*
 import javax.inject.Inject

@@ -14,7 +14,6 @@ import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.util.Constants
-import kotlinx.android.synthetic.main.back_button_layout.*
 import kotlinx.android.synthetic.main.fragment_geolocation.*
 import kotlinx.android.synthetic.main.fragment_geolocation_layout.*
 import javax.inject.Inject

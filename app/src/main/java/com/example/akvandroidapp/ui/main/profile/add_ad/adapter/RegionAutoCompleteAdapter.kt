@@ -10,8 +10,6 @@ import android.widget.Filterable
 import android.widget.TextView
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.util.ReqionList
-import java.util.*
-import kotlin.collections.ArrayList
 
 class RegionAutoCompleteAdapter(
     val mContext: Context,

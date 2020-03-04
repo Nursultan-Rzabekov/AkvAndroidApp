@@ -2,7 +2,6 @@ package com.example.akvandroidapp.ui.main.profile.state
 
 import android.net.Uri
 import android.os.Parcelable
-import com.example.akvandroidapp.entity.BlogPost
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
