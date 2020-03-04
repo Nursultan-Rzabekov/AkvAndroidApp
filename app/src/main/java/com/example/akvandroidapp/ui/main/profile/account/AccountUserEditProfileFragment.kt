@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.*
+import com.example.akvandroidapp.ui.auth.dialogs.CodeValidationDialog
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
@@ -40,7 +41,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class AccountUserEditProfileFragment : BaseProfileFragment() {
+class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDialog.CodeValidationDialogInteraction {
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -102,6 +103,25 @@ class AccountUserEditProfileFragment : BaseProfileFragment() {
             subscribeObservers()
             editInfo()
         }
+    }
+
+    private fun showValidCodeDialog(){
+        activity?.let {
+            val codevalidationDialog = CodeValidationDialog(it, this)
+            codevalidationDialog.show()
+        }
+    }
+
+    override fun onCloseBtnListener() {
+
+    }
+
+    override fun onSendMoreBtnListener() {
+
+    }
+
+    override fun onValidateBtnListener(code: String): Boolean {
+        return false
     }
 
     private fun attachUserAccounts(){
