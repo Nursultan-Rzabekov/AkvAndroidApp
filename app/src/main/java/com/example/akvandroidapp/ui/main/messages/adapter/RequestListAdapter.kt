@@ -30,12 +30,13 @@ class RequestListAdapter(
         0,
         0,
         "",
-        false,
+        "",
         0,
         0,
         "",
         "",
-        0
+        0,
+        ""
     )
 
     private val NO_RESULTS_BLOG_MARKER = HomeReservation(
@@ -45,12 +46,13 @@ class RequestListAdapter(
         0,
         0,
         "",
-        false,
+        "",
         0,
         0,
         "",
         "",
-        0
+        0,
+        ""
     )
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HomeReservation>() {
@@ -221,26 +223,26 @@ class RequestListAdapter(
 
             title.text = ("@${item.user_id} хочет быть вашем гостем в ${item.house_name}")
 
-            item.accepted_house?.let {
-                if(it){
-                    cancel.visibility = View.GONE
-                    accept.visibility = View.GONE
-                    canceled.visibility = View.GONE
-                    accepted.visibility = View.VISIBLE
-                }
-                else if(!it){
-                    cancel.visibility = View.GONE
-                    accept.visibility = View.GONE
-                    accepted.visibility = View.GONE
-                    canceled.visibility = View.VISIBLE
-                }
-                else{
-                    cancel.visibility = View.VISIBLE
-                    accept.visibility = View.VISIBLE
-                    canceled.visibility = View.GONE
-                    accepted.visibility = View.GONE
-                }
-            }
+//            item.accepted_house?.let {
+//                if(it){
+//                    cancel.visibility = View.GONE
+//                    accept.visibility = View.GONE
+//                    canceled.visibility = View.GONE
+//                    accepted.visibility = View.VISIBLE
+//                }
+//                else if(!it){
+//                    cancel.visibility = View.GONE
+//                    accept.visibility = View.GONE
+//                    accepted.visibility = View.GONE
+//                    canceled.visibility = View.VISIBLE
+//                }
+//                else{
+//                    cancel.visibility = View.VISIBLE
+//                    accept.visibility = View.VISIBLE
+//                    canceled.visibility = View.GONE
+//                    accepted.visibility = View.GONE
+//                }
+//            }
 
             if (item.house_image != null)
                 requestManager

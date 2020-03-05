@@ -27,11 +27,11 @@ data class HomeReservation (
     @ColumnInfo(name = "status")
     var status: Int? = null,
 
+    @ColumnInfo(name = "status_name")
+    var status_name: String? = null,
+
     @ColumnInfo(name = "created_at")
     var created_at: String? = null,
-
-    @ColumnInfo(name = "accepted_house")
-    var accepted_house: Boolean? = null,
 
     @ColumnInfo(name = "user_id")
     var user_id: Int? = null,
@@ -46,6 +46,9 @@ data class HomeReservation (
     var house_image: String? = null,
 
     @ColumnInfo(name = "owner_id")
-    var owner_id: Int? = null
+    var owner_id: Int? = null,
+
+    @ColumnInfo(name = "message")
+    var message: String? = null
 
 ): Parcelable

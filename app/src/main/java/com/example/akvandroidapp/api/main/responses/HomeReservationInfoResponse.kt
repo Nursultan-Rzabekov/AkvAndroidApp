@@ -29,13 +29,13 @@ class HomeReservationInfoResponse(
     @Expose
     var status: Int,
 
+    @SerializedName("status_name")
+    @Expose
+    var status_name: String,
+
     @SerializedName("created_at")
     @Expose
     var created_at: String,
-
-    @SerializedName("accepted_house")
-    @Expose
-    var accepted_house: Boolean? = null,
 
     @SerializedName("user")
     @Expose

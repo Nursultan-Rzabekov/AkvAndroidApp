@@ -145,7 +145,7 @@ interface OpenApiMainService {
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<ReviewsListResponse>>
 
-    @GET("orders/")
+    @GET("requests/")
     fun getOrders(
         @Header("Authorization")  authorization: String,
         @Query("page") page: Int

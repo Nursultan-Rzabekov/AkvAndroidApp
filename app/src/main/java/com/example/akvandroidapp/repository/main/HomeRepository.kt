@@ -63,13 +63,14 @@ constructor(
                             reservation.check_out,
                             reservation.guests,
                             reservation.status,
+                            reservation.status_name,
                             reservation.created_at,
-                            reservation.accepted_house,
                             reservation.user.id,
                             reservation.house.id,
                             reservation.house.name,
                             "${Constants.BASE_URL_IMAGE}${reservation.house.photos?.first()?.image}",
-                            reservation.owner.id
+                            reservation.owner.id,
+                            reservation.message
                         )
                     )
                 }

@@ -26,6 +26,13 @@ class Constants {
         const val FILTER_MAX_ROOMS = 15
         const val FILTER_MAX_BEDS = 30
 
+        const val RESERVATION_REQUEST = 0
+        const val RESERVATION_APPROVED = 1
+        const val RESERVATION_REJECTED = 2
+        const val RESERVATION_PAID = 3
+        const val RESERVATION_CANCELED = 4
+        const val RESERVATION_EXPIRED = 5
+
         const val NETWORK_TIMEOUT = 60000L
         const val TESTING_NETWORK_DELAY = 0L // fake network delay for testing
         const val TESTING_CACHE_DELAY = 0L // fake cache delay for testing

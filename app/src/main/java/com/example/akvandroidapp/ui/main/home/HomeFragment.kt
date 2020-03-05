@@ -157,24 +157,12 @@ class HomeFragment : BaseHomeFragment(),
 
     override fun onItemSelected(position: Int, item: HomeReservation) {
         item.status?.let {
-            val fromState = getHouseState(item.accepted_house, it)
             val bundle = bundleOf(
                 "houseId" to item.house_id,
-                "fromState" to fromState,
+                "fromState" to item.status,
                 "firstImage" to item.house_image
             )
             findNavController().navigate(R.id.action_homeFragment_to_zhilyeFragment, bundle)
-        }
-    }
-
-    private fun getHouseState(state: Boolean?, status: Int): Int{
-        return when(state){
-            true -> {
-                if (status > 0)
-                    ZhilyeActivity.NO_BOTTOM_BAR
-                else ZhilyeActivity.CANCEL_BOTTOM_BAR
-            }
-            else -> ZhilyeActivity.NO_BOTTOM_BAR
         }
     }
 

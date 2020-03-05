@@ -292,13 +292,14 @@ constructor(
                             order.check_out,
                             order.guests,
                             order.status,
+                            order.status_name,
                             order.created_at,
-                            order.accepted_house,
                             order.user.id,
                             order.house.id,
                             order.house.name,
                             "${Constants.BASE_URL_IMAGE}${order.house.photos?.first()?.image}",
-                            order.owner.id
+                            order.owner.id,
+                            order.message
                         )
                     )
                 }
