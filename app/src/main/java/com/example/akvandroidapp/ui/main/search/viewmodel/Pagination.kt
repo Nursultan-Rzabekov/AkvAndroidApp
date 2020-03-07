@@ -486,5 +486,7 @@ fun ProfileViewModel.handleIncomingProfileInfo(viewState: ProfileViewState){
 
 fun ProfileViewModel.handleIncomingProfileInfoUpdate(viewState: ProfileViewState){
     setProfileInfoUpdate(viewState.profileInfoUpdateFields)
+    setProfileInfoValidation(viewState.isPhoneNumberValid)
+    setProfileInfoCodeSend(viewState.isCodeSend)
 }
 

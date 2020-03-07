@@ -1,6 +1,7 @@
 package com.example.akvandroidapp.api.main
 
 import androidx.lifecycle.LiveData
+import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.example.akvandroidapp.api.main.bodies.CreateCancelReservationBody
 import com.example.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.example.akvandroidapp.api.main.responses.*
@@ -50,7 +51,7 @@ interface OpenApiMainService {
     ): LiveData<GenericApiResponse<BlogListFavoritesResponse>>
 
     @DELETE("houses/{house_id}/cancel_favourite/")
-    fun  deleteFavoritePost(
+    fun deleteFavoritePost(
         @Header("Authorization") authorization: String,
         @Path("house_id") house_id: Int
     ): LiveData<GenericApiResponse<GenericResponse>>
@@ -66,7 +67,6 @@ interface OpenApiMainService {
     fun getProfileInfo(
         @Header("Authorization") authorization: String
     ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
-
 
     @Multipart
     @PATCH("auth/users/me/")
@@ -198,6 +198,19 @@ interface OpenApiMainService {
         @Header("Authorization") authorization: String,
         @Part("message") message: RequestBody
     ): LiveData<GenericApiResponse<FeedbackSendResponse>>
+
+    @POST("auth/send_code")
+    @FormUrlEncoded
+    fun sendCode(
+        @Field("phone") phone: String
+    ): LiveData<GenericApiResponse<CodeResponse>>
+
+    @POST("auth/verify")
+    @FormUrlEncoded
+    fun verifyCode(
+        @Field("phone") phone: String,
+        @Field("code") code: String
+    ): LiveData<GenericApiResponse<CodeResponse>>
 }
 
 

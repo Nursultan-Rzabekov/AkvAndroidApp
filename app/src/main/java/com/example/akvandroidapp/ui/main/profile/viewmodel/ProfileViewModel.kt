@@ -61,6 +61,19 @@ constructor(
                 }?: AbsentLiveData.create()
             }
 
+            is ProfileStateEvent.SendCodeEvent -> {
+                return profileRepository.sendCode(
+                    stateEvent.phone)
+
+            }
+
+            is ProfileStateEvent.VerifyCodeEvent -> {
+                return profileRepository.verifyCode(
+                    stateEvent.phone,
+                    stateEvent.code
+                )
+            }
+
             is ProfileStateEvent.None -> {
                 return liveData {
                     emit(

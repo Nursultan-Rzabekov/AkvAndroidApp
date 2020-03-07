@@ -8,7 +8,9 @@ import kotlinx.android.parcel.Parcelize
 data class ProfileViewState (
     var profileInfoFields: ProfileInfoFields = ProfileInfoFields(),
     var profileInfoUpdateFields: ProfileInfoUpdateFields = ProfileInfoUpdateFields(),
-    var blogFields: NewBlogFields = NewBlogFields()
+    var blogFields: NewBlogFields = NewBlogFields(),
+    var isPhoneNumberValid: Boolean = false,
+    var isCodeSend: Boolean = false
 
 ) : Parcelable
 {

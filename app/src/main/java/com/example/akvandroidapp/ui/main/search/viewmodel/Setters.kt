@@ -192,6 +192,18 @@ fun ProfileViewModel.setProfileInfoUpdate(profileInfoUpdateFields: ProfileViewSt
     setViewState(update)
 }
 
+fun ProfileViewModel.setProfileInfoValidation(isValid: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.isPhoneNumberValid = isValid
+    setViewState(update)
+}
+
+fun ProfileViewModel.setProfileInfoCodeSend(isSend: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.isCodeSend = isSend
+    setViewState(update)
+}
+
 fun SearchViewModel.setBlogListData(blogList: List<BlogPost>){
     val update = getCurrentViewStateOrNew()
     update.blogFields.blogList = blogList

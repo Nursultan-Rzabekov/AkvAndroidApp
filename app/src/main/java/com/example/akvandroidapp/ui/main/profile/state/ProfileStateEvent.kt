@@ -17,7 +17,14 @@ sealed class ProfileStateEvent {
         val image: MultipartBody.Part? = null
     ): ProfileStateEvent()
 
+    data class SendCodeEvent(
+        val phone: String
+    ): ProfileStateEvent()
 
+    data class VerifyCodeEvent(
+        val phone: String,
+        val code:String
+    ):ProfileStateEvent()
 
     object None: ProfileStateEvent()
 }

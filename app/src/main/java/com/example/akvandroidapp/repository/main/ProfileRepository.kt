@@ -3,6 +3,7 @@ package com.example.akvandroidapp.repository.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.entity.*
@@ -13,6 +14,7 @@ import com.example.akvandroidapp.session.SessionManager
 import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
+import com.example.akvandroidapp.ui.auth.state.VerifyCodeFields
 import com.example.akvandroidapp.ui.main.profile.add_ad.AddAdViewState
 import com.example.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.example.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewState
@@ -900,6 +902,144 @@ constructor(
             }
 
         }.asLiveData()
+    }
+
+    fun sendCode(phone: String): LiveData<DataState<ProfileViewState>>{
+        return object: NetworkBoundResource<CodeResponse, Any, ProfileViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            true,
+            false
+        ){
+
+            // Ignore
+            override fun loadFromCache(): LiveData<ProfileViewState> {
+                return AbsentLiveData.create()
+            }
+
+            // Ignore
+            override suspend fun updateLocalDb(cacheObject: Any?) {
+
+            }
+
+            // not used in this case
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
+                Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
+
+                if(!response.body.response){
+                    return onErrorReturn(response.body.message, true, false)
+                }
+
+                onCompleteJob(
+                    DataState.data(
+                        data = ProfileViewState(
+                            isCodeSend = response.body.response
+                        )
+                    )
+                )
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
+                return openApiMainService.
+                    sendCode(phone)
+            }
+
+            override fun setJob(job: Job) {
+                addJob("attemptSendCode", job)
+            }
+        }.asLiveData()
+    }
+
+    fun verifyCode(phone: String, code:String): LiveData<DataState<ProfileViewState>>{
+
+        val verifyCodeFieldErrors = VerifyCodeFields(phone,code).isValidForSendCode()
+        if(!verifyCodeFieldErrors.equals(VerifyCodeFields.VerifyCodeError.none())){
+            return returnErrorResponse(verifyCodeFieldErrors, ResponseType.Dialog())
+        }
+
+        return object: NetworkBoundResource<CodeResponse, Any, ProfileViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            true,
+            false
+        ){
+
+            // Ignore
+            override fun loadFromCache(): LiveData<ProfileViewState> {
+                return AbsentLiveData.create()
+            }
+
+            // Ignore
+            override suspend fun updateLocalDb(cacheObject: Any?) {
+
+            }
+
+            // not used in this case
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
+
+                Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
+
+                if(!response.body.response){
+                    return onErrorReturn(response.body.message, true, false)
+                }
+
+//                val result = authTokenDao.insert(
+//                    AuthToken(
+//                        response.body.user.id,
+//                        response.body.token
+//                    )
+//                )
+
+//                if(result < 0){
+//                    return onCompleteJob(DataState.error(
+//                        Response(ErrorHandling.ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog()))
+//                    )
+//                }
+
+                //sessionManager.login(AuthToken(response.body.user.id, response.body.token))
+
+                onCompleteJob(
+                    DataState.data(
+                        data = ProfileViewState(
+                            isPhoneNumberValid = response.body.response
+                        )
+                    )
+                )
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
+                return openApiMainService.verifyCode(phone,code)
+            }
+
+            override fun setJob(job: Job) {
+                addJob("attemptSendCode", job)
+            }
+        }.asLiveData()
+    }
+
+    private fun returnErrorResponse(errorMessage: String, responseType: ResponseType): LiveData<DataState<ProfileViewState>>{
+        Log.d(TAG, "returnErrorResponse: ${errorMessage}")
+
+        return object: LiveData<DataState<ProfileViewState>>(){
+            override fun onActive() {
+                super.onActive()
+                value = DataState.error(
+                    Response(
+                        errorMessage,
+                        responseType
+                    )
+                )
+            }
+        }
     }
 }
 

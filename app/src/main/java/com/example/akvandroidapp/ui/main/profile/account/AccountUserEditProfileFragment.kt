@@ -23,6 +23,9 @@ import com.example.akvandroidapp.ui.auth.dialogs.CodeValidationDialog
 import com.example.akvandroidapp.ui.main.profile.BaseProfileFragment
 import com.example.akvandroidapp.ui.main.profile.state.ProfileStateEvent
 import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
+import com.example.akvandroidapp.ui.main.search.viewmodel.setProfileInfoCodeSend
+import com.example.akvandroidapp.ui.main.search.viewmodel.setProfileInfoUpdate
+import com.example.akvandroidapp.ui.main.search.viewmodel.setProfileInfoValidation
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.ErrorHandling
 import com.example.akvandroidapp.util.SuccessHandling
@@ -57,7 +60,6 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
         return inflater.inflate(R.layout.fragment_profile_account_edit_layout, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
@@ -67,6 +69,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
 
         attachUserAccounts()
         setupSuffixSample()
+        subscribeObservers()
 
         header_profile_account_edit_cancel_tv.setOnClickListener {
             findNavController().navigateUp()
@@ -100,9 +103,25 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
         if(phoneTotal.trim().length != 12)
             showErrorDialog(getString(R.string.invalid_number))
         else {
-            subscribeObservers()
-            editInfo()
+            sendValidationCode(phoneTotal)
         }
+    }
+
+    private fun sendValidationCode(phonenumber: String){
+        viewModel.setStateEvent(
+            ProfileStateEvent.SendCodeEvent(
+                phone = phonenumber
+            )
+        )
+    }
+
+    private fun validateIncomingCode(code: String){
+        viewModel.setStateEvent(
+            ProfileStateEvent.VerifyCodeEvent(
+                phone = "+7".plus(phoneNumber),
+                code = code
+            )
+        )
     }
 
     private fun showValidCodeDialog(){
@@ -113,15 +132,16 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
     }
 
     override fun onCloseBtnListener() {
-
+        clearStateCache()
     }
 
     override fun onSendMoreBtnListener() {
-
+        sendValidationCode("+7".plus(phoneNumber))
     }
 
     override fun onValidateBtnListener(code: String): Boolean {
-        return false
+        validateIncomingCode(code)
+        return true
     }
 
     private fun attachUserAccounts(){
@@ -238,7 +258,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
     }
 
 
-    private fun editInfo(){
+    private fun performProfileUpdate(){
         var multipartBody:MultipartBody.Part? = null
         image1?.path?.let {
             val imageFile = File(it)
@@ -260,7 +280,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
 
         viewModel.setStateEvent(
             ProfileStateEvent.EditProfileInfoEvent(
-                phone = fragment_profile_account_edit_phonenumber_tv.text.toString(),
+                phone = "+7".plus(phoneNumber),
                 gender = getGender(),
                 email = fragment_profile_account_edit_email_tv.text.toString(),
                 birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
@@ -286,20 +306,29 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
         })
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
-            viewState.profileInfoUpdateFields.let{ newBlogFields ->
+            if (viewState.isCodeSend) {
+                showValidCodeDialog()
+                viewModel.setProfileInfoCodeSend(false)
+            }
+            if (viewState.isPhoneNumberValid) {
+                performProfileUpdate()
+                viewModel.setProfileInfoValidation(false)
+            }
+            viewState.profileInfoUpdateFields.let{ profile ->
                 Log.d("qwe","qwerty + ${imageUrl}")
-                Log.d("qwe","qwerty image + ${newBlogFields.newImageUri}")
+                Log.d("qwe","qwerty image + ${profile.newImageUri}")
 
-                newBlogFields.gender?.let {gender ->
-                        sessionManager.setProfileInfo(
-                            nickname = newBlogFields.first_name.toString(),
-                            birthdate = newBlogFields.birth_day.toString(),
-                            gender = gender,
-                            phonenumber = newBlogFields.phone.toString(),
-                            email = newBlogFields.email.toString(),
-                            imageBackend = if(newBlogFields.newImageUri == null) imageUrl else newBlogFields.newImageUri
-                        )
-                        findNavController().navigateUp()
+                profile.gender?.let {gender ->
+                    sessionManager.setProfileInfo(
+                        nickname = profile.first_name.toString(),
+                        birthdate = profile.birth_day.toString(),
+                        gender = gender,
+                        phonenumber = profile.phone.toString(),
+                        email = profile.email.toString(),
+                        imageBackend = if(profile.newImageUri == null) imageUrl else profile.newImageUri
+                    )
+                    viewModel.setProfileInfoUpdate(ProfileViewState.ProfileInfoUpdateFields())
+                    findNavController().navigateUp()
                 }
             }
         })
@@ -341,5 +370,11 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
         extractedValue: String
     ) {
         phoneNumber  = extractedValue
+    }
+
+    private fun clearStateCache(){
+        viewModel.setProfileInfoCodeSend(false)
+        viewModel.setProfileInfoValidation(false)
+        viewModel.setProfileInfoUpdate(ProfileViewState.ProfileInfoUpdateFields())
     }
 }
