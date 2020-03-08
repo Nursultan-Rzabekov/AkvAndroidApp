@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
+import com.example.akvandroidapp.ui.auth.state.AuthStateEvent
 import kotlinx.android.synthetic.main.login_gmail.*
-
 
 class LoginGmailFragment : BaseAuthFragment() {
 
@@ -41,9 +41,9 @@ class LoginGmailFragment : BaseAuthFragment() {
         if(gmail.trim().equals("")) login_gmail_email_l_et.error = getString(R.string.invalid)
         else{
             login_gmail_email_l_et.isErrorEnabled = false
-            val bundle = bundleOf("gmail" to gmail)
-            findNavController().navigate(R.id.action_loginGmailFragment_to_ResetCodeFragment,bundle)
+            viewModel.setStateEvent(AuthStateEvent.ForgetCodeEvent(gmail))
+            //            val bundle = bundleOf("gmail" to gmail)
+//            findNavController().navigate(R.id.action_loginGmailFragment_to_ResetCodeFragment,bundle)
         }
     }
-
 }

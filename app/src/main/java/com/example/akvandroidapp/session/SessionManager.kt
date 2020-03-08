@@ -366,7 +366,8 @@ constructor(
 
     //Profile
 
-    fun setProfileInfo(nickname: String, birthdate: String, gender: Int, phonenumber: String, email: String, imageBackend:String? = null){
+    fun setProfileInfo(nickname: String, birthdate: String, gender: Int, phonenumber: String, email: String, imageBackend:String? = null,
+                       iban: String? = null){
         GlobalScope.launch(Main) {
             _profileInfo.value?.image = null
             _profileInfo.value?.nickname = nickname
@@ -375,6 +376,7 @@ constructor(
             _profileInfo.value?.phonenumber = phonenumber
             _profileInfo.value?.email = email
             _profileInfo.value?.imageBackend = imageBackend
+            _profileInfo.value?.iban = iban
         }
         Log.e("PROFILE_INFO", "${_profileInfo.value}")
     }

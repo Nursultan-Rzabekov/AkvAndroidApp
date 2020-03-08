@@ -48,17 +48,10 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
         return inflater.inflate(R.layout.sign_up_detail, container, false)
     }
 
-//    private var password1:String?=null
-//    private var password2:String?=null
-//    private var arg_number:String?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "RegisterFragment: ${viewModel}")
-
-//        password1 = arguments?.getString("password1")
-//        password2 = arguments?.getString("password2")
-//        arg_number = arguments?.getString("arg_number")
 
         subscribeObservers()
 
@@ -105,14 +98,6 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
                     it.registration_username?.let{sign_detail_last_name_et.setText(it)
                 }
             }
-
-//            Log.e(TAG, "state not witsh + ${viewState.authViewStateResponse}")
-//            viewState.authViewStateResponse?.let {
-//                it.let {
-//                    sendCode()
-//                    showDialog()
-//                }
-//            }
         })
 
         sessionManager.accountProperties.observe(viewLifecycleOwner, Observer {
@@ -185,7 +170,6 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
                 )
             )
         }
-
     }
 
     private fun validateRegisterDetail(username: String, email: String, birthdate: String): Boolean{

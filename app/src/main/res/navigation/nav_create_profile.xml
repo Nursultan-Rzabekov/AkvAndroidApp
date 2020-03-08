@@ -89,7 +89,6 @@
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_about_us">
 
-
         <action
             android:id="@+id/action_profileAboutProfileFragment_to_home"
             app:destination="@id/profileFragment"

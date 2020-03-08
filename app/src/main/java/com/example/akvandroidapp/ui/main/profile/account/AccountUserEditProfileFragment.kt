@@ -51,6 +51,8 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
     var image1: Uri? = null
     private var imageUrl: String? = null
     private var phoneNumber:String? = null
+    private var phoneNumberInitial:String? = null
+    private var ibanInitial:String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +72,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
         attachUserAccounts()
         setupSuffixSample()
         subscribeObservers()
+
 
         header_profile_account_edit_cancel_tv.setOnClickListener {
             findNavController().navigateUp()
@@ -100,10 +103,15 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
 
     private fun saveUserAccounts(){
         val phoneTotal = "+7".plus(phoneNumber)
-        if(phoneTotal.trim().length != 12)
-            showErrorDialog(getString(R.string.invalid_number))
-        else {
-            sendValidationCode(phoneTotal)
+        if(phoneTotal != phoneNumberInitial){
+            if(phoneTotal.trim().length != 12)
+                showErrorDialog(getString(R.string.invalid_number))
+            else {
+                sendValidationCode(phoneTotal)
+            }
+        }
+        else{
+            performProfileUpdate()
         }
     }
 
@@ -158,14 +166,17 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
                     fragment_profile_account_edit_gender_radio_group.check(fragment_profile_account_edit_man_btn.id)
                 }
             }
+            if(dataState.iban!=null){
+                fragment_profile_account_edit_iban_tv.setText(dataState.iban.toString())
+            }
+            ibanInitial = dataState.iban
             fragment_profile_account_edit_phonenumber_tv.setText(dataState.phonenumber.toString())
+            phoneNumberInitial = dataState.phonenumber.toString()
             fragment_profile_account_edit_email_tv.setText(dataState.email.toString())
             header_profile_account_edit_tv.text = dataState.nickname.toString()
-
             imageUrl = dataState.imageBackend
-
             Glide.with(this).load(
-                if (dataState.imageBackend != null) dataState.imageBackend else R.drawable.default_image)
+                if (dataState.imageBackend != null) dataState.imageBackend else R.drawable.user)
                 .into(header_profile_account_edit_civ)
         })
     }
@@ -223,7 +234,7 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
             Glide.with(this).load(image).into(header_profile_account_edit_civ)
         }
         else{
-            Glide.with(this).load(R.drawable.default_image).into(header_profile_account_edit_civ)
+            Glide.with(this).load(R.drawable.user).into(header_profile_account_edit_civ)
         }
     }
 
@@ -257,7 +268,6 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
         dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).text = getString(R.string.cancel_)
     }
 
-
     private fun performProfileUpdate(){
         var multipartBody:MultipartBody.Part? = null
         image1?.path?.let {
@@ -269,23 +279,39 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
                 )
 
              multipartBody = MultipartBody.Part.createFormData(
-                "photos",
+                "userpic",
                 imageFile.name,
                 requestBody
             )
         }
-
-        Log.d("qwe","qwerty + ${multipartBody}")
-
-
-        viewModel.setStateEvent(
-            ProfileStateEvent.EditProfileInfoEvent(
-                phone = "+7".plus(phoneNumber),
-                gender = getGender(),
-                email = fragment_profile_account_edit_email_tv.text.toString(),
-                birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
-                image = multipartBody)
-        )
+        if(fragment_profile_account_edit_iban_tv.text.toString()!=ibanInitial){
+            if (validateIban(fragment_profile_account_edit_iban_tv.text.toString().trim())) {
+                sessionManager.setIban(fragment_profile_account_edit_iban_tv.text.toString())
+                viewModel.setStateEvent(
+                    ProfileStateEvent.EditProfileInfoEvent(
+                        phone = "+7".plus(phoneNumber),
+                        gender = getGender(),
+                        email = fragment_profile_account_edit_email_tv.text.toString(),
+                        birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
+                        iban = fragment_profile_account_edit_iban_tv.text.toString(),
+                        image = multipartBody)
+                )
+            }
+            else{
+                activity?.displayErrorDialog("IBAN не полный")
+            }
+        }
+        else{
+            viewModel.setStateEvent(
+                ProfileStateEvent.EditProfileInfoEvent(
+                    phone = "+7".plus(phoneNumber),
+                    gender = getGender(),
+                    email = fragment_profile_account_edit_email_tv.text.toString(),
+                    birth_day = fragment_profile_account_edit_birth_tv.text.toString(),
+                    iban = fragment_profile_account_edit_iban_tv.text.toString(),
+                    image = multipartBody)
+            )
+        }
     }
 
     private fun subscribeObservers(){
@@ -315,23 +341,25 @@ class AccountUserEditProfileFragment : BaseProfileFragment(), CodeValidationDial
                 viewModel.setProfileInfoValidation(false)
             }
             viewState.profileInfoUpdateFields.let{ profile ->
-                Log.d("qwe","qwerty + ${imageUrl}")
-                Log.d("qwe","qwerty image + ${profile.newImageUri}")
-
                 profile.gender?.let {gender ->
                     sessionManager.setProfileInfo(
                         nickname = profile.first_name.toString(),
                         birthdate = profile.birth_day.toString(),
                         gender = gender,
+                        iban = profile.iban.toString(),
                         phonenumber = profile.phone.toString(),
                         email = profile.email.toString(),
                         imageBackend = if(profile.newImageUri == null) imageUrl else profile.newImageUri
                     )
-                    viewModel.setProfileInfoUpdate(ProfileViewState.ProfileInfoUpdateFields())
-                    findNavController().navigateUp()
                 }
             }
         })
+    }
+
+    private fun validateIban(iban: String): Boolean {
+        if (iban.length == 20)
+            return true
+        return false
     }
 
     private fun handleUpdate(dataState: DataState<ProfileViewState>){

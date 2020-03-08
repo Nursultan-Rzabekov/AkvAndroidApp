@@ -43,20 +43,20 @@ constructor(
             }
 
             is ProfileStateEvent.EditProfileInfoEvent ->{
-                Log.d("qwe","PostCreateHouse 555555 ${stateEvent.birth_day}")
-
-                val email = RequestBody.create(MediaType.parse("text/plain"), stateEvent.email!!)
-                val phone = RequestBody.create(MediaType.parse("text/plain"), stateEvent.phone!!)
-                val birth_day = RequestBody.create(MediaType.parse("text/plain"), stateEvent.birth_day!!)
+                val email = RequestBody.create(MediaType.parse("text/plain"), stateEvent.email.toString())
+                val phone = RequestBody.create(MediaType.parse("text/plain"), stateEvent.phone.toString())
+                val birthDay = RequestBody.create(MediaType.parse("text/plain"), stateEvent.birth_day.toString())
                 val gender = RequestBody.create(MediaType.parse("text/plain"), stateEvent.gender.toString())
+                val iBan = RequestBody.create(MediaType.parse("text/plain"), stateEvent.iban.toString())
                 return sessionManager.cachedToken.value?.let { authToken ->
                     profileRepository.updateProfileInfo(
                         authToken,
                         email = email,
                         phone = phone,
                         gender = gender,
-                        birth_day = birth_day,
-                        userPic = stateEvent.image
+                        birth_day = birthDay,
+                        userPic = stateEvent.image,
+                        iBan = iBan
                     )
                 }?: AbsentLiveData.create()
             }

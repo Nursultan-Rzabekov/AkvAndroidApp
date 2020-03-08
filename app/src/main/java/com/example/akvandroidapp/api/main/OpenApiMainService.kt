@@ -76,6 +76,7 @@ interface OpenApiMainService {
         @Part("gender") gender: RequestBody,
         @Part("phone") phone: RequestBody,
         @Part("birth_day") birth_day: RequestBody,
+        @Part("iban") iban: RequestBody,
         @Part userpic: MultipartBody.Part?
     ): LiveData<GenericApiResponse<BlogGetProfileInfoResponse>>
 
@@ -139,7 +140,7 @@ interface OpenApiMainService {
         @Body body: CreateReservationBody
     ): LiveData<GenericApiResponse<ReservationRequestResponse>>
 
-    @GET("houses/{house_id}/reviews")
+    @GET("houses/{house_id}/reviews/")
     fun getReviewsForHouse(
         @Path("house_id") house_id: Int,
         @Query("page") page: Int

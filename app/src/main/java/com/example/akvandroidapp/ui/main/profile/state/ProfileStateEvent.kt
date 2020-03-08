@@ -11,10 +11,10 @@ sealed class ProfileStateEvent {
         var phone: String? = null,
         var birth_day: String? = null,
         var gender: Int? = null,
-//        var first_name: String? = null,
-//        var last_name: String? = null,
         var email: String? = null,
+        var iban: String? = null,
         val image: MultipartBody.Part? = null
+
     ): ProfileStateEvent()
 
     data class SendCodeEvent(

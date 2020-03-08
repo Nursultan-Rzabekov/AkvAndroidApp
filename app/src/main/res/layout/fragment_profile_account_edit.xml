@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="@dimen/dim_24dp"
     android:layout_marginEnd="@dimen/dim_24dp">
@@ -160,6 +162,44 @@
             android:hint="@string/email"
             android:ellipsize="end"
             android:textSize="14sp"
+            android:textColor="@color/primaryZero"
+            android:textStyle="bold"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dim_16dp"
+        android:paddingBottom="@dimen/dim_16dp"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/fragment_profile_account_edit_iban_lb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/iban"
+            android:lines="1"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/fragment_profile_account_edit_iban_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BasicEditText"
+            android:imeOptions="actionDone"
+            android:background="@android:color/transparent"
+            android:hint="@string/put_iban"
+            android:ellipsize="end"
+            android:textSize="14sp"
+            android:inputType="phone"
             android:textColor="@color/primaryZero"
             android:textStyle="bold"
             android:textAlignment="viewEnd"

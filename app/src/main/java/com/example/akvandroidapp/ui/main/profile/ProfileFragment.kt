@@ -154,7 +154,7 @@ class ProfileFragment : BaseProfileFragment(){
             viewState.profileInfoFields.let{ newBlogFields ->
                 header_profile_tv.text = newBlogFields.first_name.toString()
                 Glide.with(this).load(
-                    if (newBlogFields.newImageUri != null) newBlogFields.newImageUri else R.drawable.default_image)
+                    if (newBlogFields.newImageUri != null) newBlogFields.newImageUri else R.drawable.user)
                     .into(header_profile_civ)
             }
         })

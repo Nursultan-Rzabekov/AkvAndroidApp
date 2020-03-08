@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
@@ -14,6 +15,7 @@ import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import com.redmadrobot.inputmask.MaskedTextChangedListener.ValueListener
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import kotlinx.android.synthetic.main.sign_up.*
+import kotlinx.android.synthetic.main.sign_up_pass.*
 import javax.inject.Inject
 
 
@@ -45,6 +47,10 @@ class RegisterUpFragment : BaseAuthFragment() {
         sign_in_tv.setOnClickListener {
             navLogin()
         }
+
+        sessionManager.createAccountUserInfo.observe(viewLifecycleOwner, Observer {
+            sign_up_et.hint = it._phoneNumber
+        })
     }
 
     private fun navNextNavigationPage(){

@@ -27,19 +27,6 @@
                 android:textStyle="bold"
                 android:layout_gravity="center" />
 
-            <TextView
-                android:id="@+id/header_payments_edit_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/change"
-                android:textSize="12sp"
-                android:paddingTop="@dimen/dim_4dp"
-                android:paddingBottom="@dimen/dim_4dp"
-                android:textColor="@color/primaryZero"
-                android:layout_marginEnd="@dimen/dim_8dp"
-                android:textStyle="bold"
-                android:layout_gravity="end"/>
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -58,48 +45,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/iban"
-                    android:textSize="14sp"
-                    android:layout_marginStart="@dimen/dim_12dp"
-                    android:layout_marginTop="@dimen/dim_16dp"
-                    android:layout_marginBottom="@dimen/dim_8dp"/>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="0dp"
-                    app:cardElevation="1dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/dim_16dp"
-                        android:paddingTop="@dimen/dim_24dp"
-                        android:paddingBottom="@dimen/dim_24dp">
-
-                        <EditText
-                            android:id="@+id/fragment_payments_iban_et"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/add_iban"
-                            android:textColorHint="@color/primaryZero"
-                            android:textSize="16sp"
-                            android:maxLength="20"
-                            android:inputType="textCapSentences"
-                            android:enabled="false"
-                            android:background="@android:color/transparent"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"/>
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     android:layout_width="match_parent"

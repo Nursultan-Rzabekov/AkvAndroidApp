@@ -7,6 +7,7 @@ import com.example.akvandroidapp.api.auth.OpenApiAuthService
 import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.example.akvandroidapp.api.auth.network_responses.LoginResponse
 import com.example.akvandroidapp.api.auth.network_responses.RegistrationResponse
+import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.entity.AccountProperties
 import com.example.akvandroidapp.entity.AuthToken
 import com.example.akvandroidapp.persistence.AccountPropertiesDao
@@ -279,8 +280,46 @@ constructor(
             }
 
             override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
-                return openApiAuthService.
-                    sendCode(phone)
+                return openApiAuthService.sendCode(phone)
+            }
+
+            override fun setJob(job: Job) {
+                addJob("attemptSendCode", job)
+            }
+        }.asLiveData()
+    }
+
+
+    fun forgerEmailCode(email: String): LiveData<DataState<AuthViewState>>{
+        return object: NetworkBoundResource<GenericResponse, Any, AuthViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            true,
+            false
+        ){
+
+            // Ignore
+            override fun loadFromCache(): LiveData<AuthViewState> {
+                return AbsentLiveData.create()
+            }
+
+            // Ignore
+            override suspend fun updateLocalDb(cacheObject: Any?) {
+
+            }
+
+            // not used in this case
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<GenericResponse>) {
+                Log.d(TAG, "handleApiSuccessResponse: ${response.body}")
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                return openApiAuthService.forgetEmail(email)
             }
 
             override fun setJob(job: Job) {

@@ -30,6 +30,7 @@ data class ProfileViewState (
         var first_name: String? = null,
         var last_name: String? = null,
         var id: Int? = null,
+        var iban: String? = null,
         var email: String? = null,
         var newImageUri: String? = null
     ) : Parcelable
@@ -38,6 +39,7 @@ data class ProfileViewState (
     data class ProfileInfoUpdateFields(
         var phone: String? = null,
         var birth_day: String? = null,
+        var iban:String? = null,
         var gender: Int? = null,
         var user_type: Int? = null,
         var first_name: String? = null,

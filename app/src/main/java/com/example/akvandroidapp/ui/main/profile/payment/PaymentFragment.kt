@@ -46,7 +46,7 @@ class PaymentFragment : BasePaymentFragment()
 
         setToolbar()
         initRecyclerView()
-        setEditIban()
+        //setEditIban()
         setSessionObserver()
         subscribeObservers()
         onBlogSearchOrFilter()
@@ -54,9 +54,9 @@ class PaymentFragment : BasePaymentFragment()
     }
 
     private fun setSessionObserver(){
-        sessionManager.iban.observe(viewLifecycleOwner, Observer{
-            fragment_payments_iban_et.setText(it)
-        })
+//        sessionManager.iban.observe(viewLifecycleOwner, Observer{
+//            fragment_payments_iban_et.setText(it)
+//        })
     }
 
     private fun subscribeObservers(){
@@ -114,26 +114,6 @@ class PaymentFragment : BasePaymentFragment()
         }
     }
 
-    private fun setEditIban(){
-        header_payments_edit_tv.setOnClickListener {
-            if (isChangeState) {
-                if (validateIban(fragment_payments_iban_et.text.toString().trim())) {
-                    header_payments_edit_tv.text = getString(R.string.change)
-                    isChangeState = false
-                    fragment_payments_iban_et.isEnabled = false
-                    sessionManager.setIban(fragment_payments_iban_et.text.toString())
-                }
-                else{
-                    activity?.displayErrorDialog("IBAN не полный")
-                }
-            }else{
-                header_payments_edit_tv.text = getString(R.string.save)
-                isChangeState = true
-                fragment_payments_iban_et.isEnabled = true
-            }
-        }
-    }
-
     private fun setToolbar(){
         header_payment_toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
 
@@ -174,9 +154,5 @@ class PaymentFragment : BasePaymentFragment()
         stateChangeListener.hideSoftKeyboard()
     }
 
-    private fun validateIban(iban: String): Boolean {
-        if (iban.length == 20)
-            return true
-        return false
-    }
+
 }

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.akvandroidapp.R
 import com.example.akvandroidapp.session.SessionManager
@@ -44,6 +45,11 @@ class RegisterPassFragment : BaseAuthFragment() {
         sign_up_pass_back_tv.setOnClickListener {
             findNavController().navigate(R.id.action_registerPassFragment_to_registerUpFragment)
         }
+
+        sessionManager.createAccountUserInfo.observe(viewLifecycleOwner, Observer {
+            sign_up_pass_password_et.setText(it._password)
+            sign_up_pass_password_re_et.setText(it._password)
+        })
     }
 
     private fun navNextNavigationPage(){

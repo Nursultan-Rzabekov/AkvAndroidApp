@@ -157,6 +157,7 @@ constructor(
                     nickname = response.body.first_name,
                     birthdate = response.body.birth_day,
                     gender = response.body.gender,
+                    iban = response.body.iban,
                     phonenumber = response.body.phone,
                     email = response.body.email,
                     imageBackend = response.body.userpic)
@@ -170,6 +171,7 @@ constructor(
                                 first_name = response.body.first_name,
                                 newImageUri = response.body.userpic,
                                 gender = response.body.gender,
+                                iban = response.body.iban,
                                 birth_day = response.body.birth_day,
                                 phone = response.body.phone
                             ))
@@ -206,6 +208,7 @@ constructor(
         authToken: AuthToken,
         phone:RequestBody,
         email:RequestBody,
+        iBan:RequestBody,
         gender:RequestBody,
         birth_day:RequestBody,
         userPic: MultipartBody.Part?
@@ -225,7 +228,7 @@ constructor(
 
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<BlogGetProfileInfoResponse>) {
 
-                Log.d(TAG,"PostCreateHouse 7070707070 + ${response.body}")
+                Log.d(TAG,"PostCreateHouse 7070707070 + ${response.body.userpic}")
 
                 withContext(Dispatchers.Main) {
                     onCompleteJob(
@@ -237,6 +240,7 @@ constructor(
                                     first_name = response.body.first_name,
                                     newImageUri = response.body.userpic,
                                     gender = response.body.gender,
+                                    iban = response.body.iban,
                                     birth_day = response.body.birth_day,
                                     phone = response.body.phone
                                 )
@@ -252,7 +256,8 @@ constructor(
                     email = email,
                     birth_day = birth_day,
                     userpic = userPic,
-                    gender = gender
+                    gender = gender,
+                    iban = iBan
                 )
             }
 

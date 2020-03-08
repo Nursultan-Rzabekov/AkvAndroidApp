@@ -39,6 +39,13 @@ class BlogGetProfileInfoResponse(
 
     @SerializedName("is_active")
     @Expose
-    var is_active: Boolean
+    var is_active: Boolean,
 
+    @SerializedName("iban")
+    @Expose
+    var iban: String,
+
+    @SerializedName("is_phone_confirmed")
+    @Expose
+    var is_phone_confirmed: Boolean
 )

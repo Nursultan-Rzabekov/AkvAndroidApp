@@ -48,6 +48,11 @@ constructor(val authRepository: AuthRepository): BaseViewModel<AuthStateEvent, A
 
             }
 
+            is ForgetCodeEvent -> {
+                return authRepository.forgerEmailCode(
+                    stateEvent.email)
+            }
+
             is VerifyCodeEvent -> {
                 return authRepository.verifyCode(
                     stateEvent.phone,

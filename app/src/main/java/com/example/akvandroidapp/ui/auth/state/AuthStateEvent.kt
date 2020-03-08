@@ -23,6 +23,10 @@ sealed class AuthStateEvent{
         val phone: String
     ): AuthStateEvent()
 
+    data class ForgetCodeEvent(
+        val email: String
+    ): AuthStateEvent()
+
     data class VerifyCodeEvent(
         val phone: String,
         val code:String

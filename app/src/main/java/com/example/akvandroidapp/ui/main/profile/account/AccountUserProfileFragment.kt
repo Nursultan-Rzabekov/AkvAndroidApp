@@ -67,8 +67,11 @@ class AccountUserProfileFragment : BaseProfileFragment() {
             fragment_profile_account_phonenumber_tv.text = dataState.phonenumber.toString()
             fragment_profile_account_email_tv.text = dataState.email.toString()
             header_profile_account_tv.text = dataState.nickname.toString()
+            if(dataState.iban!=null){
+                fragment_profile_account_iban_tv.text = dataState.iban.toString()
+            }
             Glide.with(this).load(
-                if (dataState.imageBackend != null) dataState.imageBackend else R.drawable.default_image)
+                if (dataState.imageBackend != null) dataState.imageBackend else R.drawable.user)
                 .into(header_profile_account_civ)
         })
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.example.akvandroidapp.api.auth.network_responses.LoginResponse
 import com.example.akvandroidapp.api.auth.network_responses.RegistrationResponse
+import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.util.GenericApiResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -37,6 +38,13 @@ interface OpenApiAuthService {
     fun sendCode(
         @Field("phone") phone: String
     ): LiveData<GenericApiResponse<CodeResponse>>
+
+
+    @POST("auth/users/reset_password/")
+    @FormUrlEncoded
+    fun forgetEmail(
+        @Field("email") email: String
+    ): LiveData<GenericApiResponse<GenericResponse>>
 
 
     @POST("auth/verify")
