@@ -52,5 +52,5 @@ interface OpenApiAuthService {
     fun verifyCode(
         @Field("phone") phone: String,
         @Field("code") code: String
-    ): LiveData<GenericApiResponse<CodeResponse>>
+    ): LiveData<GenericApiResponse<GenericResponse>>
 }

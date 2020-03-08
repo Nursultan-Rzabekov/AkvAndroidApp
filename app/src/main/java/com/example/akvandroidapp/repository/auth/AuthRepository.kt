@@ -19,6 +19,7 @@ import com.example.akvandroidapp.ui.DataState
 import com.example.akvandroidapp.ui.Response
 import com.example.akvandroidapp.ui.ResponseType
 import com.example.akvandroidapp.ui.auth.state.*
+import com.example.akvandroidapp.ui.main.profile.state.ProfileViewState
 import com.example.akvandroidapp.util.AbsentLiveData
 import com.example.akvandroidapp.util.ApiSuccessResponse
 import com.example.akvandroidapp.util.ErrorHandling.Companion.ERROR_SAVE_ACCOUNT_PROPERTIES
@@ -331,11 +332,11 @@ constructor(
     fun verifyCode(phone: String, code:String): LiveData<DataState<AuthViewState>>{
 
         val verifyCodeFieldErrors = VerifyCodeFields(phone,code).isValidForSendCode()
-        if(!verifyCodeFieldErrors.equals(VerifyCodeFields.VerifyCodeError.none())){
+        if(verifyCodeFieldErrors != VerifyCodeFields.VerifyCodeError.none()){
             return returnErrorResponse(verifyCodeFieldErrors, ResponseType.Dialog())
         }
 
-        return object: NetworkBoundResource<CodeResponse, Any, AuthViewState>(
+        return object: NetworkBoundResource<GenericResponse, Any, AuthViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             true,
@@ -357,39 +358,23 @@ constructor(
 
             }
 
-            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
-
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<GenericResponse>) {
                 Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
 
                 if(!response.body.response){
-                    return onErrorReturn(response.body.message, true, false)
+                    return onErrorReturn(response.body.response.toString(), true, false)
                 }
-
-                val result = authTokenDao.insert(
-                    AuthToken(
-                        response.body.user.id,
-                        response.body.token
-                    )
-                )
-
-                if(result < 0){
-                    return onCompleteJob(DataState.error(
-                        Response(ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog()))
-                    )
-                }
-
-                sessionManager.login(AuthToken(response.body.user.id, response.body.token))
 
                 onCompleteJob(
                     DataState.data(
                         data = AuthViewState(
-                            authToken = AuthToken(response.body.user.id, response.body.token)
+                            responseVerify = response.body.response
                         )
                     )
                 )
             }
 
-            override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
                 return openApiAuthService.verifyCode(phone,code)
             }
 

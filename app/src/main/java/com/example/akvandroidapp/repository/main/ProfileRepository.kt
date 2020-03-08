@@ -4,6 +4,7 @@ package com.example.akvandroidapp.repository.main
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.akvandroidapp.api.auth.network_responses.CodeResponse
+import com.example.akvandroidapp.api.main.GenericResponse
 import com.example.akvandroidapp.api.main.OpenApiMainService
 import com.example.akvandroidapp.api.main.responses.*
 import com.example.akvandroidapp.entity.*
@@ -967,7 +968,7 @@ constructor(
             return returnErrorResponse(verifyCodeFieldErrors, ResponseType.Dialog())
         }
 
-        return object: NetworkBoundResource<CodeResponse, Any, ProfileViewState>(
+        return object: NetworkBoundResource<GenericResponse, Any, ProfileViewState>(
             sessionManager.isConnectedToTheInternet(),
             true,
             true,
@@ -989,28 +990,13 @@ constructor(
 
             }
 
-            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<CodeResponse>) {
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<GenericResponse>) {
 
                 Log.d(TAG, "handleApiSuccessResponse: ${response.body.response}")
 
                 if(!response.body.response){
-                    return onErrorReturn(response.body.message, true, false)
+                    return onErrorReturn(response.body.response.toString(), true, false)
                 }
-
-//                val result = authTokenDao.insert(
-//                    AuthToken(
-//                        response.body.user.id,
-//                        response.body.token
-//                    )
-//                )
-
-//                if(result < 0){
-//                    return onCompleteJob(DataState.error(
-//                        Response(ErrorHandling.ERROR_SAVE_AUTH_TOKEN, ResponseType.Dialog()))
-//                    )
-//                }
-
-                //sessionManager.login(AuthToken(response.body.user.id, response.body.token))
 
                 onCompleteJob(
                     DataState.data(
@@ -1021,7 +1007,7 @@ constructor(
                 )
             }
 
-            override fun createCall(): LiveData<GenericApiResponse<CodeResponse>> {
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
                 return openApiMainService.verifyCode(phone,code)
             }
 

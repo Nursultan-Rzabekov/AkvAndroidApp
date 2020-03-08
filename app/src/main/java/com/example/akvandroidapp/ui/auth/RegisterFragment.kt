@@ -23,6 +23,7 @@ import com.example.akvandroidapp.ui.auth.dialogs.CodeValidationDialog
 import com.example.akvandroidapp.ui.auth.state.AuthStateEvent.*
 import com.example.akvandroidapp.ui.auth.state.AuthViewState
 import com.example.akvandroidapp.ui.auth.state.RegistrationFields
+import com.example.akvandroidapp.ui.main.search.viewmodel.setProfileInfoValidation
 import com.example.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
 import com.example.akvandroidapp.util.Constants
 import com.example.akvandroidapp.util.DateUtils
@@ -93,6 +94,9 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
         })
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer{viewState ->
+            if (viewState.responseVerify) {
+                navigateToLoginFragment()
+            }
             viewState.registrationFields?.let {
                     it.registration_email?.let{sign_detail_email_et.setText(it)}
                     it.registration_username?.let{sign_detail_last_name_et.setText(it)
@@ -106,6 +110,10 @@ class RegisterFragment : BaseAuthFragment(), CodeValidationDialog.CodeValidation
                 showDialog()
             }
         })
+    }
+
+    private fun navigateToLoginFragment(){
+        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
     }
 
     private fun handlePagination(dataState: DataState<AuthViewState>){

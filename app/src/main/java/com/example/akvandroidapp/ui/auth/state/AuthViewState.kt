@@ -10,6 +10,7 @@ data class AuthViewState(
     var sendCodeFields: SendCodeFields? = SendCodeFields(),
     var verifyCodeFields: VerifyCodeFields? = VerifyCodeFields(),
     var authToken: AuthToken? = null,
+    var responseVerify: Boolean = false,
     var authViewStateResponse: AuthViewStateResponse? = AuthViewStateResponse()
 )
 
