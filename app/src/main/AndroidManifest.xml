@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.akvandroidapp">
+    package="com.akv.akvandroidapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,15 +14,14 @@
         android:required="true" />
 
     <application
-        android:name=".BaseApplication"
+        android:name="com.akv.akvandroidapp.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".ui.splash.SplashScreen">
+        android:theme="@style/AppTheme">
+        <activity android:name="com.akv.akvandroidapp.ui.splash.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,63 +40,63 @@
         </provider>
 
         <activity
-            android:name=".ui.auth.AuthActivity"
+            android:name="com.akv.akvandroidapp.ui.auth.AuthActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
-            android:name=".ui.main.profile.add_ad.AddAdMainActivity"
+            android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.AddAdMainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.profile.my_house.MyHouseMainActivity"
+            android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseMainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.profile.support.SupportMainActivity"
+            android:name="com.akv.akvandroidapp.ui.main.profile.support.SupportMainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.akv.akvandroidapp.ui.main.MainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.profile.payment.PaymentMainActivity"
+            android:name="com.akv.akvandroidapp.ui.main.profile.payment.PaymentMainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.zhilye.ZhilyeActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.zhilye.ZhilyeBookActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeBookActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.messages.chatkit.CustomLayoutMessagesActivity"
+            android:name="com.akv.akvandroidapp.ui.main.messages.chatkit.CustomLayoutMessagesActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.zhilye.ZhilyeRulesOfHouseActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeRulesOfHouseActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.zhilye.ZhilyeReviewActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeReviewActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.filter.FilterCityFragment"
+            android:name="com.akv.akvandroidapp.ui.main.search.filter.FilterCityFragment"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.filter.FilterTypeFragment"
+            android:name="com.akv.akvandroidapp.ui.main.search.filter.FilterTypeFragment"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.filter.FilterUdopstvaFragment"
+            android:name="com.akv.akvandroidapp.ui.main.search.filter.FilterUdopstvaFragment"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.filter.SearchFilterFragment"
+            android:name="com.akv.akvandroidapp.ui.main.search.filter.SearchFilterFragment"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.profile.support.SupportProfileFragment"
+            android:name="com.akv.akvandroidapp.ui.main.profile.support.SupportProfileFragment"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.search.zhilye.ZhilyeDatesActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeDatesActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.main.search.MapActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.MapActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.main.profile.add_ad.MapSetPlacemarkActivity"
+            android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.MapSetPlacemarkActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan" />
         <activity

@@ -7,7 +7,7 @@
         app:startDestination="@id/profileFragment">
 
     <fragment android:id="@+id/profileFragment"
-            android:name="com.example.akvandroidapp.ui.main.profile.ProfileFragment"
+            android:name="com.akv.akvandroidapp.ui.main.profile.ProfileFragment"
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/profile_part_layout">
 
@@ -40,7 +40,7 @@
 
 
     <fragment android:id="@+id/profileAccountUserProfileFragment"
-        android:name="com.example.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment"
+        android:name="com.akv.akvandroidapp.ui.main.profile.account.AccountUserProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_profile_account_layout">
 
@@ -65,7 +65,7 @@
     </fragment>
 
     <fragment android:id="@+id/profileAccountUserEditProfileFragment"
-        android:name="com.example.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment"
+        android:name="com.akv.akvandroidapp.ui.main.profile.account.AccountUserEditProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_profile_account_edit_layout">
 
@@ -85,7 +85,7 @@
 
 
     <fragment android:id="@+id/profileAboutProfileFragment"
-        android:name="com.example.akvandroidapp.ui.main.profile.AboutProfileFragment"
+        android:name="com.akv.akvandroidapp.ui.main.profile.AboutProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_about_us">
 
@@ -102,7 +102,7 @@
     </fragment>
 
     <fragment android:id="@+id/profileSettingsProfileFragmentt"
-        android:name="com.example.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment"
+        android:name="com.akv.akvandroidapp.ui.main.profile.settings.SettingsProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_settings_layout">
 
@@ -138,7 +138,7 @@
 
 
     <fragment android:id="@+id/profileSettingsRegionProfileFragment"
-        android:name="com.example.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment"
+        android:name="com.akv.akvandroidapp.ui.main.profile.settings.SettingsRegionProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_region_layout">
 
@@ -157,7 +157,7 @@
 
 
     <fragment android:id="@+id/profileSettingsGeolocationProfileFragment"
-        android:name="com.example.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment"
+        android:name="com.akv.akvandroidapp.ui.main.profile.settings.SettingsGeolocationProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_geolocation_layout">
 

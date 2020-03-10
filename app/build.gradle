@@ -8,10 +8,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.akvandroidapp"
+        applicationId "com.akv.akvandroidapp"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 1
+        versionCode 3
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -165,7 +165,6 @@ dependencies {
     //PassCodeText https://github.com/swapnil1104/PassCodeTextе
     implementation 'com.github.swapnil1104:OtpEditText:0.2'
 
-    //faster-xml
     implementation 'com.fasterxml.jackson.core:jackson-core:2.9.8'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'

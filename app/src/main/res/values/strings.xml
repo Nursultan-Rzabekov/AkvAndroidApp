@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AkvAndroidApp</string>
+    <string name="app_name">AKV</string>
     <string name="launcher">Launcher</string>
     <string name="login">Login</string>
     <string name="auth_token">auth_token</string>

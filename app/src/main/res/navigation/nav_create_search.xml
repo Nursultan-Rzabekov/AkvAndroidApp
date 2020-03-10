@@ -7,7 +7,7 @@
         app:startDestination="@id/searchFragment">
 
         <fragment android:id="@+id/searchFragment"
-                android:name="com.example.akvandroidapp.ui.main.search.SearchFragment"
+                android:name="com.akv.akvandroidapp.ui.main.search.SearchFragment"
                 android:label="@string/fragment_create_blog"
                 tools:layout="@layout/search_part_layout">
 
@@ -47,7 +47,7 @@
         </fragment>
 
         <fragment android:id="@+id/apartmentsFragment"
-            android:name="com.example.akvandroidapp.ui.main.search.ApartmentsFragment"
+            android:name="com.akv.akvandroidapp.ui.main.search.ApartmentsFragment"
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/search_part_layout">
 
@@ -73,7 +73,7 @@
 
         <activity
             android:id="@+id/mapActivity"
-            android:name="com.example.akvandroidapp.ui.main.search.MapActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.MapActivity"
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/explore_map">
 
@@ -81,14 +81,14 @@
 
         <activity
             android:id="@+id/searchFilterFragment"
-            android:name="com.example.akvandroidapp.ui.main.search.filter.SearchFilterFragment"
+            android:name="com.akv.akvandroidapp.ui.main.search.filter.SearchFilterFragment"
             android:label="@string/fragment_update_blog"
             tools:layout="@layout/fragment_filter_layout">
         </activity>
 
 
         <activity android:id="@+id/zhilyeFragment"
-            android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
+            android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/fragment_zhilye_layout">
 

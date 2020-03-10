@@ -7,7 +7,7 @@
         app:startDestination="@id/homeFragment">
 
     <fragment android:id="@+id/homeFragment"
-            android:name="com.example.akvandroidapp.ui.main.home.HomeFragment"
+            android:name="com.akv.akvandroidapp.ui.main.home.HomeFragment"
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/fragment_saved_booking">
 
@@ -40,7 +40,7 @@
     <include app:graph="@navigation/nav_create_search" />
 
     <fragment android:id="@+id/payBoxPayWebViewFragment"
-        android:name="com.example.akvandroidapp.ui.main.home.PayBoxPayWebViewFragment"
+        android:name="com.akv.akvandroidapp.ui.main.home.PayBoxPayWebViewFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/paybox_pay">
 
@@ -58,7 +58,7 @@
 
 
     <activity android:id="@+id/zhilyeFragment"
-        android:name="com.example.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
+        android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_zhilye_layout">
 

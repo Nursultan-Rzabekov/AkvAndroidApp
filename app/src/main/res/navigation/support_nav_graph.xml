@@ -8,7 +8,7 @@
 
         <fragment
             android:id="@+id/supportProfileFragment"
-            android:name="com.example.akvandroidapp.ui.main.profile.support.SupportProfileFragment"
+            android:name="com.akv.akvandroidapp.ui.main.profile.support.SupportProfileFragment"
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/support_main_layout">
 
@@ -25,7 +25,7 @@
 
 
     <fragment android:id="@+id/profileSupportProfileReviewFragment"
-        android:name="com.example.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment"
+        android:name="com.akv.akvandroidapp.ui.main.profile.support.SupportProfileReviewFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_support_notify_error">
 

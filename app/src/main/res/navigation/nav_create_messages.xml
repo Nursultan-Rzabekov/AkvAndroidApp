@@ -7,7 +7,7 @@
         app:startDestination="@id/messagesFragment">
 
     <fragment android:id="@+id/messagesFragment"
-            android:name="com.example.akvandroidapp.ui.main.messages.MessagesFragment"
+            android:name="com.akv.akvandroidapp.ui.main.messages.MessagesFragment"
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/fragment_chat_main_layout">
 
@@ -17,7 +17,7 @@
 
 
 <!--    <fragment android:id="@+id/ChatMesFragment"-->
-<!--        android:name="com.example.akvandroidapp.ui.main.messages.ChatMesFragment"-->
+<!--        android:name="com.akv.akvandroidapp.ui.main.messages.ChatMesFragment"-->
 <!--        android:label="@string/fragment_create_blog"-->
 <!--        tools:layout="@layout/fragment_chats">-->
 
@@ -34,7 +34,7 @@
 <!--    -->
 
 <!--    <fragment android:id="@+id/RequestFragment"-->
-<!--        android:name="com.example.akvandroidapp.ui.main.messages.RequestFragment"-->
+<!--        android:name="com.akv.akvandroidapp.ui.main.messages.RequestFragment"-->
 <!--        android:label="@string/fragment_create_blog"-->
 <!--        tools:layout="@layout/fragment_requests">-->
 
@@ -51,7 +51,7 @@
 <!--    </fragment>-->
 
 <!--    <fragment android:id="@+id/MessagesDetailFragment"-->
-<!--        android:name="com.example.akvandroidapp.ui.main.messages.MessagesDetailFragment"-->
+<!--        android:name="com.akv.akvandroidapp.ui.main.messages.MessagesDetailFragment"-->
 <!--        android:label="@string/fragment_create_blog"-->
 <!--        tools:layout="@layout/activity_dialog_layout">-->
 <!--        -->
