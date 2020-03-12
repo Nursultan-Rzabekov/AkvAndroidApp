@@ -30,7 +30,6 @@ constructor(
         when(stateEvent){
 
             is AddAdStateEvent.CreateNewBlogEvent -> {
-                Log.d("qwe","PostCreateHouse 555555 ${sessionManager.cachedToken.value}")
                 return sessionManager.cachedToken.value?.let { authToken ->
                     val name = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdTitle)
                     val description = RequestBody.create(MediaType.parse("text/plain"), stateEvent._addAdDescription)
@@ -50,6 +49,7 @@ constructor(
                     val countryId = RequestBody.create(MediaType.parse("text/plain"),(stateEvent._addAdAddressCountry.toString()))
 
                     val multipartBodyList: ArrayList<MultipartBody.Part> = arrayListOf()
+
                     stateEvent.rulesList.forEach {
                         multipartBodyList.add(MultipartBody.Part.createFormData("rules",it))
                     }
@@ -59,9 +59,11 @@ constructor(
                     stateEvent.facilitiesList.forEach {
                         multipartBodyList.add(MultipartBody.Part.createFormData("accommodations",it))
                     }
-                    stateEvent._availableList.forEach {
-                        multipartBodyList.add(MultipartBody.Part.createFormData("blocked_dates",DateUtils.convertDateToString(it)))
-                    }
+
+//                    stateEvent._availableList.forEach {
+//                        multipartBodyListBlockedDates.add(MultipartBody.Part.createFormData("check_in",DateUtils.convertDateToString(it)))
+//                    }
+
 
                     profileRepository.createNewBlogPost(
                         authToken,

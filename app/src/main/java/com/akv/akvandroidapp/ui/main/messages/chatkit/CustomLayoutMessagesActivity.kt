@@ -100,7 +100,7 @@ class CustomLayoutMessagesActivity : BaseActivity(),
         viewModel = ViewModelProvider(this, providerFactory).get(DetailsViewModel::class.java)
         stateChangeListener = this
 
-        ChatClient(URI("ws://akv.kz/ws?token=${sessionManager.cachedToken.value?.token.toString()}")).connect()
+        ChatClient(URI("wss://akv.kz/ws/messages/?token=${sessionManager.cachedToken.value?.token.toString()}")).connect()
 
         imageLoader =
             ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
