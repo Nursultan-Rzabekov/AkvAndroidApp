@@ -98,11 +98,14 @@ class SearchFragment :
         }
 
         fragment_explore_apartments_iv.setOnClickListener {
-            navApartments()
+            //navApartments()
+            viewModel.setBlogFilterTypeHouse(1)
+            onBlogSearchOrFilter()
         }
 
         fragment_explore_homes_iv.setOnClickListener {
-
+            viewModel.setBlogFilterTypeHouse(2)
+            onBlogSearchOrFilter()
         }
 
         by_map_chip.setOnClickListener {
