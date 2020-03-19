@@ -13,6 +13,7 @@ import com.akv.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.akv.akvandroidapp.util.AbsentLiveData
 import javax.inject.Inject
 
+
 class ZhilyeBookViewModel
 @Inject
 constructor(

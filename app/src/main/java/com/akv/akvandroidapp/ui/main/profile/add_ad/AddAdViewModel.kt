@@ -17,8 +17,9 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
-
+data class DatesTemp(private val check_in : String,private val check_out : String)
 class AddAdViewModel
 @Inject
 constructor(
@@ -60,10 +61,31 @@ constructor(
                         multipartBodyList.add(MultipartBody.Part.createFormData("accommodations",it))
                     }
 
-//                    stateEvent._availableList.forEach {
-//                        multipartBodyListBlockedDates.add(MultipartBody.Part.createFormData("check_in",DateUtils.convertDateToString(it)))
-//                    }
+                    val listTemp : ArrayList<DatesTemp> = arrayListOf()
+                    var blockedDatesCheckIn : String = DateUtils.convertDateToString(stateEvent._availableList.first())
+                    var blockedDatesTemporalYear : Int = DateUtils.convertDateToString(stateEvent._availableList.first()).split("-")[0].toInt()
+                    var blockedDatesTemporalMonth : Int = DateUtils.convertDateToString(stateEvent._availableList.first()).split("-")[1].toInt()
+                    var blockedDatesTemporalDay : Int = (DateUtils.convertDateToString(stateEvent._availableList.first()).split("-")[2]).toInt()-1
+                    var blockedDatesCheckOut: String = DateUtils.convertDateToString(stateEvent._availableList.first())
 
+                    stateEvent._availableList.forEach {
+                        val temp = DateUtils.convertDateToString(it).split("-")
+                        if(temp[0].toInt() == blockedDatesTemporalYear &&
+                            temp[1].toInt() == blockedDatesTemporalMonth &&
+                            (temp[2]).toInt() == (blockedDatesTemporalDay + 1)){
+                            blockedDatesCheckOut = DateUtils.convertDateToString(it)
+                        }
+                        else{
+                            listTemp.add(DatesTemp(blockedDatesCheckIn,blockedDatesCheckOut))
+                            blockedDatesCheckIn = DateUtils.convertDateToString(it)
+                            blockedDatesCheckOut = DateUtils.convertDateToString(it)
+                        }
+                        blockedDatesTemporalDay = temp[2].toInt()
+                        blockedDatesTemporalMonth = temp[1].toInt()
+                        blockedDatesTemporalYear = temp[0].toInt()
+                    }
+
+                    Log.e("dates temporary", "See ${listTemp}")
 
                     profileRepository.createNewBlogPost(
                         authToken,
@@ -79,6 +101,7 @@ constructor(
                         guests,
                         multipartBodyList,
                         stateEvent.image,
+                        listTemp,
                         houseTypeId,
                         discount7days,
                         discount30days,

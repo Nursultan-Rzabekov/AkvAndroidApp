@@ -17,6 +17,7 @@ import com.akv.akvandroidapp.ui.Response
 import com.akv.akvandroidapp.ui.ResponseType
 import com.akv.akvandroidapp.ui.auth.state.VerifyCodeFields
 import com.akv.akvandroidapp.ui.main.profile.add_ad.AddAdViewState
+import com.akv.akvandroidapp.ui.main.profile.add_ad.DatesTemp
 import com.akv.akvandroidapp.ui.main.profile.my_house.state.MyHouseViewState
 import com.akv.akvandroidapp.ui.main.profile.payment.viewmodel.PaymentViewState
 import com.akv.akvandroidapp.ui.main.profile.state.ProfileViewState
@@ -55,6 +56,7 @@ constructor(
         guests:RequestBody,
         list: ArrayList<MultipartBody.Part>?,
         photos: ArrayList<MultipartBody.Part>?,
+        blockedDates: ArrayList<DatesTemp>,
         house_type_id:RequestBody,
         discount7days:RequestBody,
         discount30days:RequestBody,
@@ -109,6 +111,7 @@ constructor(
                     beds = beds,
                     guests = guests,
                     list = list,
+                    listBlockedDates = blockedDates,
                     house_type_id = house_type_id,
                     discount7days = discount7days,
                     discount30days = discount30days,

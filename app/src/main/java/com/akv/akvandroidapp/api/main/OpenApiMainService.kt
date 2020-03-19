@@ -5,6 +5,7 @@ import com.akv.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.akv.akvandroidapp.api.main.bodies.CreateCancelReservationBody
 import com.akv.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.akv.akvandroidapp.api.main.responses.*
+import com.akv.akvandroidapp.ui.main.profile.add_ad.DatesTemp
 import com.akv.akvandroidapp.util.GenericApiResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -28,6 +29,7 @@ interface OpenApiMainService {
         @Part("beds") beds: RequestBody,
         @Part("guests") guests: RequestBody,
         @Part list: ArrayList<MultipartBody.Part>?,
+        @Part("blocked_dates") listBlockedDates: ArrayList<DatesTemp>?,
         @Part("house_type_id") house_type_id: RequestBody,
         @Part("discount7days") discount7days: RequestBody,
         @Part("discount30days") discount30days: RequestBody,
