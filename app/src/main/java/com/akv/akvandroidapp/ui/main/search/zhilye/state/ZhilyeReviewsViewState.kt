@@ -3,7 +3,10 @@ package com.akv.akvandroidapp.ui.main.search.zhilye.state
 import com.akv.akvandroidapp.entity.Review
 
 class ZhilyeReviewsViewState(
-    var reviewsField: ReviewField = ReviewField()
+    var reviewsField: ReviewField = ReviewField(),
+    var isReviewCreatedField: Boolean = false,
+    var isReviewUpdatedField: Boolean = false,
+    var isReviewDeletedField: Boolean = false
 ) {
 
     data class ReviewField(
@@ -13,5 +16,4 @@ class ZhilyeReviewsViewState(
         var isQueryInProgress: Boolean = false,
         var isQueryExhausted: Boolean = false
     )
-
 }

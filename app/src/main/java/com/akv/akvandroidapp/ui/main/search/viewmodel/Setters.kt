@@ -285,6 +285,18 @@ fun ZhilyeReviewViewModel.setBlogListData(reviewList: List<Review>){
     setViewState(update)
 }
 
+fun ZhilyeReviewViewModel.setIsReviewCreated(isReviewCreated: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.isReviewCreatedField = isReviewCreated
+    setViewState(update)
+}
+
+fun ZhilyeReviewViewModel.setIsReviewUpdated(isReviewUpdated: Boolean){
+    val update = getCurrentViewStateOrNew()
+    update.isReviewUpdatedField = isReviewUpdated
+    setViewState(update)
+}
+
 fun DetailsViewModel.setBlogListData(blogList: List<UserConversationMessages>){
     val update = getCurrentViewStateOrNew()
     update.myChatFields.blogList = blogList

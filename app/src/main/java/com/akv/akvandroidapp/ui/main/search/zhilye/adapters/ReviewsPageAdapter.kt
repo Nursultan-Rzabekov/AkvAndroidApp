@@ -1,9 +1,11 @@
 package com.akv.akvandroidapp.ui.main.search.zhilye.adapters
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
@@ -11,18 +13,18 @@ import com.akv.akvandroidapp.R
 import com.akv.akvandroidapp.entity.Review
 import com.akv.akvandroidapp.util.DateUtils
 import com.akv.akvandroidapp.util.GenericViewHolder
+import kotlinx.android.synthetic.main.reviews_page_owner_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.reviews_page_recycler_view_item.view.*
 
 class ReviewsPageAdapter(
+    val userId: Int?,
+    val context: Context?,
+    val interaction: ReviewPageAdapterInteraction,
     private val requestManager: RequestManager
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private val NO_MORE_RESULTS = -1
     private val BLOG_ITEM = 0
-
-    private val NO_MORE_RESULTS_BLOG_MARKER = Review(
-        NO_MORE_RESULTS
-    )
+    private val MY_BLOG_ITEM = 1
 
     val DIFF_CALLBACK = object: DiffUtil.ItemCallback<Review>(){
         override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
@@ -43,17 +45,8 @@ class ReviewsPageAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType){
-            NO_MORE_RESULTS ->{
-                return GenericViewHolder(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.layout_no_more_results,
-                        parent,
-                        false
-                    )
-                )
-            }
             BLOG_ITEM ->{
-                return ReviewViewHolder(
+                return DefaultReviewViewHolder(
                     LayoutInflater.from(parent.context).inflate(
                         R.layout.reviews_page_recycler_view_item,
                         parent,
@@ -62,8 +55,22 @@ class ReviewsPageAdapter(
                     requestManager = requestManager
                 )
             }
+
+            MY_BLOG_ITEM -> {
+                return OwnerReviewViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.reviews_page_owner_recycler_view_item,
+                        parent,
+                        false
+                    ),
+                    context = context,
+                    requestManager = requestManager,
+                    interaction = interaction
+                )
+            }
+
             else -> {
-                return ReviewViewHolder(
+                return DefaultReviewViewHolder(
                     LayoutInflater.from(parent.context).inflate(
                         R.layout.reviews_page_recycler_view_item,
                         parent,
@@ -101,7 +108,11 @@ class ReviewsPageAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is ReviewViewHolder -> {
+            is DefaultReviewViewHolder -> {
+                holder.bind(differ.currentList[position])
+            }
+
+            is OwnerReviewViewHolder -> {
                 holder.bind(differ.currentList[position])
             }
         }
@@ -109,7 +120,7 @@ class ReviewsPageAdapter(
 
     override fun getItemViewType(position: Int): Int {
         if(differ.currentList[position].id > -1){
-            return BLOG_ITEM
+            return if (userId == differ.currentList[position].user_id) BLOG_ITEM else MY_BLOG_ITEM
         }
         return differ.currentList[position].id
     }
@@ -126,13 +137,10 @@ class ReviewsPageAdapter(
         }
     }
 
-    fun submitList(items: List<Review>?,isQueryExhausted: Boolean = false){
+    fun submitList(items: List<Review>?){
         val newList = items?.toMutableList()
-        if (isQueryExhausted)
-            newList?.add(NO_MORE_RESULTS_BLOG_MARKER)
 
         val list = differ.currentList.toMutableList()
-        list.removeAll { it.id == NO_MORE_RESULTS }
 
         newList?.forEach {
             list.add(it)
@@ -142,7 +150,12 @@ class ReviewsPageAdapter(
         Log.e("ReviewsPageAdapter", "${differ.currentList}")
     }
 
-    class ReviewViewHolder(
+    fun clearAndSubmitList(items: List<Review>?){
+        differ.submitList(items)
+        Log.e("ReviewsPageAdapter", "${differ.currentList}")
+    }
+
+    class DefaultReviewViewHolder(
         reviewView: View,
         val requestManager: RequestManager
     ): RecyclerView.ViewHolder(reviewView){
@@ -166,6 +179,57 @@ class ReviewsPageAdapter(
             body.text = review.body
         }
 
+    }
+    class OwnerReviewViewHolder(
+        reviewView: View,
+        val context: Context?,
+        val requestManager: RequestManager,
+        val interaction: ReviewPageAdapterInteraction
+    ): RecyclerView.ViewHolder(reviewView){
+
+        private val userpic = reviewView.reviews_page_owner_recycler_view_item_avatar_civ
+        private val username = reviewView.reviews_page_owner_recycler_view_item_avatar_nickname
+        private val date = reviewView.reviews_page_owner_recycler_view_item_date
+        private val rate = reviewView.reviews_page_owner_recycler_view_item_avatar_score
+        private val body = reviewView.reviews_page_owner_recycler_view_item_content_tv
+        private val deleteBtn = reviewView.reviews_page_owner_recycler_view_item_delete_btn
+        private val moreBtn = reviewView.reviews_page_owner_recycler_view_item_more_btn
+
+        fun bind(review: Review){
+            requestManager
+                .load(review.userpic)
+                .error(R.drawable.test_image_back)
+                .transition(withCrossFade())
+                .into(userpic)
+
+            username.text = review.first_name
+            date.text = DateUtils.convertLongToStringDate(review.created_at!!)
+            rate.text = review.stars.toString()
+            body.text = review.body
+
+            deleteBtn.setOnClickListener {
+                interaction.onDeleteMyReview()
+            }
+
+            moreBtn.setOnClickListener {
+                val popUpMenu = PopupMenu(context, moreBtn)
+                popUpMenu.inflate(R.menu.review_item_menu)
+                popUpMenu.setOnMenuItemClickListener {
+                    when(it.itemId) {
+                        R.id.review_edit -> {
+                            interaction.onEditMyReview(review)
+                        }
+                    }
+                    return@setOnMenuItemClickListener false
+                }
+                popUpMenu.show()
+            }
+        }
+    }
+
+    interface ReviewPageAdapterInteraction{
+        fun onDeleteMyReview()
+        fun onEditMyReview(review: Review)
     }
 
 }

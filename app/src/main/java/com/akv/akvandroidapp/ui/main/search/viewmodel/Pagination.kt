@@ -294,8 +294,8 @@ fun ZhilyeReviewViewModel.nextPage(){
     if(!viewState.value!!.reviewsField.isQueryInProgress
         && !viewState.value!!.reviewsField.isQueryExhausted){
         Log.d(TAG, "BlogViewModel: Attempting to load next page...")
-        incrementPageNumber()
         setBlogListData(listOf())
+        incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(ZhilyeReviewsStateEvent.ZhilyeReviewsEvent)
     }
@@ -305,8 +305,8 @@ fun MessagesViewModel.nextPage(){
     if(!viewState.value!!.myChatFields.isQueryInProgress
         && !viewState.value!!.myChatFields.isQueryExhausted){
         Log.d(TAG, "BlogViewModel: Attempting to load next page...")
-        incrementPageNumber()
         setBlogListData(listOf())
+        incrementPageNumber()
         setQueryInProgress(true)
         setStateEvent(MessagesStateEvent.ChatInfoEvent)
     }
@@ -458,6 +458,8 @@ fun ZhilyeReviewViewModel.handleIncomingBlogListData(viewState: ZhilyeReviewsVie
     setQueryInProgress(viewState.reviewsField.isQueryInProgress)
     setQueryExhausted(viewState.reviewsField.isQueryExhausted)
     setBlogListData(viewState.reviewsField.reviewList)
+    setIsReviewCreated(viewState.isReviewCreatedField)
+    setIsReviewUpdated(viewState.isReviewUpdatedField)
 }
 
 fun HomeViewModel.handleIncomingReservationListData(viewState: HomeViewState){

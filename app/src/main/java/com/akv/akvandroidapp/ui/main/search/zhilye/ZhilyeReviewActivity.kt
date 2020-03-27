@@ -4,6 +4,7 @@ package com.akv.akvandroidapp.ui.main.search.zhilye
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,30 +12,43 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.akv.akvandroidapp.R
+import com.akv.akvandroidapp.entity.Review
+import com.akv.akvandroidapp.session.SessionManager
 import com.akv.akvandroidapp.ui.BaseActivity
 import com.akv.akvandroidapp.ui.DataState
 import com.akv.akvandroidapp.ui.DataStateChangeListener
-import com.akv.akvandroidapp.ui.main.search.viewmodel.setHouseId
-import com.akv.akvandroidapp.ui.main.search.viewmodel.setQueryExhausted
+import com.akv.akvandroidapp.ui.main.search.dialogs.ReviewDialog
+import com.akv.akvandroidapp.ui.main.search.viewmodel.*
 import com.akv.akvandroidapp.ui.main.search.zhilye.adapters.ReviewsPageAdapter
+import com.akv.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsStateEvent
 import com.akv.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
 import com.akv.akvandroidapp.ui.main.search.zhilye.viewmodels.ZhilyeReviewViewModel
 import com.akv.akvandroidapp.util.ErrorHandling
 import com.akv.akvandroidapp.viewmodels.ViewModelProviderFactory
+import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnListScrollListener
 import handleIncomingBlogListData
 import kotlinx.android.synthetic.main.fragment_review_page_layout.*
 import kotlinx.android.synthetic.main.fragment_reviews_page.*
 import loadFirstPage
 import nextPage
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 
-class ZhilyeReviewActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
+class ZhilyeReviewActivity :
+    BaseActivity(),
+    SwipeRefreshLayout.OnRefreshListener,
+    ReviewDialog.ReviewDialogInteraction,
+    ReviewsPageAdapter.ReviewPageAdapterInteraction{
 
     private var house_id: Int? = null
     private lateinit var reviewsAdapter: ReviewsPageAdapter
 
     lateinit var stateChangeListener: DataStateChangeListener
+
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
     lateinit var viewModel: ZhilyeReviewViewModel
@@ -63,6 +77,10 @@ class ZhilyeReviewActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListene
                 viewModel.loadFirstPage()
             }
         }
+
+        fragment_reviews_fabtn.setOnClickListener {
+            showReviewDialog()
+        }
     }
 
 
@@ -76,16 +94,27 @@ class ZhilyeReviewActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListene
 
         viewModel.viewState.observe(this, Observer{ viewState ->
             if(viewState != null){
-                reviewsAdapter.apply {
-                    Log.d(TAG, "Search results responses: ${viewState.reviewsField.reviewList}")
-                    preloadGlideImages(
-                        requestManager = requestManager,
-                        list = viewState.reviewsField.reviewList
-                    )
-                    submitList(
-                        items = viewState.reviewsField.reviewList,
-                        isQueryExhausted = viewState.reviewsField.isQueryExhausted
-                    )
+                if (viewState.isReviewCreatedField || viewState.isReviewUpdatedField){
+                    viewModel.setIsReviewCreated(false)
+                    viewModel.setIsReviewUpdated(false)
+                    onBlogSearchOrFilter()
+                }
+                else {
+                    reviewsAdapter.apply {
+                        Log.d(TAG, "Reviews results responses: ${viewState.reviewsField.reviewList}")
+                        preloadGlideImages(
+                            requestManager = requestManager,
+                            list = viewState.reviewsField.reviewList
+                        )
+                        if (viewModel.getPage() != 1)
+                            submitList(
+                                items = viewState.reviewsField.reviewList
+                            )
+                        else
+                            clearAndSubmitList(
+                                items = viewState.reviewsField.reviewList
+                            )
+                    }
                 }
             }
         })
@@ -168,13 +197,17 @@ class ZhilyeReviewActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListene
     }
 
     private fun initRecyclerView(){
+
         fragment_reviews_page_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@ZhilyeReviewActivity)
             reviewsAdapter = ReviewsPageAdapter(
-                requestManager = requestManager
+                sessionManager.accountProperties.value?.id,
+                applicationContext,
+                this@ZhilyeReviewActivity,
+                requestManager
             )
 
-            addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            object: RecyclerView.OnScrollListener(){
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     val layoutManager = recyclerView.layoutManager as LinearLayoutManager
@@ -184,9 +217,57 @@ class ZhilyeReviewActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListene
                         viewModel.nextPage()
                     }
                 }
-            })
+            }
+
             adapter = reviewsAdapter
         }
+    }
+
+    private fun showReviewDialog(){
+        val reviewdialog = ReviewDialog(this, 0,"", this)
+        reviewdialog.show()
+    }
+
+    override fun onReviewCloseBtnListener() {
+    }
+
+    override fun onReviewSendBtnListener(stars: Float, body: String) {
+        house_id?.let {
+            viewModel.setStateEvent(ZhilyeReviewsStateEvent.CreateReviewEvent(
+                body = body,
+                stars = stars.roundToInt(),
+                houseId = it
+            ))
+        }
+    }
+
+    override fun onReviewUpdateBtnListener(stars: Float, body: String, reviewId: Int) {
+        house_id?.let {
+            viewModel.setStateEvent(
+                ZhilyeReviewsStateEvent.UpdateReviewEvent(
+                    body = body,
+                    houseId = it,
+                    stars = stars.roundToInt(),
+                    reviewId = reviewId
+                )
+            )
+        }
+    }
+
+    override fun onDeleteMyReview() {
+        Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onEditMyReview(review: Review) {
+        val reviewdialog = ReviewDialog(
+            this,
+            review.stars?.roundToInt()?: 1,
+            review.body.toString(),
+            this,
+            isUpdate = true
+        )
+        reviewdialog.reviewId = review.id
+        reviewdialog.show()
     }
 
 }
