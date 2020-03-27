@@ -1,6 +1,7 @@
 package com.akv.akvandroidapp.ui.main.search.zhilye.viewmodels
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.akv.akvandroidapp.repository.main.SearchRepository
@@ -31,6 +32,31 @@ constructor(
                     searchRepository.getReviewsForHouse(
                         house_id = getHouseId(),
                         page = getPage()
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is ZhilyeReviewsStateEvent.CreateReviewEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    Log.d(TAG, "houseId: ${stateEvent.houseId}, stars: ${stateEvent.stars}, body: ${stateEvent.body}")
+                    searchRepository.addReviewForHouse(
+                        authToken = it,
+                        houseId = stateEvent.houseId,
+                        stars = stateEvent.stars,
+                        body = stateEvent.body
+                    )
+                }?: AbsentLiveData.create()
+            }
+
+            is ZhilyeReviewsStateEvent.UpdateReviewEvent -> {
+                return sessionManager.cachedToken.value?.let {
+                    Log.d(TAG, "houseId: ${stateEvent.houseId}, stars: ${stateEvent.stars}, body: ${stateEvent.body}")
+                    searchRepository.updateReviewForHouse(
+                        authToken = it,
+                        houseId = stateEvent.houseId,
+                        reviewId = stateEvent.reviewId,
+                        body = stateEvent.body,
+                        stars = stateEvent.stars
                     )
                 }?: AbsentLiveData.create()
             }

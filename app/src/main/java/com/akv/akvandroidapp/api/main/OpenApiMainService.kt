@@ -5,6 +5,7 @@ import com.akv.akvandroidapp.api.auth.network_responses.CodeResponse
 import com.akv.akvandroidapp.api.main.bodies.CreateCancelReservationBody
 import com.akv.akvandroidapp.api.main.bodies.CreateReservationBody
 import com.akv.akvandroidapp.api.main.responses.*
+import com.akv.akvandroidapp.entity.Review
 import com.akv.akvandroidapp.util.GenericApiResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -212,6 +213,34 @@ interface OpenApiMainService {
         @Field("phone") phone: String,
         @Field("code") code: String
     ): LiveData<GenericApiResponse<GenericResponse>>
+
+    @POST("houses/{house_id}/reviews/")
+    @FormUrlEncoded
+    fun createReviewForHouse(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int,
+        @Field("stars") stars: Int,
+        @Field("body") body: String
+    ): LiveData<GenericApiResponse<GenericResponse>>
+
+    @DELETE("houses/{house_id}/reviews/{review_id}/")
+    @FormUrlEncoded
+    fun deleteReviewForHouse(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int,
+        @Path("review_id") review_id: Int,
+        @Field("body") body: String
+    ): LiveData<GenericApiResponse<GenericResponse>>
+
+    @PUT("houses/{house_id}/reviews/{review_id}/")
+    @FormUrlEncoded
+    fun updateReviewForHouse(
+        @Header("Authorization") authorization: String,
+        @Path("house_id") house_id: Int,
+        @Path("review_id") review_id: Int,
+        @Field("body") body: String,
+        @Field("stars") stars: Int
+    ): LiveData<GenericApiResponse<ReviewResponse>>
 }
 
 

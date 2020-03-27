@@ -6,16 +6,16 @@ import androidx.lifecycle.LiveData
 import com.akv.akvandroidapp.api.main.GenericResponse
 import com.akv.akvandroidapp.api.main.OpenApiMainService
 import com.akv.akvandroidapp.api.main.bodies.CreateReservationBody
-import com.akv.akvandroidapp.api.main.responses.BlogListSearchResponse
-import com.akv.akvandroidapp.api.main.responses.ReservationRequestResponse
-import com.akv.akvandroidapp.api.main.responses.ReviewsListResponse
-import com.akv.akvandroidapp.api.main.responses.ZhilyeResponse
+import com.akv.akvandroidapp.api.main.responses.*
 import com.akv.akvandroidapp.entity.*
 import com.akv.akvandroidapp.persistence.BlogPostDao
 import com.akv.akvandroidapp.repository.JobManager
 import com.akv.akvandroidapp.repository.NetworkBoundResource
 import com.akv.akvandroidapp.session.SessionManager
+import com.akv.akvandroidapp.ui.Data
 import com.akv.akvandroidapp.ui.DataState
+import com.akv.akvandroidapp.ui.Response
+import com.akv.akvandroidapp.ui.ResponseType
 import com.akv.akvandroidapp.ui.main.search.state.SearchViewState
 import com.akv.akvandroidapp.ui.main.search.zhilye.state.ZhilyeBookViewState
 import com.akv.akvandroidapp.ui.main.search.zhilye.state.ZhilyeReviewsViewState
@@ -26,6 +26,7 @@ import com.yandex.mapkit.geometry.Point
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class SearchRepository
@@ -522,6 +523,189 @@ constructor(
                 return openApiMainService.getReviewsForHouse(
                     house_id = house_id,
                     page = page
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeReviewsViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+
+            }
+
+            override fun setJob(job: Job) {
+                addJob("reviewsList", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun updateReviewForHouse(
+        authToken: AuthToken,
+        houseId: Int,
+        reviewId: Int,
+        body: String,
+        stars: Int
+    ): LiveData<DataState<ZhilyeReviewsViewState>>{
+        return object: NetworkBoundResource<ReviewResponse, List<BlogPost>, ZhilyeReviewsViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<ReviewResponse>) {
+                Log.d("Review update response", "response ${response.body.id}")
+
+                if (response.body.house <= 0)
+                    return onCompleteJob(DataState.error(
+                            Response("Error", ResponseType.Dialog())
+                        )
+                    )
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeReviewsViewState(
+                                isReviewUpdatedField = response.body.house > 0
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<ReviewResponse>> {
+                Log.d("Review update call", "send house_id $houseId")
+                return openApiMainService.updateReviewForHouse(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId,
+                    review_id = reviewId,
+                    body = body,
+                    stars = stars
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeReviewsViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+            }
+
+            override fun setJob(job: Job) {
+                addJob("reviewUpdate", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun deleteReviewForHouse(
+        authToken: AuthToken,
+        houseId: Int,
+        reviewId: Int,
+        body: String
+    ): LiveData<DataState<ZhilyeReviewsViewState>>{
+        return object : NetworkBoundResource<GenericResponse, List<BlogPost>, ZhilyeReviewsViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<GenericResponse>) {
+                Log.d("response delete resp", "response state: ${response.body.response}")
+
+                if (!response.body.response)
+                    return onCompleteJob(DataState.error(
+                        Response("Error", ResponseType.Dialog())
+                        )
+                    )
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeReviewsViewState(
+                                isReviewDeletedField = response.body.response
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                Log.d("Reviews delete cal", "send house_id $houseId")
+                return openApiMainService.deleteReviewForHouse(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId,
+                    review_id = reviewId,
+                    body = body
+                )
+            }
+
+            override fun loadFromCache(): LiveData<ZhilyeReviewsViewState> {
+                return AbsentLiveData.create()
+            }
+
+            override suspend fun updateLocalDb(cacheObject: List<BlogPost>?) {
+            }
+
+            override fun setJob(job: Job) {
+                addJob("deleteReview", job)
+            }
+
+        }.asLiveData()
+    }
+
+    fun addReviewForHouse(
+        authToken: AuthToken,
+        houseId: Int,
+        stars: Int,
+        body: String
+    ): LiveData<DataState<ZhilyeReviewsViewState>>{
+        return object: NetworkBoundResource<GenericResponse, List<BlogPost>, ZhilyeReviewsViewState>(
+            sessionManager.isConnectedToTheInternet(),
+            true,
+            false,
+            true
+        ){
+            override suspend fun createCacheRequestAndReturn() {
+            }
+
+            override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<GenericResponse>) {
+                Log.d("response post review", "response state: ${response.body.response}")
+
+                if(!response.body.response){
+                    return onCompleteJob(DataState.error(
+                            Response("Error", ResponseType.Dialog())
+                        )
+                    )
+                }
+
+                withContext(Dispatchers.Main){
+                    onCompleteJob(
+                        DataState.data(
+                            data = ZhilyeReviewsViewState(
+                                isReviewCreatedField = response.body.response
+                            )
+                        )
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<GenericResponse>> {
+                Log.d("Reviews post cal", "send house_id $houseId")
+                return openApiMainService.createReviewForHouse(
+                    "Token ${authToken.token!!}",
+                    house_id = houseId,
+                    stars = stars,
+                    body = body
                 )
             }
 

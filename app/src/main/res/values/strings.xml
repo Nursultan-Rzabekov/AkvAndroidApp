@@ -433,4 +433,6 @@
     <string name="no_payment_history">У вас пока нету истории платежей</string>
     <string name="fill_iban">Необходимо вести IBAN номер для размещения обьявления</string>
     <string name="put_iban">Введите IBAN номер</string>
+    <string name="three_dots">⋮</string>
+    <string name="edit">Изменить</string>
 </resources>

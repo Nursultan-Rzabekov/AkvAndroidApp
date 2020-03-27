@@ -41,7 +41,6 @@ class ApartmentsReviewsPageAdapter(
         override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean {
             return oldItem == newItem
         }
-
     }
 
     private val differ =
@@ -155,8 +154,10 @@ class ApartmentsReviewsPageAdapter(
         if (newList?.size!! > 0){
             newList.add(SHOW_MORE_ITEMS_MARKER)
         }
-        if (newList.isEmpty())
+        if (newList.isEmpty()) {
             newList.add(NO_MORE_RESULTS_BLOG_MARKER)
+            newList.add(SHOW_MORE_ITEMS_MARKER)
+        }
         differ.submitList(newList)
         Log.e("ReviewsPageAdapter", "${differ.currentList}")
     }

@@ -21,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.akv.akvandroidapp.ui.splash.SplashScreen">
+        <activity android:name="com.akv.akvandroidapp.ui.splash.AkvSplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

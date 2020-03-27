@@ -165,6 +165,9 @@ dependencies {
     //PassCodeText https://github.com/swapnil1104/PassCodeTextе
     implementation 'com.github.swapnil1104:OtpEditText:0.2'
 
+    //Drag and drop recycler
+    implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.6.0'
+
     implementation 'com.fasterxml.jackson.core:jackson-core:2.9.8'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
