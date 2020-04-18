@@ -7,7 +7,7 @@
         app:startDestination="@id/messagesFragment">
 
     <fragment android:id="@+id/messagesFragment"
-            android:name="com.akv.akvandroidapp.ui.main.messages.MessagesFragment"
+            android:name="com.akv.akvandroidapprelease.ui.main.messages.MessagesFragment"
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/fragment_chat_main_layout">
 

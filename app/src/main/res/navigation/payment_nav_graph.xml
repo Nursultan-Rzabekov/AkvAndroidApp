@@ -8,7 +8,7 @@
 
         <fragment
             android:id="@+id/paymentProfileFragment"
-            android:name="com.akv.akvandroidapp.ui.main.profile.payment.PaymentFragment"
+            android:name="com.akv.akvandroidapprelease.ui.main.profile.payment.PaymentFragment"
             android:label="@string/fragment_view_blog"
             tools:layout="@layout/fragment_payments">
 

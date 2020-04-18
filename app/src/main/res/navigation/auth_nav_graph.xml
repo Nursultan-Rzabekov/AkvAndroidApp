@@ -28,7 +28,7 @@
 
     <fragment
             android:id="@+id/loginFragment"
-            android:name="com.akv.akvandroidapp.ui.auth.LoginFragment"
+            android:name="com.akv.akvandroidapprelease.ui.auth.LoginFragment"
             android:label="fragment_login"
             tools:layout="@layout/login">
 
@@ -52,7 +52,7 @@
 
     <fragment
             android:id="@+id/register_up_Fragment"
-            android:name="com.akv.akvandroidapp.ui.auth.RegisterUpFragment"
+            android:name="com.akv.akvandroidapprelease.ui.auth.RegisterUpFragment"
             android:label="fragment_register_up"
             tools:layout="@layout/sign_up" >
 
@@ -78,7 +78,7 @@
 
     <fragment
         android:id="@+id/register_pass_Fragment"
-        android:name="com.akv.akvandroidapp.ui.auth.RegisterPassFragment"
+        android:name="com.akv.akvandroidapprelease.ui.auth.RegisterPassFragment"
         android:label="fragment_register_pass"
         tools:layout="@layout/sign_up_pass">
 
@@ -105,7 +105,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.akv.akvandroidapp.ui.auth.RegisterFragment"
+        android:name="com.akv.akvandroidapprelease.ui.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/sign_up_detail" >
 
@@ -148,7 +148,7 @@
 
     <fragment
         android:id="@+id/termOfPolicy"
-        android:name="com.akv.akvandroidapp.ui.auth.TermOfUseFragment"
+        android:name="com.akv.akvandroidapprelease.ui.auth.TermOfUseFragment"
         android:label="fragment_termOfUse"
         tools:layout="@layout/terms_of_use">
 
@@ -166,7 +166,7 @@
 
     <fragment
         android:id="@+id/privacyOfPolicy"
-        android:name="com.akv.akvandroidapp.ui.auth.PrivacyPolicyFragment"
+        android:name="com.akv.akvandroidapprelease.ui.auth.PrivacyPolicyFragment"
         android:label="fragment_privacyPolicy"
         tools:layout="@layout/privacy_policy">
 
@@ -183,7 +183,7 @@
 
     <fragment
         android:id="@+id/resetCode"
-        android:name="com.akv.akvandroidapp.ui.auth.ResetCodeFragment"
+        android:name="com.akv.akvandroidapprelease.ui.auth.ResetCodeFragment"
         android:label="fragment_resetCode"
         tools:layout="@layout/reset_code">
 
@@ -210,7 +210,7 @@
 
     <fragment
         android:id="@+id/newPassword"
-        android:name="com.akv.akvandroidapp.ui.auth.NewPasswordFragment"
+        android:name="com.akv.akvandroidapprelease.ui.auth.NewPasswordFragment"
         android:label="fragment_newPassword"
         tools:layout="@layout/new_pass">
 
@@ -227,7 +227,7 @@
 
     <fragment
         android:id="@+id/loginGmail"
-        android:name="com.akv.akvandroidapp.ui.auth.LoginGmailFragment"
+        android:name="com.akv.akvandroidapprelease.ui.auth.LoginGmailFragment"
         android:label="fragment_loginGmail"
         tools:layout="@layout/login_gmail">
 

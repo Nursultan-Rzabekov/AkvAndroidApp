@@ -7,7 +7,7 @@
         app:startDestination="@id/favoriteFragment">
 
     <fragment android:id="@+id/favoriteFragment"
-            android:name="com.akv.akvandroidapp.ui.main.favorite.FavoriteFragment"
+            android:name="com.akv.akvandroidapprelease.ui.main.favorite.FavoriteFragment"
             android:label="@string/fragment_create_blog"
             tools:layout="@layout/fragment_saved_pages">
 
@@ -41,7 +41,7 @@
 
 
     <activity android:id="@+id/zhilyeFragment"
-        android:name="com.akv.akvandroidapp.ui.main.search.zhilye.ZhilyeActivity"
+        android:name="com.akv.akvandroidapprelease.ui.main.search.zhilye.ZhilyeActivity"
         android:label="@string/fragment_view_blog"
         tools:layout="@layout/fragment_zhilye_layout">
 

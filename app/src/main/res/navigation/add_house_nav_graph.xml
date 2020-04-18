@@ -7,7 +7,7 @@
         app:startDestination="@id/profileAddTypeFragment">
 
     <fragment android:id="@+id/profileAddTypeFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddTypeFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddTypeFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_type_of_appartment">
 
@@ -23,7 +23,7 @@
 
 
     <fragment android:id="@+id/profileAddQuestsFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddQuestsFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddQuestsFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_guests_count">
 
@@ -39,7 +39,7 @@
 
 
     <fragment android:id="@+id/profileAddAddressFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddAddressFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddAddressFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_address">
 
@@ -56,7 +56,7 @@
 
 
     <fragment android:id="@+id/profileAddGalleryFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddGalleryFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddGalleryFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_gallery">
 
@@ -73,7 +73,7 @@
 
 
     <fragment android:id="@+id/profileAddDescriptionFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddDescriptionFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddDescriptionFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_description">
 
@@ -90,7 +90,7 @@
 
 
     <fragment android:id="@+id/profileAddCheckFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddCheckFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddCheckFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_check">
 
@@ -108,7 +108,7 @@
 
 
     <fragment android:id="@+id/profileAddNearFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddNearFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddNearFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_near">
 
@@ -124,7 +124,7 @@
 
 
     <fragment android:id="@+id/profileAddDatesFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddDatesFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddDatesFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_available_dates">
 
@@ -141,7 +141,7 @@
 
 
     <fragment android:id="@+id/profileAddRequirementFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddRequirementFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddRequirementFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_requirement">
 
@@ -159,7 +159,7 @@
 
 
     <fragment android:id="@+id/profileAddRulesFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddRulesFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddRulesFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_rules">
 
@@ -177,7 +177,7 @@
     </fragment>
 
     <fragment android:id="@+id/profileAddPriceFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddPriceFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddPriceFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_price">
 
@@ -195,7 +195,7 @@
 
 
     <fragment android:id="@+id/profileAddPostFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.add_ad.ProfileAddPostFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.add_ad.ProfileAddPostFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_post">
 

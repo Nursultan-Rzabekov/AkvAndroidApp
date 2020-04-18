@@ -7,7 +7,7 @@
         app:startDestination="@id/profileMyHouseAddsProfileFragment">
 
     <fragment android:id="@+id/profileMyHouseAddsProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseAddsProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseAddsProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_my_adds_layout">
 
@@ -22,7 +22,7 @@
     </fragment>
 
     <fragment android:id="@+id/profileMyHouseDetailProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseDetailProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseDetailProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_my_adds_detailed_layout">
 
@@ -46,7 +46,7 @@
     </fragment>
 
     <fragment android:id="@+id/myHouseMoneyProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseMoneyProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseMoneyProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_my_adds_earnings_layout">
 
@@ -54,7 +54,7 @@
     </fragment>
 
     <fragment android:id="@+id/myHouseDetailEditProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseDetailEditProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseDetailEditProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_my_adds_change_layout">
 
@@ -94,7 +94,7 @@
     </fragment>
 
     <fragment android:id="@+id/myHouseAvailableDatesEditProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseAvailableDatesEditProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseAvailableDatesEditProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_available_dates">
 
@@ -102,7 +102,7 @@
 
 
     <fragment android:id="@+id/myHouseNearEditProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseNearEditProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseNearEditProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_near">
 
@@ -110,14 +110,14 @@
 
 
     <fragment android:id="@+id/myHouseRulesEditProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseRulesEditProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseRulesEditProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_rules">
 
     </fragment>
 
     <fragment android:id="@+id/myHouseFacilitiesEditProfileFragment"
-        android:name="com.akv.akvandroidapp.ui.main.profile.my_house.MyHouseFacilitiesEditProfileFragment"
+        android:name="com.akv.akvandroidapprelease.ui.main.profile.my_house.MyHouseFacilitiesEditProfileFragment"
         android:label="@string/fragment_create_blog"
         tools:layout="@layout/fragment_add_ad_check">
 
