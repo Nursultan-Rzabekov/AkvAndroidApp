@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.akv.akvandroidapprelease.R
 import com.akv.akvandroidapprelease.ui.auth.AuthActivity
 
-class AkvSplashScreen : AppCompatActivity() {
+class SplashScreenActivity: AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,4 +20,5 @@ class AkvSplashScreen : AppCompatActivity() {
         }, 1000)
 
     }
+
 }

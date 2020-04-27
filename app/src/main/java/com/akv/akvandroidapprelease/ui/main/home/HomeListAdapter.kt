@@ -1,15 +1,20 @@
 package com.akv.akvandroidapprelease.ui.main.home
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
 import com.akv.akvandroidapprelease.R
 import com.akv.akvandroidapprelease.entity.HomeReservation
 import com.akv.akvandroidapprelease.util.Constants
 import com.akv.akvandroidapprelease.util.GenericViewHolder
+import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.book_request_no_results_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.book_requests_accepted_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.book_requests_canceled_recycler_view_item.view.*
@@ -193,9 +198,9 @@ class HomeListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         if(differ.currentList[position].id > -1){
-            return differ.currentList[position].status?:0
+            return differ.currentList[position].status?:Constants.RESERVATION_REQUEST
         }
-        return differ.currentList[position].id
+        return differ.currentList[position].id //status?:Constants.RESERVATION_REQUEST
     }
 
     override fun getItemCount(): Int {
@@ -273,6 +278,10 @@ class HomeListAdapter(
         }
     }
 
+    fun MaterialButton.changeColor(color: Int) {
+        this.backgroundTintList = ContextCompat.getColorStateList(context, color)
+    }
+
     class ReservationAcceptedViewHolder
     constructor(
         itemView: View,
@@ -292,10 +301,14 @@ class HomeListAdapter(
             if (item.status == Constants.RESERVATION_PAID){
                 itemView.book_requests_recycler_view_item_accept_btn.isEnabled = false
                 itemView.book_requests_recycler_view_item_accept_btn.text = "Оплачено"
+                itemView.book_requests_recycler_view_item_accept_btn.background
+                    .setTintList(ContextCompat.getColorStateList(context, R.color.grey3))
             }
             else if (item.status == Constants.RESERVATION_APPROVED){
                 itemView.book_requests_recycler_view_item_accept_btn.isEnabled = true
                 itemView.book_requests_recycler_view_item_accept_btn.text = "Оплатить"
+                itemView.book_requests_recycler_view_item_accept_btn.background
+                    .setTintList(ContextCompat.getColorStateList(context, R.color.primaryZero))
             }
 
             itemView.book_requests_accepted_recycler_view_item_top.setOnClickListener {
@@ -356,5 +369,6 @@ class HomeListAdapter(
         fun onItemCancelReserv(position: Int,item: HomeReservation)
         fun onBookMoreBtnPressed()
     }
+
 
 }
