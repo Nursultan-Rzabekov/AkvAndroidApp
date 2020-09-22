@@ -3,7 +3,7 @@
 ### Платите и общайтесь только на сайте AKV или в нашем приложении. 
 ### На AKV весь процесс — начиная с общения и заканчивая бронированием и оплатой — находится под многоуровневой защитой.
 
-[ссылка для скачивания приложения 'Google Play'](https://play.google.com/store/apps/details?id=com.akvrelease.akvandroidapp) 
+[Cсылка для скачивания приложения 'Google Play'](https://play.google.com/store/apps/details?id=com.akvrelease.akvandroidapp) 
 
 
 <img src="https://user-images.githubusercontent.com/43146486/93905608-f9cb8e00-fd1c-11ea-84c0-735639989e4c.png" width="400"> | <img src="https://user-images.githubusercontent.com/43146486/93905634-ffc16f00-fd1c-11ea-90ed-aa84ce1a0fcc.png" width="400"> 
